@@ -1,0 +1,68 @@
+
+build
+bower_components
+node_modules
+private
+
+# General
+*.jar
+*.war
+*.o
+*.lib
+*.a
+*.so
+*.so.*
+*.out
+*.log
+sonar-project.properties
+
+# Maven
+target/
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+
+
+# Eclipse
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+# Python
+*.pyc
+os
+sys
+
+# R
+R.Rproj
+.Rproj.user
+.Rhistory
+.RData
+clients/R/vignettes/*.html
+clients/cellbaseR*.tar.gz
