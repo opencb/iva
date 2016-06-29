@@ -14,4 +14,16 @@
  * limitations under the License.
  */
 
+var TITLE = "IVA Browser";
+var HOST;
+var USER_ID;
+var PROJECT;
+var STUDIES;
+var SETTINGS_SHOW = "true";
+var ABOUT = {
+    "aboutUrl": "https://github.com/opencb/iva/wiki",
+    "githubUrl": "https://github.com/opencb/iva",
+    "documentationUrl": "https://github.com/opencb/iva/wiki"
+};
 var LOGIN_SHOW = "false";
+

@@ -7,11 +7,116 @@
     <template>
         <style is="custom-style" include="iva-shared-styles"></style>
 
-        <div>IVA Browser</div>
+        <div>
+            <div style="height: 60px;">
+                <nav class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">{{title}}</a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                            <!-- Controls aligned to the right: settings and about-->
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="#" data-toggle="modal" role="button" data-placement="bottom" data-target="#myModalSettings" title="Settings ...">
+                                        <i class="fa fa-cog"></i>
+                                    </a>
+                                </li>
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{aboutUrl}}" target="_blank">About</a></li>
+                                        <li><a href="{{githubUrl}}" target="_blank">GitHub</a></li>
+                                        <li><a href="{{documentationUrl}}" target="_blank">Documentation</a></li>
+                                        <li><a href="#">Contact</a></li>
+                                        <li><a href="#">FAQ</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+
+            <!-- This is where main application is rendered -->
+            <div class="center">
+                <div class="collapse content" align="center" id="home">
+                    <h2>Welcome to {{title}}!</h2>
+                    <div style="width: 50%;">
+                        <input type="text" class="form-control" placeholder="Search for a gene, variant or region">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal dialog for Settings -->
+        <div class="modal fade" id="myModalSettings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Settings</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="addon1">Host</span>
+                            <input type="text" class="form-control" placeholder="Host address" aria-describedby="addon1"
+                                   value="{{host}}">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="addon2">User ID</span>
+                            <input type="text" class="form-control" placeholder="Username" aria-describedby="addon2"
+                                   value="{{user}}">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="addon3">Project</span>
+                            <input type="text" class="form-control" placeholder="Project ID or name"
+                                   aria-describedby="addon3" value="{{project}}">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="addon4">Studies</span>
+                            <input type="text" class="form-control" placeholder="Study IDs" aria-describedby="addon4"
+                                   value="{{study}}">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </template>
     <script>
         Polymer({
-            is: 'iva-web'
+            is: 'iva-web',
+            properties: {
+                title: {
+                    type: String
+                }
+            },
+            ready: function () {
+                this.title = TITLE;
+                this.aboutUrl = ABOUT.aboutUrl;
+                this.githubUrl = ABOUT.githubUrl;
+                this.documentationUrl = ABOUT.documentationUrl;
+                $('#home').show();
+            }
         });
     </script>
 </dom-module>

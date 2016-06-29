@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/opencb/iva.git"
   },
-  "license" : "Apache-2.0",
+  "license": "Apache-2.0",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "~1.0.0",
@@ -27,5 +27,8 @@
     "crisper": "~2.0.2",
     "grunt-replace": "~1.0.1",
     "uglify-js": "^2.6.4"
+  },
+  "dependencies": {
+    "latest-version": "^2.0.0"
   }
 }
