@@ -15,15 +15,13 @@
  */
 
 var TITLE = "IVA Browser";
-var HOST;
+var HOST = "aa";
 var USER_ID;
-var PROJECT;
-var STUDIES;
+var PROJECT = "b";
+var STUDIES = ["Study A", "Study B", "Study C"];
 var SETTINGS_SHOW = "true";
-var ABOUT = {
-    "aboutUrl": "https://github.com/opencb/iva/wiki",
-    "githubUrl": "https://github.com/opencb/iva",
-    "documentationUrl": "https://github.com/opencb/iva/wiki"
-};
+var ABOUT = [{"name": "About", "url": "https://github.com/opencb/iva/wiki"}, 
+    {"name": "GitHub", "url": "https://github.com/opencb/iva"}, 
+    {"name": "Documentation",  "url": "https://github.com/opencb/iva/wiki"}];
 var LOGIN_SHOW = "false";
 

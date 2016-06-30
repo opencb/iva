@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="iva-shared-styles.html">
+<link rel="import" href="bierapp-tool.html">
 
 <dom-module id="iva-web">
 
@@ -25,6 +26,10 @@
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                            <ul class="nav navbar-nav iva-menu">
+                                <li><a href="#home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+                                <li><a href="#bierAppPanel">BierApp</a></li>
+                            </ul>
                             <!-- Controls aligned to the right: settings and about-->
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
@@ -36,11 +41,9 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{aboutUrl}}" target="_blank">About</a></li>
-                                        <li><a href="{{githubUrl}}" target="_blank">GitHub</a></li>
-                                        <li><a href="{{documentationUrl}}" target="_blank">Documentation</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                        <li><a href="#">FAQ</a></li>
+                                        <template is="dom-repeat" items="{{about}}">
+                                            <li><a href="{{item.url}}" target="_blank">{{item.name}}</a></li>
+                                        </template>
                                     </ul>
                                 </li>
                             </ul>
@@ -52,10 +55,15 @@
             <!-- This is where main application is rendered -->
             <div class="center">
                 <div class="collapse content" align="center" id="home">
+                    <!--Home page-->
                     <h2>Welcome to {{title}}!</h2>
                     <div style="width: 50%;">
                         <input type="text" class="form-control" placeholder="Search for a gene, variant or region">
                     </div>
+                </div>
+                <div class="collapse content" id="bierAppPanel">
+                    <!--BierApp panel-->
+                    <bierapp-tool host="{{host}}" project="{{project}}" studies="{{studies}}"></bierapp-tool>
                 </div>
             </div>
         </div>
@@ -112,10 +120,17 @@
             },
             ready: function () {
                 this.title = TITLE;
-                this.aboutUrl = ABOUT.aboutUrl;
-                this.githubUrl = ABOUT.githubUrl;
-                this.documentationUrl = ABOUT.documentationUrl;
+                this.host = HOST;
+                this.project = PROJECT;
+                this.studies = STUDIES;
+                this.about = ABOUT;
                 $('#home').show();
+
+                $(".iva-menu a").on('click', function(e) {
+                    e.preventDefault(); // stops link form loading
+                    $('.content').hide(); // hides all content divs
+                    $( $(this).attr('href') ).show(); //get the href and use it find which div to show
+                });
             }
         });
     </script>

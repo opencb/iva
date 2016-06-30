@@ -1,0 +1,97 @@
+<!--
+  ~ Copyright 2015 OpenCB
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="iva-shared-styles.html">
+
+<dom-module id="bierapp-tool-filter">
+    <template>
+        <style is="custom-style" include="iva-shared-styles"></style>
+
+        <div>
+            <br>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#genotype" aria-expanded="true" aria-controls="genotype">
+                                Genotype
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="genotype" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            Genotype
+                        </div>
+                    </div>
+                </div>
+
+                <!--Consequence Type filter menu-->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#consequenceType" aria-expanded="false" aria-controls="consequenceType">
+                                Consequence Type
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="consequenceType" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            Consequence Type
+                        </div>
+                    </div>
+                </div>
+
+                <!--Frequency filter menu-->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#populationFrequency" aria-expanded="false" aria-controls="populationFrequency">
+                                Population Frequency
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="populationFrequency" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <textarea id="bierAppPopulationFreqTextarea" class="form-control clearable" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disease filter menu-->
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFour">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#disease" aria-expanded="false" aria-controls="disease">
+                                Disease
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="disease" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                        <div class="panel-body">
+                            <textarea id="bierAppDiseaseTextarea" class="form-control clearable" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'bierapp-tool-filter'
+        });
+    </script>
+</dom-module>
