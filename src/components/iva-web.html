@@ -1,13 +1,11 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="iva-shared-styles.html">
-<link rel="import" href="bierapp-tool.html">
+<link rel="import" href="../../lib/jsorolla/src/lib/opencga/variant/variant-browser.html">
 <link rel="import" href="iva-login.html">
 
 <dom-module id="iva-web">
 
     <template>
-        <style is="custom-style" include="iva-shared-styles"></style>
+        <style is="custom-style" include="jso-styles"></style>
 
         <div>
             <div style="height: 60px;">
@@ -76,7 +74,7 @@
                 </div>
                 <div class="collapse content" id="bierAppPanel">
                     <!--BierApp panel-->
-                    <bierapp-tool host="{{host}}" project="{{project}}" studies="{{studies}}"></bierapp-tool>
+                    <variant-browser host="{{host}}" project="{{project}}" studies="{{studies}}"></variant-browser>
                 </div>
             </div>
         </div>
