@@ -26,9 +26,20 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="navbar-collapse-1">
                             <ul class="nav navbar-nav iva-menu">
-                                <li><a href="#home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+                                <li><a href="#home"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                                 <li><a href="#bierAppPanel">BierApp</a></li>
                             </ul>
+                            <!--Search bar shown in other views except home-->
+                            <template is="dom-if" if="{{search}}">
+                                <form class="navbar-form navbar-left" role="search">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="homeSearchTextBox" placeholder="Gene, Transcript, Variant or Region" on-keyup="callAutoComplete">
+                                        <a href="#">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </form>
+                            </template>
                             <!-- Controls aligned to the right: settings and about-->
                             <ul class="nav navbar-nav navbar-right">
                                 <!--Settings-->
@@ -68,13 +79,16 @@
                 <div class="collapse content" align="center" id="home">
                     <!--Home page-->
                     <h2>Welcome to {{title}}!</h2>
-                    <div style="width: 50%;">
-                        <input type="text" class="form-control" placeholder="Search for a gene, variant or region">
+                    <div style="width: 60%;">
+                        <input type="text" class="form-control" id="mainSearchTextBox" placeholder="Search for a gene, variant or region" on-keyup="callAutoComplete">
                     </div>
                 </div>
                 <div class="collapse content" id="bierAppPanel">
                     <!--BierApp panel-->
-                    <variant-browser host="{{host}}" project="{{project}}" studies="{{studies}}"></variant-browser>
+                    <!--<variant-browser host="{{host}}" project="{{project}}" studies="{{studies}}"></variant-browser>-->
+                </div>
+                <div class="collapse content" id="ivaGeneView">
+                    <h2>Gene</h2>
                 </div>
             </div>
         </div>
@@ -144,6 +158,10 @@
             properties: {
                 title: {
                     type: String
+                },
+                search: {
+                    type: Boolean,
+                    value: false
                 }
             },
             ready: function () {
@@ -154,11 +172,27 @@
                 this.about = ABOUT;
                 $('#home').show();
 
+                let _this = this;
                 $(".iva-menu a").on('click', function(e) {
                     e.preventDefault(); // stops link form loading
                     $('.content').hide(); // hides all content divs
                     $( $(this).attr('href') ).show(); //get the href and use it find which div to show
+                    _this.search = false;
                 });
+            },
+
+            callAutoComplete: function (e) {
+                if (e.keyCode != '13') {
+                    // call web services for autocomplete data
+                    console.log("value is being entered")
+                } else {
+                    // load the corresponding view
+                    console.log("Enter pressed and switching to view")
+                    $('#' + e.srcElement.id).val('');
+                    this.search = true;
+                    $('.content').hide();
+                    $('#ivaGeneView').show();
+                }
             },
 
             login: function(e) {
