@@ -31,9 +31,9 @@ var opencga = {
 };
 
 var application = {
-    title: "BiERapp",
-    version: "v2.0.0",
-    logo: "images/bier-text.svg",
+    title: "IVA",
+    version: "v0.2.0",
+    logo: "images/opencb-logo.png",
     menu: [
         {
             id: "browser",
