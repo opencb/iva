@@ -14,9 +14,9 @@
   ~ limitations under the License.
   -->
 
-<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
 
-<dom-module id="iva-shared-styles">
+<dom-module id="jso-styles">
     <template>
         <style>
             /*!
@@ -78,6 +78,24 @@
             border-radius:6px 0 6px 6px;
         }
         /*# sourceMappingURL=bootstrap.min.css.map */
+
+            .navbar .divider-vertical {
+                height: 50px;
+                margin: 0 9px;
+                border-right: 1px solid #ffffff;
+                border-left: 1px solid #f2f2f2;
+            }
+
+            .navbar-inverse .divider-vertical {
+                border-left-color: #777777;
+                border-right-color: #777777;
+            }
+
+            @media (max-width: 767px) {
+                .navbar-collapse .nav > .divider-vertical {
+                    display: none;
+                }
+            }
 
         </style>
     </template>
