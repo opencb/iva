@@ -93,6 +93,10 @@ var application = {
                     visibility: "public"
                 },
                 {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
                     id: "exporter",
                     title: "Exporter",
                     visibility: "public"
