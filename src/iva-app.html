@@ -17,6 +17,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
 
 <link rel="import" href="jso-styles.html">
 
@@ -199,6 +200,10 @@
                 <div class="collapse content" id="prioritization">
                     <variant-prioritization title="Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}"
                                             studies="{{studies}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-prioritization>
+                </div>
+                <div class="collapse content" id="beacon">
+                    <br>
+                    <beacon-tool opencga-client="{{opencgaClient}}"></beacon-tool>
                 </div>
 
                 <div class="collapse content" id="genomeBrowser">
