@@ -85,7 +85,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     // Target-specific file lists and/or options go here.
-                    '<%= build.path %>/iva-web.html': 'src/components/iva-web.html'
+                    '<%= build.path %>/iva-app.html': 'src/components/iva-app.html'
                 }
             }
         },
@@ -106,8 +106,8 @@ module.exports = function(grunt) {
                         //     replacement: ''
                         // },
                         {
-                            match: /components\/iva-web\.html/g,
-                            replacement: 'iva-web.html'
+                            match: /components\/iva-app\.html/g,
+                            replacement: 'iva-app.html'
                         }
                     ]
                 },
