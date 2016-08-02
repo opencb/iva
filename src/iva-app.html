@@ -21,9 +21,11 @@
 
 <link rel="import" href="jso-styles.html">
 
-<link rel="import" href="components/opencga-projects.html">
-<link rel="import" href="components/opencga-project.html">
-<link rel="import" href="components/opencga-study.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">
+<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-login.html">-->
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload.html">
 <link rel="import" href="components/opencga-login.html">
 
 <link rel="import" href="welcome.html">
@@ -44,7 +46,7 @@
 
         <div>
             <div style="height: 60px;">
-                <nav class="navbar navbar-inverse navbar-fixed-top ">
+                <nav class="navbar navbar-inverse navbar-fixed-top">
                     <div class="container-fluid">
 
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -117,12 +119,13 @@
                                         </ul>
                                     </li>
 
-
-
-
                                     <li><a href="#" role="button">My Data</a></li>
 
-                                    <li class="bierapp-menu-vertical-right"><a href="#browser" role="button">Upload data</a></li>
+                                   <!--Upload modal window-->
+                                    <li class="bierapp-menu-vertical-right">
+                                        <a href="#" data-toggle="modal" role="button" data-placement="bottom" data-target="#uploadModal" title="Upload File ...">
+                                            Upload data</a>
+                                    </li>
                                     <li class="divider-vertical"></li>
                                 </template>
 
@@ -241,6 +244,23 @@
                 </div>
             </div>
         </div>
+
+        <!-- Upload modal window -->
+
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="uploadModalLabel">Upload File</h4>
+                    </div>
+                    <div class="modal-body">
+                        <opencga-upload></opencga-upload>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
         <!-- Modal dialog for Settings -->
@@ -363,7 +383,6 @@
                 // go to home page
                 $('.content').hide();
                 window.location.hash = "home";
-//                $('#home').show();
 
                 this._checkBreadcrumbVisible();
             },
@@ -387,7 +406,6 @@
                 $('#ModalLogin').modal('hide');
                 $('.content').hide();
                 $('#home').show();
-//                window.location.hash = "home";
             },
             logout: function() {
                 var _this = this;
