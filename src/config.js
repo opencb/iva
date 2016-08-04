@@ -123,3 +123,45 @@ var application = {
         visibility: "public"
     }
 };
+
+var DEFAULT_SPECIES = {
+    "vertebrates": [
+        {
+
+            "id": "hsapiens",
+            "scientificName": "Homo sapiens",
+            "assembly": {
+
+                "name": "GRCh37",
+                "ensemblVersion": "75_37"
+
+            },
+            "assemblies": [
+
+                {
+
+                    "name": "GRCh37",
+                    "ensemblVersion": "75_37"
+
+                },
+
+                {
+                    "name": "GRCh38",
+                    "ensemblVersion": "79_38"
+                }
+
+            ],
+            "data": [
+                "genome",
+                "gene",
+                "variation",
+                "regulation",
+                "protein",
+                "conservation",
+                "clinical",
+                "gene2disease"
+            ]
+
+        }
+    ]
+};
