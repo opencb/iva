@@ -101,7 +101,7 @@
                                 <template is="dom-if" if="{{_logged}}">
                                     <li><a href="#" role="button">Logged as '{{userId}}'</a></li>
 
-                                    <li><a href="#" role="button">Dashboard</a></li>
+                                    <li><a href="#dashboard" role="button">Dashboard</a></li>
 
                                     <!--Project dropdown menu-->
                                     <li class="dropdown">
@@ -121,7 +121,7 @@
                                             </template>
                                         </ul>
                                     </li>
-                                    
+
                                    <!--Upload modal window-->
                                     <li class="bierapp-menu-vertical-right">
                                         <a href="#" data-toggle="modal" role="button" data-placement="bottom" data-target="#uploadModal" title="Upload File ...">
@@ -207,13 +207,17 @@
                 </div>
                 <div class="collapse content" id="beacon">
                     <br>
-                    <beacon-tool opencga-client="{{opencgaClient}}" study="{{study}}"></beacon-tool>
+                    <beacon-tool opencga-client="{{opencgaClient}}" studies="{{selectedProject.studies}}"></beacon-tool>
                 </div>
 
                 <div class="collapse content" id="genomeBrowser">
                     <genome-context></genome-context>
                 </div>
 
+                <div class="collapse content" id="dashboard">
+                    Not yet!
+                    <!--<opencga-dahsboard></opencga-dahsboard>-->
+                </div>
                 <!--BreadCrumb reference-->
                 <div class="collapse content" id="projectList">
                     <opencga-projects projects="{{projects}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
