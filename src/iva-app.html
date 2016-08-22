@@ -15,12 +15,12 @@
   -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="jso-styles.html">
+<link rel="import" href="welcome.html">
+
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
-
-<link rel="import" href="jso-styles.html">
-
 <link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
@@ -28,8 +28,6 @@
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-login.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload.html">
 <link rel="import" href="components/opencga-login.html">
-
-<link rel="import" href="welcome.html">
 
 <dom-module id="iva-app">
 
@@ -182,9 +180,8 @@
 
 
             <!--Breadcrumb-->
-            <template is="dom-if" if="{{_isBreadcrumbVisible}}">
-                <ol id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
-            </template>
+            <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
+
 
 
             <!-- This is where main application is rendered -->
@@ -532,7 +529,7 @@
             renderBreadcrumb: function() {
                 var breadcrumbElement = Polymer.dom(this.root).querySelector("#breadcrumb");
 
-                if (breadcrumbElement != null) {
+                if (breadcrumbElement != null && typeof this.config !== "undefined") {
                     // we empty everything
                     Polymer.dom(breadcrumbElement).innerHTML = "";
 
