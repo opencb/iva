@@ -30,6 +30,7 @@ var opencga = {
     }
 };
 
+
 var application = {
     title: "IVA",
     version: "v0.2.0",
@@ -51,7 +52,7 @@ var application = {
                     visibility: "public"
                 },
                 {
-                    id: "prioritization",
+                    id: "prioritizationC",
                     title: "Cancer",
                     visibility: "public"
                 },
@@ -60,7 +61,7 @@ var application = {
                     visibility: "public"
                 },
                 {
-                    id: "prioritization",
+                    id: "prioritizationCC",
                     title: "Case-Control",
                     visibility: "public"
                 }
@@ -80,7 +81,8 @@ var application = {
                     id: "diagnose:family",
                     title: "Family",
                     visibility: "public"
-                }]
+                }
+            ]
         },
         {
             id: "beacon",
@@ -149,6 +151,68 @@ var application = {
         visibility: "public"
     }
 };
+
+var populationFrequencies = [
+    {
+        id: "1000g",
+        title: "1000 Genomes (Phase 3)",
+        study: "1000GENOMES_phase_3",
+        subpopulations: [
+            {
+                id: "all",
+                title: "All populations [ALL]",
+                active: true
+            },
+            {
+                id: "eur",
+                title: "European [EUR]"
+            },
+            {
+                id: "amr",
+                title: "American [AMR]"
+            },
+            {
+                id: "afr",
+                title: "African [AFR]"
+            },
+            {
+                id: "sas",
+                title: "South Asian [SAS]"
+            },
+            {
+                id: "eas",
+                title: "East Asian [EAS]"
+            }
+        ]
+    },
+    {
+        id: "exac",
+        title: "ExAC",
+        study: "EXAC",
+        subpopulations: [
+            {
+                id: "exac",
+                title: "ExAC"
+            }
+        ]
+    },
+    {
+        id: "esp",
+        title: "ESP 6500",
+        study: "ESP_6500",
+        subpopulations: [
+            {
+                id: "eur",
+                title: "European American"
+            },
+            {
+                id: "afr",
+                title: "African American"
+            }
+        ]
+    }
+];
+
 
 var DEFAULT_SPECIES = {
     "vertebrates": [
