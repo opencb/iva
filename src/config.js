@@ -43,7 +43,28 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "public"
+            visibility: "public",
+            submenu: [
+                {
+                    id: "prioritization",
+                    title: "Family",
+                    visibility: "public"
+                },
+                {
+                    id: "prioritization",
+                    title: "Cancer",
+                    visibility: "public"
+                },
+                {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
+                    id: "prioritization",
+                    title: "Case-Control",
+                    visibility: "public"
+                }
+            ]
         },
         {
             id: "diagnose",
@@ -99,6 +120,11 @@ var application = {
                 {
                     id: "exporter",
                     title: "Exporter",
+                    visibility: "public"
+                },
+                {
+                    id: "saturation",
+                    title: "Saturation",
                     visibility: "public"
                 }
             ]
