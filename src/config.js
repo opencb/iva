@@ -154,60 +154,61 @@ var application = {
 
 var populationFrequencies = [
     {
-        id: "1000g",
+        id: "1000GENOMES_phase_3",
         title: "1000 Genomes (Phase 3)",
-        study: "1000GENOMES_phase_3",
-        subpopulations: [
+        populations: [
             {
-                id: "all",
+                id: "ALL",
                 title: "All populations [ALL]",
                 active: true
             },
             {
-                id: "eur",
-                title: "European [EUR]"
+                id: "EUR",
+                title: "European [EUR]",
+                active: true
             },
             {
-                id: "amr",
+                id: "AMR",
                 title: "American [AMR]"
             },
             {
-                id: "afr",
+                id: "AFR",
                 title: "African [AFR]"
             },
             {
-                id: "sas",
+                id: "SAS",
                 title: "South Asian [SAS]"
             },
             {
-                id: "eas",
+                id: "EAS",
                 title: "East Asian [EAS]"
             }
         ]
     },
     {
-        id: "exac",
+        id: "EXAC",
         title: "ExAC",
-        study: "EXAC",
-        subpopulations: [
+        populations: [
             {
-                id: "exac",
-                title: "ExAC"
+                id: "ALL",
+                title: "ExAC",
+                active: true
             }
         ]
     },
     {
-        id: "esp",
+        id: "ESP_6500",
         title: "ESP 6500",
-        study: "ESP_6500",
-        subpopulations: [
+        populations: [
             {
-                id: "eur",
-                title: "European American"
+                id: "EUR",
+                title: "European American",
+                active: true
             },
             {
-                id: "afr",
-                title: "African American"
+                id: "AFR",
+                title: "African American",
+                active: true
             }
         ]
     }
