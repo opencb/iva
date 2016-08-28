@@ -198,10 +198,16 @@
                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-browser>
                 </div>
 
-                <div class="collapse content" id="prioritization">
-                    <variant-prioritization title="Prioritization" host="{{opencga.host}}" project="{{project}}" population-frequencies="{{populationFrequencies}}" study="{{study}}"
+                <div class="collapse content" id="family-prioritization">
+                    <variant-prioritization title="Family Prioritization" host="{{opencga.host}}" project="{{project}}" population-frequencies="{{populationFrequencies}}" study="{{study}}"
                                             opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-prioritization>
                 </div>
+
+                <div class="collapse content" id="cancer-prioritization">
+                    <variant-prioritization title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" population-frequencies="{{populationFrequencies}}" study="{{study}}"
+                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-prioritization>
+                </div>
+
                 <div class="collapse content" id="beacon">
                     <br>
                     <beacon-tool opencga-client="{{opencgaClient}}" studies="{{selectedProject.studies}}"></beacon-tool>

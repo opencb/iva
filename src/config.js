@@ -47,12 +47,12 @@ var application = {
             visibility: "public",
             submenu: [
                 {
-                    id: "prioritization",
+                    id: "family-prioritization",
                     title: "Family",
                     visibility: "public"
                 },
                 {
-                    id: "prioritizationC",
+                    id: "cancer-prioritization",
                     title: "Cancer",
                     visibility: "public"
                 },
