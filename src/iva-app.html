@@ -15,17 +15,19 @@
   -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="jso-styles.html">
+<link rel="import" href="welcome.html">
+
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
-
-<link rel="import" href="jso-styles.html">
-
-<link rel="import" href="components/opencga-projects.html">
-<link rel="import" href="components/opencga-project.html">
-<link rel="import" href="components/opencga-study.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
+<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">
+<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-login.html">-->
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload.html">
 <link rel="import" href="components/opencga-login.html">
-
-<link rel="import" href="welcome.html">
 
 <dom-module id="iva-app">
 
@@ -43,7 +45,7 @@
 
         <div>
             <div style="height: 60px;">
-                <nav class="navbar navbar-inverse navbar-fixed-top ">
+                <nav class="navbar navbar-inverse navbar-fixed-top">
                     <div class="container-fluid">
 
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -78,7 +80,12 @@
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible" >
-                                                    <li on-click="changeAnalysisTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
+                                                    <template is="dom-if" if="{{!item.separator}}">
+                                                        <li on-click="changeAnalysisTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
+                                                    </template>
+                                                    <template is="dom-if" if="{{item.separator}}">
+                                                        <li role="separator" class="divider"></li>
+                                                    </template>
                                                 </template>
                                             </ul>
                                         </li>
@@ -91,6 +98,8 @@
 
                                 <template is="dom-if" if="{{_logged}}">
                                     <li><a href="#" role="button">Logged as '{{userId}}'</a></li>
+
+                                    <li><a href="#dashboard" role="button">Dashboard</a></li>
 
                                     <!--Project dropdown menu-->
                                     <li class="dropdown">
@@ -111,12 +120,11 @@
                                         </ul>
                                     </li>
 
-
-
-
-                                    <li><a href="#" role="button">My Data</a></li>
-
-                                    <li class="bierapp-menu-vertical-right"><a href="#browser" role="button">Upload data</a></li>
+                                    <!--Upload modal window-->
+                                    <li class="bierapp-menu-vertical-right">
+                                        <a href="#" data-toggle="modal" role="button" data-placement="bottom" data-target="#uploadModal" title="Upload File ...">
+                                            Upload data</a>
+                                    </li>
                                     <li class="divider-vertical"></li>
                                 </template>
 
@@ -172,9 +180,8 @@
 
 
             <!--Breadcrumb-->
-            <template is="dom-if" if="{{_isBreadcrumbVisible}}">
-                <ol id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
-            </template>
+            <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
+
 
 
             <!-- This is where main application is rendered -->
@@ -187,25 +194,39 @@
 
             <div class="">
                 <div class="collapse content" id="browser">
-                    <variant-browser title="Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                    <variant-browser title="Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}" population-frequencies="{{populationFrequencies}}"
                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-browser>
                 </div>
 
-                <div class="collapse content" id="prioritization">
-                    <variant-prioritization title="Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}"
-                                            studies="{{studies}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-prioritization>
+                <div class="collapse content" id="family-prioritization">
+                    <variant-prioritization mode="family" title="Family Prioritization" host="{{opencga.host}}" project="{{project}}" population-frequencies="{{populationFrequencies}}" study="{{study}}"
+                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-prioritization>
+                </div>
+
+                <div class="collapse content" id="cancer-prioritization">
+                    <variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" population-frequencies="{{populationFrequencies}}" study="{{study}}"
+                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-prioritization>
+                </div>
+
+                <div class="collapse content" id="beacon">
+                    <br>
+                    <beacon-tool opencga-client="{{opencgaClient}}" studies="{{selectedProject.studies}}"></beacon-tool>
                 </div>
 
                 <div class="collapse content" id="genomeBrowser">
-                    no yet :-(
+                    <!--<genome-context></genome-context>-->
                 </div>
 
+                <div class="collapse content" id="dashboard">
+                    Not yet!
+                    <!--<opencga-dahsboard></opencga-dahsboard>-->
+                </div>
                 <!--BreadCrumb reference-->
                 <div class="collapse content" id="projectList">
                     <opencga-projects projects="{{projects}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
                 </div>
                 <div class="collapse content" id="projectInfo">
-                    <opencga-project project="{{selectedProject}}" on-study="updateStudy"></opencga-project>
+                    <opencga-project opencga-client="{{opencgaClient}}" project="{{selectedProject}}" on-study="updateStudy"></opencga-project>
                 </div>
                 <div class="collapse content" id="studyInfo">
                     <opencga-study project="{{selectedProject}}" study="{{study}}"></opencga-study>
@@ -231,6 +252,23 @@
                 </div>
             </div>
         </div>
+
+        <!-- Upload modal window -->
+
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="uploadModalLabel">Upload File</h4>
+                    </div>
+                    <div class="modal-body">
+                        <opencga-upload></opencga-upload>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
         <!-- Modal dialog for Settings -->
@@ -306,6 +344,8 @@
                 this.config.cellbase = cellbase;
                 this.config.opencga = opencga;
 
+                this.populationFrequencies = populationFrequencies;
+
                 // We need to listen to hash fragment changes to update the display and breadcrumb
                 var _this = this;
                 window.onhashchange = function () {
@@ -328,6 +368,7 @@
             },
             attached: function() {
                 this.renderBreadcrumb();
+
             },
             init: function() {
                 this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host,
@@ -353,7 +394,6 @@
                 // go to home page
                 $('.content').hide();
                 window.location.hash = "home";
-//                $('#home').show();
 
                 this._checkBreadcrumbVisible();
             },
@@ -377,7 +417,6 @@
                 $('#ModalLogin').modal('hide');
                 $('.content').hide();
                 $('#home').show();
-//                window.location.hash = "home";
             },
             logout: function() {
                 var _this = this;
@@ -455,8 +494,8 @@
 
                     this.tool = hashTool;
 
-                    console.log('ctx.project', ctx.project)
-                    console.log('ctx.study', ctx.study)
+//                    console.log('ctx.project', ctx.project)
+//                    console.log('ctx.study', ctx.study)
                     $('.content').hide();
                     $(arr[0]).show();
                 }
@@ -499,7 +538,7 @@
             renderBreadcrumb: function() {
                 var breadcrumbElement = Polymer.dom(this.root).querySelector("#breadcrumb");
 
-                if (breadcrumbElement != null) {
+                if (breadcrumbElement != null && typeof this.config !== "undefined") {
                     // we empty everything
                     Polymer.dom(breadcrumbElement).innerHTML = "";
 

@@ -30,6 +30,7 @@ var opencga = {
     }
 };
 
+
 var application = {
     title: "IVA",
     version: "v0.2.0",
@@ -43,7 +44,28 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "public"
+            visibility: "public",
+            submenu: [
+                {
+                    id: "family-prioritization",
+                    title: "Family",
+                    visibility: "public"
+                },
+                {
+                    id: "cancer-prioritization",
+                    title: "Cancer",
+                    visibility: "public"
+                },
+                {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
+                    id: "prioritizationCC",
+                    title: "Case-Control",
+                    visibility: "public"
+                }
+            ]
         },
         {
             id: "diagnose",
@@ -59,7 +81,8 @@ var application = {
                     id: "diagnose:family",
                     title: "Family",
                     visibility: "public"
-                }]
+                }
+            ]
         },
         {
             id: "beacon",
@@ -93,8 +116,17 @@ var application = {
                     visibility: "public"
                 },
                 {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
                     id: "exporter",
                     title: "Exporter",
+                    visibility: "public"
+                },
+                {
+                    id: "saturation",
+                    title: "Saturation",
                     visibility: "public"
                 }
             ]
@@ -118,4 +150,109 @@ var application = {
         title: "Projects",
         visibility: "public"
     }
+};
+
+var populationFrequencies = [
+    {
+        id: "1000GENOMES_phase_3",
+        title: "1000 Genomes (Phase 3)",
+        populations: [
+            {
+                id: "ALL",
+                title: "All populations [ALL]",
+                active: true
+            },
+            {
+                id: "EUR",
+                title: "European [EUR]",
+                active: true
+            },
+            {
+                id: "AMR",
+                title: "American [AMR]"
+            },
+            {
+                id: "AFR",
+                title: "African [AFR]"
+            },
+            {
+                id: "SAS",
+                title: "South Asian [SAS]"
+            },
+            {
+                id: "EAS",
+                title: "East Asian [EAS]"
+            }
+        ]
+    },
+    {
+        id: "EXAC",
+        title: "ExAC",
+        populations: [
+            {
+                id: "ALL",
+                title: "ExAC",
+                active: true
+            }
+        ]
+    },
+    {
+        id: "ESP_6500",
+        title: "ESP 6500",
+        populations: [
+            {
+                id: "EUR",
+                title: "European American",
+                active: true
+            },
+            {
+                id: "AFR",
+                title: "African American",
+                active: true
+            }
+        ]
+    }
+];
+
+
+var DEFAULT_SPECIES = {
+    "vertebrates": [
+        {
+
+            "id": "hsapiens",
+            "scientificName": "Homo sapiens",
+            "assembly": {
+
+                "name": "GRCh37",
+                "ensemblVersion": "75_37"
+
+            },
+            "assemblies": [
+
+                {
+
+                    "name": "GRCh37",
+                    "ensemblVersion": "75_37"
+
+                },
+
+                {
+                    "name": "GRCh38",
+                    "ensemblVersion": "79_38"
+                }
+
+            ],
+            "data": [
+                "genome",
+                "gene",
+                "variation",
+                "regulation",
+                "protein",
+                "conservation",
+                "clinical",
+                "gene2disease"
+            ]
+
+        }
+    ]
 };
