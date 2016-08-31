@@ -15,7 +15,7 @@
  */
 
 var cellbase = {
-    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-dev-v4.0"],
+    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-beta"],
     version: "v4"
 };
 

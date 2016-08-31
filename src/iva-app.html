@@ -41,6 +41,12 @@
                 font-size: 18px;
                 color: #797979;
             }
+
+            .gene-view {
+                margin: auto;
+                text-align: justify;
+                width: 90%;
+            }
         </style>
 
         <div>
@@ -195,7 +201,7 @@
             <div class="">
                 <div class="collapse content" id="browser">
                     <variant-browser title="Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}" population-frequencies="{{populationFrequencies}}"
-                                     opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-browser>
+                                     opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"  on-gene="geneSelected"></variant-browser>
                 </div>
 
                 <div class="collapse content" id="family-prioritization">
@@ -215,6 +221,12 @@
 
                 <div class="collapse content" id="genomeBrowser">
                     <!--<genome-context></genome-context>-->
+                </div>
+
+                <div class="collapse content" id="gene">
+                    <div class="gene-view">
+                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" gene="{{gene}}"></opencga-gene-view>
+                    </div>
                 </div>
 
                 <div class="collapse content" id="dashboard">
@@ -336,6 +348,10 @@
                 _logged: {
                     type: Boolean,
                     value: false
+                },
+                gene: {
+                    type: String,
+                    value: ""
                 }
             },
             ready: function() {
@@ -534,6 +550,11 @@
             projectStudySampleChanged: function() {
                 this.renderHashFragments();
                 this.renderBreadcrumb();
+            },
+            geneSelected: function(e) {
+                this.gene = e.detail.gene;
+                $('.content').hide();
+                $('#gene').show();
             },
             renderBreadcrumb: function() {
                 var breadcrumbElement = Polymer.dom(this.root).querySelector("#breadcrumb");
