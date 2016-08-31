@@ -33,23 +33,33 @@
 
         <!-- This is where main application is rendered -->
         <div class="center">
-            <span style="font-size:50px;">BRIDGE</span>
-            <h2>Overview</h2>
-            <p>
-                The BRIDGE consortium has been established as an organisational umbrella for NIHR BioResource funded Next Generation Sequencing (NGS)
-                projects which aim (i) to discover sequence variants underlying hitherto unresolved inherited Rare Diseases or (ii) to evaluate the sensitivity
-                and specificity of exome sequencing or other NGS approaches to identify already known high penetrance Rare Disease-causing variants.
-            </p>
-            <P>
-                If you are a clinician or a patient and would like to receive further information about the BRIDGE studies please e-mail rarediseases@nihrbioresource.org.uk
-                A Memorandum of Understanding outlining the principles of collaboration underpinning BRIDGE studies is available upon request.
-            </p>
-            <br>
-            <div>Note:</div>
-            <span style="font-size:13px">{{versionNav}}
+            <div style="text-align: center">
+                <span style="font-size:50px;">BRIDGE</span>
+                <input type="text" class="form-control" id="welcomeSearchTextBox" style="text-align: center;" placeholder="Search for a gene, variant or region" on-keyup="callAutoComplete">
+                <span style="font-size:12px">Examples - Gene: PCSK9, Transcript: ENST00000407236, Variant: 22-46615880-T-C, Multi-allelic variant: rs1800234, Region: 22:46615715-46615880</span>
+            </div>
+            <div style="font-size: 14px;" class="col-sm-8">
+                <h2 style="text-align: center">About BRIDGE project</h2>
+                <p>
+                    The BRIDGE consortium has been established as an organisational umbrella for NIHR BioResource funded Next Generation Sequencing (NGS)
+                    projects which aim (i) to discover sequence variants underlying hitherto unresolved inherited Rare Diseases or (ii) to evaluate the sensitivity
+                    and specificity of exome sequencing or other NGS approaches to identify already known high penetrance Rare Disease-causing variants.
+                </p>
+                <P>
+                    If you are a clinician or a patient and would like to receive further information about the BRIDGE studies please e-mail rarediseases@nihrbioresource.org.uk
+                    A Memorandum of Understanding outlining the principles of collaboration underpinning BRIDGE studies is available upon request.
+                </p>
+            </div>
+            <div class="col-sm-4">
+                <h2 style="text-align: center">Recent Activity</h2>
+                <p style="text-align: center">IN PROGRESS</p>
+            </div>
+            <div class="col-sm-12"><br><br>Note:
+                <span style="font-size:13px">{{versionNav}}
                     <br> BRIDGE web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components, so only modern web browsers are fully supported, these include Chrome 36+, Firefox 32+, IE 10+, Safari
                     7+ and Opera 24+.
                 </span>
+            </div>
         </div>
     </template>
 
@@ -75,7 +85,19 @@
                 study: {
                     type: Object
                 }
+            },
+            callAutoComplete: function (e) {
+                if (e.keyCode != '13') {
+                    // call web services for autocomplete data
+                    console.log("value is being entered")
+                } else {
+                    // load the corresponding view
+                    $('#' + e.srcElement.id).val('');
+                    $('.content').hide();
+                    // fire an event
+                }
             }
         });
+
     </script>
 </dom-module>
