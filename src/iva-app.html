@@ -360,7 +360,9 @@
                 this.config.cellbase = cellbase;
                 this.config.opencga = opencga;
 
-                this.populationFrequencies = populationFrequencies;
+                if (typeof populationFrequencies !== "undefined") {
+                    this.populationFrequencies = populationFrequencies;
+                }
 
                 // We need to listen to hash fragment changes to update the display and breadcrumb
                 var _this = this;
@@ -449,7 +451,7 @@
             changeAnalysisTool: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
                 $('.content').hide(); // hides all content divs
-                if (typeof e.srcElement.attributes.href !== "undefined") {
+                if (typeof e.srcElement !== "undefined" && typeof e.srcElement.attributes.href !== "undefined") {
                     $(e.srcElement.attributes.href.value).show(); // get the href and use it find which div to show
                     this.tool = e.srcElement.attributes.href.value;
                 } else {

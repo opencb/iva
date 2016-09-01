@@ -214,6 +214,24 @@ var populationFrequencies = [
     }
 ];
 
+var consequenceTypes = [
+    {
+        id: "SO:0001628",
+        name: "intergenic_variant",
+        title: "Intergenic",
+        description: "A sequence variant located in the intergenic region, between genes",
+        color: "#00FFCC",
+        items: [
+            {
+                id: "SO:0001636",
+                name: "2KB_upstream_variant",
+                title: "2KB_upstream_variant",
+                description: "A sequence variant located within 2KB 5' of a gene",
+                checked: true
+            }
+        ]
+    }
+];
 
 var DEFAULT_SPECIES = {
     "vertebrates": [
