@@ -200,7 +200,8 @@
 
             <div class="">
                 <div class="collapse content" id="browser">
-                    <variant-browser title="Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}" population-frequencies="{{populationFrequencies}}"
+                    <variant-browser title="Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                                     population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"  on-gene="geneSelected"></variant-browser>
                 </div>
 
@@ -362,6 +363,10 @@
 
                 if (typeof populationFrequencies !== "undefined") {
                     this.populationFrequencies = populationFrequencies;
+                }
+
+                if (typeof consequenceTypes !== "undefined") {
+                    this.consequenceTypes = consequenceTypes;
                 }
 
                 // We need to listen to hash fragment changes to update the display and breadcrumb
