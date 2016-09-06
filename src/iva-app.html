@@ -226,7 +226,7 @@
 
                 <div class="collapse content" id="gene">
                     <div class="gene-view">
-                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" gene="{{gene}}"></opencga-gene-view>
+                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" study="{{study}}" gene="{{gene}}" population-frequencies="{{populationFrequencies}}"></opencga-gene-view>
                     </div>
                 </div>
 
@@ -517,8 +517,6 @@
 
                     this.tool = hashTool;
 
-//                    console.log('ctx.project', ctx.project)
-//                    console.log('ctx.study', ctx.study)
                     $('.content').hide();
                     $(arr[0]).show();
                 }
@@ -559,6 +557,7 @@
                 this.renderBreadcrumb();
             },
             geneSelected: function(e) {
+                e.preventDefault();
                 this.gene = e.detail.gene;
                 $('.content').hide();
                 $('#gene').show();
