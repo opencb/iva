@@ -226,7 +226,7 @@
 
                 <div class="collapse content" id="gene">
                     <div class="gene-view">
-                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" study="{{study}}" gene="{{gene}}" population-frequencies="{{populationFrequencies}}"></opencga-gene-view>
+                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" study="{{study}}" gene="{{geneToShow}}" population-frequencies="{{populationFrequencies}}"></opencga-gene-view>
                     </div>
                 </div>
 
@@ -491,6 +491,11 @@
                         hashFrag += "/" + this.study.alias;
                     }
                 }
+
+                if (this.tool == "gene") {
+                    hashFrag += "/" + this.geneToShow;
+                }
+
                 window.location.hash = hashFrag;
             },
             hashFragmentListener: function(ctx) {
@@ -557,10 +562,9 @@
                 this.renderBreadcrumb();
             },
             geneSelected: function(e) {
-                e.preventDefault();
-                this.gene = e.detail.gene;
-                $('.content').hide();
-                $('#gene').show();
+                this.geneToShow = e.detail.gene;
+                this.tool = "gene";
+                this.renderHashFragments();
             },
             renderBreadcrumb: function() {
                 var breadcrumbElement = Polymer.dom(this.root).querySelector("#breadcrumb");
