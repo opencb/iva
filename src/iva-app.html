@@ -200,7 +200,7 @@
 
             <div class="">
                 <div class="collapse content" id="browser">
-                    <variant-browser title="Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                    <variant-browser title="Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}"
                                      population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"  on-gene="geneSelected"></variant-browser>
                 </div>
@@ -226,7 +226,7 @@
 
                 <div class="collapse content" id="gene">
                     <div class="gene-view">
-                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" study="{{study}}" gene="{{gene}}" population-frequencies="{{populationFrequencies}}"></opencga-gene-view>
+                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" study="{{study}}" gene="{{geneToShow}}" population-frequencies="{{populationFrequencies}}"></opencga-gene-view>
                     </div>
                 </div>
 
@@ -456,9 +456,9 @@
             changeAnalysisTool: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
                 $('.content').hide(); // hides all content divs
-                if (typeof e.srcElement !== "undefined" && typeof e.srcElement.attributes.href !== "undefined") {
-                    $(e.srcElement.attributes.href.value).show(); // get the href and use it find which div to show
-                    this.tool = e.srcElement.attributes.href.value;
+                if (typeof e.target !== "undefined" && typeof e.target.attributes.href !== "undefined") {
+                    $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
+                    this.tool = e.target.attributes.href.value;
                 } else {
                     this.tool = "home";
                     $("#home").show(); // get the href and use it find which div to show
@@ -491,6 +491,11 @@
                         hashFrag += "/" + this.study.alias;
                     }
                 }
+
+                if (this.tool == "gene") {
+                    hashFrag += "/" + this.geneToShow;
+                }
+
                 window.location.hash = hashFrag;
             },
             hashFragmentListener: function(ctx) {
@@ -527,7 +532,7 @@
                     if (this.projects[i].name == this.project || this.projects[i].alias == this.project) {
                         this.selectedProject = this.projects[i];
                         for (let j = 0; j < this.projects[i].studies.length; j++) {
-                            if (this.projects[i].studies[j].name == e.srcElement.innerHTML || this.projects[i].studies[j].alias == e.srcElement.innerHTML) {
+                            if (this.projects[i].studies[j].name == e.target.innerHTML || this.projects[i].studies[j].alias == e.target.innerHTML) {
                                 this.study = this.projects[i].studies[j];
                             }
                         }
@@ -557,10 +562,9 @@
                 this.renderBreadcrumb();
             },
             geneSelected: function(e) {
-                e.preventDefault();
-                this.gene = e.detail.gene;
-                $('.content').hide();
-                $('#gene').show();
+                this.geneToShow = e.detail.gene;
+                this.tool = "gene";
+                this.renderHashFragments();
             },
             renderBreadcrumb: function() {
                 var breadcrumbElement = Polymer.dom(this.root).querySelector("#breadcrumb");
