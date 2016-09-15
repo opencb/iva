@@ -72,58 +72,27 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <!-- Controls aligned to the LEFT -->
                             <ul class="nav navbar-nav">
-
-                                <template is="dom-if" if="{{_logged}}">
-                                    <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                                    <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
-                                        <!-- If there is not submenu we just display a button -->
-                                        <template is="dom-if" if="{{!menuItem.submenu}}">
-                                            <li on-click="changeAnalysisTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
-                                        </template>
-
-                                        <!-- If there is a submney we create a dropdown menu item -->
-                                        <template is="dom-if" if="{{menuItem.submenu}}">
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>
-                                                <ul class="dropdown-menu">
-                                                    <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible" >
-                                                        <template is="dom-if" if="{{!item.separator}}">
-                                                            <li on-click="changeAnalysisTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
-                                                        </template>
-                                                        <template is="dom-if" if="{{item.separator}}">
-                                                            <li role="separator" class="divider"></li>
-                                                        </template>
-                                                    </template>
-                                                </ul>
-                                            </li>
-                                        </template>
+                                <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
+                                <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
+                                    <!-- If there is not submenu we just display a button -->
+                                    <template is="dom-if" if="{{!menuItem.submenu}}">
+                                        <li on-click="changeAnalysisTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
                                     </template>
-                                </template>
-
-                                <template is="dom-if" if="{{!_logged}}">
-                                    <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                                    <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
-                                        <!-- If there is not submenu we just display a button -->
-                                        <template is="dom-if" if="{{!menuItem.submenu}}">
-                                            <li on-click="changeAnalysisTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
-                                        </template>
-
-                                        <!-- If there is a submney we create a dropdown menu item -->
-                                        <template is="dom-if" if="{{menuItem.submenu}}">
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>
-                                                <ul class="dropdown-menu">
-                                                    <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible" >
-                                                        <template is="dom-if" if="{{!item.separator}}">
-                                                            <li on-click="changeAnalysisTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
-                                                        </template>
-                                                        <template is="dom-if" if="{{item.separator}}">
-                                                            <li role="separator" class="divider"></li>
-                                                        </template>
+                                    <!-- If there is a submenu we create a dropdown menu item -->
+                                    <template is="dom-if" if="{{menuItem.submenu}}">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible" >
+                                                    <template is="dom-if" if="{{!item.separator}}">
+                                                        <li on-click="changeAnalysisTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
                                                     </template>
-                                                </ul>
-                                            </li>
-                                        </template>
+                                                    <template is="dom-if" if="{{item.separator}}">
+                                                        <li role="separator" class="divider"></li>
+                                                    </template>
+                                                </template>
+                                            </ul>
+                                        </li>
                                     </template>
                                 </template>
                             </ul>
@@ -149,7 +118,6 @@
                                             </template>
                                         </ul>
                                     </li>
-
                                 </template>
 
                                 <template is="dom-if" if="{{_logged}}">
@@ -407,11 +375,15 @@
                 _publicMode: {
                     type: Boolean,
                     value: false
+                },
+                config: {
+                    type: Object
                 }
             },
             ready: function() {
                 // Copy 'application' object from config.js file
                 this.config = application;
+                this.config.menu.counter = 0;
                 this.config.cellbase = cellbase;
                 this.config.opencga = opencga;
 
@@ -493,6 +465,9 @@
 
                             _this._logged = true;
                             _this._publicMode = false;
+
+                            _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
+
                             _this.getProjects();
                         })
                         .catch(function(response) {
@@ -515,6 +490,8 @@
                             _this.opencgaClient._config.sessionId = "";
 
                             _this._logged = false;
+
+                            _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
                             _this.init();
                         });
             },
