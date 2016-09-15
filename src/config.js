@@ -22,8 +22,19 @@ var cellbase = {
 var opencga = {
     host: "bioinfodev.hpc.cam.ac.uk/hgva",
     version: "v1",
-    // user: "hgva",
-    // projects: ["hsapiens_grch37"],
+    // user:  Useful scenario is user@project:study
+    projects: [
+        {
+            name: "ProjectA",
+            alias: "proj_a",
+            studies : [
+                {
+                    name: "Study1",
+                    alias: "s_1"
+                }
+            ]
+        }
+    ],
     cookies: {
         userName: "opencga_userId",
         sessionId: "opencga_sId"
@@ -39,31 +50,31 @@ var application = {
         {
             id: "browser",
             title: "Variant Browser",
-            visibility: "public"
+            visibility: "private"
         },
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "public",
+            visibility: "private",
             submenu: [
                 {
                     id: "family-prioritization",
                     title: "Family",
-                    visibility: "public"
+                    visibility: "private"
                 },
                 {
                     id: "cancer-prioritization",
                     title: "Cancer",
-                    visibility: "public"
+                    visibility: "private"
                 },
                 {
                     separator: true,
-                    visibility: "public"
+                    visibility: "private"
                 },
                 {
                     id: "prioritizationCC",
                     title: "Case-Control",
-                    visibility: "public"
+                    visibility: "private"
                 }
             ]
         },

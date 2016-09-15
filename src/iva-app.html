@@ -73,34 +73,84 @@
                             <!-- Controls aligned to the LEFT -->
                             <ul class="nav navbar-nav">
 
-                                <!-- This code parse the config menu arrays a nd creates a custom menu taken into account visibility -->
-                                <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
-                                    <!-- If there is not submenu we just display a button -->
-                                    <template is="dom-if" if="{{!menuItem.submenu}}">
-                                        <li on-click="changeAnalysisTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
-                                    </template>
+                                <template is="dom-if" if="{{_logged}}">
+                                    <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
+                                    <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
+                                        <!-- If there is not submenu we just display a button -->
+                                        <template is="dom-if" if="{{!menuItem.submenu}}">
+                                            <li on-click="changeAnalysisTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
+                                        </template>
 
-                                    <!-- If there is a submney we create a dropdown menu item -->
-                                    <template is="dom-if" if="{{menuItem.submenu}}">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>
-                                            <ul class="dropdown-menu">
-                                                <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible" >
-                                                    <template is="dom-if" if="{{!item.separator}}">
-                                                        <li on-click="changeAnalysisTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
+                                        <!-- If there is a submney we create a dropdown menu item -->
+                                        <template is="dom-if" if="{{menuItem.submenu}}">
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>
+                                                <ul class="dropdown-menu">
+                                                    <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible" >
+                                                        <template is="dom-if" if="{{!item.separator}}">
+                                                            <li on-click="changeAnalysisTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
+                                                        </template>
+                                                        <template is="dom-if" if="{{item.separator}}">
+                                                            <li role="separator" class="divider"></li>
+                                                        </template>
                                                     </template>
-                                                    <template is="dom-if" if="{{item.separator}}">
-                                                        <li role="separator" class="divider"></li>
+                                                </ul>
+                                            </li>
+                                        </template>
+                                    </template>
+                                </template>
+
+                                <template is="dom-if" if="{{!_logged}}">
+                                    <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
+                                    <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
+                                        <!-- If there is not submenu we just display a button -->
+                                        <template is="dom-if" if="{{!menuItem.submenu}}">
+                                            <li on-click="changeAnalysisTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
+                                        </template>
+
+                                        <!-- If there is a submney we create a dropdown menu item -->
+                                        <template is="dom-if" if="{{menuItem.submenu}}">
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>
+                                                <ul class="dropdown-menu">
+                                                    <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible" >
+                                                        <template is="dom-if" if="{{!item.separator}}">
+                                                            <li on-click="changeAnalysisTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
+                                                        </template>
+                                                        <template is="dom-if" if="{{item.separator}}">
+                                                            <li role="separator" class="divider"></li>
+                                                        </template>
                                                     </template>
-                                                </template>
-                                            </ul>
-                                        </li>
+                                                </ul>
+                                            </li>
+                                        </template>
                                     </template>
                                 </template>
                             </ul>
 
                             <!-- Controls aligned to the RIGHT: settings and about-->
                             <ul class="nav navbar-nav navbar-right">
+                                <!--Projects to show win public mode-->
+                                <template is="dom-if" if="{{_publicMode}}">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            Projects <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <template is="dom-repeat" items="{{projects}}" as="proj">
+                                                <li class="dropdown-submenu">
+                                                    <a href="#">{{proj.name}}</a>
+                                                    <ul class="dropdown-menu">
+                                                        <template is="dom-repeat" items="{{proj.studies}}" as="std">
+                                                            <li><a href="#" data-id="{{std.id}}" on-click="setProjectStudy">{{std.alias}}</a></li>
+                                                        </template>
+                                                    </ul>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </li>
+
+                                </template>
 
                                 <template is="dom-if" if="{{_logged}}">
                                     <li><a href="#" role="button">Logged as '{{userId}}'</a></li>
@@ -353,6 +403,10 @@
                 gene: {
                     type: String,
                     value: ""
+                },
+                _publicMode: {
+                    type: Boolean,
+                    value: false
                 }
             },
             ready: function() {
@@ -386,14 +440,14 @@
                     this.opencgaClient._config.sessionId = sid;
 
                     this._logged = true;
+                    this._publicMode = false;
                     this.getProjects();
                 }
             },
             attached: function() {
                 this.renderBreadcrumb();
-
             },
-            init: function() {
+            init: function () {
                 this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host,
                         this.config.opencga.version, this.config.opencga.cookies.sessionId, this.config.opencga.cookies.userName);
                 this.opencgaClient = new OpenCGAClient(this.opencgaClientConfig);
@@ -401,14 +455,23 @@
                 this.cellBaseClientConfig = new CellBaseClientConfig(hosts = this.config.cellbase.hosts, version = this.config.cellbase.version);
                 this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
 
-                if (typeof this.config.opencga.user !== "undefined" && this.config.opencga.user != ""
-                        && typeof this.config.opencga.projects !== "undefined" && this.config.opencga.projects.length > 0) {
-                    // This web site is set up for browsing public data
-                    this.project = opencga.projects[0];
-                    this._logged = false;
-                    // get the studies for each project
-                    // ...
+//                if (typeof this.config.opencga.user !== "undefined" && this.config.opencga.user != ""
+//                        && typeof this.config.opencga.projects !== "undefined" && this.config.opencga.projects.length > 0) {
+//                    // This web site is set up for browsing public data
+//                    this.project = opencga.projects[0];
+//                    this._logged = false;
+//                    // get the studies for each project
+//                    // ...
+                if (typeof this.config.opencga.projects !== "undefined" && this.config.opencga.projects.length > 0 && this._logged == false) {
+                    this.projects = this.config.opencga.projects;
+                    this._publicMode = true;
+                    // Setting default project and study
+                    this.project = this.projects[0].alias;
+                    this.study = this.projects[0].studies[0];
+                    this.selectedProject = this.projects[0];
                 } else {
+                    this._publicMode = false;
+                    this.projects = [];
                     this.project = "";
                     this.study = {};
                     this.samples = [];
@@ -429,11 +492,13 @@
                             _this.opencgaClient._config.sessionId = response.response[0].result[0].sessionId;
 
                             _this._logged = true;
+                            _this._publicMode = false;
                             _this.getProjects();
                         })
                         .catch(function(response) {
                             console.log("Error: ", response)
                             _this._logged = false;
+                            _this._publicMode = true;
                         });
 
                 // hide login window and return to home
