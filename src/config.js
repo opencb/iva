@@ -24,16 +24,16 @@ var opencga = {
     version: "v1",
     // user:  Useful scenario is user@project:study
     projects: [
-        {
-            name: "ProjectA",
-            alias: "proj_a",
-            studies : [
-                {
-                    name: "Study1",
-                    alias: "s_1"
-                }
-            ]
-        }
+        // {
+        //     name: "ProjectA",
+        //     alias: "proj_a",
+        //     studies : [
+        //         {
+        //             name: "Study1",
+        //             alias: "s_1"
+        //         }
+        //     ]
+        // }
     ],
     cookies: {
         userName: "opencga_userId",
@@ -50,7 +50,7 @@ var application = {
         {
             id: "browser",
             title: "Variant Browser",
-            visibility: "private"
+            visibility: "public"
         },
         {
             id: "prioritization",
