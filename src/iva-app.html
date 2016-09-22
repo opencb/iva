@@ -224,13 +224,15 @@
                 </div>
 
                 <div class="collapse content" id="family-prioritization">
-                    <variant-prioritization mode="family" title="Family Prioritization" host="{{opencga.host}}" project="{{project}}" population-frequencies="{{populationFrequencies}}" study="{{study}}"
-                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-prioritization>
+                    <variant-prioritization mode="family" title="Family Prioritization" host="{{opencga.host}}" project="{{project}}" samples="{{samples}}"
+                                            population-frequencies="{{populationFrequencies}}" study="{{study}}" opencga-client="{{opencgaClient}}"
+                                            cellbase-client="{{cellbaseClient}}"></variant-prioritization>
                 </div>
 
                 <div class="collapse content" id="cancer-prioritization">
-                    <variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" population-frequencies="{{populationFrequencies}}" study="{{study}}"
-                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-prioritization>
+                    <variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" samples="{{samples}}"
+                                            population-frequencies="{{populationFrequencies}}" study="{{study}}" opencga-client="{{opencgaClient}}"
+                                            cellbase-client="{{cellbaseClient}}"></variant-prioritization>
                 </div>
 
                 <div class="collapse content" id="beacon">
@@ -639,7 +641,11 @@
 
                         if (typeof this.samples !== "undefined" && this.samples.length > 0) {
                             let study = this._createBreadcrumbElement(this.study.alias, false);
-                            let samples = this._createBreadcrumbElement(this.samples.join(","), true);
+                            let sampleNames = [];
+                            for (let i in this.samples) {
+                                sampleNames.push(this.samples[i].name);
+                            }
+                            let samples = this._createBreadcrumbElement(sampleNames.join(","), true);
                             Polymer.dom(breadcrumbElement).appendChild(study);
                             Polymer.dom(breadcrumbElement).appendChild(samples);
                         } else {
