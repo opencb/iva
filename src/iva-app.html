@@ -614,9 +614,7 @@
                 if (breadcrumbElement != null && typeof this.config !== "undefined") {
 
                     // If there is no project in config, breadcrumb is set private so that it is shown only when logged in
-                    if (typeof this.config.opencga.projects === "undefined") {
-                        this.config.breadcrumb.visibility = "private";
-                    } else if (this.config.opencga.projects.length == 0) { // if opencga.projects = []
+                    if (typeof this.config.opencga.projects === "undefined" || this.config.opencga.projects.length == 0) {
                         this.config.breadcrumb.visibility = "private";
                     }
 
