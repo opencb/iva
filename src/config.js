@@ -163,78 +163,86 @@ var application = {
     }
 };
 
-var populationFrequencies = [
-    {
-        id: "1000GENOMES_phase_3",
-        title: "1000 Genomes",
-        populations: [
-            {
-                id: "ALL",
-                title: "All populations [ALL]",
-                active: true
-            },
-            {
-                id: "EUR",
-                title: "European [EUR]"
-            },
-            {
-                id: "AMR",
-                title: "American [AMR]"
-            },
-            {
-                id: "AFR",
-                title: "African [AFR]"
-            },
-            {
-                id: "SAS",
-                title: "South Asian [SAS]"
-            },
-            {
-                id: "EAS",
-                title: "East Asian [EAS]"
-            }
-        ]
-    },
-    {
-        id: "EXAC",
-        title: "ExAC",
-        populations: [
-            {
-                id: "ALL",
-                title: "ExAC",
-                active: true
-            },
-            {
-                id: "NFE",
-                title: "South Asian [SAS]"
-            },
-            {
-                id: "AMR",
-                title: "South Asian [SAS]"
-            },
-            {
-                id: "SAS",
-                title: "South Asian [SAS]"
-            }
-        ]
-    },
-    {
-        id: "ESP_6500",
-        title: "ESP 6500",
-        populations: [
-            {
-                id: "EA",
-                title: "European American",
-                active: true
-            },
-            {
-                id: "AA",
-                title: "African American",
-                active: true
-            }
-        ]
+var populationFrequencies = {
+    items: [
+        {
+            id: "1000GENOMES_phase_3",
+            title: "1000 Genomes",
+            populations: [
+                {
+                    id: "ALL",
+                    title: "All populations [ALL]",
+                    active: true
+                },
+                {
+                    id: "EUR",
+                    title: "European [EUR]"
+                },
+                {
+                    id: "AMR",
+                    title: "American [AMR]"
+                },
+                {
+                    id: "AFR",
+                    title: "African [AFR]"
+                },
+                {
+                    id: "SAS",
+                    title: "South Asian [SAS]"
+                },
+                {
+                    id: "EAS",
+                    title: "East Asian [EAS]"
+                }
+            ]
+        },
+        {
+            id: "EXAC",
+            title: "ExAC",
+            populations: [
+                {
+                    id: "ALL",
+                    title: "ExAC",
+                    active: true
+                },
+                {
+                    id: "NFE",
+                    title: "South Asian [SAS]"
+                },
+                {
+                    id: "AMR",
+                    title: "South Asian [SAS]"
+                },
+                {
+                    id: "SAS",
+                    title: "South Asian [SAS]"
+                }
+            ]
+        },
+        {
+            id: "ESP_6500",
+            title: "ESP 6500",
+            populations: [
+                {
+                    id: "EA",
+                    title: "European American",
+                    active: true
+                },
+                {
+                    id: "AA",
+                    title: "African American",
+                    active: true
+                }
+            ]
+        }
+    ],
+    color: {
+        // "very-rare": "red",
+        // "rare": "orange",
+        // "average": "yellow",
+        // "common": "blue"
     }
-];
+};
 
 
 var consequenceTypes = {
