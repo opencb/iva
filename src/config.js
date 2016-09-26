@@ -166,7 +166,7 @@ var application = {
 var populationFrequencies = [
     {
         id: "1000GENOMES_phase_3",
-        title: "1000 Genomes (Phase 3)",
+        title: "1000 Genomes",
         populations: [
             {
                 id: "ALL",
@@ -175,8 +175,7 @@ var populationFrequencies = [
             },
             {
                 id: "EUR",
-                title: "European [EUR]",
-                active: true
+                title: "European [EUR]"
             },
             {
                 id: "AMR",
@@ -204,6 +203,18 @@ var populationFrequencies = [
                 id: "ALL",
                 title: "ExAC",
                 active: true
+            },
+            {
+                id: "NFE",
+                title: "South Asian [SAS]"
+            },
+            {
+                id: "AMR",
+                title: "South Asian [SAS]"
+            },
+            {
+                id: "SAS",
+                title: "South Asian [SAS]"
             }
         ]
     },
@@ -212,12 +223,12 @@ var populationFrequencies = [
         title: "ESP 6500",
         populations: [
             {
-                id: "EUR",
+                id: "EA",
                 title: "European American",
                 active: true
             },
             {
-                id: "AFR",
+                id: "AA",
                 title: "African American",
                 active: true
             }
@@ -231,8 +242,8 @@ var consequenceTypes = {
     color: {
         "high": "red",
         "moderate": "orange",
-        "low": "green",
-        "modifier": "blue"
+        "low": "blue",
+        "modifier": "green"
     },
     /* 'Title' is optional. if there is no title provided then 'name' is going to be used.
      There are two more optional properties - 'checked' and 'color'. They can be set to display them default in web application.
@@ -246,9 +257,15 @@ var consequenceTypes = {
             description: "",
             items: [
                 {
+                    id: "SO:0001631",
+                    name: "upstream_gene_variant",
+                    title: "upstream gene variant",
+                    description: "A sequence variant located 5' of a gene",
+                    impact: "modifier"
+                },
+                {
                     id: "SO:0001636",
                     name: "2KB_upstream_variant",
-                    title: "2KB upstream variant",
                     description: "A sequence variant located within 2KB 5' of a gene",
                     impact: "modifier"
                     // checked: true
@@ -260,15 +277,16 @@ var consequenceTypes = {
                     impact: "modifier"
                 },
                 {
+                    id: "SO:0002083",
+                    name: "2KB_downstream_variant",
+                    description: "A sequence variant located within 2KB 3' of a gene",
+                    impact: "modifier"
+                    // checked: true
+                },
+                {
                     id: "SO:0001628",
                     name: "intergenic_variant",
                     description: "A sequence variant located in the intergenic region, between genes",
-                    impact: "modifier"
-                },
-                {
-                    id: "SO:0001631",
-                    name: "upstream_gene_variant",
-                    description: "A sequence variant located 5' of a gene",
                     impact: "modifier"
                 }
             ]
