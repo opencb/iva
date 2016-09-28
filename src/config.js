@@ -44,7 +44,7 @@ var opencga = {
 
 var application = {
     title: "IVA",
-    version: "v0.2.0",
+    version: "v0.5.0",
     logo: "images/opencb-logo.png",
     menu: [
         {
@@ -65,63 +65,29 @@ var application = {
                 {
                     id: "family-prioritization",
                     title: "Family",
-                    visibility: "private"
+                    visibility: "public"
                 },
                 {
                     id: "cancer-prioritization",
                     title: "Cancer",
-                    visibility: "private"
+                    visibility: "public"
                 },
                 {
                     separator: true,
-                    visibility: "private"
+                    visibility: "public"
                 },
                 {
                     id: "prioritizationCC",
                     title: "Case-Control",
-                    visibility: "private"
+                    visibility: "public"
                 }
             ]
         },
-        // {
-        //     id: "diagnose",
-        //     title: "Diagnose",
-        //     visibility: "public",
-        //     submenu: [
-        //         {
-        //             id: "diagnose:sample",
-        //             title: "Sample",
-        //             visibility: "public"
-        //         },
-        //         {
-        //             id: "diagnose:family",
-        //             title: "Family",
-        //             visibility: "public"
-        //         }
-        //     ]
-        // },
         {
             id: "beacon",
             title: "Beacon",
             visibility: "public"
         },
-        // {
-        //     id: "analysis",
-        //     title: "Analysis",
-        //     visibility: "public",
-        //     submenu: [
-        //         {
-        //             id: "ibs",
-        //             title: "IBS",
-        //             visibility: "public"
-        //         },
-        //         {
-        //             id: "burden",
-        //             title: "Burden Test",
-        //             visibility: "public"
-        //         }
-        //         ]
-        // },
         {
             id: "tools",
             title: "Tools",
@@ -167,11 +133,11 @@ var application = {
         visibility: "public"
     },
     about: [
-        {"name": "Documentation",  "url": "https://github.com/babelomics/bierapp/wiki", "icon": "fa fa-book"},
-        {"name": "Tutorial", "url": "https://github.com/babelomics/bierapp/wiki/Tutorial", "icon": ""},
-        {"name": "Source code", "url": "https://github.com/babelomics/bierapp", "icon": "fa fa-github"},
-        {"name": "Contact",  "url": "", "icon": "fa fa-envelope"},
-        {"name": "FAQ",  "url": "", "icon": ""}
+        {name: "Documentation",  url: "https://github.com/opencb/iva/wiki", icon: "fa fa-book"},
+        {name: "Tutorial", url: "https://github.com/opencb/iva/wiki/Tutorial", icon: ""},
+        {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
+        {name: "Contact",  url: "", icon: "fa fa-envelope"},
+        {name: "FAQ",  url: "", icon: ""}
     ],
     breadcrumb: {
         title: "Projects",
