@@ -15,7 +15,7 @@
  */
 
 var cellbase = {
-    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-beta"],
+    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-dev-v4.0"],
     version: "v4"
 };
 
@@ -60,7 +60,7 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "private",
+            visibility: "public",
             submenu: [
                 {
                     id: "family-prioritization",
@@ -83,31 +83,48 @@ var application = {
                 }
             ]
         },
-        {
-            id: "diagnose",
-            title: "Diagnose",
-            visibility: "public",
-            submenu: [
-                {
-                    id: "diagnose:sample",
-                    title: "Sample",
-                    visibility: "public"
-                },
-                {
-                    id: "diagnose:family",
-                    title: "Family",
-                    visibility: "public"
-                }
-            ]
-        },
+        // {
+        //     id: "diagnose",
+        //     title: "Diagnose",
+        //     visibility: "public",
+        //     submenu: [
+        //         {
+        //             id: "diagnose:sample",
+        //             title: "Sample",
+        //             visibility: "public"
+        //         },
+        //         {
+        //             id: "diagnose:family",
+        //             title: "Family",
+        //             visibility: "public"
+        //         }
+        //     ]
+        // },
         {
             id: "beacon",
             title: "Beacon",
             visibility: "public"
         },
+        // {
+        //     id: "analysis",
+        //     title: "Analysis",
+        //     visibility: "public",
+        //     submenu: [
+        //         {
+        //             id: "ibs",
+        //             title: "IBS",
+        //             visibility: "public"
+        //         },
+        //         {
+        //             id: "burden",
+        //             title: "Burden Test",
+        //             visibility: "public"
+        //         }
+        //         ]
+        // },
         {
-            id: "analysis",
-            title: "Analysis",
+            id: "tools",
+            title: "Tools",
             visibility: "public",
             submenu: [
                 {
@@ -118,17 +135,6 @@ var application = {
                 {
                     id: "burden",
                     title: "Burden Test",
-                    visibility: "public"
-                }]
-        },
-        {
-            id: "tools",
-            title: "Tools",
-            visibility: "public",
-            submenu: [
-                {
-                    id: "genomeBrowser",
-                    title: "Genome Browser",
                     visibility: "public"
                 },
                 {
@@ -146,6 +152,11 @@ var application = {
                     visibility: "public"
                 }
             ]
+        },
+        {
+            id: "genomeBrowser",
+            title: "Genome Browser",
+            visibility: "public",
         }
     ],
     search: {
@@ -169,6 +180,14 @@ var application = {
 };
 
 var populationFrequencies = {
+    // This is based on this figure:
+    // http://www.dialogues-cns.com/wp-content/uploads/2015/03/DialoguesClinNeurosci-17-69-g001.jpg
+    color: {
+        veryRare: "red",
+        rare: "orange",
+        average: "yellow",
+        common: "blue"
+    },
     items: [
         {
             id: "1000GENOMES_phase_3",
@@ -207,8 +226,7 @@ var populationFrequencies = {
             populations: [
                 {
                     id: "ALL",
-                    title: "ExAC",
-                    active: true
+                    title: "ExAC [ALL]"
                 },
                 {
                     id: "NFE",
@@ -240,13 +258,7 @@ var populationFrequencies = {
                 }
             ]
         }
-    ],
-    color: {
-        // "very-rare": "red",
-        // "rare": "orange",
-        // "average": "yellow",
-        // "common": "blue"
-    }
+    ]
 };
 
 var proteinSubstitutionScores = {
