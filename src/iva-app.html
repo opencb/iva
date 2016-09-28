@@ -217,9 +217,12 @@
 
 
             <div class="">
+                <div class="collapse content" id="samples" style="margin: auto;text-align: justify;width: 60%;">
+                    <opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}" samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>
+                </div>
                 <div class="collapse content" id="browser">
                     <variant-browser title="Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}"
-                                     population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                     population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"  on-gene="geneSelected"></variant-browser>
                 </div>
 
@@ -391,6 +394,10 @@
 
                 if (typeof populationFrequencies !== "undefined") {
                     this.populationFrequencies = populationFrequencies;
+                }
+
+                if (typeof proteinSubstitutionScores !== "undefined") {
+                    this.proteinSubstitutionScores = proteinSubstitutionScores;
                 }
 
                 if (typeof consequenceTypes !== "undefined") {

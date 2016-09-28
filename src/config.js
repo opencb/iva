@@ -48,6 +48,11 @@ var application = {
     logo: "images/opencb-logo.png",
     menu: [
         {
+            id: "samples",
+            title: "Samples",
+            visibility: "public"
+        },
+        {
             id: "browser",
             title: "Variant Browser",
             visibility: "public"
@@ -244,6 +249,18 @@ var populationFrequencies = {
     }
 };
 
+var proteinSubstitutionScores = {
+    sift: {
+        "damaging": "red",
+        "tolerated": "green"
+    },
+    polyphen: {
+        "probably damaging": "red",
+        "possibly damaging": "orange",
+        "benign": "green",
+        "unknown": "black"
+    }
+};
 
 var consequenceTypes = {
     // This is the impact color. It allows to customise both the impact categories and desired colors
