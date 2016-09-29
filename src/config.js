@@ -228,15 +228,16 @@ var populationFrequencies = {
 };
 
 var proteinSubstitutionScores = {
+    // This is to show the predictions in respective colors
     sift: {
-        "damaging": "red",
-        "tolerated": "green"
+        damaging: "red",
+        tolerated: "green"
     },
     polyphen: {
-        "probably damaging": "red",
-        "possibly damaging": "orange",
-        "benign": "green",
-        "unknown": "black"
+        probablyDamaging: "red",
+        possiblyDamaging: "orange",
+        benign: "green",
+        unknown: "black"
     }
 };
 
@@ -505,33 +506,30 @@ var consequenceTypes = {
 };
 
 var DEFAULT_SPECIES = {
-    "vertebrates": [
+    vertebrates: [
         {
 
-            "id": "hsapiens",
-            "scientificName": "Homo sapiens",
-            "assembly": {
+            id: "hsapiens",
+            scientificName: "Homo sapiens",
+            assembly: {
 
-                "name": "GRCh37",
-                "ensemblVersion": "75_37"
+                name: "GRCh37",
+                ensemblVersion: "75_37"
 
             },
-            "assemblies": [
-
+            assemblies: [
                 {
 
-                    "name": "GRCh37",
-                    "ensemblVersion": "75_37"
+                    name: "GRCh37",
+                    ensemblVersion: "75_37"
 
                 },
-
                 {
-                    "name": "GRCh38",
-                    "ensemblVersion": "79_38"
+                    name: "GRCh38",
+                    ensemblVersion: "79_38"
                 }
-
             ],
-            "data": [
+            data: [
                 "genome",
                 "gene",
                 "variation",
@@ -541,7 +539,6 @@ var DEFAULT_SPECIES = {
                 "clinical",
                 "gene2disease"
             ]
-
         }
     ]
 };
