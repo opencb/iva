@@ -154,7 +154,7 @@ var populationFrequencies = {
         average: "yellow",
         common: "blue"
     },
-    items: [
+    studies: [
         {
             id: "1000GENOMES_phase_3",
             title: "1000 Genomes",
@@ -253,13 +253,13 @@ var consequenceTypes = {
      There are two more optional properties - 'checked' and 'color'. They can be set to display them default in web application.
      Similarly 'description' is optional as well.
      */
-    items: [
+    categories: [
         {
             id: "",
             name: "",
             title: "Intergenic",
             description: "",
-            items: [
+            terms: [
                 {
                     id: "SO:0001631",
                     name: "upstream_gene_variant",
@@ -297,7 +297,7 @@ var consequenceTypes = {
         },
         {
             title: "Regulatory",
-            items: [
+            terms: [
                 {
                     id: "SO:0001620",
                     name: "mature_miRNA_variant",
@@ -344,7 +344,7 @@ var consequenceTypes = {
         },
         {
             title: "Coding",
-            items: [
+            terms: [
                 {
                     id: "SO:0001580",
                     name: "coding_sequence_variant",
@@ -440,7 +440,7 @@ var consequenceTypes = {
         },
         {
             title: "Non-coding",
-            items: [
+            terms: [
                 {
                     id: "SO:0001624",
                     name: "3_prime_UTR_variant",
@@ -469,7 +469,7 @@ var consequenceTypes = {
         },
         {
             title: "Splice",
-            items: [
+            terms: [
                 {
                     id: "SO:0001574",
                     name: "splice_acceptor_variant",
