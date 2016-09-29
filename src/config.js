@@ -230,7 +230,7 @@ var populationFrequencies = {
 var proteinSubstitutionScores = {
     // This is to show the predictions in respective colors
     sift: {
-        damaging: "red",
+        deleterious: "red",
         tolerated: "green"
     },
     polyphen: {
