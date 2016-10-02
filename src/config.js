@@ -150,8 +150,8 @@ var populationFrequencies = {
     // http://www.dialogues-cns.com/wp-content/uploads/2015/03/DialoguesClinNeurosci-17-69-g001.jpg
     color: {
         veryRare: "red",
-        rare: "orange",
-        average: "yellow",
+        rare: "yellow",
+        average: "orange",
         common: "blue"
     },
     studies: [
