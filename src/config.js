@@ -56,7 +56,15 @@ var application = {
             id: "browser",
             title: "Variant Browser",
             visibility: "public",
-            filters: [{}] // Allows to provide default filters for the browser
+            // Allows to provide default filters for the browser
+            filters: [
+                {
+                    name: "testing",
+                    values: [
+                        "BRCA2" ,"phylop<0.001"
+                    ]
+                }
+            ]
         },
         {
             id: "prioritization",
