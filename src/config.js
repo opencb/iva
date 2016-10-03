@@ -55,7 +55,8 @@ var application = {
         {
             id: "browser",
             title: "Variant Browser",
-            visibility: "public"
+            visibility: "public",
+            filters: [{}] // Allows to provide default filters for the browser
         },
         {
             id: "prioritization",
@@ -244,10 +245,10 @@ var proteinSubstitutionScores = {
 var consequenceTypes = {
     // This is the impact color. It allows to customise both the impact categories and desired colors
     color: {
-        "high": "red",
-        "moderate": "orange",
-        "low": "blue",
-        "modifier": "green"
+        high: "red",
+        moderate: "orange",
+        low: "blue",
+        modifier: "green"
     },
     /* 'Title' is optional. if there is no title provided then 'name' is going to be used.
      There are two more optional properties - 'checked' and 'color'. They can be set to display them default in web application.
