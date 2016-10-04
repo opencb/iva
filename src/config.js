@@ -59,10 +59,18 @@ var application = {
             // Allows to provide default filters for the browser
             filters: [
                 {
-                    name: "testing",
-                    values: [
-                        "BRCA2" ,"phylop<0.001"
-                    ]
+                    name: "Example BRCA2",
+                    query: {
+                        gene: "BRCA2",
+                        phylop: "<0.001"
+                    }
+                },
+                {
+                    name: "Example OR11",
+                    query: {
+                        gene: "OR11H1",
+                        phylop: "<0.001"
+                    }
                 }
             ]
         },
