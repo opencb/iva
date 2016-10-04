@@ -565,7 +565,8 @@
             },
             hashFragmentListener: function(ctx) {
                 var arr = window.location.hash.split('/');
-                let [hashTool, hashProject, hashStudy, hashSamples] = window.location.hash.split('/');
+//                let [hashTool, hashProject, hashStudy, hashSamples] = window.location.hash.split('/');
+                let [hashTool, hashProject, hashStudy, geneName] = window.location.hash.split('/');
 
                 // Stopping the recursive call
                 if (hashTool != this.tool || hashProject != this.project || hashStudy != this.study.alias) {
@@ -583,6 +584,10 @@
                                 }
                             }
                         }
+                    }
+
+                    if (geneName != "") {
+                        this.geneToShow = geneName;
                     }
 
                     this.tool = hashTool;
