@@ -59,10 +59,10 @@ var application = {
             // Allows to provide default filters for the browser
             filters: [
                 {
-                    name: "testing",
-                    values: [
-                        "BRCA2" ,"phylop<0.001"
-                    ]
+                    name: "none",
+                    // values: [
+                    //     "BRCA2" ,"phylop<0.001"
+                    // ]
                 }
             ]
         },
