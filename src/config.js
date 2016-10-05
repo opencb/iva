@@ -144,7 +144,7 @@ var application = {
         }
     ],
     search: {
-        placeholder: "eg. BRCA2",
+        placeholder: "Search",
         visibility: "public"
     },
     settings: {

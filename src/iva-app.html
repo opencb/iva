@@ -156,10 +156,11 @@
 
                                 <form class="navbar-form navbar-left" role="search">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="{{config.search.placeholder}}">
-                                        <a href="#">
-                                            <span class="fa fa-search" aria-hidden="true"></span>
-                                        </a>
+                                        <input type="text" class="form-control" id="searchTextBox" placeholder="{{config.search.placeholder}}"
+                                               on-keyup="buildQuery">
+                                        <!--<a href="#browser">-->
+                                            <!--<span class="fa fa-search" aria-hidden="true"></span>-->
+                                        <!--</a>-->
                                     </div>
                                     <!--<button type="submit" class="btn btn-default">Submit</button>-->
                                 </form>
@@ -212,7 +213,7 @@
             <!-- This is where main application is rendered -->
             <div class="center">
                 <div class="collapse content" id="home">
-                    <welcome-web></welcome-web>
+                    <welcome-web on-search="{{buildQuery}}"></welcome-web>
                 </div>
             </div>
 
@@ -224,7 +225,7 @@
                 <div class="collapse content" id="browser">
                     <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" config="{{browserConfig}}"
                                      population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                                     opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
+                                     opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" query="{{_query}}" on-gene="geneSelected">
                     </variant-browser>
                 </div>
 
@@ -631,11 +632,37 @@
                 this.renderHashFragments();
                 this.renderBreadcrumb();
             },
-            geneSelected: function(e) {
-                this.geneToShow = e.detail.gene;
-                this.tool = "gene";
-                this.renderHashFragments();
+            buildQuery: function(e) {
+                let query = {};
+                let value = "";
+                if (typeof e !== "undefined" && typeof e.detail.value !== "undefined") {
+                    value = e.detail.value;
+                } else if (typeof e !== "undefined" && e.keyCode == '13'){
+                    value = this.$.searchTextBox.value;
+                }
+
+                if (value != "") {
+                    if (value.startsWith("rs") || value.split(':').length > 2) {
+                        query.ids = value;
+                    } else if (value.indexOf(':') > -1 && value.indexOf('-') > -1) {
+                        query.region = value;
+                    } else if (value.startsWith("ENST")) {
+                        query["annot-xref"] = value;
+                    } else {
+                        query.gene = value;
+                        this.geneToShow = value;
+//                    this.tool = "gene";
+//                    this.renderHashFragments();
+                    }
+                    if (Object.keys(query).length > 0) {
+                        this._query = query;
+                        $('.content').hide();
+                        $('#browser').show();
+                    }
+                }
+
             },
+
             renderBreadcrumb: function() {
                 var breadcrumbElement = Polymer.dom(this.root).querySelector("#breadcrumb");
 
