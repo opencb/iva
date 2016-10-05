@@ -44,8 +44,9 @@ var opencga = {
 
 
 var application = {
-    title: "IVA",
-    version: "v0.5.0",
+    title: "BRIDGE",
+    version: "v0.1.0",
+    // logo: "images/bridge_logo.png",
     logo: "images/opencb-logo.png",
     menu: [
         {

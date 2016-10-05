@@ -87,14 +87,16 @@
                 }
             },
             callAutoComplete: function (e) {
+
                 if (e.keyCode != '13') {
                     // call web services for autocomplete data
                     console.log("value is being entered")
+                    console.log(e)
                 } else {
-                    // load the corresponding view
-                    $('#' + e.srcElement.id).val('');
+                    // fire according to the feature - gene, variant etc.
+                    this.fire("gene", {gene: this.$.welcomeSearchTextBox.value});
+                    this.$.welcomeSearchTextBox.value = "";
                     $('.content').hide();
-                    // fire an event
                 }
             }
         });
