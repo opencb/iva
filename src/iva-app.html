@@ -451,14 +451,8 @@
                 this.cellBaseClientConfig = new CellBaseClientConfig(hosts = this.config.cellbase.hosts, version = this.config.cellbase.version);
                 this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
 
-//                if (typeof this.config.opencga.user !== "undefined" && this.config.opencga.user != ""
-//                        && typeof this.config.opencga.projects !== "undefined" && this.config.opencga.projects.length > 0) {
-//                    // This web site is set up for browsing public data
-//                    this.project = opencga.projects[0];
-//                    this._logged = false;
-//                    // get the studies for each project
-//                    // ...
                 if (typeof this.config.opencga.projects !== "undefined" && this.config.opencga.projects.length > 0 && this._logged == false) {
+                    // This web site is set up for browsing public data
                     this.projects = this.config.opencga.projects;
                     this._publicMode = true;
                     // Setting default project and study
