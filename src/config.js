@@ -46,13 +46,13 @@ var opencga = {
 var application = {
     title: "BRIDGE",
     version: "v0.1.0",
-    // logo: "images/bridge_logo.png",
-    logo: "images/opencb-logo.png",
+    logo: "images/bridge_logo.png",
+    // logo: "images/opencb-logo.png",
     menu: [
         {
             id: "samples",
             title: "Samples",
-            visibility: "public"
+            visibility: "none"
         },
         {
             id: "browser",
