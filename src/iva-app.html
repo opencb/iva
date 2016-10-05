@@ -213,7 +213,7 @@
             <!-- This is where main application is rendered -->
             <div class="center">
                 <div class="collapse content" id="home">
-                    <welcome-web on-search="{{buildQuery}}"></welcome-web>
+                    <welcome-web on-search="buildQuery"></welcome-web>
                 </div>
             </div>
 
@@ -654,11 +654,12 @@
 //                    this.tool = "gene";
 //                    this.renderHashFragments();
                     }
-                    if (Object.keys(query).length > 0) {
-                        this._query = query;
-                        $('.content').hide();
-                        $('#browser').show();
-                    }
+
+                    this._query = query;
+                    $('.content').hide();
+                    $('#browser').show();
+                    this.tool = "browser";
+                    this.renderHashFragments();
                 }
 
             },
