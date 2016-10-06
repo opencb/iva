@@ -475,7 +475,7 @@
             },
             login: function(credentials) {
                 var _this = this;
-                this.opencgaClient.users().login(credentials.detail.userId, {password: credentials.detail.password})
+                this.opencgaClient.users().login(credentials.detail.userId, credentials.detail.password)
                         .then(function(response) {
                             _this.userId = credentials.detail.userId;
                             _this.sessionId = response.response[0].result[0].sessionId;
@@ -528,7 +528,7 @@
             },
             getProjects: function () {
                 var _this = this;
-                this.opencgaClient.users().projects(this.userId)
+                this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
                             _this.projects = response.response[0].result;
 
