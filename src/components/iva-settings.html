@@ -1,0 +1,34 @@
+<link rel="import" href="../jso-styles.html">
+
+<dom-module id="iva-settings">
+    <template>
+        <style is="custom-style" include="jso-styles"></style>
+
+        <div>
+            <div class="input-group">
+                <span class="input-group-addon" id="opencga-host">OpenCGA</span>
+                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="http://bioinfo.hpc.cam.ac.uk/opencga">
+            </div>
+           <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="cellbase-host">CellBase </span>
+                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="http://bioinfo.hpc.cam.ac.uk/cellbase">
+            </div>
+            <br>
+            <div class="form-group row" style="float: right;">
+                <!--<div class="offset-sm-2 col-sm-10">-->
+                    <button type="button" class="btn btn-primary">OK</button>
+                <!--</div>-->
+            </div>
+        </div>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'iva-settings',
+            properties: {
+
+            }
+        });
+    </script>
+</dom-module>

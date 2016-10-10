@@ -26,9 +26,9 @@
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-login.html">-->
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-login.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload-file.html">
-<link rel="import" href="components/opencga-login.html">
+<link rel="import" href="components/iva-settings.html">
 
 <dom-module id="iva-app">
 
@@ -168,9 +168,7 @@
                                 <!-- Setting modal window -->
                                 <template is="dom-if" if="{{config.settings.visibility}}">
                                     <li>
-                                        <a href="#" data-toggle="modal" role="button" data-placement="bottom" data-target="#myModal" title="Settings ...">
-                                            <i class="fa fa-cog"></i>
-                                        </a>
+                                        <a href="#settings" role="button"><i class="fa fa-cog"></i></a>
                                     </li>
                                 </template>
 
@@ -187,7 +185,7 @@
                                 <!-- Login/Logout button -->
                                 <li>
                                     <template is="dom-if" if="{{!_logged}}">
-                                        <a href="#login" data-toggle="modal" role="button" data-placement="bottom" data-target="#ModalLogin" title="Login ..." on-click="changeAnalysisTool">
+                                        <a href="#login" role="button">
                                             <i class="fa fa-sign-in fa-lg"></i> Login
                                         </a>
                                     </template>
@@ -263,6 +261,15 @@
                     Not implemented yet!
                     <!--<opencga-dahsboard></opencga-dahsboard>-->
                 </div>
+
+                <div class="collapse content" id="login">
+                    <opencga-login on-login="login" opencga-client="{{opencgaClient}}" opencga-client-config="{{opencgaClientConfig}}" login-text="Sign in"></opencga-login>
+                </div>
+
+                <div class="collapse content" id="settings" style="width: 50%; margin-left: 25%">
+                    <iva-settings></iva-settings>
+                </div>
+
                 <!--BreadCrumb reference-->
                 <div class="collapse content" id="projectList">
                     <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
@@ -272,25 +279,6 @@
                 </div>
                 <div class="collapse content" id="studyInfo">
                     <opencga-study project="{{selectedProject}}" study="{{study}}"></opencga-study>
-                </div>
-            </div>
-        </div>
-
-        <!-- Login modal window -->
-        <div class="center">
-            <div class="collapse content" id="login">
-                <div class="modal fade" id="ModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLogin">Login</h4>
-                            </div>
-                            <div class="modal-body">
-                                <opencga-login on-login="login" opencga-client="{{opencgaClient}}" opencga-client-config="{{opencgaClientConfig}}" login-text="Sign in"></opencga-login>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -305,37 +293,7 @@
                         <h4 class="modal-title" id="uploadModalLabel">Upload File</h4>
                     </div>
                     <div class="modal-body">
-                        <opencga-upload-file study="{{study}}" studies="{{selectedProject.studies}}"></opencga-upload-file>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- Modal dialog for Settings -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Settings</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p></p>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="opencga-host">OpenCGA</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="http://bioinfo.hpc.cam.ac.uk/opencga">
-                        </div>
-                        <p></p>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="cellbase-host">CellBase </span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="http://bioinfo.hpc.cam.ac.uk/cellbase">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">OK</button>
+                        <opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{selectedProject.studies}}"></opencga-upload-file>
                     </div>
                 </div>
             </div>
@@ -474,29 +432,20 @@
                 this._checkBreadcrumbVisible();
             },
             login: function(credentials) {
-                var _this = this;
-                this.opencgaClient.users().login(credentials.detail.userId, credentials.detail.password)
-                        .then(function(response) {
-                            _this.userId = credentials.detail.userId;
-                            _this.sessionId = response.response[0].result[0].sessionId;
-                            _this.opencgaClient._config.sessionId = response.response[0].result[0].sessionId;
+                this.userId = credentials.detail.userId;
+                this.sessionId = credentials.detail.sessionId;
+                this.opencgaClient._config.sessionId = credentials.detail.sessionId;
 
-                            _this._logged = true;
-                            _this._publicMode = false;
+                this._logged = true;
+                this._publicMode = false;
 
-                            _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
+                this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-                            _this.getProjects();
-                        })
-                        .catch(function(response) {
-                            console.log("Error: ", response)
-                            _this._logged = false;
-                            _this._publicMode = true;
-                        });
+                this.getProjects();
 
-                // hide login window and return to home
-                $('#ModalLogin').modal('hide');
+                // Show home page after the user logs in
                 $('.content').hide();
+                this.tool = "home";
                 $('#home').show();
             },
             logout: function() {
