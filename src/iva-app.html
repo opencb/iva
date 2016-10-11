@@ -122,9 +122,19 @@
                                 </template>
 
                                 <template is="dom-if" if="{{_logged}}">
-                                    <li><a href="#" role="button">Logged as '{{userId}}'</a></li>
-
-                                    <li><a href="#dashboard" role="button">Dashboard</a></li>
+                                    <!--User-->
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-user" aria-hidden="true"></i> {{userId}} <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#dashboard"><i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a></li>
+                                            <li><a href="#projectList"><i class="fa fa-database" aria-hidden="true"></i> Projects</a></li>
+                                            <li><a href="#upload"><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
+                                        </ul>
+                                    </li>
 
                                     <!--Project dropdown menu-->
                                     <li class="dropdown">
@@ -144,12 +154,6 @@
                                             </template>
                                         </ul>
                                     </li>
-
-                                    <!--Upload modal window-->
-                                    <li class="bierapp-menu-vertical-right">
-                                        <a href="#" data-toggle="modal" role="button" data-placement="bottom" data-target="#uploadModal" title="Upload File ...">
-                                            Upload data</a>
-                                    </li>
                                     <li class="divider-vertical"></li>
                                 </template>
 
@@ -157,20 +161,12 @@
                                 <form class="navbar-form navbar-left" role="search">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="searchTextBox" placeholder="{{config.search.placeholder}}"
-                                               on-keyup="buildQuery">
+                                               on-keyup="buildQuery" style="width: 170px;">
                                         <!--<a href="#browser">-->
                                             <!--<span class="fa fa-search" aria-hidden="true"></span>-->
                                         <!--</a>-->
                                     </div>
-                                    <!--<button type="submit" class="btn btn-default">Submit</button>-->
                                 </form>
-
-                                <!-- Setting modal window -->
-                                <template is="dom-if" if="{{config.settings.visibility}}">
-                                    <li>
-                                        <a href="#settings" role="button"><i class="fa fa-cog"></i></a>
-                                    </li>
-                                </template>
 
                                 <!-- About dropdown menu-->
                                 <li class="dropdown">
@@ -205,7 +201,6 @@
 
             <!--Breadcrumb-->
             <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
-
 
 
             <!-- This is where main application is rendered -->
@@ -262,16 +257,21 @@
                     <!--<opencga-dahsboard></opencga-dahsboard>-->
                 </div>
 
-                <div class="collapse content" id="login">
+                <div class="collapse content" id="login" style="width: 50%; margin: auto">
                     <opencga-login on-login="login" opencga-client="{{opencgaClient}}" opencga-client-config="{{opencgaClientConfig}}" login-text="Sign in"></opencga-login>
                 </div>
 
-                <div class="collapse content" id="settings" style="width: 50%; margin-left: 25%">
+                <div class="collapse content" id="settings" style="width: 40%; margin: auto">
+                    <br>
                     <iva-settings></iva-settings>
                 </div>
 
+                <div class="collapse content" id="upload" style="width: 40%; margin-left: 2%">
+                    <br>
+                    <opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{selectedProject.studies}}"></opencga-upload-file>
+                </div>
                 <!--BreadCrumb reference-->
-                <div class="collapse content" id="projectList">
+                <div class="collapse content" id="projectList" style="width: 60%; margin: auto">
                     <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
                 </div>
                 <div class="collapse content" id="projectInfo">
@@ -279,22 +279,6 @@
                 </div>
                 <div class="collapse content" id="studyInfo">
                     <opencga-study project="{{selectedProject}}" study="{{study}}"></opencga-study>
-                </div>
-            </div>
-        </div>
-
-        <!-- Upload modal window -->
-
-        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="uploadModalLabel">Upload File</h4>
-                    </div>
-                    <div class="modal-body">
-                        <opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{selectedProject.studies}}"></opencga-upload-file>
-                    </div>
                 </div>
             </div>
         </div>
