@@ -217,9 +217,10 @@
                     <opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}" samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>
                 </div>
                 <div class="collapse content" id="browser">
-                    <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" config="{{browserConfig}}"
-                                     population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                                     opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" query="{{_query}}" on-gene="geneSelected">
+                    <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{selectedProject.studies}}"
+                                     config="{{browserConfig}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                     consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" query="{{_query}}"
+                                     on-gene="geneSelected">
                     </variant-browser>
                 </div>
 
@@ -258,7 +259,7 @@
                     <!--<opencga-dahsboard></opencga-dahsboard>-->
                 </div>
 
-                <div class="collapse content" id="login" style="width: 50%;">
+                <div class="collapse content" id="login" style="width: 20%; margin: auto;">
                     <opencga-login on-login="login" opencga-client="{{opencgaClient}}" opencga-client-config="{{opencgaClientConfig}}" login-text="Sign in"></opencga-login>
                 </div>
 
@@ -565,7 +566,7 @@
                 let value = "";
                 if (typeof e !== "undefined" && typeof e.detail.value !== "undefined") {
                     value = e.detail.value; // It takes care of the fired event from welcome.html
-                } else if (typeof e !== "undefined" && e.keyCode == '13' || typeof e !== "undefined" && e.type == "click"){
+                } else if (typeof e !== "undefined" && e.keyCode == '13' || typeof e !== "undefined" && e.type == "click") {
                     value = this.$.searchTextBox.value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
                 }
 
