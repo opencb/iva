@@ -123,9 +123,10 @@
 
                                 <template is="dom-if" if="{{_logged}}">
                                     <!--User-->
+                                    <li><a style="padding: 0px; margin-top: 8px"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a></li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-user" aria-hidden="true"></i> {{userId}} <span class="caret"></span>
+                                            {{userId}} <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a href="#dashboard"><i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a></li>
@@ -162,9 +163,9 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="searchTextBox" placeholder="{{config.search.placeholder}}"
                                                on-keyup="buildQuery" style="width: 170px;">
-                                        <!--<a href="#browser">-->
-                                            <!--<span class="fa fa-search" aria-hidden="true"></span>-->
-                                        <!--</a>-->
+                                        <a style="cursor: pointer">
+                                            <span class="fa fa-search" aria-hidden="true" on-click="buildQuery"></span>
+                                        </a>
                                     </div>
                                 </form>
 
@@ -563,9 +564,9 @@
                 let query = {};
                 let value = "";
                 if (typeof e !== "undefined" && typeof e.detail.value !== "undefined") {
-                    value = e.detail.value;
-                } else if (typeof e !== "undefined" && e.keyCode == '13'){
-                    value = this.$.searchTextBox.value;
+                    value = e.detail.value; // It takes care of the fired event from welcome.html
+                } else if (typeof e !== "undefined" && e.keyCode == '13' || typeof e !== "undefined" && e.type == "click"){
+                    value = this.$.searchTextBox.value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
                 }
 
                 if (value != "") {
