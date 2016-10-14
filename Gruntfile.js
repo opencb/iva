@@ -30,15 +30,19 @@ module.exports = function(grunt) {
                     './bower_components/backbone/backbone.js'
                 ],
                 dest: '<%= build.path %>/vendors.js'
+            },
+            jsorolla: {
+                src: [
+                    './lib//jsorolla/src/lib/clients/cellbase-client.js',
+                    './lib/jsorolla/src/lib/cache/indexeddb-cache.js',
+                    '/lib/jsorolla/src/lib/clients/cellbase-client-config.js',
+                    './lib/jsorolla/src/lib/clients/opencga-client-config.js',
+                    './lib/jsorolla/src/lib/clients/opencga-client.js',
+                    './lib/jsorolla/src/lib/clients/rest-client.js',
+                    './lib/jsorolla/src/lib/utils.js'
+                ],
+                dest: '<%= build.path %>/jsorolla.js'
             }
-            // jsorolla: {
-            //     src: [
-            //         './lib//jsorolla/src/lib/clients/cellbase-client.js',
-            //         './lib/jsorolla/src/lib/cache/indexeddb-cache.js',
-            //         '/lib/jsorolla/src/lib/clients/cellbase-client-config.js'
-            //     ],
-            //     dest: '<%= build.path %>/jsorolla.js'
-            // }
         },
         uglify: {
             options: {
@@ -46,7 +50,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    '<%= build.path %>/vendors.min.js': ['<%= build.path %>/vendors.js']
+                    '<%= build.path %>/vendors.min.js': ['<%= build.path %>/vendors.js'],
                     // '<%= build.path %>/jsorolla.min.js': ['<%= build.path %>/jsorolla.js']
                 }
             }
@@ -85,7 +89,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     // Target-specific file lists and/or options go here.
-                    '<%= build.path %>/iva-app.html': 'src/components/iva-app.html'
+                    '<%= build.path %>/iva-app.html': 'src/iva-app.html'
                 }
             }
         },
@@ -105,10 +109,10 @@ module.exports = function(grunt) {
                         //     match: /\.\.\/lib\//g,
                         //     replacement: ''
                         // },
-                        {
-                            match: /components\/iva-app\.html/g,
-                            replacement: 'iva-app.html'
-                        }
+                        // {
+                        //     match: /components\/iva-app\.html/g,
+                        //     replacement: 'iva-app.html'
+                        // }
                     ]
                 },
                 files: [
@@ -128,7 +132,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-replace');
 
-    grunt.registerTask('default', ['clean', 'jshint', 'copy', 'concat'  , 'processhtml', 'replace', 'vulcanize']);
+    grunt.registerTask('default', ['clean', 'jshint', 'copy', 'concat', 'uglify', 'processhtml', 'replace', 'vulcanize']);
     grunt.registerTask('cl', ['clean']);
     // grunt.registerTask('test', ['clean']);
 };
