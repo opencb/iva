@@ -70,7 +70,7 @@ var application = {
                     name: "Example OR11",
                     query: {
                         gene: "OR11H1",
-                        phylop: "<0.001"
+                        phylop: "<=0.001"
                     }
                 }
             ]
