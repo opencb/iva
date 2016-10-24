@@ -63,14 +63,14 @@ var application = {
                     name: "Example BRCA2",
                     query: {
                         gene: "BRCA2",
-                        phylop: "<0.001"
+                        conservation: "phylop<0.001"
                     }
                 },
                 {
                     name: "Example OR11",
                     query: {
                         gene: "OR11H1",
-                        phylop: "<=0.001"
+                        conservation: "phylop<=0.001"
                     }
                 }
             ]
