@@ -34,7 +34,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">High</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="consequenceTypeHigh">
                         <input type="text" value="#ff0000" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -200,20 +200,28 @@
         Polymer({
             is: 'iva-settings',
             properties: {
+                opencgaClient: {
+                    type: Object
+                },
                 config: {
                     type: Object,
                     value: {}
                 }
             },
             attached: function () {
+                let _this = this;
                 $('.colorpicker-component').colorpicker();
                 
-//                $('.colorpicker-component').on('changeColor', function (e) {
-//                    console.log("Color changed", e)
-//                })
+                $('.colorpicker-component').on('changeColor', function (e) {
+                    console.log("Color changed", e)
+                    _this.config[e.target.id] = $("#" + e.target.id + "> input").val();
+                });
 
             },
             buildConfig: function (e) {
+                if (Object.keys(this.config).length > 0 && this.opencgaClient instanceof OpenCGAClient) {
+//                     this.opencgaClient.users().updateConfig("iva", )
+                }
 
             }
         });
