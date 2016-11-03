@@ -175,7 +175,7 @@ var populationFrequencies = {
     },
     studies: [
         {
-            id: "1000GENOMES_phase_3",
+            id: "1KG_PHASE3",
             title: "1000 Genomes",
             populations: [
                 {
@@ -228,7 +228,7 @@ var populationFrequencies = {
             ]
         },
         {
-            id: "ESP_6500",
+            id: "ESP6500",
             title: "ESP 6500",
             populations: [
                 {
