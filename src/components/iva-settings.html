@@ -201,7 +201,8 @@
             is: 'iva-settings',
             properties: {
                 opencgaClient: {
-                    type: Object
+                    type: Object,
+                    observer: 'checkUserConfig'
                 },
                 config: {
                     type: Object,
@@ -213,14 +214,27 @@
                 $('.colorpicker-component').colorpicker();
                 
                 $('.colorpicker-component').on('changeColor', function (e) {
-                    console.log("Color changed", e)
                     _this.config[e.target.id] = $("#" + e.target.id + "> input").val();
                 });
 
             },
+            checkUserConfig: function () {
+                if (this.opencgaClient instanceof OpenCGAClient) {
+                    this.opencgaClient.users().getConfig("iva", {}, {})
+                            .then(function (response) {
+                                let config = response.response[0].result[0];
+                                for (let key in config) {
+                                    $("#" + key + "> input").val(config[key]);
+                                }
+                            });
+                }
+            },
             buildConfig: function (e) {
                 if (Object.keys(this.config).length > 0 && this.opencgaClient instanceof OpenCGAClient) {
-//                     this.opencgaClient.users().updateConfig("iva", )
+                     this.opencgaClient.users().updateConfig("iva", this.config, {})
+                             .then(function (response) {
+                                 console.log(response)
+                             });
                 }
 
             }
