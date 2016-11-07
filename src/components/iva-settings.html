@@ -202,13 +202,18 @@
             properties: {
                 opencgaClient: {
                     type: Object,
-                    observer: 'checkUserConfig'
+                    value: function() {
+                        return {'_config':{}};
+                    }
                 },
                 config: {
                     type: Object,
                     value: {}
                 }
             },
+            observers: [
+                'checkUserConfig(opencgaClient._config.*)'
+            ],
             attached: function () {
                 let _this = this;
                 $('.colorpicker-component').colorpicker();
@@ -218,8 +223,8 @@
                 });
 
             },
-            checkUserConfig: function () {
-                if (this.opencgaClient instanceof OpenCGAClient) {
+            checkUserConfig: function (config) {
+                if (this.opencgaClient instanceof OpenCGAClient && typeof config.value.sessionId !== "undefined") {
                     this.opencgaClient.users().getConfig("iva", {}, {})
                             .then(function (response) {
                                 let config = response.response[0].result[0];
