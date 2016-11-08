@@ -26,15 +26,13 @@
             <h4>Visual Settings</h4>
             <hr>
 
-            <!--TODO Replace with dom-repeat-->
-
             <div class="col-sm-3">
                 <label>Consequence Type</label>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">High</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component" id="consequenceTypeHigh">
+                    <div class="input-group colorpicker-component" id="CT_high">
                         <input type="text" value="#ff0000" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -45,7 +43,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Moderate</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="CT_moderate">
                         <input type="text" value="#ffa500" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -56,7 +54,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Low</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="CT_low">
                         <input type="text" value="#0000ff" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -67,7 +65,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Modifier</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="CT_modifier">
                         <input type="text" value="#00ff00" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -79,7 +77,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Deleterious</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="PSS_sift_deleterious">
                         <input type="text" value="#ff0000" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -90,7 +88,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Tolerated</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="PSS_sift_tolerated">
                         <input type="text" value="#00ff00" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -104,7 +102,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Probably Damaging</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="PSS_polyphen_probablyDamaging">
                         <input type="text" value="#ff0000" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -115,7 +113,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Possibly Damaging</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="PSS_polyphen_possiblyDamaging">
                         <input type="text" value="#ffa500" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -126,7 +124,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Benign</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="PSS_polyphen_benign">
                         <input type="text" value="#00ff00" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -137,7 +135,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Unknown</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="PSS_polyphen_unknown">
                         <input type="text" value="#000000" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -151,7 +149,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Very Rare</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="PF_veryRare">
                         <input type="text" value="#ff0000" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -162,7 +160,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Rare</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="PF_rare">
                         <input type="text" value="#ffff00" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -173,7 +171,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Average</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="PF_average">
                         <input type="text" value="#ffa500" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -184,7 +182,7 @@
             <div class="form-group row">
                 <label class="col-sm-2" style="font-weight: normal">Common</label>
                 <div class="col-sm-3">
-                    <div class="input-group colorpicker-component">
+                    <div class="input-group colorpicker-component" id="PF_common">
                         <input type="text" value="#0000ff" class="form-control" />
                         <span class="input-group-addon"><i></i></span>
                     </div>
@@ -215,11 +213,77 @@
                 'checkUserConfig(opencgaClient._config.*)'
             ],
             attached: function () {
+                this.ctColor = {};
+                this.sift = {};
+                this.polyphen = {};
+                this.pfColor = {};
                 let _this = this;
                 $('.colorpicker-component').colorpicker();
-                
                 $('.colorpicker-component').on('changeColor', function (e) {
-                    _this.config[e.target.id] = $("#" + e.target.id + "> input").val();
+                    let fields = e.target.id.split('_');
+                    switch(fields[0]) {
+                        case "CT":
+                            switch (fields[1]) {
+                                case "high":
+                                    Object.assign(_this.ctColor, {high : $("#" + e.target.id + "> input").val()});
+                                    break;
+                                case "moderate":
+                                    Object.assign(_this.ctColor, {moderate : $("#" + e.target.id + "> input").val()});
+                                    break;
+                                case "low":
+                                    Object.assign(_this.ctColor, {low : $("#" + e.target.id + "> input").val()});
+                                    break;
+                                case "modifier":
+                                    Object.assign(_this.ctColor, {modifier : $("#" + e.target.id + "> input").val()});
+                                    break;
+                            }
+                            break;
+                        case "PSS":
+                            if (fields[1] == "sift") {
+                                switch (fields[2]) {
+                                    case "deleterious":
+                                        Object.assign(_this.sift, {deleterious : $("#" + e.target.id + "> input").val()});
+                                        break;
+                                    case "tolerated":
+                                        Object.assign(_this.sift, {tolerated : $("#" + e.target.id + "> input").val()});
+                                        break;
+                                }
+                            }
+                            if (fields[1] == "polyphen") {
+                                switch (fields[2]) {
+                                    case "probablyDamaging":
+                                        Object.assign(_this.polyphen, {probablyDamaging : $("#" + e.target.id + "> input").val()});
+                                        break;
+                                    case "possiblyDamaging":
+                                        Object.assign(_this.polyphen, {possiblyDamaging : $("#" + e.target.id + "> input").val()});
+                                        break;
+                                    case "benign":
+                                        Object.assign(_this.polyphen, {benign : $("#" + e.target.id + "> input").val()});
+                                        break;
+                                    case "unknown":
+                                        Object.assign(_this.polyphen, {unknown : $("#" + e.target.id + "> input").val()});
+                                        break;
+                                }
+                            }
+                            break;
+                        case "PF":
+                            switch (fields[1]) {
+                                case "veryRare":
+                                    Object.assign(_this.pfColor, {veryRare : $("#" + e.target.id + "> input").val()});
+                                    break;
+                                case "rare":
+                                    Object.assign(_this.pfColor, {rare : $("#" + e.target.id + "> input").val()});
+                                    break;
+                                case "average":
+                                    Object.assign(_this.pfColor, {average : $("#" + e.target.id + "> input").val()});
+                                    break;
+                                case "common":
+                                    Object.assign(_this.pfColor, {common : $("#" + e.target.id + "> input").val()});
+                                    break;
+                            }
+                            break;
+                    }
+//                    _this.config[e.target.id] = $("#" + e.target.id + "> input").val();
                 });
 
             },
@@ -229,16 +293,58 @@
                             .then(function (response) {
                                 let config = response.response[0].result[0];
                                 for (let key in config) {
-                                    $("#" + key + "> input").val(config[key]);
+                                    switch (key) {
+                                        case "consequenceTypes":
+                                            let colorObj = config[key].color;
+                                            for (let impact in colorObj) {
+                                                $("#CT_" + impact + "> input").val(colorObj[impact]);
+                                            }
+                                            break;
+                                        case "proteinSubstitutionScores":
+                                            let sift = typeof config[key].sift !== "undefined" ? config[key].sift : {};
+                                            let polyphen = typeof config[key].polyphen !== "undefined" ? config[key].polyphen : {};
+                                            for (let prediction in sift) {
+                                                $("#PSS_sift_" + prediction + "> input").val(sift[prediction]);
+                                            }
+                                            for (let prediction in polyphen) {
+                                                $("#PSS_polyphen_" + prediction + "> input").val(polyphen[prediction]);
+                                            }
+                                            break;
+                                        case "populationFrequencies":
+                                            let color = config[key].color;
+                                            for (let impact in color) {
+                                                $("#PF_" + impact + "> input").val(color[impact]);
+                                            }
+                                            break;
+                                    }
                                 }
                             });
                 }
             },
             buildConfig: function (e) {
+                if (Object.keys(this.ctColor).length > 0) {
+                    this.config["consequenceTypes"] = {color: this.ctColor};
+                }
+                if (Object.keys(this.sift).length > 0) {
+                    if (typeof this.config["proteinSubstitutionScores"] === "undefined") {
+                        this.config["proteinSubstitutionScores"] = {};
+                    }
+                    this.config["proteinSubstitutionScores"].sift = this.sift;
+                }
+                if (Object.keys(this.polyphen).length > 0) {
+                    if (typeof this.config["proteinSubstitutionScores"] === "undefined") {
+                        this.config["proteinSubstitutionScores"] = {};
+                    }
+                    this.config["proteinSubstitutionScores"].polyphen = this.polyphen;
+                }
+                if (Object.keys(this.pfColor).length > 0) {
+                    this.config["populationFrequencies"] = {color: this.pfColor};
+                }
+                let _this = this;
                 if (Object.keys(this.config).length > 0 && this.opencgaClient instanceof OpenCGAClient) {
                      this.opencgaClient.users().updateConfig("iva", this.config, {})
                              .then(function (response) {
-                                 console.log(response)
+                                 _this.fire("config", {config: response.response[0].result[0]});
                              });
                 }
 

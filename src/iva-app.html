@@ -267,7 +267,7 @@
 
                 <div class="collapse content" id="settings" style="width: 40%; margin: auto">
                     <br>
-                    <iva-settings opencga-client="{{opencgaClient}}"></iva-settings>
+                    <iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig"></iva-settings>
                 </div>
 
                 <div class="collapse content" id="upload" style="width: 40%; margin-left: 2%">
@@ -528,6 +528,9 @@
                     $('.content').hide();
                     $(arr[0]).show();
                 }
+            },
+            refreshConfig: function (e) {
+                console.log("on-config", e.detail.config)
             },
             setProjectStudy: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
