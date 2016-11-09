@@ -267,7 +267,7 @@
 
                 <div class="collapse content" id="settings" style="width: 40%; margin: auto">
                     <br>
-                    <iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig"></iva-settings>
+                    <iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig" default-config="{{defaultConfig}}"></iva-settings>
                 </div>
 
                 <div class="collapse content" id="upload" style="width: 40%; margin-left: 2%">
@@ -344,17 +344,22 @@
                 this.config.cellbase = cellbase;
                 this.config.opencga = opencga;
 
+                this.defaultConfig = {};
                 if (typeof populationFrequencies !== "undefined") {
                     this.populationFrequencies = populationFrequencies;
+                    this.defaultConfig.populationFrequencies = populationFrequencies;
                 }
 
                 if (typeof proteinSubstitutionScores !== "undefined") {
                     this.proteinSubstitutionScores = proteinSubstitutionScores;
+                    this.defaultConfig.proteinSubstitutionScores = proteinSubstitutionScores;
                 }
 
                 if (typeof consequenceTypes !== "undefined") {
                     this.consequenceTypes = consequenceTypes;
+                    this.defaultConfig.consequenceTypes = consequenceTypes;
                 }
+
 
                 if (typeof application !== "undefined") {
                     let menuItems = application.menu;
@@ -380,6 +385,7 @@
                     this.userId = Cookies.get(this.config.opencga.cookies.userName);
                     this.sessionId = sid;
                     this.opencgaClient._config.sessionId = sid;
+                    this.set('opencgaClient._config', this.opencgaClient._config); // To reflect the changes in '_config' of opencgaClient observers
 
                     this._logged = true;
                     this._publicMode = false;
@@ -530,7 +536,45 @@
                 }
             },
             refreshConfig: function (e) {
-                console.log("on-config", e.detail.config)
+                let colorConfig = e.detail.config;
+                let _this = this;
+                for (let key in colorConfig) {
+                    switch(key) {
+                        case "consequenceTypes":
+                            let ctColor = colorConfig[key].color;
+                            for (let impact in ctColor) {
+                                _this.consequenceTypes.color[impact] = ctColor[impact];
+                            }
+                            let ctModified = Object.assign({}, _this.consequenceTypes);
+                            _this.set('consequenceTypes', ctModified);
+                            break;
+                        case "proteinSubstitutionScores":
+                            for (let source in colorConfig[key]) {
+                                if (source == "sift") {
+                                    let sift = colorConfig[key].sift;
+                                    for (let prediction in sift) {
+                                        _this.proteinSubstitutionScores.sift[prediction] = sift[prediction];
+                                    }
+                                } else if (source == "polyphen") {
+                                    let polyphen = colorConfig[key].polyphen;
+                                    for (let pred in polyphen) {
+                                        _this.proteinSubstitutionScores.polyphen[pred] = polyphen[pred];
+                                    }
+                                }
+                            }
+                            let pssModified = Object.assign({}, _this.proteinSubstitutionScores);
+                            _this.set('proteinSubstitutionScores', pssModified);
+                            break;
+                        case "populationFrequencies":
+                            let pfColor = colorConfig[key].color;
+                            for (let i in pfColor) {
+                                _this.populationFrequencies.color[i] = pfColor[i];
+                            }
+                            let pfModified = Object.assign({}, _this.populationFrequencies);
+                            _this.set('populationFrequencies', pfModified);
+                            break;
+                    }
+                }
             },
             setProjectStudy: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed

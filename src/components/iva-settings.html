@@ -5,6 +5,8 @@
         <style is="custom-style" include="jso-styles"></style>
 
         <div>
+            <button type="button" class="btn btn-default" style="float: right" on-click="resetToDefault">Reset</button><br>
+
             <h4>CellBase</h4>
             <hr>
             <div class="form-group row">
@@ -204,7 +206,7 @@
                         return {'_config':{}};
                     }
                 },
-                config: {
+                defaultConfig: {
                     type: Object,
                     value: {}
                 }
@@ -213,6 +215,7 @@
                 'checkUserConfig(opencgaClient._config.*)'
             ],
             attached: function () {
+                this.config = {};
                 this.ctColor = {};
                 this.sift = {};
                 this.polyphen = {};
@@ -288,37 +291,41 @@
 
             },
             checkUserConfig: function (config) {
+                let _this = this;
                 if (this.opencgaClient instanceof OpenCGAClient && typeof config.value.sessionId !== "undefined") {
                     this.opencgaClient.users().getConfig("iva", {}, {})
                             .then(function (response) {
-                                let config = response.response[0].result[0];
-                                for (let key in config) {
-                                    switch (key) {
-                                        case "consequenceTypes":
-                                            let colorObj = config[key].color;
-                                            for (let impact in colorObj) {
-                                                $("#CT_" + impact + "> input").val(colorObj[impact]);
-                                            }
-                                            break;
-                                        case "proteinSubstitutionScores":
-                                            let sift = typeof config[key].sift !== "undefined" ? config[key].sift : {};
-                                            let polyphen = typeof config[key].polyphen !== "undefined" ? config[key].polyphen : {};
-                                            for (let prediction in sift) {
-                                                $("#PSS_sift_" + prediction + "> input").val(sift[prediction]);
-                                            }
-                                            for (let prediction in polyphen) {
-                                                $("#PSS_polyphen_" + prediction + "> input").val(polyphen[prediction]);
-                                            }
-                                            break;
-                                        case "populationFrequencies":
-                                            let color = config[key].color;
-                                            for (let impact in color) {
-                                                $("#PF_" + impact + "> input").val(color[impact]);
-                                            }
-                                            break;
-                                    }
-                                }
+                                _this.assignValues(response.response[0].result[0]);
+                                _this.fire("config", {config: response.response[0].result[0]});
                             });
+                }
+            },
+            assignValues: function(config) {
+                for (let key in config) {
+                    switch (key) {
+                        case "consequenceTypes":
+                            let colorObj = config[key].color;
+                            for (let impact in colorObj) {
+                                $("#CT_" + impact).colorpicker('setValue', colorObj[impact]);
+                            }
+                            break;
+                        case "proteinSubstitutionScores":
+                            let sift = typeof config[key].sift !== "undefined" ? config[key].sift : {};
+                            let polyphen = typeof config[key].polyphen !== "undefined" ? config[key].polyphen : {};
+                            for (let prediction in sift) {
+                                $("#PSS_sift_" + prediction).colorpicker('setValue', sift[prediction]);
+                            }
+                            for (let prediction in polyphen) {
+                                $("#PSS_polyphen_" + prediction).colorpicker('setValue', polyphen[prediction]);
+                            }
+                            break;
+                        case "populationFrequencies":
+                            let color = config[key].color;
+                            for (let impact in color) {
+                                $("#PF_" + impact).colorpicker('setValue', color[impact]);
+                            }
+                            break;
+                    }
                 }
             },
             buildConfig: function (e) {
@@ -348,6 +355,9 @@
                              });
                 }
 
+            },
+            resetToDefault: function (e) {
+                this.assignValues(this.defaultConfig);
             }
         });
     </script>
