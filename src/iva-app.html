@@ -226,15 +226,15 @@
 
                 <div class="collapse content" id="family-prioritization">
                     <variant-prioritization mode="family" title="Family Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                     population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                                     opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
+                                            population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
+                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
 
                 <div class="collapse content" id="cancer-prioritization">
                     <variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                     population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                                     opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
+                                            population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
+                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
 
@@ -447,14 +447,14 @@
                 var _this = this;
                 this.opencgaClient.users().logout()
                         .then(function() {
-                            _this.userId = "";
-                            _this.sessionId = "";
-                            _this.opencgaClient._config.sessionId = "";
+                            _this._logout();
+                        })
+                        .catch(function () {
+                            // we need to remove Cookies son OpenCGAClient has failed
+                            Cookies.expire(_this.config.opencga.cookies.sessionId);
+                            Cookies.expire(_this.config.opencga.cookies.userName);
 
-                            _this._logged = false;
-
-                            _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
-                            _this.init();
+                            _this._logout();
                         });
             },
             changeAnalysisTool: function(e) {
@@ -742,6 +742,16 @@
                             this._isBreadcrumbVisible = false;
                     }
                 }
+            },
+            _logout: function() {
+                this.userId = "";
+                this.sessionId = "";
+                this.opencgaClient._config.sessionId = "";
+
+                this._logged = false;
+
+                this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
+                this.init();
             },
             _checkVersion: function() {
                 this.versionNav = "You are currently using ";
