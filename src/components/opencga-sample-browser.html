@@ -6,19 +6,29 @@
 
         <div>
             <!--Different views: List, File, Cohort -->
-            <div class="btn-group" style="float: right;">
-                <!--Add href to both button and icon so that it loads the corresponding div correctly-->
-                <button class="btn btn-default" type="button" href="#{{prefix}}SampleGridView" on-click="changeView">
-                    <i class="fa fa-list" title="List of Samples" href="#{{prefix}}SampleGridView"></i>
-                </button>
-                <button class="btn btn-default" type="button" href="#{{prefix}}FileTreeView" on-click="changeView">
-                    <i class="fa fa-folder-open" title="View by Files" href="#{{prefix}}FileTreeView"></i>
-                </button>
-                <button class="btn btn-default" type="button" href="#{{prefix}}CohortsView" on-click="changeView">
-                    <i class="fa fa-sitemap" title="View by Cohorts" href="#{{prefix}}CohortsView"></i>
-                </button>
-            </div>
-            <br><br>
+            <button type="button" class="btn btn-primary" style="margin-left: 50px" href="#{{prefix}}SampleGridView" on-click="changeView">
+                <i class="fa fa-sitemap" title="List of Samples" href="#{{prefix}}SampleGridView"></i>Samples
+            </button>
+
+            <button type="button" class="btn btn-primary" style="margin-left: 20px" href="#{{prefix}}FileTreeView" on-click="changeView">
+                <i class="fa fa-folder-open" title="List of Samples" href="#{{prefix}}FileTreeView"></i>Files
+            </button>
+            <br>
+
+            <!--<div class="btn-group" style="float: right;">-->
+                <!--&lt;!&ndash;Add href to both button and icon so that it loads the corresponding div correctly&ndash;&gt;-->
+                <!--<button class="btn btn-default" type="button" href="#{{prefix}}SampleGridView" on-click="changeView">-->
+                    <!--<i class="fa fa-list" title="List of Samples" href="#{{prefix}}SampleGridView"></i>-->
+                <!--</button>-->
+                <!--<button class="btn btn-default" type="button" href="#{{prefix}}FileTreeView" on-click="changeView">-->
+                    <!--<i class="fa fa-folder-open" title="View by Files" href="#{{prefix}}FileTreeView"></i>-->
+                <!--</button>-->
+                <!--<button class="btn btn-default" type="button" href="#{{prefix}}CohortsView" on-click="changeView">-->
+                    <!--<i class="fa fa-sitemap" title="View by Cohorts" href="#{{prefix}}CohortsView"></i>-->
+                <!--</button>-->
+            <!--</div>-- >
+
+
 
             <!--Sample Grid-->
             <div id="{{prefix}}SampleGridView" class="hide-content">
