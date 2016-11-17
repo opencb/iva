@@ -476,9 +476,9 @@
                             _this.projects = response.response[0].result;
 
                             // select project and study
-                            _this.project = _this.projects[1].alias;
-                            _this.study = _this.projects[1].studies[0];
-                            _this.selectedProject = _this.projects[1];
+                            _this.project = _this.projects[0].alias;
+                            _this.study = _this.projects[0].studies[0];
+                            _this.selectedProject = _this.projects[0];
 
                             _this._checkBreadcrumbVisible();
                         })
