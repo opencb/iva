@@ -26,9 +26,9 @@
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-login.html">-->
-<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload.html">
-<link rel="import" href="components/opencga-login.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-login.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload-file.html">
+<link rel="import" href="components/iva-settings.html">
 
 <dom-module id="iva-app">
 
@@ -104,7 +104,7 @@
                                 <template is="dom-if" if="{{_publicMode}}">
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            Projects <span class="caret"></span>
+                                            Studies <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <template is="dom-repeat" items="{{projects}}" as="proj">
@@ -122,14 +122,25 @@
                                 </template>
 
                                 <template is="dom-if" if="{{_logged}}">
-                                    <li><a href="#" role="button">Logged as '{{userId}}'</a></li>
-
-                                    <li><a href="#dashboard" role="button">Dashboard</a></li>
+                                    <!--User-->
+                                    <li><a style="padding: 0px; margin-top: 8px"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            {{userId}} <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#dashboard"><i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a></li>
+                                            <li><a href="#projectList"><i class="fa fa-database" aria-hidden="true"></i> Projects</a></li>
+                                            <li><a href="#upload"><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
+                                        </ul>
+                                    </li>
 
                                     <!--Project dropdown menu-->
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            Projects <span class="caret"></span>
+                                            Studies <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <template is="dom-repeat" items="{{projects}}" as="proj">
@@ -144,12 +155,6 @@
                                             </template>
                                         </ul>
                                     </li>
-
-                                    <!--Upload modal window-->
-                                    <li class="bierapp-menu-vertical-right">
-                                        <a href="#" data-toggle="modal" role="button" data-placement="bottom" data-target="#uploadModal" title="Upload File ...">
-                                            Upload data</a>
-                                    </li>
                                     <li class="divider-vertical"></li>
                                 </template>
 
@@ -157,22 +162,12 @@
                                 <form class="navbar-form navbar-left" role="search">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="searchTextBox" placeholder="{{config.search.placeholder}}"
-                                               on-keyup="buildQuery">
-                                        <!--<a href="#browser">-->
-                                            <!--<span class="fa fa-search" aria-hidden="true"></span>-->
-                                        <!--</a>-->
-                                    </div>
-                                    <!--<button type="submit" class="btn btn-default">Submit</button>-->
-                                </form>
-
-                                <!-- Setting modal window -->
-                                <template is="dom-if" if="{{config.settings.visibility}}">
-                                    <li>
-                                        <a href="#" data-toggle="modal" role="button" data-placement="bottom" data-target="#myModal" title="Settings ...">
-                                            <i class="fa fa-cog"></i>
+                                               on-keyup="buildQuery" style="width: 170px;">
+                                        <a style="cursor: pointer">
+                                            <span class="fa fa-search" aria-hidden="true" on-click="buildQuery"></span>
                                         </a>
-                                    </li>
-                                </template>
+                                    </div>
+                                </form>
 
                                 <!-- About dropdown menu-->
                                 <li class="dropdown">
@@ -187,7 +182,7 @@
                                 <!-- Login/Logout button -->
                                 <li>
                                     <template is="dom-if" if="{{!_logged}}">
-                                        <a href="#login" data-toggle="modal" role="button" data-placement="bottom" data-target="#ModalLogin" title="Login ..." on-click="changeAnalysisTool">
+                                        <a href="#login" role="button">
                                             <i class="fa fa-sign-in fa-lg"></i> Login
                                         </a>
                                     </template>
@@ -209,7 +204,6 @@
             <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
 
 
-
             <!-- This is where main application is rendered -->
             <div class="center">
                 <div class="collapse content" id="home">
@@ -219,32 +213,32 @@
 
 
             <div class="">
-                <div class="collapse content" id="samples" style="margin: auto;text-align: justify;width: 60%;">
+                <div class="collapse content" id="samples">
                     <opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}" samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>
                 </div>
                 <div class="collapse content" id="browser">
-                    <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" config="{{browserConfig}}"
-                                     population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                                     opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" query="{{_query}}" on-gene="geneSelected">
+                    <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{selectedProject.studies}}"
+                                     config="{{browserConfig}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                     consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" query="{{_query}}"
+                                     on-gene="geneSelected">
                     </variant-browser>
                 </div>
 
                 <div class="collapse content" id="family-prioritization">
                     <variant-prioritization mode="family" title="Family Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                     population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                                     opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
+                                            population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
+                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
 
                 <div class="collapse content" id="cancer-prioritization">
                     <variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                     population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                                     opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
+                                            population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
+                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
 
                 <div class="collapse content" id="beacon">
-                    <br>
                     <beacon-tool opencga-client="{{opencgaClient}}" studies="{{selectedProject.studies}}"></beacon-tool>
                 </div>
 
@@ -255,7 +249,9 @@
 
                 <div class="collapse content" id="gene">
                     <div class="gene-view">
-                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}" gene="{{geneToShow}}" population-frequencies="{{populationFrequencies}}"></opencga-gene-view>
+                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
+                                           gene="{{geneToShow}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                           protein-substitution-scores="{{proteinSubstitutionScores}}"></opencga-gene-view>
                     </div>
                 </div>
 
@@ -263,80 +259,29 @@
                     Not implemented yet!
                     <!--<opencga-dahsboard></opencga-dahsboard>-->
                 </div>
+
+                <div class="collapse content" id="login" style="width: 20%; margin: auto;">
+                    <opencga-login on-login="login" opencga-client="{{opencgaClient}}" opencga-client-config="{{opencgaClientConfig}}" login-text="Sign in"></opencga-login>
+                </div>
+
+                <div class="collapse content" id="settings" style="width: 40%; margin: auto">
+                    <br>
+                    <iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig" default-config="{{defaultConfig}}"></iva-settings>
+                </div>
+
+                <div class="collapse content" id="upload" style="width: 40%; margin-left: 2%">
+                    <br>
+                    <opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{selectedProject.studies}}"></opencga-upload-file>
+                </div>
                 <!--BreadCrumb reference-->
-                <div class="collapse content" id="projectList">
-                    <opencga-projects projects="{{projects}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
+                <div class="collapse content" id="projectList" style="width: 60%; margin: auto">
+                    <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
                 </div>
                 <div class="collapse content" id="projectInfo">
                     <opencga-project opencga-client="{{opencgaClient}}" project="{{selectedProject}}" on-study="updateStudy"></opencga-project>
                 </div>
                 <div class="collapse content" id="studyInfo">
                     <opencga-study project="{{selectedProject}}" study="{{study}}"></opencga-study>
-                </div>
-            </div>
-        </div>
-
-        <!-- Login modal window -->
-        <div class="center">
-            <div class="collapse content" id="login">
-                <div class="modal fade" id="ModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLogin">Login</h4>
-                            </div>
-                            <div class="modal-body">
-                                <opencga-login on-login="login" opencga-client="{{opencgaClient}}" opencga-client-config="{{opencgaClientConfig}}" login-text="Sign in"></opencga-login>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Upload modal window -->
-
-        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="uploadModalLabel">Upload File</h4>
-                    </div>
-                    <div class="modal-body">
-                        <opencga-upload></opencga-upload>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- Modal dialog for Settings -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Settings</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p></p>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="opencga-host">OpenCGA</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="http://bioinfo.hpc.cam.ac.uk/opencga">
-                        </div>
-                        <p></p>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="cellbase-host">CellBase </span>
-                            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="http://bioinfo.hpc.cam.ac.uk/cellbase">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">OK</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -373,7 +318,7 @@
                 },
                 tool: {
                     type: String,
-                    value: "",
+                    value: ""
                 },
                 _logged: {
                     type: Boolean,
@@ -398,17 +343,22 @@
                 this.config.cellbase = cellbase;
                 this.config.opencga = opencga;
 
+                this.defaultConfig = {};
                 if (typeof populationFrequencies !== "undefined") {
                     this.populationFrequencies = populationFrequencies;
+                    this.defaultConfig.populationFrequencies = populationFrequencies;
                 }
 
                 if (typeof proteinSubstitutionScores !== "undefined") {
                     this.proteinSubstitutionScores = proteinSubstitutionScores;
+                    this.defaultConfig.proteinSubstitutionScores = proteinSubstitutionScores;
                 }
 
                 if (typeof consequenceTypes !== "undefined") {
                     this.consequenceTypes = consequenceTypes;
+                    this.defaultConfig.consequenceTypes = consequenceTypes;
                 }
+
 
                 if (typeof application !== "undefined") {
                     let menuItems = application.menu;
@@ -434,6 +384,7 @@
                     this.userId = Cookies.get(this.config.opencga.cookies.userName);
                     this.sessionId = sid;
                     this.opencgaClient._config.sessionId = sid;
+                    this.set('opencgaClient._config', this.opencgaClient._config); // To reflect the changes in '_config' of opencgaClient observers
 
                     this._logged = true;
                     this._publicMode = false;
@@ -445,7 +396,7 @@
             },
             init: function () {
                 this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host,
-                        this.config.opencga.version, this.config.opencga.cookies.sessionId, this.config.opencga.cookies.userName);
+                        this.config.opencga.version, true, this.config.opencga.cookies.sessionId, this.config.opencga.cookies.userName);
                 this.opencgaClient = new OpenCGAClient(this.opencgaClientConfig);
 
                 this.cellBaseClientConfig = new CellBaseClientConfig(hosts = this.config.cellbase.hosts, version = this.config.cellbase.version);
@@ -474,43 +425,35 @@
                 this._checkBreadcrumbVisible();
             },
             login: function(credentials) {
-                var _this = this;
-                this.opencgaClient.users().login(credentials.detail.userId, {password: credentials.detail.password})
-                        .then(function(response) {
-                            _this.userId = credentials.detail.userId;
-                            _this.sessionId = response.response[0].result[0].sessionId;
-                            _this.opencgaClient._config.sessionId = response.response[0].result[0].sessionId;
+                this.userId = credentials.detail.userId;
+                this.sessionId = credentials.detail.sessionId;
+                this.opencgaClient._config.sessionId = credentials.detail.sessionId;
+                this.set('opencgaClient._config', this.opencgaClient._config); // To reflect the changes in '_config' of opencgaClient observers
 
-                            _this._logged = true;
-                            _this._publicMode = false;
+                this._logged = true;
+                this._publicMode = false;
 
-                            _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
+                this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-                            _this.getProjects();
-                        })
-                        .catch(function(response) {
-                            console.log("Error: ", response)
-                            _this._logged = false;
-                            _this._publicMode = true;
-                        });
+                this.getProjects();
 
-                // hide login window and return to home
-                $('#ModalLogin').modal('hide');
+                // Show home page after the user logs in
                 $('.content').hide();
+                this.tool = "home";
                 $('#home').show();
             },
             logout: function() {
                 var _this = this;
                 this.opencgaClient.users().logout()
                         .then(function() {
-                            _this.userId = "";
-                            _this.sessionId = "";
-                            _this.opencgaClient._config.sessionId = "";
+                            _this._logout();
+                        })
+                        .catch(function () {
+                            // we need to remove Cookies son OpenCGAClient has failed
+                            Cookies.expire(_this.config.opencga.cookies.sessionId);
+                            Cookies.expire(_this.config.opencga.cookies.userName);
 
-                            _this._logged = false;
-
-                            _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
-                            _this.init();
+                            _this._logout();
                         });
             },
             changeAnalysisTool: function(e) {
@@ -528,7 +471,7 @@
             },
             getProjects: function () {
                 var _this = this;
-                this.opencgaClient.users().projects(this.userId)
+                this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
                             _this.projects = response.response[0].result;
 
@@ -591,6 +534,47 @@
                     $(arr[0]).show();
                 }
             },
+            refreshConfig: function (e) {
+                let colorConfig = e.detail.config;
+                let _this = this;
+                for (let key in colorConfig) {
+                    switch(key) {
+                        case "consequenceTypes":
+                            let ctColor = colorConfig[key].color;
+                            for (let impact in ctColor) {
+                                _this.consequenceTypes.color[impact] = ctColor[impact];
+                            }
+                            let ctModified = Object.assign({}, _this.consequenceTypes);
+                            _this.set('consequenceTypes', ctModified);
+                            break;
+                        case "proteinSubstitutionScores":
+                            for (let source in colorConfig[key]) {
+                                if (source == "sift") {
+                                    let sift = colorConfig[key].sift;
+                                    for (let prediction in sift) {
+                                        _this.proteinSubstitutionScores.sift[prediction] = sift[prediction];
+                                    }
+                                } else if (source == "polyphen") {
+                                    let polyphen = colorConfig[key].polyphen;
+                                    for (let pred in polyphen) {
+                                        _this.proteinSubstitutionScores.polyphen[pred] = polyphen[pred];
+                                    }
+                                }
+                            }
+                            let pssModified = Object.assign({}, _this.proteinSubstitutionScores);
+                            _this.set('proteinSubstitutionScores', pssModified);
+                            break;
+                        case "populationFrequencies":
+                            let pfColor = colorConfig[key].color;
+                            for (let i in pfColor) {
+                                _this.populationFrequencies.color[i] = pfColor[i];
+                            }
+                            let pfModified = Object.assign({}, _this.populationFrequencies);
+                            _this.set('populationFrequencies', pfModified);
+                            break;
+                    }
+                }
+            },
             setProjectStudy: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
                 for (let i = 0; i < this.projects.length; i++) {
@@ -630,9 +614,9 @@
                 let query = {};
                 let value = "";
                 if (typeof e !== "undefined" && typeof e.detail.value !== "undefined") {
-                    value = e.detail.value;
-                } else if (typeof e !== "undefined" && e.keyCode == '13'){
-                    value = this.$.searchTextBox.value;
+                    value = e.detail.value; // It takes care of the fired event from welcome.html
+                } else if (typeof e !== "undefined" && e.keyCode == '13' || typeof e !== "undefined" && e.type == "click") {
+                    value = this.$.searchTextBox.value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
                 }
 
                 if (value != "") {
@@ -757,6 +741,16 @@
                             this._isBreadcrumbVisible = false;
                     }
                 }
+            },
+            _logout: function() {
+                this.userId = "";
+                this.sessionId = "";
+                this.opencgaClient._config.sessionId = "";
+
+                this._logged = false;
+
+                this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
+                this.init();
             },
             _checkVersion: function() {
                 this.versionNav = "You are currently using ";
