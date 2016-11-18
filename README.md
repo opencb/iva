@@ -86,6 +86,7 @@ git submodule update --init
 Go to lib/jsorolla and checkout to ***next-v2.0.0*** branch of Jsorolla by 
 
 ```
+cd lib/jsorolla
 git checkout next-v2.0.0
 ```
 
