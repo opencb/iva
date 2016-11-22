@@ -31,8 +31,9 @@ module.exports = function(grunt) {
                     './bower_components/highcharts-release/highcharts.js',
                     './bower_components/qtip2/jquery.qtip.js',
                     './bower_components/uri.js/src/URI.js',
-                    './bower_components/cookies-js/src/cookies.js',
-                    './bower_components/moment/moment.js'
+                    './bower_components/cookies-js/dist/cookies.js',
+                    './bower_components/moment/moment.js',
+                    './bower_components/crypto-js/crypto-js.js'
                 ],
                 dest: '<%= build.path %>/vendors.js'
             },
