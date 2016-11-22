@@ -19,17 +19,18 @@ IVA is versioned following the rules from [Semantic versioning](http://semver.or
 We recommend to contact IVA developers by writing to OpenCB mailing list opencb@googlegroups.com. The main developers and maintainers are:
 * Ignacio Medina (im411@cam.ac.uk) (_Founder and Project Leader_)
 * Swaathi Kandasaamy (sk913@cam.ac.uk)
+* Asuncion Gallego (agallego@cipf.es)
 
 ##### Contributing
-IVA is an open-source and collaborative project. We appreciate any help and feedback from users, you can contribute in many different ways such as simple bug reporting and feature request. Dependending on your skills you are more than welcome to develop client tools, new features or even fixing bugs.
+IVA is an open-source and collaborative project, currently developement is mainly carried out by Stefan Gräf and Ignacio Medina teams from the University of Cambridge and Joaquin Dopazo team from CIBERER. We appreciate any help and feedback from users, you can contribute in many different ways such as simple bug reporting and feature request. Dependending on your skills you are more than welcome to develop client tools, new features or even fixing bugs.
 
 # How to build
-IVA is developed in HTML5, therefore it is mainly developed in JavaScript and makes a heavy usage of HTML and CSS. It uses Bower as building tool. IVA also requires of OpenCB JSorolla to be built, this is a JavaScript library developed for several OpenCB web-based projects, this can be found as Git submodule in IVA.
+IVA is developed in HTML5, therefore it is mainly developed in JavaScript and makes a heavy usage of HTML and CSS. It uses Grunt as building tool. IVA also requires of OpenCB JSorolla project to be built, this is a JavaScript library developed for several OpenCB web-based projects, this can be found as Git submodule in IVA.
 
-Stable releases are merged and tagged at master branch, you are encourage to use latest stable release for production. Current active development is carried out at develop branch, only building is guaranteed and bugs are expected, use this branch for development or for testing new functionalities. The only dependency of IVA from OpenCB is JSorolla.
+Stable releases are merged and tagged at _master_ branch, you are encourage to use latest stable release for production. Current active development is carried out at _develop_ branch, only building is guaranteed and bugs are expected, use this branch for development or for testing new functionalities. The only dependency of IVA from OpenCB is JSorolla.
 
 ### Prerequisites
-The following technologies are needed to build Genome Maps: [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [Bower](https://bower.io/) and [Grunt](http://gruntjs.com/getting-started).
+The following technologies are needed to build IVA: [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [Bower](https://bower.io/) and [Grunt](http://gruntjs.com/getting-started).
 
 ##### Installing Node.js and npm
 To install [Node.js](https://nodejs.org/en/) you can visit [this link](http://blog.teamtreehouse.com/install-node-js-npm-linux).
@@ -77,7 +78,7 @@ Resolving deltas: 100% (356/356), done.
 Checking connectivity... done.
 ```
 
-After this, in both cases, you **must** execute the following command to fetch the JSorolla submodule (Only the first time):
+After this, in both cases, you **must** execute the following command to fetch the JSorolla submodule (only the first time):
  
 ```
 git submodule update --init
@@ -86,6 +87,7 @@ git submodule update --init
 Go to lib/jsorolla and checkout to ***next-v2.0.0*** branch of Jsorolla by 
 
 ```
+cd lib/jsorolla
 git checkout next-v2.0.0
 ```
 
