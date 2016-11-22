@@ -395,8 +395,7 @@
                 this.renderBreadcrumb();
             },
             init: function () {
-                this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host,
-                        this.config.opencga.version, true, this.config.opencga.cookies.sessionId, this.config.opencga.cookies.userName);
+                this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host, this.config.opencga.version, true, "iva");
                 this.opencgaClient = new OpenCGAClient(this.opencgaClientConfig);
 
                 this.cellBaseClientConfig = new CellBaseClientConfig(hosts = this.config.cellbase.hosts, version = this.config.cellbase.version);
