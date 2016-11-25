@@ -398,7 +398,7 @@
                 this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host, this.config.opencga.version, true, "iva");
                 this.opencgaClient = new OpenCGAClient(this.opencgaClientConfig);
 
-                this.cellBaseClientConfig = new CellBaseClientConfig(hosts = this.config.cellbase.hosts, version = this.config.cellbase.version);
+                this.cellBaseClientConfig = new CellBaseClientConfig(hosts = this.config.cellbase.hosts, version = this.config.cellbase.version, species = "hsapiens");
                 this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
 
                 if (typeof this.config.opencga.projects !== "undefined" && this.config.opencga.projects.length > 0 && this._logged == false) {
