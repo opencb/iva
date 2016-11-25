@@ -27,7 +27,7 @@
     "underscore": "~1.8.3",
     "fontawesome": "*",
     "highcharts-release": "~4.2.7",
-    "jquery": "~3.1.1",
+    "jquery": "~2.2.4",
     "qtip2": "~2.2.1",
     "uri.js": "~1.18.2",
     "file-saver.js": "~1.20150507.2",

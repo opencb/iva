@@ -281,7 +281,7 @@
                     <opencga-project opencga-client="{{opencgaClient}}" project="{{selectedProject}}" on-study="updateStudy"></opencga-project>
                 </div>
                 <div class="collapse content" id="studyInfo">
-                    <opencga-study project="{{selectedProject}}" study="{{study}}"></opencga-study>
+                    <opencga-study opencga-client="{{opencgaClient}}" project="{{selectedProject}}" study="{{study}}"></opencga-study>
                 </div>
             </div>
         </div>
@@ -655,30 +655,30 @@
                     Polymer.dom(breadcrumbElement).innerHTML = "";
 
                     // we add the 'Projects' link
-                    let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, false);
+                    let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, false, this.config.breadcrumb.title);
                     Polymer.dom(breadcrumbElement).appendChild(projects);
 
                     // We first check if one study is selected, for this study must be defined and have at least one key
                     if (typeof this.study === "undefined" || Object.keys(this.study).length == 0) {
                         if (typeof this.project !== "undefined" && this.project != null && this.project != "") {
-                            let project = this._createBreadcrumbElement(this.project, true); // render only project if exists
+                            let project = this._createBreadcrumbElement(this.project, true, "project"); // render only project if exists
                             Polymer.dom(breadcrumbElement).appendChild(project);
                         }
                     } else {
-                        let project = this._createBreadcrumbElement(this.project, false);
+                        let project = this._createBreadcrumbElement(this.project, false, "project");
                         Polymer.dom(breadcrumbElement).appendChild(project);
 
                         if (typeof this.samples !== "undefined" && this.samples.length > 0) {
-                            let study = this._createBreadcrumbElement(this.study.alias, false);
+                            let study = this._createBreadcrumbElement(this.study.alias, false, "study");
                             let sampleNames = [];
                             for (let i in this.samples) {
                                 sampleNames.push(this.samples[i].name);
                             }
-                            let samples = this._createBreadcrumbElement(sampleNames.join(","), true);
+                            let samples = this._createBreadcrumbElement(sampleNames.join(","), true, "sample");
                             Polymer.dom(breadcrumbElement).appendChild(study);
                             Polymer.dom(breadcrumbElement).appendChild(samples);
                         } else {
-                            let study = this._createBreadcrumbElement(this.study.alias, true);
+                            let study = this._createBreadcrumbElement(this.study.alias, true, "study");
                             Polymer.dom(breadcrumbElement).appendChild(study);
                         }
                     }
@@ -687,21 +687,21 @@
                     $(".breadcrumb li a").on('click', function(e) {
                         e.preventDefault();
                         $('.content').hide();
-                        switch (e.target.innerHTML) {
+                        switch (e.target.dataset.category) {
                             case _this.config.breadcrumb.title:
                                 $('#projectList').show();
                                 break;
-                            case _this.project:
+                            case "project":
                                 $('#projectInfo').show();
                                 break;
-                            case _this.study.alias:
+                            case "study":
                                 $('#studyInfo').show();
                                 break;
                         }
                     });
                 }
             },
-            _createBreadcrumbElement(name, active) {
+            _createBreadcrumbElement(name, active, category) {
                 var li = document.createElement("li");
                 if (active == true) {
                     li.setAttribute("class", "active");
@@ -710,6 +710,7 @@
                     var a = document.createElement("a");
                     a.setAttribute("href", "#");
                     a.setAttribute("class", "");
+                    a.setAttribute("data-category", category);
                     a.textContent = name;
                     li.appendChild(a);
                 }

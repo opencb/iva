@@ -6,15 +6,15 @@
         <style is="custom-style" include="jso-styles"></style>
 
         <div class="panel">
-            <h3 style="margin: 10px 5px 15px 25px"><i class="fa fa-file" aria-hidden="true"></i>&nbsp;Samples</h3>
+            <h3 style="margin: 10px 5px 15px 25px"><i class="fa fa-sitemap" aria-hidden="true"></i>&nbsp;Samples</h3>
 
             <!--Different views: List, File, Cohort -->
             <button type="button" class="btn btn-primary" style="margin-left: 20px" href="#{{prefix}}SampleGridView" on-click="changeView">
-                <i class="fa fa-sitemap" title="List of Samples" href="#{{prefix}}SampleGridView"></i>Samples
+                <i class="fa fa-sitemap" style="padding-right: 5px" title="List of Samples" href="#{{prefix}}SampleGridView"></i>Samples
             </button>
 
             <button type="button" class="btn btn-primary" style="margin-left: 20px" href="#{{prefix}}FileTreeView" on-click="changeView">
-                <i class="fa fa-folder-open" title="List of Samples" href="#{{prefix}}FileTreeView"></i>Files
+                <i class="fa fa-folder-open" style="padding-right: 5px" title="List of Samples" href="#{{prefix}}FileTreeView"></i>Files
             </button>
             <br>
 
@@ -303,7 +303,7 @@
                 return checkbox;
             },
             dateFormatter: function (value, row, index) {
-                return moment(row.status.date).format('D MMM Y');
+                return moment(parseInt(row.status.date)).format('D MMM YY');
             },
 
             // Bootstrap Tree
