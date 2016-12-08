@@ -22,7 +22,7 @@
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
-<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">
+<!--<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">
@@ -346,17 +346,22 @@
                 this.defaultConfig = {};
                 if (typeof populationFrequencies !== "undefined") {
                     this.populationFrequencies = populationFrequencies;
-                    this.defaultConfig.populationFrequencies = populationFrequencies;
+                    // Object.assign() doesn't do deep copy. To keep the default config object unchanged, color is copied into a new object and assigned.
+                    let color = Object.assign({}, populationFrequencies.color);
+                    this.defaultConfig.populationFrequencies = {color: color};
                 }
 
                 if (typeof proteinSubstitutionScores !== "undefined") {
                     this.proteinSubstitutionScores = proteinSubstitutionScores;
-                    this.defaultConfig.proteinSubstitutionScores = proteinSubstitutionScores;
+                    let sift = Object.assign({}, proteinSubstitutionScores.sift);
+                    let polyphen = Object.assign({}, proteinSubstitutionScores.polyphen);
+                    this.defaultConfig.proteinSubstitutionScores = {sift: sift, polyphen: polyphen};
                 }
 
                 if (typeof consequenceTypes !== "undefined") {
                     this.consequenceTypes = consequenceTypes;
-                    this.defaultConfig.consequenceTypes = consequenceTypes;
+                    let color = Object.assign({}, consequenceTypes.color);
+                    this.defaultConfig.consequenceTypes = {color: color};
                 }
 
 
