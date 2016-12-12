@@ -22,7 +22,7 @@
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
-<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">
+<!--<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">
@@ -281,7 +281,7 @@
                     <opencga-project opencga-client="{{opencgaClient}}" project="{{selectedProject}}" on-study="updateStudy"></opencga-project>
                 </div>
                 <div class="collapse content" id="studyInfo">
-                    <opencga-study project="{{selectedProject}}" study="{{study}}"></opencga-study>
+                    <opencga-study opencga-client="{{opencgaClient}}" project="{{selectedProject}}" study="{{study}}"></opencga-study>
                 </div>
             </div>
         </div>
@@ -346,17 +346,22 @@
                 this.defaultConfig = {};
                 if (typeof populationFrequencies !== "undefined") {
                     this.populationFrequencies = populationFrequencies;
-                    this.defaultConfig.populationFrequencies = populationFrequencies;
+                    // Object.assign() doesn't do deep copy. To keep the default config object unchanged, color is copied into a new object and assigned.
+                    let color = Object.assign({}, populationFrequencies.color);
+                    this.defaultConfig.populationFrequencies = {color: color};
                 }
 
                 if (typeof proteinSubstitutionScores !== "undefined") {
                     this.proteinSubstitutionScores = proteinSubstitutionScores;
-                    this.defaultConfig.proteinSubstitutionScores = proteinSubstitutionScores;
+                    let sift = Object.assign({}, proteinSubstitutionScores.sift);
+                    let polyphen = Object.assign({}, proteinSubstitutionScores.polyphen);
+                    this.defaultConfig.proteinSubstitutionScores = {sift: sift, polyphen: polyphen};
                 }
 
                 if (typeof consequenceTypes !== "undefined") {
                     this.consequenceTypes = consequenceTypes;
-                    this.defaultConfig.consequenceTypes = consequenceTypes;
+                    let color = Object.assign({}, consequenceTypes.color);
+                    this.defaultConfig.consequenceTypes = {color: color};
                 }
 
 
@@ -395,11 +400,10 @@
                 this.renderBreadcrumb();
             },
             init: function () {
-                this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host,
-                        this.config.opencga.version, true, this.config.opencga.cookies.sessionId, this.config.opencga.cookies.userName);
+                this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host, this.config.opencga.version, true, "iva");
                 this.opencgaClient = new OpenCGAClient(this.opencgaClientConfig);
 
-                this.cellBaseClientConfig = new CellBaseClientConfig(hosts = this.config.cellbase.hosts, version = this.config.cellbase.version);
+                this.cellBaseClientConfig = new CellBaseClientConfig(hosts = this.config.cellbase.hosts, version = this.config.cellbase.version, species = "hsapiens");
                 this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
 
                 if (typeof this.config.opencga.projects !== "undefined" && this.config.opencga.projects.length > 0 && this._logged == false) {
@@ -464,7 +468,7 @@
                     this.tool = e.target.attributes.href.value;
                 } else {
                     this.tool = "home";
-                    $("#home").show(); // get the href and use it find which div to show
+                    $("#home").show();
                 }
 
                 this.renderHashFragments();
@@ -656,30 +660,30 @@
                     Polymer.dom(breadcrumbElement).innerHTML = "";
 
                     // we add the 'Projects' link
-                    let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, false);
+                    let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, false, this.config.breadcrumb.title);
                     Polymer.dom(breadcrumbElement).appendChild(projects);
 
                     // We first check if one study is selected, for this study must be defined and have at least one key
                     if (typeof this.study === "undefined" || Object.keys(this.study).length == 0) {
                         if (typeof this.project !== "undefined" && this.project != null && this.project != "") {
-                            let project = this._createBreadcrumbElement(this.project, true); // render only project if exists
+                            let project = this._createBreadcrumbElement(this.project, true, "project"); // render only project if exists
                             Polymer.dom(breadcrumbElement).appendChild(project);
                         }
                     } else {
-                        let project = this._createBreadcrumbElement(this.project, false);
+                        let project = this._createBreadcrumbElement(this.project, false, "project");
                         Polymer.dom(breadcrumbElement).appendChild(project);
 
                         if (typeof this.samples !== "undefined" && this.samples.length > 0) {
-                            let study = this._createBreadcrumbElement(this.study.alias, false);
+                            let study = this._createBreadcrumbElement(this.study.alias, false, "study");
                             let sampleNames = [];
                             for (let i in this.samples) {
                                 sampleNames.push(this.samples[i].name);
                             }
-                            let samples = this._createBreadcrumbElement(sampleNames.join(","), true);
+                            let samples = this._createBreadcrumbElement(sampleNames.join(","), true, "sample");
                             Polymer.dom(breadcrumbElement).appendChild(study);
                             Polymer.dom(breadcrumbElement).appendChild(samples);
                         } else {
-                            let study = this._createBreadcrumbElement(this.study.alias, true);
+                            let study = this._createBreadcrumbElement(this.study.alias, true, "study");
                             Polymer.dom(breadcrumbElement).appendChild(study);
                         }
                     }
@@ -688,21 +692,21 @@
                     $(".breadcrumb li a").on('click', function(e) {
                         e.preventDefault();
                         $('.content').hide();
-                        switch (e.target.innerHTML) {
+                        switch (e.target.dataset.category) {
                             case _this.config.breadcrumb.title:
                                 $('#projectList').show();
                                 break;
-                            case _this.project:
+                            case "project":
                                 $('#projectInfo').show();
                                 break;
-                            case _this.study.alias:
+                            case "study":
                                 $('#studyInfo').show();
                                 break;
                         }
                     });
                 }
             },
-            _createBreadcrumbElement(name, active) {
+            _createBreadcrumbElement(name, active, category) {
                 var li = document.createElement("li");
                 if (active == true) {
                     li.setAttribute("class", "active");
@@ -711,6 +715,7 @@
                     var a = document.createElement("a");
                     a.setAttribute("href", "#");
                     a.setAttribute("class", "");
+                    a.setAttribute("data-category", category);
                     a.textContent = name;
                     li.appendChild(a);
                 }

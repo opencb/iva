@@ -214,7 +214,7 @@
             observers: [
                 'checkUserConfig(opencgaClient._config.*)'
             ],
-            attached: function () {
+            attached: function() {
                 this.config = {};
                 this.ctColor = {};
                 this.sift = {};
@@ -286,7 +286,6 @@
                             }
                             break;
                     }
-//                    _this.config[e.target.id] = $("#" + e.target.id + "> input").val();
                 });
 
             },
@@ -295,7 +294,8 @@
                 if (this.opencgaClient instanceof OpenCGAClient && typeof config.value.sessionId !== "undefined") {
                     this.opencgaClient.users().getConfig("iva", {}, {})
                             .then(function (response) {
-                                _this.assignValues(response.response[0].result[0]);
+                                _this.assignValues(_this.defaultConfig); // Set the default config first
+                                _this.assignValues(response.response[0].result[0]); // Update the ones returned in the result
                                 _this.fire("config", {config: response.response[0].result[0]});
                             });
                 }
@@ -358,6 +358,10 @@
             },
             resetToDefault: function (e) {
                 this.assignValues(this.defaultConfig);
+                this.opencgaClient.users().updateConfig("iva", this.defaultConfig, {})
+                    .then(function (response) {
+                        this.fire("config", {config: response.response[0].result[0]});
+                    });
             }
         });
     </script>
