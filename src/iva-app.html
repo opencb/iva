@@ -42,11 +42,22 @@
                 font-size: 18px;
                 color: #797979;
             }
-
             .gene-view {
                 margin: auto;
                 text-align: justify;
                 width: 90%;
+            }
+            a.studies-menu {
+                color: #9d9d9d;
+            }
+            a.studies-menu:hover {
+                color: white;
+                text-decoration: none;
+                /*cursor: pointer;*/
+            }
+            .studies-scroll{
+                max-height: 300px;
+                overflow-y: scroll;
             }
         </style>
 
@@ -100,22 +111,19 @@
 
                             <!-- Controls aligned to the RIGHT: settings and about-->
                             <ul class="nav navbar-nav navbar-right">
-                                <!--Projects to show win public mode-->
+                                <!--Projects to show in public mode-->
                                 <template is="dom-if" if="{{_publicMode}}">
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             Studies <span class="caret"></span>
                                         </a>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu studies-menu studies-scroll">
                                             <template is="dom-repeat" items="{{projects}}" as="proj">
-                                                <li class="dropdown-submenu">
-                                                    <a href="#">{{proj.name}}</a>
-                                                    <ul class="dropdown-menu">
-                                                        <template is="dom-repeat" items="{{proj.studies}}" as="std">
-                                                            <li><a href="#" data-id="{{std.id}}" on-click="setProjectStudy">{{std.alias}}</a></li>
-                                                        </template>
-                                                    </ul>
-                                                </li>
+                                                <li><a><b>{{proj.name}}</b></a></li>
+                                                <template is="dom-repeat" items="{{proj.studies}}" as="std">
+                                                    <li><a href="#studyInfo" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
+                                                </template>
+                                                <li role="separator" class="divider"></li>
                                             </template>
                                         </ul>
                                     </li>
@@ -144,14 +152,19 @@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <template is="dom-repeat" items="{{projects}}" as="proj">
-                                                <li class="dropdown-submenu">
-                                                    <a href="#">{{proj.name}}</a>
-                                                    <ul class="dropdown-menu">
-                                                        <template is="dom-repeat" items="{{proj.studies}}" as="std">
-                                                            <li><a href="#" data-id="{{std.id}}" on-click="setProjectStudy">{{std.alias}}</a></li>
-                                                        </template>
-                                                    </ul>
-                                                </li>
+                                                <li><a><b>{{proj.name}}</b></a></li>
+                                                <template is="dom-repeat" items="{{proj.studies}}" as="std">
+                                                    <li><a href="#studyInfo" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
+                                                </template>
+                                                <li role="separator" class="divider"></li>
+                                                <!--<li class="dropdown-submenu">-->
+                                                    <!--<a href="#">{{proj.name}}</a>-->
+                                                    <!--<ul class="dropdown-menu">-->
+                                                        <!--<template is="dom-repeat" items="{{proj.studies}}" as="std">-->
+                                                            <!--<li><a href="#" data-id="{{std.id}}" on-click="setProjectStudy">{{std.alias}}</a></li>-->
+                                                        <!--</template>-->
+                                                    <!--</ul>-->
+                                                <!--</li>-->
                                             </template>
                                         </ul>
                                     </li>
@@ -582,8 +595,9 @@
             setProjectStudy: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
                 for (let i = 0; i < this.projects.length; i++) {
-                    if (this.projects[i].name == this.project || this.projects[i].alias == this.project) {
+                    if (this.projects[i].name == e.target.dataProject) {
                         this.selectedProject = this.projects[i];
+                        this.project = this.projects[i].alias;
                         for (let j = 0; j < this.projects[i].studies.length; j++) {
                             if (this.projects[i].studies[j].name == e.target.innerHTML || this.projects[i].studies[j].alias == e.target.innerHTML) {
                                 this.study = this.projects[i].studies[j];
