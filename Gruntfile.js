@@ -27,18 +27,35 @@ module.exports = function(grunt) {
                     './bower_components/webcomponentsjs/webcomponents-lite.js',
                     './bower_components/jquery/dist/jquery.js',
                     './bower_components/underscore/underscore.js',
-                    './bower_components/backbone/backbone.js'
+                    './bower_components/backbone/backbone.js',
+                    './bower_components/highcharts-release/highcharts.js',
+                    './bower_components/qtip2/jquery.qtip.js',
+                    './bower_components/uri.js/src/URI.js',
+                    './bower_components/cookies-js/dist/cookies.js',
+                    './bower_components/moment/moment.js',
+                    './bower_components/crypto-js/crypto-js.js'
                 ],
                 dest: '<%= build.path %>/vendors.js'
+            },
+            jsorolla: {
+                src: [
+                    './lib/jsorolla/src/lib/clients/rest-client.js',
+                    './lib/jsorolla/src/lib/clients/cellbase-client-config.js',
+                    './lib//jsorolla/src/lib/clients/cellbase-client.js',
+                    './lib/jsorolla/src/lib/clients/opencga-client-config.js',
+                    './lib/jsorolla/src/lib/clients/opencga-client.js',
+                    './lib/jsorolla/src/lib/cache/indexeddb-cache.js',
+                    './lib/jsorolla/src/lib/utils.js'
+                ],
+                dest: '<%= build.path %>/jsorolla-clients.js'
+            },
+            genomeViewer: {
+                src: [
+                    './lib/jsorolla/build/2.0.0-beta/genome-viewer/gv-config.js',
+                    './lib/jsorolla/build/2.0.0-beta/genome-viewer/genome-viewer.js'
+                ],
+                dest: '<%= build.path %>/genome-viewer.js'
             }
-            // jsorolla: {
-            //     src: [
-            //         './lib//jsorolla/src/lib/clients/cellbase-client.js',
-            //         './lib/jsorolla/src/lib/cache/indexeddb-cache.js',
-            //         '/lib/jsorolla/src/lib/clients/cellbase-client-config.js'
-            //     ],
-            //     dest: '<%= build.path %>/jsorolla.js'
-            // }
         },
         uglify: {
             options: {
@@ -46,23 +63,23 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    '<%= build.path %>/vendors.min.js': ['<%= build.path %>/vendors.js']
-                    // '<%= build.path %>/jsorolla.min.js': ['<%= build.path %>/jsorolla.js']
+                    '<%= build.path %>/vendors.min.js': ['<%= build.path %>/vendors.js'],
+                    // '<%= build.path %>/jsorolla.min.js': ['<%= build.path %>/jsorolla-clients.js']
                 }
             }
         },
         copy: {
             dist: {
                 files: [
-                    {   expand: true, cwd: './bower_components', src: ['fontawesome/**'], dest: '<%= build.vendor %>' },
-                    {   expand: true, cwd: './bower_components', src: ['qtip2/jquery.qtip.min.css'], dest: '<%= build.vendor %>' },
-                    // {   expand: true, cwd: './bower_components', src: ['qtip2/jquery.qtip.min.js'], dest: '<%= build.vendor %>' },
-                    // {   expand: true, cwd: './bower_components', src: ['uri.js/src/URI.min.js'], dest: '<%= build.vendor %>' },
-                    {   expand: true, cwd: './bower_components', src: ['polymer/polymer.html'], dest: '<%= build.vendor %>' },
+                    {   flatten: true, expand: true, cwd: './bower_components', src: ['fontawesome/css/font-awesome.min.css'], dest: '<%= build.path %>/css' },
+                    {   flatten: true, expand: true, cwd: './bower_components', src: ['qtip2/jquery.qtip.min.css'], dest: '<%= build.path %>/css' },
+                    {   flatten: true, expand: true, cwd: './bower_components', src: ['fontawesome/fonts/*'], dest: '<%= build.path %>/fonts' },
+                    {   flatten: true, expand: true, cwd: './lib', src: ['jsorolla/styles/css/style.css'], dest: '<%= build.path %>/css' },
+                    {   expand: true, cwd: './bower_components', src: ['polymer/*'], dest: '<%= build.vendor %>' },
                     {   expand: true, cwd: 'src', src: ['index.html'], dest: '<%= build.path %>/' },
                     {   expand: true, cwd: 'src', src: ['config.js'], dest: '<%= build.path %>/' },
-                    {   expand: true, cwd: './', src: ['LICENSE'], dest: '<%= build.path %>/' }
-                    // {   expand: true, cwd: 'src', src: ['components/**'], dest: '<%= build.path %>/' },
+                    {   expand: true, cwd: './', src: ['LICENSE'], dest: '<%= build.path %>/' },
+                    {   expand: true, cwd: 'src', src: ['images/*'], dest: '<%= build.path %>/' }
                 ]
             }
         },
@@ -84,8 +101,7 @@ module.exports = function(grunt) {
                     excludes: ["bower_components/polymer/polymer.html"]
                 },
                 files: {
-                    // Target-specific file lists and/or options go here.
-                    '<%= build.path %>/iva-app.html': 'src/components/iva-app.html'
+                    '<%= build.path %>/iva-app.html': 'src/iva-app.html'
                 }
             }
         },
@@ -100,19 +116,13 @@ module.exports = function(grunt) {
                         {
                             match: /\.\.\/bower_components/g,
                             replacement: 'vendor'
-                        },
-                        // {
-                        //     match: /\.\.\/lib\//g,
-                        //     replacement: ''
-                        // },
-                        {
-                            match: /components\/iva-app\.html/g,
-                            replacement: 'iva-app.html'
                         }
                     ]
                 },
                 files: [
-                    {expand: true, flatten: true, src: ['<%= build.path %>/index.html'], dest: '<%= build.path %>'}
+                    {expand: true, flatten: true, src: ['<%= build.path %>/index.html'], dest: '<%= build.path %>'},
+                    {expand: true, flatten: true, src: ['<%= build.path %>/iva-app.html'], dest: '<%= build.path %>'},
+
                 ]
             }
         }
@@ -128,7 +138,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-replace');
 
-    grunt.registerTask('default', ['clean', 'jshint', 'copy', 'concat'  , 'processhtml', 'replace', 'vulcanize']);
+    grunt.registerTask('default', ['clean', 'jshint', 'copy', 'concat', 'uglify', 'processhtml', 'vulcanize', 'replace']);
     grunt.registerTask('cl', ['clean']);
-    // grunt.registerTask('test', ['clean']);
 };
