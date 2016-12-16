@@ -15,27 +15,81 @@
  */
 
 var cellbase = {
-    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-beta"],
+    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-rc"],
     version: "v4"
 };
 
 var opencga = {
-    // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
     host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0",
+    // host: "bioinfodev.hpc.cam.ac.uk/hgva",
     // host: "localhost:9190/opencga",
     version: "v1",
     // user:  Useful scenario is user@project:study
     projects: [
-        // {
-        //     name: "ProjectA",
-        //     alias: "proj_a",
-        //     studies : [
-        //         {
-        //             name: "Study1",
-        //             alias: "s_1"
-        //         }
-        //     ]
-        // }
+        {
+            name: "Reference studies GRCh37",
+            alias: "reference_grch37",
+            studies : [
+                {
+                    name: "1000 Genomes Project - Phase 3",
+                    alias: "1kG_phase3"
+                },
+                {
+                    name: "Exome Sequencing Project",
+                    alias: "ESP6500"
+                },
+                {
+                    name: "Exome Aggregation Consortium",
+                    alias: "EXAC"
+                },
+                {
+                    name: "1000 Genomes Project ChrY - Phase 3",
+                    alias: "1kG_phase3_chrY"
+                },
+                {
+                    name: "1000 Genomes Project ChrMT - Phase 3",
+                    alias: "1kG_phase3_chrMT"
+                },
+                {
+                    name: "Genome of the Netherlands",
+                    alias: "GONL"
+                },
+                {
+                    name: "UK10K ALSPAC",
+                    alias: "UK10K_ALSPAC"
+                },
+                {
+                    name: "UK10K TWINSUK",
+                    alias: "UK10K_TWINSUK"
+                },
+                {
+                    name: "Spanish Medical Genome Project",
+                    alias: "MGP"
+                }
+            ]
+        },        {
+            name: "Reference studies GRCh38",
+            alias: "reference_grch38",
+            studies : [
+                {
+                    name: "1000 Genomes Project - Phase 3",
+                    alias: "1kG_phase3"
+                }
+            ]
+        },
+        {
+            name: "Cancer GRCh37",
+            alias: "cancer_grch37",
+            studies : [
+                {
+                    name: "QIMR Berghofer Melanoma",
+                    alias: "QIMR_Berghofer_Melanoma"
+                },                {
+                    name: "Chronic Myeloid Leukemia - Russian Academy of Medical Sciences",
+                    alias: "RAMS_CML"
+                }
+            ]
+        }
     ],
     cookies: {
         userName: "iva_userId",
@@ -45,14 +99,14 @@ var opencga = {
 
 
 var application = {
-    title: "IVA",
-    version: "v0.6.0",
+    title: "HGVA",
+    version: "v1.0.0",
     logo: "images/opencb-logo.png",
     menu: [
         {
             id: "samples",
             title: "Samples",
-            visibility: "public"
+            visibility: "none"
         },
         {
             id: "browser",
@@ -79,7 +133,7 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "public",
+            visibility: "none",
             submenu: [
                 {
                     id: "family-prioritization",
