@@ -121,7 +121,7 @@
                                             <template is="dom-repeat" items="{{projects}}" as="proj">
                                                 <li><a><b>{{proj.name}}</b></a></li>
                                                 <template is="dom-repeat" items="{{proj.studies}}" as="std">
-                                                    <li><a href="#studyInfo" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
+                                                    <li><a href="#studyInformation" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
                                                 </template>
                                                 <li role="separator" class="divider"></li>
                                             </template>
@@ -138,7 +138,7 @@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a href="#dashboard"><i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a></li>
-                                            <li><a href="#projectList"><i class="fa fa-database" aria-hidden="true"></i> Projects</a></li>
+                                            <li><a href="#projects"><i class="fa fa-database" aria-hidden="true"></i> Projects</a></li>
                                             <li><a href="#upload"><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
@@ -154,7 +154,7 @@
                                             <template is="dom-repeat" items="{{projects}}" as="proj">
                                                 <li><a><b>{{proj.name}}</b></a></li>
                                                 <template is="dom-repeat" items="{{proj.studies}}" as="std">
-                                                    <li><a href="#studyInfo" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
+                                                    <li><a href="#studyInformation" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
                                                 </template>
                                                 <li role="separator" class="divider"></li>
                                                 <!--<li class="dropdown-submenu">-->
@@ -287,13 +287,13 @@
                     <opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{selectedProject.studies}}"></opencga-upload-file>
                 </div>
                 <!--BreadCrumb reference-->
-                <div class="collapse content" id="projectList" style="width: 60%; margin: auto">
+                <div class="collapse content" id="projects" style="width: 60%; margin: auto">
                     <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
                 </div>
-                <div class="collapse content" id="projectInfo">
+                <div class="collapse content" id="project">
                     <opencga-project opencga-client="{{opencgaClient}}" project="{{selectedProject}}" on-study="updateStudy"></opencga-project>
                 </div>
-                <div class="collapse content" id="studyInfo">
+                <div class="collapse content" id="studyInformation">
                     <opencga-study opencga-client="{{opencgaClient}}" project="{{selectedProject}}" study="{{study}}"></opencga-study>
                 </div>
             </div>
@@ -594,6 +594,9 @@
             },
             setProjectStudy: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
+                $('.content').hide();
+                $('#studyInformation').show();
+                this.tool = "study";
                 for (let i = 0; i < this.projects.length; i++) {
                     if (this.projects[i].name == e.target.dataProject) {
                         this.selectedProject = this.projects[i];
@@ -614,7 +617,7 @@
                     }
                 }
                 $('.content').hide();
-                $('#projectInfo').show();
+                $('#project').show();
             },
             updateStudy: function(e) {
                 if (typeof e.detail.project !== "undefined" && e.detail.project.name != "") {
@@ -627,7 +630,7 @@
                     }
                 }
                 $('.content').hide();
-                $('#studyInfo').show();
+                $('#studyInformation').show();
             },
             projectStudySampleChanged: function() {
                 this.renderHashFragments();
@@ -652,8 +655,6 @@
                     } else {
                         query.gene = value;
                         this.geneToShow = value;
-//                    this.tool = "gene";
-//                    this.renderHashFragments();
                     }
 
                     this._query = query;
@@ -662,7 +663,6 @@
                     this.tool = "browser";
                     this.renderHashFragments();
                 }
-
             },
 
             renderBreadcrumb: function() {
@@ -713,13 +713,13 @@
                         $('.content').hide();
                         switch (e.target.dataset.category) {
                             case _this.config.breadcrumb.title:
-                                $('#projectList').show();
+                                $('#projects').show();
                                 break;
                             case "project":
-                                $('#projectInfo').show();
+                                $('#project').show();
                                 break;
                             case "study":
-                                $('#studyInfo').show();
+                                $('#studyInformation').show();
                                 break;
                         }
                     });
