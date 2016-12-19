@@ -25,7 +25,8 @@
 <!--<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
-<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">
+<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">-->
+<link rel="import" href="components/opencga-study.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-login.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload-file.html">
 <link rel="import" href="components/iva-settings.html">
@@ -121,7 +122,7 @@
                                             <template is="dom-repeat" items="{{projects}}" as="proj">
                                                 <li><a><b>{{proj.name}}</b></a></li>
                                                 <template is="dom-repeat" items="{{proj.studies}}" as="std">
-                                                    <li><a href="#studyInformation" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
+                                                    <li><a href="#" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
                                                 </template>
                                                 <li role="separator" class="divider"></li>
                                             </template>
@@ -154,7 +155,7 @@
                                             <template is="dom-repeat" items="{{projects}}" as="proj">
                                                 <li><a><b>{{proj.name}}</b></a></li>
                                                 <template is="dom-repeat" items="{{proj.studies}}" as="std">
-                                                    <li><a href="#studyInformation" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
+                                                    <li><a href="#" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
                                                 </template>
                                                 <li role="separator" class="divider"></li>
                                                 <!--<li class="dropdown-submenu">-->
@@ -596,7 +597,7 @@
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
                 $('.content').hide();
                 $('#studyInformation').show();
-                this.tool = "study";
+                this.tool = "studyInformation";
                 for (let i = 0; i < this.projects.length; i++) {
                     if (this.projects[i].name == e.target.dataProject) {
                         this.selectedProject = this.projects[i];
@@ -618,6 +619,8 @@
                 }
                 $('.content').hide();
                 $('#project').show();
+                this.tool = "project";
+                this.renderHashFragments();
             },
             updateStudy: function(e) {
                 if (typeof e.detail.project !== "undefined" && e.detail.project.name != "") {
@@ -631,6 +634,8 @@
                 }
                 $('.content').hide();
                 $('#studyInformation').show();
+                this.tool = "studyInformation";
+                this.renderHashFragments();
             },
             projectStudySampleChanged: function() {
                 this.renderHashFragments();
@@ -714,14 +719,18 @@
                         switch (e.target.dataset.category) {
                             case _this.config.breadcrumb.title:
                                 $('#projects').show();
+                                _this.tool = "projects";
                                 break;
                             case "project":
                                 $('#project').show();
+                                _this.tool = "project";
                                 break;
                             case "study":
                                 $('#studyInformation').show();
+                                _this.tool = "studyInformation";
                                 break;
                         }
+                        _this.renderHashFragments();
                     });
                 }
             },
