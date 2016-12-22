@@ -164,7 +164,7 @@ var application = {
         {
             id: "tools",
             title: "Tools",
-            visibility: "public",
+            visibility: "none",
             submenu: [
                 {
                     id: "ibs",
