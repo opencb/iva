@@ -175,7 +175,7 @@ var populationFrequencies = {
     },
     studies: [
         {
-            id: "1KG_PHASE3",
+            id: "1kG_phase3",
             title: "1000 Genomes",
             populations: [
                 {
