@@ -1,0 +1,83 @@
+<dom-module id="opencga-study">
+    <template>
+        <style is="custom-style" include="jso-styles"></style>
+        <style>
+            .center {
+                margin: 10px;
+                text-align: justify;
+            }
+
+            dt {
+                float: left;
+                clear: left;
+                text-align: right;
+                width: 8%;
+                color: #645a5a;
+            }
+
+            dd {
+                float: left;
+                margin-left: 1em;
+                color: #999
+            }
+        </style>
+
+        <div class="center">
+
+            <!-- 1ST ROW: STUDY SUMMARY -->
+            <div>
+                <h4>Summary</h4>
+                <dl>
+                    <dt>Name</dt>
+                    <dd>{{study.name}}</dd>
+                    <dt>Alias</dt>
+                    <dd>{{study.alias}}</dd>
+                    <!--<template is="dom-if" if="{{_isNotEmpty(study.type)}}">-->
+                        <!--<dt>Type</dt>-->
+                        <!--<dd>{{study.type}}</dd>-->
+                    <!--</template>-->
+                    <!--<dt>Date</dt>-->
+                    <!--<dd>{{_formatDate(study.creationDate)}}</dd>-->
+                    <dt>Disk usage</dt>
+                    <dd>{{_getDiskUsage(study.diskUsage)}}</dd>
+                    <template is="dom-if" if="{{_isNotEmpty(study.description)}}">
+                        <dt>Description</dt>
+                        <dd>{{study.description}}</dd>
+                    </template>
+                </dl>
+            </div>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'opencga-study',
+
+            properties: {
+                opencgaClient: {
+                    type: Object
+                },
+                study: {
+                    type: Object
+                }
+            },
+            _isNotEmpty: function (field) {
+                if (field !== undefined && field.length > 0) {
+                    return true;
+                }
+                return false;
+            },
+            _formatDate: function(dateStr) {
+                return moment(parseInt(dateStr)).format('D MMM YY');
+            },
+            _getDiskUsage: function(bytes) {
+                if(bytes == 0) return '0 Byte';
+                var k = 1000;
+                var dm = 3;
+                var sizes = [' Bytes', ' KB', ' MB', ' GB', ' TB', ' PB', ' EB', ' ZB', ' YB'];
+                var i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
+            }
+
+        });
+    </script>
+</dom-module>

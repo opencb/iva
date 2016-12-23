@@ -37,15 +37,15 @@ var opencga = {
         // }
     ],
     cookies: {
-        userName: "opencga_userId",
-        sessionId: "opencga_sId"
+        userName: "iva_userId",
+        sessionId: "iva_sid"
     }
 };
 
 
 var application = {
     title: "BRIDGE",
-    version: "v0.1.0",
+    version: "v0.6.0",
     logo: "images/bridge_logo.png",
     // logo: "images/opencb-logo.png",
     menu: [
@@ -64,14 +64,14 @@ var application = {
                     name: "Example BRCA2",
                     query: {
                         gene: "BRCA2",
-                        phylop: "<0.001"
+                        conservation: "phylop<0.001"
                     }
                 },
                 {
                     name: "Example OR11",
                     query: {
                         gene: "OR11H1",
-                        phylop: "<0.001"
+                        conservation: "phylop<=0.001"
                     }
                 }
             ]
@@ -175,7 +175,7 @@ var populationFrequencies = {
     },
     studies: [
         {
-            id: "1000GENOMES_phase_3",
+            id: "1kG_phase3",
             title: "1000 Genomes",
             populations: [
                 {
@@ -228,7 +228,7 @@ var populationFrequencies = {
             ]
         },
         {
-            id: "ESP_6500",
+            id: "ESP6500",
             title: "ESP 6500",
             populations: [
                 {
