@@ -44,6 +44,7 @@
                 <input type="text" class="form-control" id="welcomeSearchTextBox" style="text-align: center; height: 45px"
                        placeholder="Search for a gene, transcript, variant, multi-allelic variant, region, GO term or HPO term" on-keyup="triggerSearch">
                 <p>Example: BRCA2, ENST00000342992, rs666, 10:15097577:G:C, 1:1-100000, GO:0000001, HP:0000001</p>
+                <p>Current Project and Study are <b>{{project}}</b><b>{{study}}</b></p>
             </div>
             <!--<h2>Overview</h2>-->
             <br>
@@ -89,7 +90,8 @@
                     value: ""
                 },
                 study: {
-                    type: Object
+                    type: String,
+                    value: ""
                 }
             },
             triggerSearch: function (e) {
