@@ -206,11 +206,11 @@ var application = {
         visibility: "public"
     },
     about: [
-        {name: "Documentation",  url: "https://github.com/opencb/iva/wiki", icon: "fa fa-book"},
-        {name: "Tutorial", url: "https://github.com/opencb/iva/wiki/Tutorial", icon: ""},
+        {name: "Documentation",  url: "http://docs.opencb.org/display/hgva/HGVA+Home", icon: "fa fa-book"},
+        {name: "Tutorial", url: "http://docs.opencb.org/display/hgva/Tutorials", icon: ""},
         {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
-        {name: "Contact",  url: "", icon: "fa fa-envelope"},
-        {name: "FAQ",  url: "", icon: ""}
+        {name: "Contact",  url: "", icon: "fa fa-envelope"}
+        // {name: "FAQ",  url: "", icon: ""}
     ],
     breadcrumb: {
         title: "Projects",
