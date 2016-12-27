@@ -29,13 +29,25 @@
                 font-size: 18px;
                 color: #797979;
             }
+
+            .right {
+                width: 20%;
+            }
         </style>
 
         <!-- This is where main application is rendered -->
-        <div class="center">
+        <div>
+            <div style="text-align: center">
+                <br>
+                <span style="font-size:50px; text-align: center">The Human Genetic Variation Archive (HGVA)</span>
+                <br><br><br>
+                <input type="text" class="form-control" id="welcomeSearchTextBox" style="text-align: center; height: 45px"
+                       placeholder="Search for a gene, transcript, variant, multi-allelic variant, region, GO term or HPO term" on-keyup="triggerSearch">
+                <p>Example: BRCA2, ENST00000342992, rs666, 10:15097577:G:C, 1:1-100000, GO:0000001, HP:0000001</p>
+                <p>Current Project and Study are <b>{{project}}</b> and <b>{{study}}</b></p>
+            </div>
+            <!--<h2>Overview</h2>-->
             <br>
-            <span style="font-size:50px">The Human Genetic Variation Archive (HGVA)</span>
-            <h2>Overview</h2>
             <p>
                 <b>The Human Genomic Variation Archive (HGVA)</b> is an open access genetic variation resource that integrates
                 all variants from key world-wide reference projects, but also added-value information such as basic
@@ -78,7 +90,16 @@
                     value: ""
                 },
                 study: {
-                    type: Object
+                    type: String,
+                    value: ""
+                }
+            },
+            triggerSearch: function (e) {
+                if (e.keyCode == '13') {
+                    // fire according to the feature - gene, variant etc.
+                    this.fire("search", {value: this.$.welcomeSearchTextBox.value});
+                    this.$.welcomeSearchTextBox.value = "";
+                    $('.content').hide();
                 }
             }
         });
