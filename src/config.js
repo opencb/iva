@@ -209,7 +209,7 @@ var application = {
         {name: "Documentation",  url: "http://docs.opencb.org/display/hgva/HGVA+Home", icon: "fa fa-book"},
         {name: "Tutorial", url: "http://docs.opencb.org/display/hgva/Tutorials", icon: ""},
         {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
-        {name: "Contact",  url: "", icon: "fa fa-envelope"}
+        {name: "Contact",  url: "http://docs.opencb.org/display/hgva/People", icon: "fa fa-envelope"}
         // {name: "FAQ",  url: "", icon: ""}
     ],
     breadcrumb: {
