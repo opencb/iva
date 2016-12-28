@@ -25,8 +25,7 @@
 <!--<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">-->
-<link rel="import" href="components/opencga-study.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-login.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload-file.html">
 <link rel="import" href="components/iva-settings.html">
@@ -39,7 +38,7 @@
             .center {
                 margin: auto;
                 text-align: justify;
-                width: 80%;
+                width: 60%;
                 font-size: 18px;
                 color: #797979;
             }
@@ -221,23 +220,7 @@
             <!-- This is where main application is rendered -->
             <div class="center">
                 <div class="collapse content" id="home">
-                    <div class="col-md-9">
-                        <welcome-web on-search="buildQuery" project="{{project}}" study="{{study.name}}"></welcome-web>
-                    </div>
-                    <div class="col-md-3" style="width: 20%">
-                        <br><br><br><br><br>
-                        <div class="panel panel-primary" style="border: none">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                    Useful links</h3>
-                            </div>
-                            <div class="panel-body">
-                                <ul>
-                                    <li><a href="#projects">Projects</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <welcome-web on-search="buildQuery" project="{{project}}" study="{{study.name}}"></welcome-web>
                 </div>
             </div>
 
@@ -648,8 +631,11 @@
                     }
                 }
                 $('.content').hide();
-                $('#studyInformation').show();
-                this.tool = "studyInformation";
+//                TODO: Opencga study will be shown later. For now variant browser is shown when the study changes
+//                $('#studyInformation').show();
+//                this.tool = "studyInformation";
+                $('#browser').show();
+                this.tool = "browser";
                 this.renderHashFragments();
             },
             projectStudySampleChanged: function() {
@@ -741,8 +727,10 @@
                                 _this.tool = "project";
                                 break;
                             case "study":
-                                $('#studyInformation').show();
-                                _this.tool = "studyInformation";
+//                                $('#studyInformation').show();
+//                                _this.tool = "studyInformation";
+                                $('#browser').show();
+                                _this.tool = "browser";
                                 break;
                         }
                         _this.renderHashFragments();
