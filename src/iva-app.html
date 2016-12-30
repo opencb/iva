@@ -145,7 +145,7 @@
                                         </ul>
                                     </li>
 
-                                    <!--Project dropdown menu-->
+                                    <!--Studies dropdown menu-->
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             Studies <span class="caret"></span>
@@ -185,18 +185,20 @@
                                 </li>
 
                                 <!-- Login/Logout button -->
-                                <li>
-                                    <template is="dom-if" if="{{!_logged}}">
-                                        <a href="#login" role="button">
-                                            <i class="fa fa-sign-in fa-lg"></i> Login
-                                        </a>
-                                    </template>
-                                    <template is="dom-if" if="{{_logged}}">
-                                        <a href="#logout" on-click="logout">
-                                            <i class="fa fa-sign-out fa-lg"></i> Logout
-                                        </a>
-                                    </template>
-                                </li>
+                                <template is="dom-if" if="{{_isMenuItemVisible(config.login)}}">
+                                    <li>
+                                        <template is="dom-if" if="{{!_logged}}">
+                                            <a href="#login" role="button">
+                                                <i class="fa fa-sign-in fa-lg"></i> Login
+                                            </a>
+                                        </template>
+                                        <template is="dom-if" if="{{_logged}}">
+                                            <a href="#logout" on-click="logout">
+                                                <i class="fa fa-sign-out fa-lg"></i> Logout
+                                            </a>
+                                        </template>
+                                    </li>
+                                </template>
                             </ul>
                         </div>
                     </div>
@@ -586,8 +588,8 @@
             setProjectStudy: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
                 $('.content').hide();
-                $('#studyInformation').show();
-                this.tool = "studyInformation";
+//                $('#studyInformation').show();
+//                this.tool = "studyInformation";
                 for (let i = 0; i < this.projects.length; i++) {
                     if (this.projects[i].name == e.target.dataProject) {
                         this.selectedProject = this.projects[i];
