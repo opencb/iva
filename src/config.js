@@ -20,8 +20,9 @@ var cellbase = {
 };
 
 var opencga = {
-    host: "bioinfodev.hpc.cam.ac.uk/hgva",
-    // host: "localhost:9090/opencga",
+    // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
+    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0",
+    // host: "localhost:9190/opencga",
     version: "v1",
     // user:  Useful scenario is user@project:study
     projects: [
@@ -37,8 +38,8 @@ var opencga = {
         // }
     ],
     cookies: {
-        userName: "opencga_userId",
-        sessionId: "opencga_sId"
+        userName: "iva_userId",
+        sessionId: "iva_sid"
     }
 };
 
@@ -64,14 +65,14 @@ var application = {
                     name: "Example BRCA2",
                     query: {
                         gene: "BRCA2",
-                        phylop: "<0.001"
+                        conservation: "phylop<0.001"
                     }
                 },
                 {
                     name: "Example OR11",
                     query: {
                         gene: "OR11H1",
-                        phylop: "<0.001"
+                        conservation: "phylop<=0.001"
                     }
                 }
             ]
@@ -175,7 +176,7 @@ var populationFrequencies = {
     },
     studies: [
         {
-            id: "1000GENOMES_phase_3",
+            id: "1kG_phase3",
             title: "1000 Genomes",
             populations: [
                 {
@@ -228,7 +229,7 @@ var populationFrequencies = {
             ]
         },
         {
-            id: "ESP_6500",
+            id: "ESP6500",
             title: "ESP 6500",
             populations: [
                 {
