@@ -80,7 +80,7 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "public",
+            visibility: "none",
             submenu: [
                 {
                     id: "family-prioritization",
@@ -111,7 +111,7 @@ var application = {
         {
             id: "tools",
             title: "Tools",
-            visibility: "public",
+            visibility: "none",
             submenu: [
                 {
                     id: "ibs",
@@ -142,7 +142,7 @@ var application = {
         {
             id: "genomeBrowser",
             title: "Genome Browser",
-            visibility: "public",
+            visibility: "none",
         }
     ],
     search: {
