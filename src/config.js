@@ -213,7 +213,7 @@ var application = {
         // {name: "FAQ",  url: "", icon: ""}
     ],
     login: {
-        visibility: "public"
+        visibility: "none"
     },
     breadcrumb: {
         title: "Projects",
