@@ -212,6 +212,9 @@ var application = {
         {name: "Contact",  url: "http://docs.opencb.org/display/hgva/People", icon: "fa fa-envelope"}
         // {name: "FAQ",  url: "", icon: ""}
     ],
+    login: {
+        visibility: "public"
+    },
     breadcrumb: {
         title: "Projects",
         visibility: "public"
