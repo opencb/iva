@@ -158,6 +158,9 @@ var application = {
         {name: "Contact",  url: "", icon: "fa fa-envelope"},
         {name: "FAQ",  url: "", icon: ""}
     ],
+    login: {
+        visibility: "public"
+    },
     breadcrumb: {
         title: "Projects",
         visibility: "public"
