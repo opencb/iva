@@ -20,8 +20,8 @@ var cellbase = {
 };
 
 var opencga = {
-    host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
-    // host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0",
+    // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
+    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0",
     version: "v1",
     // user:  Useful scenario is user@project:study
     projects: [
@@ -78,7 +78,7 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "none",
+            visibility: "public",
             submenu: [
                 {
                     id: "family-prioritization",
@@ -109,7 +109,7 @@ var application = {
         {
             id: "tools",
             title: "Tools",
-            visibility: "none",
+            visibility: "public",
             submenu: [
                 {
                     id: "ibs",
