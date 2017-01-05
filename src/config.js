@@ -20,9 +20,8 @@ var cellbase = {
 };
 
 var opencga = {
-    // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
-    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0",
-    // host: "localhost:9190/opencga",
+    host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
+    // host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0",
     version: "v1",
     // user:  Useful scenario is user@project:study
     projects: [
@@ -46,7 +45,7 @@ var opencga = {
 
 var application = {
     title: "IVA",
-    version: "v0.6.0",
+    version: "v0.7.0",
     logo: "images/opencb-logo.png",
     menu: [
         {
@@ -79,7 +78,7 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "public",
+            visibility: "none",
             submenu: [
                 {
                     id: "family-prioritization",
@@ -110,7 +109,7 @@ var application = {
         {
             id: "tools",
             title: "Tools",
-            visibility: "public",
+            visibility: "none",
             submenu: [
                 {
                     id: "ibs",
@@ -152,10 +151,10 @@ var application = {
         visibility: "public"
     },
     about: [
-        {name: "Documentation",  url: "https://github.com/opencb/iva/wiki", icon: "fa fa-book"},
-        {name: "Tutorial", url: "https://github.com/opencb/iva/wiki/Tutorial", icon: ""},
+        {name: "Documentation",  url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
+        {name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
         {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
-        {name: "Contact",  url: "", icon: "fa fa-envelope"},
+        {name: "Contact",  url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
         {name: "FAQ",  url: "", icon: ""}
     ],
     login: {
