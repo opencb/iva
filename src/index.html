@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>BRIDGE</title>
+    <title></title>
 
     <!-- Favicon -->
     <!-- <link rel="icon" href="src/images/favicon.ico"> -->
@@ -120,7 +120,12 @@
 
 </head>
 
-<body>
+<body onload="setTitle()">
+    <script>
+        function setTitle() {
+            $("title").text(application.title);
+        }
+    </script>
     <iva-app></iva-app>
 </body>
 
