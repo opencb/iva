@@ -20,7 +20,7 @@ var cellbase = {
 };
 
 var opencga = {
-    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0",
+    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0.0",
     // host: "bioinfodev.hpc.cam.ac.uk/hgva",
     // host: "localhost:9190/opencga",
     version: "v1",
