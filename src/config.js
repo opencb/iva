@@ -21,7 +21,7 @@ var cellbase = {
 
 var opencga = {
     // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
-    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0",
+    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0.0",
     version: "v1",
     // user:  Useful scenario is user@project:study
     projects: [
@@ -42,6 +42,25 @@ var opencga = {
     }
 };
 
+var beacon = {
+    hosts: [
+        "brca-exchange",
+        "cell_lines",
+        "cosmic",
+        "wtsi",
+        "wgs",
+        "ncbi",
+        "ebi",
+        "ega",
+        "broad",
+        "gigascience",
+        "ucsc",
+        "lovd",
+        "hgmd",
+        "icgc",
+        "sahgp"
+    ]
+};
 
 var application = {
     title: "IVA",
