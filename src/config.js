@@ -97,6 +97,34 @@ var opencga = {
     }
 };
 
+var beacon = {
+    hosts: [
+        {
+            name: "Sanger Institute",
+            url: "http://www.sanger.ac.uk/sanger/GA4GH_Beacon",
+            queryParams: [
+                "chr",
+                "pos",
+                "all"
+            ]
+        },
+        // "brca-exchange",
+        // "cell_lines", // http://www.sanger.ac.uk/sanger/GA4GH_Beacon?chr=?;pos=?;all=?
+        // "cosmic", // http://cancer.sanger.ac.uk/api/ga4gh/beacon/query?chrom=?;pos=?;allele=?
+        // "wtsi",
+        // "wgs",
+        // "ncbi",
+        // "ebi", // http://www.ebi.ac.uk/eva/webservices/rest/v1/ga4gh/beacon?referenceName=11&start=110993&allele=INDEL&datasetIds=PRJEB4019
+        // "ega", // https://ega.crg.eu/requesterportal/v1/beacon/query?alternateBases=A&assemblyId=GRCh37&datasetIds=All+GRCh37&referenceName=1&start=1000000
+        // "broad", // http://beacon.broadinstitute.org/beacon/beaconVariantQueryAjax (POST- {dataset: "exac0.3", chromosome: "X", position: "20038741", allele: "G"})
+        // "gigascience",
+        // "ucsc",
+        // "lovd", // http://hgwdev-max.cse.ucsc.edu/cgi-bin/beacon/query?track=lovd&chrom=chr1&pos=808921&allele=T
+        // "hgmd",
+        // "icgc", // https://dcc.icgc.org/api/v1/beacon/query?allele=C&chromosome=1&dataset=&position=29885564&reference=GRCh37
+        // "sahgp"
+    ]
+};
 
 var application = {
     title: "HGVA",
@@ -206,11 +234,19 @@ var application = {
         visibility: "public"
     },
     about: [
+<<<<<<< HEAD
         {name: "Documentation",  url: "http://docs.opencb.org/display/hgva/HGVA+Home", icon: "fa fa-book"},
         {name: "Tutorial", url: "http://docs.opencb.org/display/hgva/Tutorials", icon: ""},
         {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
         {name: "Contact",  url: "http://docs.opencb.org/display/hgva/People", icon: "fa fa-envelope"}
         // {name: "FAQ",  url: "", icon: ""}
+=======
+        {name: "Documentation",  url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
+        {name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
+        {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
+        {name: "Contact",  url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
+        {name: "FAQ",  url: "", icon: ""}
+>>>>>>> develop
     ],
     login: {
         visibility: "none"
