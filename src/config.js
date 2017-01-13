@@ -234,19 +234,11 @@ var application = {
         visibility: "public"
     },
     about: [
-<<<<<<< HEAD
         {name: "Documentation",  url: "http://docs.opencb.org/display/hgva/HGVA+Home", icon: "fa fa-book"},
         {name: "Tutorial", url: "http://docs.opencb.org/display/hgva/Tutorials", icon: ""},
         {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
         {name: "Contact",  url: "http://docs.opencb.org/display/hgva/People", icon: "fa fa-envelope"}
         // {name: "FAQ",  url: "", icon: ""}
-=======
-        {name: "Documentation",  url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
-        {name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
-        {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
-        {name: "Contact",  url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
-        {name: "FAQ",  url: "", icon: ""}
->>>>>>> develop
     ],
     login: {
         visibility: "none"
