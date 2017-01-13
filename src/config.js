@@ -245,11 +245,11 @@ var populationFrequencies = {
                 },
                 {
                     id: "NFE",
-                    title: "South Asian [SAS]"
+                    title: "Non Finnish European [NFE]"
                 },
                 {
                     id: "AMR",
-                    title: "South Asian [SAS]"
+                    title: "American [AMR]"
                 },
                 {
                     id: "SAS",
