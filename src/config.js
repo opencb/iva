@@ -298,11 +298,15 @@ var populationFrequencies = {
                 },
                 {
                     id: "NFE",
-                    title: "Non Finnish European [NFE]"
+                    title: "Non-Finnish European [NFE]"
                 },
                 {
                     id: "AMR",
                     title: "American [AMR]"
+                },
+                {
+                    id: "EAS",
+                    title: "East Asian [EAS]"
                 },
                 {
                     id: "SAS",
@@ -312,16 +316,16 @@ var populationFrequencies = {
         },
         {
             id: "ESP6500",
-            title: "ESP 6500",
+            title: "ESP6500",
             populations: [
                 {
                     id: "EA",
-                    title: "European American",
+                    title: "European American [EA]",
                     active: true
                 },
                 {
                     id: "AA",
-                    title: "African American",
+                    title: "African American [AA]",
                     active: true
                 }
             ]
