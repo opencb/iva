@@ -251,10 +251,10 @@ var populationFrequencies = {
     // This is based on this figure:
     // http://www.dialogues-cns.com/wp-content/uploads/2015/03/DialoguesClinNeurosci-17-69-g001.jpg
     color: {
-        veryRare: "red",
-        rare: "yellow",
-        average: "orange",
-        common: "blue"
+        veryRare: "#ff0000",
+        rare: "#ff8080",
+        average: "#8080ff",
+        common: "#0000ff"
     },
     studies: [
         {
