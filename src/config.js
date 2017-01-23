@@ -312,6 +312,7 @@ var consequenceTypes = {
             name: "",
             title: "Intergenic",
             description: "",
+            isCategory: true,
             terms: [
                 {
                     id: "SO:0001631",
@@ -349,6 +350,7 @@ var consequenceTypes = {
             ]
         },
         {
+            isCategory: true,
             title: "Regulatory",
             terms: [
                 {
@@ -396,6 +398,7 @@ var consequenceTypes = {
             ]
         },
         {
+            isCategory: true,
             title: "Coding",
             terms: [
                 {
@@ -492,6 +495,7 @@ var consequenceTypes = {
             ]
         },
         {
+            isCategory: true,
             title: "Non-coding",
             terms: [
                 {
@@ -521,6 +525,7 @@ var consequenceTypes = {
             ]
         },
         {
+            isCategory: true,
             title: "Splice",
             terms: [
                 {
@@ -544,12 +549,14 @@ var consequenceTypes = {
             ]
         },
         {
+            isCategory: false,
             id: "SO:0001893",
             name: "transcript_ablation",
             description: "A feature ablation whereby the deleted region includes a transcript feature",
             impact: "high"
         },
         {
+            isCategory: false,
             id: "SO:0001889",
             name: "transcript_amplification",
             description: "A feature amplification of a region containing a transcript",
