@@ -43,6 +43,7 @@ var opencga = {
 };
 
 var beacon = {
+    // beacon network url : https://beacon-network.org/api/responses?allele=A&beacon=%5Bamplab%5D&chrom=13&pos=19748106&ref=GRCh37&referenceAllele=C
     hosts: [
         {
             name: "Sanger Institute",
