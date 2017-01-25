@@ -512,22 +512,10 @@
                     hashFrag += "/" + this.geneToShow;
                 }
 
-                if (typeof this._query !== "undefined" && Object.keys(this._query).length > 0) {
-                    let qArray = [];
-                    for (let key in this._query) {
-                        if (key != "studies") {
-                            qArray.push(key + "=" + this._query[key]);
-                        }
-                    }
-                    hashFrag += "?" + qArray.join('&');
-                }
-
                 window.location.hash = hashFrag;
             },
             hashFragmentListener: function(ctx) {
-                let [hashFragment, query] = window.location.hash.split('?');
-                let arr = hashFragment.split('/');
-//                var arr = window.location.hash.split('/');
+                var arr = window.location.hash.split('/');
 
                 let [hashTool, hashProject, hashStudy, geneName] = window.location.hash.split('/');
 
@@ -554,16 +542,6 @@
                     }
 
                     this.tool = hashTool;
-
-                    if (typeof query !== "undefined") {
-                        let params = query.split('&');
-                        let queryObject = {};
-                        for (let i = 0; i < params.length; i++) {
-                            let [key, value] = params[i].split('=');
-                            queryObject[key] = value;
-                        }
-                        this._query = queryObject;
-                    }
 
                     $('.content').hide();
                     $(arr[0]).show();
