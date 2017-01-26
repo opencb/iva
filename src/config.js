@@ -20,9 +20,7 @@ var cellbase = {
 };
 
 var opencga = {
-    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0",
-    // host: "bioinfodev.hpc.cam.ac.uk/hgva",
-    // host: "localhost:9190/opencga",
+    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0.0",
     version: "v1",
     // user:  Useful scenario is user@project:study
     projects: [
@@ -97,6 +95,25 @@ var opencga = {
     }
 };
 
+var beacon = {
+    hosts: [
+        "brca-exchange",
+        "cell_lines",
+        "cosmic",
+        "wtsi",
+        "wgs",
+        "ncbi",
+        "ebi",
+        "ega",
+        "broad",
+        "gigascience",
+        "ucsc",
+        "lovd",
+        "hgmd",
+        "icgc",
+        "sahgp"
+    ]
+};
 
 var application = {
     title: "HGVA",
@@ -195,7 +212,7 @@ var application = {
         {
             id: "genomeBrowser",
             title: "Genome Browser",
-            visibility: "public",
+            visibility: "none",
         }
     ],
     search: {
@@ -225,10 +242,10 @@ var populationFrequencies = {
     // This is based on this figure:
     // http://www.dialogues-cns.com/wp-content/uploads/2015/03/DialoguesClinNeurosci-17-69-g001.jpg
     color: {
-        veryRare: "red",
-        rare: "yellow",
-        average: "orange",
-        common: "blue"
+        veryRare: "#ff0000",
+        rare: "#ff8080",
+        average: "#8080ff",
+        common: "#0000ff"
     },
     studies: [
         {
@@ -272,11 +289,15 @@ var populationFrequencies = {
                 },
                 {
                     id: "NFE",
-                    title: "South Asian [SAS]"
+                    title: "Non-Finnish European [NFE]"
                 },
                 {
                     id: "AMR",
-                    title: "South Asian [SAS]"
+                    title: "American [AMR]"
+                },
+                {
+                    id: "EAS",
+                    title: "East Asian [EAS]"
                 },
                 {
                     id: "SAS",
@@ -286,16 +307,16 @@ var populationFrequencies = {
         },
         {
             id: "ESP6500",
-            title: "ESP 6500",
+            title: "ESP6500",
             populations: [
                 {
                     id: "EA",
-                    title: "European American",
+                    title: "European American [EA]",
                     active: true
                 },
                 {
                     id: "AA",
-                    title: "African American",
+                    title: "African American [AA]",
                     active: true
                 }
             ]
@@ -335,6 +356,7 @@ var consequenceTypes = {
             name: "",
             title: "Intergenic",
             description: "",
+            isCategory: true,
             terms: [
                 {
                     id: "SO:0001631",
@@ -372,6 +394,7 @@ var consequenceTypes = {
             ]
         },
         {
+            isCategory: true,
             title: "Regulatory",
             terms: [
                 {
@@ -419,6 +442,7 @@ var consequenceTypes = {
             ]
         },
         {
+            isCategory: true,
             title: "Coding",
             terms: [
                 {
@@ -515,6 +539,7 @@ var consequenceTypes = {
             ]
         },
         {
+            isCategory: true,
             title: "Non-coding",
             terms: [
                 {
@@ -544,6 +569,7 @@ var consequenceTypes = {
             ]
         },
         {
+            isCategory: true,
             title: "Splice",
             terms: [
                 {
@@ -567,12 +593,14 @@ var consequenceTypes = {
             ]
         },
         {
+            isCategory: false,
             id: "SO:0001893",
             name: "transcript_ablation",
             description: "A feature ablation whereby the deleted region includes a transcript feature",
             impact: "high"
         },
         {
+            isCategory: false,
             id: "SO:0001889",
             name: "transcript_amplification",
             description: "A feature amplification of a region containing a transcript",
