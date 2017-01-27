@@ -516,8 +516,7 @@
             },
             hashFragmentListener: function(ctx) {
                 var arr = window.location.hash.split('/');
-
-                let [hashTool, hashProject, hashStudy, geneName] = window.location.hash.split('/');
+                let [hashTool, hashProject, hashStudy, geneName] = arr;
 
                 // Stopping the recursive call
                 if (hashTool != this.tool || hashProject != this.project || hashStudy != this.study.alias) {
@@ -532,6 +531,7 @@
                                             break;
                                         }
                                     }
+                                    break;
                                 }
                             }
                         }
@@ -541,10 +541,9 @@
                         this.geneToShow = geneName;
                     }
 
-                    this.tool = hashTool;
-
+                    ctx.tool = hashTool;
                     $('.content').hide();
-                    $(arr[0]).show();
+                    $(hashTool).show();
                 }
             },
             refreshConfig: function (e) {
