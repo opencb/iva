@@ -449,14 +449,14 @@
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-//                window.location.hash = "home";
+                window.location.hash = "home";
 
                 this.getProjects();
 
                 // Show home page after the user logs in
-                $('.content').hide();
-                this.tool = "home";
-                $('#home').show();
+//                $('.content').hide();
+//                this.tool = "home";
+//                $('#home').show();
             },
             logout: function() {
                 var _this = this;
@@ -547,7 +547,6 @@
                     if (geneName != "") {
                         this.geneToShow = geneName;
                     }
-
                     ctx.tool = hashTool;
                     $('.content').hide();
                     $(hashTool).show();
@@ -792,9 +791,9 @@
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-//                this.tool = "home";
+                this.tool = "home";
 //                ('#home').show();
-
+                window.location.hash = "home";
                 this.init();
             },
             _checkVersion: function() {
