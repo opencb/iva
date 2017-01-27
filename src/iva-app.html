@@ -433,7 +433,8 @@
 
                 // go to home page
                 $('.content').hide();
-                window.location.hash = "home";
+//                window.location.hash = "home";
+                window.location.hash = this.tool;
 
                 this._checkBreadcrumbVisible();
             },
@@ -447,6 +448,8 @@
                 this._publicMode = false;
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
+
+//                window.location.hash = "home";
 
                 this.getProjects();
 
@@ -500,6 +503,10 @@
                         });
             },
             renderHashFragments: function() {
+                if (this.tool == "") {
+                    this.tool = "home";
+                }
+
                 let hashFrag = this.tool;
                 if (typeof this.project != "undefined" && this.project != "") {
                     hashFrag += "/" + this.project;
@@ -636,6 +643,8 @@
                 this.renderHashFragments();
             },
             projectStudySampleChanged: function() {
+                this.tool = window.location.hash.split('/')[0];
+
                 this.renderHashFragments();
                 this.renderBreadcrumb();
             },
@@ -783,6 +792,10 @@
                 this._logged = false;
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
+
+//                this.tool = "home";
+//                ('#home').show();
+
                 this.init();
             },
             _checkVersion: function() {
