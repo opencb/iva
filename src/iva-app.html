@@ -503,6 +503,7 @@
                         });
             },
             renderHashFragments: function() {
+                console.log("renderHashFragments - DEBUG")
                 if (this.tool == "") {
                     this.tool = "home";
                 }
@@ -522,6 +523,7 @@
                 window.location.hash = hashFrag;
             },
             hashFragmentListener: function(ctx) {
+                console.log("hashFragmentListener - DEBUG")
                 var arr = window.location.hash.split('/');
                 let [hashTool, hashProject, hashStudy, geneName] = arr;
 
@@ -641,6 +643,7 @@
                 this.renderHashFragments();
             },
             projectStudySampleChanged: function() {
+                console.log("projectStudySampleChanged - DEBUG")
                 this.tool = window.location.hash.split('/')[0];
 
                 this.renderHashFragments();
