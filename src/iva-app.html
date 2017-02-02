@@ -310,7 +310,6 @@
                 },
                 project: {
                     type: String,
-                    value: "",
                     observer: 'projectStudySampleChanged'
                 },
                 study: {
@@ -319,12 +318,7 @@
                 },
                 samples: {
                     type: Array,
-                    value: [],
                     observer: 'projectStudySampleChanged'
-                },
-                tool: {
-                    type: String,
-                    value: ""
                 },
                 _logged: {
                     type: Boolean,
@@ -391,6 +385,12 @@
 
                 this._checkVersion();
 
+                // Remember the tool that was previously set
+                this.tool = window.location.hash.split('/')[0];
+                if (this.tool == "") {
+                    this.tool = "home";
+                }
+
                 this.init();
 
                 var sid = Cookies.get(this.config.opencga.cookies.sessionId);
@@ -425,15 +425,14 @@
                     this.selectedProject = this.projects[0];
                 } else {
                     this._publicMode = false;
-                    this.projects = [];
-                    this.project = "";
-                    this.study = {};
-                    this.samples = [];
+//                    this.projects = [];
+//                    this.project = "";
+//                    this.study = {};
+//                    this.samples = [];
                 }
 
-                // go to home page
+                // go to the page that tool has
                 $('.content').hide();
-//                window.location.hash = "home";
                 window.location.hash = this.tool;
 
                 this._checkBreadcrumbVisible();
@@ -452,11 +451,6 @@
                 window.location.hash = "home";
 
                 this.getProjects();
-
-                // Show home page after the user logs in
-//                $('.content').hide();
-//                this.tool = "home";
-//                $('#home').show();
             },
             logout: function() {
                 var _this = this;
@@ -504,9 +498,6 @@
             },
             renderHashFragments: function() {
                 console.log("renderHashFragments - DEBUG")
-                if (this.tool == "") {
-                    this.tool = "home";
-                }
 
                 let hashFrag = this.tool;
                 if (typeof this.project != "undefined" && this.project != "") {
@@ -528,7 +519,7 @@
                 let [hashTool, hashProject, hashStudy, geneName] = arr;
 
                 // Stopping the recursive call
-                if (hashTool != this.tool || hashProject != this.project || hashStudy != this.study.alias) {
+                if (hashTool != this.tool || hashProject != this.project || (typeof this.study !== "undefined" && hashStudy != this.study.alias)) {
                     if (arr.length > 1) {
                         ctx.project = hashProject;
                         if (arr.length > 2) {
@@ -550,9 +541,9 @@
                         this.geneToShow = geneName;
                     }
                     ctx.tool = hashTool;
-                    $('.content').hide();
-                    $(hashTool).show();
                 }
+                $('.content').hide();
+                $(hashTool).show();
             },
             refreshConfig: function (e) {
                 let colorConfig = e.detail.config;
@@ -644,7 +635,6 @@
             },
             projectStudySampleChanged: function() {
                 console.log("projectStudySampleChanged - DEBUG")
-                this.tool = window.location.hash.split('/')[0];
 
                 this.renderHashFragments();
                 this.renderBreadcrumb();
@@ -795,7 +785,6 @@
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
                 this.tool = "home";
-//                ('#home').show();
                 window.location.hash = "home";
                 this.init();
             },

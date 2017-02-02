@@ -181,7 +181,7 @@ var application = {
     },
     breadcrumb: {
         title: "Projects",
-        visibility: "public"
+        visibility: "private"
     }
 };
 
