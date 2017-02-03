@@ -511,6 +511,7 @@
                     hashFrag += "/" + this.geneToShow;
                 }
 
+                debugger
                 window.location.hash = hashFrag;
             },
             hashFragmentListener: function(ctx) {
@@ -521,12 +522,16 @@
                 // Stopping the recursive call
                 if (hashTool != this.tool || hashProject != this.project || (typeof this.study !== "undefined" && hashStudy != this.study.alias)) {
                     if (arr.length > 1) {
-                        ctx.project = hashProject;
+                        // Field 'project' is being observed, just in case Polymer triggers
+                        // an unnecessary event we can check they are really different
+                        if (ctx.project != hashProject) {
+                            ctx.project = hashProject;
+                        }
                         if (arr.length > 2) {
                             for (let i = 0; i < ctx.projects.length; i++) {
                                 if (ctx.projects[i].name == ctx.project || ctx.projects[i].alias == ctx.project) {
                                     for (let j = 0; j < ctx.projects[i].studies.length; j++) {
-                                        if (ctx.projects[i].studies[j].name == arr[2] || ctx.projects[i].studies[j].alias == arr[2]) {
+                                        if (ctx.projects[i].studies[j].name == hashStudy || ctx.projects[i].studies[j].alias == hashStudy) {
                                             ctx.study = ctx.projects[i].studies[j];
                                             break;
                                         }
@@ -537,8 +542,8 @@
                         }
                     }
 
-                    if (geneName != "") {
-                        this.geneToShow = geneName;
+                    if (typeof geneName !== 'undefined' && geneName != "" && geneName != ctx.geneToShow) {
+                        ctx.geneToShow = geneName;
                     }
                     ctx.tool = hashTool;
                 }
