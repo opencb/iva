@@ -310,7 +310,6 @@
                 },
                 project: {
                     type: String,
-                    value: "",
                     observer: 'projectStudySampleChanged'
                 },
                 study: {
@@ -319,12 +318,7 @@
                 },
                 samples: {
                     type: Array,
-                    value: [],
                     observer: 'projectStudySampleChanged'
-                },
-                tool: {
-                    type: String,
-                    value: ""
                 },
                 _logged: {
                     type: Boolean,
@@ -391,6 +385,12 @@
 
                 this._checkVersion();
 
+                // Remember the tool that was previously set
+                this.tool = window.location.hash.split('/')[0];
+                if (this.tool == "") {
+                    this.tool = "home";
+                }
+
                 this.init();
 
                 var sid = Cookies.get(this.config.opencga.cookies.sessionId);
@@ -425,15 +425,15 @@
                     this.selectedProject = this.projects[0];
                 } else {
                     this._publicMode = false;
-                    this.projects = [];
-                    this.project = "";
-                    this.study = {};
-                    this.samples = [];
+//                    this.projects = [];
+//                    this.project = "";
+//                    this.study = {};
+//                    this.samples = [];
                 }
 
-                // go to home page
+                // go to the page that tool has
                 $('.content').hide();
-                window.location.hash = "home";
+                window.location.hash = this.tool;
 
                 this._checkBreadcrumbVisible();
             },
@@ -448,12 +448,9 @@
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-                this.getProjects();
+                window.location.hash = "home";
 
-                // Show home page after the user logs in
-                $('.content').hide();
-                this.tool = "home";
-                $('#home').show();
+                this.getProjects();
             },
             logout: function() {
                 var _this = this;
@@ -500,6 +497,8 @@
                         });
             },
             renderHashFragments: function() {
+                console.log("renderHashFragments - DEBUG")
+
                 let hashFrag = this.tool;
                 if (typeof this.project != "undefined" && this.project != "") {
                     hashFrag += "/" + this.project;
@@ -512,62 +511,44 @@
                     hashFrag += "/" + this.geneToShow;
                 }
 
-                if (typeof this._query !== "undefined" && Object.keys(this._query).length > 0) {
-                    let qArray = [];
-                    for (let key in this._query) {
-                        if (key != "studies") {
-                            qArray.push(key + "=" + this._query[key]);
-                        }
-                    }
-                    hashFrag += "?" + qArray.join('&');
-                }
-
+                debugger
                 window.location.hash = hashFrag;
             },
             hashFragmentListener: function(ctx) {
-                let [hashFragment, query] = window.location.hash.split('?');
-                let arr = hashFragment.split('/');
-//                var arr = window.location.hash.split('/');
-
-                let [hashTool, hashProject, hashStudy, geneName] = window.location.hash.split('/');
+                console.log("hashFragmentListener - DEBUG")
+                var arr = window.location.hash.split('/');
+                let [hashTool, hashProject, hashStudy, geneName] = arr;
 
                 // Stopping the recursive call
-                if (hashTool != this.tool || hashProject != this.project || hashStudy != this.study.alias) {
+                if (hashTool != this.tool || hashProject != this.project || (typeof this.study !== "undefined" && hashStudy != this.study.alias)) {
                     if (arr.length > 1) {
-                        ctx.project = hashProject;
+                        // Field 'project' is being observed, just in case Polymer triggers
+                        // an unnecessary event we can check they are really different
+                        if (ctx.project != hashProject) {
+                            ctx.project = hashProject;
+                        }
                         if (arr.length > 2) {
                             for (let i = 0; i < ctx.projects.length; i++) {
                                 if (ctx.projects[i].name == ctx.project || ctx.projects[i].alias == ctx.project) {
                                     for (let j = 0; j < ctx.projects[i].studies.length; j++) {
-                                        if (ctx.projects[i].studies[j].name == arr[2] || ctx.projects[i].studies[j].alias == arr[2]) {
+                                        if (ctx.projects[i].studies[j].name == hashStudy || ctx.projects[i].studies[j].alias == hashStudy) {
                                             ctx.study = ctx.projects[i].studies[j];
                                             break;
                                         }
                                     }
+                                    break;
                                 }
                             }
                         }
                     }
 
-                    if (geneName != "") {
-                        this.geneToShow = geneName;
+                    if (typeof geneName !== 'undefined' && geneName != "" && geneName != ctx.geneToShow) {
+                        ctx.geneToShow = geneName;
                     }
-
-                    this.tool = hashTool;
-
-                    if (typeof query !== "undefined") {
-                        let params = query.split('&');
-                        let queryObject = {};
-                        for (let i = 0; i < params.length; i++) {
-                            let [key, value] = params[i].split('=');
-                            queryObject[key] = value;
-                        }
-                        this._query = queryObject;
-                    }
-
-                    $('.content').hide();
-                    $(arr[0]).show();
+                    ctx.tool = hashTool;
                 }
+                $('.content').hide();
+                $(hashTool).show();
             },
             refreshConfig: function (e) {
                 let colorConfig = e.detail.config;
@@ -658,6 +639,8 @@
                 this.renderHashFragments();
             },
             projectStudySampleChanged: function() {
+                console.log("projectStudySampleChanged - DEBUG")
+
                 this.renderHashFragments();
                 this.renderBreadcrumb();
             },
@@ -805,6 +788,9 @@
                 this._logged = false;
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
+
+                this.tool = "home";
+                window.location.hash = "home";
                 this.init();
             },
             _checkVersion: function() {

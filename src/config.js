@@ -15,7 +15,7 @@
  */
 
 var cellbase = {
-    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-beta"],
+    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-rc"],
     version: "v4"
 };
 
@@ -44,32 +44,22 @@ var opencga = {
 };
 
 var beacon = {
-    // beacon network url : https://beacon-network.org/api/responses?allele=A&beacon=%5Bamplab%5D&chrom=13&pos=19748106&ref=GRCh37&referenceAllele=C
     hosts: [
-        {
-            name: "Sanger Institute",
-            url: "http://www.sanger.ac.uk/sanger/GA4GH_Beacon",
-            queryParams: [
-                "chr",
-                "pos",
-                "all"
-            ]
-        },
-        // "brca-exchange",
-        // "cell_lines", // http://www.sanger.ac.uk/sanger/GA4GH_Beacon?chr=?;pos=?;all=?
-        // "cosmic", // http://cancer.sanger.ac.uk/api/ga4gh/beacon/query?chrom=?;pos=?;allele=?
-        // "wtsi",
-        // "wgs",
-        // "ncbi",
-        // "ebi", // http://www.ebi.ac.uk/eva/webservices/rest/v1/ga4gh/beacon?referenceName=11&start=110993&allele=INDEL&datasetIds=PRJEB4019
-        // "ega", // https://ega.crg.eu/requesterportal/v1/beacon/query?alternateBases=A&assemblyId=GRCh37&datasetIds=All+GRCh37&referenceName=1&start=1000000
-        // "broad", // http://beacon.broadinstitute.org/beacon/beaconVariantQueryAjax (POST- {dataset: "exac0.3", chromosome: "X", position: "20038741", allele: "G"})
-        // "gigascience",
-        // "ucsc",
-        // "lovd", // http://hgwdev-max.cse.ucsc.edu/cgi-bin/beacon/query?track=lovd&chrom=chr1&pos=808921&allele=T
-        // "hgmd",
-        // "icgc", // https://dcc.icgc.org/api/v1/beacon/query?allele=C&chromosome=1&dataset=&position=29885564&reference=GRCh37
-        // "sahgp"
+        "brca-exchange",
+        "cell_lines",
+        "cosmic",
+        "wtsi",
+        "wgs",
+        "ncbi",
+        "ebi",
+        "ega",
+        "broad",
+        "gigascience",
+        "ucsc",
+        "lovd",
+        "hgmd",
+        "icgc",
+        "sahgp"
     ]
 };
 
@@ -193,7 +183,7 @@ var application = {
     },
     breadcrumb: {
         title: "Projects",
-        visibility: "public"
+        visibility: "private"
     }
 };
 
