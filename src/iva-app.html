@@ -433,7 +433,12 @@
 
                 // go to the page that tool has
                 $('.content').hide();
-                window.location.hash = this.tool;
+                if (window.location.hash != this.tool) {
+                    window.location.hash = this.tool;
+                } else {
+                    $('.content').hide();
+                    $(this.tool).show();
+                }
 
                 this._checkBreadcrumbVisible();
             },
