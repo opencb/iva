@@ -425,10 +425,10 @@
                     this.selectedProject = this.projects[0];
                 } else {
                     this._publicMode = false;
-//                    this.projects = [];
-//                    this.project = "";
-//                    this.study = {};
-//                    this.samples = [];
+                    this.projects = [];
+                    this.project = "";
+                    this.study = {};
+                    this.samples = [];
                 }
 
                 // go to the page that tool has
@@ -488,12 +488,42 @@
                 var _this = this;
                 this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
-                            _this.projects = response.response[0].result;
+                            let _projects = response.response[0].result;
+//                            _this.projects = response.response[0].result;
+
+                            // Obtain the summary of the studies
+                            let projectPromises = [];
+
+                            _projects.forEach(function(project) {
+                                let studyPromises = [];
+                                project.studies.forEach(function(study) {
+                                    studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
+                                });
+                                projectPromises.push(Promise.all(studyPromises).then(function(responses) {
+                                    let studies = [];
+                                    responses.forEach(function (response) {
+                                        let study = response.response[0].result[0];
+                                        study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+                                        studies.push(study);
+                                    });
+                                    return studies;
+                                }));
+                            });
+
+                            Promise.all(projectPromises).then(function(responses) {
+                                for (let i = 0; i < responses.length; i++) {
+                                    _projects[i].summary = responses[i];
+                                }
+                                _this.selectedProject = _projects[0];
+                                _this.projects = _projects;
+                                _this.project = _projects[0].alias;
+                                _this.study = _projects[0].studies[0];
+                            });
 
                             // select project and study
-                            _this.project = _this.projects[0].alias;
-                            _this.study = _this.projects[0].studies[0];
-                            _this.selectedProject = _this.projects[0];
+//                            _this.project = _this.projects[0].alias;
+//                            _this.study = _this.projects[0].studies[0];
+//                            _this.selectedProject = _this.projects[0];
 
                             _this._checkBreadcrumbVisible();
                         })
