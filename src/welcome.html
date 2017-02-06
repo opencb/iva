@@ -35,29 +35,33 @@
         <div class="center">
             <div style="text-align: center">
                 <br>
-                <span style="font-size:50px;">BRIDGE</span>
-                <br>
+                <h1>The NIHR BioResource - Rare Diseases Sequence Variation Browser (Beta)</h1>
                 <br>
                 <div style="font-size: 14px; text-align: justify">
+                    <img src="images/NIHR_BioResourceRareDiseases.png" width="120px" style="float: left;margin: 0px 20px 20px 20px">
                     <p>
-                        The BRIDGE consortium has been established as an organisational umbrella for NIHR BioResource funded Next Generation Sequencing (NGS)
-                        projects which aim (i) to discover sequence variants underlying hitherto unresolved inherited Rare Diseases or (ii) to evaluate the sensitivity
-                        and specificity of exome sequencing or other NGS approaches to identify already known high penetrance Rare Disease-causing variants.
+                        <a href="https://bioresource.nihr.ac.uk/rare-diseases/welcome/">The NIHR BioResource - Rare Diseases</a> has been established
+                        with the aim to identify protein-coding and non-coding sequence variation underlying rare diseases, improve diagnostics and enable the development of treatment.
+                        The whole genomes of 10,000 adults and children diagnosed with one of 15 rare diseases and their relatives have been sequenced.
                     </p>
-                    <P>
-                        If you are a clinician or a patient and would like to receive further information about the BRIDGE studies please e-mail rarediseases@nihrbioresource.org.uk
-                        A Memorandum of Understanding outlining the principles of collaboration underpinning BRIDGE studies is available upon request.
+                    <p>
+                        This web site provides access to the genome-wide sequence variation identified in more than 8,000 unrelated individuals.
                     </p>
+                    <!--<p>-->
+                    <!--If you are a clinician or a patient and would like to receive further information about the BRIDGE studies please e-mail rarediseases@nihrbioresource.org.uk-->
+                    <!--A Memorandum of Understanding outlining the principles of collaboration underpinning BRIDGE studies is available upon request.-->
+                    <!--</p>-->
                 </div>
                 <br>
-                <br>
-                <input type="text" class="form-control" id="welcomeSearchTextBox" style="text-align: center;"
+                <input type="text" class="form-control input-lg" id="welcomeSearchTextBox" style="text-align: center;"
                        placeholder="Search for a gene, transcript, variant, multi-allelic variant or region" on-keyup="callAutoComplete">
-
             </div>
 
-            <div class="col-sm-12"><br><br>Note:
-                <span style="font-size:13px">{{versionNav}}
+            <div class="col-sm-12">
+                <br><br>
+                <span style="font-size:12px">
+                    Note:
+                    {{versionNav}}
                     <br> BRIDGE web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components, so only modern web browsers are fully supported, these include Chrome 36+, Firefox 32+, IE 10+, Safari
                     7+ and Opera 24+.
                 </span>
