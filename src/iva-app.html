@@ -561,7 +561,7 @@
                         if (ctx.project != hashProject) {
                             ctx.project = hashProject;
                         }
-                        if (arr.length > 2) {
+                        if (arr.length > 2 && ctx.study != hashStudy) {
                             for (let i = 0; i < ctx.projects.length; i++) {
                                 if (ctx.projects[i].name == ctx.project || ctx.projects[i].alias == ctx.project) {
                                     for (let j = 0; j < ctx.projects[i].studies.length; j++) {
