@@ -308,8 +308,11 @@
                     type: String,
                     value: ""
                 },
+                projects: {
+                    type: Array
+                },
                 project: {
-                    type: String
+                    type: Object
 //                    ,observer: 'projectStudySampleChanged'
                 },
                 study: {
@@ -387,14 +390,20 @@
 
                 var sid = Cookies.get(this.config.opencga.cookies.sessionId);
                 if (typeof sid !== "undefined" && sid != "") {
-                    this.userId = Cookies.get(this.config.opencga.cookies.userName);
-                    this.sessionId = sid;
-                    this.opencgaClient._config.sessionId = sid;
-                    this.set('opencgaClient._config', this.opencgaClient._config); // To reflect the changes in '_config' of opencgaClient observers
-
-                    this._logged = true;
-                    this._publicMode = false;
-                    this.getProjects();
+//                    this.userId = Cookies.get(this.config.opencga.cookies.userName);
+//                    this.sessionId = sid;
+//                    this.opencgaClient._config.sessionId = sid;
+//                    this.set('opencgaClient._config', this.opencgaClient._config); // To reflect the changes in '_config' of opencgaClient observers
+//
+//                    this._logged = true;
+//                    this._publicMode = false;
+//                    this.getProjects();
+                    this.login({
+                        detail: {
+                            userId: Cookies.get(this.config.opencga.cookies.userName),
+                            sessionId: sid
+                        }
+                    });
                 }
             },
             attached: function() {
@@ -447,23 +456,27 @@
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-                window.location.hash = "home";
+//                window.location.hash = "home";
+                if (this.tool === "#login") {
+                    this.tool = "home";
+                }
+                window.location.hash = this.tool;
 
                 this.getProjects();
             },
             logout: function() {
                 var _this = this;
                 this.opencgaClient.users().logout()
-                        .then(function() {
-                            _this._logout();
-                        })
-                        .catch(function () {
-                            // we need to remove Cookies son OpenCGAClient has failed
-                            Cookies.expire(_this.config.opencga.cookies.sessionId);
-                            Cookies.expire(_this.config.opencga.cookies.userName);
+                    .then(function() {
+                        _this._logout();
+                    })
+                    .catch(function () {
+                        // we need to remove Cookies son OpenCGAClient has failed
+                        Cookies.expire(_this.config.opencga.cookies.sessionId);
+                        Cookies.expire(_this.config.opencga.cookies.userName);
 
-                            _this._logout();
-                        });
+                        _this._logout();
+                    });
             },
             changeAnalysisTool: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
@@ -481,56 +494,101 @@
             getProjects: function () {
                 var _this = this;
                 this.opencgaClient.users().getProjects(this.userId)
-                        .then(function (response) {
-                            let _projects = response.response[0].result;
+                    .then(function (response) {
+                        let _projects = response.response[0].result;
 //                            _this.projects = response.response[0].result;
+_this._setup(_projects);
+                        // Obtain the summary of the studies
+//                        let projectPromises = [];
+//
+//                        _projects.forEach(function(project) {
+//                            let studyPromises = [];
+//                            project.studies.forEach(function(study) {
+//                                studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
+//                            });
+//                            projectPromises.push(Promise.all(studyPromises).then(function(responses) {
+//                                let studies = [];
+//                                responses.forEach(function (response) {
+//                                    let study = response.response[0].result[0];
+//                                    study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+//                                    studies.push(study);
+//                                });
+//                                return studies;
+//                            }));
+//                        });
+//
+//                        Promise.all(projectPromises).then(function(responses) {
+//                            for (let i = 0; i < responses.length; i++) {
+//                                _projects[i].summary = responses[i];
+//                            }
+//                            _this.selectedProject = _projects[0];
+//                            _this.projects = _projects;
+//                            _this.project = _projects[0].alias;
+//                            _this.study = _projects[0].studies[0];
+//                        });
+//
+//                        // select project and study
+////                            _this.project = _this.projects[0].alias;
+////                            _this.study = _this.projects[0].studies[0];
+////                            _this.selectedProject = _this.projects[0];
 
-                            // Obtain the summary of the studies
-                            let projectPromises = [];
+                        _this._checkBreadcrumbVisible();
+                    })
+                    .catch(function (response) {
+                        _this.logout();
+                    });
+            },
+            _setup: function (projects) {
+                // We check that at least one project with one study exist, otherwise we do not do anything
+                if (typeof projects !== "undefined" && projects.length > 0 && projects[0].studies.length > 0) {
+                    this.projects = projects;
+                    this.project = projects[0];
+                    this.study = projects[0].studies[0];
 
-                            _projects.forEach(function(project) {
-                                let studyPromises = [];
-                                project.studies.forEach(function(study) {
-                                    studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
+                    let projectPromises = [];
+
+                    for (let i = 0; i < projects.length; i++) {
+                        projectPromises.push({id: projects[i].id, alias: projects[i].alias, studies: []});
+                        for (let j = 0; j < projects[i].studies.length; j++) {
+                            this.opencgaClient.studies().summary(projects[i].alias + ":" + projects[i].studies[j].alias)
+                                .then(function (response) {
+                                    projectPromises[i].studies.push(response);
                                 });
-                                projectPromises.push(Promise.all(studyPromises).then(function(responses) {
-                                    let studies = [];
-                                    responses.forEach(function (response) {
-                                        let study = response.response[0].result[0];
-                                        study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-                                        studies.push(study);
-                                    });
-                                    return studies;
-                                }));
-                            });
+                        }
+                    }
 
-                            Promise.all(projectPromises).then(function(responses) {
-                                for (let i = 0; i < responses.length; i++) {
-                                    _projects[i].summary = responses[i];
-                                }
-                                _this.selectedProject = _projects[0];
-                                _this.projects = _projects;
-                                _this.project = _projects[0].alias;
-                                _this.study = _projects[0].studies[0];
-                            });
+//                    projects.forEach(function(project) {
+//                        let studyPromises = [];
+//                        project.studies.forEach(function(study) {
+//                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
+//                        });
+//                        projectPromises.push(Promise.all(studyPromises).then(function(responses) {
+//                            let studies = [];
+//                            responses.forEach(function (response) {
+//                                let study = response.response[0].result[0];
+//                                study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+//                                studies.push(study);
+//                            });
+//                            return studies;
+//                        }));
+//                    });
+//
+//                    let _studySummaries = [];
+//                    Promise.all(projectPromises).then(function(responses) {
+//                        for (let i = 0; i < responses.length; i++) {
+//
+//                            _projects[i].summary = responses[i];
+//                        }
+//                    });
+                }
 
-                            // select project and study
-//                            _this.project = _this.projects[0].alias;
-//                            _this.study = _this.projects[0].studies[0];
-//                            _this.selectedProject = _this.projects[0];
-
-                            _this._checkBreadcrumbVisible();
-                        })
-                        .catch(function (response) {
-                            _this.logout();
-                        });
             },
             renderHashFragments: function() {
                 console.log("renderHashFragments - DEBUG")
 
                 let hashFrag = this.tool;
-                if (typeof this.project != "undefined" && this.project != "") {
-                    hashFrag += "/" + this.project;
+                if (typeof this.project != "undefined") {
+                    hashFrag += "/" + this.project.alias;
                     if (typeof this.study != "undefined" && this.study.alias != "") {
                         hashFrag += "/" + this.study.alias;
                     }
@@ -720,12 +778,12 @@
 
                     // We first check if one study is selected, for this study must be defined and have at least one key
                     if (typeof this.study === "undefined" || Object.keys(this.study).length == 0) {
-                        if (typeof this.project !== "undefined" && this.project != null && this.project != "") {
-                            let project = this._createBreadcrumbElement(this.project, true, "project"); // render only project if exists
+                        if (typeof this.project !== "undefined" && this.project != null) {
+                            let project = this._createBreadcrumbElement(this.project.alias, true, "project"); // render only project if exists
                             Polymer.dom(breadcrumbElement).appendChild(project);
                         }
                     } else {
-                        let project = this._createBreadcrumbElement(this.project, false, "project");
+                        let project = this._createBreadcrumbElement(this.project.alias, false, "project");
                         Polymer.dom(breadcrumbElement).appendChild(project);
 
                         if (typeof this.samples !== "undefined" && this.samples.length > 0) {
