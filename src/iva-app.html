@@ -224,7 +224,7 @@
                 </div>
                 <div class="collapse content" id="browser">
                     <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{selectedProject.studies}}"
-                                     config="{{browserConfig}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                     config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
                                      consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                      beacon-hosts="{{beaconHosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected">
                     </variant-browser>
@@ -367,15 +367,6 @@
 
                 if (typeof beacon !== "undefined") {
                     this.beaconHosts = beacon.hosts;
-                }
-
-                if (typeof application !== "undefined") {
-                    let menuItems = application.menu;
-                    for (let i in menuItems) {
-                        if (menuItems[i].id == "browser" && typeof menuItems[i].filters !== "undefined") {
-                            this.browserConfig = {filters: menuItems[i].filters};
-                        }
-                    }
                 }
 
                 // We need to listen to hash fragment changes to update the display and breadcrumb
