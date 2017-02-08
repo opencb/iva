@@ -257,7 +257,7 @@
                     <div class="gene-view">
                         <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
                                            gene="{{geneToShow}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                           protein-substitution-scores="{{proteinSubstitutionScores}}"></opencga-gene-view>
+                                           protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-gene-view>
                     </div>
                 </div>
 
@@ -309,8 +309,8 @@
                     value: ""
                 },
                 project: {
-                    type: String,
-                    observer: 'projectStudySampleChanged'
+                    type: String
+//                    ,observer: 'projectStudySampleChanged'
                 },
                 study: {
                     type: Object,
@@ -324,10 +324,10 @@
                     type: Boolean,
                     value: false
                 },
-                gene: {
-                    type: String,
-                    value: ""
-                },
+//                gene: {
+//                    type: String,
+//                    value: ""
+//                },
                 _publicMode: {
                     type: Boolean,
                     value: false
@@ -342,6 +342,7 @@
                 this.config.menu.counter = 0;
                 this.config.cellbase = cellbase;
                 this.config.opencga = opencga;
+                this.config.tools = tools;
 
                 this.defaultConfig = {};
                 if (typeof populationFrequencies !== "undefined") {
@@ -383,7 +384,7 @@
                     _this.hashFragmentListener(_this);
                 };
 
-                this._checkVersion();
+//                this._checkVersion();
 
                 // Remember the tool that was previously set
                 this.tool = window.location.hash.split('/')[0];
@@ -406,6 +407,8 @@
                 }
             },
             attached: function() {
+                this.config = Object.assign({}, this.config);
+
                 this.renderBreadcrumb();
             },
             init: function () {
@@ -442,7 +445,7 @@
 
                 this._checkBreadcrumbVisible();
             },
-            login: function(credentials) {
+            login: function(credentials, tool) {
                 this.userId = credentials.detail.userId;
                 this.sessionId = credentials.detail.sessionId;
                 this.opencgaClient._config.sessionId = credentials.detail.sessionId;
@@ -826,39 +829,40 @@
                 this.tool = "home";
                 window.location.hash = "home";
                 this.init();
-            },
-            _checkVersion: function() {
-                this.versionNav = "You are currently using ";
-                var nav = navigator.userAgent.toLowerCase();
-                if (/opr\/(\d+\.?)+/.test(nav)) {
-                    var aux = /opr\/((\d+\.?)+)/.exec(nav);
-                    this.versionNav += aux[0].replace("opr", "Opera");
-                } else if (/firefox\/(\d+\.?)+/.test(nav)) {
-                    var aux = /firefox\/((\d+\.?)+)/.exec(nav);
-                    this.versionNav += aux[0];
-                } else if (/msie (\d+\.?)+/.test(nav) || /rv\:(\d+\.?)+/.test(nav)) {
-                    var aux = /msie ((\d+\.?)+)/.exec(nav);
-                    if (aux == null) {
-                        aux = /rv\:((\d+\.?)+)/.exec(nav);
-                        this.versionNav += aux[0].replace("rv:", "Internet Explorer");
-                    } else {
-                        this.versionNav += aux[0].replace("msie", "Internet Explorer");
-                    }
-                } else if (/safari\/(\d+\.?)+/.test(nav) && nav.indexOf("chrome") == -1) {
-                    var aux = /safari\/((\d+\.?)+)/.exec(nav);
-                    this.versionNav += aux[0];
-                } else if (/chrome\/(\d+\.?)+/.test(nav)) {
-                    var aux = /chrome\/((\d+\.?)+)/.exec(nav);
-                    this.versionNav += aux[0];
-                } else {
-                    this.versionNav = "You are currently using an unsupported browser";
-                }
-                if (nav.indexOf("_64") >= 0) {
-                    this.versionNav += " (64-bits)"
-                } else if (nav.indexOf("_32") >= 0) {
-                    this.versionNav += " (32-bits)"
-                }
             }
+//            ,
+//            _checkVersion: function() {
+//                this.versionNav = "You are currently using ";
+//                var nav = navigator.userAgent.toLowerCase();
+//                if (/opr\/(\d+\.?)+/.test(nav)) {
+//                    var aux = /opr\/((\d+\.?)+)/.exec(nav);
+//                    this.versionNav += aux[0].replace("opr", "Opera");
+//                } else if (/firefox\/(\d+\.?)+/.test(nav)) {
+//                    var aux = /firefox\/((\d+\.?)+)/.exec(nav);
+//                    this.versionNav += aux[0];
+//                } else if (/msie (\d+\.?)+/.test(nav) || /rv\:(\d+\.?)+/.test(nav)) {
+//                    var aux = /msie ((\d+\.?)+)/.exec(nav);
+//                    if (aux == null) {
+//                        aux = /rv\:((\d+\.?)+)/.exec(nav);
+//                        this.versionNav += aux[0].replace("rv:", "Internet Explorer");
+//                    } else {
+//                        this.versionNav += aux[0].replace("msie", "Internet Explorer");
+//                    }
+//                } else if (/safari\/(\d+\.?)+/.test(nav) && nav.indexOf("chrome") == -1) {
+//                    var aux = /safari\/((\d+\.?)+)/.exec(nav);
+//                    this.versionNav += aux[0];
+//                } else if (/chrome\/(\d+\.?)+/.test(nav)) {
+//                    var aux = /chrome\/((\d+\.?)+)/.exec(nav);
+//                    this.versionNav += aux[0];
+//                } else {
+//                    this.versionNav = "You are currently using an unsupported browser";
+//                }
+//                if (nav.indexOf("_64") >= 0) {
+//                    this.versionNav += " (64-bits)"
+//                } else if (nav.indexOf("_32") >= 0) {
+//                    this.versionNav += " (32-bits)"
+//                }
+//            }
         });
     </script>
 </dom-module>
