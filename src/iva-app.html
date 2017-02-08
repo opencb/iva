@@ -25,8 +25,7 @@
 <!--<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">-->
-<link rel="import" href="components/opencga-study.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-login.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload-file.html">
 <link rel="import" href="components/iva-settings.html">
@@ -124,7 +123,7 @@
                                                 <template is="dom-repeat" items="{{proj.studies}}" as="std">
                                                     <li><a href="#" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
                                                 </template>
-                                                <li role="separator" class="divider"></li>
+                                                <!--<li role="separator" class="divider"></li>-->
                                             </template>
                                         </ul>
                                     </li>
@@ -146,7 +145,7 @@
                                         </ul>
                                     </li>
 
-                                    <!--Project dropdown menu-->
+                                    <!--Studies dropdown menu-->
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             Studies <span class="caret"></span>
@@ -157,15 +156,7 @@
                                                 <template is="dom-repeat" items="{{proj.studies}}" as="std">
                                                     <li><a href="#" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
                                                 </template>
-                                                <li role="separator" class="divider"></li>
-                                                <!--<li class="dropdown-submenu">-->
-                                                    <!--<a href="#">{{proj.name}}</a>-->
-                                                    <!--<ul class="dropdown-menu">-->
-                                                        <!--<template is="dom-repeat" items="{{proj.studies}}" as="std">-->
-                                                            <!--<li><a href="#" data-id="{{std.id}}" on-click="setProjectStudy">{{std.alias}}</a></li>-->
-                                                        <!--</template>-->
-                                                    <!--</ul>-->
-                                                <!--</li>-->
+                                                <!--<li role="separator" class="divider"></li>-->
                                             </template>
                                         </ul>
                                     </li>
@@ -194,18 +185,20 @@
                                 </li>
 
                                 <!-- Login/Logout button -->
-                                <li>
-                                    <template is="dom-if" if="{{!_logged}}">
-                                        <a href="#login" role="button">
-                                            <i class="fa fa-sign-in fa-lg"></i> Login
-                                        </a>
-                                    </template>
-                                    <template is="dom-if" if="{{_logged}}">
-                                        <a href="#logout" on-click="logout">
-                                            <i class="fa fa-sign-out fa-lg"></i> Logout
-                                        </a>
-                                    </template>
-                                </li>
+                                <template is="dom-if" if="{{_isMenuItemVisible(config.login)}}">
+                                    <li>
+                                        <template is="dom-if" if="{{!_logged}}">
+                                            <a href="#login" role="button">
+                                                <i class="fa fa-sign-in fa-lg"></i> Login
+                                            </a>
+                                        </template>
+                                        <template is="dom-if" if="{{_logged}}">
+                                            <a href="#logout" on-click="logout">
+                                                <i class="fa fa-sign-out fa-lg"></i> Logout
+                                            </a>
+                                        </template>
+                                    </li>
+                                </template>
                             </ul>
                         </div>
                     </div>
@@ -221,20 +214,19 @@
             <!-- This is where main application is rendered -->
             <div class="center">
                 <div class="collapse content" id="home">
-                    <welcome-web on-search="buildQuery"></welcome-web>
+                    <welcome-web on-search="buildQuery" project="{{project}}" study="{{study.name}}"></welcome-web>
                 </div>
             </div>
 
-
-            <div class="">
+            <div>
                 <div class="collapse content" id="samples">
                     <opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}" samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>
                 </div>
                 <div class="collapse content" id="browser">
                     <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{selectedProject.studies}}"
-                                     config="{{browserConfig}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                     consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" query="{{_query}}"
-                                     on-gene="geneSelected">
+                                     config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                     consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                                     beacon-hosts="{{beaconHosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected">
                     </variant-browser>
                 </div>
 
@@ -265,7 +257,7 @@
                     <div class="gene-view">
                         <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
                                            gene="{{geneToShow}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                           protein-substitution-scores="{{proteinSubstitutionScores}}"></opencga-gene-view>
+                                           protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-gene-view>
                     </div>
                 </div>
 
@@ -317,9 +309,8 @@
                     value: ""
                 },
                 project: {
-                    type: String,
-                    value: "",
-                    observer: 'projectStudySampleChanged'
+                    type: String
+//                    ,observer: 'projectStudySampleChanged'
                 },
                 study: {
                     type: Object,
@@ -327,21 +318,16 @@
                 },
                 samples: {
                     type: Array,
-                    value: [],
                     observer: 'projectStudySampleChanged'
-                },
-                tool: {
-                    type: String,
-                    value: ""
                 },
                 _logged: {
                     type: Boolean,
                     value: false
                 },
-                gene: {
-                    type: String,
-                    value: ""
-                },
+//                gene: {
+//                    type: String,
+//                    value: ""
+//                },
                 _publicMode: {
                     type: Boolean,
                     value: false
@@ -356,6 +342,7 @@
                 this.config.menu.counter = 0;
                 this.config.cellbase = cellbase;
                 this.config.opencga = opencga;
+                this.config.tools = tools;
 
                 this.defaultConfig = {};
                 if (typeof populationFrequencies !== "undefined") {
@@ -378,14 +365,8 @@
                     this.defaultConfig.consequenceTypes = {color: color};
                 }
 
-
-                if (typeof application !== "undefined") {
-                    let menuItems = application.menu;
-                    for (let i in menuItems) {
-                        if (menuItems[i].id == "browser" && typeof menuItems[i].filters !== "undefined") {
-                            this.browserConfig = {filters: menuItems[i].filters};
-                        }
-                    }
+                if (typeof beacon !== "undefined") {
+                    this.beaconHosts = beacon.hosts;
                 }
 
                 // We need to listen to hash fragment changes to update the display and breadcrumb
@@ -394,7 +375,13 @@
                     _this.hashFragmentListener(_this);
                 };
 
-                this._checkVersion();
+//                this._checkVersion();
+
+                // Remember the tool that was previously set
+                this.tool = window.location.hash.split('/')[0];
+                if (this.tool == "") {
+                    this.tool = "home";
+                }
 
                 this.init();
 
@@ -411,6 +398,8 @@
                 }
             },
             attached: function() {
+                this.config = Object.assign({}, this.config);
+
                 this.renderBreadcrumb();
             },
             init: function () {
@@ -436,13 +425,18 @@
                     this.samples = [];
                 }
 
-                // go to home page
+                // go to the page that tool has
                 $('.content').hide();
-                window.location.hash = "home";
+                if (window.location.hash != this.tool) {
+                    window.location.hash = this.tool;
+                } else {
+                    $('.content').hide();
+                    $(this.tool).show();
+                }
 
                 this._checkBreadcrumbVisible();
             },
-            login: function(credentials) {
+            login: function(credentials, tool) {
                 this.userId = credentials.detail.userId;
                 this.sessionId = credentials.detail.sessionId;
                 this.opencgaClient._config.sessionId = credentials.detail.sessionId;
@@ -453,12 +447,9 @@
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-                this.getProjects();
+                window.location.hash = "home";
 
-                // Show home page after the user logs in
-                $('.content').hide();
-                this.tool = "home";
-                $('#home').show();
+                this.getProjects();
             },
             logout: function() {
                 var _this = this;
@@ -491,12 +482,42 @@
                 var _this = this;
                 this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
-                            _this.projects = response.response[0].result;
+                            let _projects = response.response[0].result;
+//                            _this.projects = response.response[0].result;
+
+                            // Obtain the summary of the studies
+                            let projectPromises = [];
+
+                            _projects.forEach(function(project) {
+                                let studyPromises = [];
+                                project.studies.forEach(function(study) {
+                                    studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
+                                });
+                                projectPromises.push(Promise.all(studyPromises).then(function(responses) {
+                                    let studies = [];
+                                    responses.forEach(function (response) {
+                                        let study = response.response[0].result[0];
+                                        study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+                                        studies.push(study);
+                                    });
+                                    return studies;
+                                }));
+                            });
+
+                            Promise.all(projectPromises).then(function(responses) {
+                                for (let i = 0; i < responses.length; i++) {
+                                    _projects[i].summary = responses[i];
+                                }
+                                _this.selectedProject = _projects[0];
+                                _this.projects = _projects;
+                                _this.project = _projects[0].alias;
+                                _this.study = _projects[0].studies[0];
+                            });
 
                             // select project and study
-                            _this.project = _this.projects[0].alias;
-                            _this.study = _this.projects[0].studies[0];
-                            _this.selectedProject = _this.projects[0];
+//                            _this.project = _this.projects[0].alias;
+//                            _this.study = _this.projects[0].studies[0];
+//                            _this.selectedProject = _this.projects[0];
 
                             _this._checkBreadcrumbVisible();
                         })
@@ -505,6 +526,8 @@
                         });
             },
             renderHashFragments: function() {
+                console.log("renderHashFragments - DEBUG")
+
                 let hashFrag = this.tool;
                 if (typeof this.project != "undefined" && this.project != "") {
                     hashFrag += "/" + this.project;
@@ -520,37 +543,40 @@
                 window.location.hash = hashFrag;
             },
             hashFragmentListener: function(ctx) {
+                console.log("hashFragmentListener - DEBUG")
                 var arr = window.location.hash.split('/');
-//                let [hashTool, hashProject, hashStudy, hashSamples] = window.location.hash.split('/');
-                let [hashTool, hashProject, hashStudy, geneName] = window.location.hash.split('/');
+                let [hashTool, hashProject, hashStudy, geneName] = arr;
 
                 // Stopping the recursive call
-                if (hashTool != this.tool || hashProject != this.project || hashStudy != this.study.alias) {
+                if (hashTool != this.tool || hashProject != this.project || (typeof this.study !== "undefined" && hashStudy != this.study.alias)) {
                     if (arr.length > 1) {
-                        ctx.project = hashProject;
-                        if (arr.length > 2) {
+                        // Field 'project' is being observed, just in case Polymer triggers
+                        // an unnecessary event we can check they are really different
+                        if (ctx.project != hashProject) {
+                            ctx.project = hashProject;
+                        }
+                        if (arr.length > 2 && ctx.study != hashStudy) {
                             for (let i = 0; i < ctx.projects.length; i++) {
                                 if (ctx.projects[i].name == ctx.project || ctx.projects[i].alias == ctx.project) {
                                     for (let j = 0; j < ctx.projects[i].studies.length; j++) {
-                                        if (ctx.projects[i].studies[j].name == arr[2] || ctx.projects[i].studies[j].alias == arr[2]) {
+                                        if (ctx.projects[i].studies[j].name == hashStudy || ctx.projects[i].studies[j].alias == hashStudy) {
                                             ctx.study = ctx.projects[i].studies[j];
                                             break;
                                         }
                                     }
+                                    break;
                                 }
                             }
                         }
                     }
 
-                    if (geneName != "") {
-                        this.geneToShow = geneName;
+                    if (typeof geneName !== 'undefined' && geneName != "" && geneName != ctx.geneToShow) {
+                        ctx.geneToShow = geneName;
                     }
-
-                    this.tool = hashTool;
-
-                    $('.content').hide();
-                    $(arr[0]).show();
+                    ctx.tool = hashTool;
                 }
+                $('.content').hide();
+                $(hashTool).show();
             },
             refreshConfig: function (e) {
                 let colorConfig = e.detail.config;
@@ -595,9 +621,9 @@
             },
             setProjectStudy: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
-                $('.content').hide();
-                $('#studyInformation').show();
-                this.tool = "studyInformation";
+//                $('.content').hide();
+//                $('#studyInformation').show();
+//                this.tool = "studyInformation";
                 for (let i = 0; i < this.projects.length; i++) {
                     if (this.projects[i].name == e.target.dataProject) {
                         this.selectedProject = this.projects[i];
@@ -633,11 +659,16 @@
                     }
                 }
                 $('.content').hide();
-                $('#studyInformation').show();
-                this.tool = "studyInformation";
+//                TODO: Opencga study will be shown later. For now variant browser is shown when the study changes
+//                $('#studyInformation').show();
+//                this.tool = "studyInformation";
+                $('#browser').show();
+                this.tool = "browser";
                 this.renderHashFragments();
             },
             projectStudySampleChanged: function() {
+                console.log("projectStudySampleChanged - DEBUG")
+
                 this.renderHashFragments();
                 this.renderBreadcrumb();
             },
@@ -726,8 +757,10 @@
                                 _this.tool = "project";
                                 break;
                             case "study":
-                                $('#studyInformation').show();
-                                _this.tool = "studyInformation";
+//                                $('#studyInformation').show();
+//                                _this.tool = "studyInformation";
+                                $('#browser').show();
+                                _this.tool = "browser";
                                 break;
                         }
                         _this.renderHashFragments();
@@ -783,40 +816,44 @@
                 this._logged = false;
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
+
+                this.tool = "home";
+                window.location.hash = "home";
                 this.init();
-            },
-            _checkVersion: function() {
-                this.versionNav = "You are currently using ";
-                var nav = navigator.userAgent.toLowerCase();
-                if (/opr\/(\d+\.?)+/.test(nav)) {
-                    var aux = /opr\/((\d+\.?)+)/.exec(nav);
-                    this.versionNav += aux[0].replace("opr", "Opera");
-                } else if (/firefox\/(\d+\.?)+/.test(nav)) {
-                    var aux = /firefox\/((\d+\.?)+)/.exec(nav);
-                    this.versionNav += aux[0];
-                } else if (/msie (\d+\.?)+/.test(nav) || /rv\:(\d+\.?)+/.test(nav)) {
-                    var aux = /msie ((\d+\.?)+)/.exec(nav);
-                    if (aux == null) {
-                        aux = /rv\:((\d+\.?)+)/.exec(nav);
-                        this.versionNav += aux[0].replace("rv:", "Internet Explorer");
-                    } else {
-                        this.versionNav += aux[0].replace("msie", "Internet Explorer");
-                    }
-                } else if (/safari\/(\d+\.?)+/.test(nav) && nav.indexOf("chrome") == -1) {
-                    var aux = /safari\/((\d+\.?)+)/.exec(nav);
-                    this.versionNav += aux[0];
-                } else if (/chrome\/(\d+\.?)+/.test(nav)) {
-                    var aux = /chrome\/((\d+\.?)+)/.exec(nav);
-                    this.versionNav += aux[0];
-                } else {
-                    this.versionNav = "You are currently using an unsupported browser";
-                }
-                if (nav.indexOf("_64") >= 0) {
-                    this.versionNav += " (64-bits)"
-                } else if (nav.indexOf("_32") >= 0) {
-                    this.versionNav += " (32-bits)"
-                }
             }
+//            ,
+//            _checkVersion: function() {
+//                this.versionNav = "You are currently using ";
+//                var nav = navigator.userAgent.toLowerCase();
+//                if (/opr\/(\d+\.?)+/.test(nav)) {
+//                    var aux = /opr\/((\d+\.?)+)/.exec(nav);
+//                    this.versionNav += aux[0].replace("opr", "Opera");
+//                } else if (/firefox\/(\d+\.?)+/.test(nav)) {
+//                    var aux = /firefox\/((\d+\.?)+)/.exec(nav);
+//                    this.versionNav += aux[0];
+//                } else if (/msie (\d+\.?)+/.test(nav) || /rv\:(\d+\.?)+/.test(nav)) {
+//                    var aux = /msie ((\d+\.?)+)/.exec(nav);
+//                    if (aux == null) {
+//                        aux = /rv\:((\d+\.?)+)/.exec(nav);
+//                        this.versionNav += aux[0].replace("rv:", "Internet Explorer");
+//                    } else {
+//                        this.versionNav += aux[0].replace("msie", "Internet Explorer");
+//                    }
+//                } else if (/safari\/(\d+\.?)+/.test(nav) && nav.indexOf("chrome") == -1) {
+//                    var aux = /safari\/((\d+\.?)+)/.exec(nav);
+//                    this.versionNav += aux[0];
+//                } else if (/chrome\/(\d+\.?)+/.test(nav)) {
+//                    var aux = /chrome\/((\d+\.?)+)/.exec(nav);
+//                    this.versionNav += aux[0];
+//                } else {
+//                    this.versionNav = "You are currently using an unsupported browser";
+//                }
+//                if (nav.indexOf("_64") >= 0) {
+//                    this.versionNav += " (64-bits)"
+//                } else if (nav.indexOf("_32") >= 0) {
+//                    this.versionNav += " (32-bits)"
+//                }
+//            }
         });
     </script>
 </dom-module>
