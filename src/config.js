@@ -97,21 +97,7 @@ var opencga = {
 
 var beacon = {
     hosts: [
-        "brca-exchange",
-        "cell_lines",
-        "cosmic",
-        "wtsi",
-        "wgs",
-        "ncbi",
-        "ebi",
-        "ega",
-        "broad",
-        "gigascience",
-        "ucsc",
-        "lovd",
-        "hgmd",
-        "icgc",
-        "sahgp"
+        "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
     ]
 };
 
@@ -234,7 +220,58 @@ var application = {
     },
     breadcrumb: {
         title: "Projects",
-        visibility: "public"
+        visibility: "private"
+    }
+};
+
+var tools = {
+    browser: {
+        filters: [
+            {
+                name: "Example BRCA2",
+                query: {
+                    gene: "BRCA2",
+                    conservation: "phylop<0.001"
+                }
+            },
+            {
+                name: "Example OR11",
+                query: {
+                    gene: "OR11H1",
+                    conservation: "phylop<=0.001"
+                }
+            }
+        ]
+    },
+    prioritization: {
+        filters: [
+            {
+                name: "Example BRCA2",
+                query: {
+                    gene: "BRCA2",
+                    conservation: "phylop<0.001"
+                }
+            },
+            {
+                name: "Example OR11",
+                query: {
+                    gene: "OR11H1",
+                    conservation: "phylop<=0.001"
+                }
+            }
+        ]
+    },
+    gene: {
+
+        protein: {
+            color: {
+                missense_variant: "blue",
+                stop_gained: "red"
+            }
+        }
+    },
+    beacon: {
+
     }
 };
 
