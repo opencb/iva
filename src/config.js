@@ -87,6 +87,16 @@ var opencga = {
                     alias: "RAMS_CML"
                 }
             ]
+        },
+        {
+            name: "Platinum",
+            alias: "platinum",
+            studies : [
+                {
+                    name: "Illumina Platinum",
+                    alias: "illumina_platinum"
+                }
+            ]
         }
     ],
     cookies: {
