@@ -281,10 +281,10 @@
                 </div>
                 <!--BreadCrumb reference-->
                 <div class="collapse content" id="projects" style="width: 60%; margin: auto">
-                    <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
+                    <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" study-summaries="{{studySummaries}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
                 </div>
                 <div class="collapse content" id="project">
-                    <opencga-project opencga-client="{{opencgaClient}}" project="{{project}}" on-study="updateStudy"></opencga-project>
+                    <opencga-project opencga-client="{{opencgaClient}}" project="{{project}}" summaries="{{studySummaries}}" on-study="updateStudy"></opencga-project>
                 </div>
                 <div class="collapse content" id="studyInformation">
                     <opencga-study opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"></opencga-study>
@@ -428,7 +428,7 @@
                 } else {
                     this._publicMode = false;
 //                    this.projects = [];
-//                    this.project = "";
+                    this.project = {};
 //                    this.study = {};
 //                    this.samples = [];
                 }
@@ -446,11 +446,9 @@
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-//                window.location.hash = "home";
                 if (this.tool === "#login") {
                     this.tool = "#home";
                 }
-//                window.location.hash = this.tool;
                 this.renderHashFragments();
 
                 this.getProjects();
@@ -531,7 +529,7 @@
                     Promise.all(projectPromises)
                         .then(function(responses) {
                             for (let i = 0; i < responses.length; i++) {
-                                _projects.push({id: _this.projects[i].id, alias: _this.projects[i].alias, studies: responses[i]});
+                                _projects.push({id: _this.projects[i].id, alias: _this.projects[i].alias, name: _this.projects[i].name, studies: responses[i]});
                             }
                             _this.studySummaries = _projects;
                         });
@@ -699,6 +697,10 @@
                         query.region = value;
                     } else if (value.startsWith("ENST")) {
                         query["annot-xref"] = value;
+                    } else if (value.startsWith("GO:")) {
+                        query["annot-go"] = value;
+                    } else if (value.startsWith("HP:")) {
+                        query["annot-hpo"] = value;
                     } else {
                         query.gene = value;
                         this.geneToShow = value;
@@ -826,7 +828,7 @@
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-                this.tool = "home";
+                this.tool = "#home";
                 window.location.hash = "home";
                 this.init();
             }
