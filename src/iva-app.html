@@ -223,7 +223,7 @@
                     <opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}" samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>
                 </div>
                 <div class="collapse content" id="browser">
-                    <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project.alias}}" study="{{study}}" studies="{{project.studies}}"
+                    <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{project.studies}}"
                                      config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
                                      consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                      beacon-hosts="{{beaconHosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected">
@@ -231,14 +231,14 @@
                 </div>
 
                 <div class="collapse content" id="family-prioritization">
-                    <variant-prioritization mode="family" title="Family Prioritization" host="{{opencga.host}}" project="{{project.alias}}" study="{{study}}" samples="{{samples}}"
+                    <variant-prioritization mode="family" title="Family Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
                                             population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
                                             opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
 
                 <div class="collapse content" id="cancer-prioritization">
-                    <variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project.alias}}" study="{{study}}" samples="{{samples}}"
+                    <variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
                                             population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
                                             opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
                     </variant-prioritization>
@@ -255,7 +255,7 @@
 
                 <div class="collapse content" id="gene">
                     <div class="gene-view">
-                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project.alias}}" study="{{study}}"
+                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
                                            gene="{{geneToShow}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
                                            protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-gene-view>
                     </div>
@@ -298,6 +298,9 @@
         Polymer({
             is: 'iva-app',
             properties: {
+                config: {
+                    type: Object
+                },
                 opencgaClient: {
                     type: Object
                 },
@@ -305,15 +308,13 @@
                     type: Object
                 },
                 userId: {
-                    type: String,
-                    value: ""
+                    type: String
                 },
                 projects: {
                     type: Array
                 },
                 project: {
                     type: Object
-//                    ,observer: 'projectStudySampleChanged'
                 },
                 study: {
                     type: Object,
@@ -323,20 +324,16 @@
                     type: Array,
                     observer: 'projectStudySampleChanged'
                 },
-                _logged: {
-                    type: Boolean,
-                    value: false
+                studySummaries: {
+                    type: Array
                 },
-//                gene: {
-//                    type: String,
-//                    value: ""
-//                },
                 _publicMode: {
                     type: Boolean,
                     value: false
                 },
-                config: {
-                    type: Object
+                _logged: {
+                    type: Boolean,
+                    value: false
                 }
             },
             ready: function() {
@@ -385,6 +382,7 @@
                 if (this.tool == "") {
                     this.tool = "#home";
                 }
+
                 // go to the page that tool has
                 $('.content').hide();
                 if (window.location.hash != this.tool) {
@@ -395,16 +393,9 @@
 
                 this.init();
 
+                // This must happen after calling to init() function since init() created the OpencgaClient
                 var sid = Cookies.get(this.config.opencga.cookies.sessionId);
-                if (typeof sid !== "undefined" && sid != "") {
-//                    this.userId = Cookies.get(this.config.opencga.cookies.userName);
-//                    this.sessionId = sid;
-//                    this.opencgaClient._config.sessionId = sid;
-//                    this.set('opencgaClient._config', this.opencgaClient._config); // To reflect the changes in '_config' of opencgaClient observers
-//
-//                    this._logged = true;
-//                    this._publicMode = false;
-//                    this.getProjects();
+                if (typeof sid !== "undefined" && sid != "" && !this._publicMode) {
                     this.login({
                         detail: {
                             userId: Cookies.get(this.config.opencga.cookies.userName),
@@ -433,9 +424,10 @@
 //                    this.project = this.projects[0].alias;
 //                    this.study = this.projects[0].studies[0];
 //                    this.selectedProject = this.projects[0];
+                    this.getProjects();
                 } else {
                     this._publicMode = false;
-                    this.projects = [];
+//                    this.projects = [];
 //                    this.project = "";
 //                    this.study = {};
 //                    this.samples = [];
@@ -443,7 +435,7 @@
 
                 this._checkBreadcrumbVisible();
             },
-            login: function(credentials, tool) {
+            login: function(credentials) {
                 this.userId = credentials.detail.userId;
                 this.sessionId = credentials.detail.sessionId;
                 this.opencgaClient._config.sessionId = credentials.detail.sessionId;
@@ -458,7 +450,8 @@
                 if (this.tool === "#login") {
                     this.tool = "#home";
                 }
-                window.location.hash = this.tool;
+//                window.location.hash = this.tool;
+                this.renderHashFragments();
 
                 this.getProjects();
             },
@@ -497,44 +490,12 @@
                         .then(function (response) {
                             let _projects = response.response[0].result;
                             _this._setup(_projects);
-//                            _this.projects = response.response[0].result;
-                            // Obtain the summary of the studies
-//                        let projectPromises = [];
-//
-//                        _projects.forEach(function(project) {
-//                            let studyPromises = [];
-//                            project.studies.forEach(function(study) {
-//                                studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
-//                            });
-//                            projectPromises.push(Promise.all(studyPromises).then(function(responses) {
-//                                let studies = [];
-//                                responses.forEach(function (response) {
-//                                    let study = response.response[0].result[0];
-//                                    study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-//                                    studies.push(study);
-//                                });
-//                                return studies;
-//                            }));
-//                        });
-//
-//                        Promise.all(projectPromises).then(function(responses) {
-//                            for (let i = 0; i < responses.length; i++) {
-//                                _projects[i].summary = responses[i];
-//                            }
-//                            _this.selectedProject = _projects[0];
-//                            _this.projects = _projects;
-//                            _this.project = _projects[0].alias;
-//                            _this.study = _projects[0].studies[0];
-//                        });
-//
-//                        // select project and study
-////                            _this.project = _this.projects[0].alias;
-////                            _this.study = _this.projects[0].studies[0];
-////                            _this.selectedProject = _this.projects[0];
 
                             _this._checkBreadcrumbVisible();
                         })
                         .catch(function (response) {
+                            console.log("An error when getting projects:")
+                            console.log(response)
                             _this.logout();
                         });
                 }
@@ -547,46 +508,33 @@
                     this.project = projects[0];
                     this.study = projects[0].studies[0];
 
+                    let _this = this;
                     let projectPromises = [];
-
-                    for (let i = 0; i < projects.length; i++) {
-                        projectPromises.push({id: projects[i].id, alias: projects[i].alias, studies: []});
+                    projects.forEach(function(project) {
                         let studyPromises = [];
-                        for (let j = 0; j < projects[i].studies.length; j++) {
-                            studyPromises.push(this.opencgaClient.studies().summary(projects[i].alias + ":" + projects[i].studies[j].alias));
-                        }
-                        Promise.all(studyPromises).then(function(responses) {
-                            for (let z = 0; z < responses.length; z++) {
-                                let study = responses[z].response[0].result[0];
-                                study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-                                projectPromises[i].studies.push(study);
-                            }
+                        project.studies.forEach(function(study) {
+                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
                         });
-                    }
+                        projectPromises.push(Promise.all(studyPromises)
+                            .then(function(responses) {
+                                let studies = [];
+                                responses.forEach(function (response) {
+                                    let study = response.response[0].result[0];
+                                    study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+                                    studies.push(study);
+                                });
+                                return studies;
+                            }));
+                    });
 
-//                    projects.forEach(function(project) {
-//                        let studyPromises = [];
-//                        project.studies.forEach(function(study) {
-//                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
-//                        });
-//                        projectPromises.push(Promise.all(studyPromises).then(function(responses) {
-//                            let studies = [];
-//                            responses.forEach(function (response) {
-//                                let study = response.response[0].result[0];
-//                                study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-//                                studies.push(study);
-//                            });
-//                            return studies;
-//                        }));
-//                    });
-//
-//                    let _studySummaries = [];
-//                    Promise.all(projectPromises).then(function(responses) {
-//                        for (let i = 0; i < responses.length; i++) {
-//
-//                            _projects[i].summary = responses[i];
-//                        }
-//                    });
+                    let _projects = [];
+                    Promise.all(projectPromises)
+                        .then(function(responses) {
+                            for (let i = 0; i < responses.length; i++) {
+                                _projects.push({id: _this.projects[i].id, alias: _this.projects[i].alias, studies: responses[i]});
+                            }
+                            _this.studySummaries = _projects;
+                        });
                 }
 
             },
@@ -619,12 +567,12 @@
                     if (arr.length > 1) {
                         // Field 'project' is being observed, just in case Polymer triggers
                         // an unnecessary event we can check they are really different
-                        if (ctx.project != hashProject) {
-                            ctx.project = hashProject;
+                        if (ctx.project.alias != hashProject) {
+                            ctx.project.alias = hashProject;
                         }
                         if (arr.length > 2 && ctx.study != hashStudy) {
                             for (let i = 0; i < ctx.projects.length; i++) {
-                                if (ctx.projects[i].name == ctx.project || ctx.projects[i].alias == ctx.project) {
+                                if (ctx.projects[i].name == ctx.project.name || ctx.projects[i].alias == ctx.project.alias) {
                                     for (let j = 0; j < ctx.projects[i].studies.length; j++) {
                                         if (ctx.projects[i].studies[j].name == hashStudy || ctx.projects[i].studies[j].alias == hashStudy) {
                                             ctx.study = ctx.projects[i].studies[j];
