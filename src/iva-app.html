@@ -286,10 +286,12 @@
                 </div>
                 <!--BreadCrumb reference-->
                 <div class="collapse content" id="projects" style="width: 60%; margin: auto">
-                    <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" study-summaries="{{studySummaries}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
+                    <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" study-summaries="{{studySummaries}}"
+                                      on-project="updateProject" on-study="updateStudy"></opencga-projects>
                 </div>
                 <div class="collapse content" id="project">
-                    <opencga-project opencga-client="{{opencgaClient}}" project="{{project}}" summaries="{{studySummaries}}" on-study="updateStudy"></opencga-project>
+                    <opencga-project opencga-client="{{opencgaClient}}" project="{{project}}" study-summaries="{{studySummaries}}"
+                                     on-study="updateStudy"></opencga-project>
                 </div>
                 <div class="collapse content" id="studyInformation">
                     <opencga-study opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"></opencga-study>
