@@ -22,6 +22,7 @@
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-transcript-view.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
@@ -42,7 +43,7 @@
                 font-size: 18px;
                 color: #797979;
             }
-            .gene-view {
+            .feature-view {
                 margin: auto;
                 text-align: justify;
                 width: 90%;
@@ -253,12 +254,16 @@
                     <!--<genome-context></genome-context>-->
                 </div>
 
-                <div class="collapse content" id="gene">
-                    <div class="gene-view">
-                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
-                                           gene="{{geneToShow}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                           protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-gene-view>
-                    </div>
+                <div class="collapse content feature-view" id="gene">
+                    <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
+                                       gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                       protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-gene-view>
+                </div>
+
+                <div class="collapse content feature-view" id="transcript">
+                    <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
+                                             transcript="{{transcript}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                             protein-substitution-scores="{{proteinSubstitutionScores}}"></opencga-transcript-view>
                 </div>
 
                 <div class="collapse content" id="dashboard">
@@ -548,16 +553,12 @@
                     }
                 }
 
-                if (this.tool == "gene") {
-                    hashFrag += "/" + this.geneToShow;
-                }
-
                 window.location.hash = hashFrag;
             },
             hashFragmentListener: function(ctx) {
                 console.log("hashFragmentListener - DEBUG")
                 var arr = window.location.hash.split('/');
-                let [hashTool, hashProject, hashStudy, geneName] = arr;
+                let [hashTool, hashProject, hashStudy, feature] = arr;
 
                 // Stopping the recursive call
                 if (hashTool != this.tool || (typeof this.project !== "undefined" && hashProject != this.project.alias) ||
@@ -583,8 +584,12 @@
                         }
                     }
 
-                    if (typeof geneName !== 'undefined' && geneName != "" && geneName != ctx.geneToShow) {
-                        ctx.geneToShow = geneName;
+                    if (typeof feature !== 'undefined' && feature != "") {
+                        if (feature.startsWith("ENST") && feature != ctx.transcript) {
+                            ctx.transcript = feature;
+                        } else if (feature != ctx.gene) {
+                            ctx.gene = feature;
+                        }
                     }
                     ctx.tool = hashTool;
                 }
@@ -703,7 +708,7 @@
                         query["annot-hpo"] = value;
                     } else {
                         query.gene = value;
-                        this.geneToShow = value;
+                        this.gene = value;
                     }
 
                     this._query = query;
