@@ -23,6 +23,7 @@
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-transcript-view.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-protein-view.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
@@ -227,7 +228,7 @@
                     <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{project.studies}}"
                                      config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
                                      consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                     beacon-hosts="{{beaconHosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected">
+                                     beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected">
                     </variant-browser>
                 </div>
 
@@ -264,6 +265,12 @@
                     <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
                                              transcript="{{transcript}}" gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
                                              protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-transcript-view>
+                </div>
+
+                <div class="collapse content feature-view" id="protein">
+                    <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
+                                             protein="{{protein}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                             protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene.protein}}"></opencga-protein-view>
                 </div>
 
                 <div class="collapse content" id="dashboard">
@@ -370,10 +377,6 @@
                     this.consequenceTypes = consequenceTypes;
                     let color = Object.assign({}, consequenceTypes.color);
                     this.defaultConfig.consequenceTypes = {color: color};
-                }
-
-                if (typeof beacon !== "undefined") {
-                    this.beaconHosts = beacon.hosts;
                 }
 
                 // We need to listen to hash fragment changes to update the display and breadcrumb
@@ -587,7 +590,9 @@
                     }
 
                     if (typeof feature !== 'undefined' && feature != "") {
-                        if (feature.startsWith("ENST")) {
+                        if (hashTool == "#protein") {
+                            ctx.protein = feature;
+                        } else if (feature.startsWith("ENST")) {
                             ctx.transcript = feature;
                         } else {
                             ctx.gene = feature;

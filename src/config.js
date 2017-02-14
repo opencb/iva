@@ -218,7 +218,9 @@ var tools = {
         }
     },
     beacon: {
-
+        hosts: [
+            "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
+        ]
     }
 };
 
