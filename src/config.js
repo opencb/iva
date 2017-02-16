@@ -191,6 +191,7 @@ var tools = {
         ]
     },
     prioritization: {
+        segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"],
         filters: [
             {
                 name: "Example BRCA2",
