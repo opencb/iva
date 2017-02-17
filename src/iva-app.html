@@ -22,6 +22,8 @@
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-transcript-view.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-protein-view.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/cellbase/genome-context.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">
@@ -42,7 +44,7 @@
                 font-size: 18px;
                 color: #797979;
             }
-            .gene-view {
+            .feature-view {
                 margin: auto;
                 text-align: justify;
                 width: 90%;
@@ -74,10 +76,10 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a href="#home" class="navbar-brand" style="padding-top: 10px" on-click="changeAnalysisTool">
+                            <a href="#home" class="navbar-brand" style="padding-top: 10px" on-click="changeTool">
                                 <img src="{{config.logo}}" width="100px">
                             </a>
-                            <a class="navbar-brand" href="#home" on-click="changeAnalysisTool"><b>{{config.title}} {{config.version}}</b></a>
+                            <a class="navbar-brand" href="#home" on-click="changeTool"><b>{{config.title}} {{config.version}}</b></a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -88,7 +90,7 @@
                                 <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
                                     <!-- If there is not submenu we just display a button -->
                                     <template is="dom-if" if="{{!menuItem.submenu}}">
-                                        <li on-click="changeAnalysisTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
+                                        <li on-click="changeTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
                                     </template>
                                     <!-- If there is a submenu we create a dropdown menu item -->
                                     <template is="dom-if" if="{{menuItem.submenu}}">
@@ -97,7 +99,7 @@
                                             <ul class="dropdown-menu">
                                                 <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible" >
                                                     <template is="dom-if" if="{{!item.separator}}">
-                                                        <li on-click="changeAnalysisTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
+                                                        <li on-click="changeTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
                                                     </template>
                                                     <template is="dom-if" if="{{item.separator}}">
                                                         <li role="separator" class="divider"></li>
@@ -223,16 +225,16 @@
                     <opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}" samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>
                 </div>
                 <div class="collapse content" id="browser">
-                    <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{selectedProject.studies}}"
+                    <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{project.studies}}"
                                      config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
                                      consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                     beacon-hosts="{{beaconHosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected">
+                                     beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected">
                     </variant-browser>
                 </div>
 
                 <div class="collapse content" id="family-prioritization">
                     <variant-prioritization mode="family" title="Family Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                            population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
+                                            config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
                                             opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
@@ -245,7 +247,7 @@
                 </div>
 
                 <div class="collapse content" id="beacon">
-                    <beacon-tool opencga-client="{{opencgaClient}}" studies="{{selectedProject.studies}}"></beacon-tool>
+                    <beacon-tool opencga-client="{{opencgaClient}}" studies="{{project.studies}}"></beacon-tool>
                 </div>
 
                 <div class="collapse content" id="genomeBrowser">
@@ -253,12 +255,22 @@
                     <!--<genome-context></genome-context>-->
                 </div>
 
-                <div class="collapse content" id="gene">
-                    <div class="gene-view">
-                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
-                                           gene="{{geneToShow}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                           protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-gene-view>
-                    </div>
+                <div class="collapse content feature-view" id="gene">
+                    <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
+                                       gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                       protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-gene-view>
+                </div>
+
+                <div class="collapse content feature-view" id="transcript">
+                    <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
+                                             transcript="{{transcript}}" gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                             protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-transcript-view>
+                </div>
+
+                <div class="collapse content feature-view" id="protein">
+                    <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
+                                             protein="{{protein}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                             protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene.protein}}"></opencga-protein-view>
                 </div>
 
                 <div class="collapse content" id="dashboard">
@@ -277,17 +289,19 @@
 
                 <div class="collapse content" id="upload" style="width: 40%; margin-left: 2%">
                     <br>
-                    <opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{selectedProject.studies}}"></opencga-upload-file>
+                    <opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{project.studies}}"></opencga-upload-file>
                 </div>
                 <!--BreadCrumb reference-->
                 <div class="collapse content" id="projects" style="width: 60%; margin: auto">
-                    <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" on-project="updateProject" on-study="updateStudy"></opencga-projects>
+                    <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" study-summaries="{{studySummaries}}"
+                                      on-project="updateProject" on-study="updateStudy"></opencga-projects>
                 </div>
                 <div class="collapse content" id="project">
-                    <opencga-project opencga-client="{{opencgaClient}}" project="{{selectedProject}}" on-study="updateStudy"></opencga-project>
+                    <opencga-project opencga-client="{{opencgaClient}}" project="{{project}}" study-summaries="{{studySummaries}}"
+                                     on-study="updateStudy"></opencga-project>
                 </div>
                 <div class="collapse content" id="studyInformation">
-                    <opencga-study opencga-client="{{opencgaClient}}" project="{{selectedProject}}" study="{{study}}"></opencga-study>
+                    <opencga-study opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"></opencga-study>
                 </div>
             </div>
         </div>
@@ -298,6 +312,9 @@
         Polymer({
             is: 'iva-app',
             properties: {
+                config: {
+                    type: Object
+                },
                 opencgaClient: {
                     type: Object
                 },
@@ -305,12 +322,13 @@
                     type: Object
                 },
                 userId: {
-                    type: String,
-                    value: ""
+                    type: String
+                },
+                projects: {
+                    type: Array
                 },
                 project: {
-                    type: String
-//                    ,observer: 'projectStudySampleChanged'
+                    type: Object
                 },
                 study: {
                     type: Object,
@@ -320,20 +338,16 @@
                     type: Array,
                     observer: 'projectStudySampleChanged'
                 },
-                _logged: {
-                    type: Boolean,
-                    value: false
+                studySummaries: {
+                    type: Array
                 },
-//                gene: {
-//                    type: String,
-//                    value: ""
-//                },
                 _publicMode: {
                     type: Boolean,
                     value: false
                 },
-                config: {
-                    type: Object
+                _logged: {
+                    type: Boolean,
+                    value: false
                 }
             },
             ready: function() {
@@ -365,10 +379,6 @@
                     this.defaultConfig.consequenceTypes = {color: color};
                 }
 
-                if (typeof beacon !== "undefined") {
-                    this.beaconHosts = beacon.hosts;
-                }
-
                 // We need to listen to hash fragment changes to update the display and breadcrumb
                 var _this = this;
                 window.onhashchange = function () {
@@ -380,21 +390,28 @@
                 // Remember the tool that was previously set
                 this.tool = window.location.hash.split('/')[0];
                 if (this.tool == "") {
-                    this.tool = "home";
+                    this.tool = "#home";
+                }
+
+                // go to the page that tool has
+                $('.content').hide();
+                if (window.location.hash != this.tool) {
+                    window.location.hash = this.tool;
+                } else {
+                    $(this.tool).show();
                 }
 
                 this.init();
 
+                // This must happen after calling to init() function since init() created the OpencgaClient
                 var sid = Cookies.get(this.config.opencga.cookies.sessionId);
-                if (typeof sid !== "undefined" && sid != "") {
-                    this.userId = Cookies.get(this.config.opencga.cookies.userName);
-                    this.sessionId = sid;
-                    this.opencgaClient._config.sessionId = sid;
-                    this.set('opencgaClient._config', this.opencgaClient._config); // To reflect the changes in '_config' of opencgaClient observers
-
-                    this._logged = true;
-                    this._publicMode = false;
-                    this.getProjects();
+                if (typeof sid !== "undefined" && sid != "" && !this._publicMode) {
+                    this.login({
+                        detail: {
+                            userId: Cookies.get(this.config.opencga.cookies.userName),
+                            sessionId: sid
+                        }
+                    });
                 }
             },
             attached: function() {
@@ -411,32 +428,24 @@
 
                 if (typeof this.config.opencga.projects !== "undefined" && this.config.opencga.projects.length > 0 && this._logged == false) {
                     // This web site is set up for browsing public data
-                    this.projects = this.config.opencga.projects;
                     this._publicMode = true;
+                    this.projects = this.config.opencga.projects;
                     // Setting default project and study
-                    this.project = this.projects[0].alias;
-                    this.study = this.projects[0].studies[0];
-                    this.selectedProject = this.projects[0];
+//                    this.project = this.projects[0].alias;
+//                    this.study = this.projects[0].studies[0];
+//                    this.selectedProject = this.projects[0];
+                    this.getProjects();
                 } else {
                     this._publicMode = false;
-                    this.projects = [];
-                    this.project = "";
-                    this.study = {};
-                    this.samples = [];
-                }
-
-                // go to the page that tool has
-                $('.content').hide();
-                if (window.location.hash != this.tool) {
-                    window.location.hash = this.tool;
-                } else {
-                    $('.content').hide();
-                    $(this.tool).show();
+//                    this.projects = [];
+                    this.project = {};
+//                    this.study = {};
+//                    this.samples = [];
                 }
 
                 this._checkBreadcrumbVisible();
             },
-            login: function(credentials, tool) {
+            login: function(credentials) {
                 this.userId = credentials.detail.userId;
                 this.sessionId = credentials.detail.sessionId;
                 this.opencgaClient._config.sessionId = credentials.detail.sessionId;
@@ -447,97 +456,106 @@
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-                window.location.hash = "home";
+                if (this.tool === "#login") {
+                    this.tool = "#home";
+                }
+                this.renderHashFragments();
 
                 this.getProjects();
             },
             logout: function() {
                 var _this = this;
                 this.opencgaClient.users().logout()
-                        .then(function() {
-                            _this._logout();
-                        })
-                        .catch(function () {
-                            // we need to remove Cookies son OpenCGAClient has failed
-                            Cookies.expire(_this.config.opencga.cookies.sessionId);
-                            Cookies.expire(_this.config.opencga.cookies.userName);
+                    .then(function() {
+                        _this._logout();
+                    })
+                    .catch(function () {
+                        // we need to remove Cookies son OpenCGAClient has failed
+                        Cookies.expire(_this.config.opencga.cookies.sessionId);
+                        Cookies.expire(_this.config.opencga.cookies.userName);
 
-                            _this._logout();
-                        });
+                        _this._logout();
+                    });
             },
-            changeAnalysisTool: function(e) {
+            changeTool: function(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
                 $('.content').hide(); // hides all content divs
                 if (typeof e.target !== "undefined" && typeof e.target.attributes.href !== "undefined") {
                     $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
                     this.tool = e.target.attributes.href.value;
                 } else {
-                    this.tool = "home";
-                    $("#home").show();
+                    this.tool = "#home";
                 }
 
                 this.renderHashFragments();
             },
             getProjects: function () {
                 var _this = this;
-                this.opencgaClient.users().getProjects(this.userId)
+                if (this._publicMode) {
+                    // Get all projects with study info and call to _setup()
+                } else {
+                    this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
                             let _projects = response.response[0].result;
-//                            _this.projects = response.response[0].result;
-
-                            // Obtain the summary of the studies
-                            let projectPromises = [];
-
-                            _projects.forEach(function(project) {
-                                let studyPromises = [];
-                                project.studies.forEach(function(study) {
-                                    studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
-                                });
-                                projectPromises.push(Promise.all(studyPromises).then(function(responses) {
-                                    let studies = [];
-                                    responses.forEach(function (response) {
-                                        let study = response.response[0].result[0];
-                                        study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-                                        studies.push(study);
-                                    });
-                                    return studies;
-                                }));
-                            });
-
-                            Promise.all(projectPromises).then(function(responses) {
-                                for (let i = 0; i < responses.length; i++) {
-                                    _projects[i].summary = responses[i];
-                                }
-                                _this.selectedProject = _projects[0];
-                                _this.projects = _projects;
-                                _this.project = _projects[0].alias;
-                                _this.study = _projects[0].studies[0];
-                            });
-
-                            // select project and study
-//                            _this.project = _this.projects[0].alias;
-//                            _this.study = _this.projects[0].studies[0];
-//                            _this.selectedProject = _this.projects[0];
+                            _this._setup(_projects);
 
                             _this._checkBreadcrumbVisible();
                         })
                         .catch(function (response) {
+                            console.log("An error when getting projects:")
+                            console.log(response)
                             _this.logout();
                         });
+                }
+
+            },
+            _setup: function (projects) {
+                // We check that at least one project with one study exist, otherwise we do not do anything
+                if (typeof projects !== "undefined" && projects.length > 0 && projects[0].studies.length > 0) {
+                    this.projects = projects;
+                    this.project = projects[0];
+                    this.study = projects[0].studies[0];
+
+                    let _this = this;
+                    let projectPromises = [];
+                    projects.forEach(function(project) {
+                        let studyPromises = [];
+                        project.studies.forEach(function(study) {
+                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
+                        });
+                        projectPromises.push(Promise.all(studyPromises)
+                            .then(function(responses) {
+                                let studies = [];
+                                responses.forEach(function (response) {
+                                    let study = response.response[0].result[0];
+                                    study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+                                    studies.push(study);
+                                });
+                                return studies;
+                            }));
+                    });
+
+                    let _projects = [];
+                    Promise.all(projectPromises)
+                        .then(function(responses) {
+                            for (let i = 0; i < responses.length; i++) {
+                                _projects.push({id: _this.projects[i].id, alias: _this.projects[i].alias, name: _this.projects[i].name, studies: responses[i]});
+                            }
+                            _this.studySummaries = _projects;
+                        });
+                }
+
             },
             renderHashFragments: function() {
                 console.log("renderHashFragments - DEBUG")
 
                 let hashFrag = this.tool;
-                if (typeof this.project != "undefined" && this.project != "") {
-                    hashFrag += "/" + this.project;
-                    if (typeof this.study != "undefined" && this.study.alias != "") {
+                if (typeof this.project != "undefined" && typeof this.project.alias !== "undefined" && this.project.alias != "") {
+
+                    hashFrag += "/" + this.project.alias;
+                    if (typeof this.study != "undefined" && typeof this.study.alias !== "undefined" && this.study.alias != "") {
                         hashFrag += "/" + this.study.alias;
                     }
-                }
-
-                if (this.tool == "gene") {
-                    hashFrag += "/" + this.geneToShow;
                 }
 
                 window.location.hash = hashFrag;
@@ -545,19 +563,20 @@
             hashFragmentListener: function(ctx) {
                 console.log("hashFragmentListener - DEBUG")
                 var arr = window.location.hash.split('/');
-                let [hashTool, hashProject, hashStudy, geneName] = arr;
+                let [hashTool, hashProject, hashStudy, feature] = arr;
 
                 // Stopping the recursive call
-                if (hashTool != this.tool || hashProject != this.project || (typeof this.study !== "undefined" && hashStudy != this.study.alias)) {
+                if (hashTool != this.tool || (typeof this.project !== "undefined" && hashProject != this.project.alias) ||
+                    (typeof this.study !== "undefined" && hashStudy != this.study.alias)) {
                     if (arr.length > 1) {
                         // Field 'project' is being observed, just in case Polymer triggers
                         // an unnecessary event we can check they are really different
-                        if (ctx.project != hashProject) {
-                            ctx.project = hashProject;
+                        if (ctx.project.alias != hashProject) {
+                            ctx.project.alias = hashProject;
                         }
                         if (arr.length > 2 && ctx.study != hashStudy) {
                             for (let i = 0; i < ctx.projects.length; i++) {
-                                if (ctx.projects[i].name == ctx.project || ctx.projects[i].alias == ctx.project) {
+                                if (ctx.projects[i].name == ctx.project.name || ctx.projects[i].alias == ctx.project.alias) {
                                     for (let j = 0; j < ctx.projects[i].studies.length; j++) {
                                         if (ctx.projects[i].studies[j].name == hashStudy || ctx.projects[i].studies[j].alias == hashStudy) {
                                             ctx.study = ctx.projects[i].studies[j];
@@ -570,11 +589,18 @@
                         }
                     }
 
-                    if (typeof geneName !== 'undefined' && geneName != "" && geneName != ctx.geneToShow) {
-                        ctx.geneToShow = geneName;
+                    if (typeof feature !== 'undefined' && feature != "") {
+                        if (hashTool == "#protein") {
+                            ctx.protein = feature;
+                        } else if (feature.startsWith("ENST")) {
+                            ctx.transcript = feature;
+                        } else {
+                            ctx.gene = feature;
+                        }
                     }
                     ctx.tool = hashTool;
                 }
+
                 $('.content').hide();
                 $(hashTool).show();
             },
@@ -626,8 +652,7 @@
 //                this.tool = "studyInformation";
                 for (let i = 0; i < this.projects.length; i++) {
                     if (this.projects[i].name == e.target.dataProject) {
-                        this.selectedProject = this.projects[i];
-                        this.project = this.projects[i].alias;
+                        this.project = this.projects[i];
                         for (let j = 0; j < this.projects[i].studies.length; j++) {
                             if (this.projects[i].studies[j].name == e.target.innerHTML || this.projects[i].studies[j].alias == e.target.innerHTML) {
                                 this.study = this.projects[i].studies[j];
@@ -639,32 +664,28 @@
             updateProject: function(e) {
                 for (let i = 0; i < this.projects.length; i++) {
                     if (this.projects[i].name == e.detail.project.name) { // getting the selected project from projects array
-                        this.selectedProject = this.projects[i];
-                        this.project = this.projects[i].alias;
+                        this.project = this.projects[i];
                     }
                 }
-                $('.content').hide();
-                $('#project').show();
-                this.tool = "project";
+                this.tool = "#project";
                 this.renderHashFragments();
+                this.renderBreadcrumb();
             },
             updateStudy: function(e) {
                 if (typeof e.detail.project !== "undefined" && e.detail.project.name != "") {
-                    this.selectedProject = e.detail.project;
-                    this.project = e.detail.project.alias;
+                    this.project = e.detail.project;
                 }
-                for (let i = 0; i < this.selectedProject.studies.length; i++) {
-                    if (this.selectedProject.studies[i].name == e.detail.study.name || this.selectedProject.studies[i].alias == e.detail.study.alias) {
-                        this.study = this.selectedProject.studies[i];
+                for (let i = 0; i < this.project.studies.length; i++) {
+                    if (this.project.studies[i].name == e.detail.study.name || this.project.studies[i].alias == e.detail.study.alias) {
+                        this.study = this.project.studies[i];
                     }
                 }
-                $('.content').hide();
+
 //                TODO: Opencga study will be shown later. For now variant browser is shown when the study changes
-//                $('#studyInformation').show();
 //                this.tool = "studyInformation";
-                $('#browser').show();
-                this.tool = "browser";
+                this.tool = "#browser";
                 this.renderHashFragments();
+                this.renderBreadcrumb();
             },
             projectStudySampleChanged: function() {
                 console.log("projectStudySampleChanged - DEBUG")
@@ -686,21 +707,28 @@
                         query.ids = value;
                     } else if (value.indexOf(':') > -1 && value.indexOf('-') > -1) {
                         query.region = value;
+                    } else if (value.startsWith("GO:")) {
+                        query["annot-go"] = value;
+                    } else if (value.startsWith("HP:")) {
+                        query["annot-hpo"] = value;
                     } else if (value.startsWith("ENST")) {
-                        query["annot-xref"] = value;
+                        this.transcript = value;
+                        this.tool = "#transcript";
                     } else {
-                        query.gene = value;
-                        this.geneToShow = value;
+                        this.gene = value;
+                        this.tool = "#gene";
                     }
 
-                    this._query = query;
-                    $('.content').hide();
-                    $('#browser').show();
-                    this.tool = "browser";
+                    // This query object is built for variant browser. Only when the queries to browser are made, we are setting the tool to browser
+                    if (Object.keys(query).length > 0) {
+                        this._query = query;
+                        this.tool = "#browser";
+                    }
+
                     this.renderHashFragments();
+                    this.$.searchTextBox.value = ""; // Empty the value of search text box when search is complete and respective view is loaded
                 }
             },
-
             renderBreadcrumb: function() {
                 var breadcrumbElement = Polymer.dom(this.root).querySelector("#breadcrumb");
 
@@ -720,12 +748,12 @@
 
                     // We first check if one study is selected, for this study must be defined and have at least one key
                     if (typeof this.study === "undefined" || Object.keys(this.study).length == 0) {
-                        if (typeof this.project !== "undefined" && this.project != null && this.project != "") {
-                            let project = this._createBreadcrumbElement(this.project, true, "project"); // render only project if exists
+                        if (typeof this.project !== "undefined" && this.project != null) {
+                            let project = this._createBreadcrumbElement(this.project.alias, true, "project"); // render only project if exists
                             Polymer.dom(breadcrumbElement).appendChild(project);
                         }
                     } else {
-                        let project = this._createBreadcrumbElement(this.project, false, "project");
+                        let project = this._createBreadcrumbElement(this.project.alias, false, "project");
                         Polymer.dom(breadcrumbElement).appendChild(project);
 
                         if (typeof this.samples !== "undefined" && this.samples.length > 0) {
@@ -817,7 +845,7 @@
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
-                this.tool = "home";
+                this.tool = "#home";
                 window.location.hash = "home";
                 this.init();
             }
