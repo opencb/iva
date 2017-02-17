@@ -269,8 +269,8 @@
 
                 <div class="collapse content feature-view" id="protein">
                     <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
-                                             protein="{{protein}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                             protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene.protein}}"></opencga-protein-view>
+                                          protein="{{protein}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                          protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene.protein}}"></opencga-protein-view>
                 </div>
 
                 <div class="collapse content" id="dashboard">
@@ -507,7 +507,6 @@
                             _this.logout();
                         });
                 }
-
             },
             _setup: function (projects) {
                 // We check that at least one project with one study exist, otherwise we do not do anything
