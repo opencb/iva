@@ -87,6 +87,16 @@ var opencga = {
                     alias: "RAMS_CML"
                 }
             ]
+        },
+        {
+            name: "Platinum",
+            alias: "platinum",
+            studies : [
+                {
+                    name: "Illumina Platinum",
+                    alias: "illumina_platinum"
+                }
+            ]
         }
     ],
     cookies: {
@@ -198,7 +208,7 @@ var application = {
         {
             id: "genomeBrowser",
             title: "Genome Browser",
-            visibility: "public",
+            visibility: "none",
         }
     ],
     search: {
