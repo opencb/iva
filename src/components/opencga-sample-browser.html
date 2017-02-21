@@ -82,12 +82,11 @@
                     type: Object
                 },
                 study: {
-                    type: String,
+                    type: Number
 //                    observer: 'fetchSamples'
                 },
                 samples: {
                     type: Array,
-                    value: [],
                     notify: true
                 },
                 prefix: {
@@ -99,7 +98,6 @@
                 }
             },
             ready: function () {
-
                 if (typeof this.prefix === "undefined" || this.prefix == "") {
                     this.prefix = "sample" + Utils.randomString(6);
                 }

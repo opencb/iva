@@ -45,7 +45,9 @@ module.exports = function(grunt) {
                     './lib/jsorolla/src/lib/clients/opencga-client-config.js',
                     './lib/jsorolla/src/lib/clients/opencga-client.js',
                     './lib/jsorolla/src/lib/cache/indexeddb-cache.js',
-                    './lib/jsorolla/src/lib/utils.js'
+                    './lib/jsorolla/src/lib/utils.js',
+                    './lib/jsorolla/src/lib/svg.js',
+                    './lib/jsorolla/src/lib/visualisation/lollipop.js'
                 ],
                 dest: '<%= build.path %>/jsorolla-clients.js'
             },
