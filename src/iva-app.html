@@ -493,6 +493,16 @@
                 var _this = this;
                 if (this._publicMode) {
                     // Get all projects with study info and call to _setup()
+                    this.opencgaClient.users().getProjects('anonymous', {shared: true})
+                        .then(function (response) {
+                            let _projects = response.response[0].result;
+                            _this._setup(_projects);
+                            _this._checkBreadcrumbVisible();
+                        })
+                        .catch(function (response) {
+                            console.log("An error when getting projects:")
+                            console.log(response)
+                        });
                 } else {
                     this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
