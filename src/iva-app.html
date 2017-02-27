@@ -226,25 +226,25 @@
                 </div>
                 <div class="collapse content" id="browser">
                     <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{project.studies}}"
-                                     config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                     mode="browser" config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
                                      consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                      beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected">
                     </variant-browser>
                 </div>
 
-                <div class="collapse content" id="family-prioritization">
-                    <variant-prioritization mode="family" title="Family Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                <div class="collapse content" id="prioritization">
+                    <variant-prioritization mode="family" title="Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
                                             config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
                                             opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
 
-                <div class="collapse content" id="cancer-prioritization">
-                    <variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                            population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
-                    </variant-prioritization>
-                </div>
+                <!--<div class="collapse content" id="cancer-prioritization">-->
+                    <!--<variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"-->
+                                            <!--population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"-->
+                                            <!--opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">-->
+                    <!--</variant-prioritization>-->
+                <!--</div>-->
 
                 <div class="collapse content" id="beacon">
                     <beacon-tool opencga-client="{{opencgaClient}}" studies="{{project.studies}}"></beacon-tool>
