@@ -17,6 +17,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="jso-styles.html">
 <link rel="import" href="welcome.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-analysis.html">
 
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
@@ -221,6 +222,12 @@
             </div>
 
             <div>
+                <div class="collapse content" id="analysis">
+                    <variant-analysis title="Variant Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                                      config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
+                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"></variant-analysis>
+                </div>
+
                 <div class="collapse content" id="samples">
                     <opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}" samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>
                 </div>
