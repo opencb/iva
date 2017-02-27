@@ -107,6 +107,11 @@ var application = {
             // ]
         },
         {
+            id: "analysis",
+            title: "Analysis",
+            visibility: "public"
+        },
+        {
             id: "beacon",
             title: "Beacon",
             visibility: "public"

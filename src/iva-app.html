@@ -20,6 +20,7 @@
 
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-analysis.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-transcript-view.html">
@@ -240,11 +241,19 @@
                 </div>
 
                 <!--<div class="collapse content" id="cancer-prioritization">-->
-                    <!--<variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"-->
-                                            <!--population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"-->
-                                            <!--opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">-->
-                    <!--</variant-prioritization>-->
+                <!--<variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"-->
+                <!--population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"-->
+                <!--opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">-->
+                <!--</variant-prioritization>-->
                 <!--</div>-->
+
+                <div class="collapse content" id="analysis">
+                    <variant-analysis title="Variant Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                                      config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
+                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
+
+                    </variant-analysis>
+                </div>
 
                 <div class="collapse content" id="beacon">
                     <beacon-tool opencga-client="{{opencgaClient}}" studies="{{project.studies}}"></beacon-tool>
