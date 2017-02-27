@@ -226,25 +226,25 @@
                 </div>
                 <div class="collapse content" id="browser">
                     <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{project.studies}}"
-                                     config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                     mode="browser" config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
                                      consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                      beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected">
                     </variant-browser>
                 </div>
 
-                <div class="collapse content" id="family-prioritization">
-                    <variant-prioritization mode="family" title="Family Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                <div class="collapse content" id="prioritization">
+                    <variant-prioritization mode="family" title="Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
                                             config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
                                             opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
 
-                <div class="collapse content" id="cancer-prioritization">
-                    <variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                            population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
-                    </variant-prioritization>
-                </div>
+                <!--<div class="collapse content" id="cancer-prioritization">-->
+                    <!--<variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"-->
+                                            <!--population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"-->
+                                            <!--opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">-->
+                    <!--</variant-prioritization>-->
+                <!--</div>-->
 
                 <div class="collapse content" id="beacon">
                     <beacon-tool opencga-client="{{opencgaClient}}" studies="{{project.studies}}"></beacon-tool>
@@ -269,8 +269,8 @@
 
                 <div class="collapse content feature-view" id="protein">
                     <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
-                                             protein="{{protein}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                             protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene.protein}}"></opencga-protein-view>
+                                          protein="{{protein}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                          protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene.protein}}"></opencga-protein-view>
                 </div>
 
                 <div class="collapse content" id="dashboard">
@@ -493,6 +493,16 @@
                 var _this = this;
                 if (this._publicMode) {
                     // Get all projects with study info and call to _setup()
+                    this.opencgaClient.users().getProjects('anonymous', {shared: true})
+                        .then(function (response) {
+                            let _projects = response.response[0].result;
+                            _this._setup(_projects);
+                            _this._checkBreadcrumbVisible();
+                        })
+                        .catch(function (response) {
+                            console.log("An error when getting projects:")
+                            console.log(response)
+                        });
                 } else {
                     this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
@@ -507,7 +517,6 @@
                             _this.logout();
                         });
                 }
-
             },
             _setup: function (projects) {
                 // We check that at least one project with one study exist, otherwise we do not do anything

@@ -84,27 +84,27 @@ var application = {
             id: "prioritization",
             title: "Prioritization",
             visibility: "public",
-            submenu: [
-                {
-                    id: "family-prioritization",
-                    title: "Family",
-                    visibility: "public"
-                },
-                {
-                    id: "cancer-prioritization",
-                    title: "Cancer",
-                    visibility: "public"
-                },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    id: "prioritizationCC",
-                    title: "Case-Control",
-                    visibility: "public"
-                }
-            ]
+            // submenu: [
+            //     {
+            //         id: "family-prioritization",
+            //         title: "Family",
+            //         visibility: "public"
+            //     },
+            //     {
+            //         id: "cancer-prioritization",
+            //         title: "Cancer",
+            //         visibility: "public"
+            //     },
+            //     {
+            //         separator: true,
+            //         visibility: "public"
+            //     },
+            //     {
+            //         id: "prioritizationCC",
+            //         title: "Case-Control",
+            //         visibility: "public"
+            //     }
+            // ]
         },
         {
             id: "beacon",
