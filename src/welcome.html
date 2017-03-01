@@ -33,25 +33,38 @@
 
         <!-- This is where main application is rendered -->
         <div class="center">
-            <br>
+            <div style="text-align: center">
+                <br>
+                <h1>Genomics England Web Data Portal (Beta)</h1>
+                <br>
+                <div style="font-size: 14px; text-align: justify">
+                    <img src="images/Genomics-England-logo-2015.png" width="160px" style="float: left;margin: 0px 20px 20px 0px">
+                    <p>
+                        <a href="https://bioresource.nihr.ac.uk/rare-diseases/welcome/">The Genomics England</a> project will sequence 100,000 genomes
+                        from around 70,000 people. Participants are NHS patients with a rare disease, plus their families, and patients with cancer.
+                    </p>
+                    <p>
+                        The aim is to create a new genomic medicine service for the NHS – transforming the way people are cared for.
+                        Patients may be offered a diagnosis where there wasn’t one before. In time, there is the potential of new and more effective treatments.
+                    </p>
+                    <p>
+                        This web site provides access to genome-wide sequence variation identified in the maximum number of unrelated individuals from this rare disease cohort.
+                    </p>
+                </div>
+                <br>
+                <input type="text" class="form-control input-lg" id="welcomeSearchTextBox" style="text-align: center;"
+                       placeholder="Search for a gene, transcript, variant, multi-allelic variant or region" on-keyup="callAutoComplete">
+            </div>
 
-            <span style="font-size:50px">IVA 0.7.0</span>
-
-            <h2>Overview</h2>
-            <p>
-                Welcome to the IVA tool for whole genome variant analysis.
-                This interactive tool allows finding genes affected by deleterious variants that segregate along family pedigrees, case-controls or sporadic samples.
-            </p>
-            <br>
-            <h4>Note:</h4>
-            <p style="font-size:14px">
-                IVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components,
-                so only modern web browsers are fully supported, these include Chrome 49+, Firefox 45+, Microsoft Edge 14+, Safari 10+ and Opera 36+.
-                </p>
-            <br>
-            <br>
-            <br>
-            <img src="images/opencb-logo.png" width="220">
+            <div class="col-sm-12">
+                <br><br>
+                <span style="font-size:12px">
+                    Note:
+                    {{versionNav}}
+                    <br> GEL web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components, so only modern web browsers are fully supported, these include Chrome 36+, Firefox 32+, IE 10+, Safari
+                    7+ and Opera 24+.
+                </span>
+            </div>
         </div>
     </template>
 

@@ -49,14 +49,14 @@ var beacon = {
 };
 
 var application = {
-    title: "IVA",
-    version: "v0.7.0",
+    title: "GEL",
+    version: "v0.1.0",
     logo: "images/opencb-logo.png",
     menu: [
         {
             id: "samples",
             title: "Samples",
-            visibility: "public"
+            visibility: "none"
         },
         {
             id: "browser",
@@ -83,7 +83,7 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "public",
+            visibility: "private",
             // submenu: [
             //     {
             //         id: "family-prioritization",
@@ -109,17 +109,17 @@ var application = {
         {
             id: "analysis",
             title: "Analysis",
-            visibility: "public"
+            visibility: "none"
         },
         {
             id: "beacon",
             title: "Beacon",
-            visibility: "public"
+            visibility: "private"
         },
         {
             id: "tools",
             title: "Tools",
-            visibility: "public",
+            visibility: "private",
             submenu: [
                 {
                     id: "ibs",
@@ -150,7 +150,7 @@ var application = {
         {
             id: "genomeBrowser",
             title: "Genome Browser",
-            visibility: "public",
+            visibility: "none",
         }
     ],
     search: {
