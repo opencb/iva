@@ -142,6 +142,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="#dashboard"><i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a></li>
                                             <li><a href="#projects"><i class="fa fa-database" aria-hidden="true"></i> Projects</a></li>
+                                            <li><a href="#samples"><i class="fa fa-users" aria-hidden="true"></i> Samples</a></li>
                                             <li><a href="#upload"><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
@@ -165,6 +166,7 @@
                                     </li>
                                     <li class="divider-vertical"></li>
                                 </template>
+
 
 
                                 <form class="navbar-form navbar-left" role="search">
@@ -222,33 +224,23 @@
             </div>
 
             <div>
-                <div class="collapse content" id="samples">
-                    <opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}" samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>
-                </div>
                 <div class="collapse content" id="browser">
-                    <variant-browser title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{project.studies}}"
-                                     mode="browser" config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                    <variant-browser mode="browser" title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{project.studies}}"
+                                     config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
                                      consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                      beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected" summary="{{config.opencga.summary}}">
                     </variant-browser>
                 </div>
 
                 <div class="collapse content" id="prioritization">
-                    <variant-prioritization mode="family" title="Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                    <variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
                                             config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
                                             opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
 
-                <!--<div class="collapse content" id="cancer-prioritization">-->
-                <!--<variant-prioritization mode="cancer" title="Cancer Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"-->
-                <!--population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"-->
-                <!--opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">-->
-                <!--</variant-prioritization>-->
-                <!--</div>-->
-
                 <div class="collapse content" id="analysis">
-                    <variant-analysis title="Variant Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                    <variant-analysis mode="analysis" title="Variant Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
                                       config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
                                       opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
 
@@ -300,15 +292,21 @@
                     <br>
                     <opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{project.studies}}"></opencga-upload-file>
                 </div>
-                <!--BreadCrumb reference-->
+
                 <div class="collapse content" id="projects" style="width: 60%; margin: auto">
                     <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" study-summaries="{{studySummaries}}"
                                       on-project="updateProject" on-study="updateStudy"></opencga-projects>
                 </div>
+
                 <div class="collapse content" id="project">
                     <opencga-project opencga-client="{{opencgaClient}}" project="{{project}}" study-summaries="{{studySummaries}}"
                                      on-study="updateStudy"></opencga-project>
                 </div>
+
+                <div class="collapse content" id="samples">
+                    <opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}" samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>
+                </div>
+
                 <div class="collapse content" id="studyInformation">
                     <opencga-study opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"></opencga-study>
                 </div>
@@ -867,39 +865,6 @@
                 window.location.hash = "home";
                 this.init();
             }
-//            ,
-//            _checkVersion: function() {
-//                this.versionNav = "You are currently using ";
-//                var nav = navigator.userAgent.toLowerCase();
-//                if (/opr\/(\d+\.?)+/.test(nav)) {
-//                    var aux = /opr\/((\d+\.?)+)/.exec(nav);
-//                    this.versionNav += aux[0].replace("opr", "Opera");
-//                } else if (/firefox\/(\d+\.?)+/.test(nav)) {
-//                    var aux = /firefox\/((\d+\.?)+)/.exec(nav);
-//                    this.versionNav += aux[0];
-//                } else if (/msie (\d+\.?)+/.test(nav) || /rv\:(\d+\.?)+/.test(nav)) {
-//                    var aux = /msie ((\d+\.?)+)/.exec(nav);
-//                    if (aux == null) {
-//                        aux = /rv\:((\d+\.?)+)/.exec(nav);
-//                        this.versionNav += aux[0].replace("rv:", "Internet Explorer");
-//                    } else {
-//                        this.versionNav += aux[0].replace("msie", "Internet Explorer");
-//                    }
-//                } else if (/safari\/(\d+\.?)+/.test(nav) && nav.indexOf("chrome") == -1) {
-//                    var aux = /safari\/((\d+\.?)+)/.exec(nav);
-//                    this.versionNav += aux[0];
-//                } else if (/chrome\/(\d+\.?)+/.test(nav)) {
-//                    var aux = /chrome\/((\d+\.?)+)/.exec(nav);
-//                    this.versionNav += aux[0];
-//                } else {
-//                    this.versionNav = "You are currently using an unsupported browser";
-//                }
-//                if (nav.indexOf("_64") >= 0) {
-//                    this.versionNav += " (64-bits)"
-//                } else if (nav.indexOf("_32") >= 0) {
-//                    this.versionNav += " (32-bits)"
-//                }
-//            }
         });
     </script>
 </dom-module>
