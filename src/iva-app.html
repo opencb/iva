@@ -168,16 +168,17 @@
                                 </template>
 
 
-
-                                <form class="navbar-form navbar-left" role="search">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="searchTextBox" placeholder="{{config.search.placeholder}}"
-                                               on-keyup="buildQuery" style="width: 170px;">
-                                        <a style="cursor: pointer">
-                                            <span class="fa fa-search" aria-hidden="true" on-click="buildQuery"></span>
-                                        </a>
-                                    </div>
-                                </form>
+                                <template is="dom-if" if="{{_isMenuItemVisible(config.search)}}">
+                                    <form class="navbar-form navbar-left" role="search">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="searchTextBox" placeholder="{{config.search.placeholder}}"
+                                                   on-keyup="buildQuery" style="width: 170px;">
+                                            <a style="cursor: pointer">
+                                                <span class="fa fa-search" aria-hidden="true" on-click="buildQuery"></span>
+                                            </a>
+                                        </div>
+                                    </form>
+                                </template>
 
                                 <!-- About dropdown menu-->
                                 <li class="dropdown">

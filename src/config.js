@@ -113,7 +113,7 @@ var application = {
     ],
     search: {
         placeholder: "Search",
-        visibility: "none"
+        visibility: "public"
     },
     settings: {
         visibility: "public"
