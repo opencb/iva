@@ -37,6 +37,7 @@ var opencga = {
         //     ]
         // }
     ],
+    summary: true,
     cookies: {
         userName: "iva_userId",
         sessionId: "iva_sid"
@@ -45,21 +46,7 @@ var opencga = {
 
 var beacon = {
     hosts: [
-        "brca-exchange",
-        "cell_lines",
-        "cosmic",
-        "wtsi",
-        "wgs",
-        "ncbi",
-        "ebi",
-        "ega",
-        "broad",
-        "gigascience",
-        "ucsc",
-        "lovd",
-        "hgmd",
-        "icgc",
-        "sahgp"
+        "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
     ]
 };
 
@@ -69,57 +56,19 @@ var application = {
     logo: "",
     menu: [
         {
-            id: "samples",
-            title: "Samples",
-            visibility: "none"
-        },
-        {
             id: "browser",
             title: "Variant Browser",
             visibility: "public",
-            // Allows to provide default filters for the browser
-            filters: [
-                {
-                    name: "Example BRCA2",
-                    query: {
-                        gene: "BRCA2",
-                        conservation: "phylop<0.001"
-                    }
-                },
-                {
-                    name: "Example OR11",
-                    query: {
-                        gene: "OR11H1",
-                        conservation: "phylop<=0.001"
-                    }
-                }
-            ]
         },
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "none",
-            submenu: [
-                {
-                    id: "family-prioritization",
-                    title: "Family",
-                    visibility: "public"
-                },
-                {
-                    id: "cancer-prioritization",
-                    title: "Cancer",
-                    visibility: "public"
-                },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    id: "prioritizationCC",
-                    title: "Case-Control",
-                    visibility: "public"
-                }
-            ]
+            visibility: "public",
+        },
+        {
+            id: "analysis",
+            title: "Analysis",
+            visibility: "public"
         },
         {
             id: "beacon",
@@ -183,6 +132,60 @@ var application = {
     breadcrumb: {
         title: "Projects",
         visibility: "private"
+    }
+};
+
+var tools = {
+    browser: {
+        filters: [
+            {
+                name: "Example BRCA2",
+                query: {
+                    gene: "BRCA2",
+                    conservation: "phylop<0.001"
+                }
+            },
+            {
+                name: "Example OR11",
+                query: {
+                    gene: "OR11H1",
+                    conservation: "phylop<=0.001"
+                }
+            }
+        ]
+    },
+    prioritization: {
+        segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"],
+        filters: [
+            {
+                name: "Example BRCA2",
+                query: {
+                    gene: "BRCA2",
+                    conservation: "phylop<0.001"
+                }
+            },
+            {
+                name: "Example OR11",
+                query: {
+                    gene: "OR11H1",
+                    conservation: "phylop<=0.001"
+                }
+            }
+        ]
+    },
+    gene: {
+
+        protein: {
+            color: {
+                missense_variant: "blue",
+                stop_gained: "red"
+            }
+        }
+    },
+    beacon: {
+        hosts: [
+            "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
+        ]
     }
 };
 
