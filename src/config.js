@@ -21,7 +21,7 @@ var cellbase = {
 
 var opencga = {
     // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
-    host: "bioinfodev.hpc.cam.ac.uk/bridge-1.0.0",
+    host: "bioinfodev.hpc.cam.ac.uk/bridge-1.0.0-solr",
     // host: "localhost:9190/opencga",
     version: "v1",
     // user:  Useful scenario is user@project:study
@@ -63,12 +63,12 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "public",
+            visibility: "private",
         },
         {
             id: "analysis",
             title: "Analysis",
-            visibility: "public"
+            visibility: "private"
         },
         {
             id: "beacon",
@@ -78,31 +78,31 @@ var application = {
         {
             id: "tools",
             title: "Tools",
-            visibility: "none",
+            visibility: "private",
             submenu: [
                 {
                     id: "ibs",
                     title: "IBS",
-                    visibility: "public"
+                    visibility: "private"
                 },
                 {
                     id: "burden",
                     title: "Burden Test",
-                    visibility: "public"
+                    visibility: "private"
                 },
                 {
                     separator: true,
-                    visibility: "public"
+                    visibility: "private"
                 },
                 {
                     id: "exporter",
                     title: "Exporter",
-                    visibility: "public"
+                    visibility: "private"
                 },
                 {
                     id: "saturation",
                     title: "Saturation",
-                    visibility: "public"
+                    visibility: "private"
                 }
             ]
         },
