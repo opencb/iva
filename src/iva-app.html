@@ -260,7 +260,9 @@
                 <div class="collapse content feature-view" id="gene">
                     <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
                                        gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                       protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-gene-view>
+                                       protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
+
+                    </opencga-gene-view>
                 </div>
 
                 <div class="collapse content feature-view" id="transcript">
