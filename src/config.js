@@ -136,6 +136,9 @@ var application = {
 
 var tools = {
     browser: {
+        cohorts: {
+            // "1kG_phase3": ["ALL", "MXL"]
+        },
         filters: [
             {
                 name: "Example BRCA2",
