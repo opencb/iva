@@ -20,7 +20,8 @@ var cellbase = {
 };
 
 var opencga = {
-    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0.0",
+    // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
+    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0.0-solr",
     version: "v1",
     // user:  Useful scenario is user@project:study
     projects: [
@@ -99,6 +100,7 @@ var opencga = {
             ]
         }
     ],
+    summary: true,
     cookies: {
         userName: "iva_userId",
         sessionId: "iva_sid"
@@ -117,57 +119,19 @@ var application = {
     logo: "images/opencb-logo.png",
     menu: [
         {
-            id: "samples",
-            title: "Samples",
-            visibility: "none"
-        },
-        {
             id: "browser",
             title: "Variant Browser",
             visibility: "public",
-            // Allows to provide default filters for the browser
-            filters: [
-                {
-                    name: "Example BRCA2",
-                    query: {
-                        gene: "BRCA2",
-                        conservation: "phylop<0.001"
-                    }
-                },
-                {
-                    name: "Example OR11",
-                    query: {
-                        gene: "OR11H1",
-                        conservation: "phylop<=0.001"
-                    }
-                }
-            ]
         },
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "none",
-            submenu: [
-                {
-                    id: "family-prioritization",
-                    title: "Family",
-                    visibility: "public"
-                },
-                {
-                    id: "cancer-prioritization",
-                    title: "Cancer",
-                    visibility: "public"
-                },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    id: "prioritizationCC",
-                    title: "Case-Control",
-                    visibility: "public"
-                }
-            ]
+            visibility: "public",
+        },
+        {
+            id: "analysis",
+            title: "Analysis",
+            visibility: "public"
         },
         {
             id: "beacon",
