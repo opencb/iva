@@ -138,7 +138,7 @@ var application = {
 var tools = {
     browser: {
         cohorts: {
-            // "1kG_phase3": ["ALL", "MXL"]
+            "BRIDGE": ["BRIDGE", "BRIDGE_UNRELATED"]
         },
         filters: [
             {
