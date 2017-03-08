@@ -126,12 +126,12 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "public",
+            visibility: "private",
         },
         {
             id: "analysis",
             title: "Analysis",
-            visibility: "public"
+            visibility: "private"
         },
         {
             id: "beacon",
