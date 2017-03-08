@@ -37,7 +37,7 @@ var opencga = {
         //     ]
         // }
     ],
-    summary: false,
+    summary: true,
     cookies: {
         userName: "iva_userId",
         sessionId: "iva_sid"
