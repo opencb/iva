@@ -514,7 +514,7 @@
                             console.log(response)
                         });
                 } else {
-                    this.opencgaClient.users().getProjects(this.userId)
+                    this.opencgaClient.users().getProjects(this.userId, {shared: true})
                         .then(function (response) {
                             let _projects = response.response[0].result;
                             _this._setup(_projects);

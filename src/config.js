@@ -21,9 +21,9 @@ var cellbase = {
 
 var opencga = {
     // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
-    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0.0-solr",
+    host: "10.5.6.5:8080/opencga",
     version: "v1",
-    // user:  Useful scenario is user@project:study
+    // user:  "researchcga", // Useful scenario is user@project:study
     projects: [
         // {
         //     name: "ProjectA",
@@ -136,6 +136,7 @@ var application = {
 
 var tools = {
     browser: {
+        user: "researchcga",
         cohorts: {
             // "1kG_phase3": ["ALL", "MXL"]
         },
