@@ -51,8 +51,8 @@ var beacon = {
 };
 
 var application = {
-    title: "BRIDGE",
-    version: "v0.2.0 (Beta)",
+    title: "NIHR BioResource",
+    version: "(Beta)",
     logo: "",
     menu: [
         {
@@ -138,7 +138,7 @@ var application = {
 var tools = {
     browser: {
         cohorts: {
-            "BRIDGE": ["BRIDGE", "BRIDGE_UNRELATED"]
+            "BRIDGE": ["BRIDGE"]
         },
         filters: [
             {
