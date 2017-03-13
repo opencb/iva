@@ -136,7 +136,7 @@ var application = {
         {
             id: "beacon",
             title: "Beacon",
-            visibility: "public"
+            visibility: "none"
         },
         {
             id: "tools",
@@ -194,7 +194,7 @@ var application = {
     },
     breadcrumb: {
         title: "Projects",
-        visibility: "private"
+        visibility: "public"
     }
 };
 

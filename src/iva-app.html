@@ -718,7 +718,7 @@
                 if (typeof e !== "undefined" && typeof e.detail.value !== "undefined") {
                     value = e.detail.value; // It takes care of the fired event from welcome.html
                 } else if (typeof e !== "undefined" && e.keyCode == '13' || typeof e !== "undefined" && e.type == "click") {
-                    value = this.$.searchTextBox.value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
+                    value = this.$$("#searchTextBox").value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
                 }
 
                 if (value != "") {
@@ -731,11 +731,13 @@
                     } else if (value.startsWith("HP:")) {
                         query["annot-hpo"] = value;
                     } else if (value.startsWith("ENST")) {
-                        this.transcript = value;
-                        this.tool = "#transcript";
+//                        this.transcript = value;
+//                        this.tool = "#transcript";
+                        query["annot-xref"] = value;
                     } else {
-                        this.gene = value;
-                        this.tool = "#gene";
+//                        this.gene = value;
+//                        this.tool = "#gene";
+                        query.gene = value;
                     }
 
                     // This query object is built for variant browser. Only when the queries to browser are made, we are setting the tool to browser
@@ -745,7 +747,7 @@
                     }
 
                     this.renderHashFragments();
-                    this.$.searchTextBox.value = ""; // Empty the value of search text box when search is complete and respective view is loaded
+                    this.$$("#searchTextBox").value = ""; // Empty the value of search text box when search is complete and respective view is loaded
                 }
             },
             renderBreadcrumb: function() {
