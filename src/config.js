@@ -132,7 +132,7 @@ var application = {
 var tools = {
     browser: {
         cohorts: {
-            "BRIDGE": ["BRIDGE"]
+            // "BRIDGE": ["BRIDGE"]
         },
         missing: true,
         filters: [
