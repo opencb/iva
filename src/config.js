@@ -36,16 +36,11 @@ var opencga = {
         //     ]
         // }
     ],
+    summary: true,
     cookies: {
         userName: "iva_userId",
         sessionId: "iva_sid"
     }
-};
-
-var beacon = {
-    hosts: [
-        "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
-    ]
 };
 
 var application = {
@@ -54,57 +49,19 @@ var application = {
     logo: "images/opencb-logo.png",
     menu: [
         {
-            id: "samples",
-            title: "Samples",
-            visibility: "public"
-        },
-        {
             id: "browser",
             title: "Variant Browser",
             visibility: "public",
-            // Allows to provide default filters for the browser
-            filters: [
-                {
-                    name: "Example BRCA2",
-                    query: {
-                        gene: "BRCA2",
-                        conservation: "phylop<0.001"
-                    }
-                },
-                {
-                    name: "Example OR11",
-                    query: {
-                        gene: "OR11H1",
-                        conservation: "phylop<=0.001"
-                    }
-                }
-            ]
         },
         {
             id: "prioritization",
             title: "Prioritization",
             visibility: "public",
-            // submenu: [
-            //     {
-            //         id: "family-prioritization",
-            //         title: "Family",
-            //         visibility: "public"
-            //     },
-            //     {
-            //         id: "cancer-prioritization",
-            //         title: "Cancer",
-            //         visibility: "public"
-            //     },
-            //     {
-            //         separator: true,
-            //         visibility: "public"
-            //     },
-            //     {
-            //         id: "prioritizationCC",
-            //         title: "Case-Control",
-            //         visibility: "public"
-            //     }
-            // ]
+        },
+        {
+            id: "analysis",
+            title: "Analysis",
+            visibility: "public"
         },
         {
             id: "beacon",
@@ -173,6 +130,10 @@ var application = {
 
 var tools = {
     browser: {
+        cohorts: {
+            // "1kG_phase3": ["ALL", "MXL"]
+        },
+        missing: true,
         filters: [
             {
                 name: "Example BRCA2",
@@ -223,6 +184,12 @@ var tools = {
             "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
         ]
     }
+};
+
+var beacon = {
+    hosts: [
+        "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
+    ]
 };
 
 var populationFrequencies = {
