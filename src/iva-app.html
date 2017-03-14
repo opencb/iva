@@ -260,7 +260,9 @@
                 <div class="collapse content feature-view" id="gene">
                     <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
                                        gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                       protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-gene-view>
+                                       protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
+
+                    </opencga-gene-view>
                 </div>
 
                 <div class="collapse content feature-view" id="transcript">
@@ -716,7 +718,7 @@
                 if (typeof e !== "undefined" && typeof e.detail.value !== "undefined") {
                     value = e.detail.value; // It takes care of the fired event from welcome.html
                 } else if (typeof e !== "undefined" && e.keyCode == '13' || typeof e !== "undefined" && e.type == "click") {
-                    value = this.$.searchTextBox.value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
+                    value = this.$$("#searchTextBox").value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
                 }
 
                 if (value != "") {
@@ -743,7 +745,7 @@
                     }
 
                     this.renderHashFragments();
-                    this.$.searchTextBox.value = ""; // Empty the value of search text box when search is complete and respective view is loaded
+                    this.$$("#searchTextBox").value = ""; // Empty the value of search text box when search is complete and respective view is loaded
                 }
             },
             renderBreadcrumb: function() {
