@@ -44,12 +44,6 @@ var opencga = {
     }
 };
 
-var beacon = {
-    hosts: [
-        "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
-    ]
-};
-
 var application = {
     title: "NIHR BioResource",
     version: "(Beta)",
@@ -140,6 +134,7 @@ var tools = {
         cohorts: {
             "BRIDGE": ["BRIDGE"]
         },
+        missing: true,
         filters: [
             {
                 name: "Example BRCA2",
@@ -190,6 +185,12 @@ var tools = {
             "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
         ]
     }
+};
+
+var beacon = {
+    hosts: [
+        "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
+    ]
 };
 
 var populationFrequencies = {
