@@ -43,12 +43,6 @@ var opencga = {
     }
 };
 
-var beacon = {
-    hosts: [
-        "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
-    ]
-};
-
 var application = {
     title: "GEL",
     version: "v0.1.0",
@@ -140,6 +134,7 @@ var tools = {
         cohorts: {
             // "1kG_phase3": ["ALL", "MXL"]
         },
+        missing: true,
         filters: [
             {
                 name: "Example BRCA2",
@@ -190,6 +185,12 @@ var tools = {
             "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
         ]
     }
+};
+
+var beacon = {
+    hosts: [
+        "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
+    ]
 };
 
 var populationFrequencies = {
