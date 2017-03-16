@@ -131,7 +131,7 @@ var application = {
 var tools = {
     browser: {
         cohorts: {
-            // "BRIDGE": ["BRIDGE"]
+            "BRIDGE": [{id: "BRIDGE_UNRELATED", name: "BRIDGE"}],
         },
         missing: true,
         filters: [
