@@ -102,7 +102,7 @@ var opencga = {
     ],
     summary: true,
     cookie: {
-        prefix: "iva"
+        prefix: "hgva"
     }
 };
 
