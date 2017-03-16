@@ -37,9 +37,8 @@ var opencga = {
         // }
     ],
     summary: true,
-    cookies: {
-        userName: "iva_userId",
-        sessionId: "iva_sid"
+    cookie: {
+        prefix: "iva"
     }
 };
 
@@ -131,7 +130,8 @@ var application = {
 var tools = {
     browser: {
         cohorts: {
-            // "1kG_phase3": ["ALL", "MXL"]
+            // "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
+            // "EXAC": [{id: "ALL", name: "All"}]
         },
         missing: true,
         filters: [
