@@ -21,7 +21,7 @@ var cellbase = {
 
 var opencga = {
     // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
-    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0.0-solr",
+    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0.0",
     version: "v1",
     // user:  Useful scenario is user@project:study
     projects: [
@@ -41,12 +41,6 @@ var opencga = {
         userName: "iva_userId",
         sessionId: "iva_sid"
     }
-};
-
-var beacon = {
-    hosts: [
-        "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
-    ]
 };
 
 var application = {
@@ -139,6 +133,7 @@ var tools = {
         cohorts: {
             // "1kG_phase3": ["ALL", "MXL"]
         },
+        missing: true,
         filters: [
             {
                 name: "Example BRCA2",
@@ -189,6 +184,12 @@ var tools = {
             "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
         ]
     }
+};
+
+var beacon = {
+    hosts: [
+        "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
+    ]
 };
 
 var populationFrequencies = {
