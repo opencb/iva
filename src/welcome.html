@@ -36,39 +36,46 @@
         </style>
 
         <!-- This is where main application is rendered -->
-        <div>
+        <div  class="center">
             <div style="text-align: center">
+
                 <br>
-                <span style="font-size:50px; text-align: center">The Human Genetic Variation Archive (HGVA)</span>
-                <br><br><br>
+                <h1>The Human Genetic Variation Archive (HGVA)</h1>
+                <br>
+                <div style="font-size: 14px; text-align: justify">
+                    <!--<img src="images/NIHR_BioResourceRareDiseases.png" width="120px" style="float: left;margin: 0px 20px 20px 0px">-->
+                    <img src="images/opencb-logo.png" width="160px" style="float: left;margin: 0px 20px 10px 0px">
+                    <p>
+                        <a href="http://docs.opencb.org/display/hgva" target="_blank"><b>The Human Genomic Variation Archive (HGVA)</b> </a>
+                        is an open access genetic variation resource that integrates
+                        all variants from key world-wide reference projects, but also added-value information such as basic
+                        variant annotation, population frequencies, protein effect predictions, variant-associated phenotypes,
+                        etc.
+                    </p>
+                    <p>
+                        HGVA currently hosts about 300GB of data from 13 different studies describing more than 200
+                        million variants. HGVA is not a mere data archive, but a big data provider that enables users to
+                        efficiently query, filter and retrieve relevant information from its knowledge-base, either from a
+                        visual web-interface or programmatically.
+                    </p>
+                </div>
+                <br>
                 <input type="text" class="form-control" id="welcomeSearchTextBox" style="text-align: center; height: 45px"
                        placeholder="Search for a gene, transcript, variant, multi-allelic variant, region, GO term or HPO term" on-keyup="triggerSearch">
-                <p>Example: BRCA2, ENST00000342992, rs666, 10:15097577:G:C, 1:1-100000, GO:0000139, HP:3000079</p>
+                <p>Example: BRCA2, ENST00000342992, rs666, 10:15097577:G:C, 1:1-100000, GO:0000145, HP:0001756</p>
                 <p>Current selected Project and Study are <a href="#projects"><b>{{project.alias}}</b></a> and
                     <a href="#projects"><b>{{study}}. Click to change</b></a> </p>
             </div>
             <!--<h2>Overview</h2>-->
             <br>
-            
-            <p>
-                <b>The Human Genomic Variation Archive (HGVA)</b> is an open access genetic variation resource that integrates
-                all variants from key world-wide reference projects, but also added-value information such as basic
-                variant annotation, population frequencies, protein effect predictions, variant-associated phenotyes,
-                etc. HGVA currently hosts about 300GB of data from 13 different studies describing more than 200
-                million variants. HGVA is not a mere data archive, but a big data provider that enables users to
-                efficiently query, filter and retrieve relevant information from its knowledge-base, either from a
-                visual web-interface or programmatically.
-            </p>
+            <br>
             <br>
             <h4>Note:</h4>
             <p style="font-size:14px">
                 HGVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components,
                 so only modern web browsers are fully supported, these include Chrome 49+, Firefox 45+, Microsoft Edge 14+, Safari 10+ and Opera 36+.
-                </p>
+            </p>
             <br>
-            <br>
-            <br>
-            <img src="images/opencb-logo.png" width="220">
         </div>
     </template>
 
