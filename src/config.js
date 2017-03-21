@@ -73,6 +73,11 @@ var application = {
             visibility: "public",
             submenu: [
                 {
+                    id: "dataMining",
+                    title: "Data Mining",
+                    visibility: "public"
+                },
+                {
                     id: "ibs",
                     title: "IBS",
                     visibility: "public"
@@ -171,7 +176,6 @@ var tools = {
         ]
     },
     gene: {
-
         protein: {
             color: {
                 missense_variant: "blue",
@@ -182,6 +186,33 @@ var tools = {
     beacon: {
         hosts: [
             "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
+        ]
+    },
+    dataMining: {
+        facetFields: [
+            {
+                name: "Variant Type",
+                value: "type"
+            },
+            {
+                name: "Studies",
+                value: "studies"
+            },
+            {
+                name: "Genes",
+                value: "genes"
+            },
+            {
+                name: "Biotypes",
+                value: "biotypes"
+            },
+            {
+                name: "Consequence Type",
+                value: "soAcc"
+            }
+        ],
+        facetRangeFields: [
+            "phastCons", "phylop", "gerp", "caddRaw", "caddScaled", "sift", "polyphen"
         ]
     }
 };
