@@ -22,6 +22,7 @@
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-analysis.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-transcript-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-protein-view.html">
@@ -250,6 +251,12 @@
 
                 <div class="collapse content" id="beacon">
                     <beacon-tool opencga-client="{{opencgaClient}}" studies="{{project.studies}}"></beacon-tool>
+                </div>
+
+                <div class="collapse content" id="dataMining">
+                    <variant-facet title="Data Mining" project="{{project}}" study="{{study}}" studies="{{project.studies}}" config="{{config.tools.dataMining}}" opencga-client="{{opencgaClient}}"
+                                   cellbase-client="{{cellbaseClient}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                   consequence-types="{{consequenceTypes}}"></variant-facet>
                 </div>
 
                 <div class="collapse content" id="genomeBrowser">
