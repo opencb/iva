@@ -22,6 +22,7 @@
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-analysis.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-transcript-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-protein-view.html">
@@ -252,6 +253,12 @@
                     <beacon-tool opencga-client="{{opencgaClient}}" studies="{{project.studies}}"></beacon-tool>
                 </div>
 
+                <div class="collapse content" id="dataMining">
+                    <variant-facet title="Data Mining" project="{{project}}" study="{{study}}" studies="{{project.studies}}" config="{{config.tools.dataMining}}" opencga-client="{{opencgaClient}}"
+                                   cellbase-client="{{cellbaseClient}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                   consequence-types="{{consequenceTypes}}"></variant-facet>
+                </div>
+
                 <div class="collapse content" id="genomeBrowser">
                     Not implemented yet.
                     <!--<genome-context></genome-context>-->
@@ -414,11 +421,11 @@
                 this.init();
 
                 // This must happen after calling to init() function since init() created the OpencgaClient
-                var sid = Cookies.get(this.config.opencga.cookies.sessionId);
+                var sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
                 if (typeof sid !== "undefined" && sid != "" && !this._publicMode) {
                     this.login({
                         detail: {
-                            userId: Cookies.get(this.config.opencga.cookies.userName),
+                            userId: Cookies.get(this.config.opencga.cookie.prefix + "_userId"),
                             sessionId: sid
                         }
                     });
@@ -430,7 +437,7 @@
                 this.renderBreadcrumb();
             },
             init: function () {
-                this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host, this.config.opencga.version, true, "iva");
+                this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host, this.config.opencga.version, true, this.config.opencga.cookie.prefix);
                 this.opencgaClient = new OpenCGAClient(this.opencgaClientConfig);
 
                 this.cellBaseClientConfig = new CellBaseClientConfig(hosts = this.config.cellbase.hosts, version = this.config.cellbase.version, species = "hsapiens");
@@ -481,8 +488,8 @@
                     })
                     .catch(function () {
                         // we need to remove Cookies son OpenCGAClient has failed
-                        Cookies.expire(_this.config.opencga.cookies.sessionId);
-                        Cookies.expire(_this.config.opencga.cookies.userName);
+                        Cookies.expire(_this.config.opencga.cookie.prefix + "_sid");
+                        Cookies.expire(_this.config.opencga.cookie.prefix + "_userId");
 
                         _this._logout();
                     });

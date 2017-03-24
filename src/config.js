@@ -37,9 +37,8 @@ var opencga = {
         // }
     ],
     summary: true,
-    cookies: {
-        userName: "iva_userId",
-        sessionId: "iva_sid"
+    cookie: {
+        prefix: "iva"
     }
 };
 
@@ -73,6 +72,11 @@ var application = {
             title: "Tools",
             visibility: "private",
             submenu: [
+                {
+                    id: "dataMining",
+                    title: "Data Mining",
+                    visibility: "public"
+                },
                 {
                     id: "ibs",
                     title: "IBS",
@@ -132,7 +136,8 @@ var tools = {
     browser: {
         user: "researchcga",
         cohorts: {
-            // "1kG_phase3": ["ALL", "MXL"]
+            // "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
+            // "EXAC": [{id: "ALL", name: "All"}]
         },
         missing: true,
         filters: [
@@ -172,7 +177,6 @@ var tools = {
         ]
     },
     gene: {
-
         protein: {
             color: {
                 missense_variant: "blue",
@@ -183,6 +187,33 @@ var tools = {
     beacon: {
         hosts: [
             "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
+        ]
+    },
+    dataMining: {
+        facetFields: [
+            {
+                name: "Variant Type",
+                value: "type"
+            },
+            {
+                name: "Studies",
+                value: "studies"
+            },
+            {
+                name: "Genes",
+                value: "genes"
+            },
+            {
+                name: "Biotypes",
+                value: "biotypes"
+            },
+            {
+                name: "Consequence Type",
+                value: "soAcc"
+            }
+        ],
+        facetRangeFields: [
+            "phastCons", "phylop", "gerp", "caddRaw", "caddScaled", "sift", "polyphen"
         ]
     }
 };
