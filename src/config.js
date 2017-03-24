@@ -117,6 +117,11 @@ var application = {
             visibility: "public",
         },
         {
+            id: "dataMining",
+            title: "Data Mining",
+            visibility: "public"
+        },
+        {
             id: "prioritization",
             title: "Prioritization",
             visibility: "private",
@@ -136,11 +141,6 @@ var application = {
             title: "Tools",
             visibility: "none",
             submenu: [
-                {
-                    id: "dataMining",
-                    title: "Data Mining",
-                    visibility: "public"
-                },
                 {
                     id: "ibs",
                     title: "IBS",
