@@ -117,8 +117,8 @@ var application = {
             visibility: "public",
         },
         {
-            id: "dataMining",
-            title: "Data Mining",
+            id: "facet",
+            title: "Facet Analysis (New!)",
             visibility: "public"
         },
         {
@@ -247,20 +247,19 @@ var tools = {
             }
         }
     },
-    beacon: {
-        hosts: [
-            "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
-        ]
-    },
-    dataMining: {
+    facet: {
         facetFields: [
             {
-                name: "Variant Type",
-                value: "type"
+                name: "Chromosome",
+                value: "chromosome"
             },
             {
                 name: "Studies",
                 value: "studies"
+            },
+            {
+                name: "Variant Type",
+                value: "type"
             },
             {
                 name: "Genes",
@@ -277,6 +276,11 @@ var tools = {
         ],
         facetRangeFields: [
             "phastCons", "phylop", "gerp", "caddRaw", "caddScaled", "sift", "polyphen"
+        ]
+    },
+    beacon: {
+        hosts: [
+            "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
         ]
     }
 };
