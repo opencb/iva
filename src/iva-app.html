@@ -257,7 +257,7 @@
                 </div>
 
                 <div class="collapse content" id="beacon">
-                    <variant-beacon opencga-client="{{opencgaClient}}" studies="{{project.studies}}"></variant-beacon>
+                    <variant-beacon opencga-client="{{opencgaClient}}" studies="{{project.studies}}" hosts="{{config.tools.beacon.hosts}}"></variant-beacon>
                 </div>
 
                 <div class="collapse content" id="genomeBrowser">
@@ -525,6 +525,11 @@
                     this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
                             let _projects = response.response[0].result;
+                            if (typeof _this.config.opencga.asUser !== "undefined" && _this.config.opencga.asUser !== "") {
+                                for (let p of _projects) {
+                                    p.alias = _this.config.opencga.asUser + "@" + p.alias;
+                                }
+                            }
                             _this._setup(_projects);
 
                             _this._checkBreadcrumbVisible();

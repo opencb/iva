@@ -26,6 +26,10 @@ module.exports = function(grunt) {
                 src: [
                     "./bower_components/webcomponentsjs/webcomponents-lite.js",
                     "./bower_components/jquery/dist/jquery.js",
+                    "./bower_components/bootstrap/dist/js/bootstrap.js",
+                    "./bower_components/bootstrap-table/dist/bootstrap-table.js",
+                    "./bower_components/bootstrap-treeview/dist/bootstrap-treeview.js",
+                    "./bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
                     "./bower_components/underscore/underscore.js",
                     "./bower_components/backbone/backbone.js",
                     "./bower_components/highcharts-release/highcharts.js",
@@ -47,7 +51,8 @@ module.exports = function(grunt) {
                     "./lib/jsorolla/src/lib/cache/indexeddb-cache.js",
                     "./lib/jsorolla/src/lib/utils.js",
                     "./lib/jsorolla/src/lib/svg.js",
-                    "./lib/jsorolla/src/lib/visualisation/lollipop.js"
+                    "./lib/jsorolla/src/lib/visualisation/lollipop.js",
+                    "./lib/jsorolla/src/lib/opencga/variant/variant-utils.js"
                 ],
                 dest: "<%= build.path %>/jsorolla-clients.js"
             },
@@ -73,6 +78,10 @@ module.exports = function(grunt) {
         copy: {
             dist: {
                 files: [
+                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap/dist/css/bootstrap.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-table/dist/bootstrap-table.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-treeview/dist/bootstrap-treeview.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["fontawesome/css/font-awesome.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["qtip2/jquery.qtip.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["fontawesome/fonts/*"], dest: "<%= build.path %>/fonts" },
@@ -80,6 +89,7 @@ module.exports = function(grunt) {
                     {   expand: true, cwd: "./bower_components", src: ["polymer/*"], dest: "<%= build.vendor %>" },
                     {   expand: true, cwd: "src", src: ["index.html"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["config.js"], dest: "<%= build.path %>/" },
+                    {   expand: true, cwd: "src", src: ["panels.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "./", src: ["LICENSE"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["images/*"], dest: "<%= build.path %>/" }
                 ]
