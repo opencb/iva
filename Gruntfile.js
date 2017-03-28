@@ -26,6 +26,10 @@ module.exports = function(grunt) {
                 src: [
                     "./bower_components/webcomponentsjs/webcomponents-lite.js",
                     "./bower_components/jquery/dist/jquery.js",
+                    "./bower_components/bootstrap/dist/js/bootstrap.js",
+                    "./bower_components/bootstrap-table/dist/bootstrap-table.js",
+                    "./bower_components/bootstrap-treeview/dist/bootstrap-treeview.js",
+                    "./bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
                     "./bower_components/underscore/underscore.js",
                     "./bower_components/backbone/backbone.js",
                     "./bower_components/highcharts-release/highcharts.js",
@@ -73,6 +77,10 @@ module.exports = function(grunt) {
         copy: {
             dist: {
                 files: [
+                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap/dist/css/bootstrap.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-table/dist/bootstrap-table.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-treeview/dist/bootstrap-treeview.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["fontawesome/css/font-awesome.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["qtip2/jquery.qtip.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["fontawesome/fonts/*"], dest: "<%= build.path %>/fonts" },
