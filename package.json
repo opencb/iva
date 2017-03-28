@@ -8,6 +8,7 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
+    "crisper": "~2.0.2",
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "~1.0.0",
     "grunt-contrib-concat": "~1.0.1",
@@ -17,15 +18,14 @@
     "grunt-contrib-rename": "0.0.3",
     "grunt-contrib-uglify": "~2.0.0",
     "grunt-contrib-watch": "~1.0.0",
-    "grunt-vulcanize": "~1.0.0",
     "grunt-curl": "~2.2.0",
     "grunt-html-build": "~0.6.1",
     "grunt-hub": "~0.7.0",
     "grunt-processhtml": "~0.4.1",
-    "js-beautify": "~1.6.4",
-    "vulcanize": "~1.14.8",
-    "crisper": "~2.0.2",
     "grunt-replace": "~1.0.1",
-    "uglify-js": "^2.7.3"
+    "grunt-vulcanize": "~1.0.0",
+    "js-beautify": "~1.6.4",
+    "uglify-js": "^2.7.3",
+    "vulcanize": "~1.14.8"
   }
 }
