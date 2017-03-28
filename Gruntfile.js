@@ -89,6 +89,7 @@ module.exports = function(grunt) {
                     {   expand: true, cwd: "./bower_components", src: ["polymer/*"], dest: "<%= build.vendor %>" },
                     {   expand: true, cwd: "src", src: ["index.html"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["config.js"], dest: "<%= build.path %>/" },
+                    {   expand: true, cwd: "src", src: ["panels.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "./", src: ["LICENSE"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["images/*"], dest: "<%= build.path %>/" }
                 ]
