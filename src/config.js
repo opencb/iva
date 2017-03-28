@@ -55,7 +55,7 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "public",
+            visibility: "none",
         },
         {
             id: "analysis",
@@ -65,12 +65,12 @@ var application = {
         {
             id: "beacon",
             title: "Beacon",
-            visibility: "private"
+            visibility: "none"
         },
         {
             id: "tools",
             title: "Tools",
-            visibility: "private",
+            visibility: "none",
             submenu: [
                 {
                     id: "facet",
