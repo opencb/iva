@@ -212,7 +212,19 @@ var tools = {
         ],
         facetRangeFields: [
             "phastCons", "phylop", "gerp", "caddRaw", "caddScaled", "sift", "polyphen"
-        ]
+        ],
+        // chromosomes: [
+        //     {
+        //         name: "1",
+        //         start: 1,
+        //         end: 248956422
+        //     },
+        //     {
+        //         name: "2",
+        //         start: 1,
+        //         end: 242193529
+        //     }
+        // ]
     },
     beacon: {
         hosts: [
