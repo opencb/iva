@@ -21,9 +21,9 @@ var cellbase = {
 
 var opencga = {
     // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
-    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0.0",
+    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.0.0-facet",
     version: "v1",
-    // user:  Useful scenario is user@project:study
+    // asUser: "researchcga", // user@project:study
     projects: [
         // {
         //     name: "ProjectA",
@@ -44,7 +44,7 @@ var opencga = {
 
 var application = {
     title: "IVA",
-    version: "v0.7.0",
+    version: "v0.8.0",
     logo: "images/opencb-logo.png",
     menu: [
         {
@@ -72,6 +72,11 @@ var application = {
             title: "Tools",
             visibility: "public",
             submenu: [
+                {
+                    id: "facet",
+                    title: "Facet Analysis (New!)",
+                    visibility: "public"
+                },
                 {
                     id: "ibs",
                     title: "IBS",
@@ -171,13 +176,55 @@ var tools = {
         ]
     },
     gene: {
-
         protein: {
             color: {
                 missense_variant: "blue",
                 stop_gained: "red"
             }
         }
+    },
+    facet: {
+        facetFields: [
+            {
+                name: "Chromosome",
+                value: "chromosome"
+            },
+            {
+                name: "Studies",
+                value: "studies"
+            },
+            {
+                name: "Variant Type",
+                value: "type"
+            },
+            {
+                name: "Genes",
+                value: "genes"
+            },
+            {
+                name: "Biotypes",
+                value: "biotypes"
+            },
+            {
+                name: "Consequence Type",
+                value: "soAcc"
+            }
+        ],
+        facetRangeFields: [
+            "phastCons", "phylop", "gerp", "caddRaw", "caddScaled", "sift", "polyphen"
+        ],
+        // chromosomes: [
+        //     {
+        //         name: "1",
+        //         start: 1,
+        //         end: 248956422
+        //     },
+        //     {
+        //         name: "2",
+        //         start: 1,
+        //         end: 242193529
+        //     }
+        // ]
     },
     beacon: {
         hosts: [
