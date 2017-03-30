@@ -184,7 +184,7 @@ var tools = {
         }
     },
     facet: {
-        facetFields: [
+        fields: [
             {
                 name: "Chromosome",
                 value: "chromosome"
@@ -210,21 +210,36 @@ var tools = {
                 value: "soAcc"
             }
         ],
-        facetRangeFields: [
-            "phastCons", "phylop", "gerp", "caddRaw", "caddScaled", "sift", "polyphen"
+        ranges: [
+            {
+                name: "PhastCons",
+                value: "phastCons"
+            },
+            {
+                name: "PhyloP",
+                value: "phylop"
+            },
+            {
+                name: "Gerp",
+                value: "gerp"
+            },
+            {
+                name: "CADD Raw",
+                value: "caddRaw"
+            },
+            {
+                name: "CADD Scaled",
+                value: "caddScaled"
+            },
+            {
+                name: "Sift",
+                value: "sift"
+            },
+            {
+                name: "Polyphen",
+                value: "polyphen"
+            }
         ],
-        // chromosomes: [
-        //     {
-        //         name: "1",
-        //         start: 1,
-        //         end: 248956422
-        //     },
-        //     {
-        //         name: "2",
-        //         start: 1,
-        //         end: 242193529
-        //     }
-        // ]
     },
     beacon: {
         hosts: [
