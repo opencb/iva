@@ -21,7 +21,8 @@
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-analysis.html">
-<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/beacon-tool.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-facet.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-beacon.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-transcript-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-protein-view.html">
@@ -242,14 +243,22 @@
 
                 <div class="collapse content" id="analysis">
                     <variant-analysis mode="analysis" title="Variant Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                      config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
+                                      config="{{config.tools.clinical}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
                                       opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
+
 
                     </variant-analysis>
                 </div>
 
+                <div class="collapse content" id="facet">
+                    <variant-facet title="Facet Analysis" project="{{project}}" study="{{study}}" studies="{{project.studies}}" config="{{config.tools.facet}}" opencga-client="{{opencgaClient}}"
+                                   cellbase-client="{{cellbaseClient}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                   consequence-types="{{consequenceTypes}}">
+                    </variant-facet>
+                </div>
+
                 <div class="collapse content" id="beacon">
-                    <beacon-tool opencga-client="{{opencgaClient}}" studies="{{project.studies}}"></beacon-tool>
+                    <variant-beacon opencga-client="{{opencgaClient}}" studies="{{project.studies}}" hosts="{{config.tools.beacon.hosts}}"></variant-beacon>
                 </div>
 
                 <div class="collapse content" id="genomeBrowser">
@@ -517,6 +526,11 @@
                     this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
                             let _projects = response.response[0].result;
+                            if (typeof _this.config.opencga.asUser !== "undefined" && _this.config.opencga.asUser !== "") {
+                                for (let p of _projects) {
+                                    p.alias = _this.config.opencga.asUser + "@" + p.alias;
+                                }
+                            }
                             _this._setup(_projects);
 
                             _this._checkBreadcrumbVisible();
