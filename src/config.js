@@ -20,7 +20,7 @@ var cellbase = {
 };
 
 var opencga = {
-    host: "bioinfodev.hpc.cam.ac.uk/bridge-1.0.0",
+    host: "bioinfodev.hpc.cam.ac.uk/bridge-1.0.0-solr",
     version: "v1",
     // asUser: "researchcga", // user@project:study
     projects: [
