@@ -30,13 +30,14 @@ module.exports = function(grunt) {
                     "./bower_components/bootstrap-table/dist/bootstrap-table.js",
                     "./bower_components/bootstrap-treeview/dist/bootstrap-treeview.js",
                     "./bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
+                    "./bower_components/moment/moment.js",
+                    "./bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
                     "./bower_components/underscore/underscore.js",
                     "./bower_components/backbone/backbone.js",
                     "./bower_components/highcharts-release/highcharts.js",
                     "./bower_components/qtip2/jquery.qtip.js",
                     "./bower_components/uri.js/src/URI.js",
                     "./bower_components/cookies-js/dist/cookies.js",
-                    "./bower_components/moment/moment.js",
                     "./bower_components/crypto-js/crypto-js.js"
                 ],
                 dest: "<%= build.path %>/vendors.js"
@@ -82,6 +83,7 @@ module.exports = function(grunt) {
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-table/dist/bootstrap-table.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-treeview/dist/bootstrap-treeview.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["fontawesome/css/font-awesome.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["qtip2/jquery.qtip.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "./bower_components", src: ["fontawesome/fonts/*"], dest: "<%= build.path %>/fonts" },
