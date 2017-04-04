@@ -751,7 +751,7 @@
                     } else {
 //                        this.gene = value;
 //                        this.tool = "#gene";
-                        query.gene = value;
+                        query.gene = value.toUpperCase(); // To support case-insensitive search
                     }
 
                     // This query object is built for variant browser. Only when the queries to browser are made, we are setting the tool to browser
