@@ -59,7 +59,12 @@ var application = {
         },
         {
             id: "analysis",
-            title: "Analysis",
+            title: "Clinical",
+            visibility: "public"
+        },
+        {
+            id: "facet",
+            title: "Facets (New!)",
             visibility: "public"
         },
         {
@@ -72,11 +77,6 @@ var application = {
             title: "Tools",
             visibility: "public",
             submenu: [
-                {
-                    id: "facet",
-                    title: "Facet Analysis (New!)",
-                    visibility: "public"
-                },
                 {
                     id: "ibs",
                     title: "IBS",
