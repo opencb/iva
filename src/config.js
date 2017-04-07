@@ -311,6 +311,17 @@ var tools = {
         ]
     },
     clinical: {
+        variableSet: {
+            name: 'clinical_vs',
+            exclude:
+                [
+                    {
+                        webComponent: 'variant-samples-filter',
+                        variables: ['HPO', 'diagnosis']
+                    }
+                ],
+
+        },
         chromosomal_gender:
             [
                 {
