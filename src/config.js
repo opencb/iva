@@ -178,8 +178,14 @@ var tools = {
     gene: {
         protein: {
             color: {
-                missense_variant: "blue",
-                stop_gained: "red"
+                synonymous_variant: "blue",
+                coding_sequence_variant: "blue",
+                missense_variant: "orange",
+                protein_altering_variant: "orange",
+                start_lost: "red",
+                stop_gained: "red",
+                stop_lost: "red",
+                stop_retained_variant: "red"
             }
         }
     },
