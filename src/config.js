@@ -258,25 +258,7 @@ var tools = {
                 ],
 
         },
-        chromosomal_gender:
-            [
-                {
-                    id: "46_xx",
-                    title:"46,XX"
-                },
-                {
-                    id: "46_xy",
-                    title:"46,XY"
-                },
-                {
-                    id: "other",
-                    title:"Other"
-                },
-                {
-                    id: "ne",
-                    title:"NE"
-                },
-            ],
+        chromosomal_gender: [ "XX", "XY", "XO", "XXY", "XXX", "XXYY", "XXXY", "XXXX", "XYY", "OTHER", "UNKNOWN" ],
         ethnicity:
             [
                 {
