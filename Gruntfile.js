@@ -59,8 +59,8 @@ module.exports = function(grunt) {
             },
             genomeViewer: {
                 src: [
-                    "./lib/jsorolla/build/2.0.0-beta/genome-viewer/gv-config.js",
-                    "./lib/jsorolla/build/2.0.0-beta/genome-viewer/genome-viewer.js"
+                    "./lib/jsorolla/src/genome-browser/gv-config.js",
+                    "./lib/jsorolla/src/genome-browser/genome-viewer.js"
                 ],
                 dest: "<%= build.path %>/genome-viewer.js"
             }
