@@ -45,7 +45,7 @@ var opencga = {
 var application = {
     title: "IVA",
     version: "v0.8.0",
-    logo: "images/opencb-logo.png",
+    logo: "img/opencb-logo.png",
     menu: [
         {
             id: "browser",
