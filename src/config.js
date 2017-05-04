@@ -15,7 +15,7 @@
  */
 
 var cellbase = {
-    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-rc"],
+    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-rc.1.1"],
     version: "v4"
 };
 
@@ -176,8 +176,14 @@ var tools = {
     gene: {
         protein: {
             color: {
-                missense_variant: "blue",
-                stop_gained: "red"
+                synonymous_variant: "blue",
+                coding_sequence_variant: "blue",
+                missense_variant: "orange",
+                protein_altering_variant: "orange",
+                start_lost: "red",
+                stop_gained: "red",
+                stop_lost: "red",
+                stop_retained_variant: "red"
             }
         }
     },
@@ -245,6 +251,17 @@ var tools = {
         ]
     },
     clinical: {
+        variableSet: {
+            name: 'clinical_vs',
+            exclude:
+                [
+                    {
+                        webComponent: 'variant-samples-filter',
+                        variables: ['HPO', 'diagnosis']
+                    }
+                ],
+
+        },
         chromosomal_gender:
             [
                 {
