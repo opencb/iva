@@ -59,22 +59,22 @@ var application = {
         {
             id: "prioritization",
             title: "Prioritization",
-            visibility: "private",
+            visibility: "none",
         },
         {
             id: "beacon",
             title: "Beacon",
-            visibility: "private"
+            visibility: "public"
         },
         {
             id: "analysis",
             title: "Clinical",
-            visibility: "private"
+            visibility: "none"
         },
         {
             id: "tools",
             title: "Tools",
-            visibility: "private",
+            visibility: "none",
             submenu: [
                 {
                     id: "ibs",
