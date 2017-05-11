@@ -51,6 +51,7 @@
     <script src="config.js"></script>
     <!-- Load PanelApps!-->
     <script src="panels.js"></script>
+    <script src="icd10.js"></script>
 
     <!-- Load IVA CSS styles -->
     <!-- build:css css/bootstrap.min.css -->
@@ -112,27 +113,64 @@
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud.css" />-->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>-->
 
+    <!-- We load JSorolla dependencies -->
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/visualisation/lollipop.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/opencga/variant/variant-utils.js"></script>
 
-
-    <!-- New REST clients are implemented with Javascript 6, this cannot be minified yet -->
-    <!-- build:js jsorolla-clients.js -->
-    <script type="text/javascript" src="../lib/jsorolla/src/lib/cache/indexeddb-cache.js"></script>
     <script type="text/javascript" src="../lib/jsorolla/src/lib/clients/cellbase-client-config.js"></script>
     <script type="text/javascript" src="../lib/jsorolla/src/lib/clients/cellbase-client.js"></script>
     <script type="text/javascript" src="../lib/jsorolla/src/lib/clients/opencga-client-config.js"></script>
     <script type="text/javascript" src="../lib/jsorolla/src/lib/clients/opencga-client.js"></script>
     <script type="text/javascript" src="../lib/jsorolla/src/lib/clients/rest-client.js"></script>
+
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/feature-binary-search-tree.js"></script>
     <script type="text/javascript" src="../lib/jsorolla/src/lib/utils.js"></script>
     <script type="text/javascript" src="../lib/jsorolla/src/lib/svg.js"></script>
-    <script type="text/javascript" src="../lib/jsorolla/src/lib/visualisation/lollipop.js"></script>
-    <script type="text/javascript" src="../lib/jsorolla/src/lib/opencga/variant/variant-utils.js"></script>
-    <!-- /build -->
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/region.js"></script>
 
-    <!-- We load the dependencies for displaying Genome Maps -->
-    <!-- build:js genome-viewer.js -->
-    <script type="text/javascript" src="../lib/jsorolla/build/2.0.0-beta/genome-viewer/gv-config.js"></script>
-    <script type="text/javascript" src="../lib/jsorolla/build/2.0.0-beta/genome-viewer/genome-viewer.js"></script>
-    <!-- /build -->
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/cache/indexeddb-cache.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/cache/file-feature-cache.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/cache/feature-chunk-cache.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/cache/memory-store.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/cache/indexedDB-store.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/cache/bam-cache.js"></script>
+
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/data-adapter/feature/feature-template-adapter.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/data-adapter/feature/feature-data-adapter.js"></script>
+    <!-- ES6 -->
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/data-adapter/feature/cellbase-adapter-new.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/data-adapter/feature/opencga-adapter-new.js"></script>
+
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/widgets/feature/info/info-widget.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/widgets/feature/info/gene-info-widget.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/widgets/feature/info/protein-info-widget.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/widgets/feature/info/snp-info-widget.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/widgets/feature/info/transcript-info-widget.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/widgets/feature/info/vcf-variant-info-widget.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/widgets/ux-window.js"></script>
+
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/navigation-bar.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/chromosome-panel.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/karyotype-panel.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/status-bar.js"></script>
+
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/tracks/tracklist-panel.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/tracks/track.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/tracks/feature-track.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/tracks/gene-track.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/tracks/alignment-track.js"></script>
+
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/renderers/renderer.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/renderers/feature-renderer.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/renderers/feature-cluster-renderer.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/renderers/sequence-renderer.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/renderers/histogram-renderer.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/renderers/gene-renderer.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/renderers/alignment-renderer.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/renderers/variant-renderer.js"></script>
+
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/gv-config.js"></script>
+    <script type="text/javascript" src="../lib/jsorolla/src/genome-browser/genome-viewer.js"></script>
 
     <!-- Loading iva-app component -->
     <link rel="import" href="iva-app.html">
@@ -144,8 +182,11 @@
         function setTitle() {
             $("title").text(application.title);
         }
+
     </script>
+
     <iva-app></iva-app>
+
 </body>
 
 </html>
