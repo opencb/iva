@@ -30,6 +30,7 @@ module.exports = function(grunt) {
                     "./bower_components/bootstrap-table/dist/bootstrap-table.js",
                     "./bower_components/bootstrap-treeview/dist/bootstrap-treeview.js",
                     "./bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
+                    "./bower_components/bootstrap-validator/dist/validator.js",
                     "./bower_components/moment/moment.js",
                     "./bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
                     "./bower_components/underscore/underscore.js",
@@ -103,6 +104,7 @@ module.exports = function(grunt) {
                     {   expand: true, cwd: "src", src: ["index.html"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["config.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["panels.js"], dest: "<%= build.path %>/" },
+                    {   expand: true, cwd: "src", src: ["icd10.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "./", src: ["LICENSE"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src/img/", src: ["*"], dest: "<%= build.path %>/img" }
                 ]
