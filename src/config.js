@@ -569,10 +569,14 @@ var consequenceTypes = {
         low: "blue",
         modifier: "green"
     },
-    /* 'Title' is optional. if there is no title provided then 'name' is going to be used.
-     There are two more optional properties - 'checked' and 'color'. They can be set to display them default in web application.
-     Similarly 'description' is optional as well.
-     */
+
+    // Loss-of-function SO terms
+    lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
+        "stop_lost,start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
+
+    // 'Title' is optional. if there is not title provided then 'name' will be used.
+    //  There are two more optional properties - 'checked' and 'color'. They can be set to display them default in web application.
+    //  Similarly 'description' is optional as well.
     categories: [
         {
             id: "",
