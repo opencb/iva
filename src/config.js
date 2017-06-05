@@ -58,7 +58,7 @@ var application = {
             visibility: "public",
         },
         {
-            id: "analysis",
+            id: "clinical",
             title: "Clinical",
             visibility: "public"
         },
