@@ -102,9 +102,10 @@ module.exports = function(grunt) {
                     {   flatten: true, expand: true, cwd: "./lib", src: ["jsorolla/styles/img/*"], dest: "<%= build.path %>/img" },
                     {   expand: true, cwd: "./bower_components", src: ["polymer/*"], dest: "<%= build.vendor %>" },
                     {   expand: true, cwd: "src", src: ["index.html"], dest: "<%= build.path %>/" },
-                    {   expand: true, cwd: "src", src: ["config.js"], dest: "<%= build.path %>/" },
-                    {   expand: true, cwd: "src", src: ["panels.js"], dest: "<%= build.path %>/" },
-                    {   expand: true, cwd: "src", src: ["icd10.js"], dest: "<%= build.path %>/" },
+                    {   expand: true, cwd: "src", src: ["conf/config.js"], dest: "<%= build.path %>/" },
+                    {   expand: true, cwd: "src", src: ["conf/tools.js"], dest: "<%= build.path %>/" },
+                    {   expand: true, cwd: "src", src: ["conf/panels.js"], dest: "<%= build.path %>/" },
+                    {   expand: true, cwd: "src", src: ["conf/icd10.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "./", src: ["LICENSE"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src/img/", src: ["*"], dest: "<%= build.path %>/img" }
                 ]
