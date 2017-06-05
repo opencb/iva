@@ -191,7 +191,7 @@
                 </div>
             </div>
             <div class="form-group row" style="float: right;">
-                    <button type="button" class="btn btn-primary" on-click="buildConfig">OK</button>
+                <button type="button" class="btn btn-primary" on-click="buildConfig">OK</button>
             </div>
         </div>
 
@@ -293,11 +293,14 @@
                 let _this = this;
                 if (this.opencgaClient instanceof OpenCGAClient && typeof config.value.sessionId !== "undefined") {
                     this.opencgaClient.users().getConfig("iva", {}, {})
-                            .then(function (response) {
-                                _this.assignValues(_this.defaultConfig); // Set the default config first
-                                _this.assignValues(response.response[0].result[0]); // Update the ones returned in the result
-                                _this.fire("config", {config: response.response[0].result[0]});
-                            });
+                        .then(function (response) {
+                            _this.assignValues(_this.defaultConfig); // Set the default config first
+                            _this.assignValues(response.response[0].result[0]); // Update the ones returned in the result
+                            _this.fire("config", {config: response.response[0].result[0]});
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                 }
             },
             assignValues: function(config) {
@@ -349,10 +352,10 @@
                 }
                 let _this = this;
                 if (Object.keys(this.config).length > 0 && this.opencgaClient instanceof OpenCGAClient) {
-                     this.opencgaClient.users().updateConfig("iva", this.config, {})
-                             .then(function (response) {
-                                 _this.fire("config", {config: response.response[0].result[0]});
-                             });
+                    this.opencgaClient.users().updateConfig("iva", this.config, {})
+                        .then(function (response) {
+                            _this.fire("config", {config: response.response[0].result[0]});
+                        });
                 }
 
             },
