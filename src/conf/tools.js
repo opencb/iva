@@ -274,5 +274,18 @@ var tools = {
                     title: "ne/unknown"
                 }
             ],
+        cell_line:
+        [
+            {
+                id: "germline",
+                title: "constitutive (germline)",
+                checked: "true"
+            },
+            {
+                id: "somatic",
+                title: "somatic",
+                checked: "false"
+            }
+        ]
     }
 };
