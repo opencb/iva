@@ -20,7 +20,7 @@
 
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
-<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-analysis.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-clinical.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-beacon.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
@@ -241,11 +241,11 @@
                     </variant-prioritization>
                 </div>
 
-                <div class="collapse content" id="analysis">
-                    <variant-analysis title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                <div class="collapse content" id="clinical">
+                    <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
                                       config="{{config.tools.clinical}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
                                       opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
-                    </variant-analysis>
+                    </variant-clinical>
                 </div>
 
                 <div class="collapse content" id="facet">
