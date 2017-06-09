@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                     "./bower_components/jquery/dist/jquery.js",
                     "./bower_components/bootstrap/dist/js/bootstrap.js",
                     "./bower_components/bootstrap-table/dist/bootstrap-table.js",
-                    "./bower_components/bootstrap-treeview/dist/bootstrap-treeview.js",
+                    "./bower_components/bootstrap-treeview/src/js/bootstrap-treeview.js",
                     "./bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
                     "./bower_components/bootstrap-validator/dist/validator.js",
                     "./bower_components/moment/moment.js",
