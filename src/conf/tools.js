@@ -211,33 +211,21 @@ var tools = {
         status:
             [
                 {
-                    id: "affected",
-                    title: "affected"
+                    id: "AFFECTED",
+                    title: "Affected"
                 },
                 {
-                    id: "parent",
-                    title: "parent"
+                    id: "UNAFFECTED",
+                    title: "Unaffected"
                 },
                 {
-                    id: "obligate_carrierX",
-                    title: "obligate carrier chrX"
+                    id: "HEALTHY_CONTROL",
+                    title: "Healthy Control"
                 },
                 {
-                    id: "obligate_carrier1_22",
-                    title: "obligate carrier chr1-22"
+                    id: "UNKNOWN",
+                    title: "Unknown"
                 },
-                {
-                    id: "relative",
-                    title: "relative (of an affected individual and different of parents)"
-                },
-                {
-                    id: "healthy",
-                    title: "healthy control"
-                },
-                {
-                    id: "unknown",
-                    title: "unknown"
-                }
             ],
         sample_type:
             [
