@@ -109,7 +109,7 @@ var opencga = {
 
 var application = {
     title: "HGVA",
-    version: "v1.0.0",
+    version: "v1.1.0",
     logo: "img/opencb-logo.png",
     menu: [
         {
