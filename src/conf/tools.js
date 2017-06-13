@@ -220,12 +220,43 @@ var tools = {
                 },
                 {
                     id: "HEALTHY_CONTROL",
-                    title: "Healthy Control"
+                    title: "Control"
                 },
                 {
                     id: "UNKNOWN",
                     title: "Unknown"
                 },
+            ],
+        life_status:
+            [
+                {
+                    id: "ALIVE",
+                    title: "Alive"
+                },
+                {
+                    id: "ABORTED",
+                    title: "Aborted"
+                },
+                {
+                    id: "DECEASED",
+                    title: "Deceased"
+                },
+                {
+                    id: "UNBORN",
+                    title: "Unborn"
+                },
+                {
+                    id: "STILLBORN",
+                    title: "Still-born"
+                },
+                {
+                    id: "MISCARRIAGE",
+                    title: "Miscarriage"
+                },
+                {
+                    id: "UNKNOWN",
+                    title: "Unknown"
+                }
             ],
         sample_type:
             [
