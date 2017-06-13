@@ -23,6 +23,7 @@ var cellbase = {
 var opencga = {
     // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
     host: "bioinfodev.hpc.cam.ac.uk/hgva-1.2.0-dev",
+    // host: "193.147.175.128:8080/opencga-1.2.0-dev",
     version: "v1",
     // asUser: "researchcga", // user@project:study
     projects: [
