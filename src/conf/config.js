@@ -22,9 +22,9 @@ var cellbase = {
 
 var opencga = {
     // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
-    host: "10.5.6.5:9090/opencga",
+    host: "https://bio-prod-opencga-haproxy-01.gel.zone/opencga",
     version: "v1",
-    asUser: "researchcga", // user@project:study
+    // asUser: "researchcga", // user@project:study
     projects: [
         // {
         //     name: "ProjectA",
@@ -46,12 +46,12 @@ var opencga = {
 var application = {
     title: "GEL",
     version: "v0.8.0",
-    logo: "images/opencb-logo.png",
+    logo: "images/Genomics-England-logo-2015.png",
     menu: [
         {
             id: "browser",
             title: "Variant Browser",
-            visibility: "public",
+            visibility: "private",
         },
         {
             id: "prioritization",
@@ -66,12 +66,12 @@ var application = {
         {
             id: "clinical",
             title: "Clinical",
-            visibility: "public"
+            visibility: "none"
         },
         {
             id: "facet",
             title: "Facets (New!)",
-            visibility: "public"
+            visibility: "private"
         },
         {
             id: "beacon",
