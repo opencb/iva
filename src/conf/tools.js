@@ -219,7 +219,7 @@ var tools = {
                     title: "Unaffected"
                 },
                 {
-                    id: "HEALTHY_CONTROL",
+                    id: "CONTROL",
                     title: "Control"
                 },
                 {
