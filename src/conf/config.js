@@ -76,7 +76,7 @@ var application = {
         {
             id: "beacon",
             title: "Beacon",
-            visibility: "none"
+            visibility: "private"
         },
         {
             id: "tools",
