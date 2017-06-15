@@ -15,7 +15,8 @@
  */
 
 var cellbase = {
-    hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-rc"],
+    //hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-rc.1.1"],
+    hosts: ["bioinfo.hpc.cam.ac.uk/cellbase"],
     version: "v4"
 };
 
@@ -44,7 +45,7 @@ var opencga = {
 
 var application = {
     title: "GEL",
-    version: "v0.1.0",
+    version: "v0.8.0",
     logo: "images/opencb-logo.png",
     menu: [
         {
@@ -63,6 +64,16 @@ var application = {
             visibility: "none"
         },
         {
+            id: "clinical",
+            title: "Clinical",
+            visibility: "public"
+        },
+        {
+            id: "facet",
+            title: "Facets (New!)",
+            visibility: "public"
+        },
+        {
             id: "beacon",
             title: "Beacon",
             visibility: "none"
@@ -72,11 +83,6 @@ var application = {
             title: "Tools",
             visibility: "none",
             submenu: [
-                {
-                    id: "facet",
-                    title: "Facet Analysis (New!)",
-                    visibility: "public"
-                },
                 {
                     id: "ibs",
                     title: "IBS",
@@ -129,96 +135,6 @@ var application = {
     breadcrumb: {
         title: "Projects",
         visibility: "private"
-    }
-};
-
-var tools = {
-    browser: {
-        user: "researchcga",
-        cohorts: {
-            // "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-            // "EXAC": [{id: "ALL", name: "All"}]
-        },
-        missing: true,
-        filters: [
-            {
-                name: "Example BRCA2",
-                query: {
-                    gene: "BRCA2",
-                    conservation: "phylop<0.001"
-                }
-            },
-            {
-                name: "Example OR11",
-                query: {
-                    gene: "OR11H1",
-                    conservation: "phylop<=0.001"
-                }
-            }
-        ]
-    },
-    prioritization: {
-        segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"],
-        filters: [
-            {
-                name: "Example BRCA2",
-                query: {
-                    gene: "BRCA2",
-                    conservation: "phylop<0.001"
-                }
-            },
-            {
-                name: "Example OR11",
-                query: {
-                    gene: "OR11H1",
-                    conservation: "phylop<=0.001"
-                }
-            }
-        ]
-    },
-    gene: {
-        protein: {
-            color: {
-                missense_variant: "blue",
-                stop_gained: "red"
-            }
-        }
-    },
-    facet: {
-        facetFields: [
-            {
-                name: "Chromosome",
-                value: "chromosome"
-            },
-            {
-                name: "Studies",
-                value: "studies"
-            },
-            {
-                name: "Variant Type",
-                value: "type"
-            },
-            {
-                name: "Genes",
-                value: "genes"
-            },
-            {
-                name: "Biotypes",
-                value: "biotypes"
-            },
-            {
-                name: "Consequence Type",
-                value: "soAcc"
-            }
-        ],
-        facetRangeFields: [
-            "phastCons", "phylop", "gerp", "caddRaw", "caddScaled", "sift", "polyphen"
-        ]
-    },
-    beacon: {
-        hosts: [
-            "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
-        ]
     }
 };
 
@@ -336,10 +252,14 @@ var consequenceTypes = {
         low: "blue",
         modifier: "green"
     },
-    /* 'Title' is optional. if there is no title provided then 'name' is going to be used.
-     There are two more optional properties - 'checked' and 'color'. They can be set to display them default in web application.
-     Similarly 'description' is optional as well.
-     */
+
+    // Loss-of-function SO terms
+    lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
+        "stop_lost,start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
+
+    // 'Title' is optional. if there is not title provided then 'name' will be used.
+    //  There are two more optional properties - 'checked' and 'color'. They can be set to display them default in web application.
+    //  Similarly 'description' is optional as well.
     categories: [
         {
             id: "",

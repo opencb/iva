@@ -20,7 +20,7 @@
 
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">
-<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-analysis.html">
+<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-clinical.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-beacon.html">
 <link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">
@@ -141,10 +141,10 @@
                                             {{userId}} <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#dashboard"><i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a></li>
+                                            <!--<li><a href="#dashboard"><i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a></li>-->
                                             <li><a href="#projects"><i class="fa fa-database" aria-hidden="true"></i> Projects</a></li>
                                             <li><a href="#samples"><i class="fa fa-users" aria-hidden="true"></i> Samples</a></li>
-                                            <li><a href="#upload"><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>
+                                            <!--<li><a href="#upload"><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>-->
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
                                         </ul>
@@ -236,17 +236,16 @@
 
                 <div class="collapse content" id="prioritization">
                     <variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                            config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                                            opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" on-gene="geneSelected">
+                                            config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                            consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
 
-                <div class="collapse content" id="analysis">
-                    <variant-analysis mode="analysis" title="Variant Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                      config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                      consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
-
-                    </variant-analysis>
+                <div class="collapse content" id="clinical">
+                    <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                                      config="{{config.tools.clinical}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
+                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
+                    </variant-clinical>
                 </div>
 
                 <div class="collapse content" id="facet">
@@ -257,12 +256,12 @@
                 </div>
 
                 <div class="collapse content" id="beacon">
-                    <variant-beacon opencga-client="{{opencgaClient}}" studies="{{project.studies}}" hosts="{{config.tools.beacon.hosts}}"></variant-beacon>
+                    <variant-beacon opencga-client="{{opencgaClient}}" project="{{project}}" studies="{{project.studies}}" hosts="{{config.tools.beacon.hosts}}"></variant-beacon>
                 </div>
 
                 <div class="collapse content" id="genomeBrowser">
                     Not implemented yet.
-                    <!--<genome-context></genome-context>-->
+                    <!--<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>-->
                 </div>
 
                 <div class="collapse content feature-view" id="gene">
@@ -301,7 +300,7 @@
 
                 <div class="collapse content" id="upload" style="width: 40%; margin-left: 2%">
                     <br>
-                    <opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{project.studies}}"></opencga-upload-file>
+                    <!--<opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{project.studies}}"></opencga-upload-file>-->
                 </div>
 
                 <div class="collapse content" id="projects" style="width: 60%; margin: auto">
@@ -747,7 +746,7 @@
                         this.transcript = value;
                         this.tool = "#transcript";
                     } else {
-                        this.gene = value;
+                        this.gene = value.toUpperCase();
                         this.tool = "#gene";
                     }
 
