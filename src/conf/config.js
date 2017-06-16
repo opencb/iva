@@ -46,7 +46,7 @@ var opencga = {
 var application = {
     title: "GEL",
     version: "v0.8.0",
-    logo: "images/Genomics-England-logo-2015.png",
+    logo: "img/Genomics-England-logo-2015.png",
     menu: [
         {
             id: "browser",
