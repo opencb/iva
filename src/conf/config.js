@@ -16,7 +16,7 @@
 
 var cellbase = {
     //hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-rc.1.1"],
-    hosts: ["bioinfo.hpc.cam.ac.uk/cellbase"],
+    hosts: ["bio-cellbase-cbse01.biohpc.gel.zone:8080/cellbase-4.5.0-rc.1"],
     version: "v4"
 };
 
