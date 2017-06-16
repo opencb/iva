@@ -99,12 +99,17 @@
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible" >
-                                                    <template is="dom-if" if="{{!item.separator}}">
-                                                        <li on-click="changeTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
+                                                <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible">
+                                                    <template is="dom-if" if="{{item.category}}">
+                                                        <li><a><label>{{item.title}}</label></a></li>
                                                     </template>
                                                     <template is="dom-if" if="{{item.separator}}">
                                                         <li role="separator" class="divider"></li>
+                                                    </template>
+                                                    <template is="dom-if" if="{{!item.category}}">
+                                                        <template is="dom-if" if="{{!item.separator}}">
+                                                            <li on-click="changeTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
+                                                        </template>
                                                     </template>
                                                 </template>
                                             </ul>

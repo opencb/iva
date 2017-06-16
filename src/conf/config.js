@@ -83,9 +83,15 @@ var application = {
                     title: "IBS",
                     visibility: "public"
                 },
+
                 {
                     id: "burden",
                     title: "Burden Test",
+                    visibility: "public"
+                },
+                {
+                    id: "saturation",
+                    title: "Saturation",
                     visibility: "public"
                 },
                 {
@@ -93,13 +99,13 @@ var application = {
                     visibility: "public"
                 },
                 {
-                    id: "exporter",
-                    title: "Exporter",
+                    title: "Export",
+                    category: true,
                     visibility: "public"
                 },
                 {
-                    id: "saturation",
-                    title: "Saturation",
+                    id: "exporter",
+                    title: "Exporter",
                     visibility: "public"
                 }
             ]
