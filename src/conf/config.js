@@ -15,16 +15,13 @@
  */
 
 var cellbase = {
-    //hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-rc.1.1"],
     hosts: ["bio-cellbase-cbse01.biohpc.gel.zone:8080/cellbase-4.5.0-rc.1"],
     version: "v4"
 };
 
 var opencga = {
-    // host: "bioinfodev.hpc.cam.ac.uk/opencga-1.0.0-rc3",
     host: "https://bio-prod-opencga-haproxy-01.gel.zone/opencga",
     version: "v1",
-    // asUser: "researchcga", // user@project:study
     projects: [
         // {
         //     name: "ProjectA",
