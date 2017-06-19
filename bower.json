@@ -22,7 +22,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "~1.6.1",
+    "polymer": "~1.9.2",
     "bootstrap": "3.3.6",
     "bootstrap-table": "1.11.0",
     "bootstrap-treeview": "1.2.0",
