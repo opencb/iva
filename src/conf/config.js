@@ -54,14 +54,40 @@ var application = {
             visibility: "public",
         },
         {
-            id: "prioritization",
-            title: "Prioritization",
-            visibility: "public",
-        },
-        {
             id: "clinical",
             title: "Clinical",
             visibility: "public"
+        },
+        {
+            id: "analysis",
+            title: "Analysis",
+            visibility: "public",
+            submenu: [
+                {
+                    id: "prioritization",
+                    title: "Prioritization",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
+                    title: "Interpretation",
+                    category: true,
+                    visibility: "public"
+                },
+                {
+                    id: "tiering",
+                    title: "GEL Tiering (Family)",
+                    visibility: "public",
+                },
+                {
+                    id: "cancer",
+                    title: "Cancer",
+                    visibility: "public",
+                }
+            ]
         },
         {
             id: "facet",
@@ -83,15 +109,9 @@ var application = {
                     title: "IBS",
                     visibility: "public"
                 },
-
                 {
                     id: "burden",
                     title: "Burden Test",
-                    visibility: "public"
-                },
-                {
-                    id: "saturation",
-                    title: "Saturation",
                     visibility: "public"
                 },
                 {
@@ -101,6 +121,11 @@ var application = {
                 {
                     title: "Export",
                     category: true,
+                    visibility: "public"
+                },
+                {
+                    id: "saturation",
+                    title: "Saturation",
                     visibility: "public"
                 },
                 {
