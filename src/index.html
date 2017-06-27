@@ -87,11 +87,18 @@
     <link rel="stylesheet" href="../lib/jsorolla/styles/css/style.css">
     <!-- /build -->
 
+    <script>
+        // Force all polyfills on
+//        window.customElements = true;
+//        window.customElements.forcePolyfill = true;
+//        window.ShadyDOM = { force: true };
+//        window.ShadyCSS = { shimcssproperties: true};
+    </script>
     <!-- Load IVA Javascript dependencies -->
     <!-- build:js vendors.min.js -->
-    <script type="text/javascript" src="../node_modules/webcomponents.js/webcomponents-lite.js"></script>
+    <script type="text/javascript" src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
     <script type="text/javascript" src="../node_modules/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
@@ -189,7 +196,9 @@
 
     </script>
 
-    <iva-app></iva-app>
+    <iva-app>
+        <!--<slot></slot>-->
+    </iva-app>
 
 </body>
 

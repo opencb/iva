@@ -14,22 +14,23 @@
   ~ limitations under the License.
   -->
 
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/custom-style.html">
 
 <link rel="import" href="jso-styles.html">
 
 <dom-module id="welcome-web">
-
     <template>
-        <style is="custom-style" include="jso-styles"></style>
-        <style>
-            .center {
-                margin: auto;
-                text-align: justify;
-                font-size: 18px;
-                color: #797979;
-            }
-        </style>
+        <!--<custome-style>-->
+            <style include="jso-styles">
+                .center {
+                    margin: auto;
+                    text-align: justify;
+                    font-size: 18px;
+                    color: #797979;
+                }
+            </style>
+        <!--</custome-style>-->
 
         <!-- This is where main application is rendered -->
         <div class="center">
@@ -47,7 +48,7 @@
             <p style="font-size:14px">
                 IVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components,
                 so only modern web browsers are fully supported, these include Chrome 49+, Firefox 45+, Microsoft Edge 14+, Safari 10+ and Opera 36+.
-                </p>
+            </p>
             <br>
             <br>
             <br>
@@ -56,28 +57,62 @@
     </template>
 
     <script>
-        Polymer({
-            is: 'welcome-web',
-            properties: {
-                opencgaClient: {
-                    type: Object
-                },
-                host: {
-                    type: String,
-                    value: "http://bioinfodev.hpc.cam.ac.uk/hgva"
-                },
-                userId: {
-                    type: String,
-                    value: ""
-                },
-                project: {
-                    type: String,
-                    value: ""
-                },
-                study: {
-                    type: Object
+        //        Polymer({
+        //            is: 'welcome-web',
+        //            properties: {
+        //                opencgaClient: {
+        //                    type: Object
+        //                },
+        //                host: {
+        //                    type: String,
+        //                    value: "http://bioinfodev.hpc.cam.ac.uk/hgva"
+        //                },
+        //                userId: {
+        //                    type: String,
+        //                    value: ""
+        //                },
+        //                project: {
+        //                    type: String,
+        //                    value: ""
+        //                },
+        //                study: {
+        //                    type: Object
+        //                }
+        //            }
+        //        });
+
+        class Welcome extends Polymer.Element {
+
+            static get is() { return 'welcome-web'; }
+
+            static get properties() {
+                return {
+                    opencgaClient: {
+                        type: Object
+                    },
+                    host: {
+                        type: String,
+                        value: "http://bioinfodev.hpc.cam.ac.uk/hgva"
+                    },
+                    userId: {
+                        type: String,
+                        value: ""
+                    },
+                    project: {
+                        type: String,
+                        value: ""
+                    },
+                    study: {
+                        type: Object
+                    }
                 }
             }
-        });
+
+            constructor() {
+                super();
+            }
+        }
+
+        window.customElements.define(Welcome.is, Welcome);
     </script>
 </dom-module>
