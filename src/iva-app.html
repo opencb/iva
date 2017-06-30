@@ -162,7 +162,7 @@
 
                             <!-- Controls aligned to the RIGHT: settings and about-->
                             <ul class="nav navbar-nav navbar-right">
-                                <!--Projects to show in public mode-->
+                                <!--Projects to show in public mode-->Bread
                                 <template is="dom-if" if="{{_publicMode}}">
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -320,10 +320,10 @@
                 <!--</div>-->
 
                 <!--<div class="collapse content" id="clinical">-->
-                <!--<variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"-->
-                <!--config="{{config.tools.clinical}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"-->
-                <!--opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">-->
-                <!--</variant-clinical>-->
+                    <!--<variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"-->
+                        <!--config="{{config}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"-->
+                        <!--opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">-->
+                    <!--</variant-clinical>-->
                 <!--</div>-->
 
                 <!--<div class="collapse content" id="facet">-->
@@ -461,13 +461,16 @@
 
             ready() {
                 super.ready();
-
                 // Copy 'application' object from config.js file
                 this.config = application;
                 this.config.menu.counter = 0;
                 this.config.cellbase = cellbase;
-                this.config.opencga = opencga;
-                this.config.tools = tools;
+                //this.config.opencga = opencga;
+                //this.config.tools = tools;
+                this.set('config.tools', tools);
+                this.set('opencga', opencga);
+                this.set('config.opencga', opencga);
+
 
                 this.defaultConfig = {};
                 if (typeof populationFrequencies !== "undefined") {
@@ -735,7 +738,7 @@
                     ctx.tool = hashTool;
                 }
 
-//                $('.content').hide();
+                $('.content').hide();
                 $(hashTool).show();
 //                this.$["home"].style.display = 'inline';
 //                debugger
