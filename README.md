@@ -84,7 +84,7 @@ After this, in both cases, you **must** execute the following command to fetch t
 git submodule update --init
 ```
 
-Go to lib/jsorolla and checkout to ***next-v2.0.0*** branch of Jsorolla by 
+Go to lib/jsorolla and checkout to ***develop*** branch of Jsorolla by 
 
 ```
 cd lib/jsorolla
