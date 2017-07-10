@@ -27,6 +27,7 @@
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-browser.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-clinical.html">
+
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-facet.html">-->
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-beacon.html">-->
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">-->
@@ -516,7 +517,6 @@
                     this.$["home"].style.display = 'inline';
                     console.log($(this.tool))
                     console.log(this.$.home)
-                    debugger
                 }
 
                 this.init();
@@ -628,7 +628,6 @@
                 } else {
                     this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
-                            debugger
                             let _projects = response.response[0].result;
                             if (typeof _this.config.opencga.asUser !== "undefined" && _this.config.opencga.asUser !== "") {
                                 for (let p of _projects) {
