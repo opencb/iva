@@ -1,4 +1,4 @@
-<!--
+    <!--
   ~ Copyright 2015-2016 OpenCB
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +14,11 @@
   ~ limitations under the License.
   -->
 
-<!--<link rel="import" href="../bower_components/polymer/polymer.html">-->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/array-selector.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/custom-style.html">
-<!--<link rel="import" href="../bower_components/polymer/polymer.html">-->
 <link rel="import" href="jso-styles.html">
 <link rel="import" href="welcome.html">
 
@@ -52,20 +50,24 @@
                     font-size: 18px;
                     color: #797979;
                 }
+
                 .feature-view {
                     margin: auto;
                     text-align: justify;
                     width: 90%;
                 }
+
                 a.studies-menu {
                     color: #9d9d9d;
                 }
+
                 a.studies-menu:hover {
                     color: white;
                     text-decoration: none;
                     /*cursor: pointer;*/
                 }
-                .studies-scroll{
+
+                .studies-scroll {
                     max-height: 300px;
                     overflow-y: scroll;
                 }
@@ -79,7 +81,8 @@
 
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
@@ -88,7 +91,8 @@
                             <a href="#home" class="navbar-brand" style="padding-top: 10px" on-click="changeTool">
                                 <img src="{{config.logo}}" width="100px">
                             </a>
-                            <a class="navbar-brand" href="#home" on-click="changeTool"><b>{{config.title}} {{config.version}}</b></a>
+                            <a class="navbar-brand" href="#home" on-click="changeTool"><b>{{config.title}}
+                                {{config.version}}</b></a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -96,17 +100,22 @@
                             <!-- Controls aligned to the LEFT -->
                             <ul class="nav navbar-nav">
                                 <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                                <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
+                                <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible"
+                                          as="menuItem">
                                     <!-- If there is not submenu we just display a button -->
                                     <template is="dom-if" if="{{!menuItem.submenu}}">
-                                        <li on-click="changeTool"><a href$="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
+                                        <li on-click="changeTool"><a href$="#{{menuItem.id}}" role="button">{{menuItem.title}}</a>
+                                        </li>
                                     </template>
                                     <!-- If there is a submenu we create a dropdown menu item -->
                                     <template is="dom-if" if="{{menuItem.submenu}}">
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                               aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span
+                                                    class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible">
+                                                <template is="dom-repeat" items="{{menuItem.submenu}}"
+                                                          filter="_isMenuItemVisible">
                                                     <template is="dom-if" if="{{item.category}}">
                                                         <li><a><label>{{item.title}}</label></a></li>
                                                     </template>
@@ -115,7 +124,9 @@
                                                     </template>
                                                     <template is="dom-if" if="{{!item.category}}">
                                                         <template is="dom-if" if="{{!item.separator}}">
-                                                            <li on-click="changeTool"><a href$="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
+                                                            <li on-click="changeTool"><a href$="#{{item.id}}"
+                                                                                         data-id="{{item.id}}">{{item.title}}</a>
+                                                            </li>
                                                         </template>
                                                     </template>
                                                 </template>
@@ -166,14 +177,17 @@
                                 <!--Projects to show in public mode-->
                                 <template is="dom-if" if="{{_publicMode}}">
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                           aria-haspopup="true" aria-expanded="false">
                                             Studies <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu studies-menu studies-scroll">
                                             <template is="dom-repeat" items="{{projects}}" as="proj">
                                                 <li><a><b>{{proj.name}}</b></a></li>
                                                 <template is="dom-repeat" items="{{proj.studies}}" as="std">
-                                                    <li><a href="#" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
+                                                    <li><a href="#" data-study="{{std.alias}}"
+                                                           data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a>
+                                                    </li>
                                                 </template>
                                                 <!--<li role="separator" class="divider"></li>-->
                                             </template>
@@ -183,31 +197,39 @@
 
                                 <template is="dom-if" if="{{_logged}}">
                                     <!--User-->
-                                    <li><a style="padding: 0px; margin-top: 8px"><i class="fa fa-user fa-2x" aria-hidden="true"></i></a></li>
+                                    <li><a style="padding: 0px; margin-top: 8px"><i class="fa fa-user fa-2x"
+                                                                                    aria-hidden="true"></i></a></li>
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                           aria-haspopup="true" aria-expanded="false">
                                             {{userId}} <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <!--<li><a href="#dashboard"><i class="fa fa-line-chart" aria-hidden="true"></i> Dashboard</a></li>-->
-                                            <li><a href="#projects"><i class="fa fa-database" aria-hidden="true"></i> Projects</a></li>
-                                            <li><a href="#samples"><i class="fa fa-users" aria-hidden="true"></i> Samples</a></li>
+                                            <li><a href="#projects"><i class="fa fa-database" aria-hidden="true"></i>
+                                                Projects</a></li>
+                                            <li><a href="#samples"><i class="fa fa-users" aria-hidden="true"></i>
+                                                Samples</a></li>
                                             <!--<li><a href="#upload"><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>-->
                                             <li role="separator" class="divider"></li>
-                                            <li><a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a></li>
+                                            <li><a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i>
+                                                Settings</a></li>
                                         </ul>
                                     </li>
 
                                     <!--Studies dropdown menu-->
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                           aria-haspopup="true" aria-expanded="false">
                                             Studies <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <template is="dom-repeat" items="{{projects}}" as="proj">
                                                 <li><a><b>{{proj.name}}</b></a></li>
                                                 <template is="dom-repeat" items="{{proj.studies}}" as="std">
-                                                    <li><a href="#" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a></li>
+                                                    <li><a href="#" data-study="{{std.alias}}"
+                                                           data-project="{{proj.name}}" on-click="setProjectStudy">{{std.alias}}</a>
+                                                    </li>
                                                 </template>
                                                 <!--<li role="separator" class="divider"></li>-->
                                             </template>
@@ -220,10 +242,12 @@
                                 <template is="dom-if" if="{{_isMenuItemVisible(config.search)}}">
                                     <form class="navbar-form navbar-left" role="search">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="searchTextBox" placeholder="{{config.search.placeholder}}"
+                                            <input type="text" class="form-control" id="searchTextBox"
+                                                   placeholder="{{config.search.placeholder}}"
                                                    on-keyup="buildQuery" style="width: 170px;">
                                             <a style="cursor: pointer">
-                                                <span class="fa fa-search" aria-hidden="true" on-click="buildQuery"></span>
+                                                <span class="fa fa-search" aria-hidden="true"
+                                                      on-click="buildQuery"></span>
                                             </a>
                                         </div>
                                     </form>
@@ -231,27 +255,28 @@
 
                                 <!-- About dropdown menu-->
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <template is="dom-repeat" items="{{config.about}}">
-                                            <li><a href$="{{item.url}}" target="_blank"><i class$="{{item.icon}}" aria-hidden="true"></i> {{item.name}}</a></li>
+                                            <li><a href$="{{item.url}}" target="_blank"><i class$="{{item.icon}}"
+                                                                                           aria-hidden="true"></i>
+                                                {{item.name}}</a></li>
                                         </template>
                                     </ul>
                                 </li>
 
 
-
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Dropdown <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </li>
-
+                                <!--<li class="dropdown">-->
+                                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Dropdown <span class="caret"></span></a>-->
+                                <!--<ul class="dropdown-menu">-->
+                                <!--<li><a href="#">Action</a></li>-->
+                                <!--<li><a href="#">Another action</a></li>-->
+                                <!--<li><a href="#">Something else here</a></li>-->
+                                <!--<li role="separator" class="divider"></li>-->
+                                <!--<li><a href="#">Separated link</a></li>-->
+                                <!--</ul>-->
+                                <!--</li>-->
 
 
                                 <!-- Login/Logout button -->
@@ -294,7 +319,8 @@
 
 
             <!--Breadcrumb-->
-            <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
+            <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb"
+                style="margin-bottom: 1px;padding-left: 40px"></ol>
 
 
             <!-- This is where main application is rendered -->
@@ -306,10 +332,15 @@
 
             <div>
                 <div class="collapse content" id="browser">
-                    <variant-browser mode="browser" title="Variant Browser" host="{{opencga.host}}" project="{{project}}" study="{{study}}" studies="{{project.studies}}"
-                                     config="{{config.tools.browser}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                     consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                     beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}" query="{{_query}}" on-gene="geneSelected" summary="{{config.opencga.summary}}">
+                    <variant-browser mode="browser" title="Variant Browser" host="{{opencga.host}}"
+                                     project="{{project}}" study="{{study}}" studies="{{project.studies}}"
+                                     config="{{config.tools.browser}}"
+                                     population-frequencies="{{populationFrequencies}}"
+                                     protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                     consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}"
+                                     cellbase-client="{{cellbaseClient}}"
+                                     beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}" query="{{_query}}"
+                                     on-gene="geneSelected" summary="{{config.opencga.summary}}">
                     </variant-browser>
                 </div>
 
@@ -321,9 +352,13 @@
                 <!--</div>-->
 
                 <div class="collapse content" id="clinical">
-                    <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                        config="{{config.tools.clinical}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}" consequence-types="{{consequenceTypes}}"
-                        opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
+                    <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
+                                      study="{{study}}" samples="{{samples}}"
+                                      config="{{config.tools.clinical}}"
+                                      population-frequencies="{{populationFrequencies}}"
+                                      protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                      consequence-types="{{consequenceTypes}}"
+                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
                     </variant-clinical>
                 </div>
 
@@ -369,7 +404,8 @@
                 </div>
 
                 <div class="collapse content" id="login" style="width: 20%; margin: auto;">
-                    <opencga-login on-login="login" opencga-client="{{opencgaClient}}" opencga-client-config="{{opencgaClientConfig}}" login-text="Sign in"></opencga-login>
+                    <opencga-login on-login="login" opencga-client="{{opencgaClient}}"
+                                   opencga-client-config="{{opencgaClientConfig}}" login-text="Sign in"></opencga-login>
                 </div>
 
                 <!--<div class="collapse content" id="settings" style="width: 40%; margin: auto">-->
@@ -408,7 +444,9 @@
 
         class IvaApp extends Polymer.Element {
 
-            static get is() { return 'iva-app'; }
+            static get is() {
+                return 'iva-app';
+            }
 
             static get properties() {
                 return {
@@ -466,29 +504,27 @@
                 this.config = application;
                 this.config.menu.counter = 0;
                 this.config.cellbase = cellbase;
-                //this.config.opencga = opencga;
-                //this.config.tools = tools;
                 this.set('config.tools', tools);
                 this.set('opencga', opencga);
                 this.set('config.opencga', opencga);
 
 
                 this.defaultConfig = {};
-                if (typeof populationFrequencies !== "undefined") {
+                if (PolymerUtils.isNotUndefined(populationFrequencies)) {
                     this.populationFrequencies = populationFrequencies;
                     // Object.assign() doesn't do deep copy. To keep the default config object unchanged, color is copied into a new object and assigned.
                     let color = Object.assign({}, populationFrequencies.color);
                     this.defaultConfig.populationFrequencies = {color: color};
                 }
 
-                if (typeof proteinSubstitutionScores !== "undefined") {
+                if (PolymerUtils.isNotUndefined(proteinSubstitutionScores)) {
                     this.proteinSubstitutionScores = proteinSubstitutionScores;
                     let sift = Object.assign({}, proteinSubstitutionScores.sift);
                     let polyphen = Object.assign({}, proteinSubstitutionScores.polyphen);
                     this.defaultConfig.proteinSubstitutionScores = {sift: sift, polyphen: polyphen};
                 }
 
-                if (typeof consequenceTypes !== "undefined") {
+                if (PolymerUtils.isNotUndefined(consequenceTypes)) {
                     this.consequenceTypes = consequenceTypes;
                     let color = Object.assign({}, consequenceTypes.color);
                     this.defaultConfig.consequenceTypes = {color: color};
@@ -500,11 +536,9 @@
                     _this.hashFragmentListener(_this);
                 };
 
-//                this._checkVersion();
-
                 // Remember the tool that was previously set
                 this.tool = window.location.hash.split('/')[0];
-                if (this.tool == "") {
+                if (PolymerUtils.isNotEmpty(this.tool)) {
                     this.tool = "#home";
                 }
 
@@ -523,7 +557,7 @@
 
                 // This must happen after calling to init() function since init() created the OpencgaClient
                 var sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
-                if (typeof sid !== "undefined" && sid != "" && !this._publicMode) {
+                if (PolymerUtils.isNotEmpty(sid) && !this._publicMode) {
                     this.login({
                         detail: {
                             userId: Cookies.get(this.config.opencga.cookie.prefix + "_userId"),
@@ -533,9 +567,9 @@
                 }
             }
 
-            attached() {
+            connectedCallback() {
+                super.connectedCallback();
                 this.config = Object.assign({}, this.config);
-
                 this.renderBreadcrumb();
             }
 
@@ -546,21 +580,15 @@
                 this.cellBaseClientConfig = new CellBaseClientConfig(this.config.cellbase.hosts, this.config.cellbase.version, "hsapiens");
                 this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
 
-                if (typeof this.config.opencga.projects !== "undefined" && this.config.opencga.projects.length > 0 && this._logged === false) {
+                if (PolymerUtils.isNotUndefined(this.config.opencga.projects) && this.config.opencga.projects.length > 0 && this._logged === false) {
                     // This web site is set up for browsing public data
                     this._publicMode = true;
                     this.projects = this.config.opencga.projects;
-                    // Setting default project and study
-//                    this.project = this.projects[0].alias;
-//                    this.study = this.projects[0].studies[0];
-//                    this.selectedProject = this.projects[0];
                     this.getProjects();
                 } else {
                     this._publicMode = false;
-//                    this.projects = [];
                     this.project = {};
-//                    this.study = {};
-//                    this.samples = [];
+//
                 }
 
                 this._checkBreadcrumbVisible();
@@ -588,7 +616,7 @@
             logout() {
                 var _this = this;
                 this.opencgaClient.users().logout()
-                    .then(function() {
+                    .then(function () {
                         _this._logout();
                     })
                     .catch(function () {
@@ -599,10 +627,11 @@
                         _this._logout();
                     });
             }
+
             changeTool(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
                 $('.content').hide(); // hides all content divs
-                if (typeof e.target !== "undefined" && typeof e.target.attributes.href !== "undefined") {
+                if (PolymerUtils.isNotUndefined(e.target) && PolymerUtils.isNotUndefined(e.target.attributes.href)) {
                     $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
                     this.tool = e.target.attributes.href.value;
                 } else {
@@ -611,7 +640,8 @@
 
                 this.renderHashFragments();
             }
-            getProjects () {
+
+            getProjects() {
                 var _this = this;
                 if (this._publicMode) {
                     // Get all projects with study info and call to _setup()
@@ -629,7 +659,7 @@
                     this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
                             let _projects = response.response[0].result;
-                            if (typeof _this.config.opencga.asUser !== "undefined" && _this.config.opencga.asUser !== "") {
+                            if (PolymerUtils.isNotEmpty(_this.config.opencga.asUser)) {
                                 for (let p of _projects) {
                                     p.alias = _this.config.opencga.asUser + "@" + p.alias;
                                 }
@@ -645,22 +675,23 @@
                         });
                 }
             }
-            _setup (projects) {
+
+            _setup(projects) {
                 // We check that at least one project with one study exist, otherwise we do not do anything
-                if (typeof projects !== "undefined" && projects.length > 0 && projects[0].studies.length > 0) {
+                if (PolymerUtils.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
                     this.projects = projects;
                     this.project = projects[0];
                     this.study = projects[0].studies[0];
 
                     let _this = this;
                     let projectPromises = [];
-                    projects.forEach(function(project) {
+                    projects.forEach(function (project) {
                         let studyPromises = [];
-                        project.studies.forEach(function(study) {
+                        project.studies.forEach(function (study) {
                             studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
                         });
                         projectPromises.push(Promise.all(studyPromises)
-                            .then(function(responses) {
+                            .then(function (responses) {
                                 let studies = [];
                                 responses.forEach(function (response) {
                                     let study = response.response[0].result[0];
@@ -673,37 +704,44 @@
 
                     let _projects = [];
                     Promise.all(projectPromises)
-                        .then(function(responses) {
+                        .then(function (responses) {
                             for (let i = 0; i < responses.length; i++) {
-                                _projects.push({id: _this.projects[i].id, alias: _this.projects[i].alias, name: _this.projects[i].name, studies: responses[i]});
+                                _projects.push({
+                                    id: _this.projects[i].id,
+                                    alias: _this.projects[i].alias,
+                                    name: _this.projects[i].name,
+                                    studies: responses[i]
+                                });
                             }
                             _this.studySummaries = _projects;
                         });
                 }
 
             }
+
             renderHashFragments() {
                 console.log("renderHashFragments - DEBUG")
 
                 let hashFrag = this.tool;
-                if (typeof this.project != "undefined" && typeof this.project.alias !== "undefined" && this.project.alias != "") {
+                if (PolymerUtils.isNotUndefined(this.project) && PolymerUtils.isNotEmpty(this.project.alias)) {
 
                     hashFrag += "/" + this.project.alias;
-                    if (typeof this.study != "undefined" && typeof this.study.alias !== "undefined" && this.study.alias != "") {
+                    if (PolymerUtils.isNotUndefined(this.study) && PolymerUtils.isNotEmpty(this.study.alias)) {
                         hashFrag += "/" + this.study.alias;
                     }
                 }
 
                 window.location.hash = hashFrag;
             }
+
             hashFragmentListener(ctx) {
                 console.log("hashFragmentListener - DEBUG")
                 var arr = window.location.hash.split('/');
                 let [hashTool, hashProject, hashStudy, feature] = arr;
 
                 // Stopping the recursive call
-                if (hashTool != this.tool || (typeof this.project !== "undefined" && hashProject != this.project.alias) ||
-                    (typeof this.study !== "undefined" && hashStudy != this.study.alias)) {
+                if (hashTool != this.tool || (PolymerUtils.isNotUndefined(this.project) && hashProject != this.project.alias) ||
+                    (PolymerUtils.isNotUndefined(this.study) && hashStudy != this.study.alias)) {
                     if (arr.length > 1) {
                         // Field 'project' is being observed, just in case Polymer triggers
                         // an unnecessary event we can check they are really different
@@ -725,7 +763,7 @@
                         }
                     }
 
-                    if (typeof feature !== 'undefined' && feature != "") {
+                    if (PolymerUtils.isNotEmpty(feature)) {
                         if (hashTool == "#protein") {
                             ctx.protein = feature;
                         } else if (feature.startsWith("ENST")) {
@@ -736,17 +774,18 @@
                     }
                     ctx.tool = hashTool;
                 }
-
                 $('.content').hide();
-                $(hashTool).show();
-//                this.$["home"].style.display = 'inline';
-//                debugger
+
+                PolymerUtils.hideByClass("content");
+                PolymerUtils.show(hashTool.replace("#",""));
+
             }
-            refreshConfig (e) {
+
+            refreshConfig(e) {
                 let colorConfig = e.detail.config;
                 let _this = this;
                 for (let key in colorConfig) {
-                    switch(key) {
+                    switch (key) {
                         case "consequenceTypes":
                             let ctColor = colorConfig[key].color;
                             for (let impact in ctColor) {
@@ -783,11 +822,10 @@
                     }
                 }
             }
+
             setProjectStudy(e) {
                 e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
-//                $('.content').hide();
-//                $('#studyInformation').show();
-//                this.tool = "studyInformation";
+
                 for (let i = 0; i < this.projects.length; i++) {
                     if (this.projects[i].name == e.target.dataProject) {
                         this.project = this.projects[i];
@@ -799,6 +837,7 @@
                     }
                 }
             }
+
             updateProject(e) {
                 for (let i = 0; i < this.projects.length; i++) {
                     if (this.projects[i].name == e.detail.project.name) { // getting the selected project from projects array
@@ -809,8 +848,9 @@
                 this.renderHashFragments();
                 this.renderBreadcrumb();
             }
+
             updateStudy(e) {
-                if (typeof e.detail.project !== "undefined" && e.detail.project.name != "") {
+                if (PolymerUtils.isNotUndefined(e.detail.project) && PolumerUtils.isNotEmpty(e.detail.project.name)) {
                     this.project = e.detail.project;
                 }
                 for (let i = 0; i < this.project.studies.length; i++) {
@@ -825,18 +865,20 @@
                 this.renderHashFragments();
                 this.renderBreadcrumb();
             }
+
             projectStudySampleChanged() {
                 console.log("projectStudySampleChanged - DEBUG")
 
                 this.renderHashFragments();
                 this.renderBreadcrumb();
             }
+
             buildQuery(e) {
                 let query = {};
                 let value = "";
-                if (typeof e !== "undefined" && typeof e.detail.value !== "undefined") {
+                if (PolymerUtils.isNotUndefined(e) && PolymerUtils.isNotUndefined(e.detail.value)) {
                     value = e.detail.value; // It takes care of the fired event from welcome.html
-                } else if (typeof e !== "undefined" && e.keyCode == '13' || typeof e !== "undefined" && e.type == "click") {
+                } else if (PolymerUtils.isNotUndefined(e) && e.keyCode == '13' || PolymerUtils.isNotUndefined(e) && e.type == "click") {
                     value = this.$.searchTextBox.value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
                 }
 
@@ -869,74 +911,71 @@
             }
 
             renderBreadcrumb() {
-////                var breadcrumbElement = Polymer.dom(this.root).querySelector("#breadcrumb");
-//                var breadcrumbElement = this.$.breadcrumb;
-//
-//                if (breadcrumbElement != null && typeof this.config !== "undefined") {
-//
-//                    // If there is no project in config, breadcrumb is set private so that it is shown only when logged in
-//                    if (typeof this.config.opencga.projects === "undefined" || this.config.opencga.projects.length == 0) {
-//                        this.config.breadcrumb.visibility = "private";
-//                    }
-//
-//                    // we empty everything
-////                    Polymer.dom(breadcrumbElement).innerHTML = "";
-//                    console.log(this.breadcrumbElement)
-//                    debugger
-//                    this.breadcrumbElement.innerHTML = "";
-//
-//                    // we add the 'Projects' link
-//                    let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, false, this.config.breadcrumb.title);
-//                    Polymer.dom(breadcrumbElement).appendChild(projects);
-//
-//                    // We first check if one study is selected, for this study must be defined and have at least one key
-//                    if (typeof this.study === "undefined" || Object.keys(this.study).length == 0) {
-//                        if (typeof this.project !== "undefined" && this.project != null) {
-//                            let project = this._createBreadcrumbElement(this.project.alias, true, "project"); // render only project if exists
-//                            Polymer.dom(breadcrumbElement).appendChild(project);
-//                        }
-//                    } else {
-//                        let project = this._createBreadcrumbElement(this.project.alias, false, "project");
-//                        Polymer.dom(breadcrumbElement).appendChild(project);
-//
-//                        if (typeof this.samples !== "undefined" && this.samples.length > 0) {
-//                            let study = this._createBreadcrumbElement(this.study.alias, false, "study");
-//                            let sampleNames = [];
-//                            for (let i in this.samples) {
-//                                sampleNames.push(this.samples[i].name);
-//                            }
-//                            let samples = this._createBreadcrumbElement(sampleNames.join(","), true, "sample");
-//                            Polymer.dom(breadcrumbElement).appendChild(study);
-//                            Polymer.dom(breadcrumbElement).appendChild(samples);
-//                        } else {
-//                            let study = this._createBreadcrumbElement(this.study.alias, true, "study");
-//                            Polymer.dom(breadcrumbElement).appendChild(study);
-//                        }
-//                    }
-//
-//                    let _this = this;
-//                    $(".breadcrumb li a").on('click', function(e) {
-//                        e.preventDefault();
-//                        $('.content').hide();
-//                        switch (e.target.dataset.category) {
-//                            case _this.config.breadcrumb.title:
-//                                $('#projects').show();
-//                                _this.tool = "projects";
-//                                break;
-//                            case "project":
-//                                $('#project').show();
-//                                _this.tool = "project";
-//                                break;
-//                            case "study":
-////                                $('#studyInformation').show();
-////                                _this.tool = "studyInformation";
-//                                $('#browser').show();
-//                                _this.tool = "browser";
-//                                break;
-//                        }
-//                        _this.renderHashFragments();
-//                    });
-//                }
+                var breadcrumbElement = PolymerUtils.getElementById("breadcrumb");
+
+                if (PolymerUtils.isNotNull(breadcrumbElement) && PolymerUtils.isNotUndefined(this.config)) {
+
+                    // If there is no project in config, breadcrumb is set private so that it is shown only when logged in
+                    if (PolymerUtils.isUndefined(this.config.opencga.projects) || this.config.opencga.projects.length == 0) {
+                        this.config.breadcrumb.visibility = "private";
+                    }
+
+                    // we empty everything
+                    console.log(this.breadcrumbElement)
+                    PolymerUtils.innerHTML("breadcrumb", "")
+                    // we add the 'Projects' link
+                    let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, false, this.config.breadcrumb.title);
+                    breadcrumbElement.appendChild(projects);
+
+                    // We first check if one study is selected, for this study must be defined and have at least one key
+                    if (PolymerUtils.isUndefined(this.study) || Object.keys(this.study).length == 0) {
+                        if (PolymerUtils.isNotUndefinedOrNull(this.project)) {
+                            let project = this._createBreadcrumbElement(this.project.alias, true, "project"); // render only project if exists
+                            breadcrumbElement.appendChild(project);
+                        }
+                    } else {
+                        let project = this._createBreadcrumbElement(this.project.alias, false, "project");
+                        breadcrumbElement.appendChild(project);
+
+                        if (PolymerUtils.isNotUndefined(this.samples) && this.samples.length > 0) {
+                            let study = this._createBreadcrumbElement(this.study.alias, false, "study");
+                            let sampleNames = [];
+                            for (let i in this.samples) {
+                                sampleNames.push(this.samples[i].name);
+                            }
+                            let samples = this._createBreadcrumbElement(sampleNames.join(","), true, "sample");
+                            breadcrumbElement.appendChild(study);
+                            breadcrumbElement.appendChild(samples);
+                        } else {
+                            let study = this._createBreadcrumbElement(this.study.alias, true, "study");
+                            breadcrumbElement.appendChild(study);
+                        }
+                    }
+
+                    let _this = this;
+                    PolymerUtils.querySelectorAll(".breadcrumb li a").forEach(function (element) {
+                        element.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            PolymerUtils.hideByClass("content")
+                            switch (e.target.dataset.category) {
+                                case _this.config.breadcrumb.title:
+                                    PolymerUtils.show("projects")
+                                    _this.tool = "projects";
+                                    break;
+                                case "project":
+                                    PolymerUtils.show("project")
+                                    _this.tool = "project";
+                                    break;
+                                case "study":
+                                    PolymerUtils.show("browser")
+                                    _this.tool = "browser";
+                                    break;
+                            }
+                            _this.renderHashFragments();
+                        });
+                    });
+
+                }
             }
 
             _createBreadcrumbElement(name, active, category) {
@@ -956,7 +995,7 @@
             }
 
             _isMenuItemVisible(item) {
-                switch(item.visibility) {
+                switch (item.visibility) {
                     case 'public':
                         return true;
                     case 'private':
@@ -968,8 +1007,8 @@
             }
 
             _checkBreadcrumbVisible() {
-                if (typeof this.config !== "undefined") {
-                    switch(this.config.breadcrumb.visibility) {
+                if (PolymerUtils.isNotUndefined(this.config)) {
+                    switch (this.config.breadcrumb.visibility) {
                         case 'public':
                             this._isBreadcrumbVisible = true;
                             break;
@@ -982,6 +1021,7 @@
                     }
                 }
             }
+
             _logout() {
                 this.userId = "";
                 this.sessionId = "";
@@ -999,560 +1039,5 @@
 
         customElements.define(IvaApp.is, IvaApp);
 
-        //        Polymer({
-        //            is: 'iva-app',
-        //            properties: {
-        //                config: {
-        //                    type: Object
-        //                },
-        //                opencgaClient: {
-        //                    type: Object
-        //                },
-        //                cellbaseClient: {
-        //                    type: Object
-        //                },
-        //                userId: {
-        //                    type: String
-        //                },
-        //                projects: {
-        //                    type: Array
-        //                },
-        //                project: {
-        //                    type: Object
-        //                },
-        //                study: {
-        //                    type: Object,
-        //                    observer: 'projectStudySampleChanged'
-        //                },
-        //                samples: {
-        //                    type: Array,
-        //                    observer: 'projectStudySampleChanged'
-        //                },
-        //                studySummaries: {
-        //                    type: Array
-        //                },
-        //                _publicMode: {
-        //                    type: Boolean,
-        //                    value: false
-        //                },
-        //                _logged: {
-        //                    type: Boolean,
-        //                    value: false
-        //                }
-        //            },
-        //            ready: function() {
-        //                // Copy 'application' object from config.js file
-        //                this.config = application;
-        //                this.config.menu.counter = 0;
-        //                this.config.cellbase = cellbase;
-        //                this.config.opencga = opencga;
-        //                this.config.tools = tools;
-        //
-        //                this.defaultConfig = {};
-        //                if (typeof populationFrequencies !== "undefined") {
-        //                    this.populationFrequencies = populationFrequencies;
-        //                    // Object.assign() doesn't do deep copy. To keep the default config object unchanged, color is copied into a new object and assigned.
-        //                    let color = Object.assign({}, populationFrequencies.color);
-        //                    this.defaultConfig.populationFrequencies = {color: color};
-        //                }
-        //
-        //                if (typeof proteinSubstitutionScores !== "undefined") {
-        //                    this.proteinSubstitutionScores = proteinSubstitutionScores;
-        //                    let sift = Object.assign({}, proteinSubstitutionScores.sift);
-        //                    let polyphen = Object.assign({}, proteinSubstitutionScores.polyphen);
-        //                    this.defaultConfig.proteinSubstitutionScores = {sift: sift, polyphen: polyphen};
-        //                }
-        //
-        //                if (typeof consequenceTypes !== "undefined") {
-        //                    this.consequenceTypes = consequenceTypes;
-        //                    let color = Object.assign({}, consequenceTypes.color);
-        //                    this.defaultConfig.consequenceTypes = {color: color};
-        //                }
-        //
-        //                // We need to listen to hash fragment changes to update the display and breadcrumb
-        //                var _this = this;
-        //                window.onhashchange = function () {
-        //                    _this.hashFragmentListener(_this);
-        //                };
-        //
-        ////                this._checkVersion();
-        //
-        //                // Remember the tool that was previously set
-        //                this.tool = window.location.hash.split('/')[0];
-        //                if (this.tool == "") {
-        //                    this.tool = "#home";
-        //                }
-        //
-        //                // go to the page that tool has
-        //                $('.content').hide();
-        //                if (window.location.hash != this.tool) {
-        //                    window.location.hash = this.tool;
-        //                } else {
-        //                    $(this.tool).show();
-        //                }
-        //
-        //                this.init();
-        //
-        //                // This must happen after calling to init() function since init() created the OpencgaClient
-        //                var sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
-        //                if (typeof sid !== "undefined" && sid != "" && !this._publicMode) {
-        //                    this.login({
-        //                        detail: {
-        //                            userId: Cookies.get(this.config.opencga.cookie.prefix + "_userId"),
-        //                            sessionId: sid
-        //                        }
-        //                    });
-        //                }
-        //            },
-        //            attached: function() {
-        //                this.config = Object.assign({}, this.config);
-        //
-        //                this.renderBreadcrumb();
-        //            },
-        //            init: function () {
-        //                this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host, this.config.opencga.version, true, this.config.opencga.cookie.prefix);
-        //                this.opencgaClient = new OpenCGAClient(this.opencgaClientConfig);
-        //
-        //                this.cellBaseClientConfig = new CellBaseClientConfig(hosts = this.config.cellbase.hosts, version = this.config.cellbase.version, species = "hsapiens");
-        //                this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
-        //
-        //                if (typeof this.config.opencga.projects !== "undefined" && this.config.opencga.projects.length > 0 && this._logged == false) {
-        //                    // This web site is set up for browsing public data
-        //                    this._publicMode = true;
-        //                    this.projects = this.config.opencga.projects;
-        //                    // Setting default project and study
-        ////                    this.project = this.projects[0].alias;
-        ////                    this.study = this.projects[0].studies[0];
-        ////                    this.selectedProject = this.projects[0];
-        //                    this.getProjects();
-        //                } else {
-        //                    this._publicMode = false;
-        ////                    this.projects = [];
-        //                    this.project = {};
-        ////                    this.study = {};
-        ////                    this.samples = [];
-        //                }
-        //
-        //                this._checkBreadcrumbVisible();
-        //            },
-        //            login: function(credentials) {
-        //                this.userId = credentials.detail.userId;
-        //                this.sessionId = credentials.detail.sessionId;
-        //                this.opencgaClient._config.sessionId = credentials.detail.sessionId;
-        //                this.set('opencgaClient._config', this.opencgaClient._config); // To reflect the changes in '_config' of opencgaClient observers
-        //
-        //                this._logged = true;
-        //                this._publicMode = false;
-        //
-        //                this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
-        //
-        //                if (this.tool === "#login") {
-        //                    this.tool = "#home";
-        //                }
-        //                this.renderHashFragments();
-        //
-        //                this.getProjects();
-        //            },
-        //            logout: function() {
-        //                var _this = this;
-        //                this.opencgaClient.users().logout()
-        //                    .then(function() {
-        //                        _this._logout();
-        //                    })
-        //                    .catch(function () {
-        //                        // we need to remove Cookies son OpenCGAClient has failed
-        //                        Cookies.expire(_this.config.opencga.cookie.prefix + "_sid");
-        //                        Cookies.expire(_this.config.opencga.cookie.prefix + "_userId");
-        //
-        //                        _this._logout();
-        //                    });
-        //            },
-        //            changeTool: function(e) {
-        //                e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
-        //                $('.content').hide(); // hides all content divs
-        //                if (typeof e.target !== "undefined" && typeof e.target.attributes.href !== "undefined") {
-        //                    $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
-        //                    this.tool = e.target.attributes.href.value;
-        //                } else {
-        //                    this.tool = "#home";
-        //                }
-        //
-        //                this.renderHashFragments();
-        //            },
-        //            getProjects: function () {
-        //                var _this = this;
-        //                if (this._publicMode) {
-        //                    // Get all projects with study info and call to _setup()
-        //                    this.opencgaClient.users().getProjects('anonymous', {shared: true})
-        //                        .then(function (response) {
-        //                            let _projects = response.response[0].result;
-        //                            _this._setup(_projects);
-        //                            _this._checkBreadcrumbVisible();
-        //                        })
-        //                        .catch(function (response) {
-        //                            console.log("An error when getting projects:")
-        //                            console.log(response)
-        //                        });
-        //                } else {
-        //                    this.opencgaClient.users().getProjects(this.userId)
-        //                        .then(function (response) {
-        //                            let _projects = response.response[0].result;
-        //                            if (typeof _this.config.opencga.asUser !== "undefined" && _this.config.opencga.asUser !== "") {
-        //                                for (let p of _projects) {
-        //                                    p.alias = _this.config.opencga.asUser + "@" + p.alias;
-        //                                }
-        //                            }
-        //                            _this._setup(_projects);
-        //
-        //                            _this._checkBreadcrumbVisible();
-        //                        })
-        //                        .catch(function (response) {
-        //                            console.log("An error when getting projects:")
-        //                            console.log(response)
-        //                            _this.logout();
-        //                        });
-        //                }
-        //            },
-        //            _setup: function (projects) {
-        //                // We check that at least one project with one study exist, otherwise we do not do anything
-        //                if (typeof projects !== "undefined" && projects.length > 0 && projects[0].studies.length > 0) {
-        //                    this.projects = projects;
-        //                    this.project = projects[0];
-        //                    this.study = projects[0].studies[0];
-        //
-        //                    let _this = this;
-        //                    let projectPromises = [];
-        //                    projects.forEach(function(project) {
-        //                        let studyPromises = [];
-        //                        project.studies.forEach(function(study) {
-        //                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
-        //                        });
-        //                        projectPromises.push(Promise.all(studyPromises)
-        //                            .then(function(responses) {
-        //                                let studies = [];
-        //                                responses.forEach(function (response) {
-        //                                    let study = response.response[0].result[0];
-        //                                    study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-        //                                    studies.push(study);
-        //                                });
-        //                                return studies;
-        //                            }));
-        //                    });
-        //
-        //                    let _projects = [];
-        //                    Promise.all(projectPromises)
-        //                        .then(function(responses) {
-        //                            for (let i = 0; i < responses.length; i++) {
-        //                                _projects.push({id: _this.projects[i].id, alias: _this.projects[i].alias, name: _this.projects[i].name, studies: responses[i]});
-        //                            }
-        //                            _this.studySummaries = _projects;
-        //                        });
-        //                }
-        //
-        //            },
-        //            renderHashFragments: function() {
-        //                console.log("renderHashFragments - DEBUG")
-        //
-        //                let hashFrag = this.tool;
-        //                if (typeof this.project != "undefined" && typeof this.project.alias !== "undefined" && this.project.alias != "") {
-        //
-        //                    hashFrag += "/" + this.project.alias;
-        //                    if (typeof this.study != "undefined" && typeof this.study.alias !== "undefined" && this.study.alias != "") {
-        //                        hashFrag += "/" + this.study.alias;
-        //                    }
-        //                }
-        //
-        //                window.location.hash = hashFrag;
-        //            },
-        //            hashFragmentListener: function(ctx) {
-        //                console.log("hashFragmentListener - DEBUG")
-        //                var arr = window.location.hash.split('/');
-        //                let [hashTool, hashProject, hashStudy, feature] = arr;
-        //
-        //                // Stopping the recursive call
-        //                if (hashTool != this.tool || (typeof this.project !== "undefined" && hashProject != this.project.alias) ||
-        //                    (typeof this.study !== "undefined" && hashStudy != this.study.alias)) {
-        //                    if (arr.length > 1) {
-        //                        // Field 'project' is being observed, just in case Polymer triggers
-        //                        // an unnecessary event we can check they are really different
-        //                        if (ctx.project.alias != hashProject) {
-        //                            ctx.project.alias = hashProject;
-        //                        }
-        //                        if (arr.length > 2 && ctx.study != hashStudy) {
-        //                            for (let i = 0; i < ctx.projects.length; i++) {
-        //                                if (ctx.projects[i].name == ctx.project.name || ctx.projects[i].alias == ctx.project.alias) {
-        //                                    for (let j = 0; j < ctx.projects[i].studies.length; j++) {
-        //                                        if (ctx.projects[i].studies[j].name == hashStudy || ctx.projects[i].studies[j].alias == hashStudy) {
-        //                                            ctx.study = ctx.projects[i].studies[j];
-        //                                            break;
-        //                                        }
-        //                                    }
-        //                                    break;
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //
-        //                    if (typeof feature !== 'undefined' && feature != "") {
-        //                        if (hashTool == "#protein") {
-        //                            ctx.protein = feature;
-        //                        } else if (feature.startsWith("ENST")) {
-        //                            ctx.transcript = feature;
-        //                        } else {
-        //                            ctx.gene = feature;
-        //                        }
-        //                    }
-        //                    ctx.tool = hashTool;
-        //                }
-        //
-        //                $('.content').hide();
-        //                $(hashTool).show();
-        //            },
-        //            refreshConfig: function (e) {
-        //                let colorConfig = e.detail.config;
-        //                let _this = this;
-        //                for (let key in colorConfig) {
-        //                    switch(key) {
-        //                        case "consequenceTypes":
-        //                            let ctColor = colorConfig[key].color;
-        //                            for (let impact in ctColor) {
-        //                                _this.consequenceTypes.color[impact] = ctColor[impact];
-        //                            }
-        //                            let ctModified = Object.assign({}, _this.consequenceTypes);
-        //                            _this.set('consequenceTypes', ctModified);
-        //                            break;
-        //                        case "proteinSubstitutionScores":
-        //                            for (let source in colorConfig[key]) {
-        //                                if (source == "sift") {
-        //                                    let sift = colorConfig[key].sift;
-        //                                    for (let prediction in sift) {
-        //                                        _this.proteinSubstitutionScores.sift[prediction] = sift[prediction];
-        //                                    }
-        //                                } else if (source == "polyphen") {
-        //                                    let polyphen = colorConfig[key].polyphen;
-        //                                    for (let pred in polyphen) {
-        //                                        _this.proteinSubstitutionScores.polyphen[pred] = polyphen[pred];
-        //                                    }
-        //                                }
-        //                            }
-        //                            let pssModified = Object.assign({}, _this.proteinSubstitutionScores);
-        //                            _this.set('proteinSubstitutionScores', pssModified);
-        //                            break;
-        //                        case "populationFrequencies":
-        //                            let pfColor = colorConfig[key].color;
-        //                            for (let i in pfColor) {
-        //                                _this.populationFrequencies.color[i] = pfColor[i];
-        //                            }
-        //                            let pfModified = Object.assign({}, _this.populationFrequencies);
-        //                            _this.set('populationFrequencies', pfModified);
-        //                            break;
-        //                    }
-        //                }
-        //            },
-        //            setProjectStudy: function(e) {
-        //                e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
-        ////                $('.content').hide();
-        ////                $('#studyInformation').show();
-        ////                this.tool = "studyInformation";
-        //                for (let i = 0; i < this.projects.length; i++) {
-        //                    if (this.projects[i].name == e.target.dataProject) {
-        //                        this.project = this.projects[i];
-        //                        for (let j = 0; j < this.projects[i].studies.length; j++) {
-        //                            if (this.projects[i].studies[j].name == e.target.innerHTML || this.projects[i].studies[j].alias == e.target.innerHTML) {
-        //                                this.study = this.projects[i].studies[j];
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            },
-        //            updateProject: function(e) {
-        //                for (let i = 0; i < this.projects.length; i++) {
-        //                    if (this.projects[i].name == e.detail.project.name) { // getting the selected project from projects array
-        //                        this.project = this.projects[i];
-        //                    }
-        //                }
-        //                this.tool = "#project";
-        //                this.renderHashFragments();
-        //                this.renderBreadcrumb();
-        //            },
-        //            updateStudy: function(e) {
-        //                if (typeof e.detail.project !== "undefined" && e.detail.project.name != "") {
-        //                    this.project = e.detail.project;
-        //                }
-        //                for (let i = 0; i < this.project.studies.length; i++) {
-        //                    if (this.project.studies[i].name == e.detail.study.name || this.project.studies[i].alias == e.detail.study.alias) {
-        //                        this.study = this.project.studies[i];
-        //                    }
-        //                }
-        //
-        ////                TODO: Opencga study will be shown later. For now variant browser is shown when the study changes
-        ////                this.tool = "studyInformation";
-        //                this.tool = "#browser";
-        //                this.renderHashFragments();
-        //                this.renderBreadcrumb();
-        //            },
-        //            projectStudySampleChanged: function() {
-        //                console.log("projectStudySampleChanged - DEBUG")
-        //
-        //                this.renderHashFragments();
-        //                this.renderBreadcrumb();
-        //            },
-        //            buildQuery: function(e) {
-        //                let query = {};
-        //                let value = "";
-        //                if (typeof e !== "undefined" && typeof e.detail.value !== "undefined") {
-        //                    value = e.detail.value; // It takes care of the fired event from welcome.html
-        //                } else if (typeof e !== "undefined" && e.keyCode == '13' || typeof e !== "undefined" && e.type == "click") {
-        //                    value = this.$$("#searchTextBox").value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
-        //                }
-        //
-        //                if (value != "") {
-        //                    if (value.startsWith("rs") || value.split(':').length > 2) {
-        //                        query.ids = value;
-        //                    } else if (value.indexOf(':') > -1 && value.indexOf('-') > -1) {
-        //                        query.region = value;
-        //                    } else if (value.startsWith("GO:")) {
-        //                        query["annot-go"] = value;
-        //                    } else if (value.startsWith("HP:")) {
-        //                        query["annot-hpo"] = value;
-        //                    } else if (value.startsWith("ENST")) {
-        //                        this.transcript = value;
-        //                        this.tool = "#transcript";
-        //                    } else {
-        //                        this.gene = value.toUpperCase();
-        //                        this.tool = "#gene";
-        //                    }
-        //
-        //                    // This query object is built for variant browser. Only when the queries to browser are made, we are setting the tool to browser
-        //                    if (Object.keys(query).length > 0) {
-        //                        this._query = query;
-        //                        this.tool = "#browser";
-        //                    }
-        //
-        //                    this.renderHashFragments();
-        //                    this.$$("#searchTextBox").value = ""; // Empty the value of search text box when search is complete and respective view is loaded
-        //                }
-        //            },
-        //            renderBreadcrumb: function() {
-        //                var breadcrumbElement = Polymer.dom(this.root).querySelector("#breadcrumb");
-        //
-        //                if (breadcrumbElement != null && typeof this.config !== "undefined") {
-        //
-        //                    // If there is no project in config, breadcrumb is set private so that it is shown only when logged in
-        //                    if (typeof this.config.opencga.projects === "undefined" || this.config.opencga.projects.length == 0) {
-        //                        this.config.breadcrumb.visibility = "private";
-        //                    }
-        //
-        //                    // we empty everything
-        //                    Polymer.dom(breadcrumbElement).innerHTML = "";
-        //
-        //                    // we add the 'Projects' link
-        //                    let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, false, this.config.breadcrumb.title);
-        //                    Polymer.dom(breadcrumbElement).appendChild(projects);
-        //
-        //                    // We first check if one study is selected, for this study must be defined and have at least one key
-        //                    if (typeof this.study === "undefined" || Object.keys(this.study).length == 0) {
-        //                        if (typeof this.project !== "undefined" && this.project != null) {
-        //                            let project = this._createBreadcrumbElement(this.project.alias, true, "project"); // render only project if exists
-        //                            Polymer.dom(breadcrumbElement).appendChild(project);
-        //                        }
-        //                    } else {
-        //                        let project = this._createBreadcrumbElement(this.project.alias, false, "project");
-        //                        Polymer.dom(breadcrumbElement).appendChild(project);
-        //
-        //                        if (typeof this.samples !== "undefined" && this.samples.length > 0) {
-        //                            let study = this._createBreadcrumbElement(this.study.alias, false, "study");
-        //                            let sampleNames = [];
-        //                            for (let i in this.samples) {
-        //                                sampleNames.push(this.samples[i].name);
-        //                            }
-        //                            let samples = this._createBreadcrumbElement(sampleNames.join(","), true, "sample");
-        //                            Polymer.dom(breadcrumbElement).appendChild(study);
-        //                            Polymer.dom(breadcrumbElement).appendChild(samples);
-        //                        } else {
-        //                            let study = this._createBreadcrumbElement(this.study.alias, true, "study");
-        //                            Polymer.dom(breadcrumbElement).appendChild(study);
-        //                        }
-        //                    }
-        //
-        //                    let _this = this;
-        //                    $(".breadcrumb li a").on('click', function(e) {
-        //                        e.preventDefault();
-        //                        $('.content').hide();
-        //                        switch (e.target.dataset.category) {
-        //                            case _this.config.breadcrumb.title:
-        //                                $('#projects').show();
-        //                                _this.tool = "projects";
-        //                                break;
-        //                            case "project":
-        //                                $('#project').show();
-        //                                _this.tool = "project";
-        //                                break;
-        //                            case "study":
-        ////                                $('#studyInformation').show();
-        ////                                _this.tool = "studyInformation";
-        //                                $('#browser').show();
-        //                                _this.tool = "browser";
-        //                                break;
-        //                        }
-        //                        _this.renderHashFragments();
-        //                    });
-        //                }
-        //            },
-        //            _createBreadcrumbElement(name, active, category) {
-        //                var li = document.createElement("li");
-        //                if (active == true) {
-        //                    li.setAttribute("class", "active");
-        //                    li.textContent = name;
-        //                } else {
-        //                    var a = document.createElement("a");
-        //                    a.setAttribute("href", "#");
-        //                    a.setAttribute("class", "");
-        //                    a.setAttribute("data-category", category);
-        //                    a.textContent = name;
-        //                    li.appendChild(a);
-        //                }
-        //                return li;
-        //            },
-        //            _isMenuItemVisible: function(item) {
-        //                switch(item.visibility) {
-        //                    case 'public':
-        //                        return true;
-        //                    case 'private':
-        //                        return this._logged;
-        //                    case 'none':
-        //                    default:
-        //                        return false;
-        //                }
-        //            },
-        //            _checkBreadcrumbVisible: function() {
-        //                if (typeof this.config !== "undefined") {
-        //                    switch(this.config.breadcrumb.visibility) {
-        //                        case 'public':
-        //                            this._isBreadcrumbVisible = true;
-        //                            break;
-        //                        case 'private':
-        //                            this._isBreadcrumbVisible = this._logged;
-        //                            break;
-        //                        case 'none':
-        //                        default:
-        //                            this._isBreadcrumbVisible = false;
-        //                    }
-        //                }
-        //            },
-        //            _logout: function() {
-        //                this.userId = "";
-        //                this.sessionId = "";
-        //                this.opencgaClient._config.sessionId = "";
-        //
-        //                this._logged = false;
-        //
-        //                this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
-        //
-        //                this.tool = "#home";
-        //                window.location.hash = "home";
-        //                this.init();
-        //            }
-        //        });
     </script>
 </dom-module>
