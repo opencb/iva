@@ -36,7 +36,7 @@
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/catalog/opencga-login.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload-file.html">-->
-<!--<link rel="import" href="components/iva-settings.html">-->
+<link rel="import" href="components/iva-settings.html">
 
 <dom-module id="iva-app">
 
@@ -408,10 +408,11 @@
                                    opencga-client-config="{{opencgaClientConfig}}" login-text="Sign in"></opencga-login>
                 </div>
 
-                <!--<div class="collapse content" id="settings" style="width: 40%; margin: auto">-->
-                <!--<br>-->
-                <!--<iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig" default-config="{{defaultConfig}}"></iva-settings>-->
-                <!--</div>-->
+                <div class="collapse content" id="settings" style="width: 40%; margin: auto">
+                    <br>
+                    <iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig"
+                                  default-config="{{defaultConfig}}"></iva-settings>
+                </div>
 
                 <!--<div class="collapse content" id="upload" style="width: 40%; margin-left: 2%">-->
                 <!--<br>-->
