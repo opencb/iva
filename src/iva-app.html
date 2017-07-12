@@ -27,7 +27,7 @@
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-clinical.html">
 
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-facet.html">
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-beacon.html">-->
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-beacon.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">-->
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-transcript-view.html">-->
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-protein-view.html">-->
@@ -373,9 +373,11 @@
                     </variant-facet>
                 </div>
 
-                <!--<div class="collapse content" id="beacon">-->
-                <!--<variant-beacon opencga-client="{{opencgaClient}}" project="{{project}}" studies="{{project.studies}}" hosts="{{config.tools.beacon.hosts}}"></variant-beacon>-->
-                <!--</div>-->
+                <div class="collapse content" id="beacon">
+                    <variant-beacon opencga-client="{{opencgaClient}}" project="{{project}}"
+                                    studies="{{project.studies}}"
+                                    hosts="{{config.tools.beacon.hosts}}"></variant-beacon>
+                </div>
 
                 <!--<div class="collapse content" id="genomeBrowser">-->
                 <!--Not implemented yet.-->
