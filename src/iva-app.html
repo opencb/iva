@@ -21,6 +21,7 @@
 <link rel="import" href="../bower_components/polymer/lib/elements/custom-style.html">
 
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-browser.html">
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-clinical.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-beacon.html">
@@ -345,12 +346,12 @@
                     </variant-browser>
                 </div>
 
-                <!--<div class="collapse content" id="prioritization">-->
-                <!--<variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"-->
-                <!--config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"-->
-                <!--consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected">-->
-                <!--</variant-prioritization>-->
-                <!--</div>-->
+                <div class="collapse content" id="prioritization">
+                    <variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
+                                            config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                            consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected">
+                    </variant-prioritization>
+                </div>
 
                 <div class="collapse content" id="clinical">
                     <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
@@ -515,6 +516,7 @@
                 this.set('config.tools', tools);
                 this.set('opencga', opencga);
                 this.set('config.opencga', opencga);
+                this.config.species = DEFAULT_SPECIES;
 
 
                 this.defaultConfig = {};
