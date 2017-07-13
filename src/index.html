@@ -22,6 +22,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- This is configured below in the onLoad() function -->
     <title></title>
 
     <!-- Favicon -->
@@ -50,7 +51,6 @@
     <!-- Load IVA configuration file, this must be located in the same folder -->
     <script src="conf/config.js"></script>
     <script src="conf/tools.js"></script>
-    <script src="../lib/jsorolla/src/lib/webcomponents/PolymerUtils.js"></script>
 
     <!-- Load PanelApps!-->
     <script src="conf/panels.js"></script>
@@ -89,13 +89,6 @@
     <link rel="stylesheet" href="../lib/jsorolla/styles/css/style.css">
     <!-- /build -->
 
-    <script>
-        // Force all polyfills on
-//        window.customElements = true;
-//        window.customElements.forcePolyfill = true;
-//        window.ShadyDOM = { force: true };
-//        window.ShadyCSS = { shimcssproperties: true};
-    </script>
     <!-- Load IVA Javascript dependencies -->
     <!-- build:js vendors.min.js -->
     <script type="text/javascript" src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -121,11 +114,12 @@
     <!-- /build -->
 
     <!--JQCloud-->
-
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud.css" />-->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>-->
 
     <!-- We load JSorolla dependencies -->
+    <script type="text/javascript" src="../lib/jsorolla/src/lib/webcomponents/PolymerUtils.js"></script>
+
     <script type="text/javascript" src="../lib/jsorolla/src/lib/visualisation/lollipop.js"></script>
     <script type="text/javascript" src="../lib/jsorolla/src/lib/visualisation/pedigree.js"></script>
     <script type="text/javascript" src="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-utils.js"></script>
@@ -182,21 +176,17 @@
 
     <!-- Loading iva-app component -->
     <link rel="import" href="iva-app.html">
-
 </head>
 
 <body onload="setTitle()">
     <script>
         function setTitle() {
-            $("title").text(application.title);
+//       $("title").text(application.title);
+            document.getElementById("title").text(application.title);
         }
-
     </script>
 
-    <iva-app>
-        <!--<slot></slot>-->
-    </iva-app>
-
+    <iva-app></iva-app>
 </body>
 
 </html>
