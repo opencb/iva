@@ -1,42 +1,44 @@
-    <!--
-  ~ Copyright 2015-2016 OpenCB
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
+<!--
+~ Copyright 2015-2016 OpenCB
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~     http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+-->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/dom-if.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/array-selector.html">
 <link rel="import" href="../bower_components/polymer/lib/elements/custom-style.html">
-<link rel="import" href="jso-styles.html">
-<link rel="import" href="welcome.html">
 
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-clinical.html">
-
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-beacon.html">
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/catalog/opencga-login.html">
+
+<link rel="import" href="jso-styles.html">
+<link rel="import" href="welcome.html">
+<link rel="import" href="components/iva-settings.html">
+
+<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">-->
+<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">-->
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">-->
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-transcript-view.html">-->
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-protein-view.html">-->
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">-->
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">-->
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">-->
-<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/catalog/opencga-login.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload-file.html">-->
-<link rel="import" href="components/iva-settings.html">
 
 <dom-module id="iva-app">
 
@@ -379,10 +381,10 @@
                                     hosts="{{config.tools.beacon.hosts}}"></variant-beacon>
                 </div>
 
-                <!--<div class="collapse content" id="genomeBrowser">-->
-                <!--Not implemented yet.-->
-                <!--&lt;!&ndash;<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>&ndash;&gt;-->
-                <!--</div>-->
+                <div class="collapse content" id="genomeBrowser">
+                    Not implemented yet.
+                    <!--<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>-->
+                </div>
 
                 <!--<div class="collapse content feature-view" id="gene">-->
                 <!--<opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"-->
@@ -421,8 +423,8 @@
                 </div>
 
                 <div class="collapse content" id="upload" style="width: 40%; margin-left: 2%">
-                <br>
-                <!--<opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{project.studies}}"></opencga-upload-file>-->
+                    <br>
+                    <!--<opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{project.studies}}"></opencga-upload-file>-->
                 </div>
 
                 <!--<div class="collapse content" id="projects" style="width: 60%; margin: auto">-->
@@ -606,7 +608,7 @@
                 this.userId = credentials.detail.userId;
                 this.sessionId = credentials.detail.sessionId;
                 this.opencgaClient._config.sessionId = credentials.detail.sessionId;
-                this.set('opencgaClient._config', this.opencgaClient._config); // To reflect the changes in '_config' of opencgaClient observers
+                this.set('opencgaClient._config', Object.assign({}, this.opencgaClient._config)); // To reflect the changes in '_config' of opencgaClient observers
 
                 this._logged = true;
                 this._publicMode = false;
@@ -784,7 +786,7 @@
                 $('.content').hide();
 
                 PolymerUtils.hideByClass("content");
-                PolymerUtils.show(hashTool.replace("#",""));
+                PolymerUtils.show(hashTool.replace("#", ""));
 
             }
 
