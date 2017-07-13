@@ -8,8 +8,9 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "Polymer": "~1.6.1",
-    "webcomponents.js": "~0.7.24",
+    "@polymer/polymer": "~2.0.1",
+    "@webcomponents/webcomponentsjs": "~1.0.1",
+    "@webcomponents/shadycss": "~1.0.1",
     "bootstrap": "3.3.6",
     "bootstrap-table": "1.11.1",
     "bootstrap-treeview": "1.2.0",
