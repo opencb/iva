@@ -313,7 +313,7 @@
 
             checkUserConfig(config) {
                 let _this = this;
-                if (this.opencgaClient instanceof OpenCGAClient && typeof PolymerUtils.isNotUndefined(config.value.sessionId)) {
+                if (this.opencgaClient instanceof OpenCGAClient && PolymerUtils.isNotUndefined(config.value.sessionId)) {
                     this.opencgaClient.users().getConfig("iva", {}, {})
                         .then(function (response) {
                             _this.assignValues(_this.defaultConfig); // Set the default config first
