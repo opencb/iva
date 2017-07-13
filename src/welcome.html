@@ -21,22 +21,21 @@
 
 <dom-module id="welcome-web">
     <template>
-        <!--<custome-style>-->
-            <style include="jso-styles">
-                .center {
-                    margin: auto;
-                    text-align: justify;
-                    font-size: 18px;
-                    color: #797979;
-                }
-            </style>
-        <!--</custome-style>-->
+        <style include="jso-styles">
+            .welcome-center {
+                margin: auto;
+                width: 80%;
+                text-align: justify;
+                font-size: 18px;
+                color: #797979;
+            }
+        </style>
 
         <!-- This is where main application is rendered -->
-        <div class="center">
+        <div class="welcome-center">
             <br>
 
-            <span style="font-size:50px">IVA 0.9.0</span>
+            <span style="font-size: 50px">IVA 0.9.0</span>
 
             <h2>Overview</h2>
             <p>
@@ -57,33 +56,15 @@
     </template>
 
     <script>
-        //        Polymer({
-        //            is: 'welcome-web',
-        //            properties: {
-        //                opencgaClient: {
-        //                    type: Object
-        //                },
-        //                host: {
-        //                    type: String,
-        //                    value: "http://bioinfodev.hpc.cam.ac.uk/hgva"
-        //                },
-        //                userId: {
-        //                    type: String,
-        //                    value: ""
-        //                },
-        //                project: {
-        //                    type: String,
-        //                    value: ""
-        //                },
-        //                study: {
-        //                    type: Object
-        //                }
-        //            }
-        //        });
-
         class Welcome extends Polymer.Element {
 
-            static get is() { return 'welcome-web'; }
+            constructor() {
+                super();
+            }
+
+            static get is() {
+                return 'welcome-web';
+            }
 
             static get properties() {
                 return {
@@ -107,12 +88,8 @@
                     }
                 }
             }
-
-            constructor() {
-                super();
-            }
         }
 
-        window.customElements.define(Welcome.is, Welcome);
+        customElements.define(Welcome.is, Welcome);
     </script>
 </dom-module>
