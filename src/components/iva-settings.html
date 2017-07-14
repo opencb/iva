@@ -366,13 +366,13 @@
                     this.config["consequenceTypes"] = {color: this.ctColor};
                 }
                 if (Object.keys(this.sift).length > 0) {
-                    if (typeof this.config["proteinSubstitutionScores"] === "undefined") {
+                    if (PolymerUtils.isUndefined(this.config["proteinSubstitutionScores"])) {
                         this.config["proteinSubstitutionScores"] = {};
                     }
                     this.config["proteinSubstitutionScores"].sift = this.sift;
                 }
                 if (Object.keys(this.polyphen).length > 0) {
-                    if (typeof this.config["proteinSubstitutionScores"] === "undefined") {
+                    if (PolymerUtils.isUndefined(this.config["proteinSubstitutionScores"])) {
                         this.config["proteinSubstitutionScores"] = {};
                     }
                     this.config["proteinSubstitutionScores"].polyphen = this.polyphen;

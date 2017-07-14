@@ -17,11 +17,12 @@
 <link rel="import" href="../node_modules/@polymer/polymer/polymer-element.html">
 <link rel="import" href="../node_modules/@polymer/polymer/lib/elements/custom-style.html">
 
-<link rel="import" href="jso-styles.html">
+<!--<link rel="import" href="jso-styles.html">-->
 
 <dom-module id="welcome-web">
     <template>
-        <style include="jso-styles">
+        <!--<style include="jso-styles">-->
+        <style>
             .welcome-center {
                 margin: auto;
                 width: 80%;
@@ -56,37 +57,22 @@
     </template>
 
     <script>
-        class Welcome extends Polymer.Element {
 
-            constructor() {
-                super();
-            }
+        class Welcome extends Polymer.Element {
 
             static get is() {
                 return 'welcome-web';
             }
 
-            static get properties() {
-                return {
-                    opencgaClient: {
-                        type: Object
-                    },
-                    host: {
-                        type: String,
-                        value: "http://bioinfodev.hpc.cam.ac.uk/hgva"
-                    },
-                    userId: {
-                        type: String,
-                        value: ""
-                    },
-                    project: {
-                        type: String,
-                        value: ""
-                    },
-                    study: {
-                        type: Object
-                    }
-                }
+            constructor() {
+                super();
+            }
+            _attachDom(dom) {
+                this.appendChild(dom);
+            }
+
+            ready() {
+                super.ready();
             }
         }
 
