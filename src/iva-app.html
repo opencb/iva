@@ -38,6 +38,7 @@
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload-file.html">-->
 <link rel="import" href="components/iva-settings.html">
 
+
 <dom-module id="iva-app">
 
     <template>
@@ -326,7 +327,7 @@
             <!-- This is where main application is rendered -->
             <div class="center">
                 <div class="collapse content" id="home">
-                    <welcome-web on-search="buildQuery" project="{{project}}" study="{{study.name}}"></welcome-web>
+                    <welcome-web></welcome-web>
                 </div>
             </div>
 
@@ -379,10 +380,10 @@
                                     hosts="{{config.tools.beacon.hosts}}"></variant-beacon>
                 </div>
 
-                <!--<div class="collapse content" id="genomeBrowser">-->
-                <!--Not implemented yet.-->
-                <!--&lt;!&ndash;<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>&ndash;&gt;-->
-                <!--</div>-->
+                <div class="collapse content" id="genomeBrowser">
+                    Not implemented yet.
+                    <!--<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>-->
+                </div>
 
                 <div class="collapse content feature-view" id="gene">
                     <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
@@ -606,7 +607,7 @@
                 this.userId = credentials.detail.userId;
                 this.sessionId = credentials.detail.sessionId;
                 this.opencgaClient._config.sessionId = credentials.detail.sessionId;
-                this.set('opencgaClient._config', this.opencgaClient._config); // To reflect the changes in '_config' of opencgaClient observers
+                this.set('opencgaClient._config', Object.assign({}, this.opencgaClient._config)); // To reflect the changes in '_config' of opencgaClient observers
 
                 this._logged = true;
                 this._publicMode = false;
@@ -784,7 +785,7 @@
                 $('.content').hide();
 
                 PolymerUtils.hideByClass("content");
-                PolymerUtils.show(hashTool.replace("#",""));
+                PolymerUtils.show(hashTool.replace("#", ""));
 
             }
 
