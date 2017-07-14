@@ -31,7 +31,6 @@
             }
         </style>
 
-
         <!-- This is where main application is rendered -->
         <div class="welcome-center">
             <br>
@@ -60,35 +59,19 @@
 
         class Welcome extends Polymer.Element {
 
-            constructor() {
-                super();
-            }
-
             static get is() {
                 return 'welcome-web';
             }
 
-            static get properties() {
-                return {
-                    opencgaClient: {
-                        type: Object
-                    },
-                    host: {
-                        type: String,
-                        value: "http://bioinfodev.hpc.cam.ac.uk/hgva"
-                    },
-                    userId: {
-                        type: String,
-                        value: ""
-                    },
-                    project: {
-                        type: String,
-                        value: ""
-                    },
-                    study: {
-                        type: Object
-                    }
-                }
+            constructor() {
+                super();
+            }
+            _attachDom(dom) {
+                this.appendChild(dom);
+            }
+
+            ready() {
+                super.ready();
             }
         }
 
