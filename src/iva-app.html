@@ -27,20 +27,17 @@
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-clinical.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-beacon.html">
-<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/catalog/opencga-login.html">
 
-<link rel="import" href="jso-styles.html">
-<link rel="import" href="welcome.html">
-<link rel="import" href="components/iva-settings.html">
-
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/variant/variant-prioritization.html">-->
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">-->
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-gene-view.html">-->
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-transcript-view.html">-->
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/opencga-protein-view.html">-->
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/opencga-gene-view.html">
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/opencga-transcript-view.html">
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/opencga-protein-view.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">-->
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">-->
+<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">-->
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/catalog/opencga-login.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload-file.html">-->
+<link rel="import" href="components/iva-settings.html">
+
 
 <dom-module id="iva-app">
 
@@ -388,25 +385,25 @@
                     <!--<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>-->
                 </div>
 
-                <!--<div class="collapse content feature-view" id="gene">-->
-                <!--<opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"-->
-                <!--gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"-->
-                <!--protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">-->
+                <div class="collapse content feature-view" id="gene">
+                    <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
+                                       gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                       protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
 
-                <!--</opencga-gene-view>-->
-                <!--</div>-->
+                    </opencga-gene-view>
+                </div>
 
-                <!--<div class="collapse content feature-view" id="transcript">-->
-                <!--<opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"-->
-                <!--transcript="{{transcript}}" gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"-->
-                <!--protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-transcript-view>-->
-                <!--</div>-->
+                <div class="collapse content feature-view" id="transcript">
+                    <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
+                                             transcript="{{transcript}}" gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                             protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-transcript-view>
+                </div>
 
-                <!--<div class="collapse content feature-view" id="protein">-->
-                <!--<opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"-->
-                <!--protein="{{protein}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"-->
-                <!--protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene.protein}}"></opencga-protein-view>-->
-                <!--</div>-->
+                <div class="collapse content feature-view" id="protein">
+                    <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
+                                          protein="{{protein}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
+                                          protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene.protein}}"></opencga-protein-view>
+                </div>
 
                 <div class="collapse content" id="dashboard">
                     Not implemented yet!
