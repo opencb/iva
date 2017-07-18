@@ -58,15 +58,16 @@ var application = {
             visibility: "public"
         },
         {
+            id: "prioritization",
+            title: "Prioritization",
+            visibility: "public",
+        },
+        {
             id: "analysis",
             title: "Analysis",
             visibility: "public",
             submenu: [
-                {
-                    id: "prioritization",
-                    title: "Prioritization",
-                    visibility: "public",
-                },
+
                 {
                     separator: true,
                     visibility: "public"
