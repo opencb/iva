@@ -1,4 +1,14 @@
 {
-    "plugins" :["html"],
-    "extends": "eslint-config-google"
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "semi": 2,
+	    "quotes": ["warn", "double"]
+//        "default-case": "error"
+    }
 }
