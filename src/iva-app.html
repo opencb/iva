@@ -31,8 +31,8 @@
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/opencga-transcript-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/opencga-protein-view.html">
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-projects.html">-->
-<!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-project.html">-->
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/catalog/opencga-projects.html">
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/catalog/opencga-project.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-study.html">-->
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/catalog/opencga-login.html">
 <!--<link rel="import" href="../lib/jsorolla/src/lib/opencga/catalog/opencga-upload-file.html">-->
@@ -346,9 +346,14 @@
                 </div>
 
                 <div class="collapse content" id="prioritization">
-                    <variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}" project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                            config="{{config.tools.prioritization}}" population-frequencies="{{populationFrequencies}}" protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                            consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected">
+                    <variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}"
+                                            project="{{project}}" study="{{study}}" samples="{{samples}}"
+                                            config="{{config.tools.prioritization}}"
+                                            population-frequencies="{{populationFrequencies}}"
+                                            protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                            consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}"
+                                            cellbase-client="{{cellbaseClient}}"
+                                            beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected">
                     </variant-prioritization>
                 </div>
 
@@ -386,23 +391,33 @@
                 </div>
 
                 <div class="collapse content feature-view" id="gene">
-                    <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
-                                       gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                       protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
+                    <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
+                                       project="{{project}}" study="{{study}}"
+                                       gene="{{gene}}" population-frequencies="{{populationFrequencies}}"
+                                       consequence-types="{{consequenceTypes}}"
+                                       protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                       config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
 
                     </opencga-gene-view>
                 </div>
 
                 <div class="collapse content feature-view" id="transcript">
-                    <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
-                                             transcript="{{transcript}}" gene="{{gene}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                             protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene}}"></opencga-transcript-view>
+                    <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
+                                             project="{{project}}" study="{{study}}"
+                                             transcript="{{transcript}}" gene="{{gene}}"
+                                             population-frequencies="{{populationFrequencies}}"
+                                             consequence-types="{{consequenceTypes}}"
+                                             protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                             config="{{config.tools.gene}}"></opencga-transcript-view>
                 </div>
 
                 <div class="collapse content feature-view" id="protein">
-                    <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"
-                                          protein="{{protein}}" population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
-                                          protein-substitution-scores="{{proteinSubstitutionScores}}" config="{{config.tools.gene.protein}}"></opencga-protein-view>
+                    <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
+                                          project="{{project}}" study="{{study}}"
+                                          protein="{{protein}}" population-frequencies="{{populationFrequencies}}"
+                                          consequence-types="{{consequenceTypes}}"
+                                          protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                          config="{{config.tools.gene.protein}}"></opencga-protein-view>
                 </div>
 
                 <div class="collapse content" id="dashboard">
@@ -426,24 +441,28 @@
                     <!--<opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{project.studies}}"></opencga-upload-file>-->
                 </div>
 
-                <!--<div class="collapse content" id="projects" style="width: 60%; margin: auto">-->
-                <!--<opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" study-summaries="{{studySummaries}}"-->
-                <!--on-project="updateProject" on-study="updateStudy"></opencga-projects>-->
-                <!--</div>-->
+                <div class="collapse content" id="projects" style="width: 60%; margin: auto">
+                    <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}"
+                                      study-summaries="{{studySummaries}}"
+                                      on-project="updateProject" on-study="updateStudy"></opencga-projects>
+                </div>
 
-                <!--<div class="collapse content" id="project">-->
-                <!--<opencga-project opencga-client="{{opencgaClient}}" project="{{project}}" study-summaries="{{studySummaries}}"-->
-                <!--on-study="updateStudy"></opencga-project>-->
-                <!--</div>-->
+                <div class="collapse content" id="project">
+                    <opencga-project opencga-client="{{opencgaClient}}" project="{{project}}"
+                                     study-summaries="{{studySummaries}}"
+                                     on-study="updateStudy"></opencga-project>
+                </div>
 
-                <!--<div class="collapse content" id="samples">-->
-                <!--<opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}" samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>-->
-                <!--</div>-->
+                <div class="collapse content" id="samples">
+                    <!--<opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}"-->
+                                            <!--samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>-->
+                </div>
 
                 <!--<div class="collapse content" id="studyInformation">-->
-                <!--<opencga-study opencga-client="{{opencgaClient}}" project="{{project}}" study="{{study}}"></opencga-study>-->
-                <!--</div>-->
+                <!--<opencga-study opencga-client="{{opencgaClient}}" project="{{project}}"-->
+                <!--study="{{study}}"></opencga-study>-->
             </div>
+        </div>
         </div>
 
     </template>
@@ -625,16 +644,16 @@
             logout() {
                 var _this = this;
                 this.opencgaClient.users().logout()
-                    .then(function () {
-                        _this._logout();
-                    })
-                    .catch(function () {
-                        // we need to remove Cookies son OpenCGAClient has failed
-                        Cookies.expire(_this.config.opencga.cookie.prefix + "_sid");
-                        Cookies.expire(_this.config.opencga.cookie.prefix + "_userId");
+                        .then(function () {
+                            _this._logout();
+                        })
+                        .catch(function () {
+                            // we need to remove Cookies son OpenCGAClient has failed
+                            Cookies.expire(_this.config.opencga.cookie.prefix + "_sid");
+                            Cookies.expire(_this.config.opencga.cookie.prefix + "_userId");
 
-                        _this._logout();
-                    });
+                            _this._logout();
+                        });
             }
 
             changeTool(e) {
@@ -655,32 +674,32 @@
                 if (this._publicMode) {
                     // Get all projects with study info and call to _setup()
                     this.opencgaClient.users().getProjects('anonymous', {shared: true})
-                        .then(function (response) {
-                            let _projects = response.response[0].result;
-                            _this._setup(_projects);
-                            _this._checkBreadcrumbVisible();
-                        })
-                        .catch(function (response) {
-                            console.log("An error when getting projects:")
-                            console.log(response)
-                        });
+                            .then(function (response) {
+                                let _projects = response.response[0].result;
+                                _this._setup(_projects);
+                                _this._checkBreadcrumbVisible();
+                            })
+                            .catch(function (response) {
+                                console.log("An error when getting projects:")
+                                console.log(response)
+                            });
                 } else {
                     this.opencgaClient.users().getProjects(this.userId)
-                        .then(function (response) {
-                            let _projects = response.response[0].result;
-                            if (PolymerUtils.isNotEmpty(_this.config.opencga.asUser)) {
-                                for (let p of _projects) {
-                                    p.alias = _this.config.opencga.asUser + "@" + p.alias;
+                            .then(function (response) {
+                                let _projects = response.response[0].result;
+                                if (PolymerUtils.isNotEmpty(_this.config.opencga.asUser)) {
+                                    for (let p of _projects) {
+                                        p.alias = _this.config.opencga.asUser + "@" + p.alias;
+                                    }
                                 }
-                            }
-                            _this._setup(_projects);
-                            _this._checkBreadcrumbVisible();
-                        })
-                        .catch(function (response) {
-                            console.log("An error when getting projects:")
-                            console.log(response)
-                            _this.logout();
-                        });
+                                _this._setup(_projects);
+                                _this._checkBreadcrumbVisible();
+                            })
+                            .catch(function (response) {
+                                console.log("An error when getting projects:")
+                                console.log(response)
+                                _this.logout();
+                            });
                 }
             }
 
@@ -699,30 +718,30 @@
                             studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
                         });
                         projectPromises.push(Promise.all(studyPromises)
-                            .then(function (responses) {
-                                let studies = [];
-                                responses.forEach(function (response) {
-                                    let study = response.response[0].result[0];
-                                    study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-                                    studies.push(study);
-                                });
-                                return studies;
-                            }));
+                                .then(function (responses) {
+                                    let studies = [];
+                                    responses.forEach(function (response) {
+                                        let study = response.response[0].result[0];
+                                        study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+                                        studies.push(study);
+                                    });
+                                    return studies;
+                                }));
                     });
 
                     let _projects = [];
                     Promise.all(projectPromises)
-                        .then(function (responses) {
-                            for (let i = 0; i < responses.length; i++) {
-                                _projects.push({
-                                    id: _this.projects[i].id,
-                                    alias: _this.projects[i].alias,
-                                    name: _this.projects[i].name,
-                                    studies: responses[i]
-                                });
-                            }
-                            _this.studySummaries = _projects;
-                        });
+                            .then(function (responses) {
+                                for (let i = 0; i < responses.length; i++) {
+                                    _projects.push({
+                                        id: _this.projects[i].id,
+                                        alias: _this.projects[i].alias,
+                                        name: _this.projects[i].name,
+                                        studies: responses[i]
+                                    });
+                                }
+                                _this.studySummaries = _projects;
+                            });
                 }
 
             }
@@ -749,7 +768,7 @@
 
                 // Stopping the recursive call
                 if (hashTool != this.tool || (PolymerUtils.isNotUndefined(this.project) && hashProject != this.project.alias) ||
-                    (PolymerUtils.isNotUndefined(this.study) && hashStudy != this.study.alias)) {
+                        (PolymerUtils.isNotUndefined(this.study) && hashStudy != this.study.alias)) {
                     if (arr.length > 1) {
                         // Field 'project' is being observed, just in case Polymer triggers
                         // an unnecessary event we can check they are really different
@@ -858,7 +877,7 @@
             }
 
             updateStudy(e) {
-                if (PolymerUtils.isNotUndefined(e.detail.project) && PolumerUtils.isNotEmpty(e.detail.project.name)) {
+                if (PolymerUtils.isNotUndefined(e.detail.project) && PolymerUtils.isNotEmpty(e.detail.project.name)) {
                     this.project = e.detail.project;
                 }
                 for (let i = 0; i < this.project.studies.length; i++) {
