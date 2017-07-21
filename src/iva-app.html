@@ -101,22 +101,19 @@
                             <!-- Controls aligned to the LEFT -->
                             <ul class="nav navbar-nav">
                                 <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                                <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible"
-                                          as="menuItem">
+                                <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
                                     <!-- If there is not submenu we just display a button -->
                                     <template is="dom-if" if="{{!menuItem.submenu}}">
-                                        <li on-click="changeTool"><a href$="#{{menuItem.id}}" role="button">{{menuItem.title}}</a>
-                                        </li>
+                                        <li on-click="changeTool"><a href$="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
                                     </template>
                                     <!-- If there is a submenu we create a dropdown menu item -->
                                     <template is="dom-if" if="{{menuItem.submenu}}">
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                               aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span
-                                                    class="caret"></span></a>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}}
+                                                <span class="caret"></span>
+                                            </a>
                                             <ul class="dropdown-menu">
-                                                <template is="dom-repeat" items="{{menuItem.submenu}}"
-                                                          filter="_isMenuItemVisible">
+                                                <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible">
                                                     <template is="dom-if" if="{{item.category}}">
                                                         <li><a><label>{{item.title}}</label></a></li>
                                                     </template>
@@ -125,9 +122,7 @@
                                                     </template>
                                                     <template is="dom-if" if="{{!item.category}}">
                                                         <template is="dom-if" if="{{!item.separator}}">
-                                                            <li on-click="changeTool"><a href$="#{{item.id}}"
-                                                                                         data-id="{{item.id}}">{{item.title}}</a>
-                                                            </li>
+                                                            <li on-click="changeTool"><a href$="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
                                                         </template>
                                                     </template>
                                                 </template>
@@ -662,6 +657,8 @@
                 if (PolymerUtils.isNotUndefined(e.target) && PolymerUtils.isNotUndefined(e.target.attributes.href)) {
                     $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
                     this.tool = e.target.attributes.href.value;
+
+                    this.x[this.tool] = true;
                 } else {
                     this.tool = "#home";
                 }
@@ -707,8 +704,8 @@
                 // We check that at least one project with one study exist, otherwise we do not do anything
                 if (PolymerUtils.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
                     this.projects = projects;
-                    this.project = projects[0];
-                    this.study = projects[0].studies[0];
+                    this.project = projects[3];
+                    this.study = projects[3].studies[0];
 
                     let _this = this;
                     let projectPromises = [];
