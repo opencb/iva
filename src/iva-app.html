@@ -670,7 +670,7 @@
                 var _this = this;
                 if (this._publicMode) {
                     // Get all projects with study info and call to _setup()
-                    this.opencgaClient.users().getProjects('anonymous', {shared: true})
+                    this.opencgaClient.projects().search({})
                             .then(function (response) {
                                 let _projects = response.response[0].result;
                                 _this._setup(_projects);
@@ -684,11 +684,11 @@
                     this.opencgaClient.users().getProjects(this.userId)
                             .then(function (response) {
                                 let _projects = response.response[0].result;
-                                if (PolymerUtils.isNotEmpty(_this.config.opencga.asUser)) {
-                                    for (let p of _projects) {
-                                        p.alias = _this.config.opencga.asUser + "@" + p.alias;
-                                    }
-                                }
+//                                if (PolymerUtils.isNotEmpty(_this.config.opencga.asUser)) {
+//                                    for (let p of _projects) {
+//                                        p.alias = _this.config.opencga.asUser + "@" + p.alias;
+//                                    }
+//                                }
                                 _this._setup(_projects);
                                 _this._checkBreadcrumbVisible();
                             })
