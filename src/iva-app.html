@@ -101,19 +101,23 @@
                             <!-- Controls aligned to the LEFT -->
                             <ul class="nav navbar-nav">
                                 <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                                <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
+                                <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible"
+                                          as="menuItem">
                                     <!-- If there is not submenu we just display a button -->
                                     <template is="dom-if" if="{{!menuItem.submenu}}">
-                                        <li on-click="changeTool"><a href$="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>
+                                        <li on-click="changeTool"><a href$="#{{menuItem.id}}" role="button">{{menuItem.title}}</a>
+                                        </li>
                                     </template>
                                     <!-- If there is a submenu we create a dropdown menu item -->
                                     <template is="dom-if" if="{{menuItem.submenu}}">
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}}
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                               aria-haspopup="true" aria-expanded="false">{{menuItem.title}}
                                                 <span class="caret"></span>
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible">
+                                                <template is="dom-repeat" items="{{menuItem.submenu}}"
+                                                          filter="_isMenuItemVisible">
                                                     <template is="dom-if" if="{{item.category}}">
                                                         <li><a><label>{{item.title}}</label></a></li>
                                                     </template>
@@ -122,7 +126,9 @@
                                                     </template>
                                                     <template is="dom-if" if="{{!item.category}}">
                                                         <template is="dom-if" if="{{!item.separator}}">
-                                                            <li on-click="changeTool"><a href$="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>
+                                                            <li on-click="changeTool"><a href$="#{{item.id}}"
+                                                                                         data-id="{{item.id}}">{{item.title}}</a>
+                                                            </li>
                                                         </template>
                                                     </template>
                                                 </template>
@@ -279,7 +285,7 @@
                                 <template is="dom-if" if="{{_isMenuItemVisible(config.login)}}">
                                     <li>
                                         <template is="dom-if" if="{{!_logged}}">
-                                            <a href="#login" role="button">
+                                            <a href="#login" role="button" on-click="changeTool">
                                                 <i class="fa fa-sign-in fa-lg"></i> Login
                                             </a>
                                         </template>
@@ -320,138 +326,184 @@
 
 
             <!-- This is where main application is rendered -->
-            <div class="center">
-                <div class="collapse content" id="home">
-                    <welcome-web></welcome-web>
+            <template is="dom-if" if="{{config.enabledComponents.home}}">
+
+                <div class="center">
+                    <div class="content" id="home">
+                        <welcome-web></welcome-web>
+                    </div>
+
                 </div>
-            </div>
+            </template>
 
             <div>
-                <div class="collapse content" id="browser">
-                    <variant-browser mode="browser" title="Variant Browser" host="{{opencga.host}}"
-                                     project="{{project}}" study="{{study}}" studies="{{project.studies}}"
-                                     config="{{config.tools.browser}}"
-                                     population-frequencies="{{populationFrequencies}}"
-                                     protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                     consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}"
-                                     cellbase-client="{{cellbaseClient}}"
-                                     beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}" query="{{_query}}"
-                                     on-gene="geneSelected" summary="{{config.opencga.summary}}">
-                    </variant-browser>
-                </div>
+                <template is="dom-if" if="{{config.enabledComponents.browser}}">
 
-                <div class="collapse content" id="prioritization">
-                    <variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}"
-                                            project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                            config="{{config.tools.prioritization}}"
-                                            population-frequencies="{{populationFrequencies}}"
-                                            protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                            consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}"
-                                            cellbase-client="{{cellbaseClient}}"
-                                            beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected">
-                    </variant-prioritization>
-                </div>
+                    <div class="content" id="browser">
+                        <variant-browser mode="browser" title="Variant Browser" host="{{opencga.host}}"
+                                         project="{{project}}" study="{{study}}" studies="{{project.studies}}"
+                                         config="{{config.tools.browser}}" active="{{config.tools.browser.active}}"
+                                         population-frequencies="{{populationFrequencies}}"
+                                         protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                         consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}"
+                                         cellbase-client="{{cellbaseClient}}"
+                                         beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}"
+                                         query="{{_query}}"
+                                         on-gene="geneSelected" summary="{{config.opencga.summary}}">
+                        </variant-browser>
+                    </div>
+                </template>
 
-                <div class="collapse content" id="clinical">
-                    <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
-                                      study="{{study}}" samples="{{samples}}"
-                                      config="{{config.tools.clinical}}"
-                                      population-frequencies="{{populationFrequencies}}"
-                                      protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                      consequence-types="{{consequenceTypes}}"
-                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
-                    </variant-clinical>
-                </div>
+                <template is="dom-if" if="{{config.enabledComponents.prioritization}}">
 
-                <div class="collapse content" id="facet">
-                    <variant-facet title="Facet Analysis" project="{{project}}" study="{{study}}"
-                                   studies="{{project.studies}}" config="{{config.tools.facet}}"
-                                   opencga-client="{{opencgaClient}}"
-                                   cellbase-client="{{cellbaseClient}}"
-                                   population-frequencies="{{populationFrequencies}}"
-                                   protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                   consequence-types="{{consequenceTypes}}">
-                    </variant-facet>
-                </div>
+                    <div class="content" id="prioritization">
+                        <variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}"
+                                                project="{{project}}" study="{{study}}" samples="{{samples}}"
+                                                config="{{config.tools.prioritization}}"
+                                                population-frequencies="{{populationFrequencies}}"
+                                                protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                                consequence-types="{{consequenceTypes}}"
+                                                opencga-client="{{opencgaClient}}"
+                                                cellbase-client="{{cellbaseClient}}"
+                                                active="{{config.tools.prioritization.active}}"
+                                                beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected">
+                        </variant-prioritization>
+                    </div>
+                </template>
 
-                <div class="collapse content" id="beacon">
-                    <variant-beacon opencga-client="{{opencgaClient}}" project="{{project}}"
-                                    studies="{{project.studies}}"
-                                    hosts="{{config.tools.beacon.hosts}}"></variant-beacon>
-                </div>
+                <template is="dom-if" if="{{config.enabledComponents.clinical}}">
 
-                <div class="collapse content" id="genomeBrowser">
-                    Not implemented yet.
-                    <!--<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>-->
-                </div>
-
-                <div class="collapse content feature-view" id="gene">
-                    <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
-                                       project="{{project}}" study="{{study}}"
-                                       gene="{{gene}}" population-frequencies="{{populationFrequencies}}"
-                                       consequence-types="{{consequenceTypes}}"
-                                       protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                       config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
-
-                    </opencga-gene-view>
-                </div>
-
-                <div class="collapse content feature-view" id="transcript">
-                    <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
-                                             project="{{project}}" study="{{study}}"
-                                             transcript="{{transcript}}" gene="{{gene}}"
-                                             population-frequencies="{{populationFrequencies}}"
-                                             consequence-types="{{consequenceTypes}}"
-                                             protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                             config="{{config.tools.gene}}"></opencga-transcript-view>
-                </div>
-
-                <div class="collapse content feature-view" id="protein">
-                    <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
-                                          project="{{project}}" study="{{study}}"
-                                          protein="{{protein}}" population-frequencies="{{populationFrequencies}}"
-                                          consequence-types="{{consequenceTypes}}"
+                    <div class="content" id="clinical">
+                        <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
+                                          study="{{study}}" samples="{{samples}}"
+                                          config="{{config.tools.clinical}}"
+                                          population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                          config="{{config.tools.gene.protein}}"></opencga-protein-view>
-                </div>
+                                          consequence-types="{{consequenceTypes}}"
+                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
+                        </variant-clinical>
+                    </div>
+                </template>
 
-                <div class="collapse content" id="dashboard">
-                    Not implemented yet!
-                    <!--<opencga-dahsboard></opencga-dahsboard>-->
-                </div>
+                <template is="dom-if" if="{{config.enabledComponents.facet}}">
 
-                <div class="collapse content" id="login" style="width: 20%; margin: auto;">
-                    <opencga-login on-login="login" opencga-client="{{opencgaClient}}"
-                                   opencga-client-config="{{opencgaClientConfig}}" login-text="Sign in"></opencga-login>
-                </div>
+                    <div class="content" id="facet">
+                        <variant-facet title="Facet Analysis" project="{{project}}" study="{{study}}"
+                                       studies="{{project.studies}}" config="{{config.tools.facet}}"
+                                       opencga-client="{{opencgaClient}}"
+                                       cellbase-client="{{cellbaseClient}}"
+                                       population-frequencies="{{populationFrequencies}}"
+                                       protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                       consequence-types="{{consequenceTypes}}">
+                        </variant-facet>
+                    </div>
+                </template>
 
-                <div class="collapse content" id="settings" style="width: 40%; margin: auto">
-                    <br>
-                    <iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig"
-                                  default-config="{{defaultConfig}}"></iva-settings>
-                </div>
+                <template is="dom-if" if="{{config.enabledComponents.beacon}}">
 
-                <div class="collapse content" id="upload" style="width: 40%; margin-left: 2%">
-                    <br>
-                    <!--<opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{project.studies}}"></opencga-upload-file>-->
-                </div>
+                    <div class="content" id="beacon">
+                        <variant-beacon opencga-client="{{opencgaClient}}" project="{{project}}"
+                                        studies="{{project.studies}}"
+                                        hosts="{{config.tools.beacon.hosts}}"></variant-beacon>
+                    </div>
+                </template>
+                <template is="dom-if" if="{{config.enabledComponents.genomeBrowser}}">
 
-                <div class="collapse content" id="projects" style="width: 60%; margin: auto">
-                    <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}"
-                                      study-summaries="{{studySummaries}}"
-                                      on-project="updateProject" on-study="updateStudy"></opencga-projects>
-                </div>
+                    <div class="content" id="genomeBrowser">
+                        Not implemented yet.
+                        <!--<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>-->
+                    </div>
+                </template>
 
-                <div class="collapse content" id="project">
-                    <opencga-project opencga-client="{{opencgaClient}}" project="{{project}}"
-                                     study-summaries="{{studySummaries}}"
-                                     on-study="updateStudy"></opencga-project>
-                </div>
+                <template is="dom-if" if="{{config.enabledComponents.gene}}">
 
-                <div class="collapse content" id="samples">
-                    <!--<opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}"-->
-                                            <!--samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>-->
-                </div>
+                    <div class="content feature-view" id="gene">
+                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
+                                           project="{{project}}" study="{{study}}"
+                                           gene="{{gene}}" population-frequencies="{{populationFrequencies}}"
+                                           consequence-types="{{consequenceTypes}}"
+                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                           config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
+
+                        </opencga-gene-view>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.transcript}}">
+
+                    <div class="collapse content feature-view" id="transcript">
+                        <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
+                                                 project="{{project}}" study="{{study}}"
+                                                 transcript="{{transcript}}" gene="{{gene}}"
+                                                 population-frequencies="{{populationFrequencies}}"
+                                                 consequence-types="{{consequenceTypes}}"
+                                                 protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                                 config="{{config.tools.gene}}"></opencga-transcript-view>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.protein}}">
+
+                    <div class="collapse content feature-view" id="protein">
+                        <opencga-protein-view cellbase-client="tools{{cellbaseClient}}"
+                                              opencga-client="{{opencgaClient}}"
+                                              project="{{project}}" study="{{study}}"
+                                              protein="{{protein}}" population-frequencies="{{populationFrequencies}}"
+                                              consequence-types="{{consequenceTypes}}"
+                                              protein-substitution-scores="{{proteinSubstitutionScores}}"
+                                              config="{{config.tools.gene.protein}}"></opencga-protein-view>
+                    </div>
+                </template>
+                <!--<div class="collapse content" id="dashboard">-->
+                <!--Not implemented yet!-->
+                <!--&lt;!&ndash;<opencga-dahsboard></opencga-dahsboard>&ndash;&gt;-->
+                <!--</div>-->
+
+                <template is="dom-if" if="{{config.enabledComponents.login}}">
+
+                    <div class="content" id="login" style="width: 20%; margin: auto;">
+                        <opencga-login on-login="login" opencga-client="{{opencgaClient}}"
+                                       opencga-client-config="{{opencgaClientConfig}}"
+                                       login-text="Sign in"></opencga-login>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.settings}}">
+                    <div class="content" id="settings" style="width: 40%; margin: auto">
+                        <br>
+                        <iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig"
+                                      default-config="{{defaultConfig}}"></iva-settings>
+                    </div>
+                </template>
+
+                <!--<div class="collapse content" id="upload" style="width: 40%; margin-left: 2%">-->
+                <!--<br>-->
+                <!--&lt;!&ndash;<opencga-upload-file opencga-client="{{opencgaClient}}" study="{{study}}" studies="{{project.studies}}"></opencga-upload-file>&ndash;&gt;-->
+                <!--</div>-->
+
+                <template is="dom-if" if="{{config.enabledComponents.projects}}">
+
+                    <div class="content" id="projects" style="width: 60%; margin: auto">
+                        <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}"
+                                          study-summaries="{{studySummaries}}"
+                                          on-project="updateProject" on-study="updateStudy"></opencga-projects>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.project}}">
+
+                    <div class="content" id="project">
+                        <opencga-project opencga-client="{{opencgaClient}}" project="{{project}}"
+                                         study-summaries="{{studySummaries}}"
+                                         on-study="updateStudy"></opencga-project>
+                    </div>
+
+                </template>
+
+                <!--<div class="collapse content" id="samples">-->
+                <!--&lt;!&ndash;<opencga-sample-browser opencga-client="{{opencgaClient}}" study="{{study.id}}"&ndash;&gt;-->
+                <!--&lt;!&ndash;samples="{{samples}}" prefix="{{prefix}}"></opencga-sample-browser>&ndash;&gt;-->
+                <!--</div>-->
 
                 <!--<div class="collapse content" id="studyInformation">-->
                 <!--<opencga-study opencga-client="{{opencgaClient}}" project="{{project}}"-->
@@ -460,6 +512,22 @@
         </div>
         </div>
 
+        <div class="modal fade" id="MainLoadingModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+             role="dialog"
+             aria-hidden="true" style="padding-top:15%; overflow-y:visible;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Loading...</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </template>
 
     <script>
@@ -530,6 +598,24 @@
                 this.set('opencga', opencga);
                 this.set('config.opencga', opencga);
                 this.config.species = DEFAULT_SPECIES;
+                this.config.enabledComponents = {};
+
+                // Enabled components tools
+                for (var tool in this.config.tools) {
+                    if (PolymerUtils.isNotUndefined(this.config.tools[tool].active)) {
+                        this.set("config.enabledComponents." + tool, this.config.tools[tool].active);
+                    }
+                }
+                // Enabled components views
+                this.set("config.enabledComponents.gene", false);
+                this.set("config.enabledComponents.protein", false);
+                this.set("config.enabledComponents.transcript", false);
+                // Enabled components catalog
+                this.set("config.enabledComponents.login", false);
+                this.set("config.enabledComponents.projects", false);
+                this.set("config.enabledComponents.project", false);
+                this.set("config.enabledComponents.settings", false);
+                this.set("config.enabledComponents.home", true);
 
 
                 this.defaultConfig = {};
@@ -566,12 +652,12 @@
                 }
 
                 // go to the page that tool has
-                $('.content').hide();
+//                $('.content').hide();
                 if (window.location.hash != this.tool) {
                     window.location.hash = this.tool;
                 } else {
-                    $(this.tool).show();
-                    this.$["home"].style.display = 'inline';
+//                    $(this.tool).show();
+//                    this.$["home"].style.display = 'inline';
                     console.log($(this.tool))
                     console.log(this.$.home)
                 }
@@ -639,26 +725,26 @@
             logout() {
                 var _this = this;
                 this.opencgaClient.users().logout()
-                        .then(function () {
-                            _this._logout();
-                        })
-                        .catch(function () {
-                            // we need to remove Cookies son OpenCGAClient has failed
-                            Cookies.expire(_this.config.opencga.cookie.prefix + "_sid");
-                            Cookies.expire(_this.config.opencga.cookie.prefix + "_userId");
+                    .then(function () {
+                        _this._logout();
+                    })
+                    .catch(function () {
+                        // we need to remove Cookies son OpenCGAClient has failed
+                        Cookies.expire(_this.config.opencga.cookie.prefix + "_sid");
+                        Cookies.expire(_this.config.opencga.cookie.prefix + "_userId");
 
-                            _this._logout();
-                        });
+                        _this._logout();
+                    });
             }
 
             changeTool(e) {
-                e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
-                $('.content').hide(); // hides all content divs
-                if (PolymerUtils.isNotUndefined(e.target) && PolymerUtils.isNotUndefined(e.target.attributes.href)) {
-                    $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
-                    this.tool = e.target.attributes.href.value;
+                if (PolymerUtils.isNotUndefined(e)) {
+                    e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
+                }
 
-                    this.x[this.tool] = true;
+                if (PolymerUtils.isNotUndefined(e.target) && PolymerUtils.isNotUndefined(e.target.attributes.href)) {
+//                    $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
+                    this.tool = e.target.attributes.href.value;
                 } else {
                     this.tool = "#home";
                 }
@@ -666,85 +752,9 @@
                 this.renderHashFragments();
             }
 
-            getProjects() {
-                var _this = this;
-                if (this._publicMode) {
-                    // Get all projects with study info and call to _setup()
-                    this.opencgaClient.users().getProjects('anonymous', {shared: true})
-                            .then(function (response) {
-                                let _projects = response.response[0].result;
-                                _this._setup(_projects);
-                                _this._checkBreadcrumbVisible();
-                            })
-                            .catch(function (response) {
-                                console.log("An error when getting projects:")
-                                console.log(response)
-                            });
-                } else {
-                    this.opencgaClient.users().getProjects(this.userId)
-                            .then(function (response) {
-                                let _projects = response.response[0].result;
-                                if (PolymerUtils.isNotEmpty(_this.config.opencga.asUser)) {
-                                    for (let p of _projects) {
-                                        p.alias = _this.config.opencga.asUser + "@" + p.alias;
-                                    }
-                                }
-                                _this._setup(_projects);
-                                _this._checkBreadcrumbVisible();
-                            })
-                            .catch(function (response) {
-                                console.log("An error when getting projects:")
-                                console.log(response)
-                                _this.logout();
-                            });
-                }
-            }
-
-            _setup(projects) {
-                // We check that at least one project with one study exist, otherwise we do not do anything
-                if (PolymerUtils.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
-                    this.projects = projects;
-                    this.project = projects[3];
-                    this.study = projects[3].studies[0];
-
-                    let _this = this;
-                    let projectPromises = [];
-                    projects.forEach(function (project) {
-                        let studyPromises = [];
-                        project.studies.forEach(function (study) {
-                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
-                        });
-                        projectPromises.push(Promise.all(studyPromises)
-                                .then(function (responses) {
-                                    let studies = [];
-                                    responses.forEach(function (response) {
-                                        let study = response.response[0].result[0];
-                                        study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-                                        studies.push(study);
-                                    });
-                                    return studies;
-                                }));
-                    });
-
-                    let _projects = [];
-                    Promise.all(projectPromises)
-                            .then(function (responses) {
-                                for (let i = 0; i < responses.length; i++) {
-                                    _projects.push({
-                                        id: _this.projects[i].id,
-                                        alias: _this.projects[i].alias,
-                                        name: _this.projects[i].name,
-                                        studies: responses[i]
-                                    });
-                                }
-                                _this.studySummaries = _projects;
-                            });
-                }
-
-            }
-
             renderHashFragments() {
                 console.log("renderHashFragments - DEBUG")
+//                $("#" + "MainLoadingModal").modal("show");
 
                 let hashFrag = this.tool;
                 if (PolymerUtils.isNotUndefined(this.project) && PolymerUtils.isNotEmpty(this.project.alias)) {
@@ -760,12 +770,17 @@
 
             hashFragmentListener(ctx) {
                 console.log("hashFragmentListener - DEBUG")
+                for (var elementa in this.config.enabledComponents) {
+                    if (PolymerUtils.isNotUndefined(this.config.enabledComponents[elementa])) {
+                        this.set("config.enabledComponents." + elementa, false);
+                    }
+                }
                 var arr = window.location.hash.split('/');
                 let [hashTool, hashProject, hashStudy, feature] = arr;
 
                 // Stopping the recursive call
                 if (hashTool != this.tool || (PolymerUtils.isNotUndefined(this.project) && hashProject != this.project.alias) ||
-                        (PolymerUtils.isNotUndefined(this.study) && hashStudy != this.study.alias)) {
+                    (PolymerUtils.isNotUndefined(this.study) && hashStudy != this.study.alias)) {
                     if (arr.length > 1) {
                         // Field 'project' is being observed, just in case Polymer triggers
                         // an unnecessary event we can check they are really different
@@ -798,10 +813,88 @@
                     }
                     ctx.tool = hashTool;
                 }
-                $('.content').hide();
 
-                PolymerUtils.hideByClass("content");
-                PolymerUtils.show(hashTool.replace("#", ""));
+                if (PolymerUtils.isNotUndefined(this.config.enabledComponents[this.tool.replace("#", "")])) {
+                    this.set("config.enabledComponents." + this.tool.replace("#", ""), true);
+                }
+
+
+            }
+
+            getProjects() {
+                var _this = this;
+                if (this._publicMode) {
+                    // Get all projects with study info and call to _setup()
+                    this.opencgaClient.users().getProjects('anonymous', {shared: true})
+                        .then(function (response) {
+                            let _projects = response.response[0].result;
+                            _this._setup(_projects);
+                            _this._checkBreadcrumbVisible();
+                        })
+                        .catch(function (response) {
+                            console.log("An error when getting projects:")
+                            console.log(response)
+                        });
+                } else {
+                    this.opencgaClient.users().getProjects(this.userId)
+                        .then(function (response) {
+                            let _projects = response.response[0].result;
+                            if (PolymerUtils.isNotEmpty(_this.config.opencga.asUser)) {
+                                for (let p of _projects) {
+                                    p.alias = _this.config.opencga.asUser + "@" + p.alias;
+                                }
+                            }
+                            _this._setup(_projects);
+                            _this._checkBreadcrumbVisible();
+                        })
+                        .catch(function (response) {
+                            console.log("An error when getting projects:")
+                            console.log(response)
+                            _this.logout();
+                        });
+                }
+            }
+
+            _setup(projects) {
+                // We check that at least one project with one study exist, otherwise we do not do anything
+                if (PolymerUtils.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
+                    this.projects = projects;
+                    this.project = projects[3];
+                    this.study = projects[3].studies[0];
+
+                    let _this = this;
+                    let projectPromises = [];
+                    projects.forEach(function (project) {
+                        let studyPromises = [];
+                        project.studies.forEach(function (study) {
+                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
+                        });
+                        projectPromises.push(Promise.all(studyPromises)
+                            .then(function (responses) {
+                                let studies = [];
+                                responses.forEach(function (response) {
+                                    let study = response.response[0].result[0];
+                                    study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+                                    studies.push(study);
+                                });
+                                return studies;
+                            }));
+                    });
+
+                    let _projects = [];
+                    Promise.all(projectPromises)
+                        .then(function (responses) {
+                            for (let i = 0; i < responses.length; i++) {
+                                _projects.push({
+                                    id: _this.projects[i].id,
+                                    alias: _this.projects[i].alias,
+                                    name: _this.projects[i].name,
+                                    studies: responses[i]
+                                });
+                            }
+                            _this.studySummaries = _projects;
+                        });
+                }
 
             }
 
