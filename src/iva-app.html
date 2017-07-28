@@ -752,6 +752,83 @@
                 this.renderHashFragments();
             }
 
+            getProjects() {
+                var _this = this;
+                if (this._publicMode) {
+                    // Get all projects with study info and call to _setup()
+                    this.opencgaClient.projects().search({})
+                            .then(function (response) {
+                                let _projects = response.response[0].result;
+                                _this._setup(_projects);
+                                _this._checkBreadcrumbVisible();
+                            })
+                            .catch(function (response) {
+                                console.log("An error when getting projects:")
+                                console.log(response)
+                            });
+                } else {
+                    this.opencgaClient.users().getProjects(this.userId)
+                            .then(function (response) {
+                                let _projects = response.response[0].result;
+//                                if (PolymerUtils.isNotEmpty(_this.config.opencga.asUser)) {
+//                                    for (let p of _projects) {
+//                                        p.alias = _this.config.opencga.asUser + "@" + p.alias;
+//                                    }
+//                                }
+                                _this._setup(_projects);
+                                _this._checkBreadcrumbVisible();
+                            })
+                            .catch(function (response) {
+                                console.log("An error when getting projects:")
+                                console.log(response)
+                                _this.logout();
+                            });
+                }
+            }
+
+            _setup(projects) {
+                // We check that at least one project with one study exist, otherwise we do not do anything
+                if (PolymerUtils.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
+                    this.projects = projects;
+                    this.project = projects[3];
+                    this.study = projects[3].studies[0];
+
+                    let _this = this;
+                    let projectPromises = [];
+                    projects.forEach(function (project) {
+                        let studyPromises = [];
+                        project.studies.forEach(function (study) {
+                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
+                        });
+                        projectPromises.push(Promise.all(studyPromises)
+                                .then(function (responses) {
+                                    let studies = [];
+                                    responses.forEach(function (response) {
+                                        let study = response.response[0].result[0];
+                                        study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+                                        studies.push(study);
+                                    });
+                                    return studies;
+                                }));
+                    });
+
+                    let _projects = [];
+                    Promise.all(projectPromises)
+                            .then(function (responses) {
+                                for (let i = 0; i < responses.length; i++) {
+                                    _projects.push({
+                                        id: _this.projects[i].id,
+                                        alias: _this.projects[i].alias,
+                                        name: _this.projects[i].name,
+                                        studies: responses[i]
+                                    });
+                                }
+                                _this.studySummaries = _projects;
+                            });
+                }
+
+            }
+
             renderHashFragments() {
                 console.log("renderHashFragments - DEBUG")
 //                $("#" + "MainLoadingModal").modal("show");
@@ -818,83 +895,6 @@
                     this.set("config.enabledComponents." + this.tool.replace("#", ""), true);
                 }
 
-
-            }
-
-            getProjects() {
-                var _this = this;
-                if (this._publicMode) {
-                    // Get all projects with study info and call to _setup()
-                    this.opencgaClient.users().getProjects('anonymous', {shared: true})
-                        .then(function (response) {
-                            let _projects = response.response[0].result;
-                            _this._setup(_projects);
-                            _this._checkBreadcrumbVisible();
-                        })
-                        .catch(function (response) {
-                            console.log("An error when getting projects:")
-                            console.log(response)
-                        });
-                } else {
-                    this.opencgaClient.users().getProjects(this.userId)
-                        .then(function (response) {
-                            let _projects = response.response[0].result;
-                            if (PolymerUtils.isNotEmpty(_this.config.opencga.asUser)) {
-                                for (let p of _projects) {
-                                    p.alias = _this.config.opencga.asUser + "@" + p.alias;
-                                }
-                            }
-                            _this._setup(_projects);
-                            _this._checkBreadcrumbVisible();
-                        })
-                        .catch(function (response) {
-                            console.log("An error when getting projects:")
-                            console.log(response)
-                            _this.logout();
-                        });
-                }
-            }
-
-            _setup(projects) {
-                // We check that at least one project with one study exist, otherwise we do not do anything
-                if (PolymerUtils.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
-                    this.projects = projects;
-                    this.project = projects[3];
-                    this.study = projects[3].studies[0];
-
-                    let _this = this;
-                    let projectPromises = [];
-                    projects.forEach(function (project) {
-                        let studyPromises = [];
-                        project.studies.forEach(function (study) {
-                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
-                        });
-                        projectPromises.push(Promise.all(studyPromises)
-                            .then(function (responses) {
-                                let studies = [];
-                                responses.forEach(function (response) {
-                                    let study = response.response[0].result[0];
-                                    study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-                                    studies.push(study);
-                                });
-                                return studies;
-                            }));
-                    });
-
-                    let _projects = [];
-                    Promise.all(projectPromises)
-                        .then(function (responses) {
-                            for (let i = 0; i < responses.length; i++) {
-                                _projects.push({
-                                    id: _this.projects[i].id,
-                                    alias: _this.projects[i].alias,
-                                    name: _this.projects[i].name,
-                                    studies: responses[i]
-                                });
-                            }
-                            _this.studySummaries = _projects;
-                        });
-                }
 
             }
 
