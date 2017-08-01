@@ -313,7 +313,7 @@
 
             checkUserConfig(config) {
                 let _this = this;
-                if (this.opencgaClient instanceof OpenCGAClient && PolymerUtils.isNotUndefined(config.value.sessionId)) {
+                if (this.opencgaClient instanceof OpenCGAClient && UtilsNew.isNotUndefined(config.value.sessionId)) {
                     this.opencgaClient.users().getConfig("iva", {}, {})
                         .then(function (response) {
                             _this.assignValues(_this.defaultConfig); // Set the default config first
@@ -366,13 +366,13 @@
                     this.config["consequenceTypes"] = {color: this.ctColor};
                 }
                 if (Object.keys(this.sift).length > 0) {
-                    if (PolymerUtils.isUndefined(this.config["proteinSubstitutionScores"])) {
+                    if (UtilsNew.isUndefined(this.config["proteinSubstitutionScores"])) {
                         this.config["proteinSubstitutionScores"] = {};
                     }
                     this.config["proteinSubstitutionScores"].sift = this.sift;
                 }
                 if (Object.keys(this.polyphen).length > 0) {
-                    if (PolymerUtils.isUndefined(this.config["proteinSubstitutionScores"])) {
+                    if (UtilsNew.isUndefined(this.config["proteinSubstitutionScores"])) {
                         this.config["proteinSubstitutionScores"] = {};
                     }
                     this.config["proteinSubstitutionScores"].polyphen = this.polyphen;
