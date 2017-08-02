@@ -355,7 +355,7 @@
                     <div class="content" id="prioritization">
                         <variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}"
                                                 project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                                config="{{config.tools.prioritization}}" biotypes="{{config.bioTypes.bioTypes}}"
+                                                config="{{config.tools.prioritization}}" biotypes="{{config.biotypes.biotypes}}"
                                                 population-frequencies="{{populationFrequencies}}"
                                                 protein-substitution-scores="{{proteinSubstitutionScores}}"
                                                 consequence-types="{{consequenceTypes}}"
@@ -371,7 +371,7 @@
                     <div class="content" id="clinical">
                         <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
                                           study="{{study}}" samples="{{samples}}"
-                                          config="{{config.tools.clinical}}" biotypes="{{config.bioTypes.bioTypes}}"
+                                          config="{{config.tools.clinical}}" biotypes="{{config.biotypes.biotypes}}"
                                           population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}"
@@ -581,7 +581,7 @@
                 this.set('config.opencga', opencga);
                 this.config.species = DEFAULT_SPECIES;
                 this.config.enabledComponents = {};
-                this.config.bioTypes = bioTypes;
+                this.config.biotypes = biotypes;
 
                 // Enabled components tools
                 for (var tool in this.config.tools) {

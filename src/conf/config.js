@@ -584,8 +584,8 @@ const DEFAULT_SPECIES = {
     ],
 };
 
-const bioTypes = {
-    bioTypes: ["3prime_overlapping_ncrna",
+const biotypes = {
+    biotypes: ["3prime_overlapping_ncrna",
         "IG_C_gene",
         "IG_C_pseudogene",
         "IG_D_gene",
