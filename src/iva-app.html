@@ -355,7 +355,7 @@
                     <div class="content" id="prioritization">
                         <variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}"
                                                 project="{{project}}" study="{{study}}" samples="{{samples}}"
-                                                config="{{config.tools.prioritization}}"
+                                                config="{{config.tools.prioritization}}" biotypes="{{config.bioTypes.bioTypes}}"
                                                 population-frequencies="{{populationFrequencies}}"
                                                 protein-substitution-scores="{{proteinSubstitutionScores}}"
                                                 consequence-types="{{consequenceTypes}}"
@@ -371,7 +371,7 @@
                     <div class="content" id="clinical">
                         <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
                                           study="{{study}}" samples="{{samples}}"
-                                          config="{{config.tools.clinical}}"
+                                          config="{{config.tools.clinical}}" biotypes="{{config.bioTypes.bioTypes}}"
                                           population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}"
@@ -581,10 +581,11 @@
                 this.set('config.opencga', opencga);
                 this.config.species = DEFAULT_SPECIES;
                 this.config.enabledComponents = {};
+                this.config.bioTypes = bioTypes;
 
                 // Enabled components tools
                 for (var tool in this.config.tools) {
-                    if (PolymerUtils.isNotUndefined(this.config.tools[tool].active)) {
+                    if (UtilsNew.isNotUndefined(this.config.tools[tool].active)) {
                         this.set("config.enabledComponents." + tool, this.config.tools[tool].active);
                     }
                 }
@@ -601,21 +602,21 @@
 
 
                 this.defaultConfig = {};
-                if (PolymerUtils.isNotUndefined(populationFrequencies)) {
+                if (UtilsNew.isNotUndefined(populationFrequencies)) {
                     this.populationFrequencies = populationFrequencies;
                     // Object.assign() doesn't do deep copy. To keep the default config object unchanged, color is copied into a new object and assigned.
                     let color = Object.assign({}, populationFrequencies.color);
                     this.defaultConfig.populationFrequencies = {color: color};
                 }
 
-                if (PolymerUtils.isNotUndefined(proteinSubstitutionScores)) {
+                if (UtilsNew.isNotUndefined(proteinSubstitutionScores)) {
                     this.proteinSubstitutionScores = proteinSubstitutionScores;
                     let sift = Object.assign({}, proteinSubstitutionScores.sift);
                     let polyphen = Object.assign({}, proteinSubstitutionScores.polyphen);
                     this.defaultConfig.proteinSubstitutionScores = {sift: sift, polyphen: polyphen};
                 }
 
-                if (PolymerUtils.isNotUndefined(consequenceTypes)) {
+                if (UtilsNew.isNotUndefined(consequenceTypes)) {
                     this.consequenceTypes = consequenceTypes;
                     let color = Object.assign({}, consequenceTypes.color);
                     this.defaultConfig.consequenceTypes = {color: color};
@@ -629,7 +630,7 @@
 
                 // Remember the tool that was previously set
                 this.tool = window.location.hash.split('/')[0];
-                if (PolymerUtils.isNotEmpty(this.tool)) {
+                if (UtilsNew.isNotEmpty(this.tool)) {
                     this.tool = "#home";
                 }
 
@@ -648,7 +649,7 @@
 
                 // This must happen after calling to init() function since init() created the OpencgaClient
                 var sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
-                if (PolymerUtils.isNotEmpty(sid) && !this._publicMode) {
+                if (UtilsNew.isNotEmpty(sid) && !this._publicMode) {
                     this.login({
                         detail: {
                             userId: Cookies.get(this.config.opencga.cookie.prefix + "_userId"),
@@ -671,7 +672,7 @@
                 this.cellBaseClientConfig = new CellBaseClientConfig(this.config.cellbase.hosts, this.config.cellbase.version, "hsapiens");
                 this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
 
-                if (PolymerUtils.isNotUndefined(this.config.opencga.projects) && this.config.opencga.projects.length > 0 && this._logged === false) {
+                if (UtilsNew.isNotUndefined(this.config.opencga.projects) && this.config.opencga.projects.length > 0 && this._logged === false) {
                     // This web site is set up for browsing public data
                     this._publicMode = true;
                     this.projects = this.config.opencga.projects;
@@ -720,11 +721,11 @@
             }
 
             changeTool(e) {
-                if (PolymerUtils.isNotUndefined(e)) {
+                if (UtilsNew.isNotUndefined(e)) {
                     e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
                 }
 
-                if (PolymerUtils.isNotUndefined(e.target) && PolymerUtils.isNotUndefined(e.target.attributes.href)) {
+                if (UtilsNew.isNotUndefined(e.target) && UtilsNew.isNotUndefined(e.target.attributes.href)) {
 //                    $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
                     this.tool = e.target.attributes.href.value;
                 } else {
@@ -752,7 +753,7 @@
                     this.opencgaClient.users().getProjects(this.userId)
                         .then(function (response) {
                             let _projects = response.response[0].result;
-//                                if (PolymerUtils.isNotEmpty(_this.config.opencga.asUser)) {
+//                                if (UtilsNew.isNotEmpty(_this.config.opencga.asUser)) {
 //                                    for (let p of _projects) {
 //                                        p.alias = _this.config.opencga.asUser + "@" + p.alias;
 //                                    }
@@ -770,7 +771,7 @@
 
             _setup(projects) {
                 // We check that at least one project with one study exist, otherwise we do not do anything
-                if (PolymerUtils.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
+                if (UtilsNew.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
                     this.projects = projects;
                     this.project = projects[3];
                     this.study = projects[3].studies[0];
@@ -816,10 +817,10 @@
 //                $("#" + "MainLoadingModal").modal("show");
 
                 let hashFrag = this.tool;
-                if (PolymerUtils.isNotUndefined(this.project) && PolymerUtils.isNotEmpty(this.project.alias)) {
+                if (UtilsNew.isNotUndefined(this.project) && UtilsNew.isNotEmpty(this.project.alias)) {
 
                     hashFrag += "/" + this.project.alias;
-                    if (PolymerUtils.isNotUndefined(this.study) && PolymerUtils.isNotEmpty(this.study.alias)) {
+                    if (UtilsNew.isNotUndefined(this.study) && UtilsNew.isNotEmpty(this.study.alias)) {
                         hashFrag += "/" + this.study.alias;
                     }
                 }
@@ -830,7 +831,7 @@
             hashFragmentListener(ctx) {
                 console.log("hashFragmentListener - DEBUG")
                 for (var elementa in this.config.enabledComponents) {
-                    if (PolymerUtils.isNotUndefined(this.config.enabledComponents[elementa])) {
+                    if (UtilsNew.isNotUndefined(this.config.enabledComponents[elementa])) {
                         this.set("config.enabledComponents." + elementa, false);
                     }
                 }
@@ -838,8 +839,8 @@
                 let [hashTool, hashProject, hashStudy, feature] = arr;
 
                 // Stopping the recursive call
-                if (hashTool != this.tool || (PolymerUtils.isNotUndefined(this.project) && hashProject != this.project.alias) ||
-                    (PolymerUtils.isNotUndefined(this.study) && hashStudy != this.study.alias)) {
+                if (hashTool != this.tool || (UtilsNew.isNotUndefined(this.project) && hashProject != this.project.alias) ||
+                    (UtilsNew.isNotUndefined(this.study) && hashStudy != this.study.alias)) {
                     if (arr.length > 1) {
                         // Field 'project' is being observed, just in case Polymer triggers
                         // an unnecessary event we can check they are really different
@@ -861,7 +862,7 @@
                         }
                     }
 
-                    if (PolymerUtils.isNotEmpty(feature)) {
+                    if (UtilsNew.isNotEmpty(feature)) {
                         if (hashTool == "#protein") {
                             ctx.protein = feature;
                         } else if (feature.startsWith("ENST")) {
@@ -873,7 +874,7 @@
                     ctx.tool = hashTool;
                 }
 
-                if (PolymerUtils.isNotUndefined(this.config.enabledComponents[this.tool.replace("#", "")])) {
+                if (UtilsNew.isNotUndefined(this.config.enabledComponents[this.tool.replace("#", "")])) {
                     this.set("config.enabledComponents." + this.tool.replace("#", ""), true);
                 }
 
@@ -949,7 +950,7 @@
             }
 
             updateStudy(e) {
-                if (PolymerUtils.isNotUndefined(e.detail.project) && PolymerUtils.isNotEmpty(e.detail.project.name)) {
+                if (UtilsNew.isNotUndefined(e.detail.project) && UtilsNew.isNotEmpty(e.detail.project.name)) {
                     this.project = e.detail.project;
                 }
                 for (let i = 0; i < this.project.studies.length; i++) {
@@ -975,9 +976,9 @@
             buildQuery(e) {
                 let query = {};
                 let value = "";
-                if (PolymerUtils.isNotUndefined(e) && PolymerUtils.isNotUndefined(e.detail.value)) {
+                if (UtilsNew.isNotUndefined(e) && UtilsNew.isNotUndefined(e.detail.value)) {
                     value = e.detail.value; // It takes care of the fired event from welcome.html
-                } else if (PolymerUtils.isNotUndefined(e) && e.keyCode == '13' || PolymerUtils.isNotUndefined(e) && e.type == "click") {
+                } else if (UtilsNew.isNotUndefined(e) && e.keyCode == '13' || UtilsNew.isNotUndefined(e) && e.type == "click") {
                     value = this.$.searchTextBox.value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
                 }
 
@@ -1012,10 +1013,10 @@
             renderBreadcrumb() {
                 var breadcrumbElement = PolymerUtils.getElementById("breadcrumb");
 
-                if (PolymerUtils.isNotNull(breadcrumbElement) && PolymerUtils.isNotUndefined(this.config)) {
+                if (UtilsNew.isNotNull(breadcrumbElement) && UtilsNew.isNotUndefined(this.config)) {
 
                     // If there is no project in config, breadcrumb is set private so that it is shown only when logged in
-                    if (PolymerUtils.isUndefined(this.config.opencga.projects) || this.config.opencga.projects.length == 0) {
+                    if (UtilsNew.isUndefined(this.config.opencga.projects) || this.config.opencga.projects.length == 0) {
                         this.config.breadcrumb.visibility = "private";
                     }
 
@@ -1027,8 +1028,8 @@
                     breadcrumbElement.appendChild(projects);
 
                     // We first check if one study is selected, for this study must be defined and have at least one key
-                    if (PolymerUtils.isUndefined(this.study) || Object.keys(this.study).length == 0) {
-                        if (PolymerUtils.isNotUndefinedOrNull(this.project)) {
+                    if (UtilsNew.isUndefined(this.study) || Object.keys(this.study).length == 0) {
+                        if (UtilsNew.isNotUndefinedOrNull(this.project)) {
                             let project = this._createBreadcrumbElement(this.project.alias, true, "project"); // render only project if exists
                             breadcrumbElement.appendChild(project);
                         }
@@ -1036,7 +1037,7 @@
                         let project = this._createBreadcrumbElement(this.project.alias, false, "project");
                         breadcrumbElement.appendChild(project);
 
-                        if (PolymerUtils.isNotUndefined(this.samples) && this.samples.length > 0) {
+                        if (UtilsNew.isNotUndefined(this.samples) && this.samples.length > 0) {
                             let study = this._createBreadcrumbElement(this.study.alias, false, "study");
                             let sampleNames = [];
                             for (let i in this.samples) {
@@ -1106,7 +1107,7 @@
             }
 
             _checkBreadcrumbVisible() {
-                if (PolymerUtils.isNotUndefined(this.config)) {
+                if (UtilsNew.isNotUndefined(this.config)) {
                     switch (this.config.breadcrumb.visibility) {
                         case 'public':
                             this._isBreadcrumbVisible = true;

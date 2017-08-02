@@ -1,14 +1,9 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
-    },
+    "extends": "airbnb",
     "rules": {
-        "semi": 2,
-	    "quotes": ["warn", "double"]
-//        "default-case": "error"
+        // enable additional rules
+        "indent": ["error", 4],
+        "quotes": ["error", "double"],
+        "max-len": ["error", 140]
     }
 }
