@@ -3,7 +3,7 @@
     "rules": {
         // enable additional rules
         "indent": ["error", 4],
-        "quotes": ["error", "double"],
+        "quotes": ["warn", "double"],
         "max-len": ["error", 140]
     }
 }
