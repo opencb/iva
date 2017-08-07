@@ -149,11 +149,11 @@ const application = {
         visibility: "public",
     },
     about: [
-        {name: "Documentation", url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
-        {name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
-        {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
-        {name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
-        {name: "FAQ", url: "", icon: ""},
+        { name: "Documentation", url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book" },
+        { name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "" },
+        { name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github" },
+        { name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope" },
+        { name: "FAQ", url: "", icon: "" },
     ],
     login: {
         visibility: "public",

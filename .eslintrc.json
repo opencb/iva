@@ -4,6 +4,9 @@
         // enable additional rules
         "indent": ["error", 4],
         "quotes": ["warn", "double"],
-        "max-len": ["error", 140]
+        "max-len": ["error", 140],
+        "no-underscore-dangle": [0, { "allowAfterThis": true }],
+        "no-use-before-define": ["error", { "classes": false }]
+
     }
 }
