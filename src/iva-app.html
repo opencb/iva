@@ -375,7 +375,7 @@
                                           config="{{config.tools.clinical}}" biotypes="{{config.biotypes}}"
                                           population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                          consequence-types="{{consequenceTypes}}"
+                                          consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
                                           opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
                         </variant-clinical>
                     </div>
@@ -577,6 +577,7 @@
                 this.config = application;
                 this.config.menu.counter = 0;
                 this.config.cellbase = cellbase;
+                this.set("config.ebiWS", ebiWS);
                 this.set('config.tools', tools);
                 this.set('opencga', opencga);
                 this.set('config.opencga', opencga);
