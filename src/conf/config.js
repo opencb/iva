@@ -42,6 +42,12 @@ const opencga = {
     },
 };
 
+const ebiWS = {
+    root: "http://www.ebi.ac.uk/ols/api",
+    defaultTree: "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0000001/children",
+    search:"/search"
+};
+
 const application = {
     title: "IVA",
     version: "v0.9.0",
