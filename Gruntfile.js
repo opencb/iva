@@ -97,11 +97,15 @@ module.exports = function(grunt) {
                         {
                             match: /\.\.\/lib\/jsorolla\/src/g,
                             replacement: "jsorolla"
+                        },
+                        {
+                            match: /\[\[importPath\]\]images/g,
+                            replacement: "[[rootPath]]img"
                         }
                     ]
                 },
                 files: [
-                    {expand: true, flatten: true, src: ["<%= build.path %>/index.html"], dest: "<%= build.path %>"}
+                    {expand: true, flatten: true, src: ["<%= build.path %>/index.html","<%= build.path %>/iva-app.html"], dest: "<%= build.path %>"}
                 ]
             }
         }
