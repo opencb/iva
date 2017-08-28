@@ -50,7 +50,7 @@ const interpretationJson = {
 
     "reportedVariants": [
         {
-            "id": "3:22221:A:T",
+            "id": "3:10361687:T:G",
             "name": "rs123456",
             "chromosome": "22",
             "start": 3333,

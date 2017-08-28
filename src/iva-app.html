@@ -24,6 +24,7 @@
 
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-prioritization.html">
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-clinical-interpretation.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-clinical.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-beacon.html">
@@ -368,6 +369,13 @@
                     </div>
                 </template>
 
+                <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
+                    <div class="content" id="interpretation">
+                        <variant-clinical-interpretation data="{{interpretationJson}}" project="{{project}}" study="{{study}}"  cellbase-client="{{cellbaseClient}}" consequence-types="{{consequenceTypes}}" protein-substitution-scores="{{proteinSubstitutionScores}}">
+                        </variant-clinical-interpretation>
+                    </div>
+                </template>
+
                 <template is="dom-if" if="{{config.enabledComponents.clinical}}">
                     <div class="content" id="clinical">
                         <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
@@ -584,6 +592,7 @@
                 this.config.species = DEFAULT_SPECIES;
                 this.config.enabledComponents = {};
                 this.config.biotypes = biotypes;
+                this.interpretationJson = interpretationJson;
 
                 // Enabled components tools
                 for (var tool in this.config.tools) {
