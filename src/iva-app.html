@@ -1,4 +1,4 @@
-<!--
+i<!--
 ~ Copyright 2015-2016 OpenCB
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -371,11 +371,11 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
                     <div class="content" id="interpretation">
-                        <variant-clinical-interpretation title="{{Interpretation}}" data="{{interpretationJson}}" project="{{project}}"
+                        <variant-clinical-interpretation data="{{interpretationJson}}" title="Interpretation" project="{{project}}"
                                                          study="{{study}}"  opencga-client="{{opencgaClient}}"
                                                          cellbase-client="{{cellbaseClient}}"
                                                          consequence-types="{{consequenceTypes}}"
-                                                         protein-substitution-scores="{{proteinSubstitutionScores}}" >
+                                                         protein-substitution-scores="{{proteinSubstitutionScores}}">
                         </variant-clinical-interpretation>
                     </div>
                 </template>
