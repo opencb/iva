@@ -57,6 +57,7 @@ module.exports = function(grunt) {
 
                     {   expand: true, cwd: "src", src: ["index.html"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/config.js"], dest: "<%= build.path %>/" },
+                    {   expand: true, cwd: "src", src: ["conf/interpretation.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/tools.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/panels.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/icd10.js"], dest: "<%= build.path %>/" },
