@@ -528,7 +528,7 @@ i<!--
                 </div>
             </div>
         </div>
-        <variant-jobs></variant-jobs>
+        <variant-jobs study="{{study}}" opencga-client="{{opencgaClient}}"></variant-jobs>
 
     </template>
 
@@ -796,7 +796,7 @@ i<!--
                 if (UtilsNew.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
                     this.projects = projects;
                     this.project = projects[3];
-                    this.study = projects[3].studies[0];
+                    this.study = projects[].studies[0];
 
                     let _this = this;
                     let projectPromises = [];

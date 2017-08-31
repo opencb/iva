@@ -101,7 +101,7 @@ module.exports = function(grunt) {
                         },
                         {
                             match: /\[\[importPath\]\]images/g,
-                            replacement: "[[rootPath]]img"
+                            replacement: "img"
                         }
                     ]
                 },
