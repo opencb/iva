@@ -28,6 +28,7 @@ i<!--
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-clinical.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-beacon.html">
+<link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/variant/variant-jobs.html">
 
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/lib/webcomponents/opencga/opencga-transcript-view.html">
@@ -213,6 +214,8 @@ i<!--
                                                 Projects</a></li>
                                             <li><a href="#samples"><i class="fa fa-users" aria-hidden="true"></i>
                                                 Samples</a></li>
+                                            <li> <a data-target="#jobModal" data-toggle="modal"> <i class="fa fa-bars" aria-hidden="true"></i>
+                                                Jobs</a></li>
                                             <!--<li><a href="#upload"><i class="fa fa-upload" aria-hidden="true"></i> Upload</a></li>-->
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i>
@@ -331,6 +334,8 @@ i<!--
                 <div class="center">
                     <div class="content" id="home">
                         <welcome-web></welcome-web>
+
+
                     </div>
                 </div>
             </template>
@@ -348,7 +353,7 @@ i<!--
                                          cellbase-client="{{cellbaseClient}}"
                                          beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}"
                                          query="{{_query}}"
-                                         on-gene="geneSelected" summary="{{config.opencga.summary}}">
+                                         on-gene="geneSelected" summary="{{config.opencga.summary}}" ebi-config="{{config.ebiWS}}">
                         </variant-browser>
                     </div>
                 </template>
@@ -363,7 +368,7 @@ i<!--
                                                 consequence-types="{{consequenceTypes}}"
                                                 opencga-client="{{opencgaClient}}"
                                                 cellbase-client="{{cellbaseClient}}"
-                                                active="{{config.tools.prioritization.active}}"
+                                                active="{{config.tools.prioritization.active}}" ebi-config="{{config.ebiWS}}"
                                                 beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected">
                         </variant-prioritization>
                     </div>
@@ -388,7 +393,7 @@ i<!--
                                           population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
-                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}">
+                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}">
                         </variant-clinical>
                     </div>
                 </template>
@@ -523,6 +528,8 @@ i<!--
                 </div>
             </div>
         </div>
+        <variant-jobs></variant-jobs>
+
     </template>
 
     <script>
