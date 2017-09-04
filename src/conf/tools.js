@@ -64,6 +64,9 @@ const tools = {
         active: false,
 
     },
+    interpretation: {
+      active: false
+    },
     gene: {
         protein: {
             color: {
