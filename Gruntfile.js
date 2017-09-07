@@ -57,6 +57,7 @@ module.exports = function(grunt) {
 
                     {   expand: true, cwd: "src", src: ["index.html"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/config.js"], dest: "<%= build.path %>/" },
+                    {   expand: true, cwd: "src", src: ["conf/interpretation.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/tools.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/panels.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/icd10.js"], dest: "<%= build.path %>/" },
@@ -97,11 +98,15 @@ module.exports = function(grunt) {
                         {
                             match: /\.\.\/lib\/jsorolla\/src/g,
                             replacement: "jsorolla"
+                        },
+                        {
+                            match: /\[\[importPath\]\]images/g,
+                            replacement: "img"
                         }
                     ]
                 },
                 files: [
-                    {expand: true, flatten: true, src: ["<%= build.path %>/index.html"], dest: "<%= build.path %>"}
+                    {expand: true, flatten: true, src: ["<%= build.path %>/index.html","<%= build.path %>/iva-app.html"], dest: "<%= build.path %>"}
                 ]
             }
         }

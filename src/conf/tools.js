@@ -64,6 +64,9 @@ const tools = {
         active: false,
 
     },
+    interpretation: {
+      active: false
+    },
     gene: {
         protein: {
             color: {
@@ -298,12 +301,12 @@ const tools = {
             {
                 id: "germline",
                 title: "constitutive (germline)",
-                checked: "true",
+                checked: true,
             },
             {
                 id: "somatic",
                 title: "somatic",
-                checked: "false",
+                checked: false,
             },
         ],
         active: false,

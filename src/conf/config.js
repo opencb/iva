@@ -44,8 +44,14 @@ const opencga = {
 
 const ebiWS = {
     root: "http://www.ebi.ac.uk/ols/api",
-    defaultTree: "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0000001/children",
-    search:"/search"
+    tree: {
+        "hp": ["/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0012823", "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0040279",
+            "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0000005", "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0040006",
+            "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0000118", "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FUPHENO_0001002"],
+        "go": ["/ontologies/go/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FGO_0008150", "/ontologies/go/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FGO_0005575",
+            "/ontologies/go/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FGO_0003674"]
+    },
+    search: "/search"
 };
 
 const application = {
@@ -155,11 +161,11 @@ const application = {
         visibility: "public",
     },
     about: [
-        { name: "Documentation", url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book" },
-        { name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "" },
-        { name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github" },
-        { name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope" },
-        { name: "FAQ", url: "", icon: "" },
+        {name: "Documentation", url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
+        {name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
+        {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
+        {name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
+        {name: "FAQ", url: "", icon: ""},
     ],
     login: {
         visibility: "public",
@@ -190,6 +196,7 @@ const populationFrequencies = {
         {
             id: "1kG_phase3",
             title: "1000 Genomes",
+            tooltip: "Only considers variants whose observed allelic frequency in the 1000 genomes phase 3 database is below (or above) the defined value. Genome-wide allelic frequencies were obtained from more than 2.500 genomes.",
             populations: [
                 {
                     id: "ALL",
@@ -221,6 +228,7 @@ const populationFrequencies = {
         {
             id: "EXAC",
             title: "ExAC",
+            tooltip: "Only considers variants whose observed allelic frequency in the The Exome Aggregation Consortium (ExAC) database is below (or above) the defined value. ExAC covers only exomic positions. The frequencies were obtained using more than 60.000 exomes.",
             populations: [
                 {
                     id: "ALL",
@@ -247,6 +255,7 @@ const populationFrequencies = {
         {
             id: "ESP6500",
             title: "ESP6500",
+            tooltip: "Only considers variants whose observed allelic frequency in the Exome Variant Server (ESP6500) database is below (or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained using more than 6000 exomes.",
             populations: [
                 {
                     id: "EA",
