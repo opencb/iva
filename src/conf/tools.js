@@ -148,6 +148,9 @@ const tools = {
         active: false,
     },
     clinical: {
+        interpretation: {
+            algorithms: ["Tiering", "Exomiser", "VAAST"]
+        },
         variableSet: {
             name: "clinical_vs",
             exclude: [
