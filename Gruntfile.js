@@ -32,8 +32,9 @@ module.exports = function(grunt) {
                     {   expand: true, cwd: "node_modules", src: ["crypto-js/core.js"], dest: "<%= build.path %>/vendors" },
                     {   expand: true, cwd: "node_modules", src: ["crypto-js/sha256.js"], dest: "<%= build.path %>/vendors" },
 
-                    {   expand: true, cwd: "lib/jsorolla/dist", src: ["*.js"], dest: "<%= build.path %>/jsorolla/dist" },
-                    {   expand: true, cwd: "lib/jsorolla/dist/genome-browser", src: ["*.js"], dest: "<%= build.path %>/jsorolla/dist/genome-browser" },
+                    {   expand: true, cwd:"lib", src: ["jsorolla/dist/**"], dest: "<%= build.path %>" },
+                    //{   expand: true, cwd: "lib/jsorolla/dist/genome-browser", src: ["*.js"], dest: "<%= build.path %>/jsorolla/dist/genome-browser" },
+                    //{   expand: true, cwd: "lib/jsorolla/dist/core", src: ["*"], dest: "<%= build.path %>/jsorolla/dist/core" },
                     // {   expand: true, cwd: "lib/jsorolla/src/core/cache/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/cache" },
                     // {   expand: true, cwd: "lib/jsorolla/src/core/clients/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/clients" },
                     // {   expand: true, cwd: "lib/jsorolla/src/core/webcomponents/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/webcomponents" },
@@ -52,8 +53,9 @@ module.exports = function(grunt) {
                     {   flatten: true, expand: true, cwd: "node_modules", src: ["font-awesome/css/font-awesome.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "node_modules", src: ["qtip2/dist/jquery.qtip.min.css"], dest: "<%= build.path %>/css" },
                     {   flatten: true, expand: true, cwd: "node_modules", src: ["font-awesome/fonts/*"], dest: "<%= build.path %>/fonts" },
-                    {   flatten: true, expand: true, cwd: "lib", src: ["jsorolla/styles/css/style.css"], dest: "<%= build.path %>/css" },
-                    {   flatten: true, expand: true, cwd: "lib", src: ["jsorolla/styles/img/*"], dest: "<%= build.path %>/img" },
+                    {   flatten: true, expand: true, cwd: "lib", src: ["jsorolla/dist/css/style.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "lib", src: ["jsorolla/dist/img/*"], dest: "<%= build.path %>/img" },
+                    {   flatten: true, expand: true, cwd: "lib", src: ["jsorolla/dist/fonts/*"], dest: "<%= build.path %>/fonts" },
                     // {   expand: true, cwd: "./node_modules", src: ["@polymer/polymer/polymer-element.html"], dest: "<%= build.vendor %>" }
 
                     {   expand: true, cwd: "src", src: ["index.html"], dest: "<%= build.path %>/" },
