@@ -14,17 +14,18 @@
   ~ limitations under the License.
   -->
 
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../node_modules/@polymer/polymer/polymer-element.html">
+<link rel="import" href="../node_modules/@polymer/polymer/lib/elements/custom-style.html">
 
-<link rel="import" href="jso-styles.html">
+<!--<link rel="import" href="jso-styles.html">-->
 
 <dom-module id="welcome-web">
-
     <template>
-        <style is="custom-style" include="jso-styles"></style>
+        <!--<style include="jso-styles">-->
         <style>
-            .center {
+            .welcome-center {
                 margin: auto;
+                width: 80%;
                 text-align: justify;
                 font-size: 18px;
                 color: #797979;
@@ -36,10 +37,8 @@
         </style>
 
         <!-- This is where main application is rendered -->
-
         <div  class="center">
             <div style="text-align: center">
-
                 <br>
                 <h1>The Human Genetic Variation Archive (HGVA)</h1>
                 <br>
@@ -81,37 +80,58 @@
     </template>
 
     <script>
-        Polymer({
-            is: 'welcome-web',
-            properties: {
-                opencgaClient: {
-                    type: Object
-                },
-                host: {
-                    type: String,
-                    value: "http://bioinfodev.hpc.cam.ac.uk/hgva"
-                },
-                userId: {
-                    type: String,
-                    value: ""
-                },
-                project: {
-                    type: Object,
-                    value: ""
-                },
-                study: {
-                    type: String,
-                    value: ""
+        class Welcome extends Polymer.Element {
+
+            constructor() {
+                super();
+            }
+
+            static get is() {
+                return 'welcome-web';
+            }
+
+            _attachDom(dom) {
+                this.appendChild(dom);
+            }
+
+            ready() {
+                super.ready();
+            }
+
+            static get properties() {
+                return {
+                    opencgaClient: {
+                        type: Object
+                    },
+                    host: {
+                        type: String,
+                        value: "http://bioinfodev.hpc.cam.ac.uk/hgva"
+                    },
+                    userId: {
+                        type: String,
+                        value: ""
+                    },
+                    project: {
+                        type: Object,
+                        value: ""
+                    },
+                    study: {
+                        type: String,
+                        value: ""
+                    }
                 }
-            },
-            triggerSearch: function (e) {
-                if (e.keyCode == '13') {
+            }
+
+            triggerSearch(e) {
+                if (e.keyCode === "13") {
                     // fire according to the feature - gene, variant etc.
                     this.fire("search", {value: this.$.welcomeSearchTextBox.value});
                     this.$.welcomeSearchTextBox.value = "";
                     $('.content').hide();
                 }
             }
-        });
+        }
+
+        customElements.define(Welcome.is, Welcome);
     </script>
 </dom-module>

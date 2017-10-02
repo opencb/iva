@@ -30,19 +30,13 @@ IVA is developed in HTML5, therefore it is mainly developed in JavaScript and ma
 Stable releases are merged and tagged at _master_ branch, you are encourage to use latest stable release for production. Current active development is carried out at _develop_ branch, only building is guaranteed and bugs are expected, use this branch for development or for testing new functionalities. The only dependency of IVA from OpenCB is JSorolla.
 
 ### Prerequisites
-The following technologies are needed to build IVA: [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [Bower](https://bower.io/) and [Grunt](http://gruntjs.com/getting-started).
+The following technologies are needed to build IVA: [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/) and [Grunt](http://gruntjs.com/getting-started).
 
 ##### Installing Node.js and npm
 To install [Node.js](https://nodejs.org/en/) you can visit [this link](http://blog.teamtreehouse.com/install-node-js-npm-linux).
 
 [npm](https://www.npmjs.com/) stands for *node packaged modules* and it is the dependency manager of [Node.js](https://nodejs.org/en/).
 
-##### Install Bower
-After installing Node.js and npm, we can install Bower by executing the following commands with root permission:
-
-```
-$ sudo npm install -g bower
-```
 
 ##### Install Grunt
 To install grunt, run
@@ -84,7 +78,7 @@ After this, in both cases, you **must** execute the following command to fetch t
 git submodule update --init
 ```
 
-Go to lib/jsorolla and checkout to ***next-v2.0.0*** branch of Jsorolla by 
+Go to lib/jsorolla and checkout to ***develop*** branch of Jsorolla by 
 
 ```
 cd lib/jsorolla
@@ -97,7 +91,6 @@ First, you must update JSorolla dependencies, from the root folder execute:
 ```
 cd lib/jsorolla
 npm install
-bower install
 grunt
 ```
 
@@ -109,23 +102,20 @@ We have to install npm packages for IVA, from the the root folder execute:
 npm install
 ```
 
-This will make npm to look at file [package.json](https://github.com/opencb/iva/blob/develop/package.json) and install locally all the dependencies listed there.
-
-To install all *Bower* dependencies for IVA execute from the root folder:
+This will make npm to look at file [package.json](https://github.com/opencb/iva/blob/develop/package.json) and install locally all the dependencies listed there. *Note*: Because a bug in Google Polymer npm script you have to create a symbolic link, this is likely to be solved soon, execute:
 
 ```
-bower install
+cd node_modules/@polymer
+ln -s ../@webcomponents/shadycss/
 ```
 
-This will make Bower to look at file [bower.json](https://github.com/opencb/iva/blob/develop/bower.json) and install locally all the dependencies.
-
-At last execute:
+And now execute:
 
 ```
 grunt
 ```
 
-When completed, all compiled files will be located under the build folder.
+when completed, all compiled files will be located under the _build_ folder.
 
 ### Testing
 You can copy build content to a web server such as Apache HTTP Server and open your favourite internet browser to open IVA.

@@ -10,99 +10,54 @@ module.exports = function(grunt) {
         clean: {
             dist: ["<%= build.path %>/*"]
         },
-        jshint: {
-            files: ["Gruntfile.js", "src/**/*.js"],
-            options: {
-                globals: {
-                    jQuery: true
-                }
-            }
-        },
-        concat: {
-            options: {
-                sourceMap: true
-            },
-            vendors: {
-                src: [
-                    "./bower_components/webcomponentsjs/webcomponents-lite.js",
-                    "./bower_components/jquery/dist/jquery.js",
-                    "./bower_components/bootstrap/dist/js/bootstrap.js",
-                    "./bower_components/bootstrap-table/dist/bootstrap-table.js",
-                    "./bower_components/bootstrap-treeview/src/js/bootstrap-treeview.js",
-                    "./bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
-                    "./bower_components/bootstrap-validator/dist/validator.js",
-                    "./bower_components/moment/moment.js",
-                    "./bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
-                    "./bower_components/underscore/underscore.js",
-                    "./bower_components/backbone/backbone.js",
-                    "./bower_components/highcharts-release/highcharts.js",
-                    "./bower_components/qtip2/jquery.qtip.js",
-                    "./bower_components/uri.js/src/URI.js",
-                    "./bower_components/cookies-js/dist/cookies.js",
-                    "./bower_components/crypto-js/crypto-js.js"
-                ],
-                dest: "<%= build.path %>/vendors.js"
-            }
-            // ,jsorolla: {
-            //     src: [
-            //         "./lib/jsorolla/src/lib/clients/rest-client.js",
-            //         "./lib/jsorolla/src/lib/clients/cellbase-client-config.js",
-            //         "./lib//jsorolla/src/lib/clients/cellbase-client.js",
-            //         "./lib/jsorolla/src/lib/clients/opencga-client-config.js",
-            //         "./lib/jsorolla/src/lib/clients/opencga-client.js",
-            //         "./lib/jsorolla/src/lib/cache/indexeddb-cache.js",
-            //         "./lib/jsorolla/src/lib/utils.js",
-            //         "./lib/jsorolla/src/lib/svg.js",
-            //         "./lib/jsorolla/src/lib/region.js",
-            //         "./lib/jsorolla/src/lib/visualisation/lollipop.js",
-            //         "./lib/jsorolla/src/lib/opencga/variant/variant-utils.js"
-            //     ],
-            //     dest: "<%= build.path %>/jsorolla-clients.js"
-            // }
-            // ,genomeViewer: {
-            //     src: [
-            //         // "./lib/jsorolla/build/2.0.0-beta/genome-browser/gv-config.js",
-            //         // "./lib/jsorolla/build/2.0.0-beta/genome-browser/genome-browser.js"
-            //     ],
-            //     dest: "<%= build.path %>/genome-browser.js"
-            // }
-        },
-        uglify: {
-            options: {
-                banner: "/*! IVA <%= grunt.template.today(\"dd-mm-yyyy\") %> */\n"
-            },
-            dist: {
-                files: {
-                    "<%= build.path %>/vendors.min.js": ["<%= build.path %>/vendors.js"],
-                    // '<%= build.path %>/jsorolla.min.js': ['<%= build.path %>/jsorolla-clients.js']
-                }
-            }
-        },
         copy: {
             dist: {
                 files: [
+                    {   expand: true, cwd: "node_modules", src: ["@webcomponents/webcomponentsjs/webcomponents-lite.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["jquery/dist/jquery.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["underscore/underscore-min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["backbone/backbone-min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["moment/min/moment.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["bootstrap/dist/js/bootstrap.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["bootstrap-table/dist/bootstrap-table.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["bootstrap-treeview/dist/bootstrap-treeview.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["bootstrap-validator/dist/validator.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["jspdf/dist/jspdf.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["highcharts/highcharts.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["qtip2/dist/jquery.qtip.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["urijs/src/URI.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["cookies-js/dist/cookies.min.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["crypto-js/core.js"], dest: "<%= build.path %>/vendors" },
+                    {   expand: true, cwd: "node_modules", src: ["crypto-js/sha256.js"], dest: "<%= build.path %>/vendors" },
+
                     {   expand: true, cwd: "lib/jsorolla/src/lib/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib" },
                     {   expand: true, cwd: "lib/jsorolla/src/lib/cache/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/cache" },
                     {   expand: true, cwd: "lib/jsorolla/src/lib/clients/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/clients" },
-                    {   expand: true, cwd: "lib/jsorolla/src/lib/data-adapter/feature/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/data-adapter/feature" },
-                    {   expand: true, cwd: "lib/jsorolla/src/lib/opencga/variant/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/opencga/variant" },
+                    {   expand: true, cwd: "lib/jsorolla/src/lib/webcomponents/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/webcomponents" },
+                    {   expand: true, cwd: "lib/jsorolla/src/lib/webcomponents/opencga/variant/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/webcomponents/opencga/variant" },
+                    {   expand: true, cwd: "lib/jsorolla/src/lib/data-adapter/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/data-adapter" },
                     {   expand: true, cwd: "lib/jsorolla/src/lib/visualisation/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/visualisation" },
                     {   expand: true, cwd: "lib/jsorolla/src/lib/widgets/feature/info/", src: ["*.js"], dest: "<%= build.path %>/jsorolla/lib/widgets/feature/info" },
                     {   expand: true, cwd: "lib/jsorolla/src/lib/widgets/", src: ["ux-window.js"], dest: "<%= build.path %>/jsorolla/lib/widgets" },
                     {   expand: true, cwd: "lib/jsorolla/src/genome-browser/", src: ["**"], dest: "<%= build.path %>/jsorolla/genome-browser" },
-                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap/dist/css/bootstrap.min.css"], dest: "<%= build.path %>/css" },
-                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-table/dist/bootstrap-table.min.css"], dest: "<%= build.path %>/css" },
-                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-treeview/dist/bootstrap-treeview.min.css"], dest: "<%= build.path %>/css" },
-                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css"], dest: "<%= build.path %>/css" },
-                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"], dest: "<%= build.path %>/css" },
-                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["fontawesome/css/font-awesome.min.css"], dest: "<%= build.path %>/css" },
-                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["qtip2/jquery.qtip.min.css"], dest: "<%= build.path %>/css" },
-                    {   flatten: true, expand: true, cwd: "./bower_components", src: ["fontawesome/fonts/*"], dest: "<%= build.path %>/fonts" },
-                    {   flatten: true, expand: true, cwd: "./lib", src: ["jsorolla/styles/css/style.css"], dest: "<%= build.path %>/css" },
-                    {   flatten: true, expand: true, cwd: "./lib", src: ["jsorolla/styles/img/*"], dest: "<%= build.path %>/img" },
-                    {   expand: true, cwd: "./bower_components", src: ["polymer/*"], dest: "<%= build.vendor %>" },
+
+                    {   flatten: true, expand: true, cwd: "node_modules", src: ["bootstrap/dist/css/bootstrap.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "node_modules", src: ["bootstrap-table/dist/bootstrap-table.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "node_modules", src: ["bootstrap-treeview/dist/bootstrap-treeview.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "node_modules", src: ["bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "node_modules", src: ["eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "node_modules", src: ["font-awesome/css/font-awesome.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "node_modules", src: ["qtip2/dist/jquery.qtip.min.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "node_modules", src: ["font-awesome/fonts/*"], dest: "<%= build.path %>/fonts" },
+                    {   flatten: true, expand: true, cwd: "lib", src: ["jsorolla/styles/css/style.css"], dest: "<%= build.path %>/css" },
+                    {   flatten: true, expand: true, cwd: "lib", src: ["jsorolla/styles/img/*"], dest: "<%= build.path %>/img" },
+                    // {   expand: true, cwd: "./node_modules", src: ["@polymer/polymer/polymer-element.html"], dest: "<%= build.vendor %>" }
+
                     {   expand: true, cwd: "src", src: ["index.html"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/config.js"], dest: "<%= build.path %>/" },
+                    {   expand: true, cwd: "src", src: ["conf/interpretation.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/tools.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/panels.js"], dest: "<%= build.path %>/" },
                     {   expand: true, cwd: "src", src: ["conf/icd10.js"], dest: "<%= build.path %>/" },
@@ -125,51 +80,44 @@ module.exports = function(grunt) {
             default: {
                 options: {
                     // Task-specific options go here.
-                    stripComments: true,
-                    excludes: ["bower_components/polymer/polymer.html"]
+                    stripComments: true
                 },
                 files: {
                     "<%= build.path %>/iva-app.html": "src/iva-app.html"
                 }
             }
         },
-        watch: {
-            files: ["<%= jshint.files %>"],
-            tasks: ["jshint"]
-        },
         replace: {
             dist: {
                 options: {
                     patterns: [
                         {
-                            match: /\.\.\/bower_components/g,
-                            replacement: "vendor"
+                            match: /\.\.\/node_modules/g,
+                            replacement: "vendors"
                         },
                         {
                             match: /\.\.\/lib\/jsorolla\/src/g,
                             replacement: "jsorolla"
+                        },
+                        {
+                            match: /\[\[importPath\]\]images/g,
+                            replacement: "img"
                         }
                     ]
                 },
                 files: [
-                    {expand: true, flatten: true, src: ["<%= build.path %>/index.html"], dest: "<%= build.path %>"},
-                    {expand: true, flatten: true, src: ["<%= build.path %>/iva-app.html"], dest: "<%= build.path %>"},
-
+                    {expand: true, flatten: true, src: ["<%= build.path %>/index.html","<%= build.path %>/iva-app.html"], dest: "<%= build.path %>"}
                 ]
             }
         }
     });
 
     grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-copy");
-    grunt.loadNpmTasks("grunt-contrib-concat");
-    grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-processhtml");
     grunt.loadNpmTasks("grunt-vulcanize");
-    grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-replace");
 
-    grunt.registerTask("default", ["clean", "jshint", "copy", "concat", "uglify", "processhtml", "vulcanize", "replace"]);
+    grunt.registerTask("default", ["clean", "copy", "processhtml", "vulcanize", "replace"]);
     grunt.registerTask("cl", ["clean"]);
 };

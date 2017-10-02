@@ -66,3 +66,6 @@ R.Rproj
 .RData
 clients/R/vignettes/*.html
 clients/cellbaseR*.tar.gz
+
+# Other
+.eslintrc.json
