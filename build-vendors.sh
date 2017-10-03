@@ -5,7 +5,7 @@ cp -r node_modules/@polymer build/vendor/
 mkdir -p build/vendor/@webcomponents/webcomponentsjs
 cp -r node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js build/vendor/@webcomponents/webcomponentsjs/
 mkdir -p build/vendor/jquery/dist
-cp -r node_modules/jquery/dist/jquery.min.js build/vendor/jquery/dist/
+cp -r node_modules/jquery/dist/jquery.js build/vendor/jquery/dist/
 mkdir -p build/vendor/underscore
 cp -r node_modules/underscore/underscore-min.js build/vendor/underscore
 mkdir -p build/vendor/backbone
@@ -50,5 +50,7 @@ mkdir -p build/vendor/eonasdan-bootstrap-datetimepicker/build/css
 cp -r node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css build/vendor/eonasdan-bootstrap-datetimepicker/build/css
 mkdir -p build/vendor/font-awesome/css
 cp -r node_modules/font-awesome/css/font-awesome.min.css build/vendor/font-awesome/css
+mkdir -p build/vendor/font-awesome/fonts/
+cp -r node_modules/font-awesome/fonts/* build/vendor/font-awesome/fonts
 mkdir -p build/vendor/qtip2/dist/
 cp -r node_modules/qtip2/dist/jquery.qtip.min.css build/vendor/qtip2/dist/

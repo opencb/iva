@@ -16,7 +16,7 @@
     "build-css-jsorolla": "cp -r build/jsorolla/dist/css/style.css build/css",
     "build-fonts-vendors": "cp -r node_modules/font-awesome/fonts/* build/fonts",
     "build-fonts": "cp -r build/jsorolla/dist/fonts/* build/fonts",
-    "build-img": "cp -r build/jsorolla/dist/img/* src/img build/img",
+    "build-img": "cp -r build/jsorolla/dist/img/* src/img/* build/img",
     "build-config": "cp -r src/conf/config.js src/conf/tools.js src/conf/panels.js src/conf/icd10.js LICENSE build/conf",
     "build-root": "mkdir -p build/components && cp src/components/iva-settings.html build/components && cp -r src/welcome.html src/jso-styles.html build && cp -r src/iva-app.html build/iva-app-src.html && cp -r src/index.html build && cd build && sed -i '' 's#../node_modules#vendor#g' index.html iva-app-src.html && sed -i '' 's#../lib/jsorolla/src#jsorolla/dist/js#g' iva-app-src.html && npm run vulcanize",
     "vulcanize": "node_modules/vulcanize/bin/vulcanize build/iva-app-src.html > build/iva-app.html",
