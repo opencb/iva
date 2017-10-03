@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env nodejs
 
 const fs = require("fs");
 let shelljs = require('shelljs');
@@ -21,7 +21,7 @@ fs.readFile("build/index.html", "utf8", function (err2, content) {
         if (arr.length === 2) {
             let path = arr[1].substring(0, arr[1].lastIndexOf("/"));
             shelljs.mkdir("-p", VENDOR_FOLDER + path);
-            shelljs.cp("node_modules/" + arr[1], VENDOR_FOLDER + path);
+            shelljs.cp("-R", "node_modules/" + arr[1], VENDOR_FOLDER + path);
         }
     }
 

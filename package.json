@@ -14,7 +14,7 @@
     "copy-jsorolla": "mkdir -p build/jsorolla && cd lib/jsorolla && npm run dist && cd ../.. && cp -r lib/jsorolla/dist build/jsorolla",
     "vulcanize": "node_modules/vulcanize/bin/vulcanize build/iva-app.html > build/iva-app-vulcanize.html && mv build/iva-app-vulcanize.html build/iva-app.html",
     "build-iva-app": "./post-replace-iva.js",
-    "build": "npm run clean && npm run copy && npm run copy-jsorolla && npm run vulcanize && npm run build-iva-app",
+    "build": "npm run clean && npm run copy && npm run copy-jsorolla && npm run vulcanize && npm run build-iva-app"
   },
   "dependencies": {
     "@polymer/polymer": "~2.0.2",
@@ -64,7 +64,6 @@
     "uglify-js": "^2.7.3",
     "vulcanize": "~1.14.8",
     "xmldom": "0.1.27",
-    "shelljs": "0.7.8",
-    "xmlserializer": "0.6.0"
+    "shelljs": "0.7.8"
   }
 }
