@@ -10,11 +10,11 @@
   "scripts": {
     "postinstall": "ln -s lib/jsorolla/.eslintrc.json",
     "clean": "rm -rf build",
-    "copy": "mkdir -p build/vendors && cp -r src/*.html src/conf src/img LICENSE README.md build && ./build-vendors.js",
+    "copy": "mkdir -p build/vendors && cp -r src/*.html src/prod/index.html src/conf src/img LICENSE README.md build && ./build-vendors.js",
     "copy-jsorolla": "mkdir -p build/jsorolla && cd lib/jsorolla && npm run dist && cd ../.. && cp -r lib/jsorolla/dist build/jsorolla",
     "vulcanize": "node_modules/vulcanize/bin/vulcanize build/iva-app.html > build/iva-app-vulcanize.html && mv build/iva-app-vulcanize.html build/iva-app.html",
-    "build-iva-app": "sed -i 's/..\\/node_modules/vendors/' build/index.html build/iva-app.html && sed -i 's/..\\/lib\\/jsorolla/jsorolla/' build/index.html && sed -i 's/..\\/lib\\/jsorolla\\/src/jsorolla\\/dist\\/js/' build/iva-app.html && npm run vulcanize && sed -i 's/\\[importPath\\]/img/' build/iva-app.html",
-    "build": "npm run clean && npm run copy && npm run copy-jsorolla && sed 's/\\.\\.\\///' src/prod/index.html > build/index.html && npm run build-iva-app"
+    "build-iva-app": "./post-replace-iva.js",
+    "build": "npm run clean && npm run copy && npm run copy-jsorolla && npm run vulcanize && npm run build-iva-app"
   },
   "dependencies": {
     "@polymer/polymer": "~2.0.2",
