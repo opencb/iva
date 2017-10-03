@@ -603,7 +603,7 @@ i<!--
                 this.config.species = DEFAULT_SPECIES;
                 this.config.enabledComponents = {};
                 this.config.biotypes = biotypes;
-                this.interpretationJson = interpretationJson;
+//                this.interpretationJson = interpretationJson;
 
                 // Enabled components tools
                 for (var tool in this.config.tools) {
@@ -795,8 +795,8 @@ i<!--
                 // We check that at least one project with one study exist, otherwise we do not do anything
                 if (UtilsNew.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
                     this.projects = projects;
-                    this.project = projects[3];
-                    this.study = projects[3].studies[0];
+                    this.project = projects[0];
+                    this.study = projects[0].studies[0];
 
                     let _this = this;
                     let projectPromises = [];
