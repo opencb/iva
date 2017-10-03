@@ -9,19 +9,12 @@
   "license": "Apache-2.0",
   "scripts": {
     "postinstall": "ln -s lib/jsorolla/.eslintrc.json",
-    "clean": "rm -r build",
-    "init": "npm run clean && mkdir -p build/vendors build/jsorolla build/css build/fonts build/img build/conf",
-    "build-jsorolla": "cp -r lib/jsorolla/dist build/jsorolla/",
-    "build-js-css-vendors": "./build-vendors.sh",
-    "build-css": "npm run build-css-jsorolla && npm run build-fonts && npm run build-img",
-    "build-css-jsorolla": "cp -r build/jsorolla/dist/css node_modules/font-awesome/fonts build",
-    "build-fonts": "cp -r build/jsorolla/dist/fonts/* build/fonts",
-    "build-img": "cp -r build/jsorolla/dist/img/* src/img/* build/img",
-    "build-config": "cp -r src/conf/config.js src/conf/tools.js src/conf/panels.js src/conf/icd10.js LICENSE build/conf",
-    "build-root": "mkdir -p build/components && cp src/components/iva-settings.html build/components && cp -r src/welcome.html src/jso-styles.html build && cp -r src/iva-app.html build/iva-app-src.html && cp -r src/index.html build && cd build && sed -i '' 's#../node_modules#vendor#g' index.html iva-app-src.html && sed -i '' 's#../lib/jsorolla/src#jsorolla/dist/js#g' iva-app-src.html && npm run vulcanize",
-    "vulcanize": "node_modules/vulcanize/bin/vulcanize build/iva-app-src.html > build/iva-app.html",
-    "build-iva-app": "sed -i '' 's#\\[importPath\\]#img#g' build/iva-app.html",
-    "build": "npm run init && npm run build-jsorolla && npm run build-js-css-vendors && npm run build-css && npm run build-config && npm run build-root && npm run build-iva-app"
+    "clean": "rm -rf build",
+    "copy": "mkdir -p build/vendors && cp -r src/*.html src/conf src/img LICENSE README.md build && ./build-vendors.js",
+    "copy-jsorolla": "mkdir -p build/jsorolla && cd lib/jsorolla && npm run dist && cd ../.. && cp -r lib/jsorolla/dist build/jsorolla",
+    "vulcanize": "node_modules/vulcanize/bin/vulcanize build/iva-app.html > build/iva-app-vulcanize.html && mv build/iva-app-vulcanize.html build/iva-app.html",
+    "build-iva-app": "sed -i 's/..\\/node_modules/vendors/' build/index.html build/iva-app.html && sed -i 's/..\\/lib\\/jsorolla/jsorolla/' build/index.html && sed -i 's/..\\/lib\\/jsorolla\\/src/jsorolla\\/dist\\/js/' build/iva-app.html && npm run vulcanize && sed -i 's/\\[importPath\\]/img/' build/iva-app.html",
+    "build": "npm run clean && npm run copy && npm run copy-jsorolla && sed 's/\\.\\.\\///' src/prod/index.html > build/index.html && npm run build-iva-app"
   },
   "dependencies": {
     "@polymer/polymer": "~2.0.2",
@@ -69,6 +62,8 @@
     "grunt-vulcanize": "~1.0.0",
     "js-beautify": "~1.6.4",
     "uglify-js": "^2.7.3",
-    "vulcanize": "~1.14.8"
+    "vulcanize": "~1.14.8",
+    "xmldom": "0.1.27",
+    "shelljs": "0.7.8"
   }
 }
