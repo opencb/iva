@@ -1,4 +1,4 @@
-#!/usr/bin/env nodejs
+#!/usr/bin/env node
 
 const fs = require("fs");
 let shelljs = require('shelljs');

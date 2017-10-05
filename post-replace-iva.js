@@ -1,4 +1,4 @@
-#!/usr/bin/env nodejs
+#!/usr/bin/env node
 
 const fs = require("fs");
 
@@ -8,9 +8,7 @@ fs.readFile("build/iva-app.html", "utf8", function (err2, content) {
         if (err) throw err;
         console.log('The file has been saved!');
     });
-
 });
-
 
 function replaceContentIva(content){
     let importPathRegex = /\[\[importPath\]\]images/g;

@@ -114,7 +114,7 @@ ln -s ../@webcomponents/shadycss/
 And now execute:
 
 ```
-grunt
+npm run dist
 ```
 
 when completed, all compiled files will be located under the _build_ folder.
