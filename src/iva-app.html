@@ -650,7 +650,7 @@ i<!--
 
                 // Remember the tool that was previously set
                 this.tool = window.location.hash.split('/')[0];
-                if (UtilsNew.isNotEmpty(this.tool)) {
+                if (UtilsNew.isEmpty(this.tool)) {
                     this.tool = "#home";
                 }
 
