@@ -114,7 +114,7 @@ ln -s ../@webcomponents/shadycss/
 And now execute:
 
 ```
-npm run dist
+npm run build
 ```
 
 when completed, all compiled files will be located under the _build_ folder.
