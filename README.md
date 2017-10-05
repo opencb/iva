@@ -20,6 +20,8 @@ We recommend to contact IVA developers by writing to OpenCB mailing list opencb@
 * Ignacio Medina (im411@cam.ac.uk) (_Founder and Project Leader_)
 * Swaathi Kandasaamy (sk913@cam.ac.uk)
 * Asuncion Gallego (agallego@cipf.es)
+* Javier Perez Florido (javier.perez.florido.ext@juntadeandalucia.es)
+* Alexis Martínez (alexis.martinez@juntadeandalucia.es)
 
 ##### Contributing
 IVA is an open-source and collaborative project, currently developement is mainly carried out by Stefan Gräf and Ignacio Medina teams from the University of Cambridge and Joaquin Dopazo team from CIBERER. We appreciate any help and feedback from users, you can contribute in many different ways such as simple bug reporting and feature request. Dependending on your skills you are more than welcome to develop client tools, new features or even fixing bugs.
@@ -91,7 +93,7 @@ First, you must update JSorolla dependencies, from the root folder execute:
 ```
 cd lib/jsorolla
 npm install
-grunt
+npm run dist
 ```
 
 Finally, to build IVA execute:
@@ -112,7 +114,7 @@ ln -s ../@webcomponents/shadycss/
 And now execute:
 
 ```
-grunt
+npm run dist
 ```
 
 when completed, all compiled files will be located under the _build_ folder.
