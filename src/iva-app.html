@@ -466,10 +466,8 @@ i<!--
                 <!--</div>-->
 
                 <template is="dom-if" if="{{config.enabledComponents.login}}">
-                    <div class="content" id="login" style="width: 20%; margin: auto;">
-                        <opencga-login on-login="login" opencga-client="{{opencgaClient}}" opencga-client-config="{{opencgaClientConfig}}"
-                                       login-text="Sign in">
-                        </opencga-login>
+                    <div class="content" id="login" style="width: 20%; margin: auto; padding-top: 80px">
+                        <opencga-login on-login="login" opencga-client="{{opencgaClient}}" login-title="Sign in"></opencga-login>
                     </div>
                 </template>
 
