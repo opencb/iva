@@ -39,14 +39,6 @@ To install [Node.js](https://nodejs.org/en/) you can visit [this link](http://bl
 
 [npm](https://www.npmjs.com/) stands for *node packaged modules* and it is the dependency manager of [Node.js](https://nodejs.org/en/).
 
-
-##### Install Grunt
-To install grunt, run
-
-```
- npm install -g grunt-cli
-```
-
 ### Cloning
 IVA is an open-source project and can be downloaded either as package(tar.gz) from GitHub releases or source code by cloning the repository.
 
@@ -84,7 +76,7 @@ Go to lib/jsorolla and checkout to ***develop*** branch of Jsorolla by
 
 ```
 cd lib/jsorolla
-git checkout next-v2.0.0
+git checkout develop
 ```
 
 ### Build
@@ -93,7 +85,6 @@ First, you must update JSorolla dependencies, from the root folder execute:
 ```
 cd lib/jsorolla
 npm install
-npm run dist
 ```
 
 Finally, to build IVA execute:
