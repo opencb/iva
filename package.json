@@ -8,6 +8,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "preinstall": "rm -f .eslintrc.json",
     "postinstall": "ln -s lib/jsorolla/.eslintrc.json",
     "clean": "rm -rf build",
     "copy": "mkdir -p build/vendors && cp -r src/*.html src/conf src/img LICENSE README.md build && cp src/prod/index.html build && ./build-vendors.js",
