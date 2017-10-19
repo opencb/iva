@@ -8,7 +8,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "preinstall": "rm -f .eslintrc.json",
+    "preinstall": "rm -f .eslintrc.json node_modules/@polymer/shadycss",
     "postinstall": "ln -s lib/jsorolla/.eslintrc.json && cd node_modules/@polymer && ln -s ../@webcomponents/shadycss",
     "clean": "rm -rf build",
     "copy": "mkdir -p build/vendors && cp -r src/*.html src/conf src/img LICENSE README.md build && cp src/prod/index.html build && ./build-vendors.js",
@@ -25,6 +25,7 @@
     "bootstrap": "3.3.6",
     "bootstrap-colorpicker": "2.3.6",
     "bootstrap-table": "1.11.1",
+    "bootstrap-select": "1.12.4",
     "bootstrap-treeview": "1.2.0",
     "bootstrap-validator": "~0.11.9",
     "cookies-js": "~1.2.2",
