@@ -20,28 +20,60 @@
 
 const tools = {
     browser: {
+        // Warning! Moved to filter.cohorts
         cohorts: {
             // "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
             // "EXAC": [{id: "ALL", name: "All"}]
         },
         missing: true,
+
         filters: [
             {
                 name: "Example BRCA2",
                 query: {
                     gene: "BRCA2",
-                    conservation: "phylop<0.001",
+                    conservation: "phylop<0.001"
                 },
             },
             {
                 name: "Example OR11",
                 query: {
                     gene: "OR11H1",
-                    conservation: "phylop<=0.001",
+                    conservation: "phylop<=0.001"
                 },
             },
         ],
+        title: "Variant Browser",
         active: false,
+        filter: {
+            missing: true,
+            searchButtonText: "",
+            allCollapsed: true,
+            study: {
+                title: "Study and Cohorts",
+                samples: {
+                    visibility: "public",
+                    selector: true,
+                    segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
+                },
+                cohorts: {
+                    visibility: "public",
+                    cohortPerStudy: {
+                        "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
+                        "EXAC": [{id: "ALL", name: "All"}]
+                    }
+                },
+                scores: {
+                    visibility: "public"
+                },
+                studies: {
+                    visibility: "public"
+                },
+                clinicalData: {
+                    visibility: "public"
+                },
+            }
+        }
     },
     prioritization: {
         segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"],
@@ -62,10 +94,38 @@ const tools = {
             },
         ],
         active: false,
-
+        filter: {
+            missing: true,
+            searchButtonText: "",
+            allCollapsed: true,
+            study: {
+                title: "Study and Cohorts",
+                samples: {
+                    visibility: "public",
+                    selector: true,
+                    segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
+                },
+                cohorts: {
+                    visibility: "public",
+                    cohortPerStudy: {
+                        "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
+                        "EXAC": [{id: "ALL", name: "All"}]
+                    }
+                },
+                scores: {
+                    visibility: "public"
+                },
+                studies: {
+                    visibility: "public"
+                },
+                clinicalData: {
+                    visibility: "public"
+                },
+            }
+        }
     },
     interpretation: {
-      active: false
+        active: false
     },
     gene: {
         protein: {
