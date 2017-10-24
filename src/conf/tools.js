@@ -20,13 +20,8 @@
 
 const tools = {
     browser: {
-        // Warning! Moved to filter.cohorts
-        cohorts: {
-            // "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-            // "EXAC": [{id: "ALL", name: "All"}]
-        },
-        missing: true,
-
+        title: "Variant Browser",
+        active: false,
         filters: [
             {
                 name: "Example BRCA2",
@@ -43,14 +38,12 @@ const tools = {
                 },
             },
         ],
-        title: "Variant Browser",
-        active: false,
         filter: {
             missing: true,
-            searchButtonText: "",
-            allCollapsed: true,
+            searchButtonText: "Search",
             study: {
                 title: "Study and Cohorts",
+                collapsed: false,
                 samples: {
                     visibility: "public",
                     selector: true,
@@ -59,24 +52,25 @@ const tools = {
                 cohorts: {
                     visibility: "public",
                     cohortPerStudy: {
-                        "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-                        "EXAC": [{id: "ALL", name: "All"}]
+                        // "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
+                        // "EXAC": [{id: "ALL", name: "All"}]
                     }
                 },
                 scores: {
-                    visibility: "public"
+                    visibility: "none"
                 },
                 studies: {
                     visibility: "public"
                 },
                 clinicalData: {
-                    visibility: "public"
-                },
+                    visibility: "none"
+                }
             }
         }
     },
     prioritization: {
-        segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"],
+        title: "Prioritization",
+        active: false,
         filters: [
             {
                 name: "Example BRCA2",
@@ -93,34 +87,33 @@ const tools = {
                 },
             },
         ],
-        active: false,
         filter: {
             missing: true,
-            searchButtonText: "",
-            allCollapsed: true,
+            searchButtonText: "Search",
             study: {
                 title: "Study and Cohorts",
+                collapsed: false,
                 samples: {
                     visibility: "public",
                     selector: true,
                     segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
                 },
                 cohorts: {
-                    visibility: "public",
+                    visibility: "none",
                     cohortPerStudy: {
-                        "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-                        "EXAC": [{id: "ALL", name: "All"}]
+                        // "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
+                        // "EXAC": [{id: "ALL", name: "All"}]
                     }
                 },
                 scores: {
-                    visibility: "public"
+                    visibility: "none"
                 },
                 studies: {
                     visibility: "public"
                 },
                 clinicalData: {
-                    visibility: "public"
-                },
+                    visibility: "none"
+                }
             }
         }
     },
