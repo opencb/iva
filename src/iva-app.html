@@ -1,4 +1,4 @@
-i<!--
+<!--
 ~ Copyright 2015-2016 OpenCB
 ~
 ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -345,7 +345,7 @@ i<!--
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
                     <div class="content" id="browser">
-                        <variant-browser mode="browser" title="Variant Browser" host="{{opencga.host}}"
+                        <variant-browser mode="browser" title="Variant Browser"
                                          project="{{project}}" study="{{study}}" studies="{{project.studies}}"
                                          config="{{config.tools.browser}}" biotypes="{{config.biotypes}}"
                                          active="{{config.tools.browser.active}}"
@@ -355,7 +355,8 @@ i<!--
                                          cellbase-client="{{cellbaseClient}}"
                                          beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}"
                                          query="{{_query}}"
-                                         on-gene="geneSelected" summary="{{config.opencga.summary}}" ebi-config="{{config.ebiWS}}" style="font-size: 12px">
+                                         on-gene="geneSelected" summary="{{config.opencga.summary}}" ebi-config="{{config.ebiWS}}"
+                                         on-samplechange="onSampleChange" style="font-size: 12px">
                         </variant-browser>
                     </div>
                 </template>
@@ -363,7 +364,7 @@ i<!--
                 <template is="dom-if" if="{{config.enabledComponents.prioritization}}">
                     <div class="content" id="prioritization">
                         <variant-prioritization mode="prioritization" title="{{config.tools.prioritization.title}}"
-                                                project="{{project}}" study="{{study}}" studies="{{project.studies}}" samples="{{samples}}"
+                                                project="{{project}}" study="{{study}}" studies="{{project.studies}}"
                                                 config="{{config.tools.prioritization}}" biotypes="{{config.biotypes}}"
                                                 population-frequencies="{{populationFrequencies}}"
                                                 protein-substitution-scores="{{proteinSubstitutionScores}}"
@@ -371,7 +372,8 @@ i<!--
                                                 opencga-client="{{opencgaClient}}"
                                                 cellbase-client="{{cellbaseClient}}"
                                                 active="{{config.tools.prioritization.active}}" ebi-config="{{config.ebiWS}}"
-                                                beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected" style="font-size: 12px">
+                                                beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected"
+                                                on-samplechange="onSampleChange" style="font-size: 12px">
                         </variant-prioritization>
                     </div>
                 </template>
@@ -390,7 +392,7 @@ i<!--
                 <template is="dom-if" if="{{config.enabledComponents.clinical}}">
                     <div class="content" id="clinical">
                         <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
-                                          study="{{study}}" samples="{{samples}}"
+                                          study="{{study}}"
                                           config="{{config.tools.clinical}}" config-opencga="{{config.opencga}}" biotypes="{{config.biotypes}}"
                                           population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
@@ -566,7 +568,7 @@ i<!--
                     },
                     samples: {
                         type: Array,
-                        observer: 'projectStudySampleChanged'
+                        observer: 'onSampleChanged'
                     },
                     studySummaries: {
                         type: Array
@@ -606,7 +608,7 @@ i<!--
 //                this.interpretationJson = interpretationJson;
 
                 // Enabled components tools
-                for (var tool in this.config.tools) {
+                for (let tool in this.config.tools) {
                     if (UtilsNew.isNotUndefined(this.config.tools[tool].active)) {
                         this.set("config.enabledComponents." + tool, this.config.tools[tool].active);
                     }
@@ -683,6 +685,7 @@ i<!--
 
             connectedCallback() {
                 super.connectedCallback();
+
                 this.config = Object.assign({}, this.config);
                 this.renderBreadcrumb();
             }
@@ -702,8 +705,10 @@ i<!--
                 } else {
                     this._publicMode = false;
                     this.project = {};
-//
                 }
+
+                // This manages the smaples selected in each tool for updating the breadcrumb
+                this._samplesPerTool = {};
 
                 this._checkBreadcrumbVisible();
             }
@@ -731,7 +736,6 @@ i<!--
                 var _this = this;
                 this.opencgaClient.users().logout();
                 _this._logout();
-
             }
 
             changeTool(e) {
@@ -742,6 +746,11 @@ i<!--
                 if (UtilsNew.isNotUndefined(e.target) && UtilsNew.isNotUndefined(e.target.attributes.href)) {
 //                    $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
                     this.tool = e.target.attributes.href.value;
+
+                    if (UtilsNew.isNotUndefinedOrNull(this._samplesPerTool)) {
+                        this.samples = this._samplesPerTool[this.tool.replace("#", "")];
+                    }
+                    this.renderBreadcrumb()
                 } else {
                     this.tool = "#home";
                 }
@@ -750,7 +759,7 @@ i<!--
             }
 
             getProjects() {
-                var _this = this;
+                let _this = this;
                 if (this._publicMode) {
                     // Get all projects with study info and call to _setup()
                     this.opencgaClient.projects().search({})
@@ -828,7 +837,6 @@ i<!--
 
             renderHashFragments() {
                 console.log("renderHashFragments - DEBUG")
-//                $("#" + "MainLoadingModal").modal("show");
 
                 let hashFrag = this.tool;
                 if (UtilsNew.isNotUndefined(this.project) && UtilsNew.isNotEmpty(this.project.alias)) {
@@ -849,7 +857,7 @@ i<!--
                         this.set("config.enabledComponents." + elementa, false);
                     }
                 }
-                var arr = window.location.hash.split('/');
+                let arr = window.location.hash.split('/');
                 let [hashTool, hashProject, hashStudy, feature] = arr;
 
                 // Stopping the recursive call
@@ -984,6 +992,13 @@ i<!--
                 console.log("projectStudySampleChanged - DEBUG")
 
                 this.renderHashFragments();
+                this.renderBreadcrumb();
+            }
+
+            onSampleChange(e) {
+                this.set('samples', e.detail.samples);
+                this._samplesPerTool[this.tool.replace("#", "")] = this.samples;
+
                 this.renderBreadcrumb();
             }
 
@@ -1152,6 +1167,5 @@ i<!--
         }
 
         customElements.define(IvaApp.is, IvaApp);
-
     </script>
 </dom-module>
