@@ -729,17 +729,9 @@ i<!--
 
             logout() {
                 var _this = this;
-                this.opencgaClient.users().logout()
-                    .then(function () {
-                        _this._logout();
-                    })
-                    .catch(function () {
-                        // we need to remove Cookies son OpenCGAClient has failed
-                        Cookies.expire(_this.config.opencga.cookie.prefix + "_sid");
-                        Cookies.expire(_this.config.opencga.cookie.prefix + "_userId");
+                this.opencgaClient.users().logout();
+                _this._logout();
 
-                        _this._logout();
-                    });
             }
 
             changeTool(e) {
