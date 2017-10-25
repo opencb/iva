@@ -345,17 +345,16 @@
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
                     <div class="content" id="browser">
-                        <variant-browser mode="browser" title="Variant Browser"
+                        <variant-browser title="{{config.tools.browser.title}}"
                                          project="{{project}}" study="{{study}}" studies="{{project.studies}}"
                                          config="{{config.tools.browser}}" biotypes="{{config.biotypes}}"
+                                         opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                          active="{{config.tools.browser.active}}"
                                          population-frequencies="{{populationFrequencies}}"
                                          protein-substitution-scores="{{proteinSubstitutionScores}}"
-                                         consequence-types="{{consequenceTypes}}" opencga-client="{{opencgaClient}}"
-                                         cellbase-client="{{cellbaseClient}}"
-                                         beacon-hosts="{{config.tools.beacon.hosts}}" search="{{_query}}"
-                                         query="{{_query}}"
-                                         on-gene="geneSelected" summary="{{config.opencga.summary}}" ebi-config="{{config.ebiWS}}"
+                                         consequence-types="{{consequenceTypes}}"
+                                         beacon-hosts="{{config.tools.beacon.hosts}}"
+                                         on-gene="geneSelected" ebi-config="{{config.ebiWS}}"
                                          on-samplechange="onSampleChange" style="font-size: 12px">
                         </variant-browser>
                     </div>
@@ -363,15 +362,14 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.prioritization}}">
                     <div class="content" id="prioritization">
-                        <variant-prioritization mode="prioritization" title="{{config.tools.prioritization.title}}"
+                        <variant-prioritization title="{{config.tools.prioritization.title}}"
                                                 project="{{project}}" study="{{study}}" studies="{{project.studies}}"
                                                 config="{{config.tools.prioritization}}" biotypes="{{config.biotypes}}"
+                                                opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                                                active="{{config.tools.prioritization.active}}" ebi-config="{{config.ebiWS}}"
                                                 population-frequencies="{{populationFrequencies}}"
                                                 protein-substitution-scores="{{proteinSubstitutionScores}}"
                                                 consequence-types="{{consequenceTypes}}"
-                                                opencga-client="{{opencgaClient}}"
-                                                cellbase-client="{{cellbaseClient}}"
-                                                active="{{config.tools.prioritization.active}}" ebi-config="{{config.ebiWS}}"
                                                 beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected"
                                                 on-samplechange="onSampleChange" style="font-size: 12px">
                         </variant-prioritization>
