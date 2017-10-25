@@ -17,16 +17,45 @@
 /**
  * Created by imedina on 05/06/17.
  */
+const filter = {
+    missing: true,
+    searchButtonText: "Search",
+    study: {
+        title: "Study and Cohorts",
+        collapsed: false,
+        samples: {
+            visibility: "public",
+            selector: true,
+            segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
+        },
+        cohorts: {
+            visibility: "public",
+            cohortPerStudy: {
+                "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
+                "EXAC": [{id: "ALL", name: "All"}]
+            }
+        },
+        scores: {
+            visibility: "none",
+            tooltip: ""
+        },
+        studies: {
+            visibility: "public"
+        },
+        clinicalData: {
+            visibility: "none"
+        }
+    },
+    conservation: {
+        showLogicalOperator: false,
+        tooltip: ""
+    }
+};
 
 const tools = {
     browser: {
-        // Warning! Moved to filter.cohorts
-        cohorts: {
-            // "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-            // "EXAC": [{id: "ALL", name: "All"}]
-        },
-        missing: true,
-
+        title: "Variant Browser",
+        active: false,
         filters: [
             {
                 name: "Example BRCA2",
@@ -43,40 +72,11 @@ const tools = {
                 },
             },
         ],
-        title: "Variant Browser",
-        active: false,
-        filter: {
-            missing: true,
-            searchButtonText: "",
-            allCollapsed: true,
-            study: {
-                title: "Study and Cohorts",
-                samples: {
-                    visibility: "public",
-                    selector: true,
-                    segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
-                },
-                cohorts: {
-                    visibility: "public",
-                    cohortPerStudy: {
-                        "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-                        "EXAC": [{id: "ALL", name: "All"}]
-                    }
-                },
-                scores: {
-                    visibility: "public"
-                },
-                studies: {
-                    visibility: "public"
-                },
-                clinicalData: {
-                    visibility: "public"
-                },
-            }
-        }
+        filter: filter
     },
     prioritization: {
-        segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"],
+        title: "Prioritization",
+        active: false,
         filters: [
             {
                 name: "Example BRCA2",
@@ -93,36 +93,7 @@ const tools = {
                 },
             },
         ],
-        active: false,
-        filter: {
-            missing: true,
-            searchButtonText: "",
-            allCollapsed: true,
-            study: {
-                title: "Study and Cohorts",
-                samples: {
-                    visibility: "public",
-                    selector: true,
-                    segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
-                },
-                cohorts: {
-                    visibility: "public",
-                    cohortPerStudy: {
-                        "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-                        "EXAC": [{id: "ALL", name: "All"}]
-                    }
-                },
-                scores: {
-                    visibility: "public"
-                },
-                studies: {
-                    visibility: "public"
-                },
-                clinicalData: {
-                    visibility: "public"
-                },
-            }
-        }
+        filter: filter
     },
     interpretation: {
         active: false

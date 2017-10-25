@@ -362,8 +362,8 @@ i<!--
 
                 <template is="dom-if" if="{{config.enabledComponents.prioritization}}">
                     <div class="content" id="prioritization">
-                        <variant-prioritization mode="prioritization" title="Prioritization" host="{{opencga.host}}"
-                                                project="{{project}}" study="{{study}}" samples="{{samples}}"
+                        <variant-prioritization mode="prioritization" title="{{config.tools.prioritization.title}}"
+                                                project="{{project}}" study="{{study}}" studies="{{project.studies}}" samples="{{samples}}"
                                                 config="{{config.tools.prioritization}}" biotypes="{{config.biotypes}}"
                                                 population-frequencies="{{populationFrequencies}}"
                                                 protein-substitution-scores="{{proteinSubstitutionScores}}"
