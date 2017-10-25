@@ -171,6 +171,7 @@ const tools = {
             },
         ],
         active: false,
+        filter: filter
     },
     beacon: {
         hosts: [
