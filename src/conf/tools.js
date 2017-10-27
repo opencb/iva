@@ -17,6 +17,40 @@
 /**
  * Created by imedina on 05/06/17.
  */
+const filter = {
+    missing: true,
+    searchButtonText: "Search",
+    study: {
+        title: "Study and Cohorts",
+        collapsed: false,
+        samples: {
+            visibility: "public",
+            selector: true,
+            segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
+        },
+        cohorts: {
+            visibility: "public",
+            cohortPerStudy: {
+                "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
+                "EXAC": [{id: "ALL", name: "All"}]
+            }
+        },
+        scores: {
+            visibility: "none",
+            tooltip: ""
+        },
+        studies: {
+            visibility: "public"
+        },
+        clinicalData: {
+            visibility: "none"
+        }
+    },
+    conservation: {
+        showLogicalOperator: false,
+        tooltip: ""
+    }
+};
 
 const tools = {
     browser: {
@@ -38,35 +72,7 @@ const tools = {
                 },
             },
         ],
-        filter: {
-            missing: true,
-            searchButtonText: "Search",
-            study: {
-                title: "Study and Cohorts",
-                collapsed: false,
-                samples: {
-                    visibility: "public",
-                    selector: true,
-                    segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
-                },
-                cohorts: {
-                    visibility: "public",
-                    cohortPerStudy: {
-                        // "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-                        // "EXAC": [{id: "ALL", name: "All"}]
-                    }
-                },
-                scores: {
-                    visibility: "none"
-                },
-                studies: {
-                    visibility: "public"
-                },
-                clinicalData: {
-                    visibility: "none"
-                }
-            }
-        }
+        filter: filter
     },
     prioritization: {
         title: "Prioritization",
@@ -87,35 +93,7 @@ const tools = {
                 },
             },
         ],
-        filter: {
-            missing: true,
-            searchButtonText: "Search",
-            study: {
-                title: "Study and Cohorts",
-                collapsed: false,
-                samples: {
-                    visibility: "public",
-                    selector: true,
-                    segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
-                },
-                cohorts: {
-                    visibility: "none",
-                    cohortPerStudy: {
-                        // "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-                        // "EXAC": [{id: "ALL", name: "All"}]
-                    }
-                },
-                scores: {
-                    visibility: "none"
-                },
-                studies: {
-                    visibility: "public"
-                },
-                clinicalData: {
-                    visibility: "none"
-                }
-            }
-        }
+        filter: filter
     },
     interpretation: {
         active: false
@@ -193,6 +171,7 @@ const tools = {
             },
         ],
         active: false,
+        filter: filter
     },
     beacon: {
         hosts: [
