@@ -134,7 +134,7 @@ var application = {
         {
             id: "beacon",
             title: "Beacon",
-            visibility: "private"
+            visibility: "public"
         },
         {
             id: "tools",
