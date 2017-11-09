@@ -24,12 +24,12 @@ const filter = {
         title: "Study and Cohorts",
         collapsed: false,
         samples: {
-            visibility: "public",
+            visibility: "none",
             selector: true,
             segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
         },
         cohorts: {
-            visibility: "public",
+            visibility: "none",
             cohortPerStudy: {
                 "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
                 "EXAC": [{id: "ALL", name: "All"}]
@@ -40,7 +40,7 @@ const filter = {
             tooltip: ""
         },
         studies: {
-            visibility: "public"
+            visibility: "none"
         },
         clinicalData: {
             visibility: "none"
@@ -55,7 +55,7 @@ const filter = {
 const tools = {
     browser: {
         title: "Variant Browser",
-        active: false,
+        active: true,
         filters: [
             {
                 name: "Example BRCA2",
