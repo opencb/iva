@@ -102,80 +102,80 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <!-- Controls aligned to the LEFT -->
 
-                                <ul class="nav navbar-nav">
-                                    <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                                    <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible"
-                                              as="menuItem">
-                                        <!-- If there is not submenu we just display a button -->
-                                        <template is="dom-if" if="{{!menuItem.submenu}}">
-                                            <li on-click="changeTool"><a href$="#{{menuItem.id}}" role="button">{{menuItem.title}}</a>
-                                            </li>
-                                        </template>
-                                        <!-- If there is a submenu we create a dropdown menu item -->
-                                        <template is="dom-if" if="{{menuItem.submenu}}">
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                                   aria-haspopup="true" aria-expanded="false">{{menuItem.title}}
-                                                    <span class="caret"></span>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <template is="dom-repeat" items="{{menuItem.submenu}}"
-                                                              filter="_isMenuItemVisible">
-                                                        <template is="dom-if" if="{{item.category}}">
-                                                            <li><a><label>{{item.title}}</label></a></li>
-                                                        </template>
-                                                        <template is="dom-if" if="{{item.separator}}">
-                                                            <li role="separator" class="divider"></li>
-                                                        </template>
-                                                        <template is="dom-if" if="{{!item.category}}">
-                                                            <template is="dom-if" if="{{!item.separator}}">
-                                                                <li on-click="changeTool"><a href$="#{{item.id}}"
-                                                                                             data-id="{{item.id}}">{{item.title}}</a>
-                                                                </li>
-                                                            </template>
+                            <ul class="nav navbar-nav">
+                                <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
+                                <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible"
+                                          as="menuItem">
+                                    <!-- If there is not submenu we just display a button -->
+                                    <template is="dom-if" if="{{!menuItem.submenu}}">
+                                        <li on-click="changeTool"><a href$="#{{menuItem.id}}" role="button">{{menuItem.title}}</a>
+                                        </li>
+                                    </template>
+                                    <!-- If there is a submenu we create a dropdown menu item -->
+                                    <template is="dom-if" if="{{menuItem.submenu}}">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                               aria-haspopup="true" aria-expanded="false">{{menuItem.title}}
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <template is="dom-repeat" items="{{menuItem.submenu}}"
+                                                          filter="_isMenuItemVisible">
+                                                    <template is="dom-if" if="{{item.category}}">
+                                                        <li><a><label>{{item.title}}</label></a></li>
+                                                    </template>
+                                                    <template is="dom-if" if="{{item.separator}}">
+                                                        <li role="separator" class="divider"></li>
+                                                    </template>
+                                                    <template is="dom-if" if="{{!item.category}}">
+                                                        <template is="dom-if" if="{{!item.separator}}">
+                                                            <li on-click="changeTool"><a href$="#{{item.id}}"
+                                                                                         data-id="{{item.id}}">{{item.title}}</a>
+                                                            </li>
                                                         </template>
                                                     </template>
-                                                </ul>
-                                            </li>
-                                        </template>
+                                                </template>
+                                            </ul>
+                                        </li>
                                     </template>
+                                </template>
 
-                                    <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                                    <!--<dom-repeat items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">-->
-                                    <!--<template>-->
-                                    <!--&lt;!&ndash; If there is not submenu we just display a button &ndash;&gt;-->
-                                    <!--<dom-if if="{{!menuItem.submenu}}">-->
-                                    <!--<template>-->
-                                    <!--<li on-click="changeTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>-->
-                                    <!--</template>-->
-                                    <!--</dom-if>-->
+                                <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
+                                <!--<dom-repeat items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">-->
+                                <!--<template>-->
+                                <!--&lt;!&ndash; If there is not submenu we just display a button &ndash;&gt;-->
+                                <!--<dom-if if="{{!menuItem.submenu}}">-->
+                                <!--<template>-->
+                                <!--<li on-click="changeTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>-->
+                                <!--</template>-->
+                                <!--</dom-if>-->
 
-                                    <!--&lt;!&ndash; If there is a submenu we create a dropdown menu item &ndash;&gt;-->
-                                    <!--<dom-if if="{{menuItem.submenu}}">-->
-                                    <!--<template>-->
-                                    <!--<li class="dropdown">-->
-                                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>-->
-                                    <!--<ul class="dropdown-menu">-->
-                                    <!--<template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible">-->
-                                    <!--<template is="dom-if" if="{{item.category}}">-->
-                                    <!--<li><a><label>{{item.title}}</label></a></li>-->
-                                    <!--</template>-->
-                                    <!--<template is="dom-if" if="{{item.separator}}">-->
-                                    <!--<li role="separator" class="divider"></li>-->
-                                    <!--</template>-->
-                                    <!--<template is="dom-if" if="{{!item.category}}">-->
-                                    <!--<template is="dom-if" if="{{!item.separator}}">-->
-                                    <!--<li on-click="changeTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>-->
-                                    <!--</template>-->
-                                    <!--</template>-->
-                                    <!--</template>-->
-                                    <!--</ul>-->
-                                    <!--</li>-->
-                                    <!--</template>-->
-                                    <!--</dom-if>-->
-                                    <!--</template>-->
-                                    <!--</dom-repeat>-->
-                                </ul>
+                                <!--&lt;!&ndash; If there is a submenu we create a dropdown menu item &ndash;&gt;-->
+                                <!--<dom-if if="{{menuItem.submenu}}">-->
+                                <!--<template>-->
+                                <!--<li class="dropdown">-->
+                                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>-->
+                                <!--<ul class="dropdown-menu">-->
+                                <!--<template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible">-->
+                                <!--<template is="dom-if" if="{{item.category}}">-->
+                                <!--<li><a><label>{{item.title}}</label></a></li>-->
+                                <!--</template>-->
+                                <!--<template is="dom-if" if="{{item.separator}}">-->
+                                <!--<li role="separator" class="divider"></li>-->
+                                <!--</template>-->
+                                <!--<template is="dom-if" if="{{!item.category}}">-->
+                                <!--<template is="dom-if" if="{{!item.separator}}">-->
+                                <!--<li on-click="changeTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>-->
+                                <!--</template>-->
+                                <!--</template>-->
+                                <!--</template>-->
+                                <!--</ul>-->
+                                <!--</li>-->
+                                <!--</template>-->
+                                <!--</dom-if>-->
+                                <!--</template>-->
+                                <!--</dom-repeat>-->
+                            </ul>
 
                             <!-- Controls aligned to the RIGHT: settings and about-->
                             <ul class="nav navbar-nav navbar-right" >
@@ -566,7 +566,8 @@
                     },
                     samples: {
                         type: Array,
-                        observer: 'onSampleChanged'
+                        value: []
+//                        observer: 'onSampleChange'
                     },
                     studySummaries: {
                         type: Array
@@ -705,7 +706,9 @@
                     this.project = {};
                 }
 
-                // This manages the smaples selected in each tool for updating the breadcrumb
+                this.samples = [];
+
+                // This manages the samples selected in each tool for updating the breadcrumb
                 this._samplesPerTool = {};
 
                 this._checkBreadcrumbVisible();
@@ -744,9 +747,12 @@
                 if (UtilsNew.isNotUndefined(e.target) && UtilsNew.isNotUndefined(e.target.attributes.href)) {
 //                    $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
                     this.tool = e.target.attributes.href.value;
-
                     if (UtilsNew.isNotUndefinedOrNull(this._samplesPerTool)) {
-                        this.samples = this._samplesPerTool[this.tool.replace("#", "")];
+                        if (this._samplesPerTool.hasOwnProperty(this.tool.replace("#", ""))) {
+                            this.samples = this._samplesPerTool[this.tool.replace("#", "")];
+                        } else {
+                            this.samples = [];
+                        }
                     }
                     this.renderBreadcrumb()
                 } else {
@@ -994,10 +1000,13 @@
             }
 
             onSampleChange(e) {
-                this.set('samples', e.detail.samples);
-                this._samplesPerTool[this.tool.replace("#", "")] = this.samples;
+//                debugger
+                if (UtilsNew.isNotUndefinedOrNull(this.samples) && UtilsNew.isNotUndefinedOrNull(e.detail)) {
+                    this.set('samples', e.detail.samples);
+                    this._samplesPerTool[this.tool.replace("#", "")] = this.samples;
 
-                this.renderBreadcrumb();
+                    this.renderBreadcrumb();
+                }
             }
 
             buildQuery(e) {
