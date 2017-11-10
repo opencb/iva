@@ -1094,18 +1094,18 @@
                     PolymerUtils.querySelectorAll(".breadcrumb li a").forEach(function (element) {
                         element.addEventListener('click', function (e) {
                             e.preventDefault();
-                            PolymerUtils.hideByClass("content")
+//                            PolymerUtils.hideByClass("content")
                             switch (e.target.dataset.category) {
                                 case _this.config.breadcrumb.title:
-                                    PolymerUtils.show("projects")
+//                                    PolymerUtils.show("projects")
                                     _this.tool = "projects";
                                     break;
                                 case "project":
-                                    PolymerUtils.show("project")
+//                                    PolymerUtils.show("project")
                                     _this.tool = "project";
                                     break;
                                 case "study":
-                                    PolymerUtils.show("browser")
+//                                    PolymerUtils.show("browser")
                                     _this.tool = "browser";
                                     break;
                             }
