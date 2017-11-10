@@ -272,7 +272,6 @@
                                     </ul>
                                 </li>
 
-
                                 <!--<li class="dropdown">-->
                                 <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Dropdown <span class="caret"></span></a>-->
                                 <!--<ul class="dropdown-menu">-->
@@ -283,7 +282,6 @@
                                 <!--<li><a href="#">Separated link</a></li>-->
                                 <!--</ul>-->
                                 <!--</li>-->
-
 
                                 <!-- Login/Logout button -->
                                 <template is="dom-if" if="{{_isMenuItemVisible(config.login)}}">
@@ -387,7 +385,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.clinical}}">
                     <div class="content" id="clinical">
-                        <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
+                        <variant-clinical titleText="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
                                           study="{{study}}"
                                           config="{{config.tools.clinical}}" config-opencga="{{config.opencga}}" biotypes="{{config.biotypes}}"
                                           population-frequencies="{{populationFrequencies}}"
@@ -400,7 +398,8 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.facet}}">
                     <div class="content" id="facet">
-                        <variant-facet title="Facet Analysis" project="{{project}}" study="{{study}}"
+
+                        <variant-facet project="{{project}}" study="{{study}}"
                                        studies="{{project.studies}}" config="[[config.tools.facet]]"
                                        opencga-client="{{opencgaClient}}"
                                        cellbase-client="{{cellbaseClient}}"
@@ -621,7 +620,6 @@
                 this.set("config.enabledComponents.project", false);
                 this.set("config.enabledComponents.settings", false);
                 this.set("config.enabledComponents.home", true);
-
 
                 this.defaultConfig = {};
                 if (UtilsNew.isNotUndefined(populationFrequencies)) {
