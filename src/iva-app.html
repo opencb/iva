@@ -775,7 +775,9 @@
                             console.log(response)
                         });
                 } else {
-                    this.opencgaClient.users().getProjects(this.userId)
+//                    this.opencgaClient.users().getProjects(this.userId)
+                    // @TODO To be modified by Nacho.
+                    this.opencgaClient.projects().search({})
                         .then(function (response) {
                             let _projects = response.response[0].result;
 //                                if (UtilsNew.isNotEmpty(_this.config.opencga.asUser)) {

@@ -47,16 +47,16 @@ const filter = {
         }
     },
     genomic: {
-        chromosomalLocation: {
+        chromosomalLocation:{
             tooltip: "Filter out variants falling outside the genomic interval(s) defined"
         },
-        featureIds: {
+        featureIds:{
             tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
         },
-        geneDiseasePanels: {
+        geneDiseasePanels:{
             tooltip: "Filter out variants falling outside the genomic intervals (typically genes) defined by the panel(s) chosen"
         },
-        variantType: {
+        variantType:{
             tooltip: "Only considers variants of the selected type"
         }
 
@@ -84,7 +84,16 @@ const filter = {
         showLogicalOperator: false,
         tooltip: ""
     }
+
 };
+
+let filterClinical = filter;
+filterClinical.study.title = "Study";
+filterClinical.study.samples.visibility = "public";
+filterClinical.study.cohorts.visibility = "none";
+filterClinical.study.scores.visibility = "none";
+filterClinical.study.studies.visibility = "none";
+filterClinical.study.clinicalData.visibility = "none";
 
 const tools = {
     browser: {
@@ -379,35 +388,7 @@ const tools = {
             },
         ],
         active: false,
-        filter: {
-            missing: true,
-            searchButtonText: "",
-            allCollapsed: true,
-            study: {
-                title: "Study and Cohorts",
-                samples: {
-                    visibility: "public",
-                    selector: false,
-                    segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
-                },
-                cohorts: {
-                    visibility: "none",
-                    cohortPerStudy: {
-                        "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-                        "EXAC": [{id: "ALL", name: "All"}]
-                    }
-                },
-                scores: {
-                    visibility: "none"
-                },
-                studies: {
-                    visibility: "none"
-                },
-                clinicalData: {
-                    visibility: "none"
-                },
-            }
-        }
+        filter: filterClinical
     },
     genomeBrowser: {
         active: false,
