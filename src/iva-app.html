@@ -102,80 +102,78 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <!-- Controls aligned to the LEFT -->
 
-                                <ul class="nav navbar-nav">
-                                    <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                                    <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible"
-                                              as="menuItem">
-                                        <!-- If there is not submenu we just display a button -->
-                                        <template is="dom-if" if="{{!menuItem.submenu}}">
-                                            <li on-click="changeTool"><a href$="#{{menuItem.id}}" role="button">{{menuItem.title}}</a>
-                                            </li>
-                                        </template>
-                                        <!-- If there is a submenu we create a dropdown menu item -->
-                                        <template is="dom-if" if="{{menuItem.submenu}}">
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                                   aria-haspopup="true" aria-expanded="false">{{menuItem.title}}
-                                                    <span class="caret"></span>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <template is="dom-repeat" items="{{menuItem.submenu}}"
-                                                              filter="_isMenuItemVisible">
-                                                        <template is="dom-if" if="{{item.category}}">
-                                                            <li><a><label>{{item.title}}</label></a></li>
-                                                        </template>
-                                                        <template is="dom-if" if="{{item.separator}}">
-                                                            <li role="separator" class="divider"></li>
-                                                        </template>
-                                                        <template is="dom-if" if="{{!item.category}}">
-                                                            <template is="dom-if" if="{{!item.separator}}">
-                                                                <li on-click="changeTool"><a href$="#{{item.id}}"
-                                                                                             data-id="{{item.id}}">{{item.title}}</a>
-                                                                </li>
-                                                            </template>
+                            <ul class="nav navbar-nav">
+                                <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
+                                <template is="dom-repeat" items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">
+                                    <!-- If there is not submenu we just display a button -->
+                                    <template is="dom-if" if="{{!menuItem.submenu}}">
+                                        <li on-click="changeTool">
+                                            <a href$="#{{menuItem.id}}" role="button">{{menuItem.title}}</a>
+                                        </li>
+                                    </template>
+                                    <!-- If there is a submenu we create a dropdown menu item -->
+                                    <template is="dom-if" if="{{menuItem.submenu}}">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                {{menuItem.title}} <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible">
+                                                    <template is="dom-if" if="{{item.category}}">
+                                                        <li><a><label>{{item.title}}</label></a></li>
+                                                    </template>
+                                                    <template is="dom-if" if="{{item.separator}}">
+                                                        <li role="separator" class="divider"></li>
+                                                    </template>
+                                                    <template is="dom-if" if="{{!item.category}}">
+                                                        <template is="dom-if" if="{{!item.separator}}">
+                                                            <li on-click="changeTool">
+                                                                <a href$="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a>
+                                                            </li>
                                                         </template>
                                                     </template>
-                                                </ul>
-                                            </li>
-                                        </template>
+                                                </template>
+                                            </ul>
+                                        </li>
                                     </template>
+                                </template>
 
-                                    <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                                    <!--<dom-repeat items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">-->
-                                    <!--<template>-->
-                                    <!--&lt;!&ndash; If there is not submenu we just display a button &ndash;&gt;-->
-                                    <!--<dom-if if="{{!menuItem.submenu}}">-->
-                                    <!--<template>-->
-                                    <!--<li on-click="changeTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>-->
-                                    <!--</template>-->
-                                    <!--</dom-if>-->
+                                <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
+                                <!--<dom-repeat items="{{config.menu}}" filter="_isMenuItemVisible" as="menuItem">-->
+                                <!--<template>-->
+                                <!--&lt;!&ndash; If there is not submenu we just display a button &ndash;&gt;-->
+                                <!--<dom-if if="{{!menuItem.submenu}}">-->
+                                <!--<template>-->
+                                <!--<li on-click="changeTool"><a href="#{{menuItem.id}}" role="button">{{menuItem.title}}</a></li>-->
+                                <!--</template>-->
+                                <!--</dom-if>-->
 
-                                    <!--&lt;!&ndash; If there is a submenu we create a dropdown menu item &ndash;&gt;-->
-                                    <!--<dom-if if="{{menuItem.submenu}}">-->
-                                    <!--<template>-->
-                                    <!--<li class="dropdown">-->
-                                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>-->
-                                    <!--<ul class="dropdown-menu">-->
-                                    <!--<template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible">-->
-                                    <!--<template is="dom-if" if="{{item.category}}">-->
-                                    <!--<li><a><label>{{item.title}}</label></a></li>-->
-                                    <!--</template>-->
-                                    <!--<template is="dom-if" if="{{item.separator}}">-->
-                                    <!--<li role="separator" class="divider"></li>-->
-                                    <!--</template>-->
-                                    <!--<template is="dom-if" if="{{!item.category}}">-->
-                                    <!--<template is="dom-if" if="{{!item.separator}}">-->
-                                    <!--<li on-click="changeTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>-->
-                                    <!--</template>-->
-                                    <!--</template>-->
-                                    <!--</template>-->
-                                    <!--</ul>-->
-                                    <!--</li>-->
-                                    <!--</template>-->
-                                    <!--</dom-if>-->
-                                    <!--</template>-->
-                                    <!--</dom-repeat>-->
-                                </ul>
+                                <!--&lt;!&ndash; If there is a submenu we create a dropdown menu item &ndash;&gt;-->
+                                <!--<dom-if if="{{menuItem.submenu}}">-->
+                                <!--<template>-->
+                                <!--<li class="dropdown">-->
+                                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>-->
+                                <!--<ul class="dropdown-menu">-->
+                                <!--<template is="dom-repeat" items="{{menuItem.submenu}}" filter="_isMenuItemVisible">-->
+                                <!--<template is="dom-if" if="{{item.category}}">-->
+                                <!--<li><a><label>{{item.title}}</label></a></li>-->
+                                <!--</template>-->
+                                <!--<template is="dom-if" if="{{item.separator}}">-->
+                                <!--<li role="separator" class="divider"></li>-->
+                                <!--</template>-->
+                                <!--<template is="dom-if" if="{{!item.category}}">-->
+                                <!--<template is="dom-if" if="{{!item.separator}}">-->
+                                <!--<li on-click="changeTool"><a href="#{{item.id}}" data-id="{{item.id}}">{{item.title}}</a></li>-->
+                                <!--</template>-->
+                                <!--</template>-->
+                                <!--</template>-->
+                                <!--</ul>-->
+                                <!--</li>-->
+                                <!--</template>-->
+                                <!--</dom-if>-->
+                                <!--</template>-->
+                                <!--</dom-repeat>-->
+                            </ul>
 
                             <!-- Controls aligned to the RIGHT: settings and about-->
                             <ul class="nav navbar-nav navbar-right" >
@@ -453,7 +451,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.protein}}">
                     <div class="collapse content feature-view" id="protein">
-                        <opencga-protein-view cellbase-client="tools{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
+                        <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
                                               project="{{project}}" study="{{study}}"
                                               protein="{{protein}}" population-frequencies="{{populationFrequencies}}"
                                               consequence-types="{{consequenceTypes}}"
@@ -536,6 +534,10 @@
 
         class IvaApp extends Polymer.Element {
 
+            constructor() {
+                super();
+            }
+
             static get is() {
                 return 'iva-app';
             }
@@ -566,7 +568,8 @@
                     },
                     samples: {
                         type: Array,
-                        observer: 'onSampleChanged'
+                        value: []
+//                        observer: 'onSampleChange'
                     },
                     studySummaries: {
                         type: Array
@@ -582,16 +585,13 @@
                 }
             }
 
-            constructor() {
-                super();
-            }
-
             _attachDom(dom) {
                 this.appendChild(dom);
             }
 
             ready() {
                 super.ready();
+
                 // Copy 'application' object from config.js file
                 this.config = application;
                 this.config.menu.counter = 0;
@@ -645,7 +645,7 @@
                 }
 
                 // We need to listen to hash fragment changes to update the display and breadcrumb
-                var _this = this;
+                let _this = this;
                 window.onhashchange = function () {
                     _this.hashFragmentListener(_this);
                 };
@@ -658,7 +658,7 @@
 
                 // go to the page that tool has
 //                $('.content').hide();
-                if (window.location.hash != this.tool) {
+                if (window.location.hash !== this.tool) {
                     window.location.hash = this.tool;
                 } else {
 //                    $(this.tool).show();
@@ -670,7 +670,7 @@
                 this.init();
 
                 // This must happen after calling to init() function since init() created the OpencgaClient
-                var sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
+                let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
                 if (UtilsNew.isNotEmpty(sid) && !this._publicMode) {
                     this.login({
                         detail: {
@@ -705,7 +705,9 @@
                     this.project = {};
                 }
 
-                // This manages the smaples selected in each tool for updating the breadcrumb
+                this.samples = [];
+
+                // This manages the samples selected in each tool for updating the breadcrumb
                 this._samplesPerTool = {};
 
                 this._checkBreadcrumbVisible();
@@ -731,9 +733,8 @@
             }
 
             logout() {
-                var _this = this;
                 this.opencgaClient.users().logout();
-                _this._logout();
+                this._logout();
             }
 
             changeTool(e) {
@@ -744,9 +745,12 @@
                 if (UtilsNew.isNotUndefined(e.target) && UtilsNew.isNotUndefined(e.target.attributes.href)) {
 //                    $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
                     this.tool = e.target.attributes.href.value;
-
                     if (UtilsNew.isNotUndefinedOrNull(this._samplesPerTool)) {
-                        this.samples = this._samplesPerTool[this.tool.replace("#", "")];
+                        if (this._samplesPerTool.hasOwnProperty(this.tool.replace("#", ""))) {
+                            this.samples = this._samplesPerTool[this.tool.replace("#", "")];
+                        } else {
+                            this.samples = [];
+                        }
                     }
                     this.renderBreadcrumb()
                 } else {
@@ -852,28 +856,30 @@
 
             hashFragmentListener(ctx) {
                 console.log("hashFragmentListener - DEBUG")
-                for (var elementa in this.config.enabledComponents) {
-                    if (UtilsNew.isNotUndefined(this.config.enabledComponents[elementa])) {
-                        this.set("config.enabledComponents." + elementa, false);
+                // Hide all elements
+                for (let element in this.config.enabledComponents) {
+                    if (UtilsNew.isNotUndefined(this.config.enabledComponents[element])) {
+                        this.set("config.enabledComponents." + element, false);
                     }
                 }
+
                 let arr = window.location.hash.split('/');
                 let [hashTool, hashProject, hashStudy, feature] = arr;
 
                 // Stopping the recursive call
-                if (hashTool != this.tool || (UtilsNew.isNotUndefined(this.project) && hashProject != this.project.alias) ||
-                    (UtilsNew.isNotUndefined(this.study) && hashStudy != this.study.alias)) {
+                if (hashTool !== this.tool || (UtilsNew.isNotUndefined(this.project) && hashProject !== this.project.alias) ||
+                    (UtilsNew.isNotUndefined(this.study) && hashStudy !== this.study.alias)) {
                     if (arr.length > 1) {
                         // Field 'project' is being observed, just in case Polymer triggers
                         // an unnecessary event we can check they are really different
-                        if (ctx.project.alias != hashProject) {
+                        if (ctx.project.alias !== hashProject) {
                             ctx.project.alias = hashProject;
                         }
-                        if (arr.length > 2 && ctx.study != hashStudy) {
+                        if (arr.length > 2 && ctx.study !== hashStudy) {
                             for (let i = 0; i < ctx.projects.length; i++) {
-                                if (ctx.projects[i].name == ctx.project.name || ctx.projects[i].alias == ctx.project.alias) {
+                                if (ctx.projects[i].name === ctx.project.name || ctx.projects[i].alias === ctx.project.alias) {
                                     for (let j = 0; j < ctx.projects[i].studies.length; j++) {
-                                        if (ctx.projects[i].studies[j].name == hashStudy || ctx.projects[i].studies[j].alias == hashStudy) {
+                                        if (ctx.projects[i].studies[j].name === hashStudy || ctx.projects[i].studies[j].alias === hashStudy) {
                                             ctx.study = ctx.projects[i].studies[j];
                                             break;
                                         }
@@ -885,7 +891,7 @@
                     }
 
                     if (UtilsNew.isNotEmpty(feature)) {
-                        if (hashTool == "#protein") {
+                        if (hashTool === "#protein") {
                             ctx.protein = feature;
                         } else if (feature.startsWith("ENST")) {
                             ctx.transcript = feature;
@@ -996,10 +1002,13 @@
             }
 
             onSampleChange(e) {
-                this.set('samples', e.detail.samples);
-                this._samplesPerTool[this.tool.replace("#", "")] = this.samples;
+//                debugger
+                if (UtilsNew.isNotUndefinedOrNull(this.samples) && UtilsNew.isNotUndefinedOrNull(e.detail)) {
+                    this.set('samples', e.detail.samples);
+                    this._samplesPerTool[this.tool.replace("#", "")] = this.samples;
 
-                this.renderBreadcrumb();
+                    this.renderBreadcrumb();
+                }
             }
 
             buildQuery(e) {
@@ -1045,19 +1054,19 @@
                 if (UtilsNew.isNotNull(breadcrumbElement) && UtilsNew.isNotUndefined(this.config)) {
 
                     // If there is no project in config, breadcrumb is set private so that it is shown only when logged in
-                    if (UtilsNew.isUndefined(this.config.opencga.projects) || this.config.opencga.projects.length == 0) {
+                    if (UtilsNew.isUndefined(this.config.opencga.projects) || this.config.opencga.projects.length === 0) {
                         this.config.breadcrumb.visibility = "private";
                     }
 
                     // we empty everything
-                    console.log(this.breadcrumbElement)
+//                    console.log(this.breadcrumbElement)
                     PolymerUtils.innerHTML("breadcrumb", "")
                     // we add the 'Projects' link
                     let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, false, this.config.breadcrumb.title);
                     breadcrumbElement.appendChild(projects);
 
                     // We first check if one study is selected, for this study must be defined and have at least one key
-                    if (UtilsNew.isUndefined(this.study) || Object.keys(this.study).length == 0) {
+                    if (UtilsNew.isUndefined(this.study) || Object.keys(this.study).length === 0) {
                         if (UtilsNew.isNotUndefinedOrNull(this.project)) {
                             let project = this._createBreadcrumbElement(this.project.alias, true, "project"); // render only project if exists
                             breadcrumbElement.appendChild(project);
@@ -1085,18 +1094,18 @@
                     PolymerUtils.querySelectorAll(".breadcrumb li a").forEach(function (element) {
                         element.addEventListener('click', function (e) {
                             e.preventDefault();
-                            PolymerUtils.hideByClass("content")
+//                            PolymerUtils.hideByClass("content")
                             switch (e.target.dataset.category) {
                                 case _this.config.breadcrumb.title:
-                                    PolymerUtils.show("projects")
+//                                    PolymerUtils.show("projects")
                                     _this.tool = "projects";
                                     break;
                                 case "project":
-                                    PolymerUtils.show("project")
+//                                    PolymerUtils.show("project")
                                     _this.tool = "project";
                                     break;
                                 case "study":
-                                    PolymerUtils.show("browser")
+//                                    PolymerUtils.show("browser")
                                     _this.tool = "browser";
                                     break;
                             }
@@ -1108,12 +1117,12 @@
             }
 
             _createBreadcrumbElement(name, active, category) {
-                var li = document.createElement("li");
-                if (active == true) {
+                let li = document.createElement("li");
+                if (active === true) {
                     li.setAttribute("class", "active");
                     li.textContent = name;
                 } else {
-                    var a = document.createElement("a");
+                    let a = document.createElement("a");
                     a.setAttribute("href", "#");
                     a.setAttribute("class", "");
                     a.setAttribute("data-category", category);
