@@ -87,13 +87,6 @@ const filter = {
 
 };
 
-let filterClinical = filter;
-filterClinical.study.title = "Study";
-filterClinical.study.samples.visibility = "public";
-filterClinical.study.cohorts.visibility = "none";
-filterClinical.study.scores.visibility = "none";
-filterClinical.study.studies.visibility = "none";
-filterClinical.study.clinicalData.visibility = "none";
 
 const tools = {
     browser: {
@@ -388,7 +381,7 @@ const tools = {
             },
         ],
         active: false,
-        filter: filterClinical
+        filter: filter
     },
     genomeBrowser: {
         active: false,

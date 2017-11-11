@@ -401,7 +401,7 @@
                 <template is="dom-if" if="{{config.enabledComponents.facet}}">
                     <div class="content" id="facet">
                         <variant-facet title="Facet Analysis" project="{{project}}" study="{{study}}"
-                                       studies="{{project.studies}}" config="{{config.tools.facet}}"
+                                       studies="{{project.studies}}" config="[[config.tools.facet]]"
                                        opencga-client="{{opencgaClient}}"
                                        cellbase-client="{{cellbaseClient}}"
                                        population-frequencies="{{populationFrequencies}}"
