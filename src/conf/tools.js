@@ -20,6 +20,9 @@
 const filter = {
     missing: true,
     searchButtonText: "Search",
+    tooltip: {
+        classes: "qtip-dark qtip-rounded qtip-shadow"
+    },
     study: {
         title: "Study and Cohorts",
         collapsed: false,
