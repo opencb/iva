@@ -23,6 +23,29 @@ const filter = {
     tooltip: {
         classes: "qtip-dark qtip-rounded qtip-shadow"
     },
+    sections: [
+        {
+            title: "Genomic",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "location",
+                    title: "Chromosomal Location",
+                    tooltip: "Filter out variants falling outside the genomic interval(s) defined"
+                },
+                {
+                    id: "gene",
+                    title: "Feature IDs (gene, SNPs, ...)",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "cadd",
+                    title: "CADD",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                }
+            ]
+        }
+    ],
     study: {
         title: "Study and Cohorts",
         collapsed: false,
