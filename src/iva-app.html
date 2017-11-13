@@ -391,7 +391,7 @@
                                           population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
-                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}">
+                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}" icd10="{{icd10}}">
                         </variant-clinical>
                     </div>
                 </template>
@@ -602,6 +602,7 @@
                 this.config.species = DEFAULT_SPECIES;
                 this.config.enabledComponents = {};
                 this.config.biotypes = biotypes;
+                this.icd10 = ICD_10;
 //                this.interpretationJson = interpretationJson;
 
                 // Enabled components tools
