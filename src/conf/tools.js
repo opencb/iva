@@ -32,7 +32,7 @@ const filter = {
             segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
         },
         cohorts: {
-            visibility: "public",
+            visibility: "none",
             cohortPerStudy: {
                 "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
                 "EXAC": [{id: "ALL", name: "All"}]
