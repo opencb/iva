@@ -292,7 +292,7 @@
                                             </a>
                                         </template>
                                         <template is="dom-if" if="{{_logged}}">
-                                            <a href="#logout" on-click="logout">
+                                            <a on-click="logout">
                                                 <i class="fa fa-sign-out fa-lg"></i> Logout
                                             </a>
                                         </template>
@@ -332,8 +332,6 @@
                 <div class="center">
                     <div class="content" id="home">
                         <welcome-web></welcome-web>
-
-
                     </div>
                 </div>
             </template>
@@ -1160,6 +1158,7 @@
             }
 
             _logout() {
+                let message = "Succesfully logout";
                 this.userId = "";
                 this.sessionId = "";
                 this.opencgaClient._config.sessionId = "";
@@ -1171,6 +1170,7 @@
                 this.tool = "#home";
                 window.location.hash = "home";
                 this.init();
+                UtilsNew.showNotifySuccess(message)
             }
         }
 
