@@ -288,7 +288,7 @@
                                     <li>
                                         <template is="dom-if" if="{{!_logged}}">
                                             <a href="#login" role="button" on-click="changeTool">
-                                                <i class="fa fa-sign-in fa-lg"></i> Login
+                                                <i href="#login" class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Login
                                             </a>
                                         </template>
                                         <template is="dom-if" if="{{_logged}}">
@@ -848,7 +848,11 @@
                     }
                 }
 
-                window.location.hash = hashFrag;
+                if (window.location.hash === hashFrag) {
+                    this.hashFragmentListener(this);
+                } else {
+                    window.location.hash = hashFrag;
+                }
             }
 
             hashFragmentListener(ctx) {
