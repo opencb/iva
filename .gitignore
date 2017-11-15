@@ -71,5 +71,7 @@ clients/cellbaseR*.tar.gz
 .eslintrc.json
 
 # test
-test
+test/bin
+test/reports
+test/screenshots
 
