@@ -1,9 +1,8 @@
 let config = require('../../nightwatch.conf.js');
-
 module.exports = {
     'Login_test_success' : function (browser) {
         browser
-            .url('http://localhost/iva-babelomics/src/')
+            .url(config.URL_TEST)
             .windowMaximize()
             .waitForElementVisible('body', 1000)
             .assert.title('IVA')
@@ -31,7 +30,7 @@ module.exports = {
     },
     'Login_test_fail' : function (browser) {
         browser
-            .url('http://localhost/iva-babelomics/src/')
+            .url(config.URL_TEST)
             .windowMaximize()
             .waitForElementVisible('body', 1000)
             .assert.title('IVA')

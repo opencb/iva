@@ -2,7 +2,8 @@ const PKG = require('./package.json'); // so we can get the version of the proje
 const moment = require('moment'); // so we can get the version of the project
 
 const SCREENSHOT_PATH = "./test/screenshots/" + PKG.version + "/";
-const BIN_PATH = "./test/bin/"
+const BIN_PATH = "./test/bin/";
+const URL_TEST = "http://localhost/iva-babelomics/src/";
 
 const config = {
     "src_folders": ["test"],
@@ -48,4 +49,5 @@ function imgpath (browser) {
     return SCREENSHOT_PATH + metadata + '_' + moment().format("DD-MM-YYYY_HH:mm:ss") + '_';
 }
 
+module.exports.URL_TEST = URL_TEST;
 module.exports.imgpath = imgpath;
