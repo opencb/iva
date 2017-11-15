@@ -287,12 +287,12 @@
                                 <template is="dom-if" if="{{_isMenuItemVisible(config.login)}}">
                                     <li>
                                         <template is="dom-if" if="{{!_logged}}">
-                                            <a href="#login" role="button" on-click="changeTool">
+                                            <a href="#login" id="loginButton" role="button" on-click="changeTool">
                                                 <i href="#login" class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Login
                                             </a>
                                         </template>
                                         <template is="dom-if" if="{{_logged}}">
-                                            <a on-click="logout">
+                                            <a on-click="logout" id="logoutButton">
                                                 <i class="fa fa-sign-out fa-lg"></i> Logout
                                             </a>
                                         </template>
