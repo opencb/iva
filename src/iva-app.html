@@ -339,7 +339,7 @@
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
                     <div class="content" id="browser">
-                        <variant-browser title="{{config.tools.browser.title}}"
+                        <variant-browser tool-title="{{config.tools.browser.title}}"
                                          project="{{project}}" study="{{study}}" studies="{{project.studies}}"
                                          config="{{config.tools.browser}}" biotypes="{{config.biotypes}}"
                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
@@ -356,7 +356,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.prioritization}}">
                     <div class="content" id="prioritization">
-                        <variant-prioritization title="{{config.tools.prioritization.title}}"
+                        <variant-prioritization tool-title="{{config.tools.prioritization.title}}"
                                                 project="{{project}}" study="{{study}}" studies="{{project.studies}}"
                                                 config="{{config.tools.prioritization}}" biotypes="{{config.biotypes}}"
                                                 opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
@@ -370,20 +370,9 @@
                     </div>
                 </template>
 
-                <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
-                    <div class="content" id="interpretation">
-                        <variant-clinical-interpretation data="{{interpretationJson}}" title="Interpretation" project="{{project}}"
-                                                         study="{{study}}"  opencga-client="{{opencgaClient}}"
-                                                         cellbase-client="{{cellbaseClient}}"
-                                                         consequence-types="{{consequenceTypes}}"
-                                                         protein-substitution-scores="{{proteinSubstitutionScores}}">
-                        </variant-clinical-interpretation>
-                    </div>
-                </template>
-
                 <template is="dom-if" if="{{config.enabledComponents.clinical}}">
                     <div class="content" id="clinical">
-                        <variant-clinical titleText="Clinical Analysis" project="{{project}}"
+                        <variant-clinical tool-title="Clinical Analysis" project="{{project}}"
                                           study="{{study}}"
                                           config="{{config.tools.clinical}}" biotypes="{{config.biotypes}}"
                                           population-frequencies="{{populationFrequencies}}"
