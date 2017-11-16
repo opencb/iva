@@ -42,11 +42,16 @@ module.exports = {
             .pause(500)
             .assert.visible('div[id="bs-example-navbar-collapse-1"]')
             .pause(500)
-            .assert.visible('#bs-example-navbar-collapse-1 > ul > li > a[href="#clinical"]')
+            .assert.visible('#bs-example-navbar-collapse-1 > ul > li > a[href="#browser"]')
             .click('#bs-example-navbar-collapse-1 > ul > li > a[href="#clinical"]')
             .pause(500)
             .waitForElementVisible('variant-clinical-upload-new', 1000)
             .saveScreenshot(config.imgpath(browser) + "menu-upload.png")
+            .assert.visible('#bs-example-navbar-collapse-1 > ul > li > a[href="#browser"]')
+            .click('#bs-example-navbar-collapse-1 > ul > li > a[href="#browser"]')
+            .pause(500)
+            .waitForElementVisible('variant-browser', 1000)
+            .saveScreenshot(config.imgpath(browser) + "menu-browser.png")
             .end()
     }
 }
