@@ -383,9 +383,9 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.clinical}}">
                     <div class="content" id="clinical">
-                        <variant-clinical titleText="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
+                        <variant-clinical titleText="Clinical Analysis" project="{{project}}"
                                           study="{{study}}"
-                                          config="{{config.tools.clinical}}" config-opencga="{{config.opencga}}" biotypes="{{config.biotypes}}"
+                                          config="{{config.tools.clinical}}" biotypes="{{config.biotypes}}"
                                           population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
