@@ -11,7 +11,7 @@
     "preinstall": "rm -f .eslintrc.json node_modules/@polymer/shadycss",
     "postinstall": "ln -s lib/jsorolla/.eslintrc.json && cd node_modules/@polymer && ln -s ../@webcomponents/shadycss",
     "clean": "rm -rf build",
-    "copy": "mkdir -p build/vendors && cp -r src/*.html src/conf src/img LICENSE README.md build && cp src/prod/index.html build && ./build-vendors.js",
+    "copy": "mkdir -p build/vendors && cp -r src/*.html src/conf src/utils src/img LICENSE README.md build && cp src/prod/index.html build && ./build-vendors.js",
     "copy-jsorolla": "mkdir -p build/jsorolla && cd lib/jsorolla && npm run dist && cd ../.. && cp -r lib/jsorolla/dist build/jsorolla",
     "vulcanize": "node_modules/vulcanize/bin/vulcanize build/iva-app.html > build/iva-app-vulcanize.html && mv build/iva-app-vulcanize.html build/iva-app.html",
     "build-iva-app": "./post-replace-iva.js",
