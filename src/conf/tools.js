@@ -49,7 +49,7 @@ const filter = {
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
-                    id: "conservation",
+                    id: "variantType",
                     title: "Variant Type",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
@@ -91,6 +91,17 @@ const filter = {
                 {
                     id: "cadd",
                     title: "CADD",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                }
+            ]
+        },
+        {
+            title: "Conservation",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "conservation",
+                    title: "Protein Substitution Score",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
