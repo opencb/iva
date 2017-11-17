@@ -11,11 +11,12 @@
     "preinstall": "rm -f .eslintrc.json node_modules/@polymer/shadycss",
     "postinstall": "ln -s lib/jsorolla/.eslintrc.json && cd node_modules/@polymer && ln -s ../@webcomponents/shadycss",
     "clean": "rm -rf build",
-    "copy": "mkdir -p build/vendors && cp -r src/*.html src/conf src/img LICENSE README.md build && cp src/prod/index.html build && ./build-vendors.js",
+    "copy": "mkdir -p build/vendors && cp -r src/*.html src/conf src/utils src/img LICENSE README.md build && cp src/prod/index.html build && ./build-vendors.js",
     "copy-jsorolla": "mkdir -p build/jsorolla && cd lib/jsorolla && npm run dist && cd ../.. && cp -r lib/jsorolla/dist build/jsorolla",
     "vulcanize": "node_modules/vulcanize/bin/vulcanize build/iva-app.html > build/iva-app-vulcanize.html && mv build/iva-app-vulcanize.html build/iva-app.html",
     "build-iva-app": "./post-replace-iva.js",
-    "build": "npm run clean && npm run copy && npm run copy-jsorolla && npm run vulcanize && npm run build-iva-app"
+    "build": "npm run clean && npm run copy && npm run copy-jsorolla && npm run vulcanize && npm run build-iva-app",
+    "test-e2e": "./node_modules/.bin/nightwatch"
   },
   "dependencies": {
     "@polymer/polymer": "~2.2.0",
@@ -46,6 +47,7 @@
     "eslint": "~4.11.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "crisper": "~2.1.1",
     "js-beautify": "~1.6.4",
@@ -53,6 +55,8 @@
     "vulcanize": "~1.16.0",
     "xmldom": "0.1.27",
     "shelljs": "0.7.8",
-    "bower": "*"
+    "bower": "*",
+    "nightwatch": "^0.9.16",
+    "selenium-download": "^2.0.10"
   }
 }
