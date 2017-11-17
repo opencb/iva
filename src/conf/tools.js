@@ -25,7 +25,7 @@ const filter = {
     },
     sections: [
         {
-            title: "Genomic",
+            title: "Genomic Test",
             collapsed: true,
             subsections: [
                 {
@@ -34,14 +34,48 @@ const filter = {
                     tooltip: "Filter out variants falling outside the genomic interval(s) defined"
                 },
                 {
-                    id: "gene",
+                    id: "feature",
                     title: "Feature IDs (gene, SNPs, ...)",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "biotype",
+                    title: "Biotype",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "conservation",
+                    title: "Variant Type",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
                     id: "cadd",
                     title: "CADD",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                }
+            ]
+        },
+        {
+            title: "Population Frequency",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "1kG_phase3",
+                    title: "1000 Genomes",
+                    tooltip: "Only considers variants whose observed allelic frequency in the 1000 genomes phase 3 database is below " +
+                        "(or above) the defined value. Genome-wide allelic frequencies were obtained from more than 2.500 genomes"
+                },
+                {
+                    id: "EXAC",
+                    title: "ExAC",
+                    tooltip: "Only considers variants whose observed allelic frequency in the The Exome Aggregation Consortium (ExAC) " +
+                        "database is below (or above) the defined value. ExAC covers only exomic positions. The frequencies were obtained using more than 60.000 exomes"
+                },
+                {
+                    id: "ESP6500",
+                    title: "ESP6500",
+                    tooltip: "Only considers variants whose observed allelic frequency in the Exome Variant Server (ESP6500) database " +
+                        "is below (or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained using more than 6000 exomes"
                 }
             ]
         }
