@@ -39,6 +39,11 @@ const filter = {
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
+                    id: "genediseasepanels",
+                    title: "Gene Disease Panels",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
                     id: "biotype",
                     title: "Biotype",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
