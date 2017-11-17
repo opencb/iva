@@ -39,18 +39,18 @@ const filter = {
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
+                    id: "geneDiseasePanels",
+                    title: "Gene Disease Panels",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
                     id: "biotype",
                     title: "Biotype",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
-                    id: "conservation",
+                    id: "variantType",
                     title: "Variant Type",
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
-                },
-                {
-                    id: "cadd",
-                    title: "CADD",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
@@ -78,7 +78,67 @@ const filter = {
                         "is below (or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained using more than 6000 exomes"
                 }
             ]
+        },
+        {
+            title: "Deleriousness",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "proteinSubstitutionScore",
+                    title: "Protein Substitution Score",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "cadd",
+                    title: "CADD",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                }
+            ]
+        },
+        {
+            title: "Conservation",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "conservation",
+                    title: "Protein Substitution Score",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                }
+            ]
+        },
+        {
+            title: "Gene Ontology",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "goAccessions",
+                    title: "GO Accessions",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                }
+            ]
+        },
+        {
+            title: "Phenotype-Disease",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "hpoAccessions",
+                    title: "HPO Accessions",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "clinvarAccesions",
+                    title: "ClinVar Accessions",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "fullTextSearch",
+                    title: "Full-text search on HPO, ClinVar, protein domains or keywords. Some OMIM and Orphanet IDs are also supported",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                }
+            ]
         }
+
     ],
     study: {
         title: "Study and Cohorts",
