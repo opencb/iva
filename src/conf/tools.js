@@ -105,6 +105,17 @@ const filter = {
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
+        },
+        {
+            title: "Gene Ontology",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "goAccessions",
+                    title: "GO Accessions",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                }
+            ]
         }
     ],
     study: {
