@@ -116,7 +116,29 @@ const filter = {
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
+        },
+        {
+            title: "Phenotype-Disease",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "hpoAccessions",
+                    title: "HPO Accessions",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "clinvarAccesions",
+                    title: "ClinVar Accessions",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "fullTextSearch",
+                    title: "Full-text search on HPO, ClinVar, protein domains or keywords. Some OMIM and Orphanet IDs are also supported",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                }
+            ]
         }
+
     ],
     study: {
         title: "Study and Cohorts",
