@@ -39,7 +39,7 @@ const filter = {
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
-                    id: "genediseasepanels",
+                    id: "geneDiseasePanels",
                     title: "Gene Disease Panels",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
@@ -51,11 +51,6 @@ const filter = {
                 {
                     id: "conservation",
                     title: "Variant Type",
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
-                },
-                {
-                    id: "cadd",
-                    title: "CADD",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
@@ -81,6 +76,22 @@ const filter = {
                     title: "ESP6500",
                     tooltip: "Only considers variants whose observed allelic frequency in the Exome Variant Server (ESP6500) database " +
                         "is below (or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained using more than 6000 exomes"
+                }
+            ]
+        },
+        {
+            title: "Deleriousness",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "proteinSubstitutionScore",
+                    title: "Protein Substitution Score",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "cadd",
+                    title: "CADD",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
         }
