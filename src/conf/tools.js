@@ -25,6 +25,33 @@ const filter = {
     },
     sections: [
         {
+            title: "Study and Cohorts",
+            collapsed: false,
+            subsections: [
+                {
+                    id: "sample",
+                    title: "Samples",
+                    selector: true,
+                    segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"],
+                    tooltip: "Filter by sample genotypes"
+                },
+                {
+                    id: "cohort",
+                    title: "Cohort Stats (MAF)",
+                    cohortPerStudy: {
+                        "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
+                        "EXAC": [{id: "ALL", name: "All"}]
+                    },
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "study",
+                    title: "Variant Type",
+                    tooltip: "Only considers variants of the selected type"
+                }
+            ]
+        },
+        {
             title: "Genomic",
             collapsed: true,
             subsections: [
@@ -100,9 +127,16 @@ const filter = {
                 {
                     id: "conservation",
                     title: "Conservation Score",
-                    tooltip: "<strong>PhyloP</strong> scores measure evolutionary conservation at individual alignment sites. The scores are interpreted as follows compared to the evolution expected under neutral drift: positive scores (max 3.0) mean conserved positions and negative scores (min -14.0) indicate positive selection. PhyloP scores are useful to evaluate signatures of selection at particular nucleotides or classes of nucleotides (e.g., third codon positions, or first positions of miRNA target sites).<br>" +
-                    "<strong>PhastCons</strong> estimates the probability that each nucleotide belongs to a conserved element, based on the multiple alignment. The phastCons scores represent probabilities of negative selection and range between 0 (non-conserved) and 1 (highly conserved).<br>" +
-                    "<strong>Genomic Evolutionary Rate Profiling (GERP)</strong> score estimate the level of conservation of positions . Scores ≥ 2 indicate evolutionary constraint to and ≥ 3 indicate purifying selection."
+                    tooltip: "<strong>PhyloP</strong> scores measure evolutionary conservation at individual alignment sites. The scores " +
+                    "are interpreted as follows compared to the evolution expected under neutral drift: positive scores (max 3.0) mean " +
+                    "conserved positions and negative scores (min -14.0) indicate positive selection. PhyloP scores are useful to " +
+                    "evaluate signatures of selection at particular nucleotides or classes of nucleotides (e.g., third codon positions, " +
+                    "or first positions of miRNA target sites).<br>" +
+                    "<strong>PhastCons</strong> estimates the probability that each nucleotide belongs to a conserved element, based on " +
+                    "the multiple alignment. The phastCons scores represent probabilities of negative selection and range between 0 " +
+                    "(non-conserved) and 1 (highly conserved).<br>" +
+                    "<strong>Genomic Evolutionary Rate Profiling (GERP)</strong> score estimate the level of conservation of positions." +
+                    " Scores ≥ 2 indicate evolutionary constraint to and ≥ 3 indicate purifying selection."
                 }
             ]
         },
@@ -149,7 +183,7 @@ const filter = {
             segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
         },
         cohorts: {
-            visibility: "none",
+            visibility: "public",
             cohortPerStudy: {
                 "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
                 "EXAC": [{id: "ALL", name: "All"}]
