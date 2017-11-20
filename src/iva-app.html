@@ -714,8 +714,36 @@
                     this.tool = "#home";
                 }
                 this.renderHashFragments();
-
                 this.getProjects();
+                // 60000 ms = 1 min. Every 1 min we check if session is close to expirate.
+                this.intervalCheckSession = setInterval(this.checkSessionActive.bind(this), 60000);
+            }
+
+            checkSessionActive() {
+                let _message = "";
+                let _options = {
+                    icon: 'glyphicon glyphicon-user',
+                };
+                if (this._logged) {
+                    let decoded = jwt_decode(this.sessionId);
+                    let currentTime = new Date().getTime();
+                    let remainingTime = ((decoded.exp * 1000) - currentTime);
+                    // 300000 ms = 5 min = 1000(1sec) * 60(60 sec = 1min) * 5(5 min)
+                    if (remainingTime <= 300000 && remainingTime >= 60000) {
+                        _message = "Your session is close to expire. " + Math.floor(remainingTime / 60000) + " minutes remaining.";
+                    } else if (remainingTime < 60000) {
+                        _message = "Your session has expired.";
+                        this.logout();
+                        window.clearInterval(this.intervalCheckSession);
+                    } else {
+                        return;
+                    }
+                } else {
+                    _message = "Your session has expired.";
+                    window.clearInterval(this.intervalCheckSession);
+                }
+                // delay = 0 to fix the notify until user closes it.
+                UtilsApp.showNotify(_options, {delay: 0}, _message, UtilsNew.MESSAGE_INFO)
             }
 
             logout() {
