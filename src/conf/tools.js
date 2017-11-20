@@ -25,7 +25,34 @@ const filter = {
     },
     sections: [
         {
-            title: "Genomic Test",
+            title: "Study and Cohorts",
+            collapsed: false,
+            subsections: [
+                {
+                    id: "sample",
+                    title: "Samples",
+                    selector: true,
+                    segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"],
+                    tooltip: "Filter by sample genotypes"
+                },
+                {
+                    id: "cohort",
+                    title: "Cohort Stats (MAF)",
+                    cohortPerStudy: {
+                        "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
+                        "EXAC": [{id: "ALL", name: "All"}]
+                    },
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                },
+                {
+                    id: "study",
+                    title: "Variant Type",
+                    tooltip: "Only considers variants of the selected type"
+                }
+            ]
+        },
+        {
+            title: "Genomic",
             collapsed: true,
             subsections: [
                 {
@@ -41,7 +68,7 @@ const filter = {
                 {
                     id: "geneDiseasePanels",
                     title: "Gene Disease Panels",
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                    tooltip: "Filter out variants falling outside the genomic intervals (typically genes) defined by the panel(s) chosen"
                 },
                 {
                     id: "biotype",
@@ -49,9 +76,9 @@ const filter = {
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
-                    id: "variantType",
+                    id: "type",
                     title: "Variant Type",
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                    tooltip: "Only considers variants of the selected type"
                 }
             ]
         },
@@ -60,22 +87,15 @@ const filter = {
             collapsed: true,
             subsections: [
                 {
-                    id: "1kG_phase3",
-                    title: "1000 Genomes",
-                    tooltip: "Only considers variants whose observed allelic frequency in the 1000 genomes phase 3 database is below " +
-                        "(or above) the defined value. Genome-wide allelic frequencies were obtained from more than 2.500 genomes"
-                },
-                {
-                    id: "EXAC",
-                    title: "ExAC",
-                    tooltip: "Only considers variants whose observed allelic frequency in the The Exome Aggregation Consortium (ExAC) " +
-                        "database is below (or above) the defined value. ExAC covers only exomic positions. The frequencies were obtained using more than 60.000 exomes"
-                },
-                {
-                    id: "ESP6500",
-                    title: "ESP6500",
-                    tooltip: "Only considers variants whose observed allelic frequency in the Exome Variant Server (ESP6500) database " +
-                        "is below (or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained using more than 6000 exomes"
+                    id: "populationFrequency",
+                    title: "Select Population MAF",
+                    tooltip: "<strong>1000 Genomes</strong> only considers variants whose observed allelic frequency in the 1000 Genomes " +
+                    "Phase 3 project is below (or above) the defined value. Allele frequencies were obtained from about 2,500 samples." +
+                    "<br><strong>ExAC</strong> only considers variants whose observed allelic frequency in the The Exome Aggregation " +
+                    "Consortium (ExAC) database is below (or above) the defined value. ExAC covers only exomic positions. " +
+                    "The frequencies were obtained using more than 60.000 exomes." +
+                    "<br><strong>ESP56500</strong> only considers variants whose observed allelic frequency in the Exome Variant Server " +
+                    "(ESP6500) database is below (or above) the defined value. ESP6500 covers only exomic positions from about 6000 exomes"
                 }
             ]
         },
@@ -86,12 +106,17 @@ const filter = {
                 {
                     id: "proteinSubstitutionScore",
                     title: "Protein Substitution Score",
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                    tooltip: "<strong>SIFT score:</strong> Choose either a Tolerated/Deleterious qualitative score or provide below a " +
+                    "quantitative impact value. SIFT scores <0.05 are considered deleterious. " +
+                    "<strong>Polyphen:</strong> Choose, either a Benign/probably damaging qualitative score or provide below a " +
+                    "quantitative impact value. Polyphen scores can be Benign (<0.15), Possibly damaging (0.15-0.85) or Damaging (>0.85)"
                 },
                 {
                     id: "cadd",
                     title: "CADD",
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                    tooltip: "Raw values have relative meaning, with higher values indicating that a variant is more likely to be " +
+                    "simulated (or not observed) and therefore more likely to have deleterious effects. If discovering causal variants " +
+                    "within an individual, or small groups, of exomes or genomes te use of the scaled CADD score is recommended"
                 }
             ]
         },
@@ -101,8 +126,17 @@ const filter = {
             subsections: [
                 {
                     id: "conservation",
-                    title: "Protein Substitution Score",
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                    title: "Conservation Score",
+                    tooltip: "<strong>PhyloP</strong> scores measure evolutionary conservation at individual alignment sites. The scores " +
+                    "are interpreted as follows compared to the evolution expected under neutral drift: positive scores (max 3.0) mean " +
+                    "conserved positions and negative scores (min -14.0) indicate positive selection. PhyloP scores are useful to " +
+                    "evaluate signatures of selection at particular nucleotides or classes of nucleotides (e.g., third codon positions, " +
+                    "or first positions of miRNA target sites).<br>" +
+                    "<strong>PhastCons</strong> estimates the probability that each nucleotide belongs to a conserved element, based on " +
+                    "the multiple alignment. The phastCons scores represent probabilities of negative selection and range between 0 " +
+                    "(non-conserved) and 1 (highly conserved).<br>" +
+                    "<strong>Genomic Evolutionary Rate Profiling (GERP)</strong> score estimate the level of conservation of positions." +
+                    " Scores ≥ 2 indicate evolutionary constraint to and ≥ 3 indicate purifying selection."
                 }
             ]
         },
@@ -122,7 +156,7 @@ const filter = {
             collapsed: true,
             subsections: [
                 {
-                    id: "goAccessions",
+                    id: "go",
                     title: "GO Accessions",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
@@ -133,12 +167,12 @@ const filter = {
             collapsed: true,
             subsections: [
                 {
-                    id: "hpoAccessions",
+                    id: "hpo",
                     title: "HPO Accessions",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
-                    id: "clinvarAccesions",
+                    id: "clinvar",
                     title: "ClinVar Accessions",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
@@ -160,7 +194,7 @@ const filter = {
             segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
         },
         cohorts: {
-            visibility: "none",
+            visibility: "public",
             cohortPerStudy: {
                 "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
                 "EXAC": [{id: "ALL", name: "All"}]
@@ -176,46 +210,7 @@ const filter = {
         clinicalData: {
             visibility: "none"
         }
-    },
-    genomic: {
-        chromosomalLocation:{
-            tooltip: "Filter out variants falling outside the genomic interval(s) defined"
-        },
-        featureIds:{
-            tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
-        },
-        geneDiseasePanels:{
-            tooltip: "Filter out variants falling outside the genomic intervals (typically genes) defined by the panel(s) chosen"
-        },
-        variantType:{
-            tooltip: "Only considers variants of the selected type"
-        }
-
-    },
-    populationFrequency: {
-        _1000Genomes: {
-
-        },
-        exAC: {
-
-        },
-        eSP6500: {
-
-        }
-    },
-    deleteriousness: {
-        proteinSubstitutionScore: {
-            tooltip: "SIFT score. Choose either a Tolerated/Deleterious qualitative score or provide below a quantitative impact value. SIFT scores <0.05 are considered deleterious. Polyphen: Choose, either a Benign/probably damaging qualitative score or provide below a quantitative impact value. Polyphen scores are considered Benign (<0.15), Possibly damaging (0.15-0.85) or Damaging (>0.85)"
-        },
-        CADD: {
-            tooltip: "Raw values have relative meaning, with higher values indicating that a variant is more likely to be simulated (or not observed) and therefore more likely to have deleterious effects. If discovering causal variants within an individual, or small groups, of exomes or genomes te use of the scaled CADD score is recommended."
-        }
-    },
-    conservation: {
-        showLogicalOperator: false,
-        tooltip: ""
     }
-
 };
 
 
