@@ -107,6 +107,17 @@ const filter = {
             ]
         },
         {
+            title: "Consequence Type",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "consequenceType",
+                    title: "Select one or more terms",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                }
+            ]
+        },
+        {
             title: "Gene Ontology",
             collapsed: true,
             subsections: [
