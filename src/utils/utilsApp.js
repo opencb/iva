@@ -1,7 +1,7 @@
 class UtilsApp {
 
     // Notify api for Iva. http://bootstrap-notify.remabledesigns.com/
-    static showNotify(options = {}, settings = {}, message = "", type = "INFO") {
+    static showNotify(options = {}, settings = {}, message = "", type = "INFO", notifyInstance = null) {
         var types = {
             'ERROR': 'danger',
             'SUCCESS': 'success',
@@ -23,6 +23,11 @@ class UtilsApp {
         settingsDefault = Object.assign({}, settingsDefault, settings);
         optionsDefault = Object.assign({}, optionsDefault, options);
 
-        $.notify(optionsDefault, settingsDefault);
+        if (UtilsNew.isNotUndefinedOrNull(notifyInstance)) {
+            notifyInstance.update('message', message);
+            return notifyInstance;
+        }
+
+        return $.notify(optionsDefault, settingsDefault);
     }
 }
