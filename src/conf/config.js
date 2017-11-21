@@ -59,6 +59,7 @@ const application = {
     title: "IVA",
     version: "v0.9.0",
     logo: "img/opencb-logo.png",
+    notifyEventMessage: "notifymessage",
     menu: [
         {
             id: "browser",
