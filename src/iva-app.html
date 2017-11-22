@@ -380,6 +380,7 @@
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
                                           opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}"
                                           on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
+
                         </variant-clinical>
                     </div>
                 </template>
@@ -607,6 +608,8 @@
                 this.set("config.enabledComponents.project", false);
                 this.set("config.enabledComponents.settings", false);
                 this.set("config.enabledComponents.home", true);
+
+                this.icd10 = ICD_10;
 
                 this.defaultConfig = {};
                 if (UtilsNew.isNotUndefined(populationFrequencies)) {
