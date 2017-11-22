@@ -61,10 +61,12 @@ const application = {
     logo: "img/opencb-logo.png",
     notifyEventMessage: "notifymessage",
     session: {
-        checkTime: 1000,
+        // 60000 ms = 1 min
+        checkTime: 60000,
+        // 60000 ms = 1 min
         minRemainingTime: 60000,
         // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
-        maxRemainingTime: 7200000
+        maxRemainingTime: 600000
     },
     menu: [
         {

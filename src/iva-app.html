@@ -718,7 +718,7 @@
                 this.renderHashFragments();
                 this.getProjects();
                 // 60000 ms = 1 min. Every 1 min we check if session is close to expirate.
-                this.intervalCheckSession = setInterval(this.checkSessionActive.bind(this), 5000);
+                this.intervalCheckSession = setInterval(this.checkSessionActive.bind(this), this.config.session.checkTime);
             }
 
             checkSessionActive() {
@@ -730,7 +730,7 @@
                     this.sessionId = sid;
                     let decoded = jwt_decode(this.sessionId);
                     let currentTime = new Date().getTime();
-                    let remainingTime = ((decoded.exp * this.config.session.checkTime) - currentTime);
+                    let remainingTime = ((decoded.exp * 1000) - currentTime);
                     // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
                     if (remainingTime <= this.config.session.maxRemainingTime && remainingTime >= this.config.session.minRemainingTime) {
                         let remainingMinutes = Math.floor(remainingTime / this.config.session.minRemainingTime);
