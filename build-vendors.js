@@ -75,11 +75,15 @@ function replaceContentIndex(content){
     let confReplacement = "conf";
     let ivaRegex = /\.\.\/iva-app/g;
     let ivaReplacement = "iva-app";
+    let utilsRegex = /\.\.\/utils/g;
+    let utilsReplacement = "utils";
+
 
     content = replaceContent(nodeModulesRegex, nodeModulesReplacement, content);
     content = replaceContent(libJsorollaRegex, libJsorollaReplacement, content);
     content = replaceContent(confRegex, confReplacement, content);
     content = replaceContent(ivaRegex, ivaReplacement, content);
+    content = replaceContent(utilsRegex, utilsReplacement, content);
 
     return content
 }
