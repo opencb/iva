@@ -379,7 +379,7 @@
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
                                           opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}"
-                                          icd10="{{icd10}}" on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
+                                          on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
                         </variant-clinical>
                     </div>
                 </template>
@@ -590,7 +590,6 @@
                 this.config.species = DEFAULT_SPECIES;
                 this.config.enabledComponents = {};
                 this.config.biotypes = biotypes;
-                this.icd10 = ICD_10;
 
                 // Enabled components tools
                 for (let tool in this.config.tools) {
@@ -716,26 +715,31 @@
                 this.renderHashFragments();
                 this.getProjects();
                 // 60000 ms = 1 min. Every 1 min we check if session is close to expirate.
-                this.intervalCheckSession = setInterval(this.checkSessionActive.bind(this), 60000);
+                this.intervalCheckSession = setInterval(this.checkSessionActive.bind(this), 5000);
             }
 
             checkSessionActive() {
                 let _message = "";
-                let _options = {
-                    icon: 'glyphicon glyphicon-user',
-                };
-                if (this._logged) {
+                // We check if refresh token has updated session id cookie
+                let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
+
+                if (this._logged && UtilsNew.isNotUndefinedOrNull(sid)) {
+                    this.sessionId = sid;
                     let decoded = jwt_decode(this.sessionId);
                     let currentTime = new Date().getTime();
-                    let remainingTime = ((decoded.exp * 1000) - currentTime);
+                    let remainingTime = ((decoded.exp * this.config.session.checkTime) - currentTime);
                     // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
-                    if (remainingTime <= 600000 && remainingTime >= 60000) {
-                        _message = "Your session is close to expire. " + Math.floor(remainingTime / 60000) + " minutes remaining.";
-                    } else if (remainingTime < 60000) {
+                    if (remainingTime <= this.config.session.maxRemainingTime && remainingTime >= this.config.session.minRemainingTime) {
+                        let remainingMinutes = Math.floor(remainingTime / this.config.session.minRemainingTime);
+                        _message = "Your session is close to expire. <strong>" + remainingMinutes + ` minutes remaining</strong>. <a href="#" onclick='eval(UtilsApp.refreshToken()); return false;'>Click here to refresh</a>`;
+                    } else if (remainingTime < this.config.session.minRemainingTime) {
                         _message = "Your session has expired.";
                         this.logout();
                         window.clearInterval(this.intervalCheckSession);
                     } else {
+                        if (UtilsNew.isNotUndefinedOrNull(this.notifySession)) {
+                             UtilsApp.closeNotify(this.notifySession);
+                        }
                         return;
                     }
                 } else {
@@ -743,7 +747,11 @@
                     window.clearInterval(this.intervalCheckSession);
                 }
                 // delay = 0 to fix the notify until user closes it.
-                this.notifySession = UtilsApp.showNotify(_options, {delay: 0}, _message, UtilsNew.MESSAGE_INFO, this.notifySession);
+                this.notifySession = UtilsApp.showNotify({}, {delay: 0, onClosed: this.onCloseRefreshNotify.bind(this)}, _message, UtilsNew.MESSAGE_INFO, this.opencgaClient, this.notifySession);
+            }
+
+            onCloseRefreshNotify() {
+                delete this.notifySession;
             }
 
             logout() {
