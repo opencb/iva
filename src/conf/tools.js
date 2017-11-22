@@ -219,6 +219,7 @@ const tools = {
         active: false,
     },
     clinical: {
+        icd10: ICD_10,
         interpretation: {
             algorithms: ["Tiering", "Exomiser", "VAAST"]
         },
