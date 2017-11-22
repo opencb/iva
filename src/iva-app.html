@@ -393,7 +393,7 @@
                                           population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
-                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}">
+                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}" icd10="{{icd10}}">
                         </variant-clinical>
                     </div>
                 </template>
@@ -621,7 +621,7 @@
                 this.set("config.enabledComponents.project", false);
                 this.set("config.enabledComponents.settings", false);
                 this.set("config.enabledComponents.home", true);
-
+                this.icd10 = ICD_10;
 
                 this.defaultConfig = {};
                 if (UtilsNew.isNotUndefined(populationFrequencies)) {
