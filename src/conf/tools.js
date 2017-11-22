@@ -38,9 +38,15 @@ const filter = {
                 {
                     id: "cohort",
                     title: "Cohort Stats (MAF)",
-                    cohortPerStudy: {
-                        "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-                        "EXAC": [{id: "ALL", name: "All"}]
+                    cohorts: {  // organised in projects and studies
+                        reference_grch37: {
+                            "1kG_phase3": [
+                                {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
+                            ],
+                            EXAC: [
+                                {id: "ALL", name: "All"}
+                            ]
+                        }
                     },
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
