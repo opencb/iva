@@ -112,3 +112,15 @@ when completed, all compiled files will be located under the _build_ folder.
 
 ### Testing
 You can copy build content to a web server such as Apache HTTP Server and open your favourite internet browser to open IVA.
+
+### Execute Tests in development with nightwatch(http://nightwatchjs.org/)
+Prerequisite: make sure you have JDK installed, with at least version 8. If you don't have it, you can grab it from http://www.oracle.com/technetwork/java/javase/downloads/index.html.
+
+1. npm install --dev
+2. Selenium server. Download the latest release .jar from http://selenium-release.storage.googleapis.com/index.html. i.e. selenium-server-standalone-3.7.0.jar
+3. Chromedriver. Download from https://sites.google.com/a/chromium.org/chromedriver/downloads that version which supports your chrome versión. You can review what version fits your browser here https://chromedriver.storage.googleapis.com/2.33/notes.txt.
+4. Create a bin folder inside your test folder in root path
+5. Move selenium bin and chrome bin inside that bin folder.
+6. npm run test-e2e
+
+
