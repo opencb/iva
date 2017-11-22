@@ -378,7 +378,8 @@
                                           population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
-                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}" icd10="{{icd10}}" on-notifymessage="onNotifyMessage">
+                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}"
+                                          icd10="{{icd10}}" on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
                         </variant-clinical>
                     </div>
                 </template>
@@ -453,7 +454,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.login}}">
                     <div class="content" id="login" style="width: 20%; margin: auto; padding-top: 80px">
-                        <opencga-login on-login="login" opencga-client="{{opencgaClient}}" login-title="Sign in" on-notifymessage="onNotifyMessage"></opencga-login>
+                        <opencga-login on-login="login" opencga-client="{{opencgaClient}}" login-title="Sign in" on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}"></opencga-login>
                     </div>
                 </template>
 
@@ -590,7 +591,6 @@
                 this.config.enabledComponents = {};
                 this.config.biotypes = biotypes;
                 this.icd10 = ICD_10;
-//                this.interpretationJson = interpretationJson;
 
                 // Enabled components tools
                 for (let tool in this.config.tools) {
@@ -714,8 +714,36 @@
                     this.tool = "#home";
                 }
                 this.renderHashFragments();
-
                 this.getProjects();
+                // 60000 ms = 1 min. Every 1 min we check if session is close to expirate.
+                this.intervalCheckSession = setInterval(this.checkSessionActive.bind(this), 60000);
+            }
+
+            checkSessionActive() {
+                let _message = "";
+                let _options = {
+                    icon: 'glyphicon glyphicon-user',
+                };
+                if (this._logged) {
+                    let decoded = jwt_decode(this.sessionId);
+                    let currentTime = new Date().getTime();
+                    let remainingTime = ((decoded.exp * 1000) - currentTime);
+                    // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
+                    if (remainingTime <= 600000 && remainingTime >= 60000) {
+                        _message = "Your session is close to expire. " + Math.floor(remainingTime / 60000) + " minutes remaining.";
+                    } else if (remainingTime < 60000) {
+                        _message = "Your session has expired.";
+                        this.logout();
+                        window.clearInterval(this.intervalCheckSession);
+                    } else {
+                        return;
+                    }
+                } else {
+                    _message = "Your session has expired.";
+                    window.clearInterval(this.intervalCheckSession);
+                }
+                // delay = 0 to fix the notify until user closes it.
+                this.notifySession = UtilsApp.showNotify(_options, {delay: 0}, _message, UtilsNew.MESSAGE_INFO, this.notifySession);
             }
 
             logout() {
@@ -1161,11 +1189,12 @@
 
                 this.tool = "#home";
                 window.location.hash = "home";
+                window.clearInterval(this.intervalCheckSession);
                 this.init();
             }
 
             onNotifyMessage(e) {
-                UtilsApp.showNotify(e.detail.options, e.detail.settings, e.detail.message, e.detail.type)
+                UtilsApp.showNotify(e.detail.options, e.detail.settings, e.detail.message, e.detail.type);
             }
         }
 

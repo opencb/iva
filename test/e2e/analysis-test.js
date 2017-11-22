@@ -19,7 +19,7 @@ module.exports = {
             .assert.visible('button[type="submit"]')
             .click('button[type="submit"]')
             .waitForElementVisible('span[data-notify="message"]', 1000)
-            .assert.containsText('span[data-notify="message"]', 'test has logged in.')
+            .assert.containsText('span[data-notify="message"]', 'Welcome test. Your session is valid until')
             .pause(500)
             .assert.visible('nav')
             .pause(500)
