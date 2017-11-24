@@ -26,7 +26,7 @@ const filter = {
     sections: [
         {
             title: "Study and Cohorts",
-            collapsed: false,
+            collapsed: true,
             subsections: [
                 {
                     id: "sample",
@@ -52,8 +52,8 @@ const filter = {
                 },
                 {
                     id: "study",
-                    title: "Variant Type",
-                    tooltip: "Only considers variants of the selected type"
+                    title: "Studies Filter",
+                    tooltip: "Only considers variants from the selected studies"
                 }
             ]
         },
@@ -190,33 +190,7 @@ const filter = {
             ]
         }
 
-    ],
-    study: {
-        title: "Study and Cohorts",
-        collapsed: false,
-        samples: {
-            visibility: "public",
-            selector: true,
-            segregation: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"]
-        },
-        cohorts: {
-            visibility: "public",
-            cohortPerStudy: {
-                "1kG_phase3": [{id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}],
-                "EXAC": [{id: "ALL", name: "All"}]
-            }
-        },
-        scores: {
-            visibility: "none",
-            tooltip: ""
-        },
-        studies: {
-            visibility: "public"
-        },
-        clinicalData: {
-            visibility: "none"
-        }
-    }
+    ]
 };
 
 
