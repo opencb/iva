@@ -196,7 +196,7 @@ const filter = {
 
 const variantView = {
     gridView : {
-        nucleotideGenotype: true
+        nucleotideGenotype: false
     },
     advancedView: {}
 }
