@@ -194,6 +194,13 @@ const filter = {
 };
 
 
+const variantView = {
+    gridView : {
+        nucleotideGenotype: true
+    },
+    advancedView: {}
+}
+
 const tools = {
     browser: {
         title: "Variant Browser",
