@@ -379,8 +379,7 @@
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
                                           opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}"
-                                          on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
-
+                                          on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" variant-view-config="{{config.variantView}}">
                         </variant-clinical>
                     </div>
                 </template>
@@ -591,6 +590,8 @@
                 this.config.species = DEFAULT_SPECIES;
                 this.config.enabledComponents = {};
                 this.config.biotypes = biotypes;
+                this.config.variantView = variantView;
+
 
                 // Enabled components tools
                 for (let tool in this.config.tools) {
