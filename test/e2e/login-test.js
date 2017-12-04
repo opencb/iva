@@ -1,6 +1,6 @@
 let config = require('../../nightwatch.conf.js');
 module.exports = {
-    'Login_test_success' : function (browser) {
+    'Login_Logout_test_success' : function (browser) {
         browser
             .url(config.URL_TEST)
             .windowMaximize()
