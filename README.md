@@ -121,6 +121,6 @@ Prerequisite: make sure you have JDK installed, with at least version 8. If you 
 3. Chromedriver. Download from https://sites.google.com/a/chromium.org/chromedriver/downloads that version which supports your chrome versión. You can review what version fits your browser here https://chromedriver.storage.googleapis.com/2.33/notes.txt.
 4. Create a bin folder inside your test folder in root path
 5. Move selenium bin and chrome bin inside that bin folder.
-6. npm run test-e2e
+6. npm run test-e2e ( or ./node_modules/.bin/nightwatch test/e2e/clinical-prioritization.js if you want execute just one)
 
 
