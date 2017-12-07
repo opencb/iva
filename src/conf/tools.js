@@ -193,14 +193,6 @@ const filter = {
     ]
 };
 
-
-const variantView = {
-    gridView : {
-        nucleotideGenotype: false
-    },
-    advancedView: {}
-}
-
 const tools = {
     browser: {
         title: "Variant Browser",
@@ -221,7 +213,11 @@ const tools = {
                 },
             },
         ],
-        filter: filter
+        filter: filter,
+        grid: {
+            showSelect: false,
+            nucleotideGenotype: false
+        }
     },
     prioritization: {
         title: "Prioritization",
@@ -242,7 +238,11 @@ const tools = {
                 },
             },
         ],
-        filter: filter
+        filter: filter,
+        grid: {
+            showSelect: true,
+            nucleotideGenotype: false
+        }
     },
     interpretation: {
         active: false
