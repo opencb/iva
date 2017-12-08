@@ -23,10 +23,11 @@ const filter = {
     tooltip: {
         classes: "qtip-dark qtip-rounded qtip-shadow"
     },
-    sections: [
+    skipSubsections: [],    // controls which subsections are disabled and should not be displayed
+    sections: [             // sections and subsections, structure and order is respected
         {
             title: "Study and Cohorts",
-            collapsed: true,
+            collapsed: false,
             subsections: [
                 {
                     id: "sample",
@@ -238,7 +239,8 @@ const tools = {
                 },
             },
         ],
-        filter: filter,
+        // This disables two subsections in the filter menu Prioritization
+        filter: Object.assign({}, filter, {skipSubsections: ["cohort", "study"]}),
         grid: {
             showSelect: true,
             nucleotideGenotype: false
@@ -495,7 +497,11 @@ const tools = {
             },
         ],
         active: false,
-        filter: filter
+        filter: filter,
+        grid: {
+            showSelect: false,
+            nucleotideGenotype: false
+        }
     },
     genomeBrowser: {
         active: false,
