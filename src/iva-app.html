@@ -341,7 +341,7 @@
                     <div class="content" id="browser">
                         <variant-browser tool-title="{{config.tools.browser.title}}"
                                          project="{{project}}" study="{{study}}" studies="{{project.studies}}"
-                                         config="{{config.tools.browser}}" biotypes="{{config.biotypes}}"
+                                         config="[[config.tools.browser]]" biotypes="{{config.biotypes}}"
                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                          active="{{config.tools.browser.active}}"
                                          population-frequencies="{{populationFrequencies}}"
@@ -358,7 +358,7 @@
                     <div class="content" id="prioritization">
                         <variant-prioritization tool-title="{{config.tools.prioritization.title}}"
                                                 project="{{project}}" study="{{study}}" studies="{{project.studies}}"
-                                                config="{{config.tools.prioritization}}" biotypes="{{config.biotypes}}"
+                                                config="[[config.tools.prioritization]]" biotypes="{{config.biotypes}}"
                                                 opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                                 active="{{config.tools.prioritization.active}}" ebi-config="{{config.ebiWS}}"
                                                 population-frequencies="{{populationFrequencies}}"
@@ -379,7 +379,7 @@
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
                                           opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}"
-                                          on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" variant-view-config="{{config.variantView}}">
+                                          on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
                         </variant-clinical>
                     </div>
                 </template>
@@ -590,8 +590,6 @@
                 this.config.species = DEFAULT_SPECIES;
                 this.config.enabledComponents = {};
                 this.config.biotypes = biotypes;
-                this.config.variantView = variantView;
-
 
                 // Enabled components tools
                 for (let tool in this.config.tools) {
