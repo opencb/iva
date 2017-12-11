@@ -107,7 +107,7 @@ const filter = {
             ]
         },
         {
-            title: "Deleriousness",
+            title: "Deleteriousness",
             collapsed: true,
             subsections: [
                 {
@@ -190,7 +190,6 @@ const filter = {
                 }
             ]
         }
-
     ]
 };
 
@@ -500,7 +499,7 @@ const tools = {
         filter: filter,
         grid: {
             showSelect: false,
-            nucleotideGenotype: false
+            nucleotideGenotype: true
         }
     },
     genomeBrowser: {
