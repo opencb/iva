@@ -498,7 +498,7 @@ const tools = {
         active: false,
         filter: filter,
         grid: {
-            showSelect: false,
+            showSelect: true,
             nucleotideGenotype: true
         }
     },
