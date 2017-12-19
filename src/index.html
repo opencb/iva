@@ -188,9 +188,29 @@
 //       $("title").text(application.title);
             document.title = application.title;
         }
+
+        $(document).ready(function(){
+            // Back to top button
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+            // scroll body to 0px on click
+            $('#back-to-top').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 500);
+                return false;
+            });
+        });
     </script>
 
     <iva-app></iva-app>
-</body>
 
+    <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" data-placement="left"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+
+</body>
 </html>
