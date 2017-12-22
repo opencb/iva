@@ -1,6 +1,6 @@
 let config = require('../../nightwatch.conf.js');
 module.exports = {
-    'Login_test_success' : function (browser) {
+    'Login_Logout_test_success' : function (browser) {
         browser
             .url(config.URL_TEST)
             .windowMaximize()
@@ -11,13 +11,13 @@ module.exports = {
             .click('a[id="loginButton"]')
             .pause(500)
             .assert.visible('input[id="opencgaUser"]')
-            .setValue('input[id="opencgaUser"]', 'test')
+            .setValue('input[id="opencgaUser"]', config.USER)
             .assert.visible('input[id="opencgaPassword"]')
-            .setValue('input[id="opencgaPassword"]', 'test')
+            .setValue('input[id="opencgaPassword"]', config.PASSWORD)
             .assert.visible('button[type="submit"]')
             .click('button[type="submit"]')
             .waitForElementVisible('span[data-notify="message"]', 1000)
-            .assert.containsText('span[data-notify="message"]', 'Welcome test. Your session is valid until')
+            .assert.containsText('span[data-notify="message"]', 'Welcome '+ config.USER +'. Your session is valid until')
             .pause(500)
             .saveScreenshot(config.imgpath(browser) + "login.png")
             .assert.visible('a[id="logoutButton"]')
@@ -39,13 +39,13 @@ module.exports = {
             .click('a[href$="#login"]')
             .pause(500)
             .assert.visible('input[id="opencgaUser"]')
-            .setValue('input[id="opencgaUser"]', 'test2')
+            .setValue('input[id="opencgaUser"]', config.USER + "FAIL")
             .assert.visible('input[id="opencgaPassword"]')
-            .setValue('input[id="opencgaPassword"]', 'test2')
+            .setValue('input[id="opencgaPassword"]', config.PASSWORD)
             .assert.visible('button[type="submit"]')
             .click('button[type="submit"]')
             .waitForElementVisible('span[data-notify="message"]', 1000)
-            .assert.containsText('span[data-notify="message"]', 'The user id test2 does not exist.')
+            .assert.containsText('span[data-notify="message"]', 'The user id ' + config.USER + 'FAIL does not exist.')
             .pause(500)
             .saveScreenshot(config.imgpath(browser) + "loginFail.png")
             .end()

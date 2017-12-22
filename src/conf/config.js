@@ -176,6 +176,7 @@ const application = {
         {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
         {name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
         {name: "FAQ", url: "", icon: ""},
+        {name: "Version 0.9.0", url: "https://github.com/babelomics/iva", icon: ""},
     ],
     login: {
         visibility: "public",

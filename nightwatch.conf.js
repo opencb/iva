@@ -4,6 +4,8 @@ const moment = require('moment'); // so we can get the version of the project
 const SCREENSHOT_PATH = "./test/screenshots/" + PKG.version + "/";
 const BIN_PATH = "./test/bin/";
 const URL_TEST = "http://localhost/iva-babelomics/src/";
+const USER = "test";
+const PASSWORD = "test";
 
 const config = {
     "src_folders": ["test"],
@@ -50,4 +52,6 @@ function imgpath (browser) {
 }
 
 module.exports.URL_TEST = URL_TEST;
+module.exports.USER = USER;
+module.exports.PASSWORD = PASSWORD;
 module.exports.imgpath = imgpath;
