@@ -272,7 +272,6 @@
                                     </ul>
                                 </li>
 
-
                                 <!--<li class="dropdown">-->
                                 <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Dropdown <span class="caret"></span></a>-->
                                 <!--<ul class="dropdown-menu">-->
@@ -284,17 +283,16 @@
                                 <!--</ul>-->
                                 <!--</li>-->
 
-
                                 <!-- Login/Logout button -->
                                 <template is="dom-if" if="{{_isMenuItemVisible(config.login)}}">
                                     <li>
                                         <template is="dom-if" if="{{!_logged}}">
-                                            <a href="#login" role="button" on-click="changeTool">
-                                                <i class="fa fa-sign-in fa-lg"></i> Login
+                                            <a href="#login" id="loginButton" role="button" on-click="changeTool">
+                                                <i href="#login" class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Login
                                             </a>
                                         </template>
                                         <template is="dom-if" if="{{_logged}}">
-                                            <a href="#logout" on-click="logout">
+                                            <a on-click="logout" id="logoutButton">
                                                 <i class="fa fa-sign-out fa-lg"></i> Logout
                                             </a>
                                         </template>
@@ -333,9 +331,7 @@
             <template is="dom-if" if="{{config.enabledComponents.home}}">
                 <div class="center">
                     <div class="content" id="home">
-                        <welcome-web></welcome-web>
-
-
+                        <welcome-web version="{{config.version}}"></welcome-web>
                     </div>
                 </div>
             </template>
@@ -343,9 +339,9 @@
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
                     <div class="content" id="browser">
-                        <variant-browser title="{{config.tools.browser.title}}"
+                        <variant-browser tool-title="{{config.tools.browser.title}}"
                                          project="{{project}}" study="{{study}}" studies="{{project.studies}}"
-                                         config="{{config.tools.browser}}" biotypes="{{config.biotypes}}"
+                                         config="[[config.tools.browser]]" biotypes="{{config.biotypes}}"
                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                          active="{{config.tools.browser.active}}"
                                          population-frequencies="{{populationFrequencies}}"
@@ -360,9 +356,9 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.prioritization}}">
                     <div class="content" id="prioritization">
-                        <variant-prioritization title="{{config.tools.prioritization.title}}"
+                        <variant-prioritization tool-title="{{config.tools.prioritization.title}}"
                                                 project="{{project}}" study="{{study}}" studies="{{project.studies}}"
-                                                config="{{config.tools.prioritization}}" biotypes="{{config.biotypes}}"
+                                                config="[[config.tools.prioritization]]" biotypes="{{config.biotypes}}"
                                                 opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                                 active="{{config.tools.prioritization.active}}" ebi-config="{{config.ebiWS}}"
                                                 population-frequencies="{{populationFrequencies}}"
@@ -374,34 +370,25 @@
                     </div>
                 </template>
 
-                <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
-                    <div class="content" id="interpretation">
-                        <variant-clinical-interpretation data="{{interpretationJson}}" title="Interpretation" project="{{project}}"
-                                                         study="{{study}}"  opencga-client="{{opencgaClient}}"
-                                                         cellbase-client="{{cellbaseClient}}"
-                                                         consequence-types="{{consequenceTypes}}"
-                                                         protein-substitution-scores="{{proteinSubstitutionScores}}">
-                        </variant-clinical-interpretation>
-                    </div>
-                </template>
-
                 <template is="dom-if" if="{{config.enabledComponents.clinical}}">
                     <div class="content" id="clinical">
-                        <variant-clinical title="Clinical Analysis" host="{{opencga.host}}" project="{{project}}"
+                        <variant-clinical tool-title="Clinical Analysis" project="{{project}}"
                                           study="{{study}}"
-                                          config="{{config.tools.clinical}}" config-opencga="{{config.opencga}}" biotypes="{{config.biotypes}}"
+                                          config="{{config.tools.clinical}}" biotypes="{{config.biotypes}}"
                                           population-frequencies="{{populationFrequencies}}"
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
-                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}">
+                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}"
+                                          on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
                         </variant-clinical>
                     </div>
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.facet}}">
                     <div class="content" id="facet">
-                        <variant-facet title="Facet Analysis" project="{{project}}" study="{{study}}"
-                                       studies="{{project.studies}}" config="{{config.tools.facet}}"
+
+                        <variant-facet project="{{project}}" study="{{study}}"
+                                       studies="{{project.studies}}" config="[[config.tools.facet]]"
                                        opencga-client="{{opencgaClient}}"
                                        cellbase-client="{{cellbaseClient}}"
                                        population-frequencies="{{populationFrequencies}}"
@@ -467,7 +454,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.login}}">
                     <div class="content" id="login" style="width: 20%; margin: auto; padding-top: 80px">
-                        <opencga-login on-login="login" opencga-client="{{opencgaClient}}" login-title="Sign in"></opencga-login>
+                        <opencga-login on-login="login" opencga-client="{{opencgaClient}}" login-title="Sign in" on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}"></opencga-login>
                     </div>
                 </template>
 
@@ -603,7 +590,6 @@
                 this.config.species = DEFAULT_SPECIES;
                 this.config.enabledComponents = {};
                 this.config.biotypes = biotypes;
-//                this.interpretationJson = interpretationJson;
 
                 // Enabled components tools
                 for (let tool in this.config.tools) {
@@ -622,6 +608,7 @@
                 this.set("config.enabledComponents.settings", false);
                 this.set("config.enabledComponents.home", true);
 
+                this.icd10 = ICD_10;
 
                 this.defaultConfig = {};
                 if (UtilsNew.isNotUndefined(populationFrequencies)) {
@@ -728,8 +715,45 @@
                     this.tool = "#home";
                 }
                 this.renderHashFragments();
-
                 this.getProjects();
+                // 60000 ms = 1 min. Every 1 min we check if session is close to expirate.
+                this.intervalCheckSession = setInterval(this.checkSessionActive.bind(this), this.config.session.checkTime);
+            }
+
+            checkSessionActive() {
+                let _message = "";
+                // We check if refresh token has updated session id cookie
+                let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
+
+                if (this._logged && UtilsNew.isNotUndefinedOrNull(sid)) {
+                    this.sessionId = sid;
+                    let decoded = jwt_decode(this.sessionId);
+                    let currentTime = new Date().getTime();
+                    let remainingTime = ((decoded.exp * 1000) - currentTime);
+                    // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
+                    if (remainingTime <= this.config.session.maxRemainingTime && remainingTime >= this.config.session.minRemainingTime) {
+                        let remainingMinutes = Math.floor(remainingTime / this.config.session.minRemainingTime);
+                        _message = "Your session is close to expire. <strong>" + remainingMinutes + ` minutes remaining</strong>. <a href="#" onclick='eval(UtilsApp.refreshToken()); return false;'>Click here to refresh</a>`;
+                    } else if (remainingTime < this.config.session.minRemainingTime) {
+                        _message = "Your session has expired.";
+                        this.logout();
+                        window.clearInterval(this.intervalCheckSession);
+                    } else {
+                        if (UtilsNew.isNotUndefinedOrNull(this.notifySession)) {
+                             UtilsApp.closeNotify(this.notifySession);
+                        }
+                        return;
+                    }
+                } else {
+                    _message = "Your session has expired.";
+                    window.clearInterval(this.intervalCheckSession);
+                }
+                // delay = 0 to fix the notify until user closes it.
+                this.notifySession = UtilsApp.showNotify({}, {delay: 0, onClosed: this.onCloseRefreshNotify.bind(this)}, _message, UtilsNew.MESSAGE_INFO, this.opencgaClient, this.notifySession);
+            }
+
+            onCloseRefreshNotify() {
+                delete this.notifySession;
             }
 
             logout() {
@@ -775,7 +799,9 @@
                             console.log(response)
                         });
                 } else {
-                    this.opencgaClient.users().getProjects(this.userId)
+//                    this.opencgaClient.users().getProjects(this.userId)
+                    // @TODO To be modified by Nacho.
+                    this.opencgaClient.projects().search({})
                         .then(function (response) {
                             let _projects = response.response[0].result;
 //                                if (UtilsNew.isNotEmpty(_this.config.opencga.asUser)) {
@@ -849,7 +875,11 @@
                     }
                 }
 
-                window.location.hash = hashFrag;
+                if (window.location.hash === hashFrag) {
+                    this.hashFragmentListener(this);
+                } else {
+                    window.location.hash = hashFrag;
+                }
             }
 
             hashFragmentListener(ctx) {
@@ -1171,7 +1201,12 @@
 
                 this.tool = "#home";
                 window.location.hash = "home";
+                window.clearInterval(this.intervalCheckSession);
                 this.init();
+            }
+
+            onNotifyMessage(e) {
+                UtilsApp.showNotify(e.detail.options, e.detail.settings, e.detail.message, e.detail.type);
             }
         }
 

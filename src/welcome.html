@@ -84,7 +84,16 @@
             static get is() {
                 return 'welcome-web';
             }
+            
+            static get properties(){
+                version: {
+                    type: String
+                }
+            }
 
+            constructor() {
+                super();
+            }
             _attachDom(dom) {
                 this.appendChild(dom);
             }
