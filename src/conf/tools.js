@@ -499,7 +499,8 @@ const tools = {
         filter: filter,
         grid: {
             showSelect: true,
-            nucleotideGenotype: true
+            nucleotideGenotype: true,
+            downloadQcSample: false
         }
     },
     genomeBrowser: {
