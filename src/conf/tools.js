@@ -23,10 +23,10 @@ const filter = {
     tooltip: {
         classes: "qtip-dark qtip-rounded qtip-shadow"
     },
-    skipSubsections: [],    // controls which subsections are disabled and should not be displayed
-    sections: [             // sections and subsections, structure and order is respected
+    skipSubsections: ["sample", "cohort"],  // controls which subsections are disabled and should not be displayed
+    sections: [                             // sections and subsections, structure and order is respected
         {
-            title: "Study and Cohorts",
+            title: "Study",
             collapsed: false,
             subsections: [
                 {
