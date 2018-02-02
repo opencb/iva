@@ -425,8 +425,7 @@
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.transcript}}">
-
-                    <div class="collapse content feature-view" id="transcript">
+                    <div class="content feature-view" id="transcript">
                         <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
                                                  project="{{project}}" study="{{study}}" transcript="{{transcript}}" gene="{{gene}}"
                                                  population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
