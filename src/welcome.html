@@ -59,7 +59,8 @@
                        placeholder="Search for a gene, transcript, variant, multi-allelic variant, region, GO term or HPO term" on-keyup="triggerSearch">
                 <p>Example: BRCA2, ENST00000342992, rs666, 10:15097577:G:C, 1:1-100000, GO:0000145, HP:0001756</p>
                 <p>Current selected Project and Study are <a href="#projects"><b>{{project.alias}}</b></a> and
-                    <a href="#projects"><b>{{study}}. Click to change</b></a> </p>
+                    <a href="#projects"><b>{{study}}</b></a>
+                </p>
             </div>
             <!--<h2>Overview</h2>-->
             <br>
@@ -85,23 +86,6 @@
                 return 'welcome-web';
             }
             
-            static get properties(){
-                version: {
-                    type: String
-                }
-            }
-
-            constructor() {
-                super();
-            }
-            _attachDom(dom) {
-                this.appendChild(dom);
-            }
-
-            ready() {
-                super.ready();
-            }
-
             static get properties() {
                 return {
                     opencgaClient: {
@@ -109,7 +93,7 @@
                     },
                     host: {
                         type: String,
-                        value: "http://bioinfodev.hpc.cam.ac.uk/hgva"
+                        value: "http://bioinfo.hpc.cam.ac.uk/hgva"
                     },
                     userId: {
                         type: String,
@@ -122,14 +106,27 @@
                     study: {
                         type: String,
                         value: ""
+                    },
+                    version: {
+                        type: String
                     }
                 }
             }
 
+            _attachDom(dom) {
+                this.appendChild(dom);
+            }
+
             triggerSearch(e) {
-                if (e.keyCode === "13") {
+                if (e.keyCode === 13) {
                     // fire according to the feature - gene, variant etc.
-                    this.fire("search", {value: this.$.welcomeSearchTextBox.value});
+                    // this.fire("search", {value: this.$.welcomeSearchTextBox.value});
+                    let _this = this;
+                    this.dispatchEvent(new CustomEvent('search', {detail:
+                            {
+                                value: _this.$.welcomeSearchTextBox.value
+                            }
+                    }));
                     this.$.welcomeSearchTextBox.value = "";
                     $('.content').hide();
                 }
