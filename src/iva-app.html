@@ -323,15 +323,14 @@
 
 
             <!--Breadcrumb-->
-            <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb"
-                style="margin-bottom: 1px;padding-left: 40px"></ol>
+            <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
 
 
             <!-- This is where main application is rendered -->
             <template is="dom-if" if="{{config.enabledComponents.home}}">
                 <div class="center">
                     <div class="content" id="home">
-                        <welcome-web version="{{config.version}}"></welcome-web>
+                        <welcome-web project={{project}} study="{{study.alias}}" version="{{config.version}}" on-search="quickSearch"></welcome-web>
                     </div>
                 </div>
             </template>
@@ -339,7 +338,7 @@
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
                     <div class="content" id="browser">
-                        <variant-browser tool-title="{{config.tools.browser.title}}"
+                        <variant-browser tool-title="{{config.tools.browser.title}}" query="{{browserQuery}}"
                                          project="{{project}}" study="{{study}}" studies="{{project.studies}}"
                                          config="[[config.tools.browser]]" biotypes="{{config.biotypes}}"
                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
@@ -425,8 +424,7 @@
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.transcript}}">
-
-                    <div class="collapse content feature-view" id="transcript">
+                    <div class="content feature-view" id="transcript">
                         <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
                                                  project="{{project}}" study="{{study}}" transcript="{{transcript}}" gene="{{gene}}"
                                                  population-frequencies="{{populationFrequencies}}" consequence-types="{{consequenceTypes}}"
@@ -437,7 +435,7 @@
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.protein}}">
-                    <div class="collapse content feature-view" id="protein">
+                    <div class="content feature-view" id="protein">
                         <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
                                               project="{{project}}" study="{{study}}"
                                               protein="{{protein}}" population-frequencies="{{populationFrequencies}}"
@@ -1143,6 +1141,11 @@
                     });
 
                 }
+            }
+
+            quickSearch(e) {
+                window.location.hash = "browser/" + this.project.alias + "/" + this.study.alias;
+                this.browserQuery = {xrefs: e.detail.value};
             }
 
             _createBreadcrumbElement(name, active, category) {
