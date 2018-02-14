@@ -33,7 +33,66 @@ const filter = {
                     id: "sample",
                     title: "Samples",
                     selector: true,
-                    segregations: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"],
+                    segregations: [{key: "none",text:"Select..."}, {key: "autoDominant",text:"Autosomal Dominant"}, {key: "autoRecessive", text:"Autosomal Recessive"}, {key:"xLinked", text: "X linked"}, {key: "yLinked", text: "Y linked"}],
+                    decisionTreeInheritance: {
+                        autoDominant: {
+                            last: false,
+                            true:{
+                                last: false,
+                                true: "0/1",
+                                false: {
+                                    last: false,
+                                    true: "0/1",
+                                    false: "1/1,0/1"
+                                }
+                            },
+                            false: "0/0"
+                        },
+                        autoRecessive: {
+                            last: false,
+                            true: "1/1",
+                            false: {
+                                last: false,
+                                true: "0/1",
+                                false: {
+                                    last: false,
+                                    true: "0/1",
+                                    false:"0/0,0/1"
+                                }
+                            }
+                        },
+                        xLinked: {
+                            last: false,
+                            male: {
+                                last: false,
+                                true: "1/1",
+                                false: "0/0"
+                            },
+                            female: {
+                                last: false,
+                                true: "1/1",
+                                false: {
+                                    last: false,
+                                    true: "0/1",
+                                    false: {
+                                        last: false,
+                                        true: "0/1",
+                                        false: "0/0,0/1"
+                                    }
+                                }
+                            }
+                        },
+                        yLinked: {
+                            last: false,
+                            male: {
+                                last: false,
+                                true: "1/1",
+                                false: "0/0"
+                            },
+                            female: "-"
+
+                        }
+                    },
                     tooltip: "Filter by sample genotypes"
                 },
                 {
