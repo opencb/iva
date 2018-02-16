@@ -212,7 +212,7 @@ var application = {
 };
 
 const ebiWS = {
-    root: "http://www.ebi.ac.uk/ols/api",
+    root: "https://www.ebi.ac.uk/ols/api",
     tree: {
         "hp": ["/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0012823", "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0040279",
             "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0000005", "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0040006",
