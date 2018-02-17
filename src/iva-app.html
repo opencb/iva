@@ -1147,7 +1147,7 @@
 
             quickSearch(e) {
                 window.location.hash = "browser/" + this.project.alias + "/" + this.study.alias;
-                this.browserQuery = {xrefs: e.detail.value};
+                this.browserQuery = {xref: e.detail.value};
             }
 
             _createBreadcrumbElement(name, active, category) {
