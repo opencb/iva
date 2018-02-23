@@ -95,7 +95,7 @@ const filter = {
             subsections: [
                 {
                     id: "populationFrequency",
-                    title: "Select Population MAF",
+                    title: "Select Population Frequency",
                     tooltip: "<strong>1000 Genomes</strong> only considers variants whose observed allelic frequency in the 1000 Genomes " +
                     "Phase 3 project is below (or above) the defined value. Allele frequencies were obtained from about 2,500 samples." +
                     "<br><strong>ExAC</strong> only considers variants whose observed allelic frequency in the The Exome Aggregation " +
