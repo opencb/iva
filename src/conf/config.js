@@ -21,7 +21,7 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "localhost:8080/opencga-1.3.1",
+    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.2.0-dev",
     version: "v1",
     // asUser: "researchcga", // user@project:study
     projects: [
