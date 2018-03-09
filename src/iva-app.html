@@ -26,6 +26,7 @@
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-prioritization.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/clinical-interpretation-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/variant-clinical.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-panel.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-beacon.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-jobs.html">
@@ -364,7 +365,7 @@
                                                 protein-substitution-scores="{{proteinSubstitutionScores}}"
                                                 consequence-types="{{consequenceTypes}}"
                                                 beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected"
-                                                on-samplechange="onSampleChange" style="font-size: 12px">
+                                                on-samplechange="onSampleChange" style="font-size: 12px" >
                         </variant-prioritization>
                     </div>
                 </template>
@@ -378,8 +379,14 @@
                                           protein-substitution-scores="{{proteinSubstitutionScores}}"
                                           consequence-types="{{consequenceTypes}}" ebi-config="{{config.ebiWS}}"
                                           opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}"
-                                          on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
+                                          on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" >
                         </variant-clinical>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.panel}}">
+                    <div class="content" id="panel">
+                        <opencga-panel project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" panel-examples="{{panelExamples}}"></opencga-panel>
                     </div>
                 </template>
 
@@ -588,6 +595,8 @@
                 this.config.species = DEFAULT_SPECIES;
                 this.config.enabledComponents = {};
                 this.config.biotypes = biotypes;
+                this.panelExamples = diseasePanels;
+
 
                 // Enabled components tools
                 for (let tool in this.config.tools) {

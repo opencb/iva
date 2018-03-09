@@ -245,6 +245,9 @@ const tools = {
             nucleotideGenotype: false
         }
     },
+    panel: {
+        active: false
+    },
     interpretation: {
         active: false
     },

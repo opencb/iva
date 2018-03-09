@@ -79,6 +79,11 @@ const application = {
             visibility: "public",
         },
         {
+            id: "panel",
+            title: "Panels",
+            visibility: "public",
+        },
+        {
             id: "prioritization",
             title: "Prioritization",
             visibility: "public",
@@ -156,11 +161,11 @@ const application = {
                 },
             ],
         },
-        {
-            id: "genomeBrowser",
-            title: "Genome Browser",
-            visibility: "public",
-        },
+        // {
+        //     id: "genomeBrowser",
+        //     title: "Genome Browser",
+        //     visibility: "public",
+        // },
     ],
     search: {
         placeholder: "Search",
