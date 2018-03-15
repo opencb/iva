@@ -33,7 +33,13 @@ const filter = {
                     id: "sample",
                     title: "Samples",
                     selector: true,
-                    segregations: [{key: "none",text: "Select..."}, {key: "autoDominant", text: "Autosomal Dominant"}, {key: "autoRecessive", text: "Autosomal Recessive"}, {key:"xLinked", text: "X linked"}, {key: "yLinked", text: "Y linked"}],
+                    segregations: [
+                        {key: "none", text: "Select..."},
+                        {key: "autoDominant", text: "Autosomal Dominant"},
+                        {key: "autoRecessive", text: "Autosomal Recessive"},
+                        {key: "xLinked", text: "X linked"},
+                        {key: "yLinked", text: "Y linked"}
+                    ],
                     tooltip: "Filter by sample genotypes"
                 },
                 {
@@ -197,6 +203,12 @@ const tools = {
     browser: {
         title: "Variant Browser",
         active: false,
+        queryParams: {
+            useSearchIndex: "auto",
+            approximateCount: true,
+            approximateCountSamplingSize: 5000,
+            timeout: 30000
+        },
         filters: [
             {
                 name: "Example BRCA2",
@@ -213,7 +225,8 @@ const tools = {
                 },
             },
         ],
-        filter: filter,
+        // This disables two subsections in the filter menu Prioritization
+        filter: Object.assign({}, filter, {skipSubsections: ["sample"]}),
         grid: {
             showSelect: false,
             nucleotideGenotype: false
@@ -222,6 +235,12 @@ const tools = {
     prioritization: {
         title: "Prioritization",
         active: false,
+        queryParams: {
+            useSearchIndex: "yes",
+            approximateCount: true,
+            approximateCountSamplingSize: 5000,
+            timeout: 30000
+        },
         filters: [
             {
                 name: "Example BRCA2",
@@ -242,7 +261,7 @@ const tools = {
         filter: Object.assign({}, filter, {skipSubsections: ["cohort", "study"]}),
         grid: {
             showSelect: true,
-            nucleotideGenotype: false
+            nucleotideGenotype: true
         }
     },
     panel: {
