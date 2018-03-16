@@ -74,8 +74,18 @@ const application = {
             visibility: "public",
         },
         {
+            id: "interpretation",
+            title: "Variant Interpretation",
+            visibility: "public",
+        },
+        {
             id: "clinical",
             title: "Clinical",
+            visibility: "public",
+        },
+        {
+            id: "facet",
+            title: "Facets (New!)",
             visibility: "public",
         },
         {
@@ -84,14 +94,9 @@ const application = {
             visibility: "public",
         },
         {
-            id: "prioritization",
-            title: "Prioritization",
-            visibility: "public",
-        },
-        {
             id: "analysis",
             title: "Analysis",
-            visibility: "public",
+            visibility: "none",
             submenu: [
 
                 {
@@ -114,11 +119,6 @@ const application = {
                     visibility: "public",
                 },
             ],
-        },
-        {
-            id: "facet",
-            title: "Facets (New!)",
-            visibility: "public",
         },
         {
             id: "beacon",
@@ -158,14 +158,14 @@ const application = {
                     id: "exporter",
                     title: "Exporter",
                     visibility: "public",
-                },
-            ],
+                }
+            ]
         },
-        // {
-        //     id: "genomeBrowser",
-        //     title: "Genome Browser",
-        //     visibility: "public",
-        // },
+        {
+            id: "genomeBrowser",
+            title: "Genome Browser",
+            visibility: "private"
+        },
     ],
     search: {
         placeholder: "Search",

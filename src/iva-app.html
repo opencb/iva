@@ -23,7 +23,7 @@
 <link rel="import" href="welcome.html">
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-browser.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-prioritization.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-interpretation.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/clinical-interpretation-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/variant-clinical.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-panel.html">
@@ -354,19 +354,19 @@
                     </div>
                 </template>
 
-                <template is="dom-if" if="{{config.enabledComponents.prioritization}}">
-                    <div class="content" id="prioritization">
-                        <variant-prioritization tool-title="{{config.tools.prioritization.title}}"
+                <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
+                    <div class="content" id="interpretation">
+                        <opencga-variant-interpretation tool-title="{{config.tools.interpretation.title}}"
                                                 project="{{project}}" study="{{study}}" studies="{{project.studies}}"
-                                                config="[[config.tools.prioritization]]" biotypes="{{config.biotypes}}"
+                                                config="[[config.tools.interpretation]]" biotypes="{{config.biotypes}}"
                                                 opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                                active="{{config.tools.prioritization.active}}" ebi-config="{{config.ebiWS}}"
+                                                active="{{config.tools.interpretation.active}}" ebi-config="{{config.ebiWS}}"
                                                 population-frequencies="{{populationFrequencies}}"
                                                 protein-substitution-scores="{{proteinSubstitutionScores}}"
                                                 consequence-types="{{consequenceTypes}}"
                                                 beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected"
                                                 on-samplechange="onSampleChange" style="font-size: 12px" >
-                        </variant-prioritization>
+                        </opencga-variant-interpretation>
                     </div>
                 </template>
 

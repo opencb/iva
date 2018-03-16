@@ -232,8 +232,8 @@ const tools = {
             nucleotideGenotype: false
         }
     },
-    prioritization: {
-        title: "Prioritization",
+    interpretation: {
+        title: "Variant Interpreter",
         active: false,
         queryParams: {
             useSearchIndex: "yes",
@@ -265,9 +265,6 @@ const tools = {
         }
     },
     panel: {
-        active: false
-    },
-    interpretation: {
         active: false
     },
     gene: {
