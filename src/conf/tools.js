@@ -32,8 +32,9 @@ const filter = {
                 {
                     id: "sample",
                     title: "Samples",
-                    selector: true,
-                    segregations: [
+                    showApproximateCount: true,
+                    // selector: true,
+                    inheritanceModes: [
                         {key: "none", text: "Select..."},
                         {key: "autoDominant", text: "Autosomal Dominant"},
                         {key: "autoRecessive", text: "Autosomal Recessive"},
