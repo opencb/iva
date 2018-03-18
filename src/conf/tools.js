@@ -17,7 +17,7 @@
 /**
  * Created by imedina on 05/06/17.
  */
-const filter = {
+const menuFilter = {
     missing: true,
     searchButtonText: "Search",
     tooltip: {
@@ -33,7 +33,6 @@ const filter = {
                     id: "sample",
                     title: "Samples",
                     showApproximateCount: true,
-                    // selector: true,
                     inheritanceModes: [
                         {key: "none", text: "Select..."},
                         {key: "autoDominant", text: "Autosomal Dominant"},
@@ -227,7 +226,7 @@ const tools = {
             },
         ],
         // This disables two subsections in the filter menu Prioritization
-        filter: Object.assign({}, filter, {skipSubsections: ["sample"]}),
+        filter: Object.assign({}, menuFilter, {skipSubsections: ["sample"]}),
         grid: {
             showSelect: false,
             nucleotideGenotype: false
@@ -259,7 +258,7 @@ const tools = {
             },
         ],
         // This disables two subsections in the filter menu Prioritization
-        filter: Object.assign({}, filter, {skipSubsections: ["cohort", "study"]}),
+        filter: Object.assign({}, menuFilter, {skipSubsections: ["cohort", "study"]}),
         grid: {
             showSelect: true,
             nucleotideGenotype: true
@@ -328,7 +327,7 @@ const tools = {
                 name: "Polyphen", value: "polyphen"
             }
         ],
-        filter: filter
+        filter: menuFilter
     },
     beacon: {
         active: false,
@@ -473,7 +472,7 @@ const tools = {
             },
         ],
         active: false,
-        filter: filter,
+        filter: menuFilter,
         grid: {
             showSelect: true,
             nucleotideGenotype: true,
