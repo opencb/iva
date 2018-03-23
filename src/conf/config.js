@@ -16,12 +16,13 @@
 
 const cellbase = {
     // hosts: ["bioinfodev.hpc.cam.ac.uk/cellbase-4.5.0-rc.1.1"],
-    hosts: ["bioinfo.hpc.cam.ac.uk/cellbase"],
+    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
     version: "v4",
 };
 
 const opencga = {
-    host: "bioinfodev.hpc.cam.ac.uk/hgva-1.3.2",
+    host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.2",
+    // host: "http://localhost:9090/opencga",
     version: "v1",
     // asUser: "researchcga", // user@project:study
     projects: [
