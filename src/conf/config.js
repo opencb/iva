@@ -24,19 +24,43 @@ const opencga = {
     host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.2",
     // host: "http://localhost:9090/opencga",
     version: "v1",
-    // asUser: "researchcga", // user@project:study
-    projects: [
-        // {
-        //     name: "ProjectA",
-        //     alias: "proj_a",
-        //     studies : [
-        //         {
-        //             name: "Study1",
-        //             alias: "s_1"
-        //         }
-        //     ]
-        // }
-    ],
+
+    // This allows IVA to query a OpenCGA instance being an 'anonymous' user, this means that no login is required.
+    // If 'projects' is empty then all public projects and studies of 'user' will be used.
+    anonymous: {
+    //     user: "hgvauser",
+        projects: [
+            {
+                id: "platinum",
+                name: "Platinum",
+                alias: "platinum",
+                organism: {
+                    scientificName: "Homo sapiens",
+                    assembly: "GRCh37"
+                },
+                studies : [
+                    {
+                        id: "illumina_platinum",
+                        name: "Illumina Platinum",
+                        alias: "illumina_platinum"
+                    }
+                ]
+            }
+        ]
+    },
+    // // asUser: "researchcga", // user@project:study
+    // projects: [
+    //     // {
+    //     //     name: "ProjectA",
+    //     //     alias: "proj_a",
+    //     //     studies : [
+    //     //         {
+    //     //             name: "Study1",
+    //     //             alias: "s_1"
+    //     //         }
+    //     //     ]
+    //     // }
+    // ],
     summary: true,
     cookie: {
         prefix: "iva",
@@ -97,7 +121,7 @@ const application = {
         {
             id: "analysis",
             title: "Analysis",
-            visibility: "none",
+            visibility: "private",
             submenu: [
 
                 {
@@ -170,7 +194,7 @@ const application = {
     ],
     search: {
         placeholder: "Search",
-        visibility: "public",
+        visible: true,
     },
     settings: {
         visibility: "public",
@@ -179,16 +203,16 @@ const application = {
         {name: "Documentation", url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
         {name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
         {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
+        {name: "Releases", url: "https://github.com/opencb/iva/releases", icon: ""},
         {name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
         {name: "FAQ", url: "", icon: ""},
-        {name: "Version 0.9.0", url: "https://github.com/babelomics/iva", icon: ""},
     ],
     login: {
-        visibility: "public",
+        visible: true,
     },
     breadcrumb: {
         title: "Projects",
-        visibility: "private",
+        visible: true,
     },
 };
 
