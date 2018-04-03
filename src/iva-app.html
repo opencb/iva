@@ -410,6 +410,7 @@
 
                 // console.log(application)
                 // debugger
+                // this.ready2();
             }
 
             static get is() {
@@ -438,8 +439,8 @@
                 this.appendChild(dom);
             }
 
-            ready() {
-                super.ready();
+            connectedCallback() {
+                super.connectedCallback();
 
                 this._isBreadcrumbVisible = false;
 
@@ -521,24 +522,6 @@
                 }
 
                 this.init();
-
-                // This must happen after calling to init() function since init() created the OpencgaClient
-                let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
-                if (UtilsNew.isNotEmpty(sid) && !this._publicMode) {
-                    this.login({
-                        detail: {
-                            userId: Cookies.get(this.config.opencga.cookie.prefix + "_userId"),
-                            sessionId: sid
-                        }
-                    });
-                }
-            }
-
-            connectedCallback() {
-                super.connectedCallback();
-
-                this.config = Object.assign({}, this.config);
-                // this.renderBreadcrumb();
             }
 
             init() {
@@ -548,40 +531,43 @@
                 this.cellBaseClientConfig = new CellBaseClientConfig(this.config.cellbase.hosts, this.config.cellbase.version, "hsapiens");
                 this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
 
-                this._createOpencgaSessionFromConfig();
-                // if (UtilsNew.isNotUndefined(this.config.opencga.projects) && this.config.opencga.projects.length > 0 && this._logged === false) {
-                //     // This web site is set up for browsing public data
-                //     this._publicMode = true;
-                //     this.projects = this.config.opencga.projects;
-                //     this.getProjects();
-                // } else {
-                //     this._publicMode = false;
-                //     this.project = {};
-                // }
+                // this._createOpencgaSessionFromConfig();
 
-                this.samples = [];
+                // This must happen after calling to init() function since init() created the OpencgaClient
+                let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
+                if (UtilsNew.isNotEmpty(sid)) {    // && !this._publicMode
+                    this.opencgaClient._config.sessionId = sid;
+                    this._createOpenCGASession();
+                } else {
+                    this._createOpencgaSessionFromConfig();
+                }
 
                 // This manages the samples selected in each tool for updating the breadcrumb
+                this.samples = [];
                 this._samplesPerTool = {};
             }
 
             opencgaSessionObserver(p) {
-                console.log(p)
-                // debugger
-
-                if (this.opencgaSession.token !== this.opencgaSession.opencgaClient._config.sessionId) {
-                    this.opencgaSession.opencgaClient._config.sessionId = this.opencgaSession.token;
-                }
-
                 this.renderHashFragments();
                 this.renderBreadcrumb();
+            }
+
+            _createOpenCGASession() {
+                let _this = this;
+                let opencgaSession = this.opencgaClient.createSession()
+                    .then(function (response) {
+                        _this.opencgaSession = Object.assign({}, response); // this forces the observer to be executed.
+                    })
+                    .catch(function (response) {
+                        console.log("An error when creating the OpenCGA session: ", response);
+                    });
             }
 
             _createOpencgaSessionFromConfig() {
                 // Create a private opencga-session to avoid calling to the Observer
                 let opencgaSession = this.opencgaClient.createAnonymousSession();
 
-                // If 'opencga.anonymous' exists and contains either 'user' or 'projects'
+                // If 'config.opencga.anonymous' exists and contains either 'user' or 'projects'
                 if (UtilsNew.isNotUndefinedOrNull(this.config.opencga.anonymous) && Object.keys(this.config.opencga.anonymous).length > 0) {
                     // If 'projects' is defined we only load those projects
                     if (UtilsNew.isNotEmptyArray(this.config.opencga.anonymous.projects)) {
@@ -625,14 +611,8 @@
 
             login(credentials) {
                 // This creates a new authenticated opencga-session object
-                let _this = this;
-                let opencgaSession = this.opencgaClient.createSession()
-                    .then(function (response) {
-                        _this.opencgaSession = Object.assign({}, response); // this forces the observer to be executed.
-                    })
-                    .catch(function (response) {
-                        console.log("An error when creating the OpenCGA session: ", response);
-                    });
+                this.opencgaClient._config.sessionId = credentials.detail.sessionId;
+                this._createOpenCGASession();
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
@@ -640,23 +620,21 @@
                     this.tool = "#home";
                 }
 
-                // 60000 ms = 1 min. Every 1 min we check if session is close to expirate.
+                // 60000 ms = 1 min. Every 1 min we check if session is close to expire.
                 this.intervalCheckSession = setInterval(this.checkSessionActive.bind(this), this.config.session.checkTime);
             }
 
             logout() {
-                // this removes the Cookies
-                // this.opencgaSession.token = "";
+                // this delete sessionId in the client and removes the Cookies
                 this.opencgaSession.opencgaClient.users().logout();
+                this._createOpencgaSessionFromConfig();
 
                 this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
                 this.tool = "#home";
                 window.location.hash = "home";
-                window.clearInterval(this.intervalCheckSession);
 
-                this.init();
-                // this._createOpencgaSessionFromConfig();
+                window.clearInterval(this.intervalCheckSession);
             }
 
             checkSessionActive() {
