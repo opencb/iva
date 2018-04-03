@@ -247,7 +247,7 @@
                         <variant-browser tool-title="{{config.tools.browser.title}}" query="{{browserQuery}}" opencga-session="{{opencgaSession}}"
                                          project="{{opencgaSession.project}}" study="{{opencgaSession.study}}" studies="{{opencgaSession.project.studies}}"
                                          config="[[config.tools.browser]]" biotypes="{{config.biotypes}}"
-                                         opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                                         opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                          active="{{config.tools.browser.active}}"
                                          population-frequencies="{{populationFrequencies}}"
                                          protein-substitution-scores="{{proteinSubstitutionScores}}"
@@ -262,9 +262,9 @@
                 <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
                     <div class="content" id="interpretation">
                         <opencga-variant-interpretation tool-title="{{config.tools.interpretation.title}}" opencga-session="{{opencgaSession}}"
-                                                        project="{{project}}" study="{{study}}" studies="{{project.studies}}"
+                                                        project="{{opencgaSession.project}}" study="{{opencgaSession.study}}" studies="{{opencgaSession.project.studies}}"
                                                         config="[[config.tools.interpretation]]" biotypes="{{config.biotypes}}"
-                                                        opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                                                        opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                                         active="{{config.tools.interpretation.active}}" ebi-config="{{config.ebiWS}}"
                                                         population-frequencies="{{populationFrequencies}}"
                                                         protein-substitution-scores="{{proteinSubstitutionScores}}"
@@ -298,7 +298,7 @@
                 <template is="dom-if" if="{{config.enabledComponents.facet}}">
                     <div class="content" id="facet">
 
-                        <variant-facet project="{{project}}" study="{{study}}"
+                        <variant-facet opencga-session="{{opencgaSession}}" project="{{project}}" study="{{study}}"
                                        studies="{{project.studies}}" config="[[config.tools.facet]]"
                                        opencga-client="{{opencgaClient}}"
                                        cellbase-client="{{cellbaseClient}}" biotypes="{{config.biotypes}}"
@@ -418,32 +418,9 @@
 
             static get properties() {
                 return {
-                    // config: {
-                    //     type: Object
-                    // },
-                    // opencgaClient: {
-                    //     type: Object
-                    // },
-                    // cellbaseClient: {
-                    //     type: Object
-                    // },
-                    // userId: {
-                    //     type: String
-                    // },
-                    // projects: {
-                    //     type: Array
-                    // },
-                    // project: {
-                    //     type: Object
-                    // },
-                    // study: {
-                    //     type: Object,
-                    //     observer: 'projectStudySampleChanged'
-                    // },
                     samples: {
                         type: Array,
                         value: []
-//                        observer: 'onSampleChange'
                     },
                     studySummaries: {
                         type: Array
@@ -597,7 +574,6 @@
                 }
 
                 this.renderHashFragments();
-                this._checkBreadcrumbVisible();
                 this.renderBreadcrumb();
             }
 
@@ -1006,6 +982,8 @@
             }
 
             renderBreadcrumb() {
+                this._checkBreadcrumbVisible();
+
                 let breadcrumbElement = PolymerUtils.getElementById("breadcrumb");
 
                 if (UtilsNew.isNotNull(breadcrumbElement) && UtilsNew.isNotUndefined(this.config)
