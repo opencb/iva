@@ -244,7 +244,7 @@
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
                     <div class="content" id="browser">
-                        <variant-browser tool-title="{{config.tools.browser.title}}" query="{{browserQuery}}" opencga-session="{{opencgaSession}}"
+                        <opencga-variant-browser tool-title="{{config.tools.browser.title}}" query="{{browserQuery}}" opencga-session="{{opencgaSession}}"
                                          project="{{opencgaSession.project}}" study="{{opencgaSession.study}}" studies="{{opencgaSession.project.studies}}"
                                          config="[[config.tools.browser]]" biotypes="{{config.biotypes}}"
                                          opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
@@ -255,7 +255,7 @@
                                          beacon-hosts="{{config.tools.beacon.hosts}}"
                                          on-gene="geneSelected" ebi-config="{{config.ebiWS}}"
                                          on-samplechange="onSampleChange" style="font-size: 12px">
-                        </variant-browser>
+                        </opencga-variant-browser>
                     </div>
                 </template>
 
