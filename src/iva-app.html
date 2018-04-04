@@ -241,6 +241,7 @@
                 </div>
             </template>
 
+            <!-- This is where main IVA application is rendered -->
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
                     <div class="content" id="browser">
@@ -407,10 +408,6 @@
 
             constructor() {
                 super();
-
-                // console.log(application)
-                // debugger
-                // this.ready2();
             }
 
             static get is() {
@@ -425,7 +422,7 @@
                     },
                     studySummaries: {
                         type: Array
-                    },
+                    }
                 }
             }
 
@@ -458,22 +455,22 @@
                 this.panelExamples = diseasePanels;
 
 
-                // Enabled components tools
+                // We can customise which components are active by default, this improves the first loading time.
+                this.set("config.enabledComponents.home", true);
+
+                // Enable tools reading the configuration
                 for (let tool in this.config.tools) {
-                    if (UtilsNew.isNotUndefined(this.config.tools[tool].active)) {
+                    if (UtilsNew.isNotUndefinedOrNull(this.config.tools[tool].active)) {
                         this.set("config.enabledComponents." + tool, this.config.tools[tool].active);
                     }
                 }
-                // Enabled components views
-                this.set("config.enabledComponents.gene", false);
-                this.set("config.enabledComponents.protein", false);
-                this.set("config.enabledComponents.transcript", false);
+
                 // Enabled components catalog
-                this.set("config.enabledComponents.login", false);
-                this.set("config.enabledComponents.projects", false);
-                this.set("config.enabledComponents.project", false);
-                this.set("config.enabledComponents.settings", false);
-                this.set("config.enabledComponents.home", true);
+                let components = ["login", "projects", "project", "settings", "gene", "transcript", "protein"];
+                for (let component of components) {
+                    this.set("config.enabledComponents." + component, false);
+                }
+
 
                 this.icd10 = ICD_10;
 
