@@ -264,25 +264,8 @@ const tools = {
             nucleotideGenotype: true
         }
     },
-    panel: {
-        active: false
-    },
-    gene: {
-        protein: {
-            color: {
-                synonymous_variant: "blue",
-                coding_sequence_variant: "blue",
-                missense_variant: "orange",
-                protein_altering_variant: "orange",
-                start_lost: "red",
-                stop_gained: "red",
-                stop_lost: "red",
-                stop_retained_variant: "red",
-            },
-        },
-        active: false,
-    },
     facet: {
+        title: "Facet Analysis",
         active: false,
         fields: [
             {
@@ -328,6 +311,24 @@ const tools = {
             }
         ],
         filter: menuFilter
+    },
+    panel: {
+        active: false
+    },
+    gene: {
+        protein: {
+            color: {
+                synonymous_variant: "blue",
+                coding_sequence_variant: "blue",
+                missense_variant: "orange",
+                protein_altering_variant: "orange",
+                start_lost: "red",
+                stop_gained: "red",
+                stop_lost: "red",
+                stop_retained_variant: "red",
+            },
+        },
+        active: false,
     },
     beacon: {
         active: false,
