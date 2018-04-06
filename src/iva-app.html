@@ -244,27 +244,25 @@
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
                     <div class="content" id="browser">
-                        <opencga-variant-browser tool-title="{{config.tools.browser.title}}" query="{{browserQuery}}" opencga-session="{{opencgaSession}}"
-                                         project="{{opencgaSession.project}}" study="{{opencgaSession.study}}" studies="{{opencgaSession.project.studies}}"
-                                         config="[[config.tools.browser]]" biotypes="{{config.biotypes}}"
-                                         opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                         active="{{config.tools.browser.active}}"
-                                         population-frequencies="{{config.populationFrequencies}}"
-                                         protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-                                         consequence-types="{{config.consequenceTypes}}"
-                                         beacon-hosts="{{config.tools.beacon.hosts}}"
-                                         on-gene="geneSelected" ebi-config="{{config.ebiWS}}"
-                                         on-samplechange="onSampleChange" style="font-size: 12px">
+                        <opencga-variant-browser opencga-session="{{opencgaSession}}" config="[[config.tools.browser]]"
+                                                 opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                                                 query="{{browserQuery}}" biotypes="{{config.biotypes}}"
+                                                 active="{{config.tools.browser.active}}"
+                                                 population-frequencies="{{config.populationFrequencies}}"
+                                                 protein-substitution-scores="{{config.proteinSubstitutionScores}}"
+                                                 consequence-types="{{config.consequenceTypes}}"
+                                                 beacon-hosts="{{config.tools.beacon.hosts}}"
+                                                 on-gene="geneSelected" ebi-config="{{config.ebiWS}}"
+                                                 on-samplechange="onSampleChange" style="font-size: 12px">
                         </opencga-variant-browser>
                     </div>
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
                     <div class="content" id="interpretation">
-                        <opencga-variant-interpretation tool-title="{{config.tools.interpretation.title}}" opencga-session="{{opencgaSession}}"
-                                                        project="{{opencgaSession.project}}" study="{{opencgaSession.study}}" studies="{{opencgaSession.project.studies}}"
-                                                        config="[[config.tools.interpretation]]" biotypes="{{config.biotypes}}"
+                        <opencga-variant-interpretation opencga-session="{{opencgaSession}}" config="[[config.tools.interpretation]]"
                                                         opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                                                        biotypes="{{config.biotypes}}"
                                                         active="{{config.tools.interpretation.active}}" ebi-config="{{config.ebiWS}}"
                                                         population-frequencies="{{config.populationFrequencies}}"
                                                         protein-substitution-scores="{{config.proteinSubstitutionScores}}"
