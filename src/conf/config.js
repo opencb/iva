@@ -53,18 +53,6 @@ const opencga = {
     },
 };
 
-const ebiWS = {
-    root: "https://www.ebi.ac.uk/ols/api",
-    tree: {
-        "hp": ["/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0012823", "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0040279",
-            "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0000005", "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0040006",
-            "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FHP_0000118", "/ontologies/hp/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FUPHENO_0001002"],
-        "go": ["/ontologies/go/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FGO_0008150", "/ontologies/go/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FGO_0005575",
-            "/ontologies/go/terms/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FGO_0003674"]
-    },
-    search: "/search"
-};
-
 const application = {
     title: "IVA",
     version: "v0.9.0",
@@ -202,13 +190,6 @@ const application = {
     }
 };
 
-
-const biotypes = ["3prime_overlapping_ncrna", "IG_C_gene", "IG_C_pseudogene", "IG_D_gene", "IG_J_gene", "IG_J_pseudogene", "IG_V_gene",
-    "IG_V_pseudogene", "Mt_rRNA", "Mt_tRNA", "TR_C_gene", "TR_D_gene", "TR_J_gene", "TR_J_pseudogene", "TR_V_gene", "TR_V_pseudogene",
-    "antisense", "lincRNA", "miRNA", "misc_RNA", "polymorphic_pseudogene", "processed_transcript", "protein_coding", "pseudogene",
-    "rRNA", "sense_intronic", "sense_overlapping", "snRNA", "snoRNA"
-];
-
 const beacon = {
     hosts: [
         "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience",
@@ -324,15 +305,11 @@ const consequenceTypes = {
         "stop_lost,start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
 
     // 'Title' is optional. if there is not title provided then 'name' will be used.
-    //  There are two more optional properties - 'checked' and 'color'. They can be set to display them default in web application.
+    //  There are two more optional properties - 'checked' and 'impact'. They can be set to display them default in web application.
     //  Similarly 'description' is optional as well.
     categories: [
         {
-            id: "",
-            name: "",
             title: "Intergenic",
-            description: "",
-            isCategory: true,
             terms: [
                 {
                     id: "SO:0001631",
@@ -345,7 +322,6 @@ const consequenceTypes = {
                     name: "2KB_upstream_variant",
                     description: "A sequence variant located within 2KB 5' of a gene",
                     impact: "modifier",
-                    // checked: true
                 },
                 {
                     id: "SO:0001632",
@@ -358,7 +334,6 @@ const consequenceTypes = {
                     name: "2KB_downstream_variant",
                     description: "A sequence variant located within 2KB 3' of a gene",
                     impact: "modifier",
-                    // checked: true
                 },
                 {
                     id: "SO:0001628",
@@ -369,7 +344,6 @@ const consequenceTypes = {
             ],
         },
         {
-            isCategory: true,
             title: "Regulatory",
             terms: [
                 {
@@ -417,7 +391,6 @@ const consequenceTypes = {
             ],
         },
         {
-            isCategory: true,
             title: "Coding",
             terms: [
                 {
@@ -514,7 +487,6 @@ const consequenceTypes = {
             ],
         },
         {
-            isCategory: true,
             title: "Non-coding",
             terms: [
                 {
@@ -544,7 +516,6 @@ const consequenceTypes = {
             ],
         },
         {
-            isCategory: true,
             title: "Splice",
             terms: [
                 {
@@ -568,14 +539,12 @@ const consequenceTypes = {
             ],
         },
         {
-            isCategory: false,
             id: "SO:0001893",
             name: "transcript_ablation",
             description: "A feature ablation whereby the deleted region includes a transcript feature",
             impact: "high",
         },
         {
-            isCategory: false,
             id: "SO:0001889",
             name: "transcript_amplification",
             description: "A feature amplification of a region containing a transcript",

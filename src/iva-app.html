@@ -246,13 +246,13 @@
                     <div class="content" id="browser">
                         <opencga-variant-browser opencga-session="{{opencgaSession}}" config="[[config.tools.browser]]"
                                                  opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                                 query="{{browserQuery}}" biotypes="{{config.biotypes}}"
+                                                 query="{{browserQuery}}"
                                                  active="{{config.tools.browser.active}}"
                                                  population-frequencies="{{config.populationFrequencies}}"
                                                  protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                                  consequence-types="{{config.consequenceTypes}}"
                                                  beacon-hosts="{{config.tools.beacon.hosts}}"
-                                                 on-gene="geneSelected" ebi-config="{{config.ebiWS}}"
+                                                 on-gene="geneSelected"
                                                  on-samplechange="onSampleChange" style="font-size: 12px">
                         </opencga-variant-browser>
                     </div>
@@ -262,8 +262,7 @@
                     <div class="content" id="interpretation">
                         <opencga-variant-interpretation opencga-session="{{opencgaSession}}" config="[[config.tools.interpretation]]"
                                                         opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                                        biotypes="{{config.biotypes}}"
-                                                        active="{{config.tools.interpretation.active}}" ebi-config="{{config.ebiWS}}"
+                                                        active="{{config.tools.interpretation.active}}"
                                                         population-frequencies="{{config.populationFrequencies}}"
                                                         protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                                         consequence-types="{{config.consequenceTypes}}"
@@ -277,7 +276,7 @@
                     <div class="content" id="facet">
                         <opencga-variant-facet opencga-session="{{opencgaSession}}" config="[[config.tools.facet]]"
                                                opencga-client="{{opencgaSession.opencgaClient}}"
-                                               cellbase-client="{{cellbaseClient}}" biotypes="{{config.biotypes}}"
+                                               cellbase-client="{{cellbaseClient}}"
                                                population-frequencies="{{config.populationFrequencies}}"
                                                protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                                consequence-types="{{config.consequenceTypes}}">
@@ -289,11 +288,11 @@
                     <div class="content" id="clinical">
                         <variant-clinical tool-title="Clinical Analysis" project="{{opencgaSession.project}}" opencga-session="{{opencgaSession}}"
                                           study="{{opencgaSession.study}}"
-                                          config="{{config.tools.clinical}}" biotypes="{{config.biotypes}}"
+                                          config="{{config.tools.clinical}}"
                                           population-frequencies="{{config.populationFrequencies}}"
                                           protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-                                          consequence-types="{{config.consequenceTypes}}" ebi-config="{{config.ebiWS}}"
-                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" ebi-config="{{config.ebiWS}}"
+                                          consequence-types="{{config.consequenceTypes}}"
+                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                           on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" >
                         </variant-clinical>
                     </div>
@@ -442,12 +441,10 @@
                 let _config = application;
                 _config.menu.counter = 0;
                 _config.cellbase = cellbase;
-                _config.ebiWS = ebiWS;
                 _config.tools = tools;
                 _config.opencga = opencga;
                 _config.species = DEFAULT_SPECIES;
                 _config.enabledComponents = {};
-                _config.biotypes = biotypes;
                 _config.panelExamples = diseasePanels;
                 _config.populationFrequencies = populationFrequencies;
                 _config.proteinSubstitutionScores = proteinSubstitutionScores;
