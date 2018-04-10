@@ -340,6 +340,12 @@ const tools = {
         interpretation: {
             algorithms: ["Tiering", "Exomiser", "VAAST"]
         },
+        queryParams: {
+            useSearchIndex: "yes",
+            approximateCount: true,
+            approximateCountSamplingSize: 5000,
+            timeout: 30000
+        },
         variableSet: {
             name: "clinical_vs",
             exclude: [
