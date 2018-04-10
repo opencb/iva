@@ -17,7 +17,7 @@
 /**
  * Created by imedina on 05/06/17.
  */
-const menuFilter = {
+const filterMenu = {
     missing: true,
     searchButtonText: "Search",
     tooltip: {
@@ -86,6 +86,13 @@ const menuFilter = {
                 {
                     id: "biotype",
                     title: "Biotype",
+                    biotypes: [
+                        "3prime_overlapping_ncrna", "IG_C_gene", "IG_C_pseudogene", "IG_D_gene", "IG_J_gene", "IG_J_pseudogene",
+                        "IG_V_gene", "IG_V_pseudogene", "Mt_rRNA", "Mt_tRNA", "TR_C_gene", "TR_D_gene", "TR_J_gene", "TR_J_pseudogene",
+                        "TR_V_gene", "TR_V_pseudogene", "antisense", "lincRNA", "miRNA", "misc_RNA", "polymorphic_pseudogene",
+                        "processed_transcript", "protein_coding", "pseudogene", "rRNA", "sense_intronic", "sense_overlapping", "snRNA",
+                        "snoRNA"
+                    ],
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
@@ -226,7 +233,7 @@ const tools = {
             },
         ],
         // This disables two subsections in the filter menu Prioritization
-        filter: Object.assign({}, menuFilter, {skipSubsections: ["sample"]}),
+        filter: Object.assign({}, filterMenu, {skipSubsections: ["sample"]}),
         grid: {
             showSelect: false,
             nucleotideGenotype: false
@@ -258,31 +265,14 @@ const tools = {
             },
         ],
         // This disables two subsections in the filter menu Prioritization
-        filter: Object.assign({}, menuFilter, {skipSubsections: ["cohort", "study"]}),
+        filter: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
         grid: {
             showSelect: true,
             nucleotideGenotype: true
         }
     },
-    panel: {
-        active: false
-    },
-    gene: {
-        protein: {
-            color: {
-                synonymous_variant: "blue",
-                coding_sequence_variant: "blue",
-                missense_variant: "orange",
-                protein_altering_variant: "orange",
-                start_lost: "red",
-                stop_gained: "red",
-                stop_lost: "red",
-                stop_retained_variant: "red",
-            },
-        },
-        active: false,
-    },
     facet: {
+        title: "Facet Analysis",
         active: false,
         fields: [
             {
@@ -327,7 +317,25 @@ const tools = {
                 name: "Polyphen", value: "polyphen"
             }
         ],
-        filter: menuFilter
+        filter: filterMenu
+    },
+    panel: {
+        active: false
+    },
+    gene: {
+        protein: {
+            color: {
+                synonymous_variant: "blue",
+                coding_sequence_variant: "blue",
+                missense_variant: "orange",
+                protein_altering_variant: "orange",
+                start_lost: "red",
+                stop_gained: "red",
+                stop_lost: "red",
+                stop_retained_variant: "red",
+            },
+        },
+        active: false,
     },
     beacon: {
         active: false,
@@ -478,7 +486,7 @@ const tools = {
             },
         ],
         active: false,
-        filter: menuFilter,
+        filter: filterMenu,
         grid: {
             showSelect: true,
             nucleotideGenotype: true,
