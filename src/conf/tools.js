@@ -345,9 +345,54 @@ const tools = {
     },
     clinical: {
         icd10: ICD_10,
-        interpretation: {
-            algorithms: ["Tiering", "Exomiser", "VAAST"]
+        upload: {
+            visible: true,
         },
+        analysis: {
+            visible: true,
+        },
+        interpretation: {
+            visible: true,
+            algorithms: [
+                {id: "interactiveRadio", title: "Interactive (based on TEAM paper)", checked: true},
+                {id: "automaticRadio", title: "Automatic"}
+            ],
+            // Interpretation standard config
+            title: "Interpretation",
+            queryParams: {
+                useSearchIndex: "yes",
+                approximateCount: true,
+                approximateCountSamplingSize: 5000,
+                timeout: 30000
+            },
+            filters: [
+                {
+                    name: "Example BRCA2",
+                    query: {
+                        gene: "BRCA2",
+                        conservation: "phylop<0.001",
+                    },
+                },
+                {
+                    name: "Example OR11",
+                    query: {
+                        gene: "OR11H1",
+                        conservation: "phylop<=0.001",
+                    },
+                },
+            ],
+            // This disables two subsections in the filter menu Prioritization
+            filter: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
+            grid: {
+                showSelect: true,
+                nucleotideGenotype: true
+            }
+        },
+        report: {
+            visible: true,
+        },
+
+
         queryParams: {
             useSearchIndex: "yes",
             approximateCount: true,
