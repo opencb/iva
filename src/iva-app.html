@@ -286,8 +286,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.clinical}}">
                     <div class="content" id="clinical">
-                        <variant-clinical opencga-session="{{opencgaSession}}"
-                                          config="{{config.tools.clinical}}"
+                        <variant-clinical opencga-session="{{opencgaSession}}" config="[[config.tools.clinical]]"
                                           population-frequencies="{{config.populationFrequencies}}"
                                           protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                           consequence-types="{{config.consequenceTypes}}"
