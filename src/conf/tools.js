@@ -354,8 +354,8 @@ const tools = {
         interpretation: {
             visible: true,
             algorithms: [
-                {id: "interactiveRadio", title: "Interactive (based on TEAM paper)", checked: true},
-                {id: "automaticRadio", title: "Automatic"}
+                {id: "interactive", title: "Interactive (based on TEAM paper)", checked: true},
+                {id: "automatic", title: "Automatic"},
             ],
             // Interpretation standard config
             title: "Interpretation",
