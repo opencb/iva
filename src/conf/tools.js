@@ -268,7 +268,8 @@ const tools = {
         filter: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
         grid: {
             showSelect: true,
-            nucleotideGenotype: true
+            nucleotideGenotype: true,
+            interpretation: true
         }
     },
     facet: {
@@ -354,8 +355,8 @@ const tools = {
         interpretation: {
             visible: true,
             algorithms: [
-                {id: "interactive", title: "Interactive (based on TEAM paper)", checked: true},
-                {id: "automatic", title: "Automatic"},
+                {id: "interactive", title: "Interactive (based on TEAM paper)"},
+                {id: "automatic", title: "Automatic", checked: true},
             ],
             // Interpretation standard config
             title: "Interpretation",
