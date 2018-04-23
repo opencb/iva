@@ -33,6 +33,7 @@ const filterMenu = {
                     id: "sample",
                     title: "Samples",
                     showApproximateCount: true,
+                    showSelectSamples: true,
                     inheritanceModes: [
                         {key: "none", text: "Select..."},
                         {key: "autoDominant", text: "Autosomal Dominant"},
