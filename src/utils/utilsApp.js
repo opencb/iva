@@ -51,8 +51,7 @@ class UtilsApp {
         this.opencgaClient.users().refresh().then((response) => {
             let sessionId =  response.response[0].result[0].id;
             let decoded = jwt_decode(sessionId);
-            let dateExpired = new Date(null);
-            dateExpired.setSeconds(decoded.exp);
+            let dateExpired = new Date(decoded.exp * 1000);
             let validTimeSessionId =  moment(dateExpired, "YYYYMMDDHHmmss").format('D MMM YY HH:mm:ss');
             let _message = "Your session is now valid until " + validTimeSessionId;
             $.notifyClose();

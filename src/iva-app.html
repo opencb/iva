@@ -514,12 +514,13 @@
                 this.cellBaseClientConfig = new CellBaseClientConfig(this.config.cellbase.hosts, this.config.cellbase.version, "hsapiens");
                 this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
 
-                // This must happen after creating the OpencgaClient
-                this.checkSessionActive();
                 let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
                 if (UtilsNew.isNotEmpty(sid)) {    // && !this._publicMode
                     this.opencgaClient._config.sessionId = sid;
                     this._createOpenCGASession();
+                    // This must happen after creating the OpencgaClient
+                    this.checkSessionActive();
+                    this.intervalCheckSession = setInterval(this.checkSessionActive.bind(this), this.config.session.checkTime);
                 } else {
                     this._createOpencgaSessionFromConfig();
                 }
@@ -620,11 +621,11 @@
             checkSessionActive() {
                 let _message = "";
                 // We check if refresh token has updated session id cookie
-                let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
+                // let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
 
-                if (UtilsNew.isNotUndefinedOrNull(sid)) {    // UtilsNew.isNotEmpty(this.opencgaSession.token) &&
-                    this.sessionId = sid;
-                    let decoded = jwt_decode(this.sessionId);
+                if (UtilsNew.isNotUndefinedOrNull(this.opencgaClient._config.sessionId)) {    // UtilsNew.isNotEmpty(this.opencgaSession.token) &&
+                    // this.sessionId = sid;
+                    let decoded = jwt_decode(this.opencgaClient._config.sessionId);
                     let currentTime = new Date().getTime();
                     let remainingTime = ((decoded.exp * 1000) - currentTime);
                     // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
