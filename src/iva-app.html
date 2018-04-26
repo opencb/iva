@@ -1047,6 +1047,7 @@
             }
 
             onNotifyMessage(e) {
+                UtilsApp.closeNotify(this.notifySession);
                 UtilsApp.showNotify(e.detail.options, e.detail.settings, e.detail.message, e.detail.type);
             }
         }
