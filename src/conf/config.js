@@ -15,7 +15,7 @@
  */
 
 const cellbase = {
-    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase/"],
+    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
     // hosts: ["http://cellbase.clinbioinfosspa.es/cb"],
     version: "v4",
 };
@@ -27,83 +27,83 @@ const opencga = {
     // This allows IVA to query a OpenCGA instance being an 'anonymous' user, this means that no login is required.
     // If 'projects' is empty then all public projects and studies of 'user' will be used.
     anonymous: {
-        // user: "hgvauser",
-    projects: [
-        {
-            name: "Reference studies GRCh37",
-            alias: "reference_grch37",
-            studies : [
-                {
-                    name: "1000 Genomes Project - Phase 3",
-                    alias: "1kG_phase3"
-                },
-                {
-                    name: "Exome Sequencing Project",
-                    alias: "ESP6500"
-                },
-                {
-                    name: "Exome Aggregation Consortium",
-                    alias: "EXAC"
-                },
-                {
-                    name: "1000 Genomes Project ChrY - Phase 3",
-                    alias: "1kG_phase3_chrY"
-                },
-                {
-                    name: "1000 Genomes Project ChrMT - Phase 3",
-                    alias: "1kG_phase3_chrMT"
-                },
-                {
-                    name: "Genome of the Netherlands",
-                    alias: "GONL"
-                },
-                {
-                    name: "UK10K ALSPAC",
-                    alias: "UK10K_ALSPAC"
-                },
-                {
-                    name: "UK10K TWINSUK",
-                    alias: "UK10K_TWINSUK"
-                },
-                {
-                    name: "Spanish Medical Genome Project",
-                    alias: "MGP"
-                }
-            ]
-        },        {
-            name: "Reference studies GRCh38",
-            alias: "reference_grch38",
-            studies : [
-                {
-                    name: "1000 Genomes Project - Phase 3",
-                    alias: "1kG_phase3"
-                }
-            ]
-        },
-        {
-            name: "Cancer GRCh37",
-            alias: "cancer_grch37",
-            studies : [
-                {
-                    name: "QIMR Berghofer Melanoma",
-                    alias: "QIMR_Berghofer_Melanoma"
-                },                {
-                    name: "Chronic Myeloid Leukemia - Russian Academy of Medical Sciences",
-                    alias: "RAMS_CML"
-                }
-            ]
-        },
-        {
-            name: "Platinum",
-            alias: "platinum",
-            studies : [
-                {
-                    name: "Illumina Platinum",
-                    alias: "illumina_platinum"
-                }
-            ]
-        }
-    ]
+        user: "hgvauser",
+        // projects: [
+        //     {
+        //         name: "Reference studies GRCh37",
+        //         alias: "reference_grch37",
+        //         studies : [
+        //             {
+        //                 name: "1000 Genomes Project - Phase 3",
+        //                 alias: "1kG_phase3"
+        //             },
+        //             {
+        //                 name: "Exome Sequencing Project",
+        //                 alias: "ESP6500"
+        //             },
+        //             {
+        //                 name: "Exome Aggregation Consortium",
+        //                 alias: "EXAC"
+        //             },
+        //             {
+        //                 name: "1000 Genomes Project ChrY - Phase 3",
+        //                 alias: "1kG_phase3_chrY"
+        //             },
+        //             {
+        //                 name: "1000 Genomes Project ChrMT - Phase 3",
+        //                 alias: "1kG_phase3_chrMT"
+        //             },
+        //             {
+        //                 name: "Genome of the Netherlands",
+        //                 alias: "GONL"
+        //             },
+        //             {
+        //                 name: "UK10K ALSPAC",
+        //                 alias: "UK10K_ALSPAC"
+        //             },
+        //             {
+        //                 name: "UK10K TWINSUK",
+        //                 alias: "UK10K_TWINSUK"
+        //             },
+        //             {
+        //                 name: "Spanish Medical Genome Project",
+        //                 alias: "MGP"
+        //             }
+        //         ]
+        //     },        {
+        //         name: "Reference studies GRCh38",
+        //         alias: "reference_grch38",
+        //         studies : [
+        //             {
+        //                 name: "1000 Genomes Project - Phase 3",
+        //                 alias: "1kG_phase3"
+        //             }
+        //         ]
+        //     },
+        //     {
+        //         name: "Cancer GRCh37",
+        //         alias: "cancer_grch37",
+        //         studies : [
+        //             {
+        //                 name: "QIMR Berghofer Melanoma",
+        //                 alias: "QIMR_Berghofer_Melanoma"
+        //             },                {
+        //                 name: "Chronic Myeloid Leukemia - Russian Academy of Medical Sciences",
+        //                 alias: "RAMS_CML"
+        //             }
+        //         ]
+        //     },
+        //     {
+        //         name: "Platinum",
+        //         alias: "platinum",
+        //         studies : [
+        //             {
+        //                 name: "Illumina Platinum",
+        //                 alias: "illumina_platinum"
+        //             }
+        //         ]
+        //     }
+        // ]
     },
     summary: true,
     cookie: {
@@ -195,10 +195,7 @@ const application = {
         {name: "Documentation",  url: "http://docs.opencb.org/display/hgva/HGVA+Home", icon: "fa fa-book"},
         {name: "Tutorial", url: "http://docs.opencb.org/display/hgva/Tutorials", icon: ""},
         {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
-        {name: "Contact",  url: "http://docs.opencb.org/display/hgva/People", icon: "fa fa-envelope"}
-        {name: "Releases", url: "https://github.com/opencb/iva/releases", icon: ""},
-        {name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
-        {name: "FAQ", url: "", icon: ""},
+        {name: "Contact",  url: "http://docs.opencb.org/display/hgva/People", icon: "fa fa-envelope"},
     ],
     login: {
         visible: false,

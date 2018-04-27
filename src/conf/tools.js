@@ -234,7 +234,7 @@ const tools = {
             },
         ],
         // This disables two subsections in the filter menu Prioritization
-        filter: Object.assign({}, filterMenu, {skipSubsections: ["sample"]}),
+        filter: Object.assign({}, filterMenu, {skipSubsections: ["sample", "cohort"]}),
         grid: {
             showSelect: false,
             nucleotideGenotype: false
