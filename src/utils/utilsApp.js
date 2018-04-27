@@ -44,7 +44,9 @@ class UtilsApp {
     }
 
     static closeNotify(notifyInstance) {
-        notifyInstance.close();
+        if (UtilsNew.isNotUndefinedOrNull(notifyInstance)) {
+            notifyInstance.close();
+        }
     }
 
     static refreshToken(event) {
