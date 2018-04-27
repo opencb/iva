@@ -17,7 +17,7 @@
 /**
  * Created by imedina on 05/06/17.
  */
-const filter = {
+const filterMenu = {
     missing: true,
     searchButtonText: "Search",
     tooltip: {
@@ -32,8 +32,15 @@ const filter = {
                 {
                     id: "sample",
                     title: "Samples",
-                    selector: true,
-                    segregations: ["Autosomal Dominant", "Autosomal Recessive", "Compound Heterocygotous", "Recessive X-linked"],
+                    showApproximateCount: true,
+                    showSelectSamples: true,
+                    inheritanceModes: [
+                        {key: "none", text: "Select..."},
+                        {key: "autoDominant", text: "Autosomal Dominant"},
+                        {key: "autoRecessive", text: "Autosomal Recessive"},
+                        {key: "xLinked", text: "X linked"},
+                        {key: "yLinked", text: "Y linked"}
+                    ],
                     tooltip: "Filter by sample genotypes"
                 },
                 {
@@ -80,6 +87,13 @@ const filter = {
                 {
                     id: "biotype",
                     title: "Biotype",
+                    biotypes: [
+                        "3prime_overlapping_ncrna", "IG_C_gene", "IG_C_pseudogene", "IG_D_gene", "IG_J_gene", "IG_J_pseudogene",
+                        "IG_V_gene", "IG_V_pseudogene", "Mt_rRNA", "Mt_tRNA", "TR_C_gene", "TR_D_gene", "TR_J_gene", "TR_J_pseudogene",
+                        "TR_V_gene", "TR_V_pseudogene", "antisense", "lincRNA", "miRNA", "misc_RNA", "polymorphic_pseudogene",
+                        "processed_transcript", "protein_coding", "pseudogene", "rRNA", "sense_intronic", "sense_overlapping", "snRNA",
+                        "snoRNA"
+                    ],
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
@@ -95,7 +109,7 @@ const filter = {
             subsections: [
                 {
                     id: "populationFrequency",
-                    title: "Select Population MAF",
+                    title: "Select Population Frequency",
                     tooltip: "<strong>1000 Genomes</strong> only considers variants whose observed allelic frequency in the 1000 Genomes " +
                     "Phase 3 project is below (or above) the defined value. Allele frequencies were obtained from about 2,500 samples." +
                     "<br><strong>ExAC</strong> only considers variants whose observed allelic frequency in the The Exome Aggregation " +
@@ -197,6 +211,12 @@ const tools = {
     browser: {
         title: "Variant Browser",
         active: true,
+        queryParams: {
+            useSearchIndex: "auto",
+            approximateCount: true,
+            approximateCountSamplingSize: 5000,
+            timeout: 30000
+        },
         filters: [
             {
                 name: "Example BRCA2",
@@ -213,15 +233,22 @@ const tools = {
                 },
             },
         ],
-        filter: filter,
+        // This disables two subsections in the filter menu Prioritization
+        filter: Object.assign({}, filterMenu, {skipSubsections: ["sample"]}),
         grid: {
             showSelect: false,
             nucleotideGenotype: false
         }
     },
-    prioritization: {
-        title: "Prioritization",
+    interpretation: {
+        title: "Variant Interpreter",
         active: false,
+        queryParams: {
+            useSearchIndex: "yes",
+            approximateCount: true,
+            approximateCountSamplingSize: 5000,
+            timeout: 30000
+        },
         filters: [
             {
                 name: "Example BRCA2",
@@ -239,13 +266,62 @@ const tools = {
             },
         ],
         // This disables two subsections in the filter menu Prioritization
-        filter: Object.assign({}, filter, {skipSubsections: ["cohort", "study"]}),
+        filter: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
         grid: {
             showSelect: true,
-            nucleotideGenotype: false
+            nucleotideGenotype: true,
+            interpretation: true
         }
     },
-    interpretation: {
+    facet: {
+        title: "Facet Analysis",
+        active: false,
+        fields: [
+            {
+                name: "Chromosome", value: "chromosome"
+            },
+            {
+                name: "Studies", value: "studies"
+            },
+            {
+                name: "Variant Type", value: "type"
+            },
+            {
+                name: "Genes", value: "genes"
+            },
+            {
+                name: "Biotypes", value: "biotypes"
+            },
+            {
+                name: "Consequence Type", value: "soAcc"
+            }
+        ],
+        ranges: [
+            {
+                name: "PhastCons", value: "phastCons"
+            },
+            {
+                name: "PhyloP", value: "phylop"
+            },
+            {
+                name: "Gerp", value: "gerp"
+            },
+            {
+                name: "CADD Raw", value: "caddRaw"
+            },
+            {
+                name: "CADD Scaled", value: "caddScaled"
+            },
+            {
+                name: "Sift", value: "sift"
+            },
+            {
+                name: "Polyphen", value: "polyphen"
+            }
+        ],
+        filter: filterMenu
+    },
+    panel: {
         active: false
     },
     gene: {
@@ -263,76 +339,67 @@ const tools = {
         },
         active: false,
     },
-    facet: {
-        fields: [
-            {
-                name: "Chromosome",
-                value: "chromosome",
-            },
-            {
-                name: "Studies",
-                value: "studies",
-            },
-            {
-                name: "Variant Type",
-                value: "type",
-            },
-            {
-                name: "Genes",
-                value: "genes",
-            },
-            {
-                name: "Biotypes",
-                value: "biotypes",
-            },
-            {
-                name: "Consequence Type",
-                value: "soAcc",
-            },
-        ],
-        ranges: [
-            {
-                name: "PhastCons",
-                value: "phastCons",
-            },
-            {
-                name: "PhyloP",
-                value: "phylop",
-            },
-            {
-                name: "Gerp",
-                value: "gerp",
-            },
-            {
-                name: "CADD Raw",
-                value: "caddRaw",
-            },
-            {
-                name: "CADD Scaled",
-                value: "caddScaled",
-            },
-            {
-                name: "Sift",
-                value: "sift",
-            },
-            {
-                name: "Polyphen",
-                value: "polyphen",
-            },
-        ],
-        active: false,
-        filter: filter
-    },
     beacon: {
-        hosts: [
-            "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp",
-        ],
         active: false,
+        hosts: [
+            "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
+        ]
     },
     clinical: {
         icd10: ICD_10,
+        upload: {
+            visible: true,
+        },
+        analysis: {
+            visible: true,
+        },
         interpretation: {
-            algorithms: ["Tiering", "Exomiser", "VAAST"]
+            visible: true,
+            algorithms: [
+                {id: "interactive", title: "Interactive (based on TEAM paper)"},
+                {id: "automatic", title: "Automatic", checked: true},
+            ],
+            // Interpretation standard config
+            title: "Interpretation",
+            queryParams: {
+                useSearchIndex: "yes",
+                approximateCount: true,
+                approximateCountSamplingSize: 5000,
+                timeout: 30000
+            },
+            filters: [
+                {
+                    name: "Example BRCA2",
+                    query: {
+                        gene: "BRCA2",
+                        conservation: "phylop<0.001",
+                    },
+                },
+                {
+                    name: "Example OR11",
+                    query: {
+                        gene: "OR11H1",
+                        conservation: "phylop<=0.001",
+                    },
+                },
+            ],
+            // This disables two subsections in the filter menu Prioritization
+            filter: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
+            grid: {
+                showSelect: true,
+                nucleotideGenotype: true
+            }
+        },
+        report: {
+            visible: true,
+        },
+
+
+        queryParams: {
+            useSearchIndex: "yes",
+            approximateCount: true,
+            approximateCountSamplingSize: 5000,
+            timeout: 30000
         },
         variableSet: {
             name: "clinical_vs",
@@ -340,148 +407,118 @@ const tools = {
                 {
                     webComponent: "variant-samples-filter",
                     variables: ["HPO", "diagnosis"],
-                },
-            ],
-
+                }
+            ]
         },
-        chromosomal_gender: ["XX", "XY", "XO", "XXY", "XXX", "XXYY", "XXXY", "XXXX", "XYY", "OTHER", "UNKNOWN"],
+        kariotypicSex: ["XX", "XY", "XO", "XXY", "XXX", "XXYY", "XXXY", "XXXX", "XYY", "OTHER", "UNKNOWN"],
         ethnicity: [
             {
-                id: "white_mediterranean",
-                title: "white mediterranean",
+                id: "white_mediterranean", title: "white mediterranean"
             },
             {
-                id: "white_caucasian",
-                title: "white caucasian",
+                id: "white_caucasian", title: "white caucasian"
             },
             {
-                id: "black",
-                title: "black",
+                id: "black", title: "black"
             },
             {
-                id: "asiatic",
-                title: "asiatic",
+                id: "asiatic", title: "asiatic"
             },
             {
-                id: "amerindian",
-                title: "amerindian",
+                id: "amerindian", title: "amerindian"
             },
             {
-                id: "gipsy",
-                title: "gipsy",
+                id: "gipsy", title: "gipsy"
             },
             {
-                id: "arabic",
-                title: "arabic",
+                id: "arabic", title: "arabic"
             },
             {
-                id: "hindu",
-                title: "hindu",
+                id: "hindu", title: "hindu"
             },
             {
-                id: "australian_native",
-                title: "australian native",
+                id: "australian_native", title: "australian native"
             },
             {
-                id: "askenazi_jew",
-                title: "askenazi jew",
+                id: "askenazi_jew", title: "askenazi jew"
             },
             {
-                id: "sefardi_jew",
-                title: "sefardi jew",
+                id: "sefardi_jew", title: "sefardi jew"
             },
             {
-                id: "ne",
-                title: "NE/Unkonwn",
-            },
+                id: "ne", title: "NE/Unkonwn"
+            }
         ],
-        countries: ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom", "United States", "Other"],
+        countries: ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France",
+            "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland",
+            "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden", "United Kingdom", "United States", "Other"],
         province: ["Albacete", "Alicante", "Almeria", "Álava", "Asturias", "Ávila", "Badajoz", "Baleares", "Barcelona", "Burgos", "Cáceres",
-            "Cádiz", "Cantabria", "Castellón", "Ceuta", "Ciudad Real", "Cordoba", "Coruña, La", "Cuenca", "Gerona", "Granada", "Guadalajara", "Guipúzcoa", "Huelva",
-            "Huesca", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Melilla", "Murcia", "Navarra", "Orense", "Palencia", "Palmas, Las", "Pontevedra", "Rioja, La",
-            "Salamanca", "Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora",
-            "Zaragoza"],
+            "Cádiz", "Cantabria", "Castellón", "Ceuta", "Ciudad Real", "Cordoba", "Coruña, La", "Cuenca", "Gerona", "Granada",
+            "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Melilla", "Murcia",
+            "Navarra", "Orense", "Palencia", "Palmas, Las", "Pontevedra", "Rioja, La", "Salamanca", "Santa Cruz de Tenerife", "Segovia",
+            "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza"],
         status: [
             {
-                id: "AFFECTED",
-                title: "Affected",
+                id: "AFFECTED", title: "Affected"
             },
             {
-                id: "UNAFFECTED",
-                title: "Unaffected",
+                id: "UNAFFECTED", title: "Unaffected"
             },
             {
-                id: "CONTROL",
-                title: "Control",
+                id: "CONTROL", title: "Control"
             },
             {
-                id: "UNKNOWN",
-                title: "Unknown",
-            },
+                id: "UNKNOWN", title: "Unknown"
+            }
         ],
         life_status: [
             {
-                id: "ALIVE",
-                title: "Alive",
+                id: "ALIVE", title: "Alive"
             },
             {
-                id: "ABORTED",
-                title: "Aborted",
+                id: "ABORTED", title: "Aborted"
             },
             {
-                id: "DECEASED",
-                title: "Deceased",
+                id: "DECEASED", title: "Deceased"
             },
             {
-                id: "UNBORN",
-                title: "Unborn",
+                id: "UNBORN", title: "Unborn"
             },
             {
-                id: "STILLBORN",
-                title: "Still-born",
+                id: "STILLBORN", title: "Still-born"
             },
             {
-                id: "MISCARRIAGE",
-                title: "Miscarriage",
+                id: "MISCARRIAGE", title: "Miscarriage"
             },
             {
-                id: "UNKNOWN",
-                title: "Unknown",
-            },
+                id: "UNKNOWN", title: "Unknown"
+            }
         ],
         sample_type: [
             {
-                id: "blood",
-                title: "blood",
+                id: "blood", title: "blood"
             },
             {
-                id: "amniotic_fluid",
-                title: "amniotic fluid",
+                id: "amniotic_fluid", title: "amniotic fluid"
             },
             {
-                id: "chorionic_villi",
-                title: "chorionic villi",
+                id: "chorionic_villi", title: "chorionic villi"
             },
             {
-                id: "circulating_fetal",
-                title: "circulating fetal",
+                id: "circulating_fetal", title: "circulating fetal"
             },
             {
-                id: "circulating_tumor",
-                title: "circulating tumor",
+                id: "circulating_tumor", title: "circulating tumor"
             },
             {
-                id: "tissue_fresh",
-                title: "tissue (fresh)",
+                id: "tissue_fresh", title: "tissue (fresh)"
             },
             {
-                id: "other_fluids",
-                title: "other fluids",
+                id: "other_fluids", title: "other fluids"
             },
             {
-                id: "ne",
-                title: "ne/unknown",
-            },
+                id: "ne", title: "ne/unknown"
+            }
         ],
         cell_line: [
             {
@@ -496,13 +533,14 @@ const tools = {
             },
         ],
         active: false,
-        filter: filter,
+        filter: filterMenu,
         grid: {
             showSelect: true,
-            nucleotideGenotype: true
+            nucleotideGenotype: true,
+            downloadQcSample: false
         }
     },
     genomeBrowser: {
         active: false,
-    },
+    }
 };
