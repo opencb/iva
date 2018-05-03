@@ -18,7 +18,6 @@
  * Created by imedina on 05/06/17.
  */
 const filterMenu = {
-    missing: true,
     searchButtonText: "Search",
     tooltip: {
         classes: "qtip-dark qtip-rounded qtip-shadow"
@@ -52,6 +51,11 @@ const filterMenu = {
                                 {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
                             ],
                             EXAC: [
+                                {id: "ALL", name: "All"}
+                            ]
+                        },
+                        platinum: {
+                            illumina_platinum: [
                                 {id: "ALL", name: "All"}
                             ]
                         }
@@ -211,66 +215,72 @@ const tools = {
     browser: {
         title: "Variant Browser",
         active: false,
-        queryParams: {
-            useSearchIndex: "auto",
-            approximateCount: true,
-            approximateCountSamplingSize: 5000,
-            timeout: 30000
+        filter: {
+            // This disables two subsections in the filter menu Prioritization
+            menu: Object.assign({}, filterMenu, {skipSubsections: ["sample"]}),
+            examples: [
+                {
+                    name: "Example BRCA2",
+                    query: {
+                        gene: "BRCA2",
+                        conservation: "phylop<0.001"
+                    },
+                },
+                {
+                    name: "Example OR11",
+                    query: {
+                        gene: "OR11H1",
+                        conservation: "phylop<=0.001"
+                    },
+                },
+            ]
         },
-        filters: [
-            {
-                name: "Example BRCA2",
-                query: {
-                    gene: "BRCA2",
-                    conservation: "phylop<0.001"
-                },
-            },
-            {
-                name: "Example OR11",
-                query: {
-                    gene: "OR11H1",
-                    conservation: "phylop<=0.001"
-                },
-            },
-        ],
-        // This disables two subsections in the filter menu Prioritization
-        filter: Object.assign({}, filterMenu, {skipSubsections: ["sample"]}),
         grid: {
             showSelect: false,
-            nucleotideGenotype: false
+            nucleotideGenotype: false,
+            includeMissing: true,
+            queryParams: {
+                useSearchIndex: "auto",
+                approximateCount: true,
+                approximateCountSamplingSize: 5000,
+                timeout: 30000
+            }
         }
     },
     interpretation: {
         title: "Variant Interpreter",
         active: false,
-        queryParams: {
-            useSearchIndex: "yes",
-            approximateCount: true,
-            approximateCountSamplingSize: 5000,
-            timeout: 30000
+        filter: {
+            // This disables two subsections in the filter menu Prioritization
+            menu: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
+            examples: [
+                {
+                    name: "Example BRCA2",
+                    query: {
+                        gene: "BRCA2",
+                        conservation: "phylop<0.001",
+                    },
+                },
+                {
+                    name: "Example OR11",
+                    query: {
+                        gene: "OR11H1",
+                        conservation: "phylop<=0.001",
+                    },
+                },
+            ]
         },
-        filters: [
-            {
-                name: "Example BRCA2",
-                query: {
-                    gene: "BRCA2",
-                    conservation: "phylop<0.001",
-                },
-            },
-            {
-                name: "Example OR11",
-                query: {
-                    gene: "OR11H1",
-                    conservation: "phylop<=0.001",
-                },
-            },
-        ],
-        // This disables two subsections in the filter menu Prioritization
-        filter: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
         grid: {
             showSelect: true,
             nucleotideGenotype: true,
-            interpretation: true
+            interpretation: true,
+            includeMissing: true,
+            queryParams: {
+                useSearchIndex: "yes",
+                approximateCount: true,
+                approximateCountSamplingSize: 5000,
+                timeout: 30000
+            }
         }
     },
     facet: {
@@ -319,7 +329,9 @@ const tools = {
                 name: "Polyphen", value: "polyphen"
             }
         ],
-        filter: filterMenu
+        filter: {
+            menu: filterMenu
+        }
     },
     panel: {
         active: false
@@ -359,35 +371,24 @@ const tools = {
                 {id: "interactive", title: "Interactive (based on TEAM paper)"},
                 {id: "automatic", title: "Automatic", checked: true},
             ],
+
             // Interpretation standard config
             title: "Interpretation",
-            queryParams: {
-                useSearchIndex: "yes",
-                approximateCount: true,
-                approximateCountSamplingSize: 5000,
-                timeout: 30000
+            filter: {
+                // This disables two subsections in the filter menu Prioritization
+                menu: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
+                examples: []
             },
-            filters: [
-                {
-                    name: "Example BRCA2",
-                    query: {
-                        gene: "BRCA2",
-                        conservation: "phylop<0.001",
-                    },
-                },
-                {
-                    name: "Example OR11",
-                    query: {
-                        gene: "OR11H1",
-                        conservation: "phylop<=0.001",
-                    },
-                },
-            ],
-            // This disables two subsections in the filter menu Prioritization
-            filter: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
             grid: {
                 showSelect: true,
-                nucleotideGenotype: true
+                nucleotideGenotype: true,
+                includeMissing: true,
+                queryParams: {
+                    useSearchIndex: "yes",
+                    approximateCount: true,
+                    approximateCountSamplingSize: 5000,
+                    timeout: 30000
+                }
             }
         },
         report: {
