@@ -341,7 +341,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.protein}}">
                     <div class="content feature-view" id="protein">
-                        <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
+                        <opencga-protein-view opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
                                               project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
                                               protein="{{protein}}" population-frequencies="{{config.populationFrequencies}}"
                                               consequence-types="{{config.consequenceTypes}}"
