@@ -318,8 +318,8 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.gene}}">
                     <div class="content feature-view" id="gene">
-                        <opencga-gene-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
-                                           project="{{project}}" study="{{study}}"
+                        <opencga-gene-view opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
+                                           project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
                                            gene="{{gene}}" population-frequencies="{{config.populationFrequencies}}"
                                            consequence-types="{{config.consequenceTypes}}"
                                            protein-substitution-scores="{{config.proteinSubstitutionScores}}"
@@ -331,7 +331,7 @@
                 <template is="dom-if" if="{{config.enabledComponents.transcript}}">
                     <div class="content feature-view" id="transcript">
                         <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
-                                                 project="{{project}}" study="{{study}}" transcript="{{transcript}}" gene="{{gene}}"
+                                                 project="{{opencgaSession.project}}" study="{{opencgaSession.study}}" transcript="{{transcript}}" gene="{{gene}}"
                                                  population-frequencies="{{config.populationFrequencies}}" consequence-types="{{config.consequenceTypes}}"
                                                  protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                                  config="{{config.tools.gene}}">
@@ -342,7 +342,7 @@
                 <template is="dom-if" if="{{config.enabledComponents.protein}}">
                     <div class="content feature-view" id="protein">
                         <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
-                                              project="{{project}}" study="{{study}}"
+                                              project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
                                               protein="{{protein}}" population-frequencies="{{config.populationFrequencies}}"
                                               consequence-types="{{config.consequenceTypes}}"
                                               protein-substitution-scores="{{config.proteinSubstitutionScores}}"
@@ -373,7 +373,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.projects}}">
                     <div class="content" id="projects" style="width: 60%; margin: auto">
-                        <opencga-projects opencga-client="{{opencgaClient}}" projects="{{projects}}" study-summaries="{{studySummaries}}"
+                        <opencga-projects opencga-client="{{opencgaClient}}" projects="{{opencgaSession.projects}}" study-summaries="{{studySummaries}}"
                                           on-project="updateProject" on-study="updateStudy">
                         </opencga-projects>
                     </div>
@@ -381,7 +381,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.project}}">
                     <div class="content" id="project">
-                        <opencga-project opencga-client="{{opencgaClient}}" project="{{project}}" study-summaries="{{studySummaries}}"
+                        <opencga-project opencga-client="{{opencgaClient}}" project="{{opencgaSession.project}}" study-summaries="{{studySummaries}}"
                                          on-study="updateStudy">
                         </opencga-project>
                     </div>
