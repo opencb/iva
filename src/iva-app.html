@@ -22,6 +22,7 @@
 <link rel="import" href="jso-styles.html">
 <link rel="import" href="welcome.html">
 
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-genome-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-interpretation.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-facet.html">
@@ -311,7 +312,9 @@
                 </template>
                 <template is="dom-if" if="{{config.enabledComponents.genomeBrowser}}">
                     <div class="content" id="genomeBrowser">
-                        Not implemented yet.
+                        <opencga-genome-browser opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
+                                                opencga-client="{{opencgaClient}}">
+                        </opencga-genome-browser>
                         <!--<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>-->
                     </div>
                 </template>
