@@ -311,12 +311,12 @@
                         </variant-beacon>
                     </div>
                 </template>
+
                 <template is="dom-if" if="{{config.enabledComponents.genomeBrowser}}">
                     <div class="content" id="genomeBrowser">
                         <opencga-genome-browser opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
                                                 opencga-client="{{opencgaClient}}">
                         </opencga-genome-browser>
-                        <!--<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>-->
                     </div>
                 </template>
 
@@ -354,6 +354,7 @@
                         </opencga-protein-view>
                     </div>
                 </template>
+
                 <!--<div class="collapse content" id="dashboard">-->
                 <!--Not implemented yet!-->
                 <!--&lt;!&ndash;<opencga-dahsboard></opencga-dahsboard>&ndash;&gt;-->
@@ -393,7 +394,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.samples}}">
                     <div class="content" id="samples">
-                        <opencga-sample-browser opencga-session="{{opencgaSession}}" config="{{config.tools.clinical}}"></opencga-sample-browser>
+                        <opencga-sample-browser opencga-session="{{opencgaSession}}" config="{{config.sampleBrowser}}"></opencga-sample-browser>
                     </div>
                 </template>
                 <!--<div class="collapse content" id="studyInformation">-->
@@ -456,6 +457,8 @@
                 _config.populationFrequencies = populationFrequencies;
                 _config.proteinSubstitutionScores = proteinSubstitutionScores;
                 _config.consequenceTypes = consequenceTypes;
+
+                _config.sampleBrowser = sampleBrowser;
 
                 // We can customise which components are active by default, this improves the first loading time.
                 _config.enabledComponents.home = true;

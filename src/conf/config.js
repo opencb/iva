@@ -81,9 +81,14 @@ const application = {
             visibility: "public",
         },
         {
-            id: "panel",
-            title: "Panels",
+            id: "beacon",
+            title: "Beacon",
             visibility: "public",
+        },
+        {
+            id: "genomeBrowser",
+            title: "Genome Browser (Beta)",
+            visibility: "public"
         },
         {
             id: "analysis",
@@ -91,11 +96,7 @@ const application = {
             visibility: "private",
             submenu: [
                 {
-                    separator: true,
-                    visibility: "public",
-                },
-                {
-                    title: "Interpretation",
+                    title: "Clinical Interpretation",
                     category: true,
                     visibility: "public",
                 },
@@ -109,21 +110,8 @@ const application = {
                     title: "Cancer",
                     visibility: "public",
                 },
-            ],
-        },
-        {
-            id: "beacon",
-            title: "Beacon",
-            visibility: "public",
-        },
-        {
-            id: "tools",
-            title: "Tools",
-            visibility: "public",
-            submenu: [
                 {
-                    id: "ibs",
-                    title: "IBS",
+                    separator: true,
                     visibility: "public",
                 },
                 {
@@ -131,18 +119,40 @@ const application = {
                     title: "Burden Test",
                     visibility: "public",
                 },
+            ],
+        },
+        {
+            id: "tools",
+            title: "Tools",
+            visibility: "public",
+            submenu: [
+                {
+                    title: "Catalog",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "samples",
+                    title: "Samples",
+                    visibility: "public",
+                },
+                {
+                    id: "panel",
+                    title: "Panels",
+                    visibility: "public",
+                },
                 {
                     separator: true,
                     visibility: "public",
                 },
                 {
-                    title: "Export",
+                    title: "Other",
                     category: true,
                     visibility: "public",
                 },
                 {
-                    id: "saturation",
-                    title: "Saturation",
+                    id: "ibs",
+                    title: "IBS",
                     visibility: "public",
                 },
                 {
@@ -151,11 +161,6 @@ const application = {
                     visibility: "public",
                 }
             ]
-        },
-        {
-            id: "genomeBrowser",
-            title: "Genome Browser",
-            visibility: "public"
         },
     ],
     search: {
@@ -188,6 +193,17 @@ const application = {
         minRemainingTime: 60000,
         // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
         maxRemainingTime: 600000
+    }
+};
+
+const sampleBrowser = {
+    title: "Sample Browser",
+    showTitle: true,
+    filter: {
+
+    },
+    grid: {
+        showSelect: true,
     }
 };
 
