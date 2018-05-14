@@ -221,6 +221,7 @@ const tools = {
             examples: [
                 {
                     name: "Example BRCA2",
+                    active: false,
                     query: {
                         gene: "BRCA2",
                         conservation: "phylop<0.001"
@@ -255,19 +256,21 @@ const tools = {
             menu: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
             examples: [
                 {
-                    name: "Example BRCA2",
+                    name: "Clinical Interpretation (tiering)",
+                    active: true,
                     query: {
-                        gene: "BRCA2",
-                        conservation: "phylop<0.001",
-                    },
+                        biotype: "protein_coding",
+                        alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001"
+                    }
                 },
                 {
-                    name: "Example OR11",
+                    name: "Stickler syndrome",
                     query: {
-                        gene: "OR11H1",
-                        conservation: "phylop<=0.001",
-                    },
-                },
+                        gene: "COL11A1,COL11A2,COL2A1,COL9A1,COL9A2,COL9A3,LOXL3",
+                        biotype: "protein_coding",
+                        alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001"
+                    }
+                }
             ]
         },
         grid: {
@@ -278,7 +281,7 @@ const tools = {
             queryParams: {
                 useSearchIndex: "yes",
                 approximateCount: true,
-                approximateCountSamplingSize: 5000,
+                approximateCountSamplingSize: 1000,
                 timeout: 30000
             }
         }
