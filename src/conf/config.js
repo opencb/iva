@@ -21,8 +21,8 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.2",
-    // host: "http://localhost:9090/opencga",
+    host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.6",
+    // host: "http://10.248.117.63:8080/opencga-1.3.5",
     version: "v1",
 
     // This allows IVA to query a OpenCGA instance being an 'anonymous' user, this means that no login is required.
