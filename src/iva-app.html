@@ -22,6 +22,7 @@
 <link rel="import" href="jso-styles.html">
 <link rel="import" href="welcome.html">
 
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-genome-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-interpretation.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-facet.html">
@@ -36,6 +37,7 @@
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-protein-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-project.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-browser.html">
 <!--<link rel="import" href="../lib/jsorolla/src/core/opencga/catalog/opencga-study.html">-->
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-login.html">
 <link rel="import" href="iva-settings.html">
@@ -309,10 +311,12 @@
                         </variant-beacon>
                     </div>
                 </template>
+
                 <template is="dom-if" if="{{config.enabledComponents.genomeBrowser}}">
                     <div class="content" id="genomeBrowser">
-                        Not implemented yet.
-                        <!--<variant-genome-browser project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" region="{{region}}"></variant-genome-browser>-->
+                        <opencga-genome-browser opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
+                                                opencga-client="{{opencgaClient}}">
+                        </opencga-genome-browser>
                     </div>
                 </template>
 
@@ -341,7 +345,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.protein}}">
                     <div class="content feature-view" id="protein">
-                        <opencga-protein-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
+                        <opencga-protein-view opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
                                               project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
                                               protein="{{protein}}" population-frequencies="{{config.populationFrequencies}}"
                                               consequence-types="{{config.consequenceTypes}}"
@@ -350,6 +354,7 @@
                         </opencga-protein-view>
                     </div>
                 </template>
+
                 <!--<div class="collapse content" id="dashboard">-->
                 <!--Not implemented yet!-->
                 <!--&lt;!&ndash;<opencga-dahsboard></opencga-dahsboard>&ndash;&gt;-->
@@ -387,6 +392,11 @@
                     </div>
                 </template>
 
+                <template is="dom-if" if="{{config.enabledComponents.samples}}">
+                    <div class="content" id="samples">
+                        <opencga-sample-browser opencga-session="{{opencgaSession}}" config="{{config.sampleBrowser}}"></opencga-sample-browser>
+                    </div>
+                </template>
                 <!--<div class="collapse content" id="studyInformation">-->
                 <!--<opencga-study opencga-client="{{opencgaClient}}" project="{{project}}"-->
                 <!--study="{{study}}"></opencga-study>-->
@@ -448,6 +458,8 @@
                 _config.proteinSubstitutionScores = proteinSubstitutionScores;
                 _config.consequenceTypes = consequenceTypes;
 
+                _config.sampleBrowser = sampleBrowser;
+
                 // We can customise which components are active by default, this improves the first loading time.
                 _config.enabledComponents.home = true;
 
@@ -459,7 +471,7 @@
                 }
 
                 // Enabled components catalog
-                let components = ["login", "projects", "project", "settings", "gene", "transcript", "protein"];
+                let components = ["login", "projects", "project", "samples", "settings", "gene", "transcript", "protein"];
                 for (let component of components) {
                     _config.enabledComponents[component] = false;
                 }

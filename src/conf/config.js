@@ -21,7 +21,8 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.2",
+    host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.6",
+    // host: "http://10.248.117.63:8080/opencga-1.3.5",
     version: "v1",
 
     // This allows IVA to query a OpenCGA instance being an 'anonymous' user, this means that no login is required.
@@ -148,13 +149,18 @@ const application = {
             visibility: "none",
             submenu: [
                 {
-                    id: "ibs",
-                    title: "IBS",
+                    title: "Catalog",
+                    category: true,
                     visibility: "public",
                 },
                 {
-                    id: "burden",
-                    title: "Burden Test",
+                    id: "samples",
+                    title: "Samples",
+                    visibility: "public",
+                },
+                {
+                    id: "panel",
+                    title: "Panels",
                     visibility: "public",
                 },
                 {
@@ -162,13 +168,13 @@ const application = {
                     visibility: "public",
                 },
                 {
-                    title: "Export",
+                    title: "Other",
                     category: true,
                     visibility: "public",
                 },
                 {
-                    id: "saturation",
-                    title: "Saturation",
+                    id: "ibs",
+                    title: "IBS",
                     visibility: "public",
                 },
                 {
@@ -212,6 +218,17 @@ const application = {
         minRemainingTime: 60000,
         // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
         maxRemainingTime: 600000
+    }
+};
+
+const sampleBrowser = {
+    title: "Sample Browser",
+    showTitle: true,
+    filter: {
+
+    },
+    grid: {
+        showSelect: true,
     }
 };
 
