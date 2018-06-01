@@ -306,7 +306,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.beacon}}">
                     <div class="content" id="beacon">
-                        <variant-beacon opencga-client="{{opencgaClient}}" project="{{project}}" studies="{{project.studies}}"
+                        <variant-beacon opencga-client="{{opencgaClient}}" project="{{opencgaSession.project}}" studies="{{opencgaSession.project.studies}}"
                                         hosts="{{config.tools.beacon.hosts}}">
                         </variant-beacon>
                     </div>
