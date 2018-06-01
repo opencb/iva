@@ -42,26 +42,26 @@ const filterMenu = {
                     ],
                     tooltip: "Filter by sample genotypes"
                 },
-                {
-                    id: "cohort",
-                    title: "Cohort Stats (MAF)",
-                    cohorts: {  // organised in projects and studies
-                        reference_grch37: {
-                            "1kG_phase3": [
-                                {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
-                            ],
-                            EXAC: [
-                                {id: "ALL", name: "All"}
-                            ]
-                        },
-                        platinum: {
-                            illumina_platinum: [
-                                {id: "ALL", name: "All"}
-                            ]
-                        }
-                    },
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
-                },
+                // {
+                //     id: "cohort",
+                //     title: "Cohort Stats (MAF)",
+                //     cohorts: {  // organised in projects and studies
+                //         reference_grch37: {
+                //             "1kG_phase3": [
+                //                 {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
+                //             ],
+                //             EXAC: [
+                //                 {id: "ALL", name: "All"}
+                //             ]
+                //         },
+                //         platinum: {
+                //             illumina_platinum: [
+                //                 {id: "ALL", name: "All"}
+                //             ]
+                //         }
+                //     },
+                //     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                // },
                 {
                     id: "study",
                     title: "Studies Filter",
