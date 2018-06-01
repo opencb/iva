@@ -113,8 +113,8 @@ const opencga = {
 };
 
 const application = {
-    title: "IVA",
-    version: "v0.9.0",
+    title: "HGVA",
+    version: "v2.0.0",
     logo: "img/opencb-logo.png",
     // The order, title and nested submenus are respected
     menu: [
@@ -125,7 +125,7 @@ const application = {
         },
         {
             id: "facet",
-            title: "Facets (New!)",
+            title: "Facets (New)",
             visibility: "public"
         },
         {
