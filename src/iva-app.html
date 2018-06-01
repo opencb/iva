@@ -951,7 +951,7 @@
             }
 
             quickSearch(e) {
-                window.location.hash = "browser/" + this.project.alias + "/" + this.study.alias;
+                window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
                 this.browserQuery = {xref: e.detail.value};
             }
 
