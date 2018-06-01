@@ -237,7 +237,7 @@
             <template is="dom-if" if="{{config.enabledComponents.home}}">
                 <div class="center">
                     <div class="content" id="home">
-                        <welcome-web project={{project}} study="{{study.alias}}" version="{{config.version}}" on-search="quickSearch"></welcome-web>
+                        <welcome-web project={{opencgaSession.project}} study="{{opencgaSession.study.alias}}" version="{{config.version}}" on-search="quickSearch"></welcome-web>
                     </div>
                 </div>
             </template>
