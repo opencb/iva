@@ -321,7 +321,7 @@
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.gene}}">
-                    <div class="content feature-view" id="gene">
+                    <div class="content" id="gene" style="margin: auto; width: 90%">
                         <opencga-gene-view opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
                                            project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
                                            gene="{{gene}}" population-frequencies="{{config.populationFrequencies}}"
