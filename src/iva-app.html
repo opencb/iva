@@ -237,7 +237,7 @@
             <template is="dom-if" if="{{config.enabledComponents.home}}">
                 <div class="center">
                     <div class="content" id="home">
-                        <welcome-web project={{project}} study="{{study.alias}}" version="{{config.version}}" on-search="quickSearch"></welcome-web>
+                        <welcome-web project={{opencgaSession.project}} study="{{opencgaSession.study.alias}}" version="{{config.version}}" on-search="quickSearch"></welcome-web>
                     </div>
                 </div>
             </template>
@@ -306,7 +306,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.beacon}}">
                     <div class="content" id="beacon">
-                        <variant-beacon opencga-client="{{opencgaClient}}" project="{{project}}" studies="{{project.studies}}"
+                        <variant-beacon opencga-client="{{opencgaClient}}" project="{{opencgaSession.project}}" studies="{{opencgaSession.project.studies}}"
                                         hosts="{{config.tools.beacon.hosts}}">
                         </variant-beacon>
                     </div>
@@ -321,7 +321,7 @@
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.gene}}">
-                    <div class="content feature-view" id="gene">
+                    <div class="content" id="gene" style="margin: auto; width: 90%">
                         <opencga-gene-view opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
                                            project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
                                            gene="{{gene}}" population-frequencies="{{config.populationFrequencies}}"
@@ -949,7 +949,8 @@
             }
 
             quickSearch(e) {
-                window.location.hash = "browser/" + this.project.alias + "/" + this.study.alias;
+                this.tool = "#browser";
+                window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
                 this.browserQuery = {xref: e.detail.value};
             }
 
