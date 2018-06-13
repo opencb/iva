@@ -23,6 +23,7 @@
 <link rel="import" href="welcome.html">
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-genome-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/individual/opencga-individual-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-interpretation.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-facet.html">
@@ -295,6 +296,12 @@
                                           opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
                                           on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" >
                         </opencga-variant-clinical>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.individual}}">
+                    <div class="content" id="individual">
+                        <opencga-individual-browser  opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}" config="[[config.tools.clinical]]"></opencga-individual-browser>
                     </div>
                 </template>
 

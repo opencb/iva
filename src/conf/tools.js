@@ -341,6 +341,9 @@ const tools = {
     panel: {
         active: false
     },
+    individual: {
+        active: false
+    },
     gene: {
         protein: {
             color: {
@@ -391,8 +394,9 @@ const tools = {
                 queryParams: {
                     useSearchIndex: "yes",
                     approximateCount: true,
+                    skipCount: false,
                     approximateCountSamplingSize: 5000,
-                    timeout: 30000
+                    timeout: 30000,
                 }
             }
         },
