@@ -71,6 +71,11 @@ const application = {
             visibility: "public",
         },
         {
+            id: "individual",
+            title: "Individual",
+            visibility: "none",
+        },
+        {
             id: "clinical",
             title: "Clinical",
             visibility: "public",
