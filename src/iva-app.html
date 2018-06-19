@@ -307,7 +307,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.panel}}">
                     <div class="content" id="panel">
-                        <opencga-panel project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" panel-examples="{{config.panelExamples}}"></opencga-panel>
+                        <opencga-panel opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" panel-examples="{{config.panelExamples}}"></opencga-panel>
                     </div>
                 </template>
 
