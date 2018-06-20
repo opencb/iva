@@ -18,6 +18,10 @@ IVA is versioned following the rules from [Semantic versioning](http://semver.or
 ### Maintainers
 We recommend to contact IVA developers by writing to OpenCB mailing list opencb@googlegroups.com. The main developers and maintainers are:
 * Ignacio Medina (im411@cam.ac.uk) (_Founder and Project Leader_)
+* Javier Perez Florido (javier.perez.florido.ext@juntadeandalucia.es)
+* Alexis Martínez (alexis.martinez@juntadeandalucia.es)
+
+##### Former Contributors
 * Swaathi Kandasaamy (sk913@cam.ac.uk)
 * Asuncion Gallego (agallego@cipf.es)
 
@@ -30,26 +34,12 @@ IVA is developed in HTML5, therefore it is mainly developed in JavaScript and ma
 Stable releases are merged and tagged at _master_ branch, you are encourage to use latest stable release for production. Current active development is carried out at _develop_ branch, only building is guaranteed and bugs are expected, use this branch for development or for testing new functionalities. The only dependency of IVA from OpenCB is JSorolla.
 
 ### Prerequisites
-The following technologies are needed to build IVA: [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [Bower](https://bower.io/) and [Grunt](http://gruntjs.com/getting-started).
+The following technologies are needed to build IVA: [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/) and [Grunt](http://gruntjs.com/getting-started).
 
 ##### Installing Node.js and npm
 To install [Node.js](https://nodejs.org/en/) you can visit [this link](http://blog.teamtreehouse.com/install-node-js-npm-linux).
 
 [npm](https://www.npmjs.com/) stands for *node packaged modules* and it is the dependency manager of [Node.js](https://nodejs.org/en/).
-
-##### Install Bower
-After installing Node.js and npm, we can install Bower by executing the following commands with root permission:
-
-```
-$ sudo npm install -g bower
-```
-
-##### Install Grunt
-To install grunt, run
-
-```
- npm install -g grunt-cli
-```
 
 ### Cloning
 IVA is an open-source project and can be downloaded either as package(tar.gz) from GitHub releases or source code by cloning the repository.
@@ -84,11 +74,11 @@ After this, in both cases, you **must** execute the following command to fetch t
 git submodule update --init
 ```
 
-Go to lib/jsorolla and checkout to ***next-v2.0.0*** branch of Jsorolla by 
+Go to lib/jsorolla and checkout to ***develop*** branch of Jsorolla by 
 
 ```
 cd lib/jsorolla
-git checkout next-v2.0.0
+git checkout develop
 ```
 
 ### Build
@@ -97,8 +87,6 @@ First, you must update JSorolla dependencies, from the root folder execute:
 ```
 cd lib/jsorolla
 npm install
-bower install
-grunt
 ```
 
 Finally, to build IVA execute:
@@ -109,23 +97,25 @@ We have to install npm packages for IVA, from the the root folder execute:
 npm install
 ```
 
-This will make npm to look at file [package.json](https://github.com/opencb/iva/blob/develop/package.json) and install locally all the dependencies listed there.
-
-To install all *Bower* dependencies for IVA execute from the root folder:
+And now execute:
 
 ```
-bower install
+npm run build
 ```
 
-This will make Bower to look at file [bower.json](https://github.com/opencb/iva/blob/develop/bower.json) and install locally all the dependencies.
-
-At last execute:
-
-```
-grunt
-```
-
-When completed, all compiled files will be located under the build folder.
+when completed, all compiled files will be located under the _build_ folder.
 
 ### Testing
 You can copy build content to a web server such as Apache HTTP Server and open your favourite internet browser to open IVA.
+
+### Execute Tests in development with nightwatch(http://nightwatchjs.org/)
+Prerequisite: make sure you have JDK installed, with at least version 8. If you don't have it, you can grab it from http://www.oracle.com/technetwork/java/javase/downloads/index.html.
+
+1. npm install --dev
+2. Selenium server. Download the latest release .jar from http://selenium-release.storage.googleapis.com/index.html. i.e. selenium-server-standalone-3.7.0.jar
+3. Chromedriver. Download from https://sites.google.com/a/chromium.org/chromedriver/downloads that version which supports your chrome versión. You can review what version fits your browser here https://chromedriver.storage.googleapis.com/2.33/notes.txt.
+4. Create a bin folder inside your test folder in root path
+5. Move selenium bin and chrome bin inside that bin folder.
+6. npm run test-e2e ( or ./node_modules/.bin/nightwatch test/e2e/clinical-prioritization.js if you want execute just one)
+
+

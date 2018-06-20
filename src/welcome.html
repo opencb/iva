@@ -14,17 +14,13 @@
   ~ limitations under the License.
   -->
 
-<link rel="import" href="../bower_components/polymer/polymer.html">
-
-<link rel="import" href="jso-styles.html">
-
 <dom-module id="welcome-web">
-
     <template>
-        <style is="custom-style" include="jso-styles"></style>
+        <!--<style include="jso-styles">-->
         <style>
-            .center {
+            .welcome-center {
                 margin: auto;
+                width: 80%;
                 text-align: justify;
                 font-size: 18px;
                 color: #797979;
@@ -32,7 +28,7 @@
         </style>
 
         <!-- This is where main application is rendered -->
-        <div class="center">
+        <div class="welcome-center">
             <div style="text-align: center">
                 <br>
                 <h1>Genomics England Web Data Portal (Beta)</h1>
@@ -52,8 +48,8 @@
                     </p>
                 </div>
                 <br>
-                <input type="text" class="form-control input-lg" id="welcomeSearchTextBox" style="text-align: center;"
-                       placeholder="Search for a gene, transcript, variant, multi-allelic variant or region" on-keyup="callAutoComplete">
+                <!--<input type="text" class="form-control input-lg" id="welcomeSearchTextBox" style="text-align: center;"-->
+                       <!--placeholder="Search for a gene, transcript, variant, multi-allelic variant or region" on-keyup="callAutoComplete">-->
             </div>
 
             <div class="col-sm-12">
@@ -69,28 +65,31 @@
     </template>
 
     <script>
-        Polymer({
-            is: 'welcome-web',
-            properties: {
-                opencgaClient: {
-                    type: Object
-                },
-                host: {
-                    type: String,
-                    value: "http://bioinfodev.hpc.cam.ac.uk/hgva"
-                },
-                userId: {
-                    type: String,
-                    value: ""
-                },
-                project: {
-                    type: String,
-                    value: ""
-                },
-                study: {
-                    type: Object
+
+        class Welcome extends Polymer.Element {
+
+            static get is() {
+                return 'welcome-web';
+            }
+
+            static get properties(){
+                version: {
+                    type: String
                 }
             }
-        });
+
+            constructor() {
+                super();
+            }
+            _attachDom(dom) {
+                this.appendChild(dom);
+            }
+
+            ready() {
+                super.ready();
+            }
+        }
+
+        customElements.define(Welcome.is, Welcome);
     </script>
 </dom-module>
