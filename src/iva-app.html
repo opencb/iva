@@ -143,16 +143,16 @@
                                             {{opencgaSession.user.id}} <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="#projects"><i class="fa fa-database" aria-hidden="true" style="padding-right: 10px"></i>Projects</a>
-                                            </li>
-                                            <li>
-                                                <a href="#samples"><i class="fa fa-users" aria-hidden="true" style="padding-right: 10px"></i>Samples</a>
-                                            </li>
+                                            <!--<li>-->
+                                                <!--<a href="#projects"><i class="fa fa-database" aria-hidden="true" style="padding-right: 10px"></i>Projects</a>-->
+                                            <!--</li>-->
+                                            <!--<li>-->
+                                                <!--<a href="#samples"><i class="fa fa-users" aria-hidden="true" style="padding-right: 10px"></i>Samples</a>-->
+                                            <!--</li>-->
                                             <!--<li>-->
                                             <!--<a data-target="#jobModal" data-toggle="modal"><i class="fa fa-bars" aria-hidden="true"></i> Jobs</a>-->
                                             <!--</li>-->
-                                            <li role="separator" class="divider"></li>
+                                            <!--<li role="separator" class="divider"></li>-->
                                             <li>
                                                 <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
                                             </li>
@@ -984,7 +984,7 @@
 //                    console.log(this.breadcrumbElement)
                     PolymerUtils.innerHTML("breadcrumb", "");
                     // we add the 'Projects' link
-                    let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, false, this.config.breadcrumb.title);
+                    let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, true, this.config.breadcrumb.title);
                     breadcrumbElement.appendChild(projects);
 
                     // We first check if one study is selected, for this study must be defined and have at least one key

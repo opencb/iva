@@ -25,43 +25,43 @@ const filterMenu = {
     skipSubsections: [],    // controls which subsections are disabled and should not be displayed
     sections: [             // sections and subsections, structure and order is respected
         {
-            title: "Study and Cohorts",
+            title: "Studies",
             collapsed: false,
             subsections: [
-                {
-                    id: "sample",
-                    title: "Samples",
-                    showApproximateCount: true,
-                    showSelectSamples: true,
-                    inheritanceModes: [
-                        {key: "none", text: "Select..."},
-                        {key: "autoDominant", text: "Autosomal Dominant"},
-                        {key: "autoRecessive", text: "Autosomal Recessive"},
-                        {key: "xLinked", text: "X linked"},
-                        {key: "yLinked", text: "Y linked"}
-                    ],
-                    tooltip: "Filter by sample genotypes"
-                },
-                {
-                    id: "cohort",
-                    title: "Cohort Stats (MAF)",
-                    cohorts: {  // organised in projects and studies
-                        reference_grch37: {
-                            "1kG_phase3": [
-                                {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
-                            ],
-                            EXAC: [
-                                {id: "ALL", name: "All"}
-                            ]
-                        },
-                        platinum: {
-                            illumina_platinum: [
-                                {id: "ALL", name: "All"}
-                            ]
-                        }
-                    },
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
-                },
+                // {
+                //     id: "sample",
+                //     title: "Samples",
+                //     showApproximateCount: true,
+                //     showSelectSamples: true,
+                //     inheritanceModes: [
+                //         {key: "none", text: "Select..."},
+                //         {key: "autoDominant", text: "Autosomal Dominant"},
+                //         {key: "autoRecessive", text: "Autosomal Recessive"},
+                //         {key: "xLinked", text: "X linked"},
+                //         {key: "yLinked", text: "Y linked"}
+                //     ],
+                //     tooltip: "Filter by sample genotypes"
+                // },
+                // {
+                //     id: "cohort",
+                //     title: "Cohort Stats (MAF)",
+                //     cohorts: {  // organised in projects and studies
+                //         reference_grch37: {
+                //             "1kG_phase3": [
+                //                 {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
+                //             ],
+                //             EXAC: [
+                //                 {id: "ALL", name: "All"}
+                //             ]
+                //         },
+                //         platinum: {
+                //             illumina_platinum: [
+                //                 {id: "ALL", name: "All"}
+                //             ]
+                //         }
+                //     },
+                //     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                // },
                 {
                     id: "study",
                     title: "Studies Filter",

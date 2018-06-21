@@ -21,49 +21,49 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.6",
+    host: "https://opencga-embassy.gel.zone/opencga",
     // host: "http://10.248.117.63:8080/opencga-1.3.5",
     version: "v1",
 
     // This allows IVA to query a OpenCGA instance being an 'anonymous' user, this means that no login is required.
     // If 'projects' is empty then all public projects and studies of 'user' will be used.
-    anonymous: {
+    // anonymous: {
         // user: "hgvauser",
-        projects: [
-            {
-                id: "platinum",
-                name: "Platinum",
-                alias: "platinum",
-                organism: {
-                    scientificName: "Homo sapiens",
-                    assembly: "GRCh37"
-                },
-                studies : [
-                    {
-                        id: "illumina_platinum",
-                        name: "Illumina Platinum",
-                        alias: "illumina_platinum"
-                    }
-                ]
-            }
-        ]
-    },
+        // projects: [
+        //     {
+        //         id: "platinum",
+        //         name: "Platinum",
+        //         alias: "platinum",
+        //         organism: {
+        //             scientificName: "Homo sapiens",
+        //             assembly: "GRCh37"
+        //         },
+        //         studies : [
+        //             {
+        //                 id: "illumina_platinum",
+        //                 name: "Illumina Platinum",
+        //                 alias: "illumina_platinum"
+        //             }
+        //         ]
+        //     }
+        // ]
+    // },
     summary: true,
     cookie: {
-        prefix: "iva",
+        prefix: "geliva",
     },
 };
 
 const application = {
     title: "GEL",
-    version: "v0.8.0",
+    version: "v1.0.0-beta",
     logo: "img/Genomics-England-logo-2015.png",
     // The order, title and nested submenus are respected
     menu: [
         {
             id: "browser",
             title: "Variant Browser",
-            visibility: "private",
+            visibility: "public",
         },
         {
             id: "prioritization",
@@ -76,14 +76,9 @@ const application = {
             visibility: "none"
         },
         {
-            id: "individual",
-            title: "Individual",
-            visibility: "none",
-        },
-        {
             id: "clinical",
             title: "Clinical",
-            visibility: "public",
+            visibility: "noe",
         },
         {
             id: "facet",
@@ -98,36 +93,36 @@ const application = {
         {
             id: "genomeBrowser",
             title: "Genome Browser (Beta)",
-            visibility: "public"
+            visibility: "none"
         },
         {
             id: "analysis",
             title: "Analysis",
-            visibility: "private",
+            visibility: "none",
             submenu: [
                 {
                     title: "Clinical Interpretation",
                     category: true,
-                    visibility: "public",
+                    visibility: "none",
                 },
                 {
                     id: "tiering",
                     title: "GEL Tiering (Family)",
-                    visibility: "public",
+                    visibility: "none",
                 },
                 {
                     id: "cancer",
                     title: "Cancer",
-                    visibility: "public",
+                    visibility: "none",
                 },
                 {
                     separator: true,
-                    visibility: "public",
+                    visibility: "none",
                 },
                 {
                     id: "burden",
                     title: "Burden Test",
-                    visibility: "public",
+                    visibility: "none",
                 },
             ],
         },
