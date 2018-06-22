@@ -554,6 +554,22 @@
                 let _this = this;
                 let opencgaSession = this.opencgaClient.createSession()
                     .then(function (response) {
+                        // debugger
+                        let validProjectsAndStudies = {
+                            "100k_genomes_grch37_germline": "RD37",
+                            "100k_genomes_grch38_germline": "RD38",
+                            "100k_genomes_grch38_somatic": "CS38"
+                        };
+                        // let _projects = Object.assign({}, response.projects);
+                        let _projects = [];
+                        for (let project of response.projects) {
+                            let projectId = project.alias.split("@")[1];
+                            if (validProjectsAndStudies[projectId] !== undefined && validProjectsAndStudies[projectId] !== null) {
+                                _projects.push(project);
+                            }
+                        }
+                        response.projects = _projects;
+
                         _this.opencgaSession = Object.assign({}, response); // this forces the observer to be executed.
                     })
                     .catch(function (response) {
