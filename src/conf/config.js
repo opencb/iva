@@ -76,6 +76,11 @@ const application = {
             visibility: "none",
         },
         {
+            id: "family",
+            title: "Family",
+            visibility: "none",
+        },
+        {
             id: "clinical",
             title: "Clinical",
             visibility: "public",

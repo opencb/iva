@@ -24,6 +24,7 @@
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-genome-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-interpretation.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-facet.html">
@@ -302,6 +303,11 @@
                 <template is="dom-if" if="{{config.enabledComponents.individual}}">
                     <div class="content" id="individual">
                         <opencga-individual-browser  opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}" config-values="[[config.tools.clinical]]"></opencga-individual-browser>
+                    </div>
+                </template>
+                <template is="dom-if" if="{{config.enabledComponents.family}}">
+                    <div class="content" id="family">
+                        <opencga-family-browser  opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}"></opencga-family-browser>
                     </div>
                 </template>
 
