@@ -554,23 +554,18 @@
                 let _this = this;
                 let opencgaSession = this.opencgaClient.createSession()
                     .then(function (response) {
-                        // debugger
-                        let validProjectsAndStudies = {
-                            "100k_genomes_grch37_germline": "RD37",
-                            "100k_genomes_grch38_germline": "RD38",
-                            "100k_genomes_grch38_somatic": "CS38"
-                        };
-                        // let _projects = Object.assign({}, response.projects);
-                        let _projects = [];
-                        for (let project of response.projects) {
-                            let projectId = project.alias.split("@")[1];
-                            if (validProjectsAndStudies[projectId] !== undefined && validProjectsAndStudies[projectId] !== null) {
-                                _projects.push(project);
+                        // check if project array has been defined in the config.js
+                        if (UtilsNew.isNotEmptyArray(_this.config.opencga.projects)) {
+                            // TODO we must query projects/info URL to get the whole object
+                            response.projects = _this.config.opencga.projects;
+                            if (UtilsNew.isNotEmptyArray(response.projects[0].studies)) {
+                                response.project = response.projects[0];
+                                response.study = response.projects[0].studies[0];
                             }
                         }
-                        response.projects = _projects;
 
-                        _this.opencgaSession = Object.assign({}, response); // this forces the observer to be executed.
+                        // this forces the observer to be executed.
+                        _this.opencgaSession = Object.assign({}, response);
                     })
                     .catch(function (response) {
                         console.log("An error when creating the OpenCGA session: ", response);

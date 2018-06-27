@@ -25,6 +25,26 @@ const opencga = {
     // host: "http://10.248.117.63:8080/opencga-1.3.5",
     version: "v1",
 
+    // This forces the following projects to be used instead of the user's project
+    // projects: [
+    //     {
+    //         id: "platinum",
+    //         name: "Platinum",
+    //         alias: "platinum",
+    //         organism: {
+    //             scientificName: "Homo sapiens",
+    //             assembly: "GRCh37"
+    //         },
+    //         studies : [
+    //             {
+    //                 id: "illumina_platinum",
+    //                 name: "Illumina Platinum",
+    //                 alias: "illumina_platinum"
+    //             }
+    //         ]
+    //     }
+    // ],
+
     // This allows IVA to query a OpenCGA instance being an 'anonymous' user, this means that no login is required.
     // If 'projects' is empty then all public projects and studies of 'user' will be used.
     // anonymous: {
