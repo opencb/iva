@@ -23,7 +23,6 @@
 <link rel="import" href="welcome.html">
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-genome-browser.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/individual/opencga-individual-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-interpretation.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-facet.html">
@@ -38,6 +37,7 @@
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-protein-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-project.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-browser.html">
 <!--<link rel="import" href="../lib/jsorolla/src/core/opencga/catalog/opencga-study.html">-->
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-login.html">
@@ -478,7 +478,7 @@
                 }
 
                 // Enabled components catalog
-                let components = ["login", "projects", "project", "samples", "settings", "gene", "transcript", "protein"];
+                let components = ["login", "projects", "project", "samples", "individual", "settings", "gene", "transcript", "protein"];
                 for (let component of components) {
                     _config.enabledComponents[component] = false;
                 }
