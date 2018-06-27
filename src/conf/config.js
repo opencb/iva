@@ -26,24 +26,56 @@ const opencga = {
     version: "v1",
 
     // This forces the following projects to be used instead of the user's project
-    // projects: [
-    //     {
-    //         id: "platinum",
-    //         name: "Platinum",
-    //         alias: "platinum",
-    //         organism: {
-    //             scientificName: "Homo sapiens",
-    //             assembly: "GRCh37"
-    //         },
-    //         studies : [
-    //             {
-    //                 id: "illumina_platinum",
-    //                 name: "Illumina Platinum",
-    //                 alias: "illumina_platinum"
-    //             }
-    //         ]
-    //     }
-    // ],
+    projects: [
+        {
+            id: "100k_genomes_grch37_germline",
+            name: "100k Genomes Project GRCh37 Germline",
+            alias: "reopencga@100k_genomes_grch37_germline",
+            organism: {
+                scientificName: "Homo sapiens",
+                assembly: "GRCh37"
+            },
+            studies : [
+                {
+                    id: "RD37",
+                    name: "RD37",
+                    alias: "RD37"
+                }
+            ]
+        },
+        {
+            id: "100k_genomes_grch38_germline",
+            name: "100k Genomes Project GRCh38 Germline",
+            alias: "reopencga@100k_genomes_grch38_germline",
+            organism: {
+                scientificName: "Homo sapiens",
+                assembly: "GRCh38"
+            },
+            studies : [
+                {
+                    id: "RD38",
+                    name: "RD38",
+                    alias: "RD38"
+                }
+            ]
+        },
+        {
+            id: "100k_genomes_grch38_somatic",
+            name: "100k Genomes Project GRCh38 Somatic",
+            alias: "reopencga@100k_genomes_grch38_somatic",
+            organism: {
+                scientificName: "Homo sapiens",
+                assembly: "GRCh38"
+            },
+            studies : [
+                {
+                    id: "CS38",
+                    name: "CS38",
+                    alias: "CS38"
+                }
+            ]
+        }
+    ],
 
     // This allows IVA to query a OpenCGA instance being an 'anonymous' user, this means that no login is required.
     // If 'projects' is empty then all public projects and studies of 'user' will be used.
