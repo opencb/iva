@@ -573,6 +573,7 @@
 
                         // this forces the observer to be executed.
                         _this.opencgaSession = Object.assign({}, response);
+                        _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
                     })
                     .catch(function (response) {
                         console.log("An error when creating the OpenCGA session: ", response);
@@ -632,7 +633,6 @@
                 this.opencgaClient._config.sessionId = credentials.detail.sessionId;
                 this._createOpenCGASession();
 
-                this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
                 if (this.tool === "#login") {
                     this.tool = "#home";
