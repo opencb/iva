@@ -307,20 +307,20 @@ const populationFrequencies = {
                 },
             ],
         },
-        {
-            id: "ESP6500",
-            title: "ESP6500",
-            tooltip: "Only considers variants whose observed allelic frequency in the Exome Variant Server (ESP6500) database is below " +
-            "(or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained from more than 6000 exomes.",
-            populations: [
-                {
-                    id: "EA", title: "European American [EA]"
-                },
-                {
-                    id: "AA", title: "African American [AA]",
-                },
-            ],
-        },
+        // {
+        //     id: "ESP6500",
+        //     title: "ESP6500",
+        //     tooltip: "Only considers variants whose observed allelic frequency in the Exome Variant Server (ESP6500) database is below " +
+        //     "(or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained from more than 6000 exomes.",
+        //     populations: [
+        //         {
+        //             id: "EA", title: "European American [EA]"
+        //         },
+        //         {
+        //             id: "AA", title: "African American [AA]",
+        //         },
+        //     ],
+        // },
     ],
 };
 
