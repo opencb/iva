@@ -30,7 +30,7 @@
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-facet.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/clinical-interpretation-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-variant-clinical.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-panel.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/panel/opencga-panel-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-beacon.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-jobs.html">
 
@@ -314,7 +314,8 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.panel}}">
                     <div class="content" id="panel">
-                        <opencga-panel opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}" panel-examples="{{config.panelExamples}}"></opencga-panel>
+                        <opencga-panel-browser opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                                       on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" ></opencga-panel-browser>
                     </div>
                 </template>
 
