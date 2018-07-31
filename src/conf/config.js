@@ -22,7 +22,6 @@ const cellbase = {
 
 const opencga = {
     host: "https://opencga-embassy.gel.zone/opencga",
-    // host: "http://10.248.117.63:8080/opencga-1.3.5",
     version: "v1",
 
     // This forces the following projects to be used instead of the user's project
@@ -126,6 +125,11 @@ const application = {
             id: "analysis",
             title: "Analysis",
             visibility: "none"
+        },
+        {
+            id: "family",
+            title: "Family",
+            visibility: "none",
         },
         {
             id: "clinical",
@@ -339,20 +343,20 @@ const populationFrequencies = {
                 },
             ],
         },
-        {
-            id: "ESP6500",
-            title: "ESP6500",
-            tooltip: "Only considers variants whose observed allelic frequency in the Exome Variant Server (ESP6500) database is below " +
-            "(or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained from more than 6000 exomes.",
-            populations: [
-                {
-                    id: "EA", title: "European American [EA]"
-                },
-                {
-                    id: "AA", title: "African American [AA]",
-                },
-            ],
-        },
+        // {
+        //     id: "ESP6500",
+        //     title: "ESP6500",
+        //     tooltip: "Only considers variants whose observed allelic frequency in the Exome Variant Server (ESP6500) database is below " +
+        //     "(or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained from more than 6000 exomes.",
+        //     populations: [
+        //         {
+        //             id: "EA", title: "European American [EA]"
+        //         },
+        //         {
+        //             id: "AA", title: "African American [AA]",
+        //         },
+        //     ],
+        // },
     ],
 };
 

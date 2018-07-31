@@ -239,13 +239,14 @@ const tools = {
             ]
         },
         grid: {
-            showSelect: false,
+            showSelectCheckbox: false,
             nucleotideGenotype: false,
             includeMissing: true,
             queryParams: {
                 useSearchIndex: "auto",
                 approximateCount: true,
                 approximateCountSamplingSize: 5000,
+                skipCount: false,
                 timeout: 30000
             }
         }
@@ -276,7 +277,8 @@ const tools = {
             ]
         },
         grid: {
-            showSelect: true,
+            // showSelect: true,
+            showSelectCheckbox: true,
             nucleotideGenotype: true,
             interpretation: true,
             includeMissing: true,
@@ -342,6 +344,9 @@ const tools = {
         active: false
     },
     individual: {
+        active: false
+    },
+    family: {
         active: false
     },
     gene: {
