@@ -30,35 +30,41 @@
         <!-- This is where main application is rendered -->
         <div class="welcome-center">
             <div style="text-align: center">
-                <br>
-                <h1>Genomics England Web Data Portal (Beta)</h1>
-                <br>
-                <div style="font-size: 14px; text-align: justify">
-                    <img src="img/Genomics-England-logo-2015.png" width="160px" style="float: left;margin: 0px 20px 20px 0px">
+                <h1 style="padding: 50px 0px">Genomics England Web Data Portal (Beta)</h1>
+                <div style="font-size: 14px; text-align: justify;padding: 25px 0px">
+                    <img src="img/Genomics-England-logo_colour.jpg" width="160px" style="float: left;margin: 0px 20px 20px 0px">
+
                     <p>
-                        <a href="https://bioresource.nihr.ac.uk/rare-diseases/welcome/">The Genomics England</a> project will sequence 100,000 genomes
-                        from around 70,000 people. Participants are NHS patients with a rare disease, plus their families, and patients with cancer.
+                        The Interactive Variant Analysis (IVA) tool enables whole genome variant browsing and analysis of the Genomics England dataset.
                     </p>
+
                     <p>
-                        The aim is to create a new genomic medicine service for the NHS – transforming the way people are cared for.
-                        Patients may be offered a diagnosis where there wasn’t one before. In time, there is the potential of new and more effective treatments.
+                        This interactive tool provides the functionality to query genetic variants across the cohort and allows you to find
+                        genes affected by deleterious variants that segregate along family pedigrees, case-control, or sporadic samples.
                     </p>
+
                     <p>
-                        This web site provides access to genome-wide sequence variation identified in the maximum number of unrelated individuals from this rare disease cohort.
+                        The Variant Browser tab allows you to efficiently browse annotated and indexed variant studies.
+                        You can query variants using various filters such as: population frequency, consequence type, and phenotype associations.
                     </p>
+
+                    <p>
+                        The Genome Browser tab allows for an interactive and smooth variant visualisation.
+                    </p>
+
+                    <p>
+                        The IVA database currently holds all interpreted genomes that are available from the 100,000 Genomes Project from Genomics England.
+                        These are divided into the following studies: rare disease GRCh37 and GRCh38 (RD37/RD38), cancer germline GRCh38 (CG38), and cancer somatic GRCh38 (CS38).
+                    </p>
+
                 </div>
-                <br>
-                <!--<input type="text" class="form-control input-lg" id="welcomeSearchTextBox" style="text-align: center;"-->
-                       <!--placeholder="Search for a gene, transcript, variant, multi-allelic variant or region" on-keyup="callAutoComplete">-->
             </div>
 
             <div class="col-sm-12">
                 <br><br>
                 <span style="font-size:12px">
                     Note:
-                    {{versionNav}}
-                    <br> GEL web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components, so only modern web browsers are fully supported, these include Chrome 36+, Firefox 32+, IE 10+, Safari
-                    7+ and Opera 24+.
+                    <br> GEL web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components, so only modern web browsers are fully supported.
                 </span>
             </div>
         </div>
