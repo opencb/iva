@@ -1,4 +1,4 @@
-/*
+=/*
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
  */
 
 const cellbase = {
-    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase/"],
+    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
     // hosts: ["http://cellbase.clinbioinfosspa.es/cb"],
     version: "v4",
 };
@@ -24,6 +24,7 @@ const opencga = {
     // host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.6",
     host: "http://bioinfo.hpc.cam.ac.uk/hgva",
     version: "v1",
+    serverVersion: "1.4",
 
     // This forces the following projects to be used instead of the user's project
     // projects: [
@@ -159,6 +160,11 @@ const application = {
                 {
                     title: "Catalog",
                     category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "sample",
+                    title: "Sample View",
                     visibility: "public",
                 },
                 {
