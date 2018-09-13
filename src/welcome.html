@@ -77,38 +77,35 @@
                 version: {
                     type: String
                 }
-            },
-            callAutoComplete: function (e) {
-
-                if (e.keyCode != '13') {
-                    // call web services for autocomplete data
-                    console.log("value is being entered")
-                    console.log(e)
-                } else {
-                    // fire according to the feature - gene, variant etc.
-                    this.fire("search", {value: this.$.welcomeSearchTextBox.value});
-                    this.$.welcomeSearchTextBox.value = "";
-                    $('.content').hide();
-                }
             }
-        <<<<<<< HEAD
-        });
 
-        =======
+            // callAutoComplete: function (e) {
+            //
+            //     if (e.keyCode != '13') {
+            //         // call web services for autocomplete data
+            //         console.log("value is being entered")
+            //         console.log(e)
+            //     } else {
+            //         // fire according to the feature - gene, variant etc.
+            //         this.fire("search", {value: this.$.welcomeSearchTextBox.value});
+            //         this.$.welcomeSearchTextBox.value = "";
+            //         $('.content').hide();
+            //     }
+            // }
 
             constructor() {
-            super();
-        }
-        _attachDom(dom) {
-            this.appendChild(dom);
-        }
+                super();
+            }
 
-        ready() {
-            super.ready();
-        }
+            _attachDom(dom) {
+                this.appendChild(dom);
+            }
+
+            ready() {
+                super.ready();
+            }
         }
 
         customElements.define(Welcome.is, Welcome);
-        >>>>>>> develop
     </script>
 </dom-module>
