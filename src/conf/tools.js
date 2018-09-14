@@ -222,20 +222,13 @@ const tools = {
             menu: Object.assign({}, filterMenu, {skipSubsections: ["sample"]}),
             examples: [
                 {
-                    name: "Example BRCA2",
+                    name: "Example BMPR2",
                     active: false,
                     query: {
-                        gene: "BRCA2",
-                        conservation: "phylop<0.001"
+                        gene: "BMPR2",
+                        ct: "missense_variant"
                     },
-                },
-                {
-                    name: "Example OR11",
-                    query: {
-                        gene: "OR11H1",
-                        conservation: "phylop<=0.001"
-                    },
-                },
+                }
             ]
         },
         grid: {
