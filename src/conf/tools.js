@@ -249,7 +249,35 @@ const tools = {
                 skipCount: false,
                 timeout: 30000
             }
-        }
+        },
+        detail: [
+            {
+                id: "annotation",
+                component: "cellbase-variantannotation-view",
+                title: "Advanced Annotation",
+                active: true
+            },
+            {
+                id: "cohortStats",
+                component: "opencga-variant-cohort-stats",
+                title: "Cohort Stats"
+            },
+            {
+                id: "samples",
+                component: "opencga-variant-samples",
+                title: "Samples"
+            },
+            {
+                id: "beacon",
+                component: "variant-beacon-network",
+                title: "Beacon"
+            },
+            {
+                id: "template",
+                component: "opencga-variant-detail-template",
+                title: "Template"
+            }
+        ]
     },
     interpretation: {
         title: "Variant Interpreter",
