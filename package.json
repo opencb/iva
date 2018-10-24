@@ -39,6 +39,7 @@
     "font-awesome": "*",
     "highcharts": "~4.2.7",
     "jquery": "~2.2.4",
+    "jquery.json-viewer": "^1.1.0",
     "jwt-decode": "^2.2.0",
     "moment": "^2.15.1",
     "qtip2": "~3.0.3",

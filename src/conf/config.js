@@ -173,6 +173,11 @@ const application = {
                     visibility: "public",
                 },
                 {
+                    id: "cohorts",
+                    title: "Cohorts",
+                    visibility: "public",
+                },
+                {
                     id: "panel",
                     title: "Panels",
                     visibility: "public",
@@ -234,6 +239,17 @@ const application = {
 
 const sampleBrowser = {
     title: "Sample Browser",
+    showTitle: true,
+    filter: {
+
+    },
+    grid: {
+        showSelect: true,
+    }
+};
+
+const cohortBrowser = {
+    title: "Cohort Browser",
     showTitle: true,
     filter: {
 
