@@ -30,6 +30,7 @@
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-project.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-browser.html">
 <!--<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-browser.html">-->
@@ -423,6 +424,12 @@
                         <opencga-sample-browser opencga-session="{{opencgaSession}}" config="{{config.sampleBrowser}}"></opencga-sample-browser>
                     </div>
                 </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.cohorts}}">
+                    <div class="content" id="cohorts">
+                        <opencga-cohort-browser opencga-session="{{opencgaSession}}" config="{{config.cohortBrowser}}"></opencga-cohort-browser>
+                    </div>
+                </template>
                 <!--<div class="collapse content" id="studyInformation">-->
                 <!--<opencga-study opencga-client="{{opencgaClient}}" project="{{project}}"-->
                 <!--study="{{study}}"></opencga-study>-->
@@ -497,7 +504,8 @@
                 }
 
                 // Enabled components catalog
-                let components = ["login", "projects", "project", "sample", "samples", "individual", "settings", "gene", "transcript", "protein"];
+                let components = ["login", "projects", "project", "sample", "samples", "cohorts", "individual", "settings", "gene", "transcript", "protein"];
+
                 for (let component of components) {
                     _config.enabledComponents[component] = false;
                 }
@@ -574,10 +582,42 @@
                 let _this = this;
                 let opencgaSession = this.opencgaClient.createSession()
                     .then(function (response) {
+
                         // check if project array has been defined in the config.js
                         if (UtilsNew.isNotEmptyArray(_this.config.opencga.projects)) {
+                            // We store the project and study ids the user needs to visualise (defined in the config.js)
+                            let configProjects = {};
+                            for (let i = 0; i < _this.config.opencga.projects.length; i++) {
+                                configProjects[_this.config.opencga.projects[i].id] = [];
+
+                                for (let j = 0; j < _this.config.opencga.projects[i].studies.length; j++) {
+                                    configProjects[_this.config.opencga.projects[i].id].push(
+                                        _this.config.opencga.projects[i].studies[j].id
+                                    );
+                                }
+                            }
+
+                            // We must keep only the projects defined in the configuration file
+                            let activeProjects = [];
+                            for (let i = 0; i < response.projects.length; i++) {
+                                if (response.projects[i].id in configProjects) {
+                                    let project = response.projects[i];
+                                    let activeStudies = [];
+                                    for (let j = 0; j < project.studies.length; j++) {
+                                        let study = project.studies[j];
+                                        if (configProjects[project.id].indexOf(study.id) > -1) {
+                                            activeStudies.push(study);
+                                        }
+                                    }
+
+                                    // We replace the studies obtained with the ones from the configuration file
+                                    project.studies = activeStudies;
+                                    activeProjects.push(project);
+                                }
+                            }
+
                             // TODO we must query projects/info URL to get the whole object
-                            response.projects = _this.config.opencga.projects;
+                            response.projects = activeProjects;
                             if (UtilsNew.isNotEmptyArray(response.projects[0].studies)) {
                                 response.project = response.projects[0];
                                 response.study = response.projects[0].studies[0];
