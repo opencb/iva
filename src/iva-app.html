@@ -307,17 +307,6 @@
                     </div>
                 </template>
 
-                <template is="dom-if" if="{{config.enabledComponents.individual}}">
-                    <div class="content" id="individual">
-                        <opencga-individual-browser  opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}" config-values="[[config.tools.clinical]]"></opencga-individual-browser>
-                    </div>
-                </template>
-                <template is="dom-if" if="{{config.enabledComponents.family}}">
-                    <div class="content" id="family">
-                        <opencga-family-browser  opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}"></opencga-family-browser>
-                    </div>
-                </template>
-
                 <template is="dom-if" if="{{config.enabledComponents.panel}}">
                     <div class="content" id="panel">
                         <opencga-panel-browser opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
@@ -425,6 +414,18 @@
                     </div>
                 </template>
 
+                <template is="dom-if" if="{{config.enabledComponents.individuals}}">
+                    <div class="content" id="individuals">
+                        <opencga-individual-browser  opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}" config-values="[[config.tools.clinical]]"></opencga-individual-browser>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.families}}">
+                    <div class="content" id="families">
+                        <opencga-family-browser  opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}"></opencga-family-browser>
+                    </div>
+                </template>
+
                 <template is="dom-if" if="{{config.enabledComponents.cohorts}}">
                     <div class="content" id="cohorts">
                         <opencga-cohort-browser opencga-session="{{opencgaSession}}" config="{{config.cohortBrowser}}"></opencga-cohort-browser>
@@ -504,7 +505,7 @@
                 }
 
                 // Enabled components catalog
-                let components = ["login", "projects", "project", "sample", "samples", "cohorts", "individual", "settings", "gene", "transcript", "protein"];
+                let components = ["login", "projects", "project", "sample", "samples", "individuals", "families", "cohorts", "settings", "gene", "transcript", "protein"];
 
                 for (let component of components) {
                     _config.enabledComponents[component] = false;

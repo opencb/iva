@@ -87,28 +87,8 @@ const application = {
             visibility: "public",
         },
         {
-            id: "interpretation",
-            title: "Variant Interpretation",
-            visibility: "public",
-        },
-        {
-            id: "individual",
-            title: "Individual",
-            visibility: "none",
-        },
-        {
-            id: "family",
-            title: "Family",
-            visibility: "none",
-        },
-        {
-            id: "clinical",
-            title: "Clinical",
-            visibility: "public",
-        },
-        {
             id: "facet",
-            title: "Facets",
+            title: "Aggregation Stats",
             visibility: "public",
         },
         {
@@ -117,49 +97,28 @@ const application = {
             visibility: "public",
         },
         {
+            id: "interpretation",
+            title: "Variant Interpretation",
+            visibility: "public",
+        },
+        {
+            id: "clinical",
+            title: "Clinical",
+            visibility: "public",
+        },
+        {
             id: "genomeBrowser",
             title: "Genome Browser (Beta)",
             visibility: "public"
         },
         {
-            id: "analysis",
-            title: "Analysis",
-            visibility: "private",
-            submenu: [
-                {
-                    title: "Clinical Interpretation",
-                    category: true,
-                    visibility: "public",
-                },
-                {
-                    id: "tiering",
-                    title: "GEL Tiering (Family)",
-                    visibility: "public",
-                },
-                {
-                    id: "cancer",
-                    title: "Cancer",
-                    visibility: "public",
-                },
-                {
-                    separator: true,
-                    visibility: "public",
-                },
-                {
-                    id: "burden",
-                    title: "Burden Test",
-                    visibility: "public",
-                },
-            ],
-        },
-        {
-            id: "tools",
-            title: "Tools",
+            id: "catalog",
+            title: "Catalog (New!)",
             visibility: "public",
             submenu: [
                 {
-                    title: "Catalog",
-                    category: true,
+                    id: "projects",
+                    title: "Projects",
                     visibility: "public",
                 },
                 {
@@ -168,18 +127,63 @@ const application = {
                     visibility: "public",
                 },
                 {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "Browsers",
+                    category: true,
+                    visibility: "public",
+                },
+                {
                     id: "samples",
-                    title: "Samples",
+                    title: "Sample Browser",
+                    visibility: "public",
+                },
+                {
+                    id: "individuals",
+                    title: "Individual Browser",
+                    visibility: "public",
+                },
+                {
+                    id: "families",
+                    title: "Family Browser",
                     visibility: "public",
                 },
                 {
                     id: "cohorts",
-                    title: "Cohorts",
+                    title: "Cohort Browser",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "Panels",
+                    category: true,
                     visibility: "public",
                 },
                 {
                     id: "panel",
                     title: "Panels",
+                    visibility: "public",
+                }
+            ],
+        },
+        {
+            id: "tools",
+            title: "Tools",
+            visibility: "public",
+            submenu: [
+                {
+                    title: "Variant",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "ibs",
+                    title: "IBS",
                     visibility: "public",
                 },
                 {
@@ -189,11 +193,6 @@ const application = {
                 {
                     title: "Other",
                     category: true,
-                    visibility: "public",
-                },
-                {
-                    id: "ibs",
-                    title: "IBS",
                     visibility: "public",
                 },
                 {
