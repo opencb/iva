@@ -22,7 +22,7 @@ const cellbase = {
 
 const opencga = {
     // host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.6",
-    host: "http://bioinfo.hpc.cam.ac.uk/hgva",
+    host: "http://bioinfo.hpc.cam.ac.uk/goos",
     version: "v1",
     serverVersion: "1.4",
 
@@ -50,33 +50,33 @@ const opencga = {
     // If 'projects' is empty then all public projects and studies of 'user' will be used.
     anonymous: {
         // user: "hgvauser",
-        projects: [
-            {
-                id: "platinum",
-                name: "Platinum",
-                alias: "platinum",
-                organism: {
-                    scientificName: "Homo sapiens",
-                    assembly: "GRCh37"
-                },
-                studies : [
-                    {
-                        id: "illumina_platinum",
-                        name: "Illumina Platinum",
-                        alias: "illumina_platinum"
-                    }
-                ]
-            }
-        ]
+        // projects: [
+        //     {
+        //         id: "platinum",
+        //         name: "Platinum",
+        //         alias: "platinum",
+        //         organism: {
+        //             scientificName: "Homo sapiens",
+        //             assembly: "GRCh37"
+        //         },
+        //         studies : [
+        //             {
+        //                 id: "illumina_platinum",
+        //                 name: "Illumina Platinum",
+        //                 alias: "illumina_platinum"
+        //             }
+        //         ]
+        //     }
+        // ]
     },
     summary: true,
     cookie: {
-        prefix: "iva",
+        prefix: "goos",
     },
 };
 
 const application = {
-    title: "IVA",
+    title: "GOOS",
     version: "v1.0.0-beta",
     logo: "img/opencb-logo.png",
     // The order, title and nested submenus are respected
@@ -99,12 +99,12 @@ const application = {
         {
             id: "interpretation",
             title: "Variant Interpretation",
-            visibility: "public",
+            visibility: "none",
         },
         {
             id: "clinical",
             title: "Clinical",
-            visibility: "public",
+            visibility: "none",
         },
         {
             id: "genomeBrowser",
@@ -124,7 +124,7 @@ const application = {
                 {
                     id: "sample",
                     title: "Sample View",
-                    visibility: "public",
+                    visibility: "none",
                 },
                 {
                     separator: true,
@@ -174,7 +174,7 @@ const application = {
         {
             id: "tools",
             title: "Tools",
-            visibility: "public",
+            visibility: "none",
             submenu: [
                 {
                     title: "Variant",
