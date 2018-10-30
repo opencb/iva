@@ -249,7 +249,35 @@ const tools = {
                 skipCount: false,
                 timeout: 30000
             }
-        }
+        },
+        detail: [
+            {
+                id: "annotation",
+                component: "cellbase-variantannotation-view",
+                title: "Advanced Annotation",
+                active: true
+            },
+            {
+                id: "cohortStats",
+                component: "opencga-variant-cohort-stats",
+                title: "Cohort Stats"
+            },
+            {
+                id: "samples",
+                component: "opencga-variant-samples",
+                title: "Samples"
+            },
+            {
+                id: "beacon",
+                component: "variant-beacon-network",
+                title: "Beacon"
+            },
+            {
+                id: "template",
+                component: "opencga-variant-detail-template",
+                title: "Template"
+            }
+        ]
     },
     interpretation: {
         title: "Variant Interpreter",
@@ -291,53 +319,53 @@ const tools = {
         }
     },
     facet: {
-        title: "Facet Analysis",
+        // title: "Facet Analysis",
         active: false,
-        fields: [
-            {
-                name: "Chromosome", value: "chromosome"
-            },
-            {
-                name: "Studies", value: "studies"
-            },
-            {
-                name: "Variant Type", value: "type"
-            },
-            {
-                name: "Genes", value: "genes"
-            },
-            {
-                name: "Biotypes", value: "biotypes"
-            },
-            {
-                name: "Consequence Type", value: "soAcc"
-            }
-        ],
-        ranges: [
-            {
-                name: "PhastCons", value: "phastCons"
-            },
-            {
-                name: "PhyloP", value: "phylop"
-            },
-            {
-                name: "Gerp", value: "gerp"
-            },
-            {
-                name: "CADD Raw", value: "caddRaw"
-            },
-            {
-                name: "CADD Scaled", value: "caddScaled"
-            },
-            {
-                name: "Sift", value: "sift"
-            },
-            {
-                name: "Polyphen", value: "polyphen"
-            }
-        ],
+        // fields: [
+        //     {
+        //         name: "Chromosome", value: "chromosome"
+        //     },
+        //     {
+        //         name: "Studies", value: "studies"
+        //     },
+        //     {
+        //         name: "Variant Type", value: "type"
+        //     },
+        //     {
+        //         name: "Genes", value: "genes"
+        //     },
+        //     {
+        //         name: "Biotypes", value: "biotypes"
+        //     },
+        //     {
+        //         name: "Consequence Type", value: "soAcc"
+        //     }
+        // ],
+        // ranges: [
+        //     {
+        //         name: "PhastCons", value: "phastCons"
+        //     },
+        //     {
+        //         name: "PhyloP", value: "phylop"
+        //     },
+        //     {
+        //         name: "Gerp", value: "gerp"
+        //     },
+        //     {
+        //         name: "CADD Raw", value: "caddRaw"
+        //     },
+        //     {
+        //         name: "CADD Scaled", value: "caddScaled"
+        //     },
+        //     {
+        //         name: "Sift", value: "sift"
+        //     },
+        //     {
+        //         name: "Polyphen", value: "polyphen"
+        //     }
+        // ],
         filter: {
-            menu: filterMenu
+            menu: Object.assign({}, filterMenu, {skipSubsections: ["sample"]}),
         }
     },
     panel: {

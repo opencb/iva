@@ -15,14 +15,16 @@
  */
 
 const cellbase = {
-    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase/"],
+    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
     // hosts: ["http://cellbase.clinbioinfosspa.es/cb"],
     version: "v4",
 };
 
 const opencga = {
     host: "https://opencga-embassy.gel.zone/opencga",
+    // host: "http://bio-dev-opencgainternal-tomcat-01.gel.zone:8080/opencga",
     version: "v1",
+    serverVersion: "1.4",
 
     // This forces the following projects to be used instead of the user's project
     projects: [
@@ -117,28 +119,8 @@ const application = {
             visibility: "public",
         },
         {
-            id: "prioritization",
-            title: "Variant Interpretation",
-            visibility: "none",
-        },
-        {
-            id: "analysis",
-            title: "Analysis",
-            visibility: "none"
-        },
-        {
-            id: "family",
-            title: "Family",
-            visibility: "none",
-        },
-        {
-            id: "clinical",
-            title: "Clinical",
-            visibility: "noe",
-        },
-        {
             id: "facet",
-            title: "Facets",
+            title: "Aggregation Stats",
             visibility: "public",
         },
         {
@@ -147,39 +129,78 @@ const application = {
             visibility: "public",
         },
         {
+            id: "interpretation",
+            title: "Variant Interpretation",
+            visibility: "public",
+        },
+        {
+            id: "clinical",
+            title: "Clinical",
+            visibility: "public",
+        },
+        {
             id: "genomeBrowser",
             title: "Genome Browser (Beta)",
             visibility: "none"
         },
         {
-            id: "analysis",
-            title: "Analysis",
-            visibility: "none",
+            id: "catalog",
+            title: "Catalog (New!)",
+            visibility: "public",
             submenu: [
                 {
-                    title: "Clinical Interpretation",
+                    id: "projects",
+                    title: "Projects",
+                    visibility: "public",
+                },
+                {
+                    id: "sample",
+                    title: "Sample View",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "Browsers",
                     category: true,
                     visibility: "none",
                 },
                 {
-                    id: "tiering",
-                    title: "GEL Tiering (Family)",
-                    visibility: "none",
+                    id: "samples",
+                    title: "Sample Browser",
+                    visibility: "public",
                 },
                 {
-                    id: "cancer",
-                    title: "Cancer",
-                    visibility: "none",
+                    id: "individuals",
+                    title: "Individual Browser",
+                    visibility: "public",
+                },
+                {
+                    id: "families",
+                    title: "Family Browser",
+                    visibility: "public",
+                },
+                {
+                    id: "cohorts",
+                    title: "Cohort Browser",
+                    visibility: "public",
                 },
                 {
                     separator: true,
                     visibility: "none",
                 },
                 {
-                    id: "burden",
-                    title: "Burden Test",
-                    visibility: "none",
+                    title: "Panels",
+                    category: true,
+                    visibility: "public",
                 },
+                {
+                    id: "panel",
+                    title: "Panels",
+                    visibility: "public",
+                }
             ],
         },
         {
@@ -188,18 +209,13 @@ const application = {
             visibility: "none",
             submenu: [
                 {
-                    title: "Catalog",
+                    title: "Variant",
                     category: true,
                     visibility: "public",
                 },
                 {
-                    id: "samples",
-                    title: "Samples",
-                    visibility: "public",
-                },
-                {
-                    id: "panel",
-                    title: "Panels",
+                    id: "ibs",
+                    title: "IBS",
                     visibility: "public",
                 },
                 {
@@ -209,11 +225,6 @@ const application = {
                 {
                     title: "Other",
                     category: true,
-                    visibility: "public",
-                },
-                {
-                    id: "ibs",
-                    title: "IBS",
                     visibility: "public",
                 },
                 {
@@ -264,6 +275,17 @@ const application = {
 
 const sampleBrowser = {
     title: "Sample Browser",
+    showTitle: true,
+    filter: {
+
+    },
+    grid: {
+        showSelect: true,
+    }
+};
+
+const cohortBrowser = {
+    title: "Cohort Browser",
     showTitle: true,
     filter: {
 
