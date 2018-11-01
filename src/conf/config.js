@@ -136,6 +136,11 @@ const application = {
                     visibility: "public",
                 },
                 {
+                    id: "files",
+                    title: "File Browser",
+                    visibility: "public",
+                },
+                {
                     id: "samples",
                     title: "Sample Browser",
                     visibility: "public",
@@ -246,6 +251,18 @@ const sampleBrowser = {
         showSelect: true,
     }
 };
+
+const fileBrowser = {
+    title: "File Browser",
+    showTitle: true,
+    filter: {
+
+    },
+    grid: {
+        showSelect: true,
+    }
+};
+
 
 const cohortBrowser = {
     title: "Cohort Browser",
