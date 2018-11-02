@@ -21,8 +21,8 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "https://opencga-embassy.gel.zone/opencga",
-    // host: "http://bio-dev-opencgainternal-tomcat-01.gel.zone:8080/opencga",
+    // host: "https://opencga-embassy.gel.zone/opencga",
+    host: "http://bio-dev-opencgainternal-tomcat-01.gel.zone:8080/opencga",
     version: "v1",
     serverVersion: "1.4",
 
