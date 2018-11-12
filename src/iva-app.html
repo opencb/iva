@@ -30,13 +30,13 @@
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-project.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/files/opencga-file-browser.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-browser.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-view.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-browser.html">
-<!--<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-browser.html">-->
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/panel/opencga-panel-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-browser.html">
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/clinical-interpretation-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-variant-clinical.html">
@@ -438,9 +438,13 @@
                         <opencga-cohort-browser opencga-session="{{opencgaSession}}" config="{{config.cohortBrowser}}"></opencga-cohort-browser>
                     </div>
                 </template>
-                <!--<div class="collapse content" id="studyInformation">-->
-                <!--<opencga-study opencga-client="{{opencgaClient}}" project="{{project}}"-->
-                <!--study="{{study}}"></opencga-study>-->
+
+                <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysis}}">
+                    <div class="content" id="clinicalAnalysis">
+                        <opencga-clinical-analysis-browser opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-analysis-browser>
+                    </div>
+                </template>
+
             </div>
         </div>
     </template>
@@ -512,7 +516,8 @@
                 }
 
                 // Enabled components catalog
-                let components = ["login", "projects", "project", "sample", "files", "samples", "individuals", "families", "cohorts", "settings", "gene", "transcript", "protein"];
+                let components = ["login", "projects", "project", "sample", "files", "samples", "individuals", "families", "cohorts",
+                    "clinicalAnalysis", "settings", "gene", "transcript", "protein"];
 
                 for (let component of components) {
                     _config.enabledComponents[component] = false;

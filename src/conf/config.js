@@ -22,7 +22,8 @@ const cellbase = {
 
 const opencga = {
     // host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.6",
-    host: "http://bioinfo.hpc.cam.ac.uk/hgva",
+    // host: "http://bioinfo.hpc.cam.ac.uk/hgva",
+    host: "http://bio-dev-opencgainternal-tomcat-01.gel.zone:8080/opencga",
     version: "v1",
     serverVersion: "1.4",
 
@@ -158,6 +159,11 @@ const application = {
                 {
                     id: "cohorts",
                     title: "Cohort Browser",
+                    visibility: "public",
+                },
+                {
+                    id: "clinicalAnalysis",
+                    title: "Clinical Analysis Browser",
                     visibility: "public",
                 },
                 {
