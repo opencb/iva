@@ -167,6 +167,11 @@ const application = {
                     visibility: "public",
                 },
                 {
+                    id: "clinicalAnalysisPortal",
+                    title: "Case Portal",
+                    visibility: "public",
+                },
+                {
                     separator: true,
                     visibility: "public",
                 },
