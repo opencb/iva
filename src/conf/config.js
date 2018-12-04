@@ -145,7 +145,7 @@ const application = {
         },
         {
             id: "facet",
-            title: "Facets (New)",
+            title: "Aggregation Stats",
             visibility: "public"
         },
         {
