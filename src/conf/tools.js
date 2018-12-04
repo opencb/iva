@@ -272,11 +272,11 @@ const tools = {
                 component: "variant-beacon-network",
                 title: "Beacon"
             },
-            {
-                id: "template",
-                component: "opencga-variant-detail-template",
-                title: "Template"
-            }
+            // {
+            //     id: "template",
+            //     component: "opencga-variant-detail-template",
+            //     title: "Template"
+            // }
         ]
     },
     interpretation: {
