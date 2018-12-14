@@ -97,20 +97,132 @@ const application = {
             title: "Beacon",
             visibility: "public",
         },
+
+
         {
-            id: "interpretation",
-            title: "Variant Interpretation",
-            visibility: "public",
-        },
-        {
-            id: "clinical",
+            id: "case",
             title: "Clinical",
             visibility: "public",
+            submenu: [
+                {
+                    id: "clinicalAnalysisPortal",
+                    title: "Interpretation Portal",
+                    visibility: "public",
+                },
+                {
+                    id: "interpretation",
+                    title: "Variant Interpreter",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "Editor",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "clinicalAnalysisCreator",
+                    title: "Case Creator",
+                    visibility: "public",
+                },
+                {
+                    id: "panel",
+                    title: "Disease Panel",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    id: "clinical",
+                    title: "Clinical",
+                    visibility: "public",
+                },
+            ]
         },
         {
             id: "genomeBrowser",
             title: "Genome Browser (Beta)",
             visibility: "public"
+        },
+        {
+            id: "analysis",
+            title: "Analysis (Pending)",
+            visibility: "public",
+            submenu: [
+                {
+                    title: "Summary Stats",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "stats",
+                    title: "Cohort Variant Stats",
+                    visibility: "public",
+                },
+                {
+                    id: "ibs",
+                    title: "IBS/IBD",
+                    visibility: "public",
+                },
+                {
+                    id: "h-w",
+                    title: "Hardy-Weinberg",
+                    visibility: "public",
+                },
+                {
+                    id: "mendel",
+                    title: "Mendel Errors",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "GWAS",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "assoc",
+                    title: "Association",
+                    visibility: "public",
+                },
+                {
+                    id: "tdt",
+                    title: "Family-based Association (TDT)",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "Other",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "compound",
+                    title: "Compound Heterozygous",
+                    visibility: "public",
+                },
+                {
+                    id: "sampleFacet",
+                    title: "Aggregation Stats",
+                    visibility: "public",
+                },
+                {
+                    id: "exporter",
+                    title: "Exporter",
+                    visibility: "public",
+                }
+            ]
         },
         {
             id: "catalog",
@@ -165,63 +277,8 @@ const application = {
                     id: "clinicalAnalysis",
                     title: "Clinical Analysis Browser",
                     visibility: "public",
-                },
-                {
-                    id: "clinicalAnalysisPortal",
-                    title: "Case Portal",
-                    visibility: "public",
-                },
-                {
-                    id: "clinicalAnalysisCreator",
-                    title: "Case Creator",
-                    visibility: "public",
-                },
-                {
-                    separator: true,
-                    visibility: "public",
-                },
-                {
-                    title: "Panels",
-                    category: true,
-                    visibility: "public",
-                },
-                {
-                    id: "panel",
-                    title: "Panels",
-                    visibility: "public",
                 }
             ],
-        },
-        {
-            id: "tools",
-            title: "Tools",
-            visibility: "public",
-            submenu: [
-                {
-                    title: "Variant",
-                    category: true,
-                    visibility: "public",
-                },
-                {
-                    id: "ibs",
-                    title: "IBS",
-                    visibility: "public",
-                },
-                {
-                    separator: true,
-                    visibility: "public",
-                },
-                {
-                    title: "Other",
-                    category: true,
-                    visibility: "public",
-                },
-                {
-                    id: "exporter",
-                    title: "Exporter",
-                    visibility: "public",
-                }
-            ]
         },
     ],
     search: {
