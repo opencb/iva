@@ -255,21 +255,21 @@ const tools = {
                 component: "opencga-variant-cohort-stats",
                 title: "Cohort Stats"
             },
-            {
-                id: "samples",
-                component: "opencga-variant-samples",
-                title: "Samples"
-            },
+            // {
+            //     id: "samples",
+            //     component: "opencga-variant-samples",
+            //     title: "Samples"
+            // },
             {
                 id: "beacon",
                 component: "variant-beacon-network",
                 title: "Beacon"
             },
-            {
-                id: "template",
-                component: "opencga-variant-detail-template",
-                title: "Template"
-            }
+            // {
+            //     id: "template",
+            //     component: "opencga-variant-detail-template",
+            //     title: "Template"
+            // }
         ]
     },
     interpretation: {
