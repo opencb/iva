@@ -443,13 +443,15 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysis}}">
                     <div class="content" id="clinicalAnalysis">
-                        <opencga-clinical-analysis-browser opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-analysis-browser>
+                        <opencga-clinical-analysis-browser opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"
+                                                           on-urlchange="onUrlChange" query="{{query}}"></opencga-clinical-analysis-browser>
                     </div>
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisPortal}}">
                     <div class="content" id="clinicalAnalysisPortal">
-                        <opencga-clinical-analysis-portal opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-analysis-portal>
+                        <opencga-clinical-analysis-portal opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"
+                        ></opencga-clinical-analysis-portal>
                     </div>
                 </template>
 
@@ -735,6 +737,27 @@
                 window.clearInterval(this.intervalCheckSession);
             }
 
+            onUrlChange(e) {
+                let hashFrag = e.detail.id;
+                if (UtilsNew.isNotUndefined(this.opencgaSession.project) && UtilsNew.isNotEmpty(this.opencgaSession.project.alias)) {
+
+                    hashFrag += "/" + this.opencgaSession.project.alias;
+                    if (UtilsNew.isNotUndefined(this.opencgaSession.study) && UtilsNew.isNotEmpty(this.opencgaSession.study.alias)) {
+                        hashFrag += "/" + this.opencgaSession.study.alias;
+                    }
+                }
+
+                let myQueryParams = [];
+                for (let key in e.detail.query) {
+                    myQueryParams.push(key + "=" + e.detail.query[key]);
+                }
+                if (myQueryParams.length > 0) {
+                    hashFrag += `?${myQueryParams.join("&")}`;
+                }
+
+                window.location.hash = hashFrag;
+            }
+
             checkSessionActive() {
                 let _message = "";
                 // We check if refresh token has updated session id cookie
@@ -911,6 +934,18 @@
                         }
                     }
                     ctx.tool = hashTool;
+                }
+
+                let searchArr = window.location.hash.split("?");
+                if (searchArr.length > 1) {
+                    let search = searchArr[1];
+                    arr = search.split("&");
+                    let query = {};
+                    for (let i = 0; i < arr.length; i++) {
+                        let split = arr[i].split("=");
+                        query[split[0]] = split[1];
+                    }
+                    this.query = query;
                 }
 
                 if (UtilsNew.isNotUndefined(this.config.enabledComponents[this.tool.replace("#", "")])) {
