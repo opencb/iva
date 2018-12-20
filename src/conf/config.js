@@ -47,27 +47,27 @@ var opencga = {
 
     // This allows IVA to query a OpenCGA instance being an 'anonymous' user, this means that no login is required.
     // If 'projects' is empty then all public projects and studies of 'user' will be used.
-    // anonymous: {
-    //     // user: "hgvauser",
-    //     projects: [
-    //         {
-    //             id: "platinum",
-    //             name: "Platinum",
-    //             alias: "platinum",
-    //             organism: {
-    //                 scientificName: "Homo sapiens",
-    //                 assembly: "GRCh37"
-    //             },
-    //             studies : [
-    //                 {
-    //                     id: "illumina_platinum",
-    //                     name: "Illumina Platinum",
-    //                     alias: "illumina_platinum"
-    //                 }
-    //             ]
-    //         }
-    //     ]
-    // },
+    anonymous: {
+        // user: "hgvauser",
+        projects: [
+            {
+                id: "NIHR-BR37",
+                name: "NIHR-BR37",
+                alias: "NIHR-BR37",
+                organism: {
+                    scientificName: "Homo sapiens",
+                    assembly: "GRCh37"
+                },
+                studies : [
+                    {
+                        id: "I37",
+                        name: "I37",
+                        alias: "I37"
+                    }
+                ]
+            }
+        ]
+    },
     summary: true,
     cookie: {
         prefix: "nihrbr"
@@ -319,7 +319,7 @@ var application = {
         {name: "FAQ", url: "", icon: ""},
     ],
     login: {
-        visible: true,
+        visible: false,
     },
     breadcrumb: {
         title: "Projects",
