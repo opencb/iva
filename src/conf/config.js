@@ -21,7 +21,7 @@ const cellbase = {
 };
 
 var opencga = {
-    host: "bioinfo.hpc.cam.ac.uk/bridge-1.4.0-rc1",
+    host: "bioinfo.hpc.cam.ac.uk/bridge-1.4.0-rc2",
     version: "v1",
     serverVersion: "1.4",
 
@@ -106,7 +106,7 @@ var application = {
         },
         {
             id: "facet",
-            title: "Facets",
+            title: "Aggregation Stats",
             visibility: "public",
         },
         {
@@ -119,6 +119,53 @@ var application = {
             title: "Beacon",
             visibility: "public",
         },
+
+
+        {
+            id: "case",
+            title: "Clinical",
+            visibility: "none",
+            submenu: [
+                {
+                    id: "clinicalAnalysisPortal",
+                    title: "Interpretation Portal",
+                    visibility: "public",
+                },
+                {
+                    id: "interpretation",
+                    title: "Variant Interpreter",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "Editor",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "clinicalAnalysisCreator",
+                    title: "Case Creator",
+                    visibility: "public",
+                },
+                {
+                    id: "panel",
+                    title: "Disease Panel",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    id: "clinical",
+                    title: "Clinical",
+                    visibility: "public",
+                },
+            ]
+        },
         {
             id: "genomeBrowser",
             title: "Genome Browser (Beta)",
@@ -130,18 +177,28 @@ var application = {
             visibility: "none",
             submenu: [
                 {
-                    title: "Clinical Interpretation",
+                    title: "Summary Stats",
                     category: true,
                     visibility: "public",
                 },
                 {
-                    id: "tiering",
-                    title: "GEL Tiering (Family)",
+                    id: "stats",
+                    title: "Cohort Variant Stats",
                     visibility: "public",
                 },
                 {
-                    id: "cancer",
-                    title: "Cancer",
+                    id: "ibs",
+                    title: "IBS/IBD",
+                    visibility: "public",
+                },
+                {
+                    id: "h-w",
+                    title: "Hardy-Weinberg",
+                    visibility: "public",
+                },
+                {
+                    id: "mendel",
+                    title: "Mendel Errors",
                     visibility: "public",
                 },
                 {
@@ -149,35 +206,18 @@ var application = {
                     visibility: "public",
                 },
                 {
-                    id: "burden",
-                    title: "Burden Test",
-                    visibility: "public",
-                },
-            ],
-        },
-        {
-            id: "tools",
-            title: "Tools",
-            visibility: "none",
-            submenu: [
-                {
-                    title: "Catalog",
+                    title: "GWAS",
                     category: true,
                     visibility: "public",
                 },
                 {
-                    id: "sample",
-                    title: "Sample View",
+                    id: "assoc",
+                    title: "Association",
                     visibility: "public",
                 },
                 {
-                    id: "samples",
-                    title: "Samples",
-                    visibility: "public",
-                },
-                {
-                    id: "panel",
-                    title: "Panels",
+                    id: "tdt",
+                    title: "Family-based Association (TDT)",
                     visibility: "public",
                 },
                 {
@@ -190,8 +230,13 @@ var application = {
                     visibility: "public",
                 },
                 {
-                    id: "ibs",
-                    title: "IBS",
+                    id: "compound",
+                    title: "Compound Heterozygous",
+                    visibility: "public",
+                },
+                {
+                    id: "sampleFacet",
+                    title: "Aggregation Stats",
                     visibility: "public",
                 },
                 {
@@ -200,6 +245,62 @@ var application = {
                     visibility: "public",
                 }
             ]
+        },
+        {
+            id: "tools",
+            title: "Tools",
+            visibility: "none",
+            submenu: [
+                {
+                    id: "projects",
+                    title: "Projects",
+                    visibility: "public",
+                },
+                {
+                    id: "sample",
+                    title: "Sample View",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "Browsers",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "files",
+                    title: "File Browser",
+                    visibility: "public",
+                },
+                {
+                    id: "samples",
+                    title: "Sample Browser",
+                    visibility: "public",
+                },
+                {
+                    id: "individuals",
+                    title: "Individual Browser",
+                    visibility: "public",
+                },
+                {
+                    id: "families",
+                    title: "Family Browser",
+                    visibility: "public",
+                },
+                {
+                    id: "cohorts",
+                    title: "Cohort Browser",
+                    visibility: "public",
+                },
+                {
+                    id: "clinicalAnalysis",
+                    title: "Clinical Analysis Browser",
+                    visibility: "public",
+                }
+            ],
         },
     ],
     search: {
@@ -245,6 +346,29 @@ const sampleBrowser = {
     }
 };
 
+const fileBrowser = {
+    title: "File Browser",
+    showTitle: true,
+    filter: {
+
+    },
+    grid: {
+        showSelect: true,
+    }
+};
+
+
+const cohortBrowser = {
+    title: "Cohort Browser",
+    showTitle: true,
+    filter: {
+
+    },
+    grid: {
+        showSelect: true,
+    }
+};
+
 const beacon = {
     hosts: [
         "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience",
@@ -266,7 +390,7 @@ const populationFrequencies = {
             id: "1kG_phase3",
             title: "1000 Genomes",
             tooltip: "Only considers variants whose observed allelic frequency in the 1000 genomes phase 3 database is below (or above) " +
-            "the defined value. Genome-wide allelic frequencies were obtained from more than 2.500 genomes.",
+                "the defined value. Genome-wide allelic frequencies were obtained from more than 2.500 genomes.",
             populations: [
                 {
                     id: "ALL", title: "All populations [ALL]",
@@ -293,7 +417,7 @@ const populationFrequencies = {
             id: "GNOMAD_GENOMES",
             title: "gnomAD Genomes",
             tooltip: "Only considers variants whose observed allelic frequency in the gnomAD Genomes database is below (or above) the " +
-            "defined value. Frequencies were calculated from about 15,000 unrelated individuals.",
+                "defined value. Frequencies were calculated from about 15,000 unrelated individuals.",
             populations: [
                 {
                     id: "ALL", title: "gnomAD [ALL]",
