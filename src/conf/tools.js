@@ -291,8 +291,11 @@ const tools = {
                     active: true,
                     query: {
                         biotype: "protein_coding",
-                        alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001"
-                    }
+                        alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
+                        ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
+                            "frameshift_variant,stop_lost,start_lost,transcript_amplification,inframe_insertion,inframe_deletion," +
+                            "missense_variant"
+}
                 },
                 {
                     name: "Stickler syndrome",

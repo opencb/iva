@@ -21,8 +21,8 @@ const cellbase = {
 };
 
 const opencga = {
-    // host: "http://bioinfodev.hpc.cam.ac.uk/hgva-1.3.6",
-    host: "http://bioinfo.hpc.cam.ac.uk/hgva",
+    host: "http://bioinfodev.hpc.cam.ac.uk/opencga-test",
+    // host: "http://bioinfo.hpc.cam.ac.uk/hgva",
     // host: "http://bio-dev-opencgainternal-tomcat-01.gel.zone:8080/opencga",
     version: "v1",
     serverVersion: "1.4",
@@ -49,27 +49,27 @@ const opencga = {
 
     // This allows IVA to query a OpenCGA instance being an 'anonymous' user, this means that no login is required.
     // If 'projects' is empty then all public projects and studies of 'user' will be used.
-    anonymous: {
-        // user: "hgvauser",
-        projects: [
-            {
-                id: "platinum",
-                name: "Platinum",
-                alias: "platinum",
-                organism: {
-                    scientificName: "Homo sapiens",
-                    assembly: "GRCh37"
-                },
-                studies : [
-                    {
-                        id: "illumina_platinum",
-                        name: "Illumina Platinum",
-                        alias: "illumina_platinum"
-                    }
-                ]
-            }
-        ]
-    },
+    // anonymous: {
+    //     // user: "hgvauser",
+    //     projects: [
+    //         {
+    //             id: "platinum",
+    //             name: "Platinum",
+    //             alias: "platinum",
+    //             organism: {
+    //                 scientificName: "Homo sapiens",
+    //                 assembly: "GRCh37"
+    //             },
+    //             studies : [
+    //                 {
+    //                     id: "illumina_platinum",
+    //                     name: "Illumina Platinum",
+    //                     alias: "illumina_platinum"
+    //                 }
+    //             ]
+    //         }
+    //     ]
+    // },
     summary: true,
     cookie: {
         prefix: "iva",
