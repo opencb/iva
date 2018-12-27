@@ -270,7 +270,12 @@ const tools = {
             {
                 id: "beacon",
                 component: "variant-beacon-network",
-                title: "Beacon"
+                title: "Beacon",
+                // Uncomment and edit Beacon hosts to change default hosts
+                // hosts: [
+                //     "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc",
+                //     "lovd", "hgmd", "icgc", "sahgp"
+                // ]
             },
             {
                 id: "template",
@@ -294,8 +299,9 @@ const tools = {
                         alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
                         ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
                             "frameshift_variant,stop_lost,start_lost,transcript_amplification,inframe_insertion,inframe_deletion," +
-                            "missense_variant"
-}
+                            "missense_variant",
+                        genotype: "NA12877:0/1;NA12878:0/1;NA12879:0/1,1/1"
+                    }
                 },
                 {
                     name: "Stickler syndrome",
@@ -319,7 +325,35 @@ const tools = {
                 approximateCountSamplingSize: 1000,
                 timeout: 30000
             }
-        }
+        },
+        detail: [
+            {
+                id: "annotation",
+                component: "cellbase-variantannotation-view",
+                title: "Advanced Annotation",
+                active: true
+            },
+            {
+                id: "fileMetrics",
+                component: "opencga-variant-file-metrics",
+                title: "File Metrics"
+            },
+            {
+                id: "beacon",
+                component: "variant-beacon-network",
+                title: "Beacon",
+                // Uncomment and edit Beacon hosts to change default hosts
+                // hosts: [
+                //     "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc",
+                //     "lovd", "hgmd", "icgc", "sahgp"
+                // ]
+            },
+            {
+                id: "template",
+                component: "opencga-variant-detail-template",
+                title: "Template"
+            }
+        ]
     },
     facet: {
         // title: "Facet Analysis",

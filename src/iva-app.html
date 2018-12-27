@@ -259,15 +259,13 @@
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
                     <div class="content" id="browser">
                         <opencga-variant-browser opencga-session="{{opencgaSession}}" config="[[config.tools.browser]]"
-                                                 opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                                 query="{{browserQuery}}"
+                                                 cellbase-client="{{cellbaseClient}}"
+                                                 query="{{browserQuery}}" search="{{browserSearchQuery}}"
                                                  active="{{config.tools.browser.active}}"
                                                  population-frequencies="{{config.populationFrequencies}}"
                                                  protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                                  consequence-types="{{config.consequenceTypes}}"
-                                                 beacon-hosts="{{config.tools.beacon.hosts}}"
-                                                 on-gene="geneSelected"
-                                                 on-samplechange="onSampleChange" style="font-size: 12px">
+                                                 on-gene="geneSelected" on-samplechange="onSampleChange" style="font-size: 12px">
                         </opencga-variant-browser>
                     </div>
                 </template>
@@ -275,12 +273,12 @@
                 <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
                     <div class="content" id="interpretation">
                         <opencga-variant-interpretation opencga-session="{{opencgaSession}}" config="[[config.tools.interpretation]]"
-                                                        opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                                                        cellbase-client="{{cellbaseClient}}"
                                                         active="{{config.tools.interpretation.active}}"
                                                         population-frequencies="{{config.populationFrequencies}}"
                                                         protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                                         consequence-types="{{config.consequenceTypes}}"
-                                                        beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected"
+                                                        on-gene="geneSelected"
                                                         on-samplechange="onSampleChange" style="font-size: 12px" >
                         </opencga-variant-interpretation>
                     </div>
@@ -600,6 +598,8 @@
                 } else {
                     this._createOpencgaSessionFromConfig();
                 }
+
+                this.browserSearchQuery = {gene: "BRCA2"};
             }
 
             opencgaSessionObserver() {
