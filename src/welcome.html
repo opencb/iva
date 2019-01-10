@@ -40,7 +40,7 @@
             </p>
             <br>
             <input type="text" class="form-control input-lg" id="welcomeSearchTextBox" style="text-align: center;"
-                   placeholder="Search for a gene, transcript, protein or a variant" on-blur="onSearch">
+                   placeholder="Search for a gene, transcript, protein or a variant" on-blur="onBlur" on-keyup="onKeyup">
             <br>
             <h4>Note:</h4>
             <p style="font-size:14px">
@@ -76,7 +76,17 @@
                 this.appendChild(dom);
             }
 
-            onSearch(e) {
+            onBlur(e) {
+                this.notify();
+            }
+
+            onKeyup(e) {
+                if (e.keyCode === 13) {
+                    this.notify();
+                }
+            }
+
+            notify() {
                 this.dispatchEvent(new CustomEvent("search", {
                     detail: {
                         xref: PolymerUtils.getValue("welcomeSearchTextBox")
