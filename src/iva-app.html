@@ -1095,7 +1095,8 @@
             quickSearch(e) {
                 this.tool = "#browser";
                 window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
-                this.browserQuery = {xref: e.detail.value};
+                // this.browserQuery = {xref: e.detail.value};
+                this.browserSearchQuery = {xref: e.detail.value};
             }
 
             _checkBreadcrumbVisible() {
