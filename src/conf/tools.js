@@ -223,7 +223,7 @@ const tools = {
             examples: [
                 {
                     name: "Example BRCA2",
-                    active: false,
+                    active: true,
                     query: {
                         gene: "BRCA2",
                         conservation: "phylop<0.001"
@@ -292,15 +292,42 @@ const tools = {
             menu: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
             examples: [
                 {
-                    name: "Clinical Interpretation (tiering)",
+                    name: "Tiering (AR)",
+                    active: false,
+                    query: {
+                        biotype: "protein_coding,IG_C_gene,IG_D_gene,IG_J_gene,IG_V_gene,IG_V_gene,nonsense_mediated_decay," +
+                            "non_stop_decay,TR_C_gene,TR_D_gene,TR_J_gene,TR_V_gene",
+                        alternate_frequency: "1kG_phase3:AFR<0.01;1kG_phase3:AMR<0.01;1kG_phase3:EAS<0.01;1kG_phase3:EUR<0.01;" +
+                            "1kG_phase3:SAS<0.01;GNOMAD_EXOMES:AFR<0.01;GNOMAD_EXOMES:AMR<0.01;GNOMAD_EXOMES:EAS<0.01;" +
+                            "GNOMAD_EXOMES:FIN<0.01;GNOMAD_EXOMES:NFE<0.01;GNOMAD_EXOMES:ASJ<0.01;GNOMAD_EXOMES:OTH<0.01",
+                        ct: "SO:0001893,SO:0001574,SO:0001575,SO:0001587,SO:0001589,SO:0001578,SO:0001582,SO:0001889," +
+                            "SO:0001821,SO:0001822,SO:0001583,SO:0001630,SO:0001626"
+                    }
+                },
+                {
+                    name: "Tiering (AD)",
+                    active: false,
+                    query: {
+                        biotype: "protein_coding,IG_C_gene,IG_D_gene,IG_J_gene,IG_V_gene,IG_V_gene,nonsense_mediated_decay," +
+                            "non_stop_decay,TR_C_gene,TR_D_gene,TR_J_gene,TR_V_gene",
+                        alternate_frequency: "1kG_phase3:AFR<0.002;1kG_phase3:AMR<0.002;1kG_phase3:EAS<0.002;1kG_phase3:EUR<0.002;" +
+                            "1kG_phase3:SAS<0.002;GNOMAD_EXOMES:AFR<0.001;GNOMAD_EXOMES:AMR<0.001;GNOMAD_EXOMES:EAS<0.001;" +
+                            "GNOMAD_EXOMES:FIN<0.001;GNOMAD_EXOMES:NFE<0.001;GNOMAD_EXOMES:ASJ<0.001;GNOMAD_EXOMES:OTH<0.002",
+                        ct: "SO:0001893,SO:0001574,SO:0001575,SO:0001587,SO:0001589,SO:0001578,SO:0001582,SO:0001889," +
+                            "SO:0001821,SO:0001822,SO:0001583,SO:0001630,SO:0001626"
+                    }
+                },
+                {
+                    name: "Clinical Interpretation",
                     active: true,
                     query: {
+                        region: "1",
                         biotype: "protein_coding",
                         alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
                         ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
                             "frameshift_variant,stop_lost,start_lost,transcript_amplification,inframe_insertion,inframe_deletion," +
                             "missense_variant",
-                        genotype: "NA12877:0/1;NA12878:0/1;NA12879:0/1,1/1"
+                        // genotype: "NA12877:0/1;NA12878:0/1;NA12879:0/1,1/1"
                     }
                 },
                 {
@@ -353,7 +380,10 @@ const tools = {
                 component: "opencga-variant-detail-template",
                 title: "Template"
             }
-        ]
+        ],
+        css: {
+            style: "font-size: 12px"
+        }
     },
     facet: {
         // title: "Facet Analysis",
