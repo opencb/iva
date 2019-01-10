@@ -1093,10 +1093,12 @@
             }
 
             quickSearch(e) {
+                debugger
                 this.tool = "#browser";
                 window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
                 // this.browserQuery = {xref: e.detail.value};
-                this.browserSearchQuery = {xref: e.detail.value};
+
+                this.browserSearchQuery = e.detail;
             }
 
             _checkBreadcrumbVisible() {
