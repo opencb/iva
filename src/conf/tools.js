@@ -105,7 +105,7 @@ const filterMenu = {
                 {
                     id: "type",
                     title: "Variant Type",
-                    types: ["SNV", "INDEL", "CNV", "INSERTION", "DELETION", "MNV"],
+                    types: ["SNV", "CNV", "INSERTION", "DELETION", "MNV"],
                     tooltip: "Only considers variants of the selected type"
                 }
             ]
