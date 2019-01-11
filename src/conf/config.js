@@ -373,7 +373,6 @@ const populationFrequencies = {
             populations: [
                 {
                     id: "ALL", title: "All populations [ALL]",
-                    active: true,
                 },
                 {
                     id: "EUR", title: "European [EUR]",
@@ -405,10 +404,13 @@ const populationFrequencies = {
                     id: "NFE", title: "Non-Finnish European [NFE]",
                 },
                 {
+                    id: "FIN", title: "Finnish[FIN]",
+                },
+                {
                     id: "AMR", title: "American [AMR]",
                 },
                 {
-                    id: "AFR", title: "African [AFR]",
+                    id: "AFR", title: "African/African American [AFR]",
                 },
                 {
                     id: "EAS", title: "East Asian [EAS]",
@@ -418,20 +420,6 @@ const populationFrequencies = {
                 },
             ],
         },
-        // {
-        //     id: "ESP6500",
-        //     title: "ESP6500",
-        //     tooltip: "Only considers variants whose observed allelic frequency in the Exome Variant Server (ESP6500) database is below " +
-        //     "(or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained from more than 6000 exomes.",
-        //     populations: [
-        //         {
-        //             id: "EA", title: "European American [EA]"
-        //         },
-        //         {
-        //             id: "AA", title: "African American [AA]",
-        //         },
-        //     ],
-        // },
     ],
 };
 
@@ -714,7 +702,8 @@ const consequenceTypes = {
                 {
                     id: "SO:0001630",
                     name: "splice_region_variant",
-                    description: "A sequence variant in which a change has occurred within the region of the splice site, either within 1-3 bases of the exon or 3-8 bases of the intron",
+                    description: "A sequence variant in which a change has occurred within the region of the splice site, either " +
+                        "within 1-3 bases of the exon or 3-8 bases of the intron",
                     impact: "low",
                 },
             ],
@@ -734,40 +723,40 @@ const consequenceTypes = {
     ],
 };
 
-const DEFAULT_SPECIES = {
-    vertebrates: [
-        {
-
-            id: "hsapiens",
-            scientificName: "Homo sapiens",
-            assembly: {
-
-                name: "GRCh37",
-                ensemblVersion: "75_37",
-
-            },
-            assemblies: [
-                {
-
-                    name: "GRCh37",
-                    ensemblVersion: "75_37",
-
-                },
-                {
-                    name: "GRCh38",
-                    ensemblVersion: "79_38",
-                },
-            ],
-            data: [
-                "genome",
-                "gene",
-                "variation",
-                "regulation",
-                "protein",
-                "conservation",
-                "clinical",
-                "gene2disease",
-            ],
-        },
-    ],
-};
+// const DEFAULT_SPECIES = {
+//     vertebrates: [
+//         {
+//
+//             id: "hsapiens",
+//             scientificName: "Homo sapiens",
+//             assembly: {
+//
+//                 name: "GRCh37",
+//                 ensemblVersion: "75_37",
+//
+//             },
+//             assemblies: [
+//                 {
+//
+//                     name: "GRCh37",
+//                     ensemblVersion: "75_37",
+//
+//                 },
+//                 {
+//                     name: "GRCh38",
+//                     ensemblVersion: "79_38",
+//                 },
+//             ],
+//             data: [
+//                 "genome",
+//                 "gene",
+//                 "variation",
+//                 "regulation",
+//                 "protein",
+//                 "conservation",
+//                 "clinical",
+//                 "gene2disease",
+//             ],
+//         },
+//     ],
+// };
