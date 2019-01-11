@@ -510,18 +510,18 @@ const consequenceTypes = {
                     description: "A transcript variant located with the sequence of the mature miRNA",
                     impact: "modifier",
                 },
-                {
-                    id: "SO:0001894",
-                    name: "regulatory_region_ablation",
-                    description: "A feature ablation whereby the deleted region includes a regulatory region",
-                    impact: "moderate",
-                },
-                {
-                    id: "SO:0001891",
-                    name: "regulatory_region_amplification",
-                    description: "A feature amplification of a region containing a regulatory region",
-                    impact: "modifier",
-                },
+                // {
+                //     id: "SO:0001894",
+                //     name: "regulatory_region_ablation",
+                //     description: "A feature ablation whereby the deleted region includes a regulatory region",
+                //     impact: "moderate",
+                // },
+                // {
+                //     id: "SO:0001891",
+                //     name: "regulatory_region_amplification",
+                //     description: "A feature amplification of a region containing a regulatory region",
+                //     impact: "modifier",
+                // },
                 {
                     id: "SO:0001566",
                     name: "regulatory_region_variant",
@@ -534,18 +534,18 @@ const consequenceTypes = {
                     description: "A sequence variant located within a transcription factor binding site",
                     impact: "modifier",
                 },
-                {
-                    id: "SO:0001895",
-                    name: "TFBS_ablation",
-                    description: "A feature ablation whereby the deleted region includes a transcription factor binding site",
-                    impact: "modifier",
-                },
-                {
-                    id: "SO:0001892",
-                    name: "TFBS_amplification",
-                    description: "A feature amplification of a region containing a transcription factor binding site",
-                    impact: "modifier",
-                },
+                // {
+                //     id: "SO:0001895",
+                //     name: "TFBS_ablation",
+                //     description: "A feature ablation whereby the deleted region includes a transcription factor binding site",
+                //     impact: "modifier",
+                // },
+                // {
+                //     id: "SO:0001892",
+                //     name: "TFBS_amplification",
+                //     description: "A feature amplification of a region containing a transcription factor binding site",
+                //     impact: "modifier",
+                // },
             ],
         },
         {
@@ -557,12 +557,12 @@ const consequenceTypes = {
                     description: "A sequence variant that changes the coding sequence",
                     impact: "modifier",
                 },
-                {
-                    id: "SO:0001907",
-                    name: "feature_elongation",
-                    description: "A sequence variant that causes the extension of a genomic feature, with regard to the reference sequence",
-                    impact: "modifier",
-                },
+                // {
+                //     id: "SO:0001907",
+                //     name: "feature_elongation",
+                //     description: "A sequence variant that causes the extension of a genomic feature, with regard to the reference sequence",
+                //     impact: "modifier",
+                // },
                 {
                     id: "SO:0001906",
                     name: "feature_truncation",
@@ -580,18 +580,29 @@ const consequenceTypes = {
                     name: "incomplete_terminal_codon_variant",
                     description: "A sequence variant where at least one base of the final codon of an incompletely annotated transcript is changed",
                     impact: "low",
-
                 },
                 {
                     id: "SO:0001822",
                     name: "inframe_deletion",
                     description: "An inframe non synonymous variant that deletes bases from the coding sequence",
-                    impact: "moderate",
+                    impact: "high",
                 },
                 {
                     id: "SO:0001821",
                     name: "inframe_insertion",
                     description: "An inframe non synonymous variant that inserts bases into in the coding sequence",
+                    impact: "high",
+                },
+                {
+                    id: "SO:0001650",
+                    name: "inframe_variant",
+                    description: "A sequence variant which does not cause a disruption of the translational reading frame",
+                    impact: "low",
+                },
+                {
+                    id: "SO:0001582",
+                    name: "initiator_codon_variant",
+                    description: "A codon variant that changes at least one base of the first codon of a transcript",
                     impact: "moderate",
                 },
                 {
@@ -606,12 +617,12 @@ const consequenceTypes = {
                     description: "A variant in a transcript that is the target of NMD",
                     impact: "modifier",
                 },
-                {
-                    id: "SO:0001818",
-                    name: "protein_altering_variant",
-                    description: "A sequence_variant which is predicted to change the protein encoded in the coding sequence",
-                    impact: "moderate",
-                },
+                // {
+                //     id: "SO:0001818",
+                //     name: "protein_altering_variant",
+                //     description: "A sequence_variant which is predicted to change the protein encoded in the coding sequence",
+                //     impact: "moderate",
+                // },
                 {
                     id: "SO:0001819",
                     name: "synonymous_variant",
@@ -642,6 +653,12 @@ const consequenceTypes = {
                     description: "A sequence variant where at least one base in the terminator codon is changed, but the terminator remains",
                     impact: "low",
                 },
+                {
+                    id: "SO:0001590",
+                    name: "terminator_codon_variant",
+                    description: "A sequence variant whereby at least one of the bases in the terminator codon is changed",
+                    impact: "low",
+                },
             ],
         },
         {
@@ -669,6 +686,12 @@ const consequenceTypes = {
                     id: "SO:0001792",
                     name: "non_coding_transcript_exon_variant",
                     description: "A sequence variant that changes non-coding exon sequence in a non-coding transcript",
+                    impact: "modifier",
+                },
+                {
+                    id: "SO:0001619",
+                    name: "non_coding_transcript_variant",
+                    description: "A transcript variant of a non coding RNA gene",
                     impact: "modifier",
                 },
             ],
