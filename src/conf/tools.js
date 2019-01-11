@@ -94,15 +94,18 @@ const filterMenu = {
                     biotypes: [
                         "3prime_overlapping_ncrna", "IG_C_gene", "IG_C_pseudogene", "IG_D_gene", "IG_J_gene", "IG_J_pseudogene",
                         "IG_V_gene", "IG_V_pseudogene", "Mt_rRNA", "Mt_tRNA", "TR_C_gene", "TR_D_gene", "TR_J_gene", "TR_J_pseudogene",
-                        "TR_V_gene", "TR_V_pseudogene", "antisense", "lincRNA", "miRNA", "misc_RNA", "polymorphic_pseudogene",
-                        "processed_transcript", "protein_coding", "pseudogene", "rRNA", "sense_intronic", "sense_overlapping", "snRNA",
-                        "snoRNA"
+                        "TR_V_gene", "TR_V_pseudogene", "antisense", "lincRNA", "miRNA", "misc_RNA", "non_stop_decay",
+                        "nonsense_mediated_decay", "polymorphic_pseudogene", "processed_pseudogene", "processed_transcript",
+                        "protein_coding", "pseudogene", "rRNA", "retained_intron", "sense_intronic", "sense_overlapping", "snRNA",
+                        "snoRNA", "transcribed_processed_pseudogene", "transcribed_unprocessed_pseudogene",
+                        "translated_processed_pseudogene", "unitary_pseudogene", "unprocessed_pseudogene"
                     ],
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
                     id: "type",
                     title: "Variant Type",
+                    types: ["SNV", "INDEL", "CNV", "INSERTION", "DELETION", "MNV"],
                     tooltip: "Only considers variants of the selected type"
                 }
             ]
@@ -121,6 +124,17 @@ const filterMenu = {
                     "The frequencies were obtained using more than 60.000 exomes." +
                     "<br><strong>ESP56500</strong> only considers variants whose observed allelic frequency in the Exome Variant Server " +
                     "(ESP6500) database is below (or above) the defined value. ESP6500 covers only exomic positions from about 6000 exomes"
+                }
+            ]
+        },
+        {
+            title: "Consequence Type",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "consequenceType",
+                    title: "Select SO terms",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
         },
@@ -162,17 +176,6 @@ const filterMenu = {
                     "(non-conserved) and 1 (highly conserved).<br>" +
                     "<strong>Genomic Evolutionary Rate Profiling (GERP)</strong> score estimate the level of conservation of positions." +
                     " Scores ≥ 2 indicate evolutionary constraint to and ≥ 3 indicate purifying selection."
-                }
-            ]
-        },
-        {
-            title: "Consequence Type",
-            collapsed: true,
-            subsections: [
-                {
-                    id: "consequenceType",
-                    title: "Select SO terms",
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
         },
