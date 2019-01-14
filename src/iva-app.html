@@ -195,7 +195,7 @@
                                                 <input type="text" class="form-control" id="searchTextBox"
                                                        placeholder="{{config.search.placeholder}}" on-keyup="buildQuery" style="width: 180px;">
                                                 <a style="cursor: pointer">
-                                                    <span class="fa fa-search" aria-hidden="true" on-click="buildQuery"></span>
+                                                    <span class="fa fa-search" aria-hidden="true" on-click="onQuickSearch"></span>
                                                 </a>
                                             </div>
                                         </form>
@@ -276,6 +276,7 @@
                     <div class="content" id="interpretation">
                         <opencga-variant-interpretation opencga-session="{{opencgaSession}}"
                                                         cellbase-client="{{cellbaseClient}}"
+                                                        query="{{interpretationSearchQuery}}"
                                                         active="{{config.tools.interpretation.active}}"
                                                         population-frequencies="{{config.populationFrequencies}}"
                                                         protein-substitution-scores="{{config.proteinSubstitutionScores}}"
@@ -1090,6 +1091,31 @@
                     this.renderHashFragments();
                     this.$.searchTextBox.value = ""; // Empty the value of search text box when search is complete and respective view is loaded
                 }
+            }
+
+            onQuickSearch(e) {
+                let gene = PolymerUtils.getValue("searchTextBox");
+                if (UtilsNew.isNotUndefinedOrNull(this.tool)) {
+                    let _query = {
+                        xref: gene
+                    };
+                    switch (this.tool) {
+                        case "#browser":
+                            window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                            this.browserSearchQuery = _query;
+                            break;
+                        case "#interpretation":
+                            window.location.hash = "interpretation/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                            this.interpretationSearchQuery = _query;
+                            break;
+                        default:
+                            this.tool = "#browser";
+                            window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                            this.browserSearchQuery = _query;
+                            break;
+                    }
+                }
+                // debugger
             }
 
             quickSearch(e) {
