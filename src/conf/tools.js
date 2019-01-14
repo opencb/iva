@@ -24,13 +24,33 @@ const filterMenu = {
     },
     skipSubsections: [],    // controls which subsections are disabled and should not be displayed
     sections: [             // sections and subsections, structure and order is respected
+        // {
+        //     title: "Clinical Interpretation",
+        //     collapsed: false,
+        //     subsections: [
+        //         {
+        //             id: "sample",
+        //             title: "Sample and File Filters",
+        //             showApproximateCount: true,
+        //             showSelectSamples: true,
+        //             inheritanceModes: [
+        //                 {key: "none", text: "Select..."},
+        //                 {key: "autoDominant", text: "Autosomal Dominant"},
+        //                 {key: "autoRecessive", text: "Autosomal Recessive"},
+        //                 {key: "xLinked", text: "X linked"},
+        //                 {key: "yLinked", text: "Y linked"}
+        //             ],
+        //             tooltip: "Filter by sample genotypes"
+        //         }
+        //     ]
+        // },
         {
             title: "Study and Cohorts",
             collapsed: false,
             subsections: [
                 {
                     id: "sample",
-                    title: "Samples",
+                    title: "Sample and File Filters",
                     showApproximateCount: true,
                     showSelectSamples: true,
                     inheritanceModes: [
@@ -94,15 +114,18 @@ const filterMenu = {
                     biotypes: [
                         "3prime_overlapping_ncrna", "IG_C_gene", "IG_C_pseudogene", "IG_D_gene", "IG_J_gene", "IG_J_pseudogene",
                         "IG_V_gene", "IG_V_pseudogene", "Mt_rRNA", "Mt_tRNA", "TR_C_gene", "TR_D_gene", "TR_J_gene", "TR_J_pseudogene",
-                        "TR_V_gene", "TR_V_pseudogene", "antisense", "lincRNA", "miRNA", "misc_RNA", "polymorphic_pseudogene",
-                        "processed_transcript", "protein_coding", "pseudogene", "rRNA", "sense_intronic", "sense_overlapping", "snRNA",
-                        "snoRNA"
+                        "TR_V_gene", "TR_V_pseudogene", "antisense", "lincRNA", "miRNA", "misc_RNA", "non_stop_decay",
+                        "nonsense_mediated_decay", "polymorphic_pseudogene", "processed_pseudogene", "processed_transcript",
+                        "protein_coding", "pseudogene", "rRNA", "retained_intron", "sense_intronic", "sense_overlapping", "snRNA",
+                        "snoRNA", "transcribed_processed_pseudogene", "transcribed_unprocessed_pseudogene",
+                        "translated_processed_pseudogene", "unitary_pseudogene", "unprocessed_pseudogene"
                     ],
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
                     id: "type",
                     title: "Variant Type",
+                    types: ["SNV", "INDEL", "CNV", "INSERTION", "DELETION", "MNV"],
                     tooltip: "Only considers variants of the selected type"
                 }
             ]
@@ -121,6 +144,17 @@ const filterMenu = {
                     "The frequencies were obtained using more than 60.000 exomes." +
                     "<br><strong>ESP56500</strong> only considers variants whose observed allelic frequency in the Exome Variant Server " +
                     "(ESP6500) database is below (or above) the defined value. ESP6500 covers only exomic positions from about 6000 exomes"
+                }
+            ]
+        },
+        {
+            title: "Consequence Type",
+            collapsed: true,
+            subsections: [
+                {
+                    id: "consequenceType",
+                    title: "Select SO terms",
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
         },
@@ -166,17 +200,6 @@ const filterMenu = {
             ]
         },
         {
-            title: "Consequence Type",
-            collapsed: true,
-            subsections: [
-                {
-                    id: "consequenceType",
-                    title: "Select SO terms",
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
-                }
-            ]
-        },
-        {
             title: "Gene Ontology",
             collapsed: true,
             subsections: [
@@ -211,6 +234,18 @@ const filterMenu = {
     ]
 };
 
+// Prepare Browser and Interpretation filter menu
+// let browserFilterMenu = Object.assign(filterMenu);
+// let browserFilterMenuSections = filterMenu.sections.slice(0);
+// browserFilterMenuSections.splice(0, 1);
+// browserFilterMenu.sections = browserFilterMenuSections;
+// debugger
+//
+// let interpretationFilterMenu = Object.assign(filterMenu);
+// let interpretationFilterMenuSections = filterMenu.sections.slice(0);
+// interpretationFilterMenuSections.splice(1, 1);
+// interpretationFilterMenu.sections = interpretationFilterMenuSections;
+
 const tools = {
     browser: {
         title: "Variant Browser",
@@ -223,7 +258,7 @@ const tools = {
             examples: [
                 {
                     name: "Example BRCA2",
-                    active: false,
+                    active: true,
                     query: {
                         gene: "BRCA2",
                         conservation: "phylop<0.001"
@@ -239,16 +274,50 @@ const tools = {
             ]
         },
         grid: {
-            showSelect: false,
+            showSelectCheckbox: false,
             nucleotideGenotype: false,
             includeMissing: true,
             queryParams: {
                 useSearchIndex: "auto",
                 approximateCount: true,
                 approximateCountSamplingSize: 5000,
+                skipCount: false,
                 timeout: 30000
             }
-        }
+        },
+        detail: [
+            {
+                id: "annotation",
+                component: "cellbase-variantannotation-view",
+                title: "Advanced Annotation",
+                active: true
+            },
+            {
+                id: "cohortStats",
+                component: "opencga-variant-cohort-stats",
+                title: "Cohort Stats"
+            },
+            {
+                id: "samples",
+                component: "opencga-variant-samples",
+                title: "Samples"
+            },
+            {
+                id: "beacon",
+                component: "variant-beacon-network",
+                title: "Beacon",
+                // Uncomment and edit Beacon hosts to change default hosts
+                // hosts: [
+                //     "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc",
+                //     "lovd", "hgmd", "icgc", "sahgp"
+                // ]
+            },
+            {
+                id: "template",
+                component: "opencga-variant-detail-template",
+                title: "Template"
+            }
+        ]
     },
     interpretation: {
         title: "Variant Interpreter",
@@ -258,11 +327,42 @@ const tools = {
             menu: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
             examples: [
                 {
-                    name: "Clinical Interpretation (tiering)",
+                    name: "Tiering (AR)",
+                    active: false,
+                    query: {
+                        biotype: "protein_coding,IG_C_gene,IG_D_gene,IG_J_gene,IG_V_gene,IG_V_gene,nonsense_mediated_decay," +
+                            "non_stop_decay,TR_C_gene,TR_D_gene,TR_J_gene,TR_V_gene",
+                        alternate_frequency: "1kG_phase3:AFR<0.01;1kG_phase3:AMR<0.01;1kG_phase3:EAS<0.01;1kG_phase3:EUR<0.01;" +
+                            "1kG_phase3:SAS<0.01;GNOMAD_EXOMES:AFR<0.01;GNOMAD_EXOMES:AMR<0.01;GNOMAD_EXOMES:EAS<0.01;" +
+                            "GNOMAD_EXOMES:FIN<0.01;GNOMAD_EXOMES:NFE<0.01;GNOMAD_EXOMES:ASJ<0.01;GNOMAD_EXOMES:OTH<0.01",
+                        ct: "SO:0001893,SO:0001574,SO:0001575,SO:0001587,SO:0001589,SO:0001578,SO:0001582,SO:0001889," +
+                            "SO:0001821,SO:0001822,SO:0001583,SO:0001630,SO:0001626"
+                    }
+                },
+                {
+                    name: "Tiering (AD)",
+                    active: false,
+                    query: {
+                        biotype: "protein_coding,IG_C_gene,IG_D_gene,IG_J_gene,IG_V_gene,IG_V_gene,nonsense_mediated_decay," +
+                            "non_stop_decay,TR_C_gene,TR_D_gene,TR_J_gene,TR_V_gene",
+                        alternate_frequency: "1kG_phase3:AFR<0.002;1kG_phase3:AMR<0.002;1kG_phase3:EAS<0.002;1kG_phase3:EUR<0.002;" +
+                            "1kG_phase3:SAS<0.002;GNOMAD_EXOMES:AFR<0.001;GNOMAD_EXOMES:AMR<0.001;GNOMAD_EXOMES:EAS<0.001;" +
+                            "GNOMAD_EXOMES:FIN<0.001;GNOMAD_EXOMES:NFE<0.001;GNOMAD_EXOMES:ASJ<0.001;GNOMAD_EXOMES:OTH<0.002",
+                        ct: "SO:0001893,SO:0001574,SO:0001575,SO:0001587,SO:0001589,SO:0001578,SO:0001582,SO:0001889," +
+                            "SO:0001821,SO:0001822,SO:0001583,SO:0001630,SO:0001626"
+                    }
+                },
+                {
+                    name: "Clinical Interpretation",
                     active: true,
                     query: {
+                        region: "1",
                         biotype: "protein_coding",
-                        alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001"
+                        alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
+                        ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
+                            "frameshift_variant,stop_lost,start_lost,transcript_amplification,inframe_insertion,inframe_deletion," +
+                            "missense_variant",
+                        // genotype: "NA12877:0/1;NA12878:0/1;NA12879:0/1,1/1"
                     }
                 },
                 {
@@ -276,7 +376,8 @@ const tools = {
             ]
         },
         grid: {
-            showSelect: true,
+            // showSelect: true,
+            showSelectCheckbox: true,
             nucleotideGenotype: true,
             interpretation: true,
             includeMissing: true,
@@ -286,59 +387,96 @@ const tools = {
                 approximateCountSamplingSize: 1000,
                 timeout: 30000
             }
+        },
+        detail: [
+            {
+                id: "annotation",
+                component: "cellbase-variantannotation-view",
+                title: "Advanced Annotation",
+                active: true
+            },
+            {
+                id: "fileMetrics",
+                component: "opencga-variant-file-metrics",
+                title: "File Metrics"
+            },
+            {
+                id: "beacon",
+                component: "variant-beacon-network",
+                title: "Beacon",
+                // Uncomment and edit Beacon hosts to change default hosts
+                // hosts: [
+                //     "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc",
+                //     "lovd", "hgmd", "icgc", "sahgp"
+                // ]
+            },
+            {
+                id: "template",
+                component: "opencga-variant-detail-template",
+                title: "Template"
+            }
+        ],
+        css: {
+            style: "font-size: 12px"
         }
     },
     facet: {
-        title: "Facet Analysis",
+        // title: "Facet Analysis",
         active: false,
-        fields: [
-            {
-                name: "Chromosome", value: "chromosome"
-            },
-            {
-                name: "Studies", value: "studies"
-            },
-            {
-                name: "Variant Type", value: "type"
-            },
-            {
-                name: "Genes", value: "genes"
-            },
-            {
-                name: "Biotypes", value: "biotypes"
-            },
-            {
-                name: "Consequence Type", value: "soAcc"
-            }
-        ],
-        ranges: [
-            {
-                name: "PhastCons", value: "phastCons"
-            },
-            {
-                name: "PhyloP", value: "phylop"
-            },
-            {
-                name: "Gerp", value: "gerp"
-            },
-            {
-                name: "CADD Raw", value: "caddRaw"
-            },
-            {
-                name: "CADD Scaled", value: "caddScaled"
-            },
-            {
-                name: "Sift", value: "sift"
-            },
-            {
-                name: "Polyphen", value: "polyphen"
-            }
-        ],
+        // fields: [
+        //     {
+        //         name: "Chromosome", value: "chromosome"
+        //     },
+        //     {
+        //         name: "Studies", value: "studies"
+        //     },
+        //     {
+        //         name: "Variant Type", value: "type"
+        //     },
+        //     {
+        //         name: "Genes", value: "genes"
+        //     },
+        //     {
+        //         name: "Biotypes", value: "biotypes"
+        //     },
+        //     {
+        //         name: "Consequence Type", value: "soAcc"
+        //     }
+        // ],
+        // ranges: [
+        //     {
+        //         name: "PhastCons", value: "phastCons"
+        //     },
+        //     {
+        //         name: "PhyloP", value: "phylop"
+        //     },
+        //     {
+        //         name: "Gerp", value: "gerp"
+        //     },
+        //     {
+        //         name: "CADD Raw", value: "caddRaw"
+        //     },
+        //     {
+        //         name: "CADD Scaled", value: "caddScaled"
+        //     },
+        //     {
+        //         name: "Sift", value: "sift"
+        //     },
+        //     {
+        //         name: "Polyphen", value: "polyphen"
+        //     }
+        // ],
         filter: {
-            menu: filterMenu
+            menu: Object.assign({}, filterMenu, {skipSubsections: ["sample"]}),
         }
     },
     panel: {
+        active: false
+    },
+    individual: {
+        active: false
+    },
+    family: {
         active: false
     },
     gene: {
@@ -391,8 +529,9 @@ const tools = {
                 queryParams: {
                     useSearchIndex: "yes",
                     approximateCount: true,
+                    skipCount: false,
                     approximateCountSamplingSize: 5000,
-                    timeout: 30000
+                    timeout: 30000,
                 }
             }
         },

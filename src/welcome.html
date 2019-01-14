@@ -39,6 +39,9 @@
                 This interactive tool allows finding genes affected by deleterious variants that segregate along family pedigrees, case-controls or sporadic samples.
             </p>
             <br>
+            <input type="text" class="form-control input-lg" id="welcomeSearchTextBox" style="text-align: center;"
+                   placeholder="Search for a gene, transcript, protein or a variant" on-blur="onBlur" on-keyup="onKeyup">
+            <br>
             <h4>Note:</h4>
             <p style="font-size:14px">
                 IVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components,
@@ -55,6 +58,10 @@
 
         class Welcome extends Polymer.Element {
 
+            constructor() {
+                super();
+            }
+
             static get is() {
                 return 'welcome-web';
             }
@@ -65,15 +72,28 @@
                 }
             }
 
-            constructor() {
-                super();
-            }
             _attachDom(dom) {
                 this.appendChild(dom);
             }
 
-            ready() {
-                super.ready();
+            onBlur(e) {
+                this.notify();
+            }
+
+            onKeyup(e) {
+                if (e.keyCode === 13) {
+                    this.notify();
+                }
+            }
+
+            notify() {
+                this.dispatchEvent(new CustomEvent("search", {
+                    detail: {
+                        xref: PolymerUtils.getValue("welcomeSearchTextBox")
+                    },
+                    bubbles: true,
+                    composed: true
+                }));
             }
         }
 

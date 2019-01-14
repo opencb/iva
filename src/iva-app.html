@@ -22,22 +22,34 @@
 <link rel="import" href="jso-styles.html">
 <link rel="import" href="welcome.html">
 
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-genome-browser.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-browser.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-interpretation.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-facet.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/clinical-interpretation-view.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-variant-clinical.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-panel.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-beacon.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-jobs.html">
-
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-transcript-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-protein-view.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-genome-browser.html">
+
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-projects.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-project.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/files/opencga-file-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/panel/opencga-panel-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-portal.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-creator.html">
+
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/clinical-interpretation-view.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-variant-clinical.html">
+
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-interpretation.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-facet.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-beacon.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-jobs.html">
+<!--<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-detail-template.html">-->
+
 <!--<link rel="import" href="../lib/jsorolla/src/core/opencga/catalog/opencga-study.html">-->
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-login.html">
 <link rel="import" href="iva-settings.html">
@@ -183,7 +195,7 @@
                                                 <input type="text" class="form-control" id="searchTextBox"
                                                        placeholder="{{config.search.placeholder}}" on-keyup="buildQuery" style="width: 180px;">
                                                 <a style="cursor: pointer">
-                                                    <span class="fa fa-search" aria-hidden="true" on-click="buildQuery"></span>
+                                                    <span class="fa fa-search" aria-hidden="true" on-click="onQuickSearch"></span>
                                                 </a>
                                             </div>
                                         </form>
@@ -246,30 +258,31 @@
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
                     <div class="content" id="browser">
-                        <opencga-variant-browser opencga-session="{{opencgaSession}}" config="[[config.tools.browser]]"
-                                                 opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                                 query="{{browserQuery}}"
+                        <!--search="{{browserSearchQuery}}"-->
+                        <opencga-variant-browser opencga-session="{{opencgaSession}}"
+                                                 cellbase-client="{{cellbaseClient}}"
+                                                 query="{{browserSearchQuery}}"
                                                  active="{{config.tools.browser.active}}"
                                                  population-frequencies="{{config.populationFrequencies}}"
                                                  protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                                  consequence-types="{{config.consequenceTypes}}"
-                                                 beacon-hosts="{{config.tools.beacon.hosts}}"
-                                                 on-gene="geneSelected"
-                                                 on-samplechange="onSampleChange" style="font-size: 12px">
+                                                 on-gene="geneSelected" on-samplechange="onSampleChange"
+                                                 style="font-size: 12px" config="{{config.tools.browser}}">
                         </opencga-variant-browser>
                     </div>
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
                     <div class="content" id="interpretation">
-                        <opencga-variant-interpretation opencga-session="{{opencgaSession}}" config="[[config.tools.interpretation]]"
-                                                        opencga-client="{{opencgaSession.opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                        <opencga-variant-interpretation opencga-session="{{opencgaSession}}"
+                                                        cellbase-client="{{cellbaseClient}}"
+                                                        query="{{interpretationSearchQuery}}"
                                                         active="{{config.tools.interpretation.active}}"
                                                         population-frequencies="{{config.populationFrequencies}}"
                                                         protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                                         consequence-types="{{config.consequenceTypes}}"
-                                                        beacon-hosts="{{config.tools.beacon.hosts}}" on-gene="geneSelected"
-                                                        on-samplechange="onSampleChange" style="font-size: 12px" >
+                                                        on-gene="geneSelected" on-samplechange="onSampleChange"
+                                                        style="font-size: 12px" config="{{config.tools.interpretation}}">
                         </opencga-variant-interpretation>
                     </div>
                 </template>
@@ -300,7 +313,8 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.panel}}">
                     <div class="content" id="panel">
-                        <opencga-panel project="{{project}}" study="{{study}}" opencga-client="{{opencgaClient}}" panel-examples="{{config.panelExamples}}"></opencga-panel>
+                        <opencga-panel-browser opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                                       on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" ></opencga-panel-browser>
                     </div>
                 </template>
 
@@ -392,14 +406,62 @@
                     </div>
                 </template>
 
+                <template is="dom-if" if="{{config.enabledComponents.sample}}">
+                    <div class="content" id="sample" style="margin: auto; width: 90%">
+                        <opencga-sample-view opencga-session="{{opencgaSession}}" sample-id="NA12877" config="{{config.sampleView}}"></opencga-sample-view>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.files}}">
+                    <div class="content" id="files">
+                        <opencga-file-browser opencga-session="{{opencgaSession}}" config="{{config.fileBrowser}}"></opencga-file-browser>
+                    </div>
+                </template>
+
                 <template is="dom-if" if="{{config.enabledComponents.samples}}">
                     <div class="content" id="samples">
                         <opencga-sample-browser opencga-session="{{opencgaSession}}" config="{{config.sampleBrowser}}"></opencga-sample-browser>
                     </div>
                 </template>
-                <!--<div class="collapse content" id="studyInformation">-->
-                <!--<opencga-study opencga-client="{{opencgaClient}}" project="{{project}}"-->
-                <!--study="{{study}}"></opencga-study>-->
+
+                <template is="dom-if" if="{{config.enabledComponents.individuals}}">
+                    <div class="content" id="individuals">
+                        <opencga-individual-browser  opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}" config-values="[[config.tools.clinical]]"></opencga-individual-browser>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.families}}">
+                    <div class="content" id="families">
+                        <opencga-family-browser  opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}"></opencga-family-browser>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.cohorts}}">
+                    <div class="content" id="cohorts">
+                        <opencga-cohort-browser opencga-session="{{opencgaSession}}" config="{{config.cohortBrowser}}"></opencga-cohort-browser>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysis}}">
+                    <div class="content" id="clinicalAnalysis">
+                        <opencga-clinical-analysis-browser opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"
+                                                           on-urlchange="onUrlChange" query="{{query}}"></opencga-clinical-analysis-browser>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisPortal}}">
+                    <div class="content" id="clinicalAnalysisPortal">
+                        <opencga-clinical-analysis-portal opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"
+                        ></opencga-clinical-analysis-portal>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisCreator}}">
+                    <div class="content" id="clinicalAnalysisCreator">
+                        <opencga-clinical-analysis-creator opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-analysis-creator>
+                    </div>
+                </template>
+
             </div>
         </div>
     </template>
@@ -451,7 +513,7 @@
                 _config.cellbase = cellbase;
                 _config.tools = tools;
                 _config.opencga = opencga;
-                _config.species = DEFAULT_SPECIES;
+                // _config.species = DEFAULT_SPECIES;
                 _config.enabledComponents = {};
                 _config.panelExamples = diseasePanels;
                 _config.populationFrequencies = populationFrequencies;
@@ -471,7 +533,9 @@
                 }
 
                 // Enabled components catalog
-                let components = ["login", "projects", "project", "samples", "settings", "gene", "transcript", "protein"];
+                let components = ["login", "projects", "project", "sample", "files", "samples", "individuals", "families", "cohorts",
+                    "clinicalAnalysis", "clinicalAnalysisPortal", "clinicalAnalysisCreator", "settings", "gene", "transcript", "protein"];
+
                 for (let component of components) {
                     _config.enabledComponents[component] = false;
                 }
@@ -521,6 +585,7 @@
 
                 // Initialise clients and create the session
                 this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host, this.config.opencga.version, true, this.config.opencga.cookie.prefix);
+                this.opencgaClientConfig.serverVersion = this.config.opencga.serverVersion;
                 this.opencgaClient = new OpenCGAClient(this.opencgaClientConfig);
 
                 this.cellBaseClientConfig = new CellBaseClientConfig(this.config.cellbase.hosts, this.config.cellbase.version, "hsapiens");
@@ -536,6 +601,9 @@
                 } else {
                     this._createOpencgaSessionFromConfig();
                 }
+
+                // this.browserSearchQuery = {gene: "BRCA2", sample: "NA12877", study: "platinum"};
+                this.browserSearchQuery = {};
             }
 
             opencgaSessionObserver() {
@@ -547,7 +615,51 @@
                 let _this = this;
                 let opencgaSession = this.opencgaClient.createSession()
                     .then(function (response) {
-                        _this.opencgaSession = Object.assign({}, response); // this forces the observer to be executed.
+
+                        // check if project array has been defined in the config.js
+                        if (UtilsNew.isNotEmptyArray(_this.config.opencga.projects)) {
+                            // We store the project and study ids the user needs to visualise (defined in the config.js)
+                            let configProjects = {};
+                            for (let i = 0; i < _this.config.opencga.projects.length; i++) {
+                                configProjects[_this.config.opencga.projects[i].id] = [];
+
+                                for (let j = 0; j < _this.config.opencga.projects[i].studies.length; j++) {
+                                    configProjects[_this.config.opencga.projects[i].id].push(
+                                        _this.config.opencga.projects[i].studies[j].id
+                                    );
+                                }
+                            }
+
+                            // We must keep only the projects defined in the configuration file
+                            let activeProjects = [];
+                            for (let i = 0; i < response.projects.length; i++) {
+                                if (response.projects[i].id in configProjects) {
+                                    let project = response.projects[i];
+                                    let activeStudies = [];
+                                    for (let j = 0; j < project.studies.length; j++) {
+                                        let study = project.studies[j];
+                                        if (configProjects[project.id].indexOf(study.id) > -1) {
+                                            activeStudies.push(study);
+                                        }
+                                    }
+
+                                    // We replace the studies obtained with the ones from the configuration file
+                                    project.studies = activeStudies;
+                                    activeProjects.push(project);
+                                }
+                            }
+
+                            // TODO we must query projects/info URL to get the whole object
+                            response.projects = activeProjects;
+                            if (UtilsNew.isNotEmptyArray(response.projects[0].studies)) {
+                                response.project = response.projects[0];
+                                response.study = response.projects[0].studies[0];
+                            }
+                        }
+
+                        // this forces the observer to be executed.
+                        _this.opencgaSession = Object.assign({}, response);
+                        _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
                     })
                     .catch(function (response) {
                         console.log("An error when creating the OpenCGA session: ", response);
@@ -607,7 +719,6 @@
                 this.opencgaClient._config.sessionId = credentials.detail.sessionId;
                 this._createOpenCGASession();
 
-                this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
 
                 if (this.tool === "#login") {
                     this.tool = "#home";
@@ -630,6 +741,27 @@
                 window.clearInterval(this.intervalCheckSession);
             }
 
+            onUrlChange(e) {
+                let hashFrag = e.detail.id;
+                if (UtilsNew.isNotUndefined(this.opencgaSession.project) && UtilsNew.isNotEmpty(this.opencgaSession.project.alias)) {
+
+                    hashFrag += "/" + this.opencgaSession.project.alias;
+                    if (UtilsNew.isNotUndefined(this.opencgaSession.study) && UtilsNew.isNotEmpty(this.opencgaSession.study.alias)) {
+                        hashFrag += "/" + this.opencgaSession.study.alias;
+                    }
+                }
+
+                let myQueryParams = [];
+                for (let key in e.detail.query) {
+                    myQueryParams.push(key + "=" + e.detail.query[key]);
+                }
+                if (myQueryParams.length > 0) {
+                    hashFrag += `?${myQueryParams.join("&")}`;
+                }
+
+                window.location.hash = hashFrag;
+            }
+
             checkSessionActive() {
                 let _message = "";
                 // We check if refresh token has updated session id cookie
@@ -643,7 +775,7 @@
                     // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
                     if (remainingTime <= this.config.session.maxRemainingTime && remainingTime >= this.config.session.minRemainingTime) {
                         let remainingMinutes = Math.floor(remainingTime / this.config.session.minRemainingTime);
-                        _message = "Your session is close to expire. <strong>" + remainingMinutes + ` minutes remaining</strong>. <a href="#" onclick='eval(UtilsApp.refreshToken()); return false;'>Click here to refresh</a>`;
+                        _message = "Your session is close to expire. <strong>" + remainingMinutes + ` minutes remaining</strong>. <a href="#" onclick='eval(NotificationUtils.refreshToken()); return false;'>Click here to refresh</a>`;
                     } else {
                         if (remainingTime < this.config.session.minRemainingTime) {
                             _message = "Your session has expired.";
@@ -651,7 +783,7 @@
                             window.clearInterval(this.intervalCheckSession);
                         } else {
                             if (UtilsNew.isNotUndefinedOrNull(this.notifySession)) {
-                                UtilsApp.closeNotify(this.notifySession);
+                                NotificationUtils.closeNotify(this.notifySession);
                             }
                             return;
                         }
@@ -662,10 +794,11 @@
                 }
                 // delay = 0 to fix the notify until user closes it.
                 if (UtilsNew.isNotEmpty(_message)) {
-                    this.notifySession = UtilsApp.showNotify({}, {
+                    this.notifySession = NotificationUtils.showNotify(_message, UtilsNew.MESSAGE_INFO,
+                        {}, {
                         delay: 0,
                         onClosed: this.onCloseRefreshNotify.bind(this)
-                    }, _message, UtilsNew.MESSAGE_INFO, this.opencgaClient, this.notifySession);
+                    }, this.opencgaClient, this.notifySession);
                 }
             }
 
@@ -805,6 +938,18 @@
                         }
                     }
                     ctx.tool = hashTool;
+                }
+
+                let searchArr = window.location.hash.split("?");
+                if (searchArr.length > 1) {
+                    let search = searchArr[1];
+                    arr = search.split("&");
+                    let query = {};
+                    for (let i = 0; i < arr.length; i++) {
+                        let split = arr[i].split("=");
+                        query[split[0]] = split[1];
+                    }
+                    this.query = query;
                 }
 
                 if (UtilsNew.isNotUndefined(this.config.enabledComponents[this.tool.replace("#", "")])) {
@@ -948,10 +1093,38 @@
                 }
             }
 
+            onQuickSearch(e) {
+                let gene = PolymerUtils.getValue("searchTextBox");
+                if (UtilsNew.isNotUndefinedOrNull(this.tool)) {
+                    let _query = {
+                        xref: gene
+                    };
+                    switch (this.tool) {
+                        case "#browser":
+                            window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                            this.browserSearchQuery = _query;
+                            break;
+                        case "#interpretation":
+                            window.location.hash = "interpretation/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                            this.interpretationSearchQuery = _query;
+                            break;
+                        default:
+                            this.tool = "#browser";
+                            window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                            this.browserSearchQuery = _query;
+                            break;
+                    }
+                }
+                // debugger
+            }
+
             quickSearch(e) {
+                debugger
                 this.tool = "#browser";
                 window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
-                this.browserQuery = {xref: e.detail.value};
+                // this.browserQuery = {xref: e.detail.value};
+
+                this.browserSearchQuery = e.detail;
             }
 
             _checkBreadcrumbVisible() {
@@ -1060,8 +1233,8 @@
             }
 
             onNotifyMessage(e) {
-                UtilsApp.closeNotify(this.notifySession);
-                UtilsApp.showNotify(e.detail.options, e.detail.settings, e.detail.message, e.detail.type);
+                NotificationUtils.closeNotify(this.notifySession);
+                NotificationUtils.showNotify(e.detail.message, e.detail.type, e.detail.options, e.detail.settings);
             }
         }
 
