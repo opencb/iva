@@ -214,6 +214,18 @@ const filterMenu = {
     ]
 };
 
+// Prepare Browser and Interpretation filter menu
+// let browserFilterMenu = Object.assign(filterMenu);
+// let browserFilterMenuSections = filterMenu.sections.slice(0);
+// browserFilterMenuSections.splice(0, 1);
+// browserFilterMenu.sections = browserFilterMenuSections;
+// debugger
+//
+// let interpretationFilterMenu = Object.assign(filterMenu);
+// let interpretationFilterMenuSections = filterMenu.sections.slice(0);
+// interpretationFilterMenuSections.splice(1, 1);
+// interpretationFilterMenu.sections = interpretationFilterMenuSections;
+
 const tools = {
     browser: {
         title: "Variant Browser",
