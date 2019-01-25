@@ -36,6 +36,7 @@
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/panel/opencga-panel-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-portal.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-portal.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-creator.html">
@@ -249,7 +250,8 @@
             <template is="dom-if" if="{{config.enabledComponents.home}}">
                 <div class="center">
                     <div class="content" id="home">
-                        <welcome-web project={{opencgaSession.project}} study="{{opencgaSession.study.alias}}" version="{{config.version}}" on-search="quickSearch"></welcome-web>
+                        <welcome-web project={{opencgaSession.project}} study="{{opencgaSession.study.alias}}" version="{{config.version}}"
+                                     cellbase-client={{cellbaseClient}} on-search="quickSearch"></welcome-web>
                     </div>
                 </div>
             </template>
@@ -274,7 +276,7 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
                     <div class="content" id="interpretation">
-                        <opencga-variant-interpretation opencga-session="{{opencgaSession}}"
+                        <opencga-variant-interpretation opencga-session="{{opencgaSession}}" clinical-analysis-id="{{clinicalAnalysisId}}"
                                                         cellbase-client="{{cellbaseClient}}"
                                                         query="{{interpretationSearchQuery}}"
                                                         active="{{config.tools.interpretation.active}}"
@@ -451,8 +453,8 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisPortal}}">
                     <div class="content" id="clinicalAnalysisPortal">
-                        <opencga-clinical-analysis-portal opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"
-                        ></opencga-clinical-analysis-portal>
+                        <!--<opencga-clinical-analysis-portal opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-analysis-portal>-->
+                        <opencga-clinical-portal opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-portal>
                     </div>
                 </template>
 
@@ -927,6 +929,15 @@
                             }
                         }
                     }
+debugger
+                    switch (hashTool) {
+                        case "#protein":
+                            break;
+                        case "#interpretation":
+                            this.clinicalAnalysisId = feature;
+                            break;
+                    }
+
 
                     if (UtilsNew.isNotEmpty(feature)) {
                         if (hashTool === "#protein") {
@@ -1119,7 +1130,7 @@
             }
 
             quickSearch(e) {
-                debugger
+                // debugger
                 this.tool = "#browser";
                 window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
                 // this.browserQuery = {xref: e.detail.value};
