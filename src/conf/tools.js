@@ -83,11 +83,11 @@ const filterMenu = {
                     title: "Feature IDs (gene, SNPs, ...)",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
-                {
-                    id: "geneDiseasePanels",
-                    title: "Gene Disease Panels",
-                    tooltip: "Filter out variants falling outside the genomic intervals (typically genes) defined by the panel(s) chosen"
-                },
+                // {
+                //     id: "geneDiseasePanels",
+                //     title: "Gene Disease Panels",
+                //     tooltip: "Filter out variants falling outside the genomic intervals (typically genes) defined by the panel(s) chosen"
+                // },
                 {
                     id: "biotype",
                     title: "Biotype",
@@ -105,7 +105,7 @@ const filterMenu = {
                 {
                     id: "type",
                     title: "Variant Type",
-                    types: ["SNV", "CNV", "INSERTION", "DELETION", "MNV"],
+                    types: ["SNV", "INSERTION", "DELETION", "MNV"],
                     tooltip: "Only considers variants of the selected type"
                 }
             ]
@@ -194,11 +194,11 @@ const filterMenu = {
             title: "Phenotype-Disease",
             collapsed: true,
             subsections: [
-                {
-                    id: "hpo",
-                    title: "HPO Accessions",
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
-                },
+                // {
+                //     id: "hpo",
+                //     title: "HPO Accessions",
+                //     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+                // },
                 {
                     id: "clinvar",
                     title: "ClinVar Accessions",
