@@ -98,8 +98,6 @@ const application = {
             title: "Beacon",
             visibility: "public",
         },
-
-
         {
             id: "case",
             title: "Clinical",
@@ -120,27 +118,8 @@ const application = {
                     visibility: "public",
                 },
                 {
-                    title: "Editor",
-                    category: true,
-                    visibility: "public",
-                },
-                {
-                    id: "clinicalAnalysisCreator",
-                    title: "Case Creator",
-                    visibility: "public",
-                },
-                {
-                    id: "panel",
-                    title: "Disease Panel",
-                    visibility: "public",
-                },
-                {
-                    separator: true,
-                    visibility: "public",
-                },
-                {
                     id: "clinical",
-                    title: "Clinical",
+                    title: "Clinical (Old)",
                     visibility: "public",
                 },
             ]
@@ -197,6 +176,25 @@ const application = {
                 {
                     id: "tdt",
                     title: "Family-based Association (TDT)",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "Clinical Interpretation Analysis",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "tiering",
+                    title: "Tiering (Genomics England)",
+                    visibility: "public",
+                },
+                {
+                    id: "team",
+                    title: "TEAM",
                     visibility: "public",
                 },
                 {
@@ -433,7 +431,7 @@ const proteinSubstitutionScores = {
     },
     polyphen: {
         probablyDamaging: "red",
-        possiblyDamaging: "orange",
+        possiblyDamaging: "darkorange",
         benign: "green",
         unknown: "black",
     },
@@ -443,7 +441,7 @@ const consequenceTypes = {
     // This is the impact color. It allows to customise both the impact categories and desired colors
     color: {
         high: "red",
-        moderate: "orange",
+        moderate: "darkorange",
         low: "blue",
         modifier: "green",
     },
