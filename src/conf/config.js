@@ -22,61 +22,63 @@ const cellbase = {
 
 const opencga = {
     // host: "https://opencga-embassy.gel.zone/opencga",
-    host: "http://bio-dev-opencgainternal-tomcat-01.gel.zone:8080/opencga",
+    // host: "http://bio-dev-opencgainternal-tomcat-01.gel.zone:8080/opencga",
+    // host: "http://bioinfodev.hpc.cam.ac.uk/opencga-test",
+    host: "http://localhost:8080/opencga-test",
     version: "v1",
     serverVersion: "1.4",
 
     // This forces the following projects to be used instead of the user's project
-    projects: [
-        {
-            id: "100k_genomes_grch37_germline",
-            name: "100k Genomes Project GRCh37 Germline",
-            alias: "reopencga@100k_genomes_grch37_germline",
-            organism: {
-                scientificName: "Homo sapiens",
-                assembly: "GRCh37"
-            },
-            studies : [
-                {
-                    id: "RD37",
-                    name: "RD37",
-                    alias: "RD37"
-                }
-            ]
-        },
-        {
-            id: "100k_genomes_grch38_germline",
-            name: "100k Genomes Project GRCh38 Germline",
-            alias: "reopencga@100k_genomes_grch38_germline",
-            organism: {
-                scientificName: "Homo sapiens",
-                assembly: "GRCh38"
-            },
-            studies : [
-                {
-                    id: "RD38",
-                    name: "RD38",
-                    alias: "RD38"
-                }
-            ]
-        },
-        {
-            id: "100k_genomes_grch38_somatic",
-            name: "100k Genomes Project GRCh38 Somatic",
-            alias: "reopencga@100k_genomes_grch38_somatic",
-            organism: {
-                scientificName: "Homo sapiens",
-                assembly: "GRCh38"
-            },
-            studies : [
-                {
-                    id: "CS38",
-                    name: "CS38",
-                    alias: "CS38"
-                }
-            ]
-        }
-    ],
+    // projects: [
+    //     {
+    //         id: "100k_genomes_grch37_germline",
+    //         name: "100k Genomes Project GRCh37 Germline",
+    //         alias: "reopencga@100k_genomes_grch37_germline",
+    //         organism: {
+    //             scientificName: "Homo sapiens",
+    //             assembly: "GRCh37"
+    //         },
+    //         studies : [
+    //             {
+    //                 id: "RD37",
+    //                 name: "RD37",
+    //                 alias: "RD37"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         id: "100k_genomes_grch38_germline",
+    //         name: "100k Genomes Project GRCh38 Germline",
+    //         alias: "reopencga@100k_genomes_grch38_germline",
+    //         organism: {
+    //             scientificName: "Homo sapiens",
+    //             assembly: "GRCh38"
+    //         },
+    //         studies : [
+    //             {
+    //                 id: "RD38",
+    //                 name: "RD38",
+    //                 alias: "RD38"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         id: "100k_genomes_grch38_somatic",
+    //         name: "100k Genomes Project GRCh38 Somatic",
+    //         alias: "reopencga@100k_genomes_grch38_somatic",
+    //         organism: {
+    //             scientificName: "Homo sapiens",
+    //             assembly: "GRCh38"
+    //         },
+    //         studies : [
+    //             {
+    //                 id: "CS38",
+    //                 name: "CS38",
+    //                 alias: "CS38"
+    //             }
+    //         ]
+    //     }
+    // ],
 
     // This allows IVA to query a OpenCGA instance being an 'anonymous' user, this means that no login is required.
     // If 'projects' is empty then all public projects and studies of 'user' will be used.
@@ -128,12 +130,10 @@ const application = {
             title: "Beacon",
             visibility: "public",
         },
-
-
         {
             id: "case",
             title: "Clinical",
-            visibility: "public",
+            visibility: "none",
             submenu: [
                 {
                     id: "clinicalAnalysisPortal",
@@ -150,27 +150,8 @@ const application = {
                     visibility: "public",
                 },
                 {
-                    title: "Editor",
-                    category: true,
-                    visibility: "public",
-                },
-                {
-                    id: "clinicalAnalysisCreator",
-                    title: "Case Creator",
-                    visibility: "public",
-                },
-                {
-                    id: "panel",
-                    title: "Disease Panel",
-                    visibility: "public",
-                },
-                {
-                    separator: true,
-                    visibility: "public",
-                },
-                {
                     id: "clinical",
-                    title: "Clinical",
+                    title: "Clinical (Old)",
                     visibility: "public",
                 },
             ]
@@ -183,7 +164,7 @@ const application = {
         {
             id: "analysis",
             title: "Analysis (Pending)",
-            visibility: "public",
+            visibility: "none",
             submenu: [
                 {
                     title: "Summary Stats",
@@ -232,6 +213,25 @@ const application = {
                 {
                     separator: true,
                     visibility: "none",
+                },
+                {
+                    title: "Clinical Interpretation Analysis",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "tiering",
+                    title: "Tiering (Genomics England)",
+                    visibility: "public",
+                },
+                {
+                    id: "team",
+                    title: "TEAM",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
                 },
                 {
                     title: "Other",
@@ -399,6 +399,7 @@ const populationFrequencies = {
         rare: "#ff8080",
         average: "#8080ff",
         common: "#0000ff",
+        unobserved: "black"
     },
     studies: [
         {
@@ -409,19 +410,18 @@ const populationFrequencies = {
             populations: [
                 {
                     id: "ALL", title: "All populations [ALL]",
-                    active: true,
-                },
-                {
-                    id: "EUR", title: "European [EUR]",
-                },
-                {
-                    id: "AMR", title: "American [AMR]",
                 },
                 {
                     id: "AFR", title: "African [AFR]",
                 },
                 {
+                    id: "AMR", title: "American [AMR]",
+                },
+                {
                     id: "EAS", title: "East Asian [EAS]",
+                },
+                {
+                    id: "EUR", title: "European [EUR]",
                 },
                 {
                     id: "SAS", title: "South Asian [SAS]",
@@ -438,36 +438,25 @@ const populationFrequencies = {
                     id: "ALL", title: "gnomAD [ALL]",
                 },
                 {
-                    id: "NFE", title: "Non-Finnish European [NFE]",
+                    id: "AFR", title: "African/African American [AFR]",
                 },
                 {
                     id: "AMR", title: "American [AMR]",
                 },
                 {
-                    id: "AFR", title: "African [AFR]",
+                    id: "EAS", title: "East Asian [EAS]",
                 },
                 {
-                    id: "EAS", title: "East Asian [EAS]",
+                    id: "FIN", title: "Finnish[FIN]",
+                },
+                {
+                    id: "NFE", title: "Non-Finnish European [NFE]",
                 },
                 {
                     id: "SAS", title: "South Asian [SAS]",
                 },
             ],
         },
-        // {
-        //     id: "ESP6500",
-        //     title: "ESP6500",
-        //     tooltip: "Only considers variants whose observed allelic frequency in the Exome Variant Server (ESP6500) database is below " +
-        //     "(or above) the defined value. ESP6500 covers only exomic positions. The frequencies were obtained from more than 6000 exomes.",
-        //     populations: [
-        //         {
-        //             id: "EA", title: "European American [EA]"
-        //         },
-        //         {
-        //             id: "AA", title: "African American [AA]",
-        //         },
-        //     ],
-        // },
     ],
 };
 
@@ -479,7 +468,7 @@ const proteinSubstitutionScores = {
     },
     polyphen: {
         probablyDamaging: "red",
-        possiblyDamaging: "orange",
+        possiblyDamaging: "darkorange",
         benign: "green",
         unknown: "black",
     },
@@ -489,7 +478,7 @@ const consequenceTypes = {
     // This is the impact color. It allows to customise both the impact categories and desired colors
     color: {
         high: "red",
-        moderate: "orange",
+        moderate: "darkorange",
         low: "blue",
         modifier: "green",
     },
@@ -546,18 +535,18 @@ const consequenceTypes = {
                     description: "A transcript variant located with the sequence of the mature miRNA",
                     impact: "modifier",
                 },
-                {
-                    id: "SO:0001894",
-                    name: "regulatory_region_ablation",
-                    description: "A feature ablation whereby the deleted region includes a regulatory region",
-                    impact: "moderate",
-                },
-                {
-                    id: "SO:0001891",
-                    name: "regulatory_region_amplification",
-                    description: "A feature amplification of a region containing a regulatory region",
-                    impact: "modifier",
-                },
+                // {
+                //     id: "SO:0001894",
+                //     name: "regulatory_region_ablation",
+                //     description: "A feature ablation whereby the deleted region includes a regulatory region",
+                //     impact: "moderate",
+                // },
+                // {
+                //     id: "SO:0001891",
+                //     name: "regulatory_region_amplification",
+                //     description: "A feature amplification of a region containing a regulatory region",
+                //     impact: "modifier",
+                // },
                 {
                     id: "SO:0001566",
                     name: "regulatory_region_variant",
@@ -570,18 +559,18 @@ const consequenceTypes = {
                     description: "A sequence variant located within a transcription factor binding site",
                     impact: "modifier",
                 },
-                {
-                    id: "SO:0001895",
-                    name: "TFBS_ablation",
-                    description: "A feature ablation whereby the deleted region includes a transcription factor binding site",
-                    impact: "modifier",
-                },
-                {
-                    id: "SO:0001892",
-                    name: "TFBS_amplification",
-                    description: "A feature amplification of a region containing a transcription factor binding site",
-                    impact: "modifier",
-                },
+                // {
+                //     id: "SO:0001895",
+                //     name: "TFBS_ablation",
+                //     description: "A feature ablation whereby the deleted region includes a transcription factor binding site",
+                //     impact: "modifier",
+                // },
+                // {
+                //     id: "SO:0001892",
+                //     name: "TFBS_amplification",
+                //     description: "A feature amplification of a region containing a transcription factor binding site",
+                //     impact: "modifier",
+                // },
             ],
         },
         {
@@ -593,12 +582,12 @@ const consequenceTypes = {
                     description: "A sequence variant that changes the coding sequence",
                     impact: "modifier",
                 },
-                {
-                    id: "SO:0001907",
-                    name: "feature_elongation",
-                    description: "A sequence variant that causes the extension of a genomic feature, with regard to the reference sequence",
-                    impact: "modifier",
-                },
+                // {
+                //     id: "SO:0001907",
+                //     name: "feature_elongation",
+                //     description: "A sequence variant that causes the extension of a genomic feature, with regard to the reference sequence",
+                //     impact: "modifier",
+                // },
                 {
                     id: "SO:0001906",
                     name: "feature_truncation",
@@ -616,18 +605,29 @@ const consequenceTypes = {
                     name: "incomplete_terminal_codon_variant",
                     description: "A sequence variant where at least one base of the final codon of an incompletely annotated transcript is changed",
                     impact: "low",
-
                 },
                 {
                     id: "SO:0001822",
                     name: "inframe_deletion",
                     description: "An inframe non synonymous variant that deletes bases from the coding sequence",
-                    impact: "moderate",
+                    impact: "high",
                 },
                 {
                     id: "SO:0001821",
                     name: "inframe_insertion",
                     description: "An inframe non synonymous variant that inserts bases into in the coding sequence",
+                    impact: "high",
+                },
+                {
+                    id: "SO:0001650",
+                    name: "inframe_variant",
+                    description: "A sequence variant which does not cause a disruption of the translational reading frame",
+                    impact: "low",
+                },
+                {
+                    id: "SO:0001582",
+                    name: "initiator_codon_variant",
+                    description: "A codon variant that changes at least one base of the first codon of a transcript",
                     impact: "moderate",
                 },
                 {
@@ -642,12 +642,12 @@ const consequenceTypes = {
                     description: "A variant in a transcript that is the target of NMD",
                     impact: "modifier",
                 },
-                {
-                    id: "SO:0001818",
-                    name: "protein_altering_variant",
-                    description: "A sequence_variant which is predicted to change the protein encoded in the coding sequence",
-                    impact: "moderate",
-                },
+                // {
+                //     id: "SO:0001818",
+                //     name: "protein_altering_variant",
+                //     description: "A sequence_variant which is predicted to change the protein encoded in the coding sequence",
+                //     impact: "moderate",
+                // },
                 {
                     id: "SO:0001819",
                     name: "synonymous_variant",
@@ -676,6 +676,12 @@ const consequenceTypes = {
                     id: "SO:0001567",
                     name: "stop_retained_variant",
                     description: "A sequence variant where at least one base in the terminator codon is changed, but the terminator remains",
+                    impact: "low",
+                },
+                {
+                    id: "SO:0001590",
+                    name: "terminator_codon_variant",
+                    description: "A sequence variant whereby at least one of the bases in the terminator codon is changed",
                     impact: "low",
                 },
             ],
@@ -707,6 +713,12 @@ const consequenceTypes = {
                     description: "A sequence variant that changes non-coding exon sequence in a non-coding transcript",
                     impact: "modifier",
                 },
+                {
+                    id: "SO:0001619",
+                    name: "non_coding_transcript_variant",
+                    description: "A transcript variant of a non coding RNA gene",
+                    impact: "modifier",
+                },
             ],
         },
         {
@@ -727,7 +739,8 @@ const consequenceTypes = {
                 {
                     id: "SO:0001630",
                     name: "splice_region_variant",
-                    description: "A sequence variant in which a change has occurred within the region of the splice site, either within 1-3 bases of the exon or 3-8 bases of the intron",
+                    description: "A sequence variant in which a change has occurred within the region of the splice site, either " +
+                        "within 1-3 bases of the exon or 3-8 bases of the intron",
                     impact: "low",
                 },
             ],
@@ -747,40 +760,40 @@ const consequenceTypes = {
     ],
 };
 
-const DEFAULT_SPECIES = {
-    vertebrates: [
-        {
-
-            id: "hsapiens",
-            scientificName: "Homo sapiens",
-            assembly: {
-
-                name: "GRCh37",
-                ensemblVersion: "75_37",
-
-            },
-            assemblies: [
-                {
-
-                    name: "GRCh37",
-                    ensemblVersion: "75_37",
-
-                },
-                {
-                    name: "GRCh38",
-                    ensemblVersion: "79_38",
-                },
-            ],
-            data: [
-                "genome",
-                "gene",
-                "variation",
-                "regulation",
-                "protein",
-                "conservation",
-                "clinical",
-                "gene2disease",
-            ],
-        },
-    ],
-};
+// const DEFAULT_SPECIES = {
+//     vertebrates: [
+//         {
+//
+//             id: "hsapiens",
+//             scientificName: "Homo sapiens",
+//             assembly: {
+//
+//                 name: "GRCh37",
+//                 ensemblVersion: "75_37",
+//
+//             },
+//             assemblies: [
+//                 {
+//
+//                     name: "GRCh37",
+//                     ensemblVersion: "75_37",
+//
+//                 },
+//                 {
+//                     name: "GRCh38",
+//                     ensemblVersion: "79_38",
+//                 },
+//             ],
+//             data: [
+//                 "genome",
+//                 "gene",
+//                 "variation",
+//                 "regulation",
+//                 "protein",
+//                 "conservation",
+//                 "clinical",
+//                 "gene2disease",
+//             ],
+//         },
+//     ],
+// };
