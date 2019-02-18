@@ -17,7 +17,7 @@ pipeline {
                        sh "docker push opencb/iva:${tag}"
                    }
            }
-     }
+       }
   }
 }
 
