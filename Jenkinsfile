@@ -5,17 +5,19 @@ pipeline {
             when {
               allOf {
                       branch 'develop'
-                      buildingTag()
               }
             }
             options {
                 timeout(time: 25, unit: 'MINUTES')
             }
             steps {
-                    sh 'docker build  -t opencb/iva:${tag} -f docker/Dockerfile .
-                    withDockerRegistry([ credentialsId: "wasim-docker-hub", url: "" ]) {
-                       sh "docker push opencb/iva:${tag}"
-                   }
+	        script {
+	                def tag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
+               }
+	       sh "docker build  -t opencb/iva:'${tag}' -f docker/Dockerfile ."
+	       withDockerRegistry([ credentialsId: "wasim-docker-hub", url: "" ]) {
+	       sh "docker push opencb/iva:'${tag}'"
+              }
            }
        }
   }
