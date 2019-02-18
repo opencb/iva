@@ -263,6 +263,7 @@
                         <!--search="{{browserSearchQuery}}"-->
                         <opencga-variant-browser opencga-session="{{opencgaSession}}"
                                                  cellbase-client="{{cellbaseClient}}"
+                                                 reactome-client="{{reactomeClient}}"
                                                  query="{{browserSearchQuery}}"
                                                  active="{{config.tools.browser.active}}"
                                                  population-frequencies="{{config.populationFrequencies}}"
@@ -592,6 +593,8 @@
 
                 this.cellBaseClientConfig = new CellBaseClientConfig(this.config.cellbase.hosts, this.config.cellbase.version, "hsapiens");
                 this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
+
+                this.reactomeClient = new ReactomeClient();
 
                 let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
                 if (UtilsNew.isNotEmpty(sid)) {    // && !this._publicMode
