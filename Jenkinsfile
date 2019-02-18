@@ -5,14 +5,13 @@ pipeline {
             options {
                 timeout(time: 25, unit: 'MINUTES')
             }
-            steps {
+ 		steps {
 	        script {
-                def tag = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()	       
-sh "docker build  -t opencb/iva:'${tag}' -f docker/Dockerfile ."
-	       
-               withDockerRegistry([ credentialsId: "wasim-docker-hub", url: "" ]) {
-	       sh "docker push opencb/iva:'${tag}'"
-		}              
+                        def tag = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()	       
+		        sh "docker build  -t opencb/iva:'${tag}' -f docker/Dockerfile ."
+                        withDockerRegistry([ credentialsId: "wasim-docker-hub", url: "" ]) {
+	       			sh "docker push opencb/iva:'${tag}'"
+			}	              
 		}		
            }
        }
