@@ -313,6 +313,11 @@ const tools = {
                 // ]
             },
             {
+                id: "network",
+                component: "reactome-variant-network",
+                title: "Gene network"
+            },
+            {
                 id: "template",
                 component: "opencga-variant-detail-template",
                 title: "Template"
