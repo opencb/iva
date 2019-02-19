@@ -1,7 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage ('Docker Build and Push') {
+         stage ('Build') {
+            options {
+                timeout(time: 5, unit: 'MINUTES')
+            }
+            steps {
+                sh 'cd lib/jsorolla && npm install && cd ../.. && npm install --unsafe-perm && npm run build'
+            }
+        }
+	stage ('Docker Build and Push') {
             options {
                 timeout(time: 25, unit: 'MINUTES')
             }
