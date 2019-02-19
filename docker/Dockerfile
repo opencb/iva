@@ -12,7 +12,7 @@ RUN apt-get update && \
 RUN echo '{ "allow_root": true }' > /root/.bowerrc && \
     npm install -g grunt-cli
 
-COPY ./build/* /usr/local/apache2/htdocs
+COPY ./build /usr/local/apache2/htdocs
 
 EXPOSE 80
 
