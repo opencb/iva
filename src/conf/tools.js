@@ -20,48 +20,15 @@
 const filterMenu = {
     searchButtonText: "Search",
     tooltip: {
-        classes: "qtip-dark qtip-rounded qtip-shadow"
+        classes: "qtip-rounded qtip-shadow qtip-custom-class",
+        // classes: "qtip-dark qtip-rounded qtip-shadow"
     },
     skipSubsections: [],    // controls which subsections are disabled and should not be displayed
     sections: [             // sections and subsections, structure and order is respected
-        // {
-        //     title: "Clinical Interpretation",
-        //     collapsed: false,
-        //     subsections: [
-        //         {
-        //             id: "sample",
-        //             title: "Sample and File Filters",
-        //             showApproximateCount: true,
-        //             showSelectSamples: true,
-        //             inheritanceModes: [
-        //                 {key: "none", text: "Select..."},
-        //                 {key: "autoDominant", text: "Autosomal Dominant"},
-        //                 {key: "autoRecessive", text: "Autosomal Recessive"},
-        //                 {key: "xLinked", text: "X linked"},
-        //                 {key: "yLinked", text: "Y linked"}
-        //             ],
-        //             tooltip: "Filter by sample genotypes"
-        //         }
-        //     ]
-        // },
         {
             title: "Study and Cohorts",
             collapsed: false,
             subsections: [
-                {
-                    id: "sample",
-                    title: "Sample and File Filters",
-                    showApproximateCount: true,
-                    showSelectSamples: true,
-                    inheritanceModes: [
-                        {key: "none", text: "Select..."},
-                        {key: "autoDominant", text: "Autosomal Dominant"},
-                        {key: "autoRecessive", text: "Autosomal Recessive"},
-                        {key: "xLinked", text: "X linked"},
-                        {key: "yLinked", text: "Y linked"}
-                    ],
-                    tooltip: "Filter by sample genotypes"
-                },
                 {
                     id: "cohort",
                     title: "Cohort Stats (MAF)",
@@ -104,8 +71,8 @@ const filterMenu = {
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
                 {
-                    id: "geneDiseasePanels",
-                    title: "Gene Disease Panels",
+                    id: "diseasePanels",
+                    title: "Disease Panels",
                     tooltip: "Filter out variants falling outside the genomic intervals (typically genes) defined by the panel(s) chosen"
                 },
                 {
@@ -234,17 +201,40 @@ const filterMenu = {
     ]
 };
 
-// Prepare Browser and Interpretation filter menu
-// let browserFilterMenu = Object.assign(filterMenu);
-// let browserFilterMenuSections = filterMenu.sections.slice(0);
-// browserFilterMenuSections.splice(0, 1);
-// browserFilterMenu.sections = browserFilterMenuSections;
-// debugger
-//
-// let interpretationFilterMenu = Object.assign(filterMenu);
-// let interpretationFilterMenuSections = filterMenu.sections.slice(0);
-// interpretationFilterMenuSections.splice(1, 1);
-// interpretationFilterMenu.sections = interpretationFilterMenuSections;
+
+// Clone menu for interpretation and add clinical section
+let clinical = {
+    title: "Clinical",
+    collapsed: false,
+    subsections: [
+        {
+            id: "sample",
+            title: "Sample and File Filters",
+            showApproximateCount: true,
+            showSelectSamples: true,
+            inheritanceModes: [
+                {key: "none", text: "Select..."},
+                {key: "autoDominant", text: "Autosomal Dominant"},
+                {key: "autoRecessive", text: "Autosomal Recessive"},
+                {key: "xLinked", text: "X linked"},
+                {key: "yLinked", text: "Y linked"}
+            ],
+            tooltip: "Filter by sample genotypes"
+        },
+        {
+            id: "diseasePanels",
+            title: "Disease Panels",
+            tooltip: "Filter out variants falling outside the genomic intervals (typically genes) defined by the panel(s) chosen"
+        }
+    ]
+};
+
+let interpreterMenu = JSON.parse(JSON.stringify(filterMenu));
+let interpreterSections = interpreterMenu.sections.slice(1);    // remove first section "Study and Cohorts"
+interpreterSections.unshift(clinical);                          // insert "Clinical" section
+interpreterSections[1].subsections.splice(2,1);                 // remove "Disease Panels" subsection from "Genomic" section
+interpreterMenu.sections = interpreterSections;
+
 
 const tools = {
     browser: {
@@ -253,8 +243,7 @@ const tools = {
         showSummary: true,
         showGenomeBrowser: false,
         filter: {
-            // This disables two subsections in the filter menu Prioritization
-            menu: Object.assign({}, filterMenu, {skipSubsections: ["sample"]}),
+            menu: filterMenu,
             examples: [
                 {
                     name: "Example BRCA2",
@@ -313,6 +302,11 @@ const tools = {
                 // ]
             },
             {
+                id: "network",
+                component: "reactome-variant-network",
+                title: "Gene network"
+            },
+            {
                 id: "template",
                 component: "opencga-variant-detail-template",
                 title: "Template"
@@ -323,8 +317,7 @@ const tools = {
         title: "Variant Interpreter",
         active: false,
         filter: {
-            // This disables two subsections in the filter menu Prioritization
-            menu: Object.assign({}, filterMenu, {skipSubsections: ["cohort", "study"]}),
+            menu: interpreterMenu,
             examples: [
                 {
                     name: "Tiering (AR)",

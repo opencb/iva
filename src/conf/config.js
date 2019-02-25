@@ -15,15 +15,14 @@
  */
 
 const cellbase = {
-    hosts: ["CELLBASE_HOST_URL"],
-    // hosts: ["http://cellbase.clinbioinfosspa.es/cb"],
+    hosts: ["<CELLBASE_HOST_URL>"],
     version: "v4",
 };
 
 const opencga = {
     host: "<OPENCGA_HOST_URL>",
+    // host: "http://bioinfodev.hpc.cam.ac.uk/opencga-test",
     // host: "http://bioinfo.hpc.cam.ac.uk/hgva",
-    // host: "http://bio-dev-opencgainternal-tomcat-01.gel.zone:8080/opencga",
     version: "v1",
     serverVersion: "1.4",
 
@@ -78,7 +77,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v1.0.0-beta",
+    version: "v1.0.0-rc2",
     logo: "img/opencb-logo.png",
     // The order, title and nested submenus are respected
     menu: [
@@ -97,8 +96,6 @@ const application = {
             title: "Beacon",
             visibility: "public",
         },
-
-
         {
             id: "case",
             title: "Clinical",
@@ -119,27 +116,8 @@ const application = {
                     visibility: "public",
                 },
                 {
-                    title: "Editor",
-                    category: true,
-                    visibility: "public",
-                },
-                {
-                    id: "clinicalAnalysisCreator",
-                    title: "Case Creator",
-                    visibility: "public",
-                },
-                {
-                    id: "panel",
-                    title: "Disease Panel",
-                    visibility: "public",
-                },
-                {
-                    separator: true,
-                    visibility: "public",
-                },
-                {
                     id: "clinical",
-                    title: "Clinical",
+                    title: "Clinical (Old)",
                     visibility: "public",
                 },
             ]
@@ -196,6 +174,25 @@ const application = {
                 {
                     id: "tdt",
                     title: "Family-based Association (TDT)",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "Clinical Interpretation Analysis",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "tiering",
+                    title: "Tiering (Genomics England)",
+                    visibility: "public",
+                },
+                {
+                    id: "team",
+                    title: "TEAM",
                     visibility: "public",
                 },
                 {
@@ -363,6 +360,7 @@ const populationFrequencies = {
         rare: "#ff8080",
         average: "#8080ff",
         common: "#0000ff",
+        unobserved: "black"
     },
     studies: [
         {
@@ -375,16 +373,16 @@ const populationFrequencies = {
                     id: "ALL", title: "All populations [ALL]",
                 },
                 {
-                    id: "EUR", title: "European [EUR]",
+                    id: "AFR", title: "African [AFR]",
                 },
                 {
                     id: "AMR", title: "American [AMR]",
                 },
                 {
-                    id: "AFR", title: "African [AFR]",
+                    id: "EAS", title: "East Asian [EAS]",
                 },
                 {
-                    id: "EAS", title: "East Asian [EAS]",
+                    id: "EUR", title: "European [EUR]",
                 },
                 {
                     id: "SAS", title: "South Asian [SAS]",
@@ -401,19 +399,19 @@ const populationFrequencies = {
                     id: "ALL", title: "gnomAD [ALL]",
                 },
                 {
-                    id: "NFE", title: "Non-Finnish European [NFE]",
-                },
-                {
-                    id: "FIN", title: "Finnish[FIN]",
+                    id: "AFR", title: "African/African American [AFR]",
                 },
                 {
                     id: "AMR", title: "American [AMR]",
                 },
                 {
-                    id: "AFR", title: "African/African American [AFR]",
+                    id: "EAS", title: "East Asian [EAS]",
                 },
                 {
-                    id: "EAS", title: "East Asian [EAS]",
+                    id: "FIN", title: "Finnish[FIN]",
+                },
+                {
+                    id: "NFE", title: "Non-Finnish European [NFE]",
                 },
                 {
                     id: "SAS", title: "South Asian [SAS]",
@@ -431,7 +429,7 @@ const proteinSubstitutionScores = {
     },
     polyphen: {
         probablyDamaging: "red",
-        possiblyDamaging: "orange",
+        possiblyDamaging: "darkorange",
         benign: "green",
         unknown: "black",
     },
@@ -441,7 +439,7 @@ const consequenceTypes = {
     // This is the impact color. It allows to customise both the impact categories and desired colors
     color: {
         high: "red",
-        moderate: "orange",
+        moderate: "darkorange",
         low: "blue",
         modifier: "green",
     },
