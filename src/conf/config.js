@@ -79,7 +79,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v1.0.0-RC",
+    version: "v1.0.0-rc2",
     logo: "img/opencb-logo.png",
     // The order, title and nested submenus are respected
     menu: [
