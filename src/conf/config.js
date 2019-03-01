@@ -287,14 +287,19 @@ const application = {
     settings: {
         visibility: "public",
     },
-    about: [
-        {name: "Documentation", url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
-        {name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
-        {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
-        {name: "Releases", url: "https://github.com/opencb/iva/releases", icon: ""},
-        {name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
-        {name: "FAQ", url: "", icon: ""},
-    ],
+    about: {
+        dropdown: false,
+        links: [
+            {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
+            {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
+            {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
+            {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: ""},
+            {id: "about", name: "About", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
+            {id: "terms", name: "Terms", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
+            {id: "contact", name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
+            {id: "faq", name: "FAQ", url: "", icon: ""},
+        ]
+    },
     login: {
         visible: true,
     },
