@@ -119,8 +119,6 @@ var application = {
             title: "Beacon",
             visibility: "public",
         },
-
-
         {
             id: "case",
             title: "Clinical",
@@ -141,27 +139,8 @@ var application = {
                     visibility: "public",
                 },
                 {
-                    title: "Editor",
-                    category: true,
-                    visibility: "public",
-                },
-                {
-                    id: "clinicalAnalysisCreator",
-                    title: "Case Creator",
-                    visibility: "public",
-                },
-                {
-                    id: "panel",
-                    title: "Disease Panel",
-                    visibility: "public",
-                },
-                {
-                    separator: true,
-                    visibility: "public",
-                },
-                {
                     id: "clinical",
-                    title: "Clinical",
+                    title: "Clinical (Old)",
                     visibility: "public",
                 },
             ]
@@ -218,6 +197,25 @@ var application = {
                 {
                     id: "tdt",
                     title: "Family-based Association (TDT)",
+                    visibility: "public",
+                },
+                {
+                    separator: true,
+                    visibility: "public",
+                },
+                {
+                    title: "Clinical Interpretation Analysis",
+                    category: true,
+                    visibility: "public",
+                },
+                {
+                    id: "tiering",
+                    title: "Tiering (Genomics England)",
+                    visibility: "public",
+                },
+                {
+                    id: "team",
+                    title: "TEAM",
                     visibility: "public",
                 },
                 {
@@ -310,14 +308,15 @@ var application = {
     settings: {
         visibility: "public",
     },
-    about: [
-        {name: "Documentation", url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
-        {name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
-        {name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
-        {name: "Releases", url: "https://github.com/opencb/iva/releases", icon: ""},
-        {name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
-        {name: "FAQ", url: "", icon: ""},
-    ],
+    about: {
+        dropdown: false,
+        links: [
+            {id: "about", name: "About", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
+            {id: "terms", name: "Terms", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
+            {id: "contact", name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
+            {id: "faq", name: "FAQ", url: "", icon: ""},
+        ]
+    },
     login: {
         visible: false,
     },
@@ -453,7 +452,7 @@ const proteinSubstitutionScores = {
     },
     polyphen: {
         probablyDamaging: "red",
-        possiblyDamaging: "orange",
+        possiblyDamaging: "darkorange",
         benign: "green",
         unknown: "black",
     },
@@ -463,7 +462,7 @@ const consequenceTypes = {
     // This is the impact color. It allows to customise both the impact categories and desired colors
     color: {
         high: "red",
-        moderate: "orange",
+        moderate: "darkorange",
         low: "blue",
         modifier: "green",
     },
