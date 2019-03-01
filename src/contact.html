@@ -1,0 +1,71 @@
+<!--
+  ~ Copyright 2015-2016 OpenCB
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<dom-module id="contact-web">
+    <template>
+        <!--<style include="jso-styles">-->
+        <style>
+            .contact-center {
+                margin: auto;
+                width: 65%;
+                text-align: justify;
+                font-size: 16px;
+                color: #797979;
+            }
+        </style>
+
+        <!-- This is where main application is rendered -->
+        <div class="contact-center">
+            <h1>Contact</h1>
+            <hr>
+
+            <p>Errors in the website can be reported to the <a href="https://github.com/opencb/iva/issues" target="_blank">IVA issue tracker</a> via Github</p>
+
+            <p>You can contact us via <a href="mailto:wgs@bioresource.nihr.ac.uk">email</a> to report data problems or make feature suggestions.
+                These messages will be regularly reviewed and are appreciated but we will not answer all queries,
+                we will update the FAQ page as appropriate.</p>
+        </div>
+    </template>
+
+    <script>
+
+        class Contact extends Polymer.Element {
+
+            constructor() {
+                super();
+            }
+
+            static get is() {
+                return 'contact-web';
+            }
+
+            static get properties() {
+                return {
+                    version: {
+                        type: String
+                    }
+                }
+            }
+
+            _attachDom(dom) {
+                this.appendChild(dom);
+            }
+
+        }
+
+        customElements.define(Contact.is, Contact);
+    </script>
+</dom-module>

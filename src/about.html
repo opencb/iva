@@ -1,0 +1,74 @@
+<!--
+  ~ Copyright 2015-2016 OpenCB
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<dom-module id="about-web">
+    <template>
+        <!--<style include="jso-styles">-->
+        <style>
+            .about-center {
+                margin: auto;
+                width: 65%;
+                text-align: justify;
+                font-size: 16px;
+                color: #797979;
+            }
+        </style>
+
+        <!-- This is where main application is rendered -->
+        <div class="about-center">
+            <h1>About</h1>
+            <hr>
+
+            <p><a href="https://bioresource.nihr.ac.uk/rare-diseases/rare-diseases/" target="_blank">The NIHR BioResource for Rare Diseases</a> has been established with the aim to identify protein-coding and non-coding sequence
+                variation underlying rare diseases, improve diagnostics and enable the development of treatment.</p>
+
+            <p>The preprint paper <a href="https://www.biorxiv.org/content/10.1101/507244v1" target="_blank">Whole-genome sequencing of rare disease patients in a national healthcare system</a> describes in detail the generation and analysis of 13,037 30x whole genome sequences.
+                These were derived from 9,802 adults and children diagnosed with a rare disease or their relatives.</p>
+            <p>This web site provides access to genome-wide allele frequency sequence variation identified in the set of 10,259 unrelated individuals from this rare disease cohort.</p>
+
+            <p>For bug reports, please file an issue on the <a href="https://github.com/opencb/iva/issues" target="_blank">IVA issue tracker</a>.</p>
+        </div>
+    </template>
+
+    <script>
+
+        class About extends Polymer.Element {
+
+            constructor() {
+                super();
+            }
+
+            static get is() {
+                return 'about-web';
+            }
+
+            static get properties() {
+                return {
+                    version: {
+                        type: String
+                    }
+                }
+            }
+
+            _attachDom(dom) {
+                this.appendChild(dom);
+            }
+
+        }
+
+        customElements.define(About.is, About);
+    </script>
+</dom-module>
