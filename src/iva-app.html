@@ -21,6 +21,10 @@
 <link rel="import" href="../node_modules/@polymer/polymer/lib/elements/custom-style.html">
 <link rel="import" href="jso-styles.html">
 <link rel="import" href="welcome.html">
+<link rel="import" href="about.html">
+<link rel="import" href="terms.html">
+<link rel="import" href="contact.html">
+<link rel="import" href="faq.html">
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-transcript-view.html">
@@ -39,7 +43,7 @@
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-portal.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-portal.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-creator.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-editor.html">
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/clinical-interpretation-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-variant-clinical.html">
@@ -204,20 +208,33 @@
                                 </template>
 
                                 <!-- About dropdown menu-->
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                       aria-haspopup="true" aria-expanded="false"> About <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <template is="dom-repeat" items="{{config.about}}">
-                                            <li>
-                                                <a href$="{{item.url}}" target="_blank"><i class$="{{item.icon}}" aria-hidden="true"></i>
-                                                    {{item.name}}
-                                                </a>
-                                            </li>
-                                        </template>
-                                    </ul>
-                                </li>
+                                <template is="dom-if" if="{{config.about.dropdown}}">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                           aria-haspopup="true" aria-expanded="false"> About <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <template is="dom-repeat" items="{{config.about.links}}">
+                                                <li>
+                                                    <a href$="{{item.url}}" target="_blank"><i class$="{{item.icon}}" aria-hidden="true"></i>
+                                                        {{item.name}}
+                                                    </a>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </li>
+                                </template>
+
+                                <template is="dom-if" if="{{!config.about.dropdown}}">
+                                    <template is="dom-repeat" items="{{config.about.links}}" as="link">
+                                        <!--<li>-->
+                                        <!--<a href="#" data-study="{{std.alias}}" data-project="{{proj.name}}" on-click="onStudySelect">{{std.alias}}</a>-->
+                                        <!--</li>-->
+                                        <li>
+                                            <a href="#{{link.id}}" role="button" on-click="changeTool">{{link.name}}</a>
+                                        </li>
+                                    </template>
+                                </template>
 
                                 <!-- Login/Logout button -->
                                 <template is="dom-if" if="{{config.login.visible}}">
@@ -247,15 +264,41 @@
 
 
             <!-- This is where main application is rendered -->
-            <template is="dom-if" if="{{config.enabledComponents.home}}">
-                <div class="center">
-                    <div class="content" id="home">
-                        <welcome-web project={{opencgaSession.project}} study="{{opencgaSession.study.alias}}" version="{{config.version}}"
-                                     cellbase-client={{cellbaseClient}} on-search="quickSearch"></welcome-web>
-                    </div>
-                </div>
-            </template>
+            <div>
+                <template is="dom-if" if="{{config.enabledComponents.home}}">
+                    <div class="center">
+                        <div class="content" id="home">
+                            <welcome-web project={{opencgaSession.project}} study="{{opencgaSession.study.alias}}" version="{{config.version}}"
+                                         cellbase-client={{cellbaseClient}} on-search="quickSearch"></welcome-web>
+                        </div>
 
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.about}}">
+                    <div class="content" id="about">
+                        <about-web version="{{config.version}}"></about-web>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.terms}}">
+                    <div class="content" id="terms">
+                        <terms-web version="{{config.version}}"></terms-web>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.contact}}">
+                    <div class="content" id="contact">
+                        <contact-web version="{{config.version}}"></contact-web>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.faq}}">
+                    <div class="content" id="faq">
+                        <faq-web version="{{config.version}}"></faq-web>
+                    </div>
+                </template>
+            </div>
             <!-- This is where main IVA application is rendered -->
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.browser}}">
@@ -263,6 +306,7 @@
                         <!--search="{{browserSearchQuery}}"-->
                         <opencga-variant-browser opencga-session="{{opencgaSession}}"
                                                  cellbase-client="{{cellbaseClient}}"
+                                                 reactome-client="{{reactomeClient}}"
                                                  query="{{browserSearchQuery}}"
                                                  active="{{config.tools.browser.active}}"
                                                  population-frequencies="{{config.populationFrequencies}}"
@@ -304,11 +348,11 @@
                 <template is="dom-if" if="{{config.enabledComponents.clinical}}">
                     <div class="content" id="clinical">
                         <opencga-variant-clinical opencga-session="{{opencgaSession}}" config="[[config.tools.clinical]]"
-                                          population-frequencies="{{config.populationFrequencies}}"
-                                          protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-                                          consequence-types="{{config.consequenceTypes}}"
-                                          opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                          on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" >
+                                                  population-frequencies="{{config.populationFrequencies}}"
+                                                  protein-substitution-scores="{{config.proteinSubstitutionScores}}"
+                                                  consequence-types="{{config.consequenceTypes}}"
+                                                  opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+                                                  on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" >
                         </opencga-variant-clinical>
                     </div>
                 </template>
@@ -316,7 +360,7 @@
                 <template is="dom-if" if="{{config.enabledComponents.panel}}">
                     <div class="content" id="panel">
                         <opencga-panel-browser opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                       on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" ></opencga-panel-browser>
+                                               on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" ></opencga-panel-browser>
                     </div>
                 </template>
 
@@ -526,6 +570,10 @@
 
                 // We can customise which components are active by default, this improves the first loading time.
                 _config.enabledComponents.home = true;
+                _config.enabledComponents.about = false;
+                _config.enabledComponents.contact = false;
+                _config.enabledComponents.terms = false;
+                _config.enabledComponents.faq = false;
 
                 // Enable tools reading the configuration
                 for (let tool in _config.tools) {
@@ -592,6 +640,8 @@
 
                 this.cellBaseClientConfig = new CellBaseClientConfig(this.config.cellbase.hosts, this.config.cellbase.version, "hsapiens");
                 this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
+
+                this.reactomeClient = new ReactomeClient();
 
                 let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
                 if (UtilsNew.isNotEmpty(sid)) {    // && !this._publicMode
@@ -798,9 +848,9 @@
                 if (UtilsNew.isNotEmpty(_message)) {
                     this.notifySession = NotificationUtils.showNotify(_message, UtilsNew.MESSAGE_INFO,
                         {}, {
-                        delay: 0,
-                        onClosed: this.onCloseRefreshNotify.bind(this)
-                    }, this.opencgaClient, this.notifySession);
+                            delay: 0,
+                            onClosed: this.onCloseRefreshNotify.bind(this)
+                        }, this.opencgaClient, this.notifySession);
                 }
             }
 
@@ -929,7 +979,7 @@
                             }
                         }
                     }
-debugger
+
                     switch (hashTool) {
                         case "#protein":
                             break;
