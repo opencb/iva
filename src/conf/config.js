@@ -288,7 +288,7 @@ const application = {
         visibility: "public",
     },
     about: {
-        dropdown: false,
+        dropdown: true,
         links: [
             {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
             {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
