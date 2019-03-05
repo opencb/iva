@@ -133,7 +133,7 @@ const application = {
         {
             id: "case",
             title: "Clinical",
-            visibility: "none",
+            visibility: "public",
             submenu: [
                 {
                     id: "clinicalAnalysisPortal",
@@ -143,16 +143,16 @@ const application = {
                 {
                     id: "interpretation",
                     title: "Variant Interpreter",
-                    visibility: "public",
+                    visibility: "none",
                 },
                 {
                     separator: true,
-                    visibility: "public",
+                    visibility: "none",
                 },
                 {
                     id: "clinical",
                     title: "Clinical (Old)",
-                    visibility: "public",
+                    visibility: "none",
                 },
             ]
         },
