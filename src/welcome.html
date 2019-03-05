@@ -137,7 +137,7 @@
                 let featureId = PolymerUtils.getElementById("welcomeSearchTextBox").value;
                 if (UtilsNew.isNotEmpty(featureId)) {
                     let query = {};
-                    if (featureId.startsWith("chr") || featureId.match(/^\d/)) {
+                    if (featureId.startsWith("chr") || featureId === "X" || featureId === "Y" || featureId === "MT" || featureId.match(/^\d/)) {
                         if (featureId.split(":").length < 3) {
                             // It's a region, contains only one ':' character
                             query.region = featureId;
