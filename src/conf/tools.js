@@ -33,27 +33,22 @@ const filterMenu = {
                     id: "cohort",
                     title: "Cohort Stats (MAF)",
                     cohorts: {  // organised in projects and studies
-                        reference_grch37: {
-                            "1kG_phase3": [
-                                {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
-                            ],
-                            EXAC: [
-                                {id: "ALL", name: "All"}
-                            ]
-                        },
-                        platinum: {
-                            illumina_platinum: [
-                                {id: "ALL", name: "All"}
+                        "NIHR-BR37": {
+                            "I37": [
+                                {id: "UW10K", name: "UW10K"},
+                                {id: "UW10K_EUR", name: "UW10K_EUR"},
+                                {id: "UW10K_SAS", name: "UW10K_SAS"},
+                                {id: "UW10K_AFR", name: "UW10K_AFR"},
                             ]
                         }
                     },
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 },
-                {
-                    id: "study",
-                    title: "Studies Filter",
-                    tooltip: "Only considers variants from the selected studies"
-                }
+                // {
+                //     id: "study",
+                //     title: "Studies Filter",
+                //     tooltip: "Only considers variants from the selected studies"
+                // }
             ]
         },
         {
