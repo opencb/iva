@@ -318,6 +318,8 @@ const tools = {
         active: false,
         filter: {
             menu: interpreterMenu,
+            lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
+                "stop_lost", "start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
             examples: [
                 {
                     name: "Tiering (AR)",
