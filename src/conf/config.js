@@ -99,24 +99,15 @@ const application = {
             visibility: "public",
         },
         {
+            id: "clinicalAnalysisPortal",
+            title: "Interpretation Portal",
+            visibility: "public",
+        },
+        {
             id: "case",
             title: "Clinical",
-            visibility: "public",
+            visibility: "none",
             submenu: [
-                {
-                    id: "clinicalAnalysisPortal",
-                    title: "Interpretation Portal",
-                    visibility: "public",
-                },
-                {
-                    id: "interpretation",
-                    title: "Variant Interpreter",
-                    visibility: "public",
-                },
-                {
-                    separator: true,
-                    visibility: "public",
-                },
                 {
                     id: "clinical",
                     title: "Clinical (Old)",
@@ -126,7 +117,7 @@ const application = {
         },
         {
             id: "genomeBrowser",
-            title: "Genome Browser (Beta)",
+            title: "Genome Browser",
             visibility: "public"
         },
         {
@@ -188,8 +179,13 @@ const application = {
                     visibility: "public",
                 },
                 {
+                    id: "interpretation",
+                    title: "Variant Interpreter",
+                    visibility: "public",
+                },
+                {
                     id: "tiering",
-                    title: "Tiering (Genomics England)",
+                    title: "OpenCGA Tiering (Based on GEL Tiering)",
                     visibility: "public",
                 },
                 {
@@ -225,7 +221,7 @@ const application = {
         },
         {
             id: "catalog",
-            title: "Catalog (New!)",
+            title: "Catalog Metadata",
             visibility: "public",
             submenu: [
                 {
