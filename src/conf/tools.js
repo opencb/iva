@@ -256,7 +256,7 @@ const tools = {
             examples: [
                 {
                     name: "Example BRCA2",
-                    active: true,
+                    // active: true,
                     query: {
                         gene: "BRCA2",
                         conservation: "phylop<0.001"
@@ -360,7 +360,7 @@ const tools = {
                     name: "Clinical Interpretation",
                     active: true,
                     query: {
-                        region: "1",
+                        // region: "1",
                         biotype: "protein_coding",
                         alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
                         ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
