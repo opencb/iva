@@ -131,24 +131,15 @@ const application = {
             visibility: "public",
         },
         {
+            id: "clinicalAnalysisPortal",
+            title: "Interpretation Portal",
+            visibility: "public",
+        },
+        {
             id: "case",
             title: "Clinical",
-            visibility: "public",
+            visibility: "none",
             submenu: [
-                {
-                    id: "clinicalAnalysisPortal",
-                    title: "Interpretation Portal",
-                    visibility: "public",
-                },
-                {
-                    id: "interpretation",
-                    title: "Variant Interpreter",
-                    visibility: "none",
-                },
-                {
-                    separator: true,
-                    visibility: "none",
-                },
                 {
                     id: "clinical",
                     title: "Clinical (Old)",
@@ -220,8 +211,13 @@ const application = {
                     visibility: "public",
                 },
                 {
+                    id: "interpretation",
+                    title: "Variant Interpreter",
+                    visibility: "public",
+                },
+                {
                     id: "tiering",
-                    title: "Tiering (Genomics England)",
+                    title: "OpenCGA Tiering (Based on GEL Tiering)",
                     visibility: "public",
                 },
                 {
@@ -257,7 +253,7 @@ const application = {
         },
         {
             id: "catalog",
-            title: "Catalog (New!)",
+            title: "Catalog Metadata",
             visibility: "public",
             submenu: [
                 {
@@ -322,7 +318,7 @@ const application = {
         visible: true,
     },
     settings: {
-        visibility: "public",
+        visible: false,
     },
     about: {
         dropdown: true,
@@ -406,12 +402,16 @@ const populationFrequencies = {
         common: "#0000ff",
         unobserved: "black"
     },
+    tooltip: `<strong>1000 Genomes</strong> Only considers variants whose observed allelic frequency in the 1000 genomes phase 3 database 
+                is below (or above) the defined value. Genome-wide allelic frequencies were obtained from more than 2.500 genomes.<br><br>
+              <strong>gnomAD Genomes</strong> Only considers variants whose observed allelic frequency in the gnomAD Genomes database is 
+                below (or above) the defined value. Frequencies were calculated from about 15,000 unrelated individuals`,
     studies: [
         {
             id: "1kG_phase3",
             title: "1000 Genomes",
-            tooltip: "Only considers variants whose observed allelic frequency in the 1000 genomes phase 3 database is below (or above) " +
-                "the defined value. Genome-wide allelic frequencies were obtained from more than 2.500 genomes.",
+            // tooltip: "Only considers variants whose observed allelic frequency in the 1000 genomes phase 3 database is below (or above) " +
+            //     "the defined value. Genome-wide allelic frequencies were obtained from more than 2.500 genomes.",
             populations: [
                 {
                     id: "ALL", title: "All populations [ALL]",
@@ -436,8 +436,8 @@ const populationFrequencies = {
         {
             id: "GNOMAD_GENOMES",
             title: "gnomAD Genomes",
-            tooltip: "Only considers variants whose observed allelic frequency in the gnomAD Genomes database is below (or above) the " +
-                "defined value. Frequencies were calculated from about 15,000 unrelated individuals.",
+            // tooltip: "Only considers variants whose observed allelic frequency in the gnomAD Genomes database is below (or above) the " +
+            //     "defined value. Frequencies were calculated from about 15,000 unrelated individuals.",
             populations: [
                 {
                     id: "ALL", title: "gnomAD [ALL]",

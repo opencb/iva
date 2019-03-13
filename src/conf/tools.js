@@ -17,6 +17,7 @@
 /**
  * Created by imedina on 05/06/17.
  */
+
 const filterMenu = {
     searchButtonText: "Search",
     tooltip: {
@@ -91,7 +92,7 @@ const filterMenu = {
                 },
                 {
                     id: "biotype",
-                    title: "Biotype",
+                    title: "Gene Biotype",
                     biotypes: [
                         "3prime_overlapping_ncrna", "IG_C_gene", "IG_C_pseudogene", "IG_D_gene", "IG_J_gene", "IG_J_pseudogene",
                         "IG_V_gene", "IG_V_pseudogene", "Mt_rRNA", "Mt_tRNA", "TR_C_gene", "TR_D_gene", "TR_J_gene", "TR_J_pseudogene",
@@ -118,13 +119,7 @@ const filterMenu = {
                 {
                     id: "populationFrequency",
                     title: "Select Population Frequency",
-                    tooltip: "<strong>1000 Genomes</strong> only considers variants whose observed allelic frequency in the 1000 Genomes " +
-                    "Phase 3 project is below (or above) the defined value. Allele frequencies were obtained from about 2,500 samples." +
-                    "<br><strong>ExAC</strong> only considers variants whose observed allelic frequency in the The Exome Aggregation " +
-                    "Consortium (ExAC) database is below (or above) the defined value. ExAC covers only exomic positions. " +
-                    "The frequencies were obtained using more than 60.000 exomes." +
-                    "<br><strong>ESP56500</strong> only considers variants whose observed allelic frequency in the Exome Variant Server " +
-                    "(ESP6500) database is below (or above) the defined value. ESP6500 covers only exomic positions from about 6000 exomes"
+                    tooltip: populationFrequencies.tooltip
                 }
             ]
         },
@@ -318,13 +313,13 @@ const tools = {
             {
                 id: "network",
                 component: "reactome-variant-network",
-                title: "Gene network"
+                title: "Reactome Pathways"
             },
-            {
-                id: "template",
-                component: "opencga-variant-detail-template",
-                title: "Template"
-            }
+            // {
+            //     id: "template",
+            //     component: "opencga-variant-detail-template",
+            //     title: "Template"
+            // }
         ]
     },
     interpretation: {
@@ -332,6 +327,8 @@ const tools = {
         active: false,
         filter: {
             menu: interpreterMenu,
+            lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
+                "stop_lost", "start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
             examples: [
                 {
                     name: "Tiering (AR)",
@@ -417,11 +414,11 @@ const tools = {
                 //     "lovd", "hgmd", "icgc", "sahgp"
                 // ]
             },
-            {
-                id: "template",
-                component: "opencga-variant-detail-template",
-                title: "Template"
-            }
+            // {
+            //     id: "template",
+            //     component: "opencga-variant-detail-template",
+            //     title: "Template"
+            // }
         ],
         css: {
             style: "font-size: 12px"

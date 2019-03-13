@@ -29,57 +29,41 @@
 
         <!-- This is where main application is rendered -->
         <div class="welcome-center">
-            <div style="text-align: center">
-                <h1 style="padding: 50px 0px">Genomics England Web Data Portal (Beta)</h1>
-                <div style="font-size: 14px; text-align: justify;padding: 25px 0px">
-                    <img src="img/Genomics-England-logo_colour.jpg" width="160px" style="float: left;margin: 0px 20px 20px 0px">
+            <span style="font-size: 50px">IVA {{version}}</span>
 
-                    <p>
-                        The Interactive Variant Analysis (IVA) tool enables whole genome variant browsing and analysis of the Genomics England dataset.
-                    </p>
+            <h2>Overview</h2>
+            <p>
+                Welcome to the IVA tool for whole genome variant analysis.
+                This interactive tool allows finding genes affected by deleterious variants that segregate along family pedigrees, case-controls or sporadic samples.
+            </p>
+            <br>
 
-                    <p>
-                        This interactive tool provides the functionality to query genetic variants across the cohort and allows you to find
-                        genes affected by deleterious variants that segregate along family pedigrees, case-control, or sporadic samples.
-                    </p>
 
-                    <p>
-                        The Variant Browser tab allows you to efficiently browse annotated and indexed variant studies.
-                        You can query variants using various filters such as: population frequency, consequence type, and phenotype associations.
-                    </p>
-
-                    <p>
-                        The Genome Browser tab allows for an interactive and smooth variant visualisation.
-                    </p>
-
-                    <p>
-                        The IVA database currently holds all interpreted genomes that are available from the 100,000 Genomes Project from Genomics England.
-                        These are divided into the following studies: rare disease GRCh37 and GRCh38 (RD37/RD38), cancer germline GRCh38 (CG38), and cancer somatic GRCh38 (CS38).
-                    </p>
-
-                    <div style="padding: 20px 10px">
-                        <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist" on-keyup="callAutocomplete"
-                               placeholder="Search for gene symbols, genomic regions or variants" value="">
-                        <datalist id="FeatureDatalist"></datalist>
-                        <!-- Examples -->
-                        <span style="font-size: 0.8em; padding-left: 10px">
+            <template is="dom-if" if="{{checkProjects}}">
+                <div style="padding: 20px 10px">
+                    <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist" on-keyup="callAutocomplete"
+                           placeholder="Search for gene symbols, genomic regions or variants" value="">
+                    <datalist id="FeatureDatalist"></datalist>
+                    <!-- Examples -->
+                    <span style="font-size: 0.8em; padding-left: 10px">
                     Examples - Gene: <a on-click="onExampleClick" data-type="gene" style="cursor: pointer">BRCA2</a>,
                     Region: <a on-click="onExampleClick" data-type="region" style="cursor: pointer">3</a>, <a on-click="onExampleClick" data-type="region" style="cursor: pointer">3:113000-1150000</a>,
                     SNP: <a on-click="onExampleClick" data-type="snp" style="cursor: pointer">rs445909</a>
                     Variant: <a on-click="onExampleClick" data-type="variant" style="cursor: pointer">13:32962274:G:T</a>
                 </span>
-                    </div>
 
                 </div>
-            </div>
-
-            <div class="col-sm-12">
-                <br><br>
-                <span style="font-size:12px">
-                    Note:
-                    <br> GEL web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components, so only modern web browsers are fully supported.
-                </span>
-            </div>
+            </template>
+            <br>
+            <h4>Note:</h4>
+            <p style="font-size:14px">
+                IVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as Web Components,
+                so only modern web browsers are fully supported, these include Chrome 49+, Firefox 45+, Microsoft Edge 14+, Safari 10+ and Opera 36+.
+            </p>
+            <br>
+            <br>
+            <br>
+            <img src="img/opencb-logo.png" width="220">
         </div>
     </template>
 
@@ -89,6 +73,8 @@
 
             constructor() {
                 super();
+
+                this.checkProjects = false;
             }
 
             static get is() {
@@ -97,6 +83,10 @@
 
             static get properties() {
                 return {
+                    opencgaSession: {
+                        type: Object,
+                        observer: "opencgaSessionObserver"
+                    },
                     version: {
                         type: String
                     },
@@ -119,6 +109,14 @@
             //         this.notify();
             //     }
             // }
+
+            opencgaSessionObserver() {
+                if (UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project)) {
+                    this.checkProjects = true;
+                } else {
+                    this.checkProjects = false;
+                }
+            }
 
             onExampleClick(e) {
                 let query = {};
@@ -152,7 +150,7 @@
                 let featureId = PolymerUtils.getElementById("welcomeSearchTextBox").value;
                 if (UtilsNew.isNotEmpty(featureId)) {
                     let query = {};
-                    if (featureId.startsWith("chr") || featureId.match(/^\d/)) {
+                    if (featureId.startsWith("chr") || featureId === "X" || featureId === "Y" || featureId === "MT" || featureId.match(/^\d/)) {
                         if (featureId.split(":").length < 3) {
                             // It's a region, contains only one ':' character
                             query.region = featureId;
