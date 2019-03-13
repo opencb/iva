@@ -168,10 +168,12 @@
                                             <!--<li>-->
                                             <!--<a data-target="#jobModal" data-toggle="modal"><i class="fa fa-bars" aria-hidden="true"></i> Jobs</a>-->
                                             <!--</li>-->
-                                            <li role="separator" class="divider"></li>
-                                            <li>
-                                                <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                                            </li>
+                                            <template is="dom-if" if="{{config.settings.visible}}">
+                                                <li role="separator" class="divider"></li>
+                                                <li>
+                                                    <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+                                                </li>
+                                            </template>
                                         </ul>
                                     </li>
                                 </template>
@@ -268,8 +270,11 @@
                 <template is="dom-if" if="{{config.enabledComponents.home}}">
                     <div class="center">
                         <div class="content" id="home">
-                            <welcome-web project={{opencgaSession.project}} study="{{opencgaSession.study.alias}}" version="{{config.version}}"
-                                         cellbase-client={{cellbaseClient}} on-search="quickSearch"></welcome-web>
+                            <welcome-web opencga-session="{{opencgaSession}}"
+                                         version="{{config.version}}"
+                                         cellbase-client={{cellbaseClient}}
+                                         on-search="quickSearch">
+                            </welcome-web>
                         </div>
 
                     </div>
@@ -359,14 +364,16 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.panel}}">
                     <div class="content" id="panel">
-                        <opencga-panel-browser opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                               on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" ></opencga-panel-browser>
+                        <opencga-panel-browser opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}"
+                                               cellbase-client="{{cellbaseClient}}"
+                                               on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
+                        </opencga-panel-browser>
                     </div>
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.beacon}}">
                     <div class="content" id="beacon">
-                        <variant-beacon opencga-client="{{opencgaClient}}" project="{{opencgaSession.project}}" studies="{{opencgaSession.project.studies}}"
+                        <variant-beacon opencga-session="{{opencgaSession}}"
                                         hosts="{{config.tools.beacon.hosts}}">
                         </variant-beacon>
                     </div>

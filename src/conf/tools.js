@@ -17,6 +17,7 @@
 /**
  * Created by imedina on 05/06/17.
  */
+
 const filterMenu = {
     searchButtonText: "Search",
     tooltip: {
@@ -104,13 +105,7 @@ const filterMenu = {
                 {
                     id: "populationFrequency",
                     title: "Select Population Frequency",
-                    tooltip: "<strong>1000 Genomes</strong> only considers variants whose observed allelic frequency in the 1000 Genomes " +
-                    "Phase 3 project is below (or above) the defined value. Allele frequencies were obtained from about 2,500 samples." +
-                    "<br><strong>ExAC</strong> only considers variants whose observed allelic frequency in the The Exome Aggregation " +
-                    "Consortium (ExAC) database is below (or above) the defined value. ExAC covers only exomic positions. " +
-                    "The frequencies were obtained using more than 60.000 exomes." +
-                    "<br><strong>ESP56500</strong> only considers variants whose observed allelic frequency in the Exome Variant Server " +
-                    "(ESP6500) database is below (or above) the defined value. ESP6500 covers only exomic positions from about 6000 exomes"
+                    tooltip: populationFrequencies.tooltip
                 }
             ]
         },
@@ -304,13 +299,13 @@ const tools = {
             {
                 id: "network",
                 component: "reactome-variant-network",
-                title: "Gene network"
+                title: "Reactome Pathways"
             },
-            {
-                id: "template",
-                component: "opencga-variant-detail-template",
-                title: "Template"
-            }
+            // {
+            //     id: "template",
+            //     component: "opencga-variant-detail-template",
+            //     title: "Template"
+            // }
         ]
     },
     interpretation: {
@@ -405,11 +400,11 @@ const tools = {
                 //     "lovd", "hgmd", "icgc", "sahgp"
                 // ]
             },
-            {
-                id: "template",
-                component: "opencga-variant-detail-template",
-                title: "Template"
-            }
+            // {
+            //     id: "template",
+            //     component: "opencga-variant-detail-template",
+            //     title: "Template"
+            // }
         ],
         css: {
             style: "font-size: 12px"
