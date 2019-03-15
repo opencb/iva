@@ -21,12 +21,9 @@ const cellbase = {
 };
 
 const opencga = {
-    // host: "https://opencga-embassy.gel.zone/opencga",
-    // host: "http://bio-dev-opencgainternal-tomcat-01.gel.zone:8080/opencga",
     // host: "http://bioinfodev.hpc.cam.ac.uk/opencga-test",
-    host: "http://localhost:8080/opencga-test",
-    // host: "http://bioinfo.hpc.cam.ac.uk/hgva",
-    // host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test",
+    // host: "http://localhost:8080/opencga-test",
+    host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test",
     version: "v1",
     serverVersion: "1.4",
 

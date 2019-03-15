@@ -256,7 +256,7 @@ const tools = {
             examples: [
                 {
                     name: "Example BRCA2",
-                    // active: true,
+                    active: false,
                     query: {
                         gene: "BRCA2",
                         conservation: "phylop<0.001"
