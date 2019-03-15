@@ -317,7 +317,7 @@ const application = {
     ],
     search: {
         placeholder: "Search",
-        visible: true,
+        visible: false,
     },
     settings: {
         visible: false,
