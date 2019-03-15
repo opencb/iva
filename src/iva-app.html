@@ -82,8 +82,8 @@
         </custom-style>
 
         <div>
-            <div style="height: 60px;">
-                <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div>
+                <nav class="navbar navbar-inverse" style="margin-bottom: 5px; border-radius: 0px">
                     <div class="container-fluid">
 
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -261,10 +261,10 @@
             </div>
             <!-- End of navigation bar -->
 
-
             <!--Breadcrumb-->
-            <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
-
+            <div>
+                <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
+            </div>
 
             <!-- This is where main application is rendered -->
             <div>
