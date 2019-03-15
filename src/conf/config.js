@@ -266,7 +266,7 @@ const application = {
                 {
                     id: "sample",
                     title: "Sample View",
-                    visibility: "public",
+                    visibility: "none",
                 },
                 {
                     separator: true,
@@ -280,7 +280,7 @@ const application = {
                 {
                     id: "files",
                     title: "File Browser",
-                    visibility: "public",
+                    visibility: "none",
                 },
                 {
                     id: "samples",
@@ -305,7 +305,7 @@ const application = {
                 {
                     id: "clinicalAnalysis",
                     title: "Clinical Analysis Browser",
-                    visibility: "public",
+                    visibility: "none",
                 }
             ],
         },
