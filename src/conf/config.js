@@ -94,13 +94,13 @@ const application = {
             visibility: "public",
         },
         {
-            id: "beacon",
-            title: "Beacon",
+            id: "clinicalAnalysisPortal",
+            title: "Interpretation Portal",
             visibility: "public",
         },
         {
-            id: "clinicalAnalysisPortal",
-            title: "Interpretation Portal",
+            id: "beacon",
+            title: "Beacon",
             visibility: "public",
         },
         {
