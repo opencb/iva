@@ -888,48 +888,48 @@
                 this.renderHashFragments();
             }
 
-            _setup(projects) {
-                // We check that at least one project with one study exist, otherwise we do not do anything
-                if (UtilsNew.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
-                    this.projects = projects;
-                    this.project = projects[0];
-                    this.study = projects[0].studies[0];
-
-                    let _this = this;
-                    let projectPromises = [];
-                    projects.forEach(function (project) {
-                        let studyPromises = [];
-                        project.studies.forEach(function (study) {
-                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
-                        });
-                        projectPromises.push(Promise.all(studyPromises)
-                            .then(function (responses) {
-                                let studies = [];
-                                responses.forEach(function (response) {
-                                    let study = response.response[0].result[0];
-                                    study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-                                    studies.push(study);
-                                });
-                                return studies;
-                            }));
-                    });
-
-                    let _projects = [];
-                    Promise.all(projectPromises)
-                        .then(function (responses) {
-                            for (let i = 0; i < responses.length; i++) {
-                                _projects.push({
-                                    id: _this.projects[i].id,
-                                    alias: _this.projects[i].alias,
-                                    name: _this.projects[i].name,
-                                    organism: _this.projects[i].organism,
-                                    studies: responses[i]
-                                });
-                            }
-                            _this.studySummaries = _projects;
-                        });
-                }
-            }
+            // _setup(projects) {
+            //     // We check that at least one project with one study exist, otherwise we do not do anything
+            //     if (UtilsNew.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
+            //         this.projects = projects;
+            //         this.project = projects[0];
+            //         this.study = projects[0].studies[0];
+            //
+            //         let _this = this;
+            //         let projectPromises = [];
+            //         projects.forEach(function (project) {
+            //             let studyPromises = [];
+            //             project.studies.forEach(function (study) {
+            //                 studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
+            //             });
+            //             projectPromises.push(Promise.all(studyPromises)
+            //                 .then(function (responses) {
+            //                     let studies = [];
+            //                     responses.forEach(function (response) {
+            //                         let study = response.response[0].result[0];
+            //                         study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+            //                         studies.push(study);
+            //                     });
+            //                     return studies;
+            //                 }));
+            //         });
+            //
+            //         let _projects = [];
+            //         Promise.all(projectPromises)
+            //             .then(function (responses) {
+            //                 for (let i = 0; i < responses.length; i++) {
+            //                     _projects.push({
+            //                         id: _this.projects[i].id,
+            //                         alias: _this.projects[i].alias,
+            //                         name: _this.projects[i].name,
+            //                         organism: _this.projects[i].organism,
+            //                         studies: responses[i]
+            //                     });
+            //                 }
+            //                 _this.studySummaries = _projects;
+            //             });
+            //     }
+            // }
 
             renderHashFragments() {
                 console.log("renderHashFragments - DEBUG")
