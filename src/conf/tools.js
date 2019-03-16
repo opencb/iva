@@ -105,7 +105,8 @@ const filterMenu = {
                 {
                     id: "populationFrequency",
                     title: "Select Population Frequency",
-                    tooltip: populationFrequencies.tooltip
+                    tooltip: populationFrequencies.tooltip,
+                    showSetAll: true
                 }
             ]
         },
@@ -317,6 +318,17 @@ const tools = {
                 "stop_lost", "start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
             examples: [
                 {
+                    name: "Default (protein and missense)",
+                    active: true,
+                    query: {
+                        biotype: "protein_coding",
+                        // alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
+                        ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
+                            "frameshift_variant,stop_lost,start_lost,transcript_amplification,inframe_insertion,inframe_deletion," +
+                            "missense_variant",
+                    }
+                },
+                {
                     name: "Tiering (AR)",
                     active: false,
                     query: {
@@ -340,19 +352,6 @@ const tools = {
                             "GNOMAD_EXOMES:FIN<0.001;GNOMAD_EXOMES:NFE<0.001;GNOMAD_EXOMES:ASJ<0.001;GNOMAD_EXOMES:OTH<0.002",
                         ct: "SO:0001893,SO:0001574,SO:0001575,SO:0001587,SO:0001589,SO:0001578,SO:0001582,SO:0001889," +
                             "SO:0001821,SO:0001822,SO:0001583,SO:0001630,SO:0001626"
-                    }
-                },
-                {
-                    name: "Clinical Interpretation",
-                    active: true,
-                    query: {
-                        // region: "1",
-                        biotype: "protein_coding",
-                        alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
-                        ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
-                            "frameshift_variant,stop_lost,start_lost,transcript_amplification,inframe_insertion,inframe_deletion," +
-                            "missense_variant",
-                        // genotype: "NA12877:0/1;NA12878:0/1;NA12879:0/1,1/1"
                     }
                 },
                 {
