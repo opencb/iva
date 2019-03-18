@@ -40,13 +40,13 @@
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/panel/opencga-panel-browser.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-portal.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-browser.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-portal.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/clinical/opencga-clinical-analysis-editor.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-portal.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-analysis-browser.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-review-cases.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-analysis-editor.html">
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/clinical-interpretation-view.html">
-<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-variant-clinical.html">
+<link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/clinical/obsolete/opencga-variant-clinical.html">
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-browser.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-interpretation.html">
@@ -82,8 +82,8 @@
         </custom-style>
 
         <div>
-            <div style="height: 60px;">
-                <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div>
+                <nav class="navbar navbar-inverse" style="margin-bottom: 5px; border-radius: 0px">
                     <div class="container-fluid">
 
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -168,10 +168,12 @@
                                             <!--<li>-->
                                             <!--<a data-target="#jobModal" data-toggle="modal"><i class="fa fa-bars" aria-hidden="true"></i> Jobs</a>-->
                                             <!--</li>-->
-                                            <li role="separator" class="divider"></li>
-                                            <li>
-                                                <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                                            </li>
+                                            <template is="dom-if" if="{{config.settings.visible}}">
+                                                <li role="separator" class="divider"></li>
+                                                <li>
+                                                    <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+                                                </li>
+                                            </template>
                                         </ul>
                                     </li>
                                 </template>
@@ -258,18 +260,21 @@
             </div>
             <!-- End of navigation bar -->
 
-
             <!--Breadcrumb-->
-            <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
-
+            <div>
+                <ol hidden$="{{!_isBreadcrumbVisible}}" id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
+            </div>
 
             <!-- This is where main application is rendered -->
             <div>
                 <template is="dom-if" if="{{config.enabledComponents.home}}">
                     <div class="center">
                         <div class="content" id="home">
-                            <welcome-web project={{opencgaSession.project}} study="{{opencgaSession.study.alias}}" version="{{config.version}}"
-                                         cellbase-client={{cellbaseClient}} on-search="quickSearch"></welcome-web>
+                            <welcome-web opencga-session="{{opencgaSession}}"
+                                         version="{{config.version}}"
+                                         cellbase-client={{cellbaseClient}}
+                                         on-search="quickSearch">
+                            </welcome-web>
                         </div>
 
                     </div>
@@ -359,14 +364,16 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.panel}}">
                     <div class="content" id="panel">
-                        <opencga-panel-browser opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                               on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}" ></opencga-panel-browser>
+                        <opencga-panel-browser opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}"
+                                               cellbase-client="{{cellbaseClient}}"
+                                               on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
+                        </opencga-panel-browser>
                     </div>
                 </template>
 
                 <template is="dom-if" if="{{config.enabledComponents.beacon}}">
                     <div class="content" id="beacon">
-                        <variant-beacon opencga-client="{{opencgaClient}}" project="{{opencgaSession.project}}" studies="{{opencgaSession.project.studies}}"
+                        <variant-beacon opencga-session="{{opencgaSession}}"
                                         hosts="{{config.tools.beacon.hosts}}">
                         </variant-beacon>
                     </div>
@@ -881,48 +888,48 @@
                 this.renderHashFragments();
             }
 
-            _setup(projects) {
-                // We check that at least one project with one study exist, otherwise we do not do anything
-                if (UtilsNew.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
-                    this.projects = projects;
-                    this.project = projects[0];
-                    this.study = projects[0].studies[0];
-
-                    let _this = this;
-                    let projectPromises = [];
-                    projects.forEach(function (project) {
-                        let studyPromises = [];
-                        project.studies.forEach(function (study) {
-                            studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
-                        });
-                        projectPromises.push(Promise.all(studyPromises)
-                            .then(function (responses) {
-                                let studies = [];
-                                responses.forEach(function (response) {
-                                    let study = response.response[0].result[0];
-                                    study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-                                    studies.push(study);
-                                });
-                                return studies;
-                            }));
-                    });
-
-                    let _projects = [];
-                    Promise.all(projectPromises)
-                        .then(function (responses) {
-                            for (let i = 0; i < responses.length; i++) {
-                                _projects.push({
-                                    id: _this.projects[i].id,
-                                    alias: _this.projects[i].alias,
-                                    name: _this.projects[i].name,
-                                    organism: _this.projects[i].organism,
-                                    studies: responses[i]
-                                });
-                            }
-                            _this.studySummaries = _projects;
-                        });
-                }
-            }
+            // _setup(projects) {
+            //     // We check that at least one project with one study exist, otherwise we do not do anything
+            //     if (UtilsNew.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
+            //         this.projects = projects;
+            //         this.project = projects[0];
+            //         this.study = projects[0].studies[0];
+            //
+            //         let _this = this;
+            //         let projectPromises = [];
+            //         projects.forEach(function (project) {
+            //             let studyPromises = [];
+            //             project.studies.forEach(function (study) {
+            //                 studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
+            //             });
+            //             projectPromises.push(Promise.all(studyPromises)
+            //                 .then(function (responses) {
+            //                     let studies = [];
+            //                     responses.forEach(function (response) {
+            //                         let study = response.response[0].result[0];
+            //                         study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
+            //                         studies.push(study);
+            //                     });
+            //                     return studies;
+            //                 }));
+            //         });
+            //
+            //         let _projects = [];
+            //         Promise.all(projectPromises)
+            //             .then(function (responses) {
+            //                 for (let i = 0; i < responses.length; i++) {
+            //                     _projects.push({
+            //                         id: _this.projects[i].id,
+            //                         alias: _this.projects[i].alias,
+            //                         name: _this.projects[i].name,
+            //                         organism: _this.projects[i].organism,
+            //                         studies: responses[i]
+            //                     });
+            //                 }
+            //                 _this.studySummaries = _projects;
+            //             });
+            //     }
+            // }
 
             renderHashFragments() {
                 console.log("renderHashFragments - DEBUG")
