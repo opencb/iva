@@ -50,11 +50,11 @@
                     <datalist id="FeatureDatalist"></datalist>
                     <!-- Examples -->
                     <span style="font-size: 0.8em; padding-left: 10px">
-                    Examples - Gene: <a on-click="onExampleClick" data-type="gene" style="cursor: pointer">BRCA2</a>,
-                    Region: <a on-click="onExampleClick" data-type="region" style="cursor: pointer">3</a>, <a on-click="onExampleClick" data-type="region" style="cursor: pointer">3:113000-1150000</a>,
-                    SNP: <a on-click="onExampleClick" data-type="snp" style="cursor: pointer">rs445909</a>
-                    Variant: <a on-click="onExampleClick" data-type="variant" style="cursor: pointer">13:32962274:G:T</a>
-                </span>
+                        Examples - Gene: <a on-click="onExampleClick" data-type="gene" style="cursor: pointer">BRCA2</a>,
+                        Region: <a on-click="onExampleClick" data-type="region" style="cursor: pointer">3</a>, <a on-click="onExampleClick" data-type="region" style="cursor: pointer">3:113000-1150000</a>,
+                        SNP: <a on-click="onExampleClick" data-type="snp" style="cursor: pointer">rs445909</a>
+                        Variant: <a on-click="onExampleClick" data-type="variant" style="cursor: pointer">13:32962274:G:T</a>
+                    </span>
                 </div>
             </template>
             <br>
@@ -122,7 +122,7 @@
             }
 
             onExampleClick(e) {
-                let query = {};
+                let query = {study: this.opencgaSession.study.fqn};
                 switch (e.currentTarget.dataset.type) {
                     case "gene":
                         query.gene = e.currentTarget.text;
