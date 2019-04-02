@@ -392,6 +392,12 @@ const tools = {
             }
         },
         detail: [
+            // {
+            //     id: "variantReview",
+            //     component: "opencga-interpretation-variant-review",
+            //     title: "Review",
+            //     active: false
+            // },
             {
                 id: "annotation",
                 component: "cellbase-variantannotation-view",
