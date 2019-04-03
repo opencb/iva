@@ -333,7 +333,7 @@ const tools = {
             examples: [
                 {
                     name: "Default (protein and missense)",
-                    active: true,
+                    active: false,
                     query: {
                         biotype: "protein_coding",
                         // alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
