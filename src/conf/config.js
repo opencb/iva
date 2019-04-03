@@ -16,7 +16,6 @@
 
 const cellbase = {
     hosts: ["https://cellbase.gel.zone/cellbase"],
-    // hosts: ["http://cellbase.clinbioinfosspa.es/cb"],
     version: "v4",
 };
 

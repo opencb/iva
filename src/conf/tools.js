@@ -44,30 +44,32 @@ const filterMenu = {
                 //     ],
                 //     tooltip: "Filter by sample genotypes"
                 // },
-                // {
-                //     id: "cohort",
-                //     title: "Cohort Stats (MAF)",
-                //     cohorts: {  // organised in projects and studies
-                //         reference_grch37: {
-                //             "1kG_phase3": [
-                //                 {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
-                //             ],
-                //             EXAC: [
-                //                 {id: "ALL", name: "All"}
-                //             ]
-                //         },
-                //         platinum: {
-                //             illumina_platinum: [
-                //                 {id: "ALL", name: "All"}
-                //             ]
-                //         }
-                //     },
-                //     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
-                // },
                 {
                     id: "study",
                     title: "Studies Filter",
                     tooltip: "Only considers variants from the selected studies"
+                },
+                {
+                    id: "cohort",
+                    title: "Study Cohort Stats (MAF)",
+                    cohorts: {  // organised in projects and studies
+                        "100k_genomes_grch37_germline": {
+                            RD37: [
+                                {id: "ALL", name: "All"}
+                            ]
+                        },
+                        "100k_genomes_grch38_germline": {
+                            RD38: [
+                                {id: "ALL", name: "All"},
+                                {id: "FND", name: "Parents"},
+                                {id: "FND_CONTROL", name: "Unaff. Parents"},
+                            ],
+                            CG38: [
+                                {id: "ALL", name: "All"}
+                            ]
+                        }
+                },
+                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
         },
