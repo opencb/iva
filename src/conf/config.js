@@ -108,15 +108,9 @@ const opencga = {
 };
 
 const application = {
-<<<<<<< HEAD
     title: "GEL",
-    version: "v1.0.0",
-    logo: "img/Genomics-England-logo-2015.png",
-=======
-    title: "IVA",
     version: "v1.0.1",
-    logo: "img/opencb-logo.png",
->>>>>>> develop
+    logo: "img/Genomics-England-logo-2015.png",
     // The order, title and nested submenus are respected
     menu: [
         {
