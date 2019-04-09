@@ -22,7 +22,7 @@ const cellbase = {
 const opencga = {
     // host: "http://bioinfodev.hpc.cam.ac.uk/opencga-test",
     // host: "http://localhost:8080/opencga-test",
-    host: "https://re-opencgahadoop.gel.zone/opencga-test-1.4.2",
+    host: "https://re-opencgahadoop.gel.zone/opencga-test",
     version: "v1",
     serverVersion: "1.4",
 
