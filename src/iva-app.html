@@ -326,10 +326,11 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
                     <div class="content" id="interpretation">
-                        <opencga-variant-interpretation opencga-session="{{opencgaSession}}" clinical-analysis-id="{{clinicalAnalysisId}}"
+<!--                        active="{{config.tools.interpretation.active}}"-->
+                        <opencga-variant-interpretation opencga-session="{{opencgaSession}}"
+                                                        clinical-analysis-id="{{clinicalAnalysisId}}"
                                                         cellbase-client="{{cellbaseClient}}"
                                                         query="{{interpretationSearchQuery}}"
-                                                        active="{{config.tools.interpretation.active}}"
                                                         population-frequencies="{{config.populationFrequencies}}"
                                                         protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                                         consequence-types="{{config.consequenceTypes}}"

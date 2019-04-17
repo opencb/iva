@@ -337,6 +337,7 @@ const tools = {
                     name: "Default (protein and missense)",
                     active: false,
                     query: {
+                        // region: "22",
                         biotype: "protein_coding",
                         // alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
                         ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
@@ -394,12 +395,6 @@ const tools = {
             }
         },
         detail: [
-            // {
-            //     id: "variantReview",
-            //     component: "opencga-interpretation-variant-review",
-            //     title: "Review",
-            //     active: false
-            // },
             {
                 id: "annotation",
                 component: "cellbase-variantannotation-view",
