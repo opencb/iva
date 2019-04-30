@@ -390,9 +390,11 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.gene}}">
                     <div class="content" id="gene" style="margin: auto; width: 90%">
-                        <opencga-gene-view opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
-                                           project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
-                                           gene="{{gene}}" population-frequencies="{{config.populationFrequencies}}"
+                        <opencga-gene-view opencga-session="{{opencgaSession}}"
+                                           cellbase-client="{{cellbaseClient}}"
+                                           project="{{opencgaSession.project}}"
+                                           gene="{{gene}}"
+                                           population-frequencies="{{config.populationFrequencies}}"
                                            consequence-types="{{config.consequenceTypes}}"
                                            protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                            config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
