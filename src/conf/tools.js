@@ -55,14 +55,16 @@ const filterMenu = {
                     cohorts: {  // organised in projects and studies
                         "100k_genomes_grch37_germline": {
                             RD37: [
-                                {id: "ALL", name: "All"}
+                                {id: "ALL", name: "All"},
+                                {id: "PARENTS", name: "Parents"},
+                                {id: "UNAFF_PARENTS", name: "Unaff. Parents"},
                             ]
                         },
                         "100k_genomes_grch38_germline": {
                             RD38: [
                                 {id: "ALL", name: "All"},
-                                {id: "FND", name: "Parents"},
-                                {id: "FND_CONTROL", name: "Unaff. Parents"},
+                                {id: "PARENTS", name: "Parents"},
+                                {id: "UNAFF_PARENTS", name: "Unaff. Parents"},
                             ],
                             CG38: [
                                 {id: "ALL", name: "All"}
