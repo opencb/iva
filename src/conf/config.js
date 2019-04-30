@@ -109,7 +109,7 @@ const opencga = {
 
 const application = {
     title: "GEL",
-    version: "v1.0.1",
+    version: "v1.0.2-rc",
     logo: "img/Genomics-England-logo-2015.png",
     // The order, title and nested submenus are respected
     menu: [
