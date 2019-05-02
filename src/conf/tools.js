@@ -329,6 +329,7 @@ const tools = {
     },
     interpretation: {
         title: "Variant Interpreter",
+        disableSaveInterpretation: false,
         active: false,
         filter: {
             menu: interpreterMenu,
@@ -385,7 +386,7 @@ const tools = {
         },
         grid: {
             // showSelect: true,
-            showSelectCheckbox: true,
+            showSelectCheckbox: false,
             nucleotideGenotype: true,
             interpretation: true,
             includeMissing: true,
@@ -418,11 +419,6 @@ const tools = {
                 //     "lovd", "hgmd", "icgc", "sahgp"
                 // ]
             },
-            // {
-            //     id: "template",
-            //     component: "opencga-variant-detail-template",
-            //     title: "Template"
-            // }
         ],
         css: {
             style: "font-size: 12px"
