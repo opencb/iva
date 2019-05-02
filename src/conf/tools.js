@@ -329,7 +329,7 @@ const tools = {
     },
     interpretation: {
         title: "Variant Interpreter",
-        disableSaveInterpretation: false,
+        disableSaveInterpretation: true,
         active: false,
         filter: {
             menu: interpreterMenu,
