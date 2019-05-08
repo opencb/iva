@@ -18,6 +18,31 @@
  * Created by imedina on 05/06/17.
  */
 
+const cohortFileMenu = {
+    id: "cohort",
+    title: "Study Cohort Stats (MAF)",
+    cohorts: {  // organised in projects and studies
+        "100k_genomes_grch37_germline": {
+            RD37: [
+                {id: "ALL", name: "All"},
+                {id: "PARENTS", name: "Parents"},
+                {id: "UNAFF_PARENTS", name: "Unaff. Parents"},
+            ]
+        },
+        "100k_genomes_grch38_germline": {
+            RD38: [
+                {id: "ALL", name: "All"},
+                {id: "PARENTS", name: "Parents"},
+                {id: "UNAFF_PARENTS", name: "Unaff. Parents"},
+            ],
+            CG38: [
+                {id: "ALL", name: "All"}
+            ]
+        }
+    },
+    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+};
+
 const filterMenu = {
     searchButtonText: "Search",
     tooltip: {
@@ -49,30 +74,7 @@ const filterMenu = {
                     title: "Studies Filter",
                     tooltip: "Only considers variants from the selected studies"
                 },
-                {
-                    id: "cohort",
-                    title: "Study Cohort Stats (MAF)",
-                    cohorts: {  // organised in projects and studies
-                        "100k_genomes_grch37_germline": {
-                            RD37: [
-                                {id: "ALL", name: "All"},
-                                {id: "PARENTS", name: "Parents"},
-                                {id: "UNAFF_PARENTS", name: "Unaff. Parents"},
-                            ]
-                        },
-                        "100k_genomes_grch38_germline": {
-                            RD38: [
-                                {id: "ALL", name: "All"},
-                                {id: "PARENTS", name: "Parents"},
-                                {id: "UNAFF_PARENTS", name: "Unaff. Parents"},
-                            ],
-                            CG38: [
-                                {id: "ALL", name: "All"}
-                            ]
-                        }
-                },
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
-                }
+                cohortFileMenu
             ]
         },
         {
@@ -218,12 +220,12 @@ const filterMenu = {
 
 // Clone menu for interpretation and add clinical section
 let clinical = {
-    title: "Clinical",
+    title: "Sample and File",
     collapsed: false,
     subsections: [
         {
             id: "sample",
-            title: "Sample and File Filters",
+            title: "Sample Genotype",
             showApproximateCount: true,
             showSelectSamples: true,
             inheritanceModes: [
@@ -233,12 +235,12 @@ let clinical = {
                 {key: "xLinked", text: "X linked"},
                 {key: "yLinked", text: "Y linked"}
             ],
-            tooltip: "Filter by sample genotypes"
+            tooltip: "Filter by sample genotype and mode of inheritance"
         },
         {
-            id: "diseasePanels",
-            title: "Disease Panels",
-            tooltip: "Filter out variants falling outside the genomic intervals (typically genes) defined by the panel(s) chosen"
+            id: "file",
+            title: "File Attributes",
+            tooltip: "Filter by file attributes such as QUAL and FILTER"
         }
     ]
 };
@@ -246,7 +248,7 @@ let clinical = {
 let interpreterMenu = JSON.parse(JSON.stringify(filterMenu));
 let interpreterSections = interpreterMenu.sections.slice(1);    // remove first section "Study and Cohorts"
 interpreterSections.unshift(clinical);                          // insert "Clinical" section
-interpreterSections[1].subsections.splice(2,1);                 // remove "Disease Panels" subsection from "Genomic" section
+// interpreterSections[1].subsections.splice(2,1);                 // remove "Disease Panels" subsection from "Genomic" section
 interpreterMenu.sections = interpreterSections;
 
 
