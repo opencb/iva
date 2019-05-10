@@ -241,7 +241,8 @@ let clinical = {
             id: "file",
             title: "File Attributes",
             tooltip: "Filter by file attributes such as QUAL and FILTER"
-        }
+        },
+        cohortFileMenu
     ]
 };
 
@@ -333,7 +334,7 @@ const tools = {
         title: "Variant Interpreter",
         disableSaveInterpretation: true,
         active: false,
-        showOtherTools: true,
+        showOtherTools: false,
         filter: {
             menu: interpreterMenu,
             lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
