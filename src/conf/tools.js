@@ -20,7 +20,7 @@
 
 const cohortFileMenu = {
     id: "cohort",
-    title: "Cohort Stats (MAF)",
+    title: "Cohort Alternate Allele Stats",
     cohorts: {  // organised in projects and studies
         reference_grch37: {
             "1kG_phase3": [
@@ -34,9 +34,17 @@ const cohortFileMenu = {
             platinum: [
                 {id: "ALL", name: "ALL"}
             ]
-        }
+        },
+        // "100k_genomes_grch38_germline": {
+        //     RD38: [
+        //         {id: "ALL", name: "All"}, {id: "PARENTS", name: "Parents"}
+        //     ],
+        //     CG38: [
+        //         {id: "ALL", name: "All"}
+        //     ]
+        // }
     },
-    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+    tooltip: "Filter variants by cohort Alternate allele frequency"
 };
 
 const filterMenu = {
@@ -375,6 +383,9 @@ const tools = {
             nucleotideGenotype: true,
             interpretation: true,
             includeMissing: true,
+            // alias: {
+            //     DP: "NR"
+            // },
             queryParams: {
                 useSearchIndex: "yes",
                 approximateCount: true,
