@@ -20,7 +20,7 @@
 
 const cohortFileMenu = {
     id: "cohort",
-    title: "Study Cohort Stats (MAF)",
+    title: "Cohort Alternate Allele Stats",
     cohorts: {  // organised in projects and studies
         "100k_genomes_grch37_germline": {
             RD37: [
@@ -38,9 +38,9 @@ const cohortFileMenu = {
             CG38: [
                 {id: "ALL", name: "All"}
             ]
-        }
+        },
     },
-    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
+    tooltip: "Filter variants by cohort Alternate allele frequency"
 };
 
 const filterMenu = {
@@ -394,6 +394,9 @@ const tools = {
             nucleotideGenotype: true,
             interpretation: true,
             includeMissing: true,
+            alias: {
+                DP: "NR"
+            },
             queryParams: {
                 useSearchIndex: "yes",
                 approximateCount: true,
