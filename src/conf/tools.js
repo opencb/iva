@@ -431,6 +431,16 @@ const tools = {
             style: "font-size: 12px"
         }
     },
+    clinicalPortal: {
+        title: "Clinical Interpretation Portal",
+        reviewCases: {
+            grid: {
+                columns: {
+                    hidden: ["dueDate"]
+                }
+            }
+        }
+    },
     facet: {
         // title: "Facet Analysis",
         active: false,
