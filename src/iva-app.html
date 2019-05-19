@@ -941,9 +941,9 @@
                 let hashFrag = this.tool;
                 if (UtilsNew.isNotUndefined(this.opencgaSession.project) && UtilsNew.isNotEmpty(this.opencgaSession.project.alias)) {
 
-                    hashFrag += "/" + this.opencgaSession.project.alias;
+                    hashFrag += "/" + this.opencgaSession.project.id;
                     if (UtilsNew.isNotUndefined(this.opencgaSession.study) && UtilsNew.isNotEmpty(this.opencgaSession.study.alias)) {
-                        hashFrag += "/" + this.opencgaSession.study.alias;
+                        hashFrag += "/" + this.opencgaSession.study.id;
                     }
                 }
 
@@ -992,6 +992,9 @@
                     }
 
                     switch (hashTool) {
+                        case "#browser":
+                            this.browserSearchQuery = Object.assign({}, this.browserSearchQuery);
+                            break;
                         case "#protein":
                             break;
                         case "#interpretation":
@@ -1193,7 +1196,7 @@
             quickSearch(e) {
                 // debugger
                 this.tool = "#browser";
-                window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                window.location.hash = "browser/" + this.opencgaSession.project.id + "/" + this.opencgaSession.study.id;
                 // this.browserQuery = {xref: e.detail.value};
 
                 this.browserSearchQuery = e.detail;

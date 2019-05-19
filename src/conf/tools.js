@@ -39,8 +39,8 @@ const cohortFileMenu = {
                 {id: "ALL", name: "All"}
             ]
         },
-    },
-    tooltip: "Filter variants by cohort Alternate allele frequency"
+        tooltip: "Filter variants by cohort Alternate allele frequency"
+    }
 };
 
 const filterMenu = {
@@ -126,7 +126,7 @@ const filterMenu = {
                     id: "populationFrequency",
                     title: "Select Population Frequency",
                     tooltip: populationFrequencies.tooltip,
-                    showSetAll: true
+                    showSetAll: false
                 }
             ]
         },
