@@ -35,16 +35,8 @@ const cohortFileMenu = {
                 {id: "ALL", name: "ALL"}
             ]
         },
-        // "100k_genomes_grch38_germline": {
-        //     RD38: [
-        //         {id: "ALL", name: "All"}, {id: "PARENTS", name: "Parents"}
-        //     ],
-        //     CG38: [
-        //         {id: "ALL", name: "All"}
-        //     ]
-        // }
-    },
-    tooltip: "Filter variants by cohort Alternate allele frequency"
+        tooltip: "Filter variants by cohort Alternate allele frequency"
+    }
 };
 
 const filterMenu = {
