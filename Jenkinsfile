@@ -9,7 +9,7 @@ pipeline {
                 sh 'npm install --unsafe-perm && npm run build'
             }
         }
-	    stage ('Docker Build and Push') {
+	    stage ('Build and Push Stable Docker') {
             options {
                 timeout(time: 25, unit: 'MINUTES')
             }
@@ -18,7 +18,7 @@ pipeline {
             }
  		    steps {
 	            script {
-                    def tag = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
+                    def tag = sh(returnStdout: true, script: "node -p \"require('./package.json').version\"").trim()
 		            sh "docker build  -t opencb/iva:'${tag}' -f docker/Dockerfile ."
                     withDockerRegistry([ credentialsId: "wasim-docker-hub", url: "" ]) {
 	       			    sh "docker push opencb/iva:'${tag}'"
@@ -26,6 +26,23 @@ pipeline {
 		        }
            }
        }
+       stage ('Build and Push Development Docker') {
+            options {
+                timeout(time: 25, unit: 'MINUTES')
+            }
+            when {
+                branch "develop"
+            }
+        	steps {
+       	        script {
+                    def tag = sh(returnStdout: true, script: "node -p \"require('./package.json').version\"").trim()
+       		        sh "docker build  -t opencb/iva:'${tag}' -f docker/Dockerfile ."
+                    withDockerRegistry([ credentialsId: "wasim-docker-hub", url: "" ]) {
+       	       		    sh "docker push opencb/iva:'${tag}'"
+       			    }
+       		    }
+            }
+        }
     }
 }
 
