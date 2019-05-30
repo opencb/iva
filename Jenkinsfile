@@ -13,6 +13,9 @@ pipeline {
             options {
                 timeout(time: 25, unit: 'MINUTES')
             }
+            when {
+                        branch "master"
+            }
  		steps {
 	        script {
                         def tag = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()	       
