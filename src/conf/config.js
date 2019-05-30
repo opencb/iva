@@ -87,11 +87,6 @@ const application = {
             visibility: "public",
         },
         {
-            id: "facet",
-            title: "Aggregation Stats",
-            visibility: "public",
-        },
-        {
             id: "clinicalAnalysisPortal",
             title: "Interpretation Portal",
             visibility: "public",
@@ -99,6 +94,11 @@ const application = {
         {
             id: "beacon",
             title: "Beacon",
+            visibility: "public",
+        },
+        {
+            id: "facet",
+            title: "Aggregation Stats",
             visibility: "public",
         },
         {
@@ -116,12 +116,12 @@ const application = {
         {
             id: "genomeBrowser",
             title: "Genome Browser",
-            visibility: "public"
+            visibility: "private"
         },
         {
             id: "analysis",
             title: "Analysis (Pending)",
-            visibility: "public",
+            visibility: "private",
             submenu: [
                 {
                     title: "Summary Stats",
@@ -284,14 +284,14 @@ const application = {
     about: {
         dropdown: true,
         links: [
-            {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva/IVA+Home", icon: "fa fa-book"},
-            {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
             {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
+            {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva", icon: "fa fa-book"},
+            {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
             {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: ""},
             {id: "about", name: "About", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
             {id: "terms", name: "Terms", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
             {id: "contact", name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
-            {id: "faq", name: "FAQ", url: "", icon: ""},
+            {id: "faq", name: "FAQ", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
         ]
     },
     login: {
