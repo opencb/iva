@@ -325,10 +325,11 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
                     <div class="content" id="interpretation">
-                        <opencga-variant-interpretation opencga-session="{{opencgaSession}}" clinical-analysis-id="{{clinicalAnalysisId}}"
+<!--                        active="{{config.tools.interpretation.active}}"-->
+                        <opencga-variant-interpretation opencga-session="{{opencgaSession}}"
+                                                        clinical-analysis-id="{{clinicalAnalysisId}}"
                                                         cellbase-client="{{cellbaseClient}}"
                                                         query="{{interpretationSearchQuery}}"
-                                                        active="{{config.tools.interpretation.active}}"
                                                         population-frequencies="{{config.populationFrequencies}}"
                                                         protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                                         consequence-types="{{config.consequenceTypes}}"
@@ -389,9 +390,11 @@
 
                 <template is="dom-if" if="{{config.enabledComponents.gene}}">
                     <div class="content" id="gene" style="margin: auto; width: 90%">
-                        <opencga-gene-view opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
-                                           project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
-                                           gene="{{gene}}" population-frequencies="{{config.populationFrequencies}}"
+                        <opencga-gene-view opencga-session="{{opencgaSession}}"
+                                           cellbase-client="{{cellbaseClient}}"
+                                           project="{{opencgaSession.project}}"
+                                           gene="{{gene}}"
+                                           population-frequencies="{{config.populationFrequencies}}"
                                            consequence-types="{{config.consequenceTypes}}"
                                            protein-substitution-scores="{{config.proteinSubstitutionScores}}"
                                            config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
@@ -505,7 +508,7 @@
                 <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisPortal}}">
                     <div class="content" id="clinicalAnalysisPortal">
                         <!--<opencga-clinical-analysis-portal opencga-session="{{opencgaSession}}" config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-analysis-portal>-->
-                        <opencga-clinical-portal opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}" config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-portal>
+                        <opencga-clinical-portal opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}" config="{{config.tools.clinicalPortal}}"></opencga-clinical-portal>
                     </div>
                 </template>
 
@@ -568,7 +571,7 @@
                 _config.opencga = opencga;
                 // _config.species = DEFAULT_SPECIES;
                 _config.enabledComponents = {};
-                _config.panelExamples = diseasePanels;
+                // _config.panelExamples = diseasePanels;
                 _config.populationFrequencies = populationFrequencies;
                 _config.proteinSubstitutionScores = proteinSubstitutionScores;
                 _config.consequenceTypes = consequenceTypes;
@@ -937,9 +940,9 @@
                 let hashFrag = this.tool;
                 if (UtilsNew.isNotUndefined(this.opencgaSession.project) && UtilsNew.isNotEmpty(this.opencgaSession.project.alias)) {
 
-                    hashFrag += "/" + this.opencgaSession.project.alias;
+                    hashFrag += "/" + this.opencgaSession.project.id;
                     if (UtilsNew.isNotUndefined(this.opencgaSession.study) && UtilsNew.isNotEmpty(this.opencgaSession.study.alias)) {
-                        hashFrag += "/" + this.opencgaSession.study.alias;
+                        hashFrag += "/" + this.opencgaSession.study.id;
                     }
                 }
 
@@ -988,6 +991,9 @@
                     }
 
                     switch (hashTool) {
+                        case "#browser":
+                            this.browserSearchQuery = Object.assign({}, this.browserSearchQuery);
+                            break;
                         case "#protein":
                             break;
                         case "#interpretation":
@@ -1189,7 +1195,7 @@
             quickSearch(e) {
                 // debugger
                 this.tool = "#browser";
-                window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                window.location.hash = "browser/" + this.opencgaSession.project.id + "/" + this.opencgaSession.study.id;
                 // this.browserQuery = {xref: e.detail.value};
 
                 this.browserSearchQuery = e.detail;

@@ -18,6 +18,27 @@
  * Created by imedina on 05/06/17.
  */
 
+const cohortFileMenu = {
+    id: "cohort",
+    title: "Cohort Alternate Allele Stats",
+    cohorts: {  // organised in projects and studies
+        reference_grch37: {
+            "1kG_phase3": [
+                {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
+            ],
+            EXAC: [
+                {id: "ALL", name: "All"}
+            ]
+        },
+        GRCH37: {
+            platinum: [
+                {id: "ALL", name: "ALL"}
+            ]
+        },
+        tooltip: "Filter variants by cohort Alternate allele frequency"
+    }
+};
+
 const filterMenu = {
     searchButtonText: "Search",
     tooltip: {
@@ -35,26 +56,7 @@ const filterMenu = {
                     title: "Studies Filter",
                     tooltip: "Only considers variants from the selected studies"
                 },
-                {
-                    id: "cohort",
-                    title: "Cohort Stats (MAF)",
-                    cohorts: {  // organised in projects and studies
-                        reference_grch37: {
-                            "1kG_phase3": [
-                                {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
-                            ],
-                            EXAC: [
-                                {id: "ALL", name: "All"}
-                            ]
-                        },
-                        GRCH37: {
-                            platinum: [
-                                {id: "ALL", name: "ALL"}
-                            ]
-                        }
-                    },
-                    tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
-                }
+                cohortFileMenu
             ]
         },
         {
@@ -200,12 +202,12 @@ const filterMenu = {
 
 // Clone menu for interpretation and add clinical section
 let clinical = {
-    title: "Clinical",
+    title: "Sample and File",
     collapsed: false,
     subsections: [
         {
             id: "sample",
-            title: "Sample and File Filters",
+            title: "Sample Genotype",
             showApproximateCount: true,
             showSelectSamples: true,
             inheritanceModes: [
@@ -215,12 +217,12 @@ let clinical = {
                 {key: "xLinked", text: "X linked"},
                 {key: "yLinked", text: "Y linked"}
             ],
-            tooltip: "Filter by sample genotypes"
+            tooltip: "Filter by sample genotype and mode of inheritance"
         },
         {
-            id: "diseasePanels",
-            title: "Disease Panels",
-            tooltip: "Filter out variants falling outside the genomic intervals (typically genes) defined by the panel(s) chosen"
+            id: "file",
+            title: "File Attributes",
+            tooltip: "Filter by file attributes such as QUAL and FILTER"
         }
     ]
 };
@@ -228,7 +230,7 @@ let clinical = {
 let interpreterMenu = JSON.parse(JSON.stringify(filterMenu));
 let interpreterSections = interpreterMenu.sections.slice(1);    // remove first section "Study and Cohorts"
 interpreterSections.unshift(clinical);                          // insert "Clinical" section
-interpreterSections[1].subsections.splice(2,1);                 // remove "Disease Panels" subsection from "Genomic" section
+// interpreterSections[1].subsections.splice(2,1);                 // remove "Disease Panels" subsection from "Genomic" section
 interpreterMenu.sections = interpreterSections;
 
 
@@ -311,7 +313,9 @@ const tools = {
     },
     interpretation: {
         title: "Variant Interpreter",
+        disableSaveInterpretation: false,
         active: false,
+        showOtherTools: true,
         filter: {
             menu: interpreterMenu,
             lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
@@ -319,8 +323,9 @@ const tools = {
             examples: [
                 {
                     name: "Default (protein and missense)",
-                    active: true,
+                    active: false,
                     query: {
+                        // region: "22",
                         biotype: "protein_coding",
                         // alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
                         ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
@@ -366,24 +371,22 @@ const tools = {
         },
         grid: {
             // showSelect: true,
-            showSelectCheckbox: true,
+            showSelectCheckbox: false,
             nucleotideGenotype: true,
             interpretation: true,
             includeMissing: true,
+            // alias: {
+            //     DP: "NR"
+            // },
             queryParams: {
                 useSearchIndex: "yes",
+                skipCount: true,
                 approximateCount: true,
                 approximateCountSamplingSize: 1000,
                 timeout: 30000
             }
         },
         detail: [
-            // {
-            //     id: "variantReview",
-            //     component: "opencga-interpretation-variant-review",
-            //     title: "Review",
-            //     active: false
-            // },
             {
                 id: "annotation",
                 component: "cellbase-variantannotation-view",
@@ -405,14 +408,19 @@ const tools = {
                 //     "lovd", "hgmd", "icgc", "sahgp"
                 // ]
             },
-            // {
-            //     id: "template",
-            //     component: "opencga-variant-detail-template",
-            //     title: "Template"
-            // }
         ],
         css: {
             style: "font-size: 12px"
+        }
+    },
+    clinicalPortal: {
+        title: "Clinical Interpretation Portal",
+        reviewCases: {
+            grid: {
+                columns: {
+                    hidden: ["dueDate"]
+                }
+            }
         }
     },
     facet: {
