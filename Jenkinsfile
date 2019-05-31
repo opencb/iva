@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-         stage ('Build source code') {
+        stage ('Build source code') {
             options {
                 timeout(time: 5, unit: 'MINUTES')
             }
@@ -25,8 +25,8 @@ pipeline {
 			        }
 		        }
            }
-       }
-       stage ('Build and Push Development Docker') {
+        }
+        stage ('Build and Push Development Docker') {
             options {
                 timeout(time: 25, unit: 'MINUTES')
             }

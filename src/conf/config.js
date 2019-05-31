@@ -20,9 +20,9 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "http://localhost:8080/opencga-test",
+    // host: "http://localhost:8080/opencga-test",
     // host: "http://bioinfo.hpc.cam.ac.uk/hgva",
-    // host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test",
+    host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test-1.4.2",
     version: "v1",
     serverVersion: "1.4",
 
@@ -77,13 +77,18 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v1.1.0-dev",
+    version: "v1.0.3-dev",
     logo: "img/opencb-logo.png",
     // The order, title and nested submenus are respected
     menu: [
         {
             id: "browser",
             title: "Variant Browser",
+            visibility: "public",
+        },
+        {
+            id: "facet",
+            title: "Aggregation Stats",
             visibility: "public",
         },
         {
@@ -94,11 +99,6 @@ const application = {
         {
             id: "beacon",
             title: "Beacon",
-            visibility: "public",
-        },
-        {
-            id: "facet",
-            title: "Aggregation Stats",
             visibility: "public",
         },
         {
