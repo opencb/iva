@@ -15,14 +15,14 @@
  */
 
 const cellbase = {
-    hosts: ["https://cellbase.gel.zone/cellbase"],
+    hosts: ["http://cellbase.gel.zone/cellbase"],
     version: "v4",
 };
 
 const opencga = {
     // host: "https://re-opencgahadoop.gel.zone/opencga-test",
     // host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test",
-    host: "https://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test-1.4.2",
+    host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test-1.4.2",
     version: "v1",
     serverVersion: "1.4",
 
