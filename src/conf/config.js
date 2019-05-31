@@ -20,8 +20,9 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "https://re-opencgahadoop.gel.zone/opencga-test",
+    // host: "https://re-opencgahadoop.gel.zone/opencga-test",
     // host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test",
+    host: "https://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test-1.4.2",
     version: "v1",
     serverVersion: "1.4",
 
@@ -108,7 +109,7 @@ const opencga = {
 
 const application = {
     title: "GEL",
-    version: "v1.0.2-rc3",
+    version: "v1.0.3",
     logo: "img/Genomics-England-logo-2015.png",
     // The order, title and nested submenus are respected
     menu: [

@@ -399,6 +399,7 @@ const tools = {
             },
             queryParams: {
                 useSearchIndex: "yes",
+                skipCount: true,
                 approximateCount: true,
                 approximateCountSamplingSize: 1000,
                 timeout: 30000
