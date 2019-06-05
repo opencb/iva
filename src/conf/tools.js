@@ -380,9 +380,9 @@ const tools = {
             // },
             queryParams: {
                 useSearchIndex: "yes",
-                skipCount: true,
+                skipCount: false,
                 approximateCount: true,
-                approximateCountSamplingSize: 1000,
+                approximateCountSamplingSize: 500,
                 timeout: 30000
             }
         },
