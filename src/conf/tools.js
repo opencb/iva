@@ -17,6 +17,28 @@
 /**
  * Created by imedina on 05/06/17.
  */
+
+const cohortFileMenu = {
+    id: "cohort",
+    title: "Cohort Alternate Allele Stats",
+    cohorts: {  // organised in projects and studies
+        reference_grch37: {
+            "1kG_phase3": [
+                {id: "ALL", name: "All"}, {id: "MXL", name: "Mexican"}
+            ],
+            EXAC: [
+                {id: "ALL", name: "All"}
+            ]
+        },
+        GRCH37: {
+            platinum: [
+                {id: "ALL", name: "ALL"}
+            ]
+        },
+        tooltip: "Filter variants by cohort Alternate allele frequency"
+    }
+};
+
 const filterMenu = {
     searchButtonText: "Search",
     tooltip: {
@@ -72,7 +94,7 @@ const filterMenu = {
                 // },
                 {
                     id: "biotype",
-                    title: "Biotype",
+                    title: "Gene Biotype",
                     biotypes: [
                         "3prime_overlapping_ncrna", "IG_C_gene", "IG_C_pseudogene", "IG_D_gene", "IG_J_gene", "IG_J_pseudogene",
                         "IG_V_gene", "IG_V_pseudogene", "Mt_rRNA", "Mt_tRNA", "TR_C_gene", "TR_D_gene", "TR_J_gene", "TR_J_pseudogene",
@@ -99,13 +121,8 @@ const filterMenu = {
                 {
                     id: "populationFrequency",
                     title: "Select Population Frequency",
-                    tooltip: "<strong>1000 Genomes</strong> only considers variants whose observed allelic frequency in the 1000 Genomes " +
-                    "Phase 3 project is below (or above) the defined value. Allele frequencies were obtained from about 2,500 samples." +
-                    "<br><strong>ExAC</strong> only considers variants whose observed allelic frequency in the The Exome Aggregation " +
-                    "Consortium (ExAC) database is below (or above) the defined value. ExAC covers only exomic positions. " +
-                    "The frequencies were obtained using more than 60.000 exomes." +
-                    "<br><strong>ESP56500</strong> only considers variants whose observed allelic frequency in the Exome Variant Server " +
-                    "(ESP6500) database is below (or above) the defined value. ESP6500 covers only exomic positions from about 6000 exomes"
+                    tooltip: populationFrequencies.tooltip,
+                    showSetAll: true
                 }
             ]
         },
@@ -199,12 +216,12 @@ const filterMenu = {
 
 // Clone menu for interpretation and add clinical section
 let clinical = {
-    title: "Clinical",
+    title: "Sample and File",
     collapsed: false,
     subsections: [
         {
             id: "sample",
-            title: "Sample and File Filters",
+            title: "Sample Genotype",
             showApproximateCount: true,
             showSelectSamples: true,
             inheritanceModes: [
@@ -214,12 +231,12 @@ let clinical = {
                 {key: "xLinked", text: "X linked"},
                 {key: "yLinked", text: "Y linked"}
             ],
-            tooltip: "Filter by sample genotypes"
+            tooltip: "Filter by sample genotype and mode of inheritance"
         },
         {
-            id: "diseasePanels",
-            title: "Disease Panels",
-            tooltip: "Filter out variants falling outside the genomic intervals (typically genes) defined by the panel(s) chosen"
+            id: "file",
+            title: "File Attributes",
+            tooltip: "Filter by file attributes such as QUAL and FILTER"
         }
     ]
 };
@@ -227,7 +244,7 @@ let clinical = {
 let interpreterMenu = JSON.parse(JSON.stringify(filterMenu));
 let interpreterSections = interpreterMenu.sections.slice(1);    // remove first section "Study and Cohorts"
 interpreterSections.unshift(clinical);                          // insert "Clinical" section
-interpreterSections[1].subsections.splice(2,1);                 // remove "Disease Panels" subsection from "Genomic" section
+// interpreterSections[1].subsections.splice(2,1);                 // remove "Disease Panels" subsection from "Genomic" section
 interpreterMenu.sections = interpreterSections;
 
 
@@ -292,7 +309,7 @@ const tools = {
             {
                 id: "network",
                 component: "reactome-variant-network",
-                title: "Gene network"
+                title: "Reactome Pathways"
             },
             // {
             //     id: "template",
@@ -303,10 +320,26 @@ const tools = {
     },
     interpretation: {
         title: "Variant Interpreter",
+        disableSaveInterpretation: false,
         active: false,
+        showOtherTools: true,
         filter: {
             menu: interpreterMenu,
+            lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
+                "stop_lost", "start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
             examples: [
+                {
+                    name: "Default (protein and missense)",
+                    active: false,
+                    query: {
+                        // region: "22",
+                        biotype: "protein_coding",
+                        // alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
+                        ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
+                            "frameshift_variant,stop_lost,start_lost,transcript_amplification,inframe_insertion,inframe_deletion," +
+                            "missense_variant",
+                    }
+                },
                 {
                     name: "Tiering (AR)",
                     active: false,
@@ -334,19 +367,6 @@ const tools = {
                     }
                 },
                 {
-                    name: "Clinical Interpretation",
-                    active: true,
-                    query: {
-                        region: "1",
-                        biotype: "protein_coding",
-                        alternate_frequency: "1kG_phase3:ALL<0.001;GNOMAD_GENOMES:ALL<0.001",
-                        ct: "transcript_ablation,splice_acceptor_variant,splice_donor_variant,stop_gained," +
-                            "frameshift_variant,stop_lost,start_lost,transcript_amplification,inframe_insertion,inframe_deletion," +
-                            "missense_variant",
-                        // genotype: "NA12877:0/1;NA12878:0/1;NA12879:0/1,1/1"
-                    }
-                },
-                {
                     name: "Stickler syndrome",
                     query: {
                         gene: "COL11A1,COL11A2,COL2A1,COL9A1,COL9A2,COL9A3,LOXL3",
@@ -358,14 +378,18 @@ const tools = {
         },
         grid: {
             // showSelect: true,
-            showSelectCheckbox: true,
+            showSelectCheckbox: false,
             nucleotideGenotype: true,
             interpretation: true,
             includeMissing: true,
+            // alias: {
+            //     DP: "NR"
+            // },
             queryParams: {
                 useSearchIndex: "yes",
+                skipCount: false,
                 approximateCount: true,
-                approximateCountSamplingSize: 1000,
+                approximateCountSamplingSize: 500,
                 timeout: 30000
             }
         },
@@ -391,14 +415,19 @@ const tools = {
                 //     "lovd", "hgmd", "icgc", "sahgp"
                 // ]
             },
-            {
-                id: "template",
-                component: "opencga-variant-detail-template",
-                title: "Template"
-            }
         ],
         css: {
             style: "font-size: 12px"
+        }
+    },
+    clinicalPortal: {
+        title: "Clinical Interpretation Portal",
+        reviewCases: {
+            grid: {
+                columns: {
+                    hidden: ["dueDate"]
+                }
+            }
         }
     },
     facet: {

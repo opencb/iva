@@ -57,7 +57,6 @@
                 <!--<input type="text" class="form-control input-lg" id="welcomeSearchTextBoxOld" style="text-align: center;"-->
                 <!--placeholder="Search for a gene, transcript, protein or a variant" on-blur="onBlur" on-keyup="onKeyup">-->
                 <!--<br>-->
-
                 <div style="padding: 20px 10px">
                     <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist" on-keyup="callAutocomplete"
                            placeholder="Search for gene symbols, genomic regions or variants" value="">
@@ -90,6 +89,8 @@
 
             constructor() {
                 super();
+
+                this.checkProjects = false;
             }
 
             static get is() {
@@ -98,6 +99,10 @@
 
             static get properties() {
                 return {
+                    opencgaSession: {
+                        type: Object,
+                        observer: "opencgaSessionObserver"
+                    },
                     version: {
                         type: String
                     },
@@ -121,8 +126,16 @@
             //     }
             // }
 
+            opencgaSessionObserver() {
+                if (UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project)) {
+                    this.checkProjects = true;
+                } else {
+                    this.checkProjects = false;
+                }
+            }
+
             onExampleClick(e) {
-                let query = {};
+                let query = {study: this.opencgaSession.study.fqn};
                 switch (e.currentTarget.dataset.type) {
                     case "gene":
                         query.gene = e.currentTarget.text;
@@ -153,7 +166,7 @@
                 let featureId = PolymerUtils.getElementById("welcomeSearchTextBox").value;
                 if (UtilsNew.isNotEmpty(featureId)) {
                     let query = {};
-                    if (featureId.startsWith("chr") || featureId === "X" || featureId === "Y" || featureId.match(/^\d/)) {
+                    if (featureId.startsWith("chr") || featureId === "X" || featureId === "Y" || featureId === "MT" || featureId.match(/^\d/)) {
                         if (featureId.split(":").length < 3) {
                             // It's a region, contains only one ':' character
                             query.region = featureId;
