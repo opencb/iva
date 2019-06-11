@@ -20,7 +20,7 @@ const cellbase = {
 };
 
 var opencga = {
-    host: "bioinfo.hpc.cam.ac.uk/bridge-1.4.0-rc2",
+    host: "http://bioinfo.hpc.cam.ac.uk/bridge-1.4.2",
     version: "v1",
     serverVersion: "1.4",
 
@@ -299,7 +299,7 @@ var application = {
         visible: false,
     },
     about: {
-        dropdown: true,
+        dropdown: false,
         links: [
             {id: "about", name: "About", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
             {id: "terms", name: "Terms", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
