@@ -108,7 +108,7 @@ const opencga = {
 };
 
 const application = {
-    title: "GEL",
+    title: "Pre-Release",
     version: "v2.0.0",
     logo: "img/Genomics-England-logo-2015.png",
     // The order, title and nested submenus are respected
