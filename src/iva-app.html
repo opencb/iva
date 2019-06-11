@@ -665,7 +665,7 @@
                 }
 
                 // this.browserSearchQuery = {gene: "BRCA2", sample: "NA12877", study: "platinum"};
-                this.browserSearchQuery = {};
+                // this.browserSearchQuery = {};
             }
 
             opencgaSessionObserver() {
@@ -1175,7 +1175,7 @@
                     };
                     switch (this.tool) {
                         case "#browser":
-                            window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                            window.location.hash = "browser/" + this.opencgaSession.project.id + "/" + this.opencgaSession.study.id;
                             this.browserSearchQuery = _query;
                             break;
                         case "#interpretation":

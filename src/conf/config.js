@@ -61,7 +61,8 @@ var opencga = {
                     {
                         id: "I37",
                         name: "I37",
-                        alias: "I37"
+                        alias: "I37",
+                        fqn: "I37"
                     }
                 ]
             }
