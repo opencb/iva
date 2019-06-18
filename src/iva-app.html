@@ -1179,12 +1179,12 @@
                             this.browserSearchQuery = _query;
                             break;
                         case "#interpretation":
-                            window.location.hash = "interpretation/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                            window.location.hash = "interpretation/" + this.opencgaSession.project.id + "/" + this.opencgaSession.study.id;
                             this.interpretationSearchQuery = _query;
                             break;
                         default:
                             this.tool = "#browser";
-                            window.location.hash = "browser/" + this.opencgaSession.project.alias + "/" + this.opencgaSession.study.alias;
+                            window.location.hash = "browser/" + this.opencgaSession.project.id + "/" + this.opencgaSession.study.id;
                             this.browserSearchQuery = _query;
                             break;
                     }
