@@ -15,12 +15,12 @@
  */
 
 const cellbase = {
-    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
+    hosts: ["https://bioinfo.hpc.cam.ac.uk/cellbase"],
     version: "v4",
 };
 
 var opencga = {
-    host: "http://bioinfo.hpc.cam.ac.uk/bridge-1.4.2",
+    host: "https://bioinfo.hpc.cam.ac.uk/bridge-1.4.2",
     version: "v1",
     serverVersion: "1.4",
 
