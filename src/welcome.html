@@ -161,6 +161,7 @@
             }
 
             notify(query) {
+                query.study = this.opencgaSession.study.fqn;
                 this.dispatchEvent(new CustomEvent("search", {
                     detail: query,
                     bubbles: true,
@@ -173,7 +174,7 @@
                 let featureId = PolymerUtils.getElementById("welcomeSearchTextBox").value;
                 if (UtilsNew.isNotEmpty(featureId)) {
                     let query = {};
-                    if (featureId.startsWith("chr") || featureId === "X" || featureId === "Y" || featureId === "MT" || featureId.match(/^\d/)) {
+                    if (featureId.startsWith("chr") || featureId.startsWith("X") || featureId.startsWith("Y") || featureId.startsWith("MT") || featureId.match(/^\d/)) {
                         if (featureId.split(":").length < 3) {
                             // It's a region, contains only one ':' character
                             query.region = featureId;
