@@ -13,7 +13,7 @@ const config = {
 
     "selenium": {
         "start_process": true,
-        "server_path": BIN_PATH + "selenium-server-standalone-3.7.0.jar",
+        "server_path": BIN_PATH + "selenium-server-standalone-3.141.59.jar",
         "log_path": "",
         "port": 4444,
         "cli_args": {

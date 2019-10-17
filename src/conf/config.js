@@ -21,8 +21,9 @@ const cellbase = {
 
 const opencga = {
     // host: "http://localhost:8080/opencga-test",
-    // host: "http://bioinfo.hpc.cam.ac.uk/hgva",
-    host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test-1.4.2",
+    //host: "http://bioinfo.hpc.cam.ac.uk/hgva",
+    host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo",
+    //host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test-1.4.2",
     version: "v1",
     serverVersion: "1.4",
 
@@ -77,7 +78,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v1.0.4-dev",
+    version: "v2.0.0-dev",
     logo: "img/opencb-logo.png",
     // The order, title and nested submenus are respected
     menu: [
@@ -284,14 +285,14 @@ const application = {
     about: {
         dropdown: true,
         links: [
-            {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
+            {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},
             {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva", icon: "fa fa-book"},
-            {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
-            {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: ""},
-            {id: "about", name: "About", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
-            {id: "terms", name: "Terms", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
-            {id: "contact", name: "Contact", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
-            {id: "faq", name: "FAQ", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
+            {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
+            {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: "fa fa-archive"},
+            {id: "about", name: "About", url: "#about", icon: "fa fa-info-circle"},
+            {id: "terms", name: "Terms", url: "#terms", icon: "fa fa-file-alt"},
+            {id: "contact", name: "Contact", url: "#contact", icon: "fa fa-envelope"},
+            {id: "faq", name: "FAQ", url: "#faq", icon: "fa fa-question"},
         ]
     },
     login: {

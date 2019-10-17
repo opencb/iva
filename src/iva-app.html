@@ -20,11 +20,16 @@
 <link rel="import" href="../node_modules/@polymer/polymer/lib/elements/array-selector.html">
 <link rel="import" href="../node_modules/@polymer/polymer/lib/elements/custom-style.html">
 <link rel="import" href="jso-styles.html">
-<link rel="import" href="welcome.html">
-<link rel="import" href="about.html">
-<link rel="import" href="terms.html">
-<link rel="import" href="contact.html">
-<link rel="import" href="faq.html">
+
+<!--
+    @deprecated migrated to LitElemenent
+    <link rel="import" href="welcome.html">
+    <link rel="import" href="faq.html">
+    <link rel="import" href="about.html">
+    <link rel="import" href="terms.html">
+    <link rel="import" href="contact.html">
+
+-->
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-transcript-view.html">
@@ -59,6 +64,13 @@
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-login.html">
 <link rel="import" href="iva-settings.html">
 
+
+
+<script type="module" src="about.js"></script>
+<script type="module" src="contact.js"></script>
+<script type="module" src="faq.js"></script>
+<script type="module" src="terms.js"></script>
+<script type="module" src="welcome.js"></script>
 
 <dom-module id="iva-app">
 
@@ -210,23 +222,6 @@
                                 </template>
 
                                 <!-- About dropdown menu-->
-                                <template is="dom-if" if="{{config.about.dropdown}}">
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                           aria-haspopup="true" aria-expanded="false"> About <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <template is="dom-repeat" items="{{config.about.links}}">
-                                                <li>
-                                                    <a href$="{{item.url}}" target="_blank"><i class$="{{item.icon}}" aria-hidden="true"></i>
-                                                        {{item.name}}
-                                                    </a>
-                                                </li>
-                                            </template>
-                                        </ul>
-                                    </li>
-                                </template>
-
                                 <template is="dom-if" if="{{!config.about.dropdown}}">
                                     <template is="dom-repeat" items="{{config.about.links}}" as="link">
                                         <!--<li>-->
@@ -243,16 +238,37 @@
                                     <li>
                                         <template is="dom-if" if="{{!opencgaSession.token}}">
                                             <a href="#login" id="loginButton" role="button" on-click="changeTool">
-                                                <i href="#login" class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Login
+                                                <i href="#login" class="fa fa-sign-in-alt fa-lg" aria-hidden="true"></i> Login
                                             </a>
                                         </template>
                                         <template is="dom-if" if="{{opencgaSession.token}}">
                                             <a id="logoutButton" role="button" on-click="logout">
-                                                <i class="fa fa-sign-out fa-lg"></i> Logout
+                                                <i class="fa fa-sign-out-alt fa-lg"></i> Logout
                                             </a>
                                         </template>
                                     </li>
                                 </template>
+
+                                <template is="dom-if" if="{{config.about.dropdown}}">
+                                    <li class="dropdown">
+                                        <ul class="dropdown-menu">
+                                            <template is="dom-repeat" items="{{config.about.links}}">
+                                                <li>
+                                                    <a href$="{{item.url}}" target="_blank"><i class$="{{item.icon}}" aria-hidden="true"></i>
+                                                        {{item.name}}
+                                                    </a>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                           aria-haspopup="true" aria-expanded="false"> <i class="fas fa-bars"></i>
+                                        </a>
+                                    </li>
+                                </template>
+
+
+
+
                             </ul>
                         </div>
                     </div>
@@ -266,10 +282,11 @@
             </div>
 
             <!-- This is where main application is rendered -->
-            <div>
+            <div class="container-fluid">
                 <template is="dom-if" if="{{config.enabledComponents.home}}">
-                    <div class="center">
+                    <div class="col-md-6 col-md-offset-3">
                         <div class="content" id="home">
+
                             <welcome-web opencga-session="{{opencgaSession}}"
                                          version="{{config.version}}"
                                          cellbase-client={{cellbaseClient}}
