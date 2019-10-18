@@ -1,5 +1,5 @@
-export default { css: `
+export default `
     body {
        
     }
-`};
+`;
