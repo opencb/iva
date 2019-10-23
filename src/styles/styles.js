@@ -17,7 +17,6 @@
 /*
 * Reusable collection of css widgets
 * */
-let a = `ss`
 let checkBoxContainer = `
 		.checkbox-container li{
 		  display: block;

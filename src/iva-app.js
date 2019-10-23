@@ -1,5 +1,20 @@
+/**
+ * Copyright 2015-2019 OpenCB
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 //import { LitElement, html } from 'lit-element'; // bare import by name doesn't work yet in browser. https://www.polymer-project.org/blog/2018-02-26-3.0-preview-paths-and-names
-//import { html, LitElement } from 'https://unpkg.com/@polymer/lit-element@0.5.1/lit-element.js?module';
 import {LitElement, html} from "/web_modules/lit-element.js";
 import WelcomeWeb from "./welcome.js";
 import AboutWeb from "./about.js";
@@ -42,6 +57,12 @@ class IvaApp extends LitElement {
 			cellbaseClient: {
 				type: Object
 			}
+		}
+	}
+
+	updated(changedProperties) {
+		if (changedProperties.has("opencgaSession")) {
+			this.opencgaSessionObserver()
 		}
 	}
 
@@ -159,12 +180,6 @@ class IvaApp extends LitElement {
 
 		//run the observer the first time doesnt work TODO check why
 		//this.opencgaSessionObserver();
-	}
-
-	updated(changedProperties) {
-		if (changedProperties.has("opencgaSession")) {
-			this.opencgaSessionObserver()
-		}
 	}
 
 	opencgaSessionObserver() {
@@ -1051,7 +1066,7 @@ class IvaApp extends LitElement {
 			</div>
 			
 			<!-- This is where main IVA application is rendered -->
-			<div>
+			<div class="container-fluid">
 				${this.config.enabledComponents.browser ? html`
 					<div class="content" id="browser">
 						<!--search="{{browserSearchQuery}}"-->
