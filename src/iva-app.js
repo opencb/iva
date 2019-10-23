@@ -11,9 +11,6 @@ import {OpencgaLogin,
 	OpencgaVariantBrowser
 } from "../lib/jsorolla/components.js";
 
-
-import style from "./styles/global.js"
-
 class IvaApp extends LitElement {
 
 	constructor() {
@@ -646,6 +643,7 @@ class IvaApp extends LitElement {
 		if (UtilsNew.isNotUndefined(e) && UtilsNew.isNotUndefined(e.detail.value)) {
 			value = e.detail.value; // It takes care of the fired event from welcome.html
 		} else if (UtilsNew.isNotUndefined(e) && e.keyCode === "13" || UtilsNew.isNotUndefined(e) && e.type === "click") {
+			//TODO convert in LitElement compliant
 			value = this.$.searchTextBox.value;  // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
 		}
 
@@ -673,6 +671,7 @@ class IvaApp extends LitElement {
 			}
 
 			this.renderHashFragments();
+			//TODO convert in LitElement compliant
 			this.$.searchTextBox.value = ""; // Empty the value of search text box when search is complete and respective view is loaded
 		}
 	}
@@ -826,9 +825,7 @@ class IvaApp extends LitElement {
 
 	render() {
 		return html`
-			<style type="text/css">${style.css}</style>
-            <style include="jso-styles">
-            
+            <style include="jso-styles">            	
                 .navbar-inverse {
                     background-color: #0c2f4c;
                 }
@@ -866,432 +863,430 @@ class IvaApp extends LitElement {
                 }
             </style>
 
-<div class="${style.body}">
-    <nav class="navbar navbar-inverse" style="margin-bottom: 5px; border-radius: 0px">
-        <div class="container-fluid">
-
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="#home" class="navbar-brand" style="padding-top: 10px" @click="${this.changeTool}">
-                    <img src="${this.config.logo}" width="100px">
-                </a>
-                <a class="navbar-brand" href="#home" @click="${this.changeTool}">
-                    <b>${this.config.title} ${this.config.version}</b>
-                </a>
-            </div>
-
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                <!-- Controls aligned to the LEFT -->
-                <ul class="nav navbar-nav">
-                    <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                    ${this.config.menu.length && this.config.menu.map(item => html`
-						<!-- If there is not submenu we just display a button -->
-                        ${!item.submenu ? html`
-                        	<li @click="${this.changeTool}">
-                            	<a href="#${item.id}" role="button">${item.title}</a>
-							</li>` : html`
-                            <!-- If there is a submenu we create a dropdown menu item -->
-                            <li class="dropdown">
-                            	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                	${item.title} <span class="caret"></span>
-                            	</a>
-								<ul class="dropdown-menu">
-									${item.submenu.map(subitem =>
-										subitem.category ? html`<li><a><label>${subitem.title}</label></a></li>` :
-										subitem.separator ? html`<li role="separator" class="divider"></li>` : 
-										html`<li @click="${this.changeTool}"><a href="#${subitem.id}" data-id="${subitem.id}">${subitem.title}</a></li>`)} 
-                                </ul>
-                            </li>`
-                    	}`
-					)}
-                </ul>
-
-                <!-- Controls aligned to the RIGHT: settings and about-->
-                <ul class="nav navbar-nav navbar-right">
-                    <!--User-->
-                    ${this.opencgaSession.token ? html`
-                    	<li class="dropdown" id="nav-user">
-                        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            	<i class="fa fa-user" aria-hidden="true"></i>
-                                ${this.opencgaSession.user.id} <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                            	<li>
-                                	<a href="#projects"><i class="fa fa-database" aria-hidden="true" style="padding-right: 10px"></i>Projects</a>
-                                </li>
-                                <li>
-                                	<a href="#samples"><i class="fa fa-users" aria-hidden="true" style="padding-right: 10px"></i>Samples</a>
-                                </li>
-                                <!--<li>
-                                	<a data-target="#jobModal" data-toggle="modal"><i class="fa fa-bars" aria-hidden="true"></i> Jobs</a>-->
-                                </li> -->
-                                ${this.config.settings.visible ? html`
-                                	<li role="separator" class="divider"></li>
-                                    <li>
-                                    	<a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                                     </li>
-                                ` : null }
-                            </ul>
-                        </li>
-                   	` : null}
-
-                    <!--Studies dropdown and Search menu-->
-                    ${this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
-                    	<li class="dropdown">
-                        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Studies <span class="caret"></span></a>
-                            <ul class="dropdown-menu pre-scrollable">
-                            	${this.opencgaSession.projects.map(project => html`
-                                	<li><a><b>${project.name}</b></a></li>
-                                    ${project.studies && project.studies.length && project.studies && project.studies.map(study => html`
-                                    	<li>
-                                    		<a href="#" data-study="${study.alias}" data-project="${project.name}" @click="${this.onStudySelect}">${study.alias}</a>
-                                    	</li>
-                                    `)}                                            
-                                `)}
-                            </ul>
-                        </li>
-                        ${this.config.search.visible ? html`
-                        	<form class="navbar-form navbar-left" role="search">
-                        		<div class="form-group">
-                        			<div class="input-group search-box-wrapper">
-                        				<input class="form-control" id="searchTextBox"  placeholder="${this.config.search.placeholder}" @change="${this.buildQuery}">
-                        				<span class="input-group-addon"><span class="fa fa-search" aria-hidden="true" @click="${this.onQuickSearch}"></span></span>
-                        			</div>
-                        		</div>
-                        	</form>
-                        ` : null}
-                    ` : null}
-
-                    <!-- Login/Logout button -->
-                    ${this.config.login.visible ? html`
-						<li>
-							${this.opencgaSession.token ? html`
-								<a id="logoutButton" role="button" @click="${this.logout}">
-									<i class="fa fa-sign-out-alt fa-lg"></i> Logout
-								</a>` : html`
-								<a href="#login" id="loginButton" role="button" @click="${this.changeTool}">
-									<i href="#login" class="fa fa-sign-in-alt fa-lg" aria-hidden="true"></i> Login
-								</a>
-							`}
-						</li>
-					` : null}
-
-                    <!-- About dropdown menu-->
-                    ${this.config.about.dropdown ? html`
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-bars"></i>
+			<div>
+				<nav class="navbar navbar-inverse" style="margin-bottom: 5px; border-radius: 0px">
+					<div class="container-fluid">
+			
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+									data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a href="#home" class="navbar-brand" style="padding-top: 10px" @click="${this.changeTool}">
+								<img src="${this.config.logo}" width="100px">
 							</a>
-							<ul class="dropdown-menu">
-                            	${this.config.about.links && this.config.about.links.map(link => html`
-                                <li>
-                                                    <a href="${link.url}" ><i class="${link.icon}" aria-hidden="true"></i>
-                                                        ${link.name}
-                                                    </a>
-                                                </li>
-                                            `)}
-                                        </ul>
-                                    </li>
-                                ` : this.config.about.links && this.config.about.links.map(link => html`
-                                    <li>
-                                        <a href="#${link.id}}" role="button" @click="${this.changeTool}">${link.name}</a>
-                                    </li>
-                                `)}
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>
-<!-- End of navigation bar -->
-
-<!--Breadcrumb-->
-<div>
-    <ol hidden="${!this._isBreadcrumbVisible}" id="breadcrumb" class="breadcrumb"
-        style="margin-bottom: 1px;padding-left: 40px"></ol>
-</div>
-
-<!-- This is where main application is rendered -->
-<div>
-    ${this.config.enabledComponents.home ? html`
-    	<div class="content" id="home">
-       		<welcome-web .opencgaSession="${this.opencgaSession}" version="${this.config.version}" .cellbaseClient=${this.cellbaseClient} @search="${this.quickSearch}"> </welcome-web>
-        </div>
-    ` : null}
-
-    ${this.config.enabledComponents.about ? html`
-     	<div class="content" id="about">
-        	<about-web version="${this.config.version}"></about-web>
-        </div>
-    ` : null}
-
-    ${this.config.enabledComponents.terms ? html`
-    	<div class="content" id="terms">
-        	<terms-web version="${this.config.version}"></terms-web>
-        </div>
-    ` : null}
-
-    ${this.config.enabledComponents.contact ? html`
-    	<div class="content" id="contact">
-        	<contact-web version="${this.config.version}"></contact-web>
-        </div>
-    ` : null}
-
-    ${this.config.enabledComponents.faq ? html`
-    <div class="content" id="faq">
-    	<faq-web version="${this.config.version}"></faq-web>
-    </div>
-    ` : null}
-</div>
-
-<!-- This is where main IVA application is rendered -->
-<div>
-	${this.config.enabledComponents.browser ? html`
-		<div class="content" id="browser">
-			<!--search="{{browserSearchQuery}}"-->
-			<opencga-variant-browser .opencgaSession="${this.opencgaSession}"
-									.cellbaseClient="${this.cellbaseClient}"
-									.reactomeClient="${this.reactomeClient}"
-									.query="${this.browserSearchQuery}"
-									?active="${this.config.tools.browser.active}"
-									.populationFrequencies="${this.config.populationFrequencies}"
-									.proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-									.consequenceTypes="${this.config.consequenceTypes}"
-									@onGene="${this.geneSelected}"
-									@onSamplechange="${this.onSampleChange}"
-									.config="${this.config.tools.browser}"
-									style="font-size: 12px">
-			</opencga-variant-browser>
-		</div>` : null}
-	
-	
-    <!-- TODO convert in lit-element
-    
-    <template is="dom-if" if="{{config.enabledComponents.interpretation}}">
-        <div class="content" id="interpretation">
-            <opencga-variant-interpretation opencga-session="{{opencgaSession}}"
-                                            clinical-analysis-id="{{clinicalAnalysisId}}"
-                                            cellbase-client="{{cellbaseClient}}"
-                                            query="{{interpretationSearchQuery}}"
-                                            population-frequencies="{{config.populationFrequencies}}"
-                                            protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-                                            consequence-types="{{config.consequenceTypes}}"
-                                            on-gene="geneSelected" on-samplechange="onSampleChange"
-                                            style="font-size: 12px" config="{{config.tools.interpretation}}">
-            </opencga-variant-interpretation>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.facet}}">
-        <div class="content" id="facet">
-            <opencga-variant-facet opencga-session="{{opencgaSession}}" config="[[config.tools.facet]]"
-                                   opencga-client="{{opencgaSession.opencgaClient}}"
-                                   cellbase-client="{{cellbaseClient}}"
-                                   population-frequencies="{{config.populationFrequencies}}"
-                                   protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-                                   consequence-types="{{config.consequenceTypes}}">
-            </opencga-variant-facet>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.clinical}}">
-        <div class="content" id="clinical">
-            <opencga-variant-clinical opencga-session="{{opencgaSession}}" config="[[config.tools.clinical]]"
-                                      population-frequencies="{{config.populationFrequencies}}"
-                                      protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-                                      consequence-types="{{config.consequenceTypes}}"
-                                      opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                      on-notifymessage="onNotifyMessage"
-                                      event-notify-name="{{config.notifyEventMessage}}">
-            </opencga-variant-clinical>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.panel}}">
-        <div class="content" id="panel">
-            <opencga-panel-browser opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}"
-                                   cellbase-client="{{cellbaseClient}}"
-                                   on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
-            </opencga-panel-browser>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.beacon}}">
-        <div class="content" id="beacon">
-            <variant-beacon opencga-session="{{opencgaSession}}"
-                            hosts="{{config.tools.beacon.hosts}}">
-            </variant-beacon>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.genomeBrowser}}">
-        <div class="content" id="genomeBrowser">
-            <opencga-genome-browser opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
-                                    opencga-client="{{opencgaClient}}">
-            </opencga-genome-browser>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.gene}}">
-        <div class="content" id="gene" style="margin: auto; width: 90%">
-            <opencga-gene-view opencga-session="{{opencgaSession}}"
-                               cellbase-client="{{cellbaseClient}}"
-                               project="{{opencgaSession.project}}"
-                               gene="{{gene}}"
-                               population-frequencies="{{config.populationFrequencies}}"
-                               consequence-types="{{config.consequenceTypes}}"
-                               protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-                               config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
-            </opencga-gene-view>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.transcript}}">
-        <div class="content feature-view" id="transcript">
-            <opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
-                                     project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
-                                     transcript="{{transcript}}" gene="{{gene}}"
-                                     population-frequencies="{{config.populationFrequencies}}"
-                                     consequence-types="{{config.consequenceTypes}}"
-                                     protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-                                     config="{{config.tools.gene}}">
-            </opencga-transcript-view>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.protein}}">
-        <div class="content feature-view" id="protein">
-            <opencga-protein-view opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
-                                  opencga-client="{{opencgaClient}}"
-                                  project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
-                                  protein="{{protein}}" population-frequencies="{{config.populationFrequencies}}"
-                                  consequence-types="{{config.consequenceTypes}}"
-                                  protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-                                  config="{{config.tools.gene.protein}}">
-            </opencga-protein-view>
-        </div>
-    </template>-->
-    
-    
-    
-
-    ${this.config.enabledComponents.login ? html`
-        <div class="content" id="login" style="width: 20%; margin: auto; padding-top: 80px">
-            <opencga-login @login="${this.login}" .opencgaClient="${this.opencgaClient}" loginTitle="Sign in"
-                           @notifymessage="${this.onNotifyMessage}" notifyEventMessage="${this.config.notifyEventMessage}">
-            </opencga-login>
-        </div>
-    ` : null}
-    
-
-    <!-- TODO convert in lit-element
-
-    <template is="dom-if" if="{{config.enabledComponents.settings}}">
-        <div class="content" id="settings" style="width: 40%; margin: auto">
-            <br>
-            <iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig"
-                          default-config="{{defaultConfig}}">
-            </iva-settings>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.projects}}">
-        <div class="content" id="projects" style="width: 60%; margin: auto">
-            <opencga-projects opencga-client="{{opencgaClient}}" projects="{{opencgaSession.projects}}"
-                              study-summaries="{{studySummaries}}"
-                              on-project="updateProject" on-study="updateStudy">
-            </opencga-projects>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.project}}">
-        <div class="content" id="project">
-            <opencga-project opencga-client="{{opencgaClient}}" project="{{opencgaSession.project}}"
-                             study-summaries="{{studySummaries}}"
-                             on-study="updateStudy">
-            </opencga-project>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.sample}}">
-        <div class="content" id="sample" style="margin: auto; width: 90%">
-            <opencga-sample-view opencga-session="{{opencgaSession}}" sample-id="NA12877"
-                                 config="{{config.sampleView}}"></opencga-sample-view>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.files}}">
-        <div class="content" id="files">
-            <opencga-file-browser opencga-session="{{opencgaSession}}"
-                                  config="{{config.fileBrowser}}"></opencga-file-browser>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.samples}}">
-        <div class="content" id="samples">
-            <opencga-sample-browser opencga-session="{{opencgaSession}}"
-                                    config="{{config.sampleBrowser}}"></opencga-sample-browser>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.individuals}}">
-        <div class="content" id="individuals">
-            <opencga-individual-browser opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}"
-                                        config-values="[[config.tools.clinical]]"></opencga-individual-browser>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.families}}">
-        <div class="content" id="families">
-            <opencga-family-browser opencga-client="{{opencgaClient}}"
-                                    opencga-session="{{opencgaSession}}"></opencga-family-browser>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.cohorts}}">
-        <div class="content" id="cohorts">
-            <opencga-cohort-browser opencga-session="{{opencgaSession}}"
-                                    config="{{config.cohortBrowser}}"></opencga-cohort-browser>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysis}}">
-        <div class="content" id="clinicalAnalysis">
-            <opencga-clinical-analysis-browser opencga-session="{{opencgaSession}}"
-                                               config="{{config.clinicalAnalysisBrowser}}"
-                                               on-urlchange="onUrlChange"
-                                               query="{{query}}"></opencga-clinical-analysis-browser>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisPortal}}">
-        <div class="content" id="clinicalAnalysisPortal">
-            <opencga-clinical-portal opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
-                                     config="{{config.tools.clinicalPortal}}"></opencga-clinical-portal>
-        </div>
-    </template>
-
-    <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisCreator}}">
-        <div class="content" id="clinicalAnalysisCreator">
-            <opencga-clinical-analysis-creator opencga-session="{{opencgaSession}}"
-                                               config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-analysis-creator>
-        </div>
-    </template>
-    -->
-
-</div>
-</div
-`;
+							<a class="navbar-brand" href="#home" @click="${this.changeTool}">
+								<b>${this.config.title} ${this.config.version}</b>
+							</a>
+						</div>
+			
+			
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			
+							<!-- Controls aligned to the LEFT -->
+							<ul class="nav navbar-nav">
+								<!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
+								${this.config.menu.length && this.config.menu.map(item => html`
+									<!-- If there is not submenu we just display a button -->
+									${!item.submenu ? html`
+										<li @click="${this.changeTool}">
+											<a href="#${item.id}" role="button">${item.title}</a>
+										</li>` : html`
+										<!-- If there is a submenu we create a dropdown menu item -->
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+												${item.title} <span class="caret"></span>
+											</a>
+											<ul class="dropdown-menu">
+												${item.submenu.map(subitem =>
+													subitem.category ? html`<li><a><label>${subitem.title}</label></a></li>` :
+													subitem.separator ? html`<li role="separator" class="divider"></li>` : 
+													html`<li @click="${this.changeTool}"><a href="#${subitem.id}" data-id="${subitem.id}">${subitem.title}</a></li>`)} 
+											</ul>
+										</li>`
+									}`
+								)}
+							</ul>
+			
+							<!-- Controls aligned to the RIGHT: settings and about-->
+							<ul class="nav navbar-nav navbar-right">
+								<!--User-->
+								${this.opencgaSession.token ? html`
+									<li class="dropdown" id="nav-user">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+											<i class="fa fa-user" aria-hidden="true"></i>
+											${this.opencgaSession.user.id} <span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu">
+											<li>
+												<a href="#projects"><i class="fa fa-database" aria-hidden="true" style="padding-right: 10px"></i>Projects</a>
+											</li>
+											<li>
+												<a href="#samples"><i class="fa fa-users" aria-hidden="true" style="padding-right: 10px"></i>Samples</a>
+											</li>
+											<!--<li>
+												<a data-target="#jobModal" data-toggle="modal"><i class="fa fa-bars" aria-hidden="true"></i> Jobs</a>-->
+											</li> 
+											${this.config.settings.visible ? html`
+												<li role="separator" class="divider"></li>
+												<li>
+													<a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+												 </li>
+											` : null }
+										</ul>
+									</li>
+								` : null}
+			
+								<!--Studies dropdown and Search menu-->
+								${this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Studies <span class="caret"></span></a>
+										<ul class="dropdown-menu pre-scrollable">
+											${this.opencgaSession.projects.map(project => html`
+												<li><a><b>${project.name}</b></a></li>
+												${project.studies && project.studies.length && project.studies && project.studies.map(study => html`
+													<li>
+														<a href="#" data-study="${study.alias}" data-project="${project.name}" @click="${this.onStudySelect}">${study.alias}</a>
+													</li>
+												`)}                                            
+											`)}
+										</ul>
+									</li>
+									${this.config.search.visible ? html`
+										<form class="navbar-form navbar-left" role="search">
+											<div class="form-group">
+												<div class="input-group search-box-wrapper">
+													<input class="form-control" id="searchTextBox"  placeholder="${this.config.search.placeholder}" @change="${this.buildQuery}">
+													<span class="input-group-addon"><span class="fa fa-search" aria-hidden="true" @click="${this.onQuickSearch}"></span></span>
+												</div>
+											</div>
+										</form>
+									` : null}
+								` : null}
+			
+								<!-- Login/Logout button -->
+								${this.config.login.visible ? html`
+									<li>
+										${this.opencgaSession.token ? html`
+											<a id="logoutButton" role="button" @click="${this.logout}">
+												<i class="fa fa-sign-out-alt fa-lg"></i> Logout
+											</a>` : html`
+											<a href="#login" id="loginButton" role="button" @click="${this.changeTool}">
+												<i href="#login" class="fa fa-sign-in-alt fa-lg" aria-hidden="true"></i> Login
+											</a>
+										`}
+									</li>
+								` : null}
+			
+								<!-- About dropdown menu-->
+								${this.config.about.dropdown ? html`
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+											<i class="fas fa-bars"></i>
+										</a>
+										<ul class="dropdown-menu">
+											${this.config.about.links && this.config.about.links.map(link => html`
+											<li>
+																<a href="${link.url}" ><i class="${link.icon}" aria-hidden="true"></i>
+																	${link.name}
+																</a>
+															</li>
+														`)}
+													</ul>
+												</li>
+											` : this.config.about.links && this.config.about.links.map(link => html`
+												<li>
+													<a href="#${link.id}}" role="button" @click="${this.changeTool}">${link.name}</a>
+												</li>
+											`)}
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+			<!-- End of navigation bar -->
+			
+			<!--Breadcrumb-->
+			<div>
+				<ol hidden="${!this._isBreadcrumbVisible}" id="breadcrumb" class="breadcrumb"
+					style="margin-bottom: 1px;padding-left: 40px"></ol>
+			</div>
+			
+			<!-- This is where main application is rendered -->
+			<div>
+				${this.config.enabledComponents.home ? html`
+					<div class="content" id="home">
+						<welcome-web .opencgaSession="${this.opencgaSession}" version="${this.config.version}" .cellbaseClient=${this.cellbaseClient} @search="${this.quickSearch}"> </welcome-web>
+					</div>
+				` : null}
+			
+				${this.config.enabledComponents.about ? html`
+					<div class="content" id="about">
+						<about-web version="${this.config.version}"></about-web>
+					</div>
+				` : null}
+			
+				${this.config.enabledComponents.terms ? html`
+					<div class="content" id="terms">
+						<terms-web version="${this.config.version}"></terms-web>
+					</div>
+				` : null}
+			
+				${this.config.enabledComponents.contact ? html`
+					<div class="content" id="contact">
+						<contact-web version="${this.config.version}"></contact-web>
+					</div>
+				` : null}
+			
+				${this.config.enabledComponents.faq ? html`
+				<div class="content" id="faq">
+					<faq-web version="${this.config.version}"></faq-web>
+				</div>
+				` : null}
+			</div>
+			
+			<!-- This is where main IVA application is rendered -->
+			<div>
+				${this.config.enabledComponents.browser ? html`
+					<div class="content" id="browser">
+						<!--search="{{browserSearchQuery}}"-->
+						<opencga-variant-browser .opencgaSession="${this.opencgaSession}"
+												.cellbaseClient="${this.cellbaseClient}"
+												.reactomeClient="${this.reactomeClient}"
+												.query="${this.browserSearchQuery}"
+												?active="${this.config.tools.browser.active}"
+												.populationFrequencies="${this.config.populationFrequencies}"
+												.proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
+												.consequenceTypes="${this.config.consequenceTypes}"
+												@onGene="${this.geneSelected}"
+												@onSamplechange="${this.onSampleChange}"
+												.config="${this.config.tools.browser}"
+												style="font-size: 12px">
+						</opencga-variant-browser>
+					</div>` : null}
+				
+				
+				<!-- TODO convert in lit-element
+				
+				<template is="dom-if" if="{{config.enabledComponents.interpretation}}">
+					<div class="content" id="interpretation">
+						<opencga-variant-interpretation opencga-session="{{opencgaSession}}"
+														clinical-analysis-id="{{clinicalAnalysisId}}"
+														cellbase-client="{{cellbaseClient}}"
+														query="{{interpretationSearchQuery}}"
+														population-frequencies="{{config.populationFrequencies}}"
+														protein-substitution-scores="{{config.proteinSubstitutionScores}}"
+														consequence-types="{{config.consequenceTypes}}"
+														on-gene="geneSelected" on-samplechange="onSampleChange"
+														style="font-size: 12px" config="{{config.tools.interpretation}}">
+						</opencga-variant-interpretation>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.facet}}">
+					<div class="content" id="facet">
+						<opencga-variant-facet opencga-session="{{opencgaSession}}" config="[[config.tools.facet]]"
+											   opencga-client="{{opencgaSession.opencgaClient}}"
+											   cellbase-client="{{cellbaseClient}}"
+											   population-frequencies="{{config.populationFrequencies}}"
+											   protein-substitution-scores="{{config.proteinSubstitutionScores}}"
+											   consequence-types="{{config.consequenceTypes}}">
+						</opencga-variant-facet>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.clinical}}">
+					<div class="content" id="clinical">
+						<opencga-variant-clinical opencga-session="{{opencgaSession}}" config="[[config.tools.clinical]]"
+												  population-frequencies="{{config.populationFrequencies}}"
+												  protein-substitution-scores="{{config.proteinSubstitutionScores}}"
+												  consequence-types="{{config.consequenceTypes}}"
+												  opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
+												  on-notifymessage="onNotifyMessage"
+												  event-notify-name="{{config.notifyEventMessage}}">
+						</opencga-variant-clinical>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.panel}}">
+					<div class="content" id="panel">
+						<opencga-panel-browser opencga-session="{{opencgaSession}}" opencga-client="{{opencgaClient}}"
+											   cellbase-client="{{cellbaseClient}}"
+											   on-notifymessage="onNotifyMessage" event-notify-name="{{config.notifyEventMessage}}">
+						</opencga-panel-browser>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.beacon}}">
+					<div class="content" id="beacon">
+						<variant-beacon opencga-session="{{opencgaSession}}"
+										hosts="{{config.tools.beacon.hosts}}">
+						</variant-beacon>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.genomeBrowser}}">
+					<div class="content" id="genomeBrowser">
+						<opencga-genome-browser opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
+												opencga-client="{{opencgaClient}}">
+						</opencga-genome-browser>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.gene}}">
+					<div class="content" id="gene" style="margin: auto; width: 90%">
+						<opencga-gene-view opencga-session="{{opencgaSession}}"
+										   cellbase-client="{{cellbaseClient}}"
+										   project="{{opencgaSession.project}}"
+										   gene="{{gene}}"
+										   population-frequencies="{{config.populationFrequencies}}"
+										   consequence-types="{{config.consequenceTypes}}"
+										   protein-substitution-scores="{{config.proteinSubstitutionScores}}"
+										   config="{{config.tools.gene}}" summary="{{config.opencga.summary}}">
+						</opencga-gene-view>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.transcript}}">
+					<div class="content feature-view" id="transcript">
+						<opencga-transcript-view cellbase-client="{{cellbaseClient}}" opencga-client="{{opencgaClient}}"
+												 project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
+												 transcript="{{transcript}}" gene="{{gene}}"
+												 population-frequencies="{{config.populationFrequencies}}"
+												 consequence-types="{{config.consequenceTypes}}"
+												 protein-substitution-scores="{{config.proteinSubstitutionScores}}"
+												 config="{{config.tools.gene}}">
+						</opencga-transcript-view>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.protein}}">
+					<div class="content feature-view" id="protein">
+						<opencga-protein-view opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
+											  opencga-client="{{opencgaClient}}"
+											  project="{{opencgaSession.project}}" study="{{opencgaSession.study}}"
+											  protein="{{protein}}" population-frequencies="{{config.populationFrequencies}}"
+											  consequence-types="{{config.consequenceTypes}}"
+											  protein-substitution-scores="{{config.proteinSubstitutionScores}}"
+											  config="{{config.tools.gene.protein}}">
+						</opencga-protein-view>
+					</div>
+				</template>-->
+				
+				
+				
+			
+				${this.config.enabledComponents.login ? html`
+					<div class="content" id="login" style="width: 20%; margin: auto; padding-top: 80px">
+						<opencga-login @login="${this.login}" .opencgaClient="${this.opencgaClient}" loginTitle="Sign in"
+									   @notifymessage="${this.onNotifyMessage}" notifyEventMessage="${this.config.notifyEventMessage}">
+						</opencga-login>
+					</div>
+				` : null}
+				
+			
+				<!-- TODO convert in lit-element
+			
+				<template is="dom-if" if="{{config.enabledComponents.settings}}">
+					<div class="content" id="settings" style="width: 40%; margin: auto">
+						<br>
+						<iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig"
+									  default-config="{{defaultConfig}}">
+						</iva-settings>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.projects}}">
+					<div class="content" id="projects" style="width: 60%; margin: auto">
+						<opencga-projects opencga-client="{{opencgaClient}}" projects="{{opencgaSession.projects}}"
+										  study-summaries="{{studySummaries}}"
+										  on-project="updateProject" on-study="updateStudy">
+						</opencga-projects>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.project}}">
+					<div class="content" id="project">
+						<opencga-project opencga-client="{{opencgaClient}}" project="{{opencgaSession.project}}"
+										 study-summaries="{{studySummaries}}"
+										 on-study="updateStudy">
+						</opencga-project>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.sample}}">
+					<div class="content" id="sample" style="margin: auto; width: 90%">
+						<opencga-sample-view opencga-session="{{opencgaSession}}" sample-id="NA12877"
+											 config="{{config.sampleView}}"></opencga-sample-view>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.files}}">
+					<div class="content" id="files">
+						<opencga-file-browser opencga-session="{{opencgaSession}}"
+											  config="{{config.fileBrowser}}"></opencga-file-browser>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.samples}}">
+					<div class="content" id="samples">
+						<opencga-sample-browser opencga-session="{{opencgaSession}}"
+												config="{{config.sampleBrowser}}"></opencga-sample-browser>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.individuals}}">
+					<div class="content" id="individuals">
+						<opencga-individual-browser opencga-client="{{opencgaClient}}" opencga-session="{{opencgaSession}}"
+													config-values="[[config.tools.clinical]]"></opencga-individual-browser>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.families}}">
+					<div class="content" id="families">
+						<opencga-family-browser opencga-client="{{opencgaClient}}"
+												opencga-session="{{opencgaSession}}"></opencga-family-browser>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.cohorts}}">
+					<div class="content" id="cohorts">
+						<opencga-cohort-browser opencga-session="{{opencgaSession}}"
+												config="{{config.cohortBrowser}}"></opencga-cohort-browser>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.clinicalAnalysis}}">
+					<div class="content" id="clinicalAnalysis">
+						<opencga-clinical-analysis-browser opencga-session="{{opencgaSession}}"
+														   config="{{config.clinicalAnalysisBrowser}}"
+														   on-urlchange="onUrlChange"
+														   query="{{query}}"></opencga-clinical-analysis-browser>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisPortal}}">
+					<div class="content" id="clinicalAnalysisPortal">
+						<opencga-clinical-portal opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
+												 config="{{config.tools.clinicalPortal}}"></opencga-clinical-portal>
+					</div>
+				</template>
+			
+				<template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisCreator}}">
+					<div class="content" id="clinicalAnalysisCreator">
+						<opencga-clinical-analysis-creator opencga-session="{{opencgaSession}}"
+														   config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-analysis-creator>
+					</div>
+				</template>
+				-->
+			
+			</div>`;
 	}
 }
 
-customElements.define("iva-app", IvaApp)
+customElements.define("iva-app", IvaApp);
