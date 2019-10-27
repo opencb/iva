@@ -17,7 +17,7 @@
     "build-iva-app": "./post-replace-iva.js",
     "build": "npm run clean && npm run copy && npm run copy-jsorolla && npm run vulcanize && npm run build-iva-app",
     "test-e2e": "./node_modules/.bin/nightwatch",
-    "serve": "browser-sync start --server --files 'src' 'lib/jsorolla/src' 'lib/jsorolla/styles'",
+    "serve": "browser-sync start --config bs-config.js",
     "prepare": "pika-web"
   },
   "dependencies": {
@@ -54,10 +54,9 @@
     "bower": "*",
     "browser-sync": "^2.26.7",
     "crisper": "~2.1.1",
-    "eslint": "~4.11.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0",
+    "eslint": "^6.5.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-config-google": "^0.14.0",
     "js-beautify": "~1.6.4",
     "nightwatch": "^0.9.16",
     "selenium-download": "^2.0.10",
