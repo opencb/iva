@@ -135,7 +135,7 @@ const switchWidget = `
       position: relative;
       height: 30px;
       width: 60px;
-      background: #bbbbbb;
+      background: #347ab7;
       border-radius: 50px;
       transition: all 500ms;
     }
@@ -147,7 +147,7 @@ const switchWidget = `
         background-color: white;
         left: 62px;
         border-radius: 50%;
-        transition: all 500ms;
+        transition: all 300ms;
         z-index: 4;
     }
     

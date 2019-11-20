@@ -26,6 +26,15 @@ import {OpencgaLogin,
 	OpencgaVariantBrowser
 } from "../lib/jsorolla/components.js";
 
+import "./../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-interpretation.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-facet.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-portal.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-beacon.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-browser.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-projects.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-browser.js";
+
+
 class IvaApp extends LitElement {
 
 	constructor() {
@@ -512,7 +521,7 @@ class IvaApp extends LitElement {
 
 			switch (hashTool) {
 			case "#browser":
-				this.browserSearchQuery = Object.assign({}, this.browserSearchQuery); //TODO WTF?
+				this.browserSearchQuery = Object.assign({}, this.browserSearchQuery);
 				break;
 			case "#protein":
 				break;
@@ -597,14 +606,14 @@ class IvaApp extends LitElement {
 
 	onStudySelect(e) {
 		e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
-
+		let [_studyname, _projectname] = [e.target.getAttribute("data-study"), e.target.getAttribute("data-project")]
 		let _project, _study;
 		for (let i = 0; i < this.opencgaSession.projects.length; i++) {
-			if (this.opencgaSession.projects[i].name === e.target.dataProject) {
+			if (this.opencgaSession.projects[i].name === _projectname) {
 				_project = this.opencgaSession.projects[i];
 				for (let j = 0; j < this.opencgaSession.projects[i].studies.length; j++) {
-					if (this.opencgaSession.projects[i].studies[j].name === e.target.innerHTML
-						|| this.opencgaSession.projects[i].studies[j].alias === e.target.innerHTML) {
+					if (this.opencgaSession.projects[i].studies[j].name === _studyname
+						|| this.opencgaSession.projects[i].studies[j].alias === _studyname) {
 						_study = this.opencgaSession.projects[i].studies[j];
 						break;
 					}
@@ -1074,7 +1083,7 @@ class IvaApp extends LitElement {
 												.cellbaseClient="${this.cellbaseClient}"
 												.reactomeClient="${this.reactomeClient}"
 												.query="${this.browserSearchQuery}"
-												?active="${this.config.tools.browser.active}"
+												.active="${this.config.tools.browser.active}"
 												.populationFrequencies="${this.config.populationFrequencies}"
 												.proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
 												.consequenceTypes="${this.config.consequenceTypes}"
@@ -1083,38 +1092,87 @@ class IvaApp extends LitElement {
 												.config="${this.config.tools.browser}"
 												style="font-size: 12px">
 						</opencga-variant-browser>
-					</div>` : null}
+					</div>
+				` : null}
 				
 				
-				<!-- TODO convert in lit-element
+				${this.config.enabledComponents.facet ? html`
+					<div class="content" id="facet">
+						<opencga-variant-facet  .opencgaSession="${this.opencgaSession}"
+											    .opencgaClient="${this.opencgaSession.opencgaClient}"
+												.config="${this.config.tools.facet}"
+											    .cellbaseClient="${this.cellbaseClient}"
+											    .populationFrequencies="${this.config.populationFrequencies}"
+											    .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
+											   	.consequenceTypes="${this.config.consequenceTypes}">
+						</opencga-variant-facet>
+					</div>				
+				` : null}
+
+				${this.config.enabledComponents.clinicalAnalysisPortal ? html`
+					<div class="content" id="clinicalAnalysisPortal">
+						<opencga-clinical-portal .opencgaSession="${this.opencgaSession}"
+												.config="${this.config.tools.clinicalPortal}"
+											    .cellbaseClient="${this.cellbaseClient}">
+						</opencga-clinical-portal>
+					</div>
+				` : null}
 				
-				<template is="dom-if" if="{{config.enabledComponents.interpretation}}">
+				
+				${this.config.enabledComponents.interpretation ? html`
 					<div class="content" id="interpretation">
-						<opencga-variant-interpretation opencga-session="{{opencgaSession}}"
-														clinical-analysis-id="{{clinicalAnalysisId}}"
-														cellbase-client="{{cellbaseClient}}"
-														query="{{interpretationSearchQuery}}"
-														population-frequencies="{{config.populationFrequencies}}"
-														protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-														consequence-types="{{config.consequenceTypes}}"
-														on-gene="geneSelected" on-samplechange="onSampleChange"
-														style="font-size: 12px" config="{{config.tools.interpretation}}">
+						<opencga-variant-interpretation .opencgaSession="${this.opencgaSession}"
+														.cellbaseClient="${this.cellbaseClient}"
+														.clinicalAnalysisId="${this.clinicalAnalysisId}"
+														.query="${this.interpretationSearchQuery}"
+														.populationFrequencies="${this.config.populationFrequencies}"
+														.proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
+														.consequenceTypes="${this.config.consequenceTypes}"
+														@gene="${this.geneSelected}"
+														@samplechange="${this.onSampleChange}"
+														style="font-size: 12px"
+														.config="${this.config.tools.interpretation}">
 						</opencga-variant-interpretation>
 					</div>
-				</template>
-			
-				<template is="dom-if" if="{{config.enabledComponents.facet}}">
-					<div class="content" id="facet">
-						<opencga-variant-facet opencga-session="{{opencgaSession}}" config="[[config.tools.facet]]"
-											   opencga-client="{{opencgaSession.opencgaClient}}"
-											   cellbase-client="{{cellbaseClient}}"
-											   population-frequencies="{{config.populationFrequencies}}"
-											   protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-											   consequence-types="{{config.consequenceTypes}}">
-						</opencga-variant-facet>
+				` : null }
+				
+				${this.config.enabledComponents.beacon ? html`
+					<div class="content" id="beacon">
+						<variant-beacon .opencgaSession="${this.opencgaSession}"
+										.hosts="${this.config.tools.beacon.hosts}">
+						</variant-beacon>
 					</div>
-				</template>
-			
+				` : null }
+					
+				${this.config.enabledComponents.genomeBrowser ? html`
+					<div class="content" id="genomeBrowser">
+						<opencga-genome-browser .opencgaSession="${this.opencgaSession}"
+												.cellbaseClient="${this.cellbaseClient}"
+												.opencgaClient="${this.opencgaClient}">
+						</opencga-genome-browser>
+					</div>
+				` : null } 
+				
+				${this.config.enabledComponents.projects ? html`
+					<div class="content" id="projects" style="width: 60%; margin: auto">
+						<opencga-projects  .opencgaClient="${this.opencgaClient}"
+										   .projects="${this.opencgaSession.projects}"
+										   .studySummaries="${this.studySummaries}"
+										   @project="${this.updateProject}"
+										   @study="${this.updateStudy}">
+						</opencga-projects>
+					</div>
+				` : null }
+				
+				${this.config.enabledComponents.samples ? html`
+					<div class="content" id="samples">
+						<opencga-sample-browser .opencgaSession="${this.opencgaSession}"
+												.config="${this.config.sampleBrowser}">
+						</opencga-sample-browser>
+					</div>
+				` : null }
+				
+			<!-- TODO convert in lit-element
 				<template is="dom-if" if="{{config.enabledComponents.clinical}}">
 					<div class="content" id="clinical">
 						<opencga-variant-clinical opencga-session="{{opencgaSession}}" config="[[config.tools.clinical]]"
@@ -1136,23 +1194,7 @@ class IvaApp extends LitElement {
 						</opencga-panel-browser>
 					</div>
 				</template>
-			
-				<template is="dom-if" if="{{config.enabledComponents.beacon}}">
-					<div class="content" id="beacon">
-						<variant-beacon opencga-session="{{opencgaSession}}"
-										hosts="{{config.tools.beacon.hosts}}">
-						</variant-beacon>
-					</div>
-				</template>
-			
-				<template is="dom-if" if="{{config.enabledComponents.genomeBrowser}}">
-					<div class="content" id="genomeBrowser">
-						<opencga-genome-browser opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
-												opencga-client="{{opencgaClient}}">
-						</opencga-genome-browser>
-					</div>
-				</template>
-			
+		
 				<template is="dom-if" if="{{config.enabledComponents.gene}}">
 					<div class="content" id="gene" style="margin: auto; width: 90%">
 						<opencga-gene-view opencga-session="{{opencgaSession}}"
@@ -1204,7 +1246,7 @@ class IvaApp extends LitElement {
 					</div>
 				` : null}
 				
-			
+				
 				<!-- TODO convert in lit-element
 			
 				<template is="dom-if" if="{{config.enabledComponents.settings}}">
@@ -1213,15 +1255,6 @@ class IvaApp extends LitElement {
 						<iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig"
 									  default-config="{{defaultConfig}}">
 						</iva-settings>
-					</div>
-				</template>
-			
-				<template is="dom-if" if="{{config.enabledComponents.projects}}">
-					<div class="content" id="projects" style="width: 60%; margin: auto">
-						<opencga-projects opencga-client="{{opencgaClient}}" projects="{{opencgaSession.projects}}"
-										  study-summaries="{{studySummaries}}"
-										  on-project="updateProject" on-study="updateStudy">
-						</opencga-projects>
 					</div>
 				</template>
 			
@@ -1247,13 +1280,7 @@ class IvaApp extends LitElement {
 											  config="{{config.fileBrowser}}"></opencga-file-browser>
 					</div>
 				</template>
-			
-				<template is="dom-if" if="{{config.enabledComponents.samples}}">
-					<div class="content" id="samples">
-						<opencga-sample-browser opencga-session="{{opencgaSession}}"
-												config="{{config.sampleBrowser}}"></opencga-sample-browser>
-					</div>
-				</template>
+		
 			
 				<template is="dom-if" if="{{config.enabledComponents.individuals}}">
 					<div class="content" id="individuals">
@@ -1285,12 +1312,7 @@ class IvaApp extends LitElement {
 					</div>
 				</template>
 			
-				<template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisPortal}}">
-					<div class="content" id="clinicalAnalysisPortal">
-						<opencga-clinical-portal opencga-session="{{opencgaSession}}" cellbase-client="{{cellbaseClient}}"
-												 config="{{config.tools.clinicalPortal}}"></opencga-clinical-portal>
-					</div>
-				</template>
+				
 			
 				<template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisCreator}}">
 					<div class="content" id="clinicalAnalysisCreator">
