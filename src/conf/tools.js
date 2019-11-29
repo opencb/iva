@@ -170,7 +170,7 @@ const filterMenu = {
             subsections: [
                 {
                     id: "go",
-                    title: "GO Accessions",
+                    title: "GO Accessions (max. 100 terms)",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]

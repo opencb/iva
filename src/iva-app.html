@@ -25,6 +25,7 @@
 <link rel="import" href="terms.html">
 <link rel="import" href="contact.html">
 <link rel="import" href="faq.html">
+<link rel="import" href="getting-started.html">
 
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.html">
 <link rel="import" href="../lib/jsorolla/src/core/webcomponents/opencga/opencga-transcript-view.html">
@@ -273,7 +274,9 @@
                             <welcome-web opencga-session="{{opencgaSession}}"
                                          version="{{config.version}}"
                                          cellbase-client={{cellbaseClient}}
-                                         on-search="quickSearch">
+                                         config="{{config}}"
+                                         on-search="quickSearch"
+                                         on-changetool="changeTool">
                             </welcome-web>
                         </div>
 
@@ -301,6 +304,12 @@
                 <template is="dom-if" if="{{config.enabledComponents.faq}}">
                     <div class="content" id="faq">
                         <faq-web version="{{config.version}}"></faq-web>
+                    </div>
+                </template>
+
+                <template is="dom-if" if="{{config.enabledComponents.gettingstarted}}">
+                    <div class="content" id="gettingstarted">
+                        <getting-started-web config="{{config}}" opencga-session="{{opencgaSession}}"></getting-started-web>
                     </div>
                 </template>
             </div>
@@ -584,6 +593,7 @@
                 _config.enabledComponents.contact = false;
                 _config.enabledComponents.terms = false;
                 _config.enabledComponents.faq = false;
+                _config.enabledComponents.gettingstarted = false; // TODO not present in config
 
                 // Enable tools reading the configuration
                 for (let tool in _config.tools) {
@@ -869,6 +879,7 @@
             }
 
             changeTool(e) {
+                console.log(e.target)
                 if (UtilsNew.isNotUndefined(e)) {
                     e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
                 }
