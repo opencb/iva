@@ -35,8 +35,8 @@ const cohortFileMenu = {
                 {id: "ALL", name: "ALL"}
             ]
         },
-        tooltip: "Filter variants by cohort Alternate allele frequency"
-    }
+    },
+    tooltip: "Filter variants by cohort Alternate allele frequency"
 };
 
 const filterMenu = {
@@ -170,7 +170,7 @@ const filterMenu = {
             subsections: [
                 {
                     id: "go",
-                    title: "GO Accessions",
+                    title: "GO Accessions (max. 100 terms)",
                     tooltip: "Filter out variants falling outside the genomic features (gene, transcript, SNP, etc.) defined"
                 }
             ]
