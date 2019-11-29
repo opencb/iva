@@ -76,7 +76,7 @@
                                 <img class="img-responsive" src$="img/tools/thumbnails/{{tool.thumbnail}}" on-click="openModal">
                             </div>
                             <div class="col-xs-6 col-md-7 _col-md-pull-5">
-                                <h2><a href$="#{{tool.id}}"> {{tool.title}}</a></h2>
+                                <h2><a href$="#{{tool.id}}/{{opencgaSession.project.id}}/{{opencgaSession.study.id}}">{{tool.title}}</a></h2>
                                 <div id$="{{tool.id}}_description"></div>
                             </div>
                         </div>
