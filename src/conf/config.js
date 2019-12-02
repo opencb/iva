@@ -291,6 +291,7 @@ const application = {
         links: [
             {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-github"},
             {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva", icon: "fa fa-book"},
+            {id: "gettingstarted", name: "Getting Started", url: "#gettingstarted", icon: "fa fa-question"},
             {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: ""},
             {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: ""},
             {id: "about", name: "About", url: "http://docs.opencb.org/display/iva/About", icon: "fa fa-envelope"},
