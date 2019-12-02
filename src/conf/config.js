@@ -323,6 +323,7 @@ const application = {
         links: [
             {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva/Welcome+to+IVA", icon: "fa fa-book"},
             {id: "tutorial", name: "Tutorial", url: "https://re-confluence.gel.zone/pages/viewpage.action?pageId=10520553", icon: "fas fa-chalkboard-teacher"},
+            {id: "gettingstarted", name: "Getting Started", url: "#gettingstarted", icon: "fa fa-question"}
         ]
     },
     login: {
