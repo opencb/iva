@@ -26,6 +26,12 @@
                 color: #797979;
             }
 
+            .welcome-center > p,
+            .welcome-center > ul {
+                font-size: .8em;
+                line-height: 1.4em;
+            }
+
             .hi-icon-wrap {
                 text-align: center;
                 margin: 0 auto;
@@ -48,6 +54,7 @@
                 text-decoration: none;
                 color: #000966;
             }
+
             .hi-icon a:hover p {
                 text-decoration: none;
             }
@@ -109,7 +116,7 @@
                 transition: transform 0.2s, all 0.2s;
             }
 
-            .hi-icon-animation .hi-icon svg image{
+            .hi-icon-animation .hi-icon svg image {
                 height: 90px;
                 width: 90px;
             }
@@ -136,10 +143,12 @@
                 transform: scale(0.85);
                 opacity: 0.5;
             }
+
             /* in case of svg icon*/
             .hi-icon-animation .icon-wrapper:hover .hi-icon svg {
                 transform: scale(0.85);
             }
+
             /* in case of fa icon*/
             .hi-icon-animation .icon-wrapper:hover .hi-icon.fa {
                 transform: scale(0.85);
@@ -159,101 +168,133 @@
             }
 
             .getting-started {
-                display: block;
-                color: #797979;
-                font-size: 1.2em;
-                padding: 0 0 40px 0;
+                display: inline-block;
+                border: 4px #000966 solid;
+                background: white;
+                position: relative;
+                padding: 10px 35px;
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+                border-radius: 30px;
             }
 
-            .getting-started:hover{
+            .getting-started:hover {
                 text-decoration: none;
             }
 
             .getting-started span {
-                background: white;
-                position: relative;
-                padding: 0 20px;
+                color: #000966;
+                font-size: .8em;
                 display: inline-block;
                 -webkit-transition: all 0.3s;
                 -moz-transition: all 0.3s;
                 transition: all 0.3s;
             }
 
-            .getting-started::before {
-                content: "";
-                display: inline-block;
-                width: 100%;
-                height: 5px;
-                background: #000966;
-                position: relative;
-                top:25px;
-                -webkit-transition: all 0.3s;
-                -moz-transition: all 0.3s;
-                transition: all 0.3s;
-                -webkit-transform: scale(1);
-                -moz-transform: scale(1);
-                -ms-transform: scale(1);
-                transform: scale(1);
-            }
-            .getting-started:hover span{
+            .getting-started:hover {
                 -webkit-transform: scale(1.2);
                 -moz-transform: scale(1.2);
                 -ms-transform: scale(1.2);
                 transform: scale(1.2);
-            }
-
-            .getting-started:hover::before {
+                border: 4px #fff solid;
                 background: #000966;
-                -webkit-transform: scale(0.85);
-                -moz-transform: scale(0.85);
-                -ms-transform: scale(0.85);
-                transform: scale(0.85);
             }
 
+            .getting-started:hover span {
+                -webkit-transform: scale(.8);
+                -moz-transform: scale(.8);
+                -ms-transform: scale(.8);
+                transform: scale(.8);
+                color: #fff
+            }
 
+            #title {
+                font-size: 10em;
+                text-align: center;
+                font-weight: bold;
+                letter-spacing: -20px;
+                position: relative;
+            }
+
+            #title::first-letter {
+                letter-spacing: -5px;
+            }
+
+            #title span.subtitle {
+                font-size: 25px;
+                margin-top: -30px;
+                display: block;
+                letter-spacing: 0;
+            }
+
+            #title .version {
+                font-size: 15px;
+                display: inline-block;
+                vertical-align: top;
+                letter-spacing: 0px;
+                margin: 35px 0 0 0;
+                position: absolute;
+            }
+
+            #title .bracket {
+                font-size: 1.5em;
+                color: black;
+            }
+
+            .footer {
+                margin-bottom: 80px;
+            }
         </style>
 
         <!-- This is where main application is rendered -->
         <div class="welcome-center">
-            <!--<span style="font-size: 50px">IVA {{version}}</span>-->
+            <h1 id="title">IVA
+                <p class="version">
+                    <span class="bracket">(</span>Pre-Release<span class="bracket">)</span>
+                </p>
+                <span class="subtitle">Interactive Variant Analysis</span>
+            </h1>
 
-            <h1>Interactive Variant Analysis (IVA) Pre-Release</h1>
-
-            <div style="padding: 10px">
+            <p>
                 Please be aware that this is a pre-release version of IVA.
-            </div>
+            </p>
 
-            <div style="padding: 10px">
-                The Interactive Variant Analysis (IVA) web-based tool and OpenCGA server enable whole genome variant browsing and analysis of the Genomics England dataset. IVA and OpenCGA have been developed as part of the <a href="https://github.com/opencb" target="_blank">OpenCB</a> project.
-            </div>
+            <p>
+                The Interactive Variant Analysis (IVA) web-based tool and OpenCGA server enable whole genome variant
+                browsing and analysis of the Genomics England dataset. IVA and OpenCGA have been developed as part of
+                the <a href="https://github.com/opencb" target="_blank">OpenCB</a> project.
+            </p>
 
-            <div style="padding: 10px">
-                This interactive tool provides the functionality to query genetic variants across the cohort and allows you to find genes affected by deleterious variants that segregate along family pedigrees, case-control, or sporadic samples. You can query variants using various filters such as: population frequency, consequence type, mode of inheritance or phenotype associations.
-            </div>
+            <p>
+                This interactive tool provides the functionality to query genetic variants across the cohort and allows
+                you to find genes affected by deleterious variants that segregate along family pedigrees, case-control,
+                or sporadic samples. You can query variants using various filters such as: population frequency,
+                consequence type, mode of inheritance or phenotype associations.
+            </p>
 
-            <div style="padding: 10px">
-                The OpenCGA database currently holds all interpreted genomes that are available from the 100,000 Genomes Project from Genomics England. These are divided into the following studies: GRCh37 rare disease (RD37), GRCh38 rare disease (RD38), cancer germline GRCh38 (CG38), and cancer somatic GRCh38 (CS38).
-            </div>
+            <p>
+                The OpenCGA database currently holds all interpreted genomes that are available from the 100,000 Genomes
+                Project from Genomics England. These are divided into the following studies: GRCh37 rare disease (RD37),
+                GRCh38 rare disease (RD38), cancer germline GRCh38 (CG38), and cancer somatic GRCh38 (CS38).
+            </p>
 
-            <div style="padding: 10px">
+            <p>
                 We are very keen to get user's feedback on IVA including:
-                <ul>
-                    <li>how IVA facilitates your research</li>
-                    <li>how excited you are about the additional functionality IVA brings</li>
-                    <li>additional functions or changes to IVA you would like us to consider</li>
-                    <li>any bugs or issues encountered when using IVA</li>
-                    <li>whether you think IVA will expand the utility of the research environment to a new user base</li>
-                </ul>
-            </div>
-
-            <div style="padding: 10px">
-                Please send your feedback to <a href="mailto:gecip-help@genomicsengland.co.uk">gecip-help@genomicsengland.co.uk</a> with 'IVA feedback' as the subject.
-            </div>
+            </p>
+            <ul>
+                <li>how IVA facilitates your research</li>
+                <li>how excited you are about the additional functionality IVA brings</li>
+                <li>additional functions or changes to IVA you would like us to consider</li>
+                <li>any bugs or issues encountered when using IVA</li>
+                <li>whether you think IVA will expand the utility of the research environment to a new user base</li>
+            </ul>
 
             <template is="dom-if" if="{{checkProjects}}">
                 <div style="padding: 20px 10px">
                     <h3>Quick Search</h3>
-                    <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist" on-keyup="callAutocomplete"
+                    <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist"
+                           on-keyup="callAutocomplete"
                            placeholder="Search for gene symbols, genomic regions or variants" value="">
                     <datalist id="FeatureDatalist"></datalist>
                     <!-- Examples -->
@@ -271,15 +312,24 @@
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
                 <template is="dom-repeat" items={{components}} as="tool">
                     <div class="col-md-3 col-sm-6">
-                        <a class="icon-wrapper" href$="#{{tool.id}}/{{opencgaSession.project.id}}/{{opencgaSession.study.id}}" on-click="changeTool">
-                            <div class$="hi-icon {{tool.fa_icon}}">
-                               <!-- <svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                    <image xlink:href$="img/tools/icons/{{tool.icon}}" />
-                                </svg>-->
-                            </div>
-                            <p>{{tool.title}}</p>
-                            <span class="smaller"></span>
-                        </a>
+                        <template is="dom-if" if="{{checkProjects}}">
+                            <a class="icon-wrapper"
+                               href$="#{{tool.id}}/{{opencgaSession.project.id}}/{{opencgaSession.study.id}}">
+                                <div class$="hi-icon {{tool.fa_icon}}">>
+                                </div>
+                                <p>{{tool.title}}</p>
+                                <span class="smaller"></span>
+                            </a>
+                        </template>
+                        <template is="dom-if" if="{{!checkProjects}}">
+                            <a class="icon-wrapper" href$="#{{tool.id}}">
+                                <div class$="hi-icon {{tool.fa_icon}}">
+                                </div>
+                                <p>{{tool.title}}</p>
+                                <span class="smaller"></span>
+                            </a>
+                        </template>
+
                     </div>
                 </template>
             </div>
@@ -288,6 +338,11 @@
                 <a class="getting-started" href="#gettingstarted"><span>Getting started with IVA</span></a>
             </div>
 
+            <div class="footer">
+                <hr >
+                Please send your feedback to <a href="mailto:gecip-help@genomicsengland.co.uk">gecip-help@genomicsengland.co.uk</a>
+                with 'IVA feedback' as the subject.
+            </div>
             <!--<h4>Note:</h4>
             <p style="font-size:14px">
                 IVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies
@@ -350,7 +405,7 @@
             connectedCallback() {
                 super.connectedCallback();
                 //TODO fix it ignores visibility
-                this.components = this.config.components.slice(0,4);
+                this.components = this.config.components.slice(0, 4);
             }
 
             opencgaSessionObserver() {
@@ -439,11 +494,11 @@
 
             isVisible(item) {
                 switch (item.visibility) {
-                case 'public':
+                case "public":
                     return true;
-                case 'private':
+                case "private":
                     return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
-                case 'none':
+                case "none":
                 default:
                     return false;
                 }
