@@ -1,6 +1,6 @@
 {
   "name": "iva",
-  "version": "1.0.3-dev",
+  "version": "1.0.4-dev",
   "description": "IVA description",
   "repository": {
     "type": "git",
@@ -16,7 +16,8 @@
     "vulcanize": "node_modules/vulcanize/bin/vulcanize build/iva-app.html > build/iva-app-vulcanize.html && mv build/iva-app-vulcanize.html build/iva-app.html",
     "build-iva-app": "./post-replace-iva.js",
     "build": "npm run clean && npm run copy && npm run copy-jsorolla && npm run vulcanize && npm run build-iva-app",
-    "test-e2e": "./node_modules/.bin/nightwatch"
+    "test-e2e": "./node_modules/.bin/nightwatch",
+    "serve": "browser-sync start --server --files 'src' 'lib/jsorolla/src' 'lib/jsorolla/styles'"
   },
   "dependencies": {
     "@polymer/polymer": "2.6.1",

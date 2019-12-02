@@ -340,7 +340,94 @@ const application = {
         minRemainingTime: 60000,
         // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
         maxRemainingTime: 600000
-    }
+    },
+    //Components in the getting_started page
+    //NOTE the first 4 tools are going to be shown in the landing page as well
+    components: [
+        {
+            id: "browser",
+            title: "Variant Browser",
+            visibility: "public",
+            thumbnail: "screenshot1.png",
+            fa_icon: "fa fa-list",
+            icon: "variant_browser.svg",
+            description:`
+                <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                <ul>
+                    <li>Rich annotation and links to leading reference databases</li>
+                    <li>Filter by gene, consequence, frequency and much more</li>
+                </ul>`,
+        },
+        {
+            id: "facet",
+            title: "Aggregation Stats",
+            visibility: "public",
+            thumbnail: "screenshot2.png",
+            fa_icon: "fa fa-chart-bar",
+            icon: "aggregation2.svg",
+            description:`
+                    <ul>
+                        <li>Filter by gene, consequence, frequency and much more</li>
+                        <li>Add nested facets to generate aggregate statistics</li>
+                    </ul>
+                </p>`,
+        },
+        {
+            id:"clinicalAnalysisPortal",
+            title:"Interpretation portal",
+            visibility: "public",
+            thumbnail:"screenshot3.png",
+            fa_icon:"fa fa-user-md",
+            icon:"interpretation_portal.svg",
+            description:`
+                <ul>
+                    <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
+                    <li>Filter by gene, consequence, frequency and much more</li>
+                </ul>                
+            `,
+        },
+        {
+            id:"beacon",
+            title:"GA4GH Beacon",
+            visibility: "public",
+            thumbnail:"screenshot3.png",
+            fa_icon:"fa fa-globe-europe",
+            icon:"variant_browser.svg",
+            description:`
+                <ul>
+                    <li>Federated search from the Global Alliance for Genomics and Health</li>
+                    <li>Find databases that have information about specific variants</li>
+                </ul>`,
+        },
+       /* {
+            id:"genomeBrowser",
+            title:"Genome Browser",
+            visibility: "none",
+            thumbnail:"screenshot3.png",
+            fa_icon:"fa fa-globe-europe",
+            icon:"genome_browser.svg",
+            description:`
+                <ul>
+                    <li>Based on Genome Maps (http://genomemaps.org)</li>
+                    <li>Smooth, interactive variant visualisation</li>
+                </ul>`,
+        },*/
+        /*{
+            id:"###",
+            title:"Catalog Metadata",
+            visibility: "none",
+            thumbnail:"screenshot3.png",
+            fa_icon:"fa fa-globe-europe",
+            icon:"genome_browser.svg",
+            description:`
+                <ul>
+                    <li>Browse, aggregate and compare clinical metadata</li>
+                    <li>Browse by sample, individual, family or cohort</li>
+                </ul>`,
+        }*/
+
+    ]
+
 };
 
 const sampleBrowser = {
