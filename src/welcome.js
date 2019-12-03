@@ -20,6 +20,7 @@ export default class WelcomeWeb extends LitElement {
     constructor() {
         super();
         this.checkProjects = false;
+        this.components = [];
     }
 
     static get properties() {
@@ -35,12 +36,19 @@ export default class WelcomeWeb extends LitElement {
             },
             checkProjects: {
                 type: Boolean
+            },
+            config: {
+                type: Object
             }
         };
     }
 
     createRenderRoot() {
         return this;
+    }
+
+    firstUpdated(_changedProperties) {
+        console.log("this.config.components",this.config.components)
     }
 
     updated(changedProperties) {
@@ -50,7 +58,10 @@ export default class WelcomeWeb extends LitElement {
     }
 
     opencgaSessionObserver() {
+        console.log("opencgaSessionObserver")
+
         this.checkProjects = !!(UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project));
+        this.components = this.config.components.filter(this.isVisible).slice(0, 4);
     }
 
     onExampleClick(e) {
@@ -121,6 +132,18 @@ export default class WelcomeWeb extends LitElement {
         }
     }
 
+    isVisible(item) {
+        switch (item.visibility) {
+        case "public":
+            return true;
+        case "private":
+            return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
+        case "none":
+        default:
+            return false;
+        }
+    }
+
     render() {
         return html`
         <style>
@@ -146,6 +169,201 @@ export default class WelcomeWeb extends LitElement {
                 display: block;
                 letter-spacing: 0;
             }
+            
+            .hi-icon-wrap {
+                text-align: center;
+                margin: 0 auto;
+                padding: 2em 0 3em;
+            }
+            .hi-icon {
+                display: inline-block;
+                cursor: pointer;
+                margin: 15px 30px;
+                width: 110px;
+                height: 110px;
+                border-radius: 50%;
+                text-align: center;
+                position: relative;
+                z-index: 1;
+            }
+            .hi-icon a p {
+                text-decoration: none;
+                color: #000966;
+            }
+            .hi-icon a:hover p {
+                text-decoration: none;
+            }
+            .hi-icon:after {
+                pointer-events: none;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                content: '';
+                -webkit-box-sizing: content-box;
+                -moz-box-sizing: content-box;
+                box-sizing: content-box;
+            }
+            .hi-icon:before {
+                /*font-family: 'ecoicon';*/
+                speak: none;
+                font-size: 48px;
+                line-height: 110px;
+                font-style: normal;
+                font-variant: normal;
+                text-transform: none;
+                display: block;
+                -webkit-font-smoothing: antialiased;
+                color: #000966;
+            }
+            .hi-icon-mobile:before {
+                content: "\\e009";
+            }
+            .hi-icon-animation .hi-icon {
+                -webkit-transition: box-shadow 0.2s;
+                -moz-transition: box-shadow 0.2s;
+                transition: box-shadow 0.2s;
+            }
+            .hi-icon-animation p {
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+                color: #797979;
+            }
+            .hi-icon-animation .hi-icon svg {
+                -webkit-transition: -webkit-transform 0.2s, all 0.2s;
+                -moz-transition: -moz-transform 0.2s, all 0.2s;
+                transition: transform 0.2s, all 0.2s;
+                fill: #000966;
+                height: 90px;
+                width: 90px;
+            }
+            .hi-icon-animation .hi-icon.fa,
+            .hi-icon-animation .icon-wrapper:hover .hi-icon img{
+                -webkit-transition: -webkit-transform 0.2s, all 0.2s;
+                -moz-transition: -moz-transform 0.2s, all 0.2s;
+                transition: transform 0.2s, all 0.2s;
+            }
+            .hi-icon-animation .hi-icon svg image{
+                height: 90px;
+                width: 90px;
+            }
+            .hi-icon-animation .hi-icon:after {
+                top: 0;
+                left: 0;
+                padding: 0;
+                box-shadow: 0 0 0 4px #000966;
+                -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+                -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+                transition: transform 0.2s, opacity 0.2s;
+            }
+            .hi-icon-animation .icon-wrapper:hover {
+                display: inline-block;
+                text-decoration: none;
+            }
+            .hi-icon-animation .icon-wrapper:hover .hi-icon:after {
+                -webkit-transform: scale(0.85);
+                -moz-transform: scale(0.85);
+                -ms-transform: scale(0.85);
+                transform: scale(0.85);
+                opacity: 0.5;
+            }
+            /* in case of svg or image[src=svg] icon */
+            .hi-icon-animation .icon-wrapper:hover .hi-icon svg,
+            .hi-icon-animation .icon-wrapper:hover .hi-icon img{
+                transform: scale(0.85);
+            }
+            /* in case of fa icon*/
+            .hi-icon-animation .icon-wrapper:hover .hi-icon.fa {
+                transform: scale(0.85);
+            }
+            .hi-icon-animation .icon-wrapper:hover .hi-icon {
+                box-shadow: 0 0 0 10px rgba(0, 9, 102, 1);
+                color: #fff;
+            }
+            .hi-icon-animation .icon-wrapper:hover p {
+                color: #000966;
+            }
+            .smaller {
+                font-size: 75%;
+            }
+            .getting-started {
+                display: inline-block;
+                border: 4px #000966 solid;
+                background: white;
+                position: relative;
+                padding: 10px 35px;
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+                border-radius: 30px;
+            }
+
+            .getting-started:hover {
+                text-decoration: none;
+            }
+
+            .getting-started span {
+                color: #000966;
+                display: inline-block;
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+
+            .getting-started:hover {
+                -webkit-transform: scale(1.2);
+                -moz-transform: scale(1.2);
+                -ms-transform: scale(1.2);
+                transform: scale(1.2);
+                border: 4px #fff solid;
+                background: #000966;
+            }
+
+            .getting-started:hover span {
+                -webkit-transform: scale(.8);
+                -moz-transform: scale(.8);
+                -ms-transform: scale(.8);
+                transform: scale(.8);
+                color: #fff
+            }
+
+            #title {
+                font-size: 10em;
+                text-align: center;
+                font-weight: bold;
+                letter-spacing: -20px;
+                position: relative;
+            }
+
+            #title::first-letter {
+                letter-spacing: -5px;
+            }
+
+            #title span.subtitle {
+                font-size: 25px;
+                margin-top: -30px;
+                display: block;
+                letter-spacing: 0;
+            }
+
+            #title .version {
+                font-size: 15px;
+                display: inline-block;
+                vertical-align: top;
+                letter-spacing: 0px;
+                margin: 35px 0 0 0;
+                position: absolute;
+            }
+
+            #title .bracket {
+                font-size: 1.5em;
+                color: black;
+            }
+
+            .footer {
+                margin-bottom: 80px;
+            }
         
         </style>
         
@@ -154,10 +372,8 @@ export default class WelcomeWeb extends LitElement {
             <br>
         
             <h1 id="title">IVA <span>${this.version}</span></h1>
-        
-            <h2>Overview</h2>
-            <p>
-                Welcome to the IVA tool for whole genome variant analysis.
+            <p class="text-center">
+                Welcome to the IVA tool for whole genome variant analysis.<br />
                 This interactive tool allows finding genes affected by deleterious variants that segregate along family
                 pedigrees, case-controls or sporadic samples.
             </p>
@@ -167,27 +383,44 @@ export default class WelcomeWeb extends LitElement {
             <!--<br>-->
         
             ${this.checkProjects ? html`
-                                    <div style="padding: 20px 10px">
-                                        <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist" @change="${this.callAutocomplete}"
-                                                   placeholder="Search for gene symbols, genomic regions or variants" value="">
-                                            <datalist id="FeatureDatalist"></datalist>
-                                            <!-- Examples -->
-                                            <span style="font-size: 0.8em; padding-left: 10px">
-                                                Examples - Gene: <a @click="${this.onExampleClick}" data-type="gene" style="cursor: pointer">BRCA2</a>,
-                                                Region: <a @click="${this.onExampleClick}" data-type="region" style="cursor: pointer">3</a>, <a @click="${this.onExampleClick}" data-type="region" style="cursor: pointer">3:113000-1150000</a>,
-                                                SNP: <a @click="${this.onExampleClick}" data-type="snp" style="cursor: pointer">rs445909</a>
-                                                Variant: <a @click="${this.onExampleClick}" data-type="variant" style="cursor: pointer">13:32962274:G:T</a>
-                                            </span>
-                                    </div>` : null
-            }
-        
-            <h4>Note</h4>
+                <div style="padding: 20px 10px">
+                    <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist" @change="${this.callAutocomplete}" placeholder="Search for gene symbols, genomic regions or variants" value="">
+                        <datalist id="FeatureDatalist"></datalist>
+                        <!-- Examples -->
+                    <span style="font-size: 0.8em; padding-left: 10px">
+                            Examples - Gene: <a @click="${this.onExampleClick}" data-type="gene" style="cursor: pointer">BRCA2</a>,
+                            Region: <a @click="${this.onExampleClick}" data-type="region" style="cursor: pointer">3</a>, <a @click="${this.onExampleClick}" data-type="region" style="cursor: pointer">3:113000-1150000</a>,
+                            SNP: <a @click="${this.onExampleClick}" data-type="snp" style="cursor: pointer">rs445909</a>
+                            Variant: <a @click="${this.onExampleClick}" data-type="variant" style="cursor: pointer">13:32962274:G:T</a>
+                    </span>
+                </div>`
+            : null }
+             
+            <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
+                ${this.components.map( tool => html`
+                    <div class="col-md-3 col-sm-6">
+                        <a class="icon-wrapper" href="#${tool.id}/${this.checkProjects ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
+                            <div class="hi-icon">
+                                <img src="img/tools/icons/${tool.icon}" />
+                            </div>
+                            <p>${tool.title}</p>
+                            <span class="smaller"></span>
+                        </a>
+                    </div> 
+                `)}
+            </div>
+
+            <div class="row text-center">
+                <a class="getting-started" href="#gettingstarted"><span>Getting started with IVA</span></a>
+            </div>
+                       
+           <!-- <h4>Note</h4>
             <small>
                 IVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as
                 Web Components,
                 so only modern web browsers are fully supported, these include Chrome 49+, Firefox 45+, Microsoft Edge 14+,
                 Safari 10+ and Opera 36+.
-            </small>
+            </small>-->
             <p><img id="logo" src="img/opencb-logo.png"/></p>
         </div>
         `;

@@ -21,6 +21,7 @@ import "./about.js";
 import "./contact.js";
 import "./faq.js";
 import "./terms.js";
+import "./getting-started.js";
 
 import {OpencgaLogin,
     OpencgaVariantBrowser
@@ -110,6 +111,7 @@ class IvaApp extends LitElement {
         _config.enabledComponents.contact = false;
         _config.enabledComponents.terms = false;
         _config.enabledComponents.faq = false;
+        _config.enabledComponents.gettingstarted = false;
 
         // Enable tools reading the configuration
         for (let tool in _config.tools) {
@@ -923,7 +925,7 @@ class IvaApp extends LitElement {
 								<span class="icon-bar"></span>
 							</button>
 							<a href="#home" class="navbar-brand" style="padding-top: 10px" @click="${this.changeTool}">
-								<img src="${this.config.logo}" width="100px">
+								<img src="${this.config.logo}" width="100px" alt="logo">
 							</a>
 							<a class="navbar-brand" href="#home" @click="${this.changeTool}">
 								<b>${this.config.title} ${this.config.version}</b>
@@ -955,8 +957,8 @@ class IvaApp extends LitElement {
                         html`<li><a href="#${subitem.id}" @click="${this.changeTool}" data-id="${subitem.id}">${subitem.title}</a></li>`)} 
 											</ul>
 										</li>`
-            }`
-        )}
+                                    }`
+                                )}
 							</ul>
 			
 							<!-- Controls aligned to the RIGHT: settings and about-->
@@ -1068,7 +1070,7 @@ class IvaApp extends LitElement {
 			<div>
 				${this.config.enabledComponents.home ? html`
 					<div class="content" id="home">
-						<welcome-web .opencgaSession="${this.opencgaSession}" version="${this.config.version}" .cellbaseClient=${this.cellbaseClient} @search="${this.quickSearch}"> </welcome-web>
+						<welcome-web .opencgaSession="${this.opencgaSession}" version="${this.config.version}" .cellbaseClient=${this.cellbaseClient} @search="${this.quickSearch}" .config="${this.config}"> </welcome-web>
 					</div>
 				` : null}
 			
@@ -1093,6 +1095,12 @@ class IvaApp extends LitElement {
 				${this.config.enabledComponents.faq ? html`
 				<div class="content" id="faq">
 					<faq-web version="${this.config.version}"></faq-web>
+				</div>
+				` : null}
+				
+				${this.config.enabledComponents.gettingstarted ? html`
+				<div class="content" id="getting-started">
+					<getting-started .opencgaSession="${this.opencgaSession}" .config="${this.config}"></getting-started>
 				</div>
 				` : null}
 			</div>
