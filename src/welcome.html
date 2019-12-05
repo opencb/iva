@@ -395,8 +395,7 @@
 
             connectedCallback() {
                 super.connectedCallback();
-                //TODO fix it ignores visibility
-                this.components = this.config.components.slice(0, 4);
+                this.components = this.config.components.filter(this.isVisible).slice(0, 4);
             }
 
             opencgaSessionObserver() {
