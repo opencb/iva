@@ -1,9 +1,13 @@
 .btn-primary.ripple {
     color: white;
 }
+
+.btn-group .ripple {
+    margin: 0;
+}
+
 .ripple {
     margin: .375rem;
-    color: inherit;
     text-transform: uppercase;
     word-wrap: break-word;
     white-space: normal;
@@ -15,9 +19,12 @@
     -webkit-transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
     transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
     padding: 0.8rem 2.2rem;
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
 }
 
-.ripple:hover, .ripple:focus {
+.ripple:hover {
     outline: 0;
     -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
     box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
@@ -28,11 +35,6 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.18), 0 3px 10px 0 rgba(0,0,0,0.15);
 }
 
-.ripple {
-    position: relative;
-    overflow: hidden;
-    transform: translate3d(0, 0, 0);
-}
 .ripple:after {
     content: "";
     display: block;
@@ -53,4 +55,24 @@
     transform: scale(0, 0);
     opacity: .2;
     transition: 0s;
+}
+
+.ripple-disabled:after {
+    display: none;
+}
+
+.ripple-disabled:active, .ripple-disabled:hover, .ripple-disabled:focus {
+    -webkit-box-shadow:none;
+    box-shadow: none;
+    cursor: default;
+
+}
+
+
+.search-button-wrapper {
+    text-align: center;
+
+}
+.search-button-wrapper i {
+    padding: 0 5px;
 }

@@ -22,6 +22,7 @@ import "./contact.js";
 import "./faq.js";
 import "./terms.js";
 import "./getting-started.js";
+import "./breadcrumb.js";
 
 import {OpencgaLogin,
     OpencgaVariantBrowser
@@ -204,7 +205,9 @@ class IvaApp extends LitElement {
 
     opencgaSessionObserver() {
         this.renderHashFragments();
-        this.renderBreadcrumb();
+        this._isBreadcrumbVisible = this.config.breadcrumb.visible && this.opencgaSession.projects !== undefined && this.opencgaSession.projects.length !== 0;
+        this.requestUpdate()
+        //this.renderBreadcrumb();
     }
 
     _createOpenCGASession() {
@@ -753,7 +756,6 @@ class IvaApp extends LitElement {
     _checkBreadcrumbVisible() {
         if (UtilsNew.isNotUndefinedOrNull(this.config) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession)) {
             this._isBreadcrumbVisible = this.config.breadcrumb.visible && this.opencgaSession.projects !== undefined && this.opencgaSession.projects.length !== 0;
-            this.requestUpdate();
         }
     }
 
@@ -821,6 +823,7 @@ class IvaApp extends LitElement {
                 });
             });
         }
+        this.requestUpdate();
     }
 
     _createBreadcrumbElement(name, active, category) {
@@ -958,7 +961,7 @@ class IvaApp extends LitElement {
 											</ul>
 										</li>`
                                     }`
-                                )}
+                                ) }
 							</ul>
 			
 							<!-- Controls aligned to the RIGHT: settings and about-->
@@ -1061,9 +1064,11 @@ class IvaApp extends LitElement {
 			
 			<!--Breadcrumb-->
 			${this._isBreadcrumbVisible ? html`
-				<div>
+				<!--<div>
 					<ol id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
-				</div>
+				</div>-->
+				<bread-crumb .config="${this.config}" .opencgaSession="${this.opencgaSession}"></bread-crumb>
+
 			` : null}
 			
 			<!-- This is where main application is rendered -->
@@ -1142,6 +1147,7 @@ class IvaApp extends LitElement {
 					<div class="content" id="facet">
 						<opencga-variant-facet  .opencgaSession="${this.opencgaSession}"
 											    .opencgaClient="${this.opencgaSession.opencgaClient}"
+											    .query="${this.browserSearchQuery}"
 												.config="${this.config.tools.facet}"
 											    .cellbaseClient="${this.cellbaseClient}"
 											    .populationFrequencies="${this.config.populationFrequencies}"
