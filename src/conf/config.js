@@ -353,7 +353,7 @@ const application = {
             fa_icon: "fa fa-list",
             icon: "variant_browser.svg",
             description:`
-                <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                <p>Explore all variants identified in the 100,000 Genomes Project dataset</p>
                 <ul>
                     <li>Rich annotation and links to leading reference databases</li>
                     <li>Filter by gene, consequence, frequency and much more</li>
