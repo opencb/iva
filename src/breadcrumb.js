@@ -51,7 +51,7 @@ export default class Breadcrumb extends LitElement {
     buildHash() {
         let hashFrag = "";
         if (this.opencgaSession.project && this.opencgaSession.project.alias) {
-            hashFrag += "/" + this.opencgaSession.project.id;
+            hashFrag += this.opencgaSession.project.id;
             if (this.opencgaSession.study && this.opencgaSession.study.alias) {
                 hashFrag += "/" + this.opencgaSession.study.id;
             }

@@ -80,12 +80,6 @@ class IvaApp extends LitElement {
         }
     }
 
-    updated(changedProperties) {
-        if (changedProperties.has("opencgaSession")) {
-            this.opencgaSessionObserver()
-        }
-    }
-
     /**
      * This function creates all the initial configuration
      * @private
@@ -166,7 +160,7 @@ class IvaApp extends LitElement {
 
         // Other initialisations
         this.icd10 = ICD_10;
-        this._isBreadcrumbVisible = true;
+        this._isBreadcrumbVisible = false;
         // This manages the samples selected in each tool for updating the breadcrumb
         this.samples = [];
         this._samplesPerTool = {};
@@ -202,6 +196,13 @@ class IvaApp extends LitElement {
         //run the observer the first time doesnt work TODO check why
         //this.opencgaSessionObserver();
     }
+
+    updated(changedProperties) {
+        if (changedProperties.has("opencgaSession")) {
+            this.opencgaSessionObserver()
+        }
+    }
+
 
     opencgaSessionObserver() {
         this.renderHashFragments();
@@ -753,6 +754,14 @@ class IvaApp extends LitElement {
         this.browserSearchQuery = e.detail;
     }
 
+    quickFacetSearch(e) {
+        console.log("IVA-APP quickfacetsearch")
+        this.tool = "#facet";
+        window.location.hash = "facet/" + this.opencgaSession.project.id + "/" + this.opencgaSession.study.id;
+        // this.browserQuery = {xref: e.detail.value};
+        this.browserSearchQuery = e.detail;
+    }
+
     _checkBreadcrumbVisible() {
         if (UtilsNew.isNotUndefinedOrNull(this.config) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession)) {
             this._isBreadcrumbVisible = this.config.breadcrumb.visible && this.opencgaSession.projects !== undefined && this.opencgaSession.projects.length !== 0;
@@ -1117,7 +1126,7 @@ class IvaApp extends LitElement {
 					<div class="content" id="login" style="width: 20%; margin: auto; padding-top: 80px">
 						<opencga-login  .opencgaClient="${this.opencgaClient}"
 										loginTitle="Sign in"
-									    notifyEventMessage="${this.config.notifyEventMessage}"
+									    .notifyEventMessage="${this.config.notifyEventMessage}"
 									    @login="${this.login}"
 									    @notifymessage="${this.onNotifyMessage}">
 						</opencga-login>
@@ -1138,7 +1147,8 @@ class IvaApp extends LitElement {
 												.config="${this.config.tools.browser}"
 												style="font-size: 12px"
 												@onGene="${this.geneSelected}"
-												@onSamplechange="${this.onSampleChange}">
+												@onSamplechange="${this.onSampleChange}"
+												@facetSearch="${this.quickFacetSearch}">
 						</opencga-variant-browser>
 					</div>
 				` : null}
@@ -1160,6 +1170,7 @@ class IvaApp extends LitElement {
 				${this.config.enabledComponents.clinicalAnalysisPortal ? html`
 					<div class="content" id="clinicalAnalysisPortal">
 						<opencga-clinical-portal .opencgaSession="${this.opencgaSession}"
+						                        .opencgaClient="${this.opencgaSession.opencgaClient}"
 												.config="${this.config.tools.clinicalPortal}"
 											    .cellbaseClient="${this.cellbaseClient}">
 						</opencga-clinical-portal>
@@ -1225,7 +1236,7 @@ class IvaApp extends LitElement {
 						<opencga-panel-browser  .opencgaSession="${this.opencgaSession}"
 												.opencgaClient="${this.opencgaClient}"
 											    .cellbaseClient="${this.cellbaseClient}"
-											    eventNotifyName="${this.config.notifyEventMessage}"
+											    .eventNotifyName="${this.config.notifyEventMessage}"
 											    @notifymessage="${this.onNotifyMessage}">
 						</opencga-panel-browser>
 					</div>

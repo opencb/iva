@@ -25,8 +25,8 @@ const opencga = {
     //host: "https://bio-uat-opencgainternal.gel.zone/opencga/webservices/",
 
     // host: "http://bioinfo.hpc.cam.ac.uk/hgva", public instance
-    host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", //small demo instance
-    //host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
+    //host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", //small demo instance
+    host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
     //host: "https://re-test-opencgahadoop.gel.zone/opencga", //opencga 1.3
 
     version: "v1",

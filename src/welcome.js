@@ -23,6 +23,10 @@ export default class WelcomeWeb extends LitElement {
         this.components = [];
     }
 
+    createRenderRoot() {
+        return this;
+    }
+
     static get properties() {
         return {
             opencgaSession: {
@@ -41,14 +45,6 @@ export default class WelcomeWeb extends LitElement {
                 type: Object
             }
         };
-    }
-
-    createRenderRoot() {
-        return this;
-    }
-
-    firstUpdated(_changedProperties) {
-        console.log("this.config.components",this.config.components)
     }
 
     updated(changedProperties) {
@@ -383,7 +379,7 @@ export default class WelcomeWeb extends LitElement {
             <!--<br>-->
         
             ${this.checkProjects ? html`
-                <div style="padding: 20px 10px">
+                <div>
                     <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist" @change="${this.callAutocomplete}" placeholder="Search for gene symbols, genomic regions or variants" value="">
                         <datalist id="FeatureDatalist"></datalist>
                         <!-- Examples -->
