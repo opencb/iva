@@ -1,3 +1,13 @@
+/* BT panel title override */
+.panel-title {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.panel-default>.panel-heading {
+    background: none;
+}
+
 .btn-primary.ripple {
     color: white;
 }
@@ -7,7 +17,7 @@
 }
 
 .ripple {
-    margin: .375rem;
+    margin: 0 .375rem;
     text-transform: uppercase;
     word-wrap: break-word;
     white-space: normal;
@@ -68,9 +78,17 @@
 
 }
 
+.ripple.no-transform {
+    text-transform: none;
+}
+
+.ripple.btn-small {
+    padding: 0.8rem 1.3rem;
+    font-size: .8em;
+}
 .search-button-wrapper {
     text-align: center;
-
+    margin: 0 0 10px 0;
 }
 .search-button-wrapper i {
     padding: 0 5px;

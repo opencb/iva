@@ -1213,7 +1213,8 @@ class IvaApp extends LitElement {
 				
 				${this.config.enabledComponents.projects ? html`
 					<div class="content" id="projects" style="width: 60%; margin: auto">
-						<opencga-projects  .opencgaClient="${this.opencgaClient}"
+						<opencga-projects  .opencgaSession="${this.opencgaSession}"  
+						                   .opencgaClient="${this.opencgaClient}"
 										   .projects="${this.opencgaSession.projects}"
 										   .studySummaries="${this.studySummaries}"
 										   @project="${this.updateProject}"

@@ -220,9 +220,14 @@ const clinical = {
             tooltip: "Filter by sample genotype and mode of inheritance"
         },
         {
-            id: "file",
-            title: "File Attributes",
-            tooltip: "Filter by file attributes such as QUAL and FILTER"
+            id: "file-qual",
+            title: "File QUAL Attribute",
+            tooltip: "Filter by file attribute QUAL"
+        },
+        {
+            id: "file-pass",
+            title: "File PASS Attribute",
+            tooltip: "Filter by file attribute PASS"
         }
     ]
 };

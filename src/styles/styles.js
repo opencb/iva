@@ -54,7 +54,7 @@ const checkBoxWidget = `
          left: 0;
          height: 20px;
          width: 20px;
-         background-color: #b7b7b7;
+         background-color: #f5f5f5;
     }
      .checkbox-container .checkbox-container:hover input ~ .checkmark {
          background-color: #ccc;
