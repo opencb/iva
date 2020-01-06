@@ -92,6 +92,7 @@ const switchWidget = `
     .switch-container {
       position: relative;
       width: 180px;
+      padding-top: 10px;
     }
     
     .switch-container .flex-center {

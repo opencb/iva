@@ -46,6 +46,8 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-fa
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-analysis-browser.js";
 
+import "./../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-facet.js";
+
 class IvaApp extends LitElement {
 
     constructor() {
@@ -107,6 +109,7 @@ class IvaApp extends LitElement {
         _config.enabledComponents.terms = false;
         _config.enabledComponents.faq = false;
         _config.enabledComponents.gettingstarted = false;
+        _config.enabledComponents["files-facet"] = false;
 
         // Enable tools reading the configuration
         for (let tool in _config.tools) {
@@ -115,9 +118,10 @@ class IvaApp extends LitElement {
             }
         }
 
+        console.log("this.config.enabledComponents",_config.enabledComponents)
         // Enabled components catalog
         let components = ["login", "projects", "project", "sample", "files", "samples", "individuals", "families", "cohorts",
-            "clinicalAnalysis", "clinicalAnalysisPortal", "clinicalAnalysisCreator", "settings", "gene", "transcript", "protein"];
+            "clinicalAnalysis", "clinicalAnalysisPortal", "clinicalAnalysisCreator", "settings", "gene", "transcript", "protein","files-facet"];
 
         for (let component of components) {
             _config.enabledComponents[component] = false;
@@ -195,6 +199,8 @@ class IvaApp extends LitElement {
 
         //run the observer the first time doesnt work TODO check why
         //this.opencgaSessionObserver();
+
+        this.browserSearchQuery = {};
     }
 
     updated(changedProperties) {
@@ -875,6 +881,11 @@ class IvaApp extends LitElement {
 
     //TODO geneSelected() is called by several components but it doesn't exists
 
+    //TODO CONTINUE this should keep in sync the query object between variant-browser and variant-facet
+    onQueryChange(e) {
+        console.log("onQueryChange", e)
+        this.browserSearchQuery = {...e.detail.query}
+    }
 
     render() {
         return html`
@@ -1148,6 +1159,7 @@ class IvaApp extends LitElement {
 												style="font-size: 12px"
 												@onGene="${this.geneSelected}"
 												@onSamplechange="${this.onSampleChange}"
+												@queryChange="${this.onQueryChange}"
 												@facetSearch="${this.quickFacetSearch}">
 						</opencga-variant-browser>
 					</div>
@@ -1251,6 +1263,21 @@ class IvaApp extends LitElement {
 					</div>
 				` : null }
 
+                ${this.config.enabledComponents["files-facet"] ? html`
+					<div class="content" id="files-facet">
+						<opencga-facet  resource="files"
+										.opencgaSession="${this.opencgaSession}"
+                                        .opencgaClient="${this.opencgaSession.opencgaClient}"
+                                        .query="${this.browserSearchQuery}"
+                                        .config="${this.config.tools.facet}"
+                                        .cellbaseClient="${this.cellbaseClient}"
+                                        .populationFrequencies="${this.config.populationFrequencies}"
+                                        .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
+                                        .consequenceTypes="${this.config.consequenceTypes}">
+						</opencga-facet>
+					</div>
+				` : null}
+
 				<!--todo check-->
 				${this.config.enabledComponents.gene ? html`
 					<div class="content" id="gene" style="margin: auto; width: 90%">
@@ -1270,8 +1297,7 @@ class IvaApp extends LitElement {
 				${this.config.enabledComponents.sample ? html`
 					<div class="content" id="sample" style="margin: auto; width: 90%">
 						<opencga-sample-view    .opencgaSession="${this.opencgaSession}"
-												.config="${this.config.sampleView}"
-												sampleId="NA12877">
+												.config="${this.config.sampleView}">
 						</opencga-sample-view>
 					</div>
 				` : null }
