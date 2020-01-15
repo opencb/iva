@@ -45,8 +45,11 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencg
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-analysis-browser.js";
-
-import "./../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-facet.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/files/opencga-file-facet.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-samples-facet.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-facet.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-facet.js";
+import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-facet.js";
 
 class IvaApp extends LitElement {
 
@@ -120,8 +123,28 @@ class IvaApp extends LitElement {
 
         console.log("this.config.enabledComponents",_config.enabledComponents)
         // Enabled components catalog
-        let components = ["login", "projects", "project", "sample", "files", "samples", "individuals", "families", "cohorts",
-            "clinicalAnalysis", "clinicalAnalysisPortal", "clinicalAnalysisCreator", "settings", "gene", "transcript", "protein","files-facet"];
+        let components = [
+            "login",
+            "projects",
+            "project",
+            "sample",
+            "files",
+            "samples",
+            "individuals",
+            "families",
+            "cohorts",
+            "clinicalAnalysis",
+            "clinicalAnalysisPortal",
+            "clinicalAnalysisCreator",
+            "settings",
+            "gene",
+            "transcript",
+            "protein",
+            "files-facet",
+            "samples-facet",
+            "individual-facet",
+            "family-facet",
+            "cohort-facet"];
 
         for (let component of components) {
             _config.enabledComponents[component] = false;
@@ -906,7 +929,18 @@ class IvaApp extends LitElement {
 					background-color: #0c2f4c;
 				}
 				
-                .center {
+				#nav-user > a {
+                    padding-left: 40px;
+				}
+				
+				#nav-user > a > i {
+                    font-size: 25px;
+                    position: absolute;
+                    left: 10px;
+                    top: 13px;
+				}
+				
+				.center {
                     margin: auto;
                     text-align: justify;
                     width: 60%;
@@ -990,7 +1024,7 @@ class IvaApp extends LitElement {
 								${this.opencgaSession.token ? html`
 									<li class="dropdown" id="nav-user">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-											<i class="fa fa-user" aria-hidden="true"></i>
+											<i class="fa fa-user-circle" aria-hidden="true"></i>
 											${this.opencgaSession.user.id} <span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu">
@@ -1244,6 +1278,21 @@ class IvaApp extends LitElement {
 					</div>
 				` : null }
 				
+				${this.config.enabledComponents["samples-facet"] ? html`
+					<div class="content" id="samples-facet">
+						<opencga-samples-facet resource="sample"
+										.opencgaSession="${this.opencgaSession}"
+                                        .opencgaClient="${this.opencgaSession.opencgaClient}"
+                                        .query="${this.browserSearchQuery}"
+                                        .config="${this.config.tools.facet}"
+                                        .cellbaseClient="${this.cellbaseClient}"
+                                        .populationFrequencies="${this.config.populationFrequencies}"
+                                        .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
+                                        .consequenceTypes="${this.config.consequenceTypes}">
+						</opencga-samples-facet>
+					</div>
+				` : null}
+				
 				${this.config.enabledComponents.panel ? html`
 					<div class="content" id="panel">
 						<opencga-panel-browser  .opencgaSession="${this.opencgaSession}"
@@ -1265,8 +1314,7 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents["files-facet"] ? html`
 					<div class="content" id="files-facet">
-						<opencga-facet  resource="files"
-										.opencgaSession="${this.opencgaSession}"
+						<opencga-file-facet .opencgaSession="${this.opencgaSession}"
                                         .opencgaClient="${this.opencgaSession.opencgaClient}"
                                         .query="${this.browserSearchQuery}"
                                         .config="${this.config.tools.facet}"
@@ -1274,7 +1322,7 @@ class IvaApp extends LitElement {
                                         .populationFrequencies="${this.config.populationFrequencies}"
                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
                                         .consequenceTypes="${this.config.consequenceTypes}">
-						</opencga-facet>
+						</opencga-file-facet>
 					</div>
 				` : null}
 
@@ -1301,6 +1349,7 @@ class IvaApp extends LitElement {
 						</opencga-sample-view>
 					</div>
 				` : null }
+				
 				
 				${this.config.enabledComponents.transcript ? html`
 					<div class="content feature-view" id="transcript">
@@ -1343,6 +1392,20 @@ class IvaApp extends LitElement {
 					</div>
                 ` : null }
                 
+                ${this.config.enabledComponents["individual-facet"] ? html`
+					<div class="content" id="individual-facet">
+						<opencga-individual-facet .opencgaSession="${this.opencgaSession}"
+                                        .opencgaClient="${this.opencgaSession.opencgaClient}"
+                                        .query="${this.browserSearchQuery}"
+                                        .config="${this.config.tools.facet}"
+                                        .cellbaseClient="${this.cellbaseClient}"
+                                        .populationFrequencies="${this.config.populationFrequencies}"
+                                        .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
+                                        .consequenceTypes="${this.config.consequenceTypes}">
+						</opencga-individual-facet>
+					</div>
+				` : null}
+                
                 ${this.config.enabledComponents.families ? html`
                     <div class="content" id="families">
 						<opencga-family-browser .opencgaClient="${this.opencgaClient}"
@@ -1350,6 +1413,20 @@ class IvaApp extends LitElement {
                         </opencga-family-browser>
 					</div>
                 ` : null }
+                
+                ${this.config.enabledComponents["family-facet"] ? html`
+					<div class="content" id="family-facet">
+						<opencga-family-facet .opencgaSession="${this.opencgaSession}"
+                                        .opencgaClient="${this.opencgaSession.opencgaClient}"
+                                        .query="${this.browserSearchQuery}"
+                                        .config="${this.config.tools.facet}"
+                                        .cellbaseClient="${this.cellbaseClient}"
+                                        .populationFrequencies="${this.config.populationFrequencies}"
+                                        .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
+                                        .consequenceTypes="${this.config.consequenceTypes}">
+						</opencga-family-facet>
+					</div>
+				` : null}
 
                 ${this.config.enabledComponents.cohorts ? html`
 					<div class="content" id="cohorts">
@@ -1358,6 +1435,20 @@ class IvaApp extends LitElement {
                         </opencga-cohort-browser>
 					</div>
                 ` : null }
+
+                ${this.config.enabledComponents["cohort-facet"] ? html`
+					<div class="content" id="cohort-facet">
+						<opencga-cohort-facet .opencgaSession="${this.opencgaSession}"
+                                        .opencgaClient="${this.opencgaSession.opencgaClient}"
+                                        .query="${this.browserSearchQuery}"
+                                        .config="${this.config.tools.facet}"
+                                        .cellbaseClient="${this.cellbaseClient}"
+                                        .populationFrequencies="${this.config.populationFrequencies}"
+                                        .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
+                                        .consequenceTypes="${this.config.consequenceTypes}">
+						</opencga-cohort-facet>
+					</div>
+				` : null}
                 
                 ${this.config.enabledComponents.clinicalAnalysis ? html`
 					<div class="content" id="clinicalAnalysis">

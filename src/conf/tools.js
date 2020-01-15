@@ -34,7 +34,13 @@ const cohortFileMenu = {
             platinum: [
                 {id: "ALL", name: "ALL"}
             ]
+        },
+        exomes_grch37: {
+            corpasome: [
+                {id: "ALL", name: "ALL"}
+            ]
         }
+
     },
     tooltip: "Filter variants by cohort Alternate allele frequency"
 };

@@ -160,9 +160,8 @@ export default class WelcomeWeb extends LitElement {
             }
         
             #title span {
-                font-size: 30px;
+                font-size: 20px;
                 margin-top: -30px;
-                display: block;
                 letter-spacing: 0;
             }
             
@@ -283,6 +282,7 @@ export default class WelcomeWeb extends LitElement {
             .smaller {
                 font-size: 75%;
             }
+
             .getting-started {
                 display: inline-block;
                 border: 4px #000966 solid;
@@ -301,6 +301,7 @@ export default class WelcomeWeb extends LitElement {
 
             .getting-started span {
                 color: #000966;
+                font-size: .8em;
                 display: inline-block;
                 -webkit-transition: all 0.3s;
                 -moz-transition: all 0.3s;
@@ -337,7 +338,7 @@ export default class WelcomeWeb extends LitElement {
             }
 
             #title span.subtitle {
-                font-size: 25px;
+                font-size: 20px;
                 margin-top: -30px;
                 display: block;
                 letter-spacing: 0;
@@ -348,12 +349,12 @@ export default class WelcomeWeb extends LitElement {
                 display: inline-block;
                 vertical-align: top;
                 letter-spacing: 0px;
-                margin: 35px 0 0 0;
+                margin: 25px 0 0 0;
                 position: absolute;
             }
 
             #title .bracket {
-                font-size: 1.5em;
+                font-size: 2em;
                 color: black;
             }
 
@@ -365,9 +366,13 @@ export default class WelcomeWeb extends LitElement {
         
         <!-- This is where main application is rendered -->
         <div class="col-md-6 col-md-offset-3 welcome-center text-muted text-justify">
-            <br>
-        
-            <h1 id="title">IVA <span>${this.version}</span></h1>
+            <h1 id="title">IVA
+                <p class="version">
+                    <span class="bracket">(</span><span>${this.version}</span><span class="bracket">)</span>
+                </p>
+                <span class="subtitle">Interactive Variant Analysis</span>
+            </h1>
+            
             <p class="text-center">
                 Welcome to the IVA tool for whole genome variant analysis.<br />
                 This interactive tool allows finding genes affected by deleterious variants that segregate along family
