@@ -47,7 +47,7 @@ export default class GettingStarted extends LitElement {
 
     firstUpdated(_changedProperties) {
         this.setDescription();
-        console.log(this.opencgaSession)
+        console.log(this.opencgaSession);
     }
 
     setDescription() {
@@ -124,7 +124,7 @@ export default class GettingStarted extends LitElement {
                                 <img class="img-responsive" src="img/tools/thumbnails/${tool.thumbnail}" @click="${this.openModal}">
                             </div>
                             <div class="col-xs-6 col-md-7 ${ i % 2 ? "col-md-pull-5 text-right" : "" }">
-                                <h2><a href="#${tool.id}/${this.opencgaSession && this.opencgaSession.project? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}"> ${tool.title} </a></h2>
+                                <h2><a href="#${tool.id}/${this.opencgaSession && this.opencgaSession.project? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}"> ${tool.title} </a></h2>
                                 <div id="${tool.id}_description"></div>
                             </div>
                         </div>

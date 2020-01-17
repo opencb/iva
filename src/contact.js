@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import {LitElement, html} from '/web_modules/lit-element.js';
+import {LitElement, html} from "/web_modules/lit-element.js";
 
 export default class ContactWeb extends LitElement {
 
     constructor() {
-        super()
+        super();
     }
 
     createRenderRoot() {
@@ -35,6 +35,7 @@ export default class ContactWeb extends LitElement {
         </div>
         `;
     }
+
 }
 
-customElements.define('contact-web',ContactWeb);
+customElements.define("contact-web", ContactWeb);

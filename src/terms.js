@@ -17,23 +17,24 @@ import {LitElement, html} from "/web_modules/lit-element.js";
 
 export default class TermsWeb extends LitElement {
 
-	constructor() {
-		super()
-	}
+    constructor() {
+        super();
+    }
 
-	createRenderRoot() {
-		return this;
-	}
+    createRenderRoot() {
+        return this;
+    }
 
-	render() {
-		return html`
+    render() {
+        return html`
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <h1>Terms</h1>
             </div>
         </div>
         `;
-	}
+    }
+
 }
 
 customElements.define("terms-web", TermsWeb);

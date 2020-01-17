@@ -54,10 +54,11 @@ export default class WelcomeWeb extends LitElement {
     }
 
     opencgaSessionObserver() {
-        console.log("opencgaSessionObserver")
-
+        //console.log("opencgaSessionObserver")
+        //console.log(this.opencgaSession)
         this.checkProjects = !!(UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project));
         this.components = this.config.components.filter(this.isVisible).slice(0, 4);
+
     }
 
     onExampleClick(e) {

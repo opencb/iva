@@ -38,10 +38,10 @@ export default class Breadcrumb extends LitElement {
             config: {
                 type: Object
             }
-        }
+        };
     }
 
-    _init(){
+    _init() {
         this._prefix = "bc-" + Utils.randomString(6) + "_";
     }
 
@@ -95,6 +95,7 @@ export default class Breadcrumb extends LitElement {
         </div>
         `;
     }
+
 }
 
 customElements.define("bread-crumb", Breadcrumb);
