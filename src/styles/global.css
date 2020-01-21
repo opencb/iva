@@ -89,7 +89,7 @@
 }
 .search-button-wrapper {
     text-align: center;
-    margin: 0 0 10px 0;
+    margin: 0 0 20px 0;
 }
 .search-button-wrapper i {
     padding: 0 5px;
@@ -99,6 +99,9 @@
     width: 100%;
 }
 
+.switch-toggle-wrapper {
+    margin-top: 10px;
+}
 .switch-toggle.text-white input[type=radio]:checked + label {
     color: white;
     transition: color ease-in-out .3s;
@@ -112,3 +115,5 @@
 .switch-toggle input[disabled] ~ label {
     color: #e4e4e4;
 }
+
+

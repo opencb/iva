@@ -358,7 +358,7 @@ class IvaApp extends LitElement {
     login(credentials) {
         // This creates a new authenticated opencga-session object
 
-        console.log("iva-app: roger I'm in");
+        console.log("iva-app: roger I'm in", credentials);
         this.opencgaClient._config.sessionId = credentials.detail.sessionId;
         this._createOpenCGASession();
 
@@ -1190,7 +1190,7 @@ class IvaApp extends LitElement {
 				` : null}
 			</div>
 			
-			 <div class="alert alert-info">${JSON.stringify(this.queries)}</div> 
+			<!-- <div class="alert alert-info">${JSON.stringify(this.queries)}</div> --> 
 			
 			<!-- This is where main IVA application is rendered -->
 			<div class="container-fluid">
@@ -1305,7 +1305,10 @@ class IvaApp extends LitElement {
 						<opencga-sample-browser .query="${this.queries.sample}"
 						                        .opencgaSession="${this.opencgaSession}"
 												.opencgaClient="${this.opencgaClient}"
-												.config="${this.config.sampleBrowser}">
+												.config="${this.config.sampleBrowser}"
+                                                @querySearch="${e => this.onQueryFilterSearch(e, "sample")}"
+                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "sample")}"
+                                                @facetSearch="${this.quickFacetSearch}">
 						</opencga-sample-browser>
 					</div>
 				` : null }
@@ -1343,8 +1346,9 @@ class IvaApp extends LitElement {
 						<opencga-file-browser .opencgaSession="${this.opencgaSession}"
 											  .config="${this.config.fileBrowser}"
 											  .query="${this.queries.files}"
-											  @querySearch="${e => this.onQueryFilterSearch(e,"files")}"
-											  @activeFilterChange="${e => this.onQueryFilterSearch(e, "files")}">
+                                              @querySearch="${e => this.onQueryFilterSearch(e, "files")}"
+                                              @activeFilterChange="${e => this.onQueryFilterSearch(e, "files")}"
+                                              @facetSearch="${this.quickFacetSearch}">
 						</opencga-file-browser>
 					</div>
 				` : null }
@@ -1359,7 +1363,8 @@ class IvaApp extends LitElement {
                                         .populationFrequencies="${this.config.populationFrequencies}"
                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
                                         .consequenceTypes="${this.config.consequenceTypes}"
-                                        @querySearch="${e => this.onQueryFilterSearch(e, "files")}">
+                                        @querySearch="${e => this.onQueryFilterSearch(e, "files")}"
+                                        @activeFilterChange="${e => this.onQueryFilterSearch(e, "files")}">
 						</opencga-file-facet>
 					</div>
 				` : null}
@@ -1429,7 +1434,8 @@ class IvaApp extends LitElement {
 						                            .opencgaSession="${this.opencgaSession}"
 													.configValues="${this.config.tools.clinical}"
 											        @querySearch="${e => this.onQueryFilterSearch(e,"individuals")}"
-											        @activeFilterChange="${e => this.onQueryFilterSearch(e, "individuals")}">
+											        @activeFilterChange="${e => this.onQueryFilterSearch(e, "individuals")}"
+                                                    @facetSearch="${this.quickFacetSearch}">
                         </opencga-individual-browser>
 					</div>
                 ` : null }
@@ -1443,7 +1449,9 @@ class IvaApp extends LitElement {
                                         .cellbaseClient="${this.cellbaseClient}"
                                         .populationFrequencies="${this.config.populationFrequencies}"
                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                        .consequenceTypes="${this.config.consequenceTypes}">
+                                        .consequenceTypes="${this.config.consequenceTypes}"
+                                        @querySearch="${e => this.onQueryFilterSearch(e, "individuals")}"
+                                        @activeFilterChange="${e => this.onQueryFilterSearch(e, "individuals")}">
 						</opencga-individual-facet>
 					</div>
 				` : null}
@@ -1453,8 +1461,9 @@ class IvaApp extends LitElement {
 						<opencga-family-browser .query="${this.queries.families}"
 						                        .opencgaClient="${this.opencgaClient}"
 												.opencgaSession="${this.opencgaSession}"
-											     @querySearch="${e => this.onQueryFilterSearch(e,"families")}"
-											    @activeFilterChange="${e => this.onQueryFilterSearch(e, "families")}">
+											    @querySearch="${e => this.onQueryFilterSearch(e,"families")}"
+											    @activeFilterChange="${e => this.onQueryFilterSearch(e, "families")}"
+                                                @facetSearch="${this.quickFacetSearch}">
                         </opencga-family-browser>
 					</div>
                 ` : null }
@@ -1468,7 +1477,9 @@ class IvaApp extends LitElement {
                                         .cellbaseClient="${this.cellbaseClient}"
                                         .populationFrequencies="${this.config.populationFrequencies}"
                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                        .consequenceTypes="${this.config.consequenceTypes}">
+                                        .consequenceTypes="${this.config.consequenceTypes}"
+                                        @querySearch="${e => this.onQueryFilterSearch(e, "families")}"
+                                        @activeFilterChange="${e => this.onQueryFilterSearch(e, "families")}">                                        
 						</opencga-family-facet>
 					</div>
 				` : null}
@@ -1479,7 +1490,8 @@ class IvaApp extends LitElement {
 						                        .opencgaSession="${this.opencgaSession}"
 												.config="${this.config.cohortBrowser}"
 											    @querySearch="${e => this.onQueryFilterSearch(e,"cohorts")}"
-											    @activeFilterChange="${e => this.onQueryFilterSearch(e, "cohorts")}">
+											    @activeFilterChange="${e => this.onQueryFilterSearch(e, "cohorts")}"
+											    @facetSearch="${this.quickFacetSearch}">
                         </opencga-cohort-browser>
 					</div>
                 ` : null }
@@ -1493,7 +1505,9 @@ class IvaApp extends LitElement {
                                         .cellbaseClient="${this.cellbaseClient}"
                                         .populationFrequencies="${this.config.populationFrequencies}"
                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                        .consequenceTypes="${this.config.consequenceTypes}">
+                                        .consequenceTypes="${this.config.consequenceTypes}"
+                                        @querySearch="${e => this.onQueryFilterSearch(e, "cohorts")}"
+                                        @activeFilterChange="${e => this.onQueryFilterSearch(e, "cohorts")}"
 						</opencga-cohort-facet>
 					</div>
 				` : null}

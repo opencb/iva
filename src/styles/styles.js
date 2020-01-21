@@ -39,7 +39,8 @@ const checkBoxWidget = `
          margin: 0 5px;
     }
      .checkbox-container .checkmark-label {
-         padding:0 0 0 30px 
+         padding:0 0 0 30px;
+         color: #333;
     }
      .checkbox-container input[type=checkbox] {
          position: absolute;
@@ -56,11 +57,8 @@ const checkBoxWidget = `
          width: 20px;
          background-color: #f5f5f5;
     }
-     .checkbox-container .checkbox-container:hover input ~ .checkmark {
-         background-color: #ccc;
-    }
      .checkbox-container input:checked ~ .checkmark {
-         background-color: #2196F3;
+         background-color: #337ab7;
     }
      .checkbox-container .checkmark:after {
          content: "";
@@ -81,10 +79,15 @@ const checkBoxWidget = `
          -ms-transform: rotate(45deg);
          transform: rotate(45deg);
     }
-     .checkbox-container>li>a:focus, .checkbox-container>li>a:hover {
-         color: #262626;
+    
+     .checkbox-container a:focus .checkmark-label, 
+     .checkbox-container a:hover .checkmark-label {
+         color: #337ab7;     
+     }
+
+     .checkbox-container li a:focus,
+     .checkbox-container li a:hover {
          text-decoration: none;
-         background-color: #f5f5f5;
     }
 `;
 

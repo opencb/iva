@@ -27,9 +27,9 @@ const opencga = {
     // host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", //small demo instance
 
     //host: "http://51.104.252.173:8080/opencga", //opencga 2 demo:demo
-    //host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
+    host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
     // host: "http://bioinfo.hpc.cam.ac.uk/hgva", public instance
-    host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", //small demo instance
+    //host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", //small demo instance
     // host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
     //host: "https://re-test-opencgahadoop.gel.zone/opencga", //opencga 1.3
     // host: "http://bioinfodev.hpc.cam.ac.uk/web-apps/opencga-test", //TODO test for varianti interpretation "disorder" field missing
