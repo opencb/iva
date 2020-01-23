@@ -923,11 +923,15 @@ class IvaApp extends LitElement {
         this.browserSearchQuery = {...e.detail.query}
     }
 
+
     onQueryFilterSearch(e, source) {
-        console.log("onQueryFilterSearch", e, e.detail.query)
-        this.queries[source] = e.detail.query || {};
+
+        //FIXME filters component emits a event containing {detail:{query:Object}} while active-filter emits {detail:{Object}}
+        //TODO fix active-filters
+        const q = e.detail.query || e.detail;
+        this.queries[source] = {...q};
         this.queries = {...this.queries};
-        console.log("this.queries",this.queries)
+        //console.log("this.queries",this.queries);
         this.requestUpdate();
     }
 
@@ -1035,10 +1039,14 @@ class IvaApp extends LitElement {
 												${item.title} <span class="caret"></span>
 											</a>
 											<ul class="dropdown-menu">
-												${item.submenu.map(subitem =>
-                subitem.category ? html`<li><a><label>${subitem.title}</label></a></li>` :
-                    subitem.separator ? html`<li role="separator" class="divider"></li>` :
-                        html`<li><a href="#${subitem.id}" @click="${this.changeTool}" data-id="${subitem.id}">${subitem.title}</a></li>`)} 
+												${item.submenu.map( subitem =>
+                                                    subitem.category ? html`
+                                                        <li><a><label>${subitem.title}</label></a></li>
+                                                    ` : subitem.separator ? html`
+                                                        <li role="separator" class="divider"></li>
+                                                    ` : html`
+                                                    <li><a href="#${subitem.id}" @click="${this.changeTool}" data-id="${subitem.id}">${subitem.title}</a></li>
+                                                    `)}
 											</ul>
 										</li>`
                                     }`
@@ -1054,16 +1062,15 @@ class IvaApp extends LitElement {
 											<i class="fa fa-user-circle" aria-hidden="true"></i>
 											${this.opencgaSession.user.id} <span class="caret"></span>
 										</a>
-										<ul class="dropdown-menu">
-											<li>
-												<a href="#projects"><i class="fa fa-database" aria-hidden="true" style="padding-right: 10px"></i>Projects</a>
-											</li>
-											<li>
-												<a href="#samples"><i class="fa fa-users" aria-hidden="true" style="padding-right: 10px"></i>Samples</a>
-											</li>
-											<!--<li>
-												<a data-target="#jobModal" data-toggle="modal"><i class="fa fa-bars" aria-hidden="true"></i> Jobs</a>-->
-											</li> 
+										<ul class="dropdown-menu">											
+											${this.config.userMenu.submenu.map( subitem =>
+                                                subitem.category ? html`
+                                                    <li><a><label>${subitem.title}</label></a></li>
+                                                    ` : subitem.separator ? html`
+                                                        <li role="separator" class="divider"></li>
+                                                    ` : html`
+                                                    <li><a href="#${subitem.id}" @click="${this.changeTool}" data-id="${subitem.id}">${subitem.icon ? html`<i class="${subitem.icon}"></i>` : ``} ${subitem.title}</a></li>
+                                            `)}
 											${this.config.settings.visible ? html`
 												<li role="separator" class="divider"></li>
 												<li>
@@ -1074,6 +1081,7 @@ class IvaApp extends LitElement {
 									</li>
 								` : null}
 			
+			                    
 								<!--Studies dropdown and Search menu-->
 								${this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
 									<li class="dropdown">
@@ -1190,7 +1198,7 @@ class IvaApp extends LitElement {
 				` : null}
 			</div>
 			
-			<!-- <div class="alert alert-info">${JSON.stringify(this.queries)}</div> --> 
+			 <!-- -<div class="alert alert-info">${JSON.stringify(this.queries)}</div> --> 
 			
 			<!-- This is where main IVA application is rendered -->
 			<div class="container-fluid">
@@ -1289,7 +1297,7 @@ class IvaApp extends LitElement {
 				` : null } 
 				
 				${this.config.enabledComponents.projects ? html`
-					<div class="content" id="projects" style="width: 60%; margin: auto">
+					<div class="content" id="projects">
 						<opencga-projects  .opencgaSession="${this.opencgaSession}"  
 						                   .opencgaClient="${this.opencgaClient}"
 										   .projects="${this.opencgaSession.projects}"
