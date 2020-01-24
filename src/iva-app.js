@@ -32,10 +32,10 @@ import {OpenCGAClient, OpenCGAClientConfig} from "../lib/jsorolla/src/core/clien
 import {CellBaseClient, CellBaseClientConfig} from "../lib/jsorolla/src/core/clients/cellbase-client.js";
 import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome-client.js";
 
-import "./../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-facet.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-facet.js";
 import "./../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-portal.js";
-import "./../lib/jsorolla/src/core/webcomponents/opencga/variant/variant-beacon.js";
-import "./../lib/jsorolla/src/core/webcomponents/opencga/variant/opencga-variant-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
 import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-projects.js";
 import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-browser.js";
 import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/files/opencga-file-browser.js";
