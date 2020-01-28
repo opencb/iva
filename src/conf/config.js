@@ -92,44 +92,56 @@ const application = {
         {
             id: "browser",
             title: "Variant Browser",
-            visibility: "public"
-        },
-        {
-            id: "facet",
-            title: "Aggregation Stats",
-            visibility: "public"
-        },
-        {
-            id: "clinicalAnalysisPortal",
-            title: "Interpretation Portal",
-            visibility: "public"
-        },
-        {
-            id: "beacon",
-            title: "Beacon",
-            visibility: "public"
-        },
-        {
-            id: "case",
-            title: "Clinical",
-            visibility: "none",
+            description: "",
+            icon: "",
+            visibility: "public",
             submenu: [
                 {
-                    id: "clinical",
-                    title: "Clinical (Old)",
+                    id: "browser",
+                    title: "Variant Browser",
+                    description: "",
+                    icon: "",
                     visibility: "public"
-                }
+                },
+                {
+                    id: "facet",
+                    title: "Aggregation Stats",
+                    icon: "",
+                    description: "",
+                    visibility: "public",
+                },
+                {
+                    id: "genomeBrowser",
+                    title: "Genome Browser",
+                    description: "",
+                    icon: "",
+                    visibility: "private"
+                },
             ]
         },
-        {
-            id: "genomeBrowser",
-            title: "Genome Browser",
-            visibility: "private"
-        },
+
+        // {
+        //     id: "case",
+        //     title: "Clinical",
+        //     description: "",
+        //     icon: "",
+        //     visibility: "none",
+        //     submenu: [
+        //         {
+        //             id: "clinical",
+        //             title: "Clinical (Old)",
+        //             description: "",
+        //             icon: "",
+        //             visibility: "public"
+        //         }
+        //     ]
+        // },
         {
             id: "analysis",
-            title: "Analysis (Pending)",
-            visibility: "private",
+            title: "Variant Analysis",
+            description: "",
+            icon: "",
+            visibility: "public",
             submenu: [
                 {
                     title: "Summary Stats",
@@ -139,21 +151,29 @@ const application = {
                 {
                     id: "stats",
                     title: "Cohort Variant Stats",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
                     id: "ibs",
                     title: "IBS/IBD",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
                     id: "h-w",
                     title: "Hardy-Weinberg",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
                     id: "mendel",
                     title: "Mendel Errors",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
@@ -168,11 +188,15 @@ const application = {
                 {
                     id: "assoc",
                     title: "Association",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
                     id: "tdt",
                     title: "Family-based Association (TDT)",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
@@ -180,23 +204,29 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    title: "Clinical Interpretation Analysis",
+                    title: "Sample Analysis",
                     category: true,
                     visibility: "public"
                 },
                 {
-                    id: "interpretation",
-                    title: "Variant Interpreter",
+                    id: "knockout",
+                    title: "Knockout Analysis",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
-                    id: "tiering",
-                    title: "OpenCGA Tiering (Based on GEL Tiering)",
+                    id: "eligibility",
+                    title: "Eligibility Analysis",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
-                    id: "team",
-                    title: "TEAM",
+                    id: "sampleFacet",
+                    title: "Aggregation Stats",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
@@ -211,21 +241,94 @@ const application = {
                 {
                     id: "compound",
                     title: "Compound Heterozygous",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
-                    id: "sampleFacet",
-                    title: "Aggregation Stats",
+                    id: "mendel",
+                    title: "Mendel Errors",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 },
                 {
                     id: "exporter",
                     title: "Exporter",
+                    description: "",
+                    icon: "",
                     visibility: "public"
                 }
             ]
         },
-        /*{
+        {
+            id: "clinical",
+            title: "Clinical Analysis",
+            description: "",
+            icon: "",
+            visibility: "public",
+            submenu: [
+                {
+                    title: "Clinical Interpretation",
+                    category: true,
+                    visibility: "public"
+                },
+                {
+                    id: "clinicalAnalysisPortal",
+                    title: "Interpretation Portal",
+                    icon: "",
+                    description: "",
+                    visibility: "public",
+                },
+                // {
+                //     id: "interpretation",
+                //     title: "Variant Interpreter",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
+                    title: "Interpretation Analysis",
+                    category: true,
+                    visibility: "public"
+                },
+                {
+                    id: "tiering",
+                    title: "OpenCGA Tiering (Based on GEL Tiering)",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    id: "team",
+                    title: "TEAM",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
+                    title: "CVA",
+                    category: true,
+                    visibility: "public"
+                },
+                {
+                    id: "cva",
+                    title: "Reported Browser",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+            ]
+        },
+        {
             id: "catalog",
             title: "Catalog Metadata",
             visibility: "public",
@@ -233,11 +336,6 @@ const application = {
                 {
                     id: "projects",
                     title: "Projects",
-                    visibility: "public"
-                },
-                {
-                    id: "sample",
-                    title: "Sample View",
                     visibility: "public"
                 },
                 {
@@ -305,7 +403,23 @@ const application = {
                     visibility: "public"
                 }
             ]
-        }*/
+        },
+        {
+            id: "ga4gh",
+            title: "GA4GH",
+            description: "",
+            icon: "",
+            visibility: "public",
+            submenu: [
+                {
+                    id: "beacon",
+                    title: "Beacon",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+            ]
+        },
     ],
     search: {
         placeholder: "Search",
