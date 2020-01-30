@@ -21,14 +21,14 @@ const cellbase = {
 
 const opencga = {
     // host: "http://localhost:8080/opencga-test",
-    //host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test-1.4.2",
-    //host: "https://bio-uat-opencgainternal.gel.zone/opencga/webservices/",
-    //host: "http://bioinfo.hpc.cam.ac.uk/hgva", // public instance
-    host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", //small demo instance
+    // host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test-1.4.2",
+    // host: "https://bio-uat-opencgainternal.gel.zone/opencga/webservices/",
+    // host: "http://bioinfo.hpc.cam.ac.uk/hgva", // public instance
+    host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", // small demo instance
 
-    //host: "http://51.104.252.173:8080/opencga", //opencga 2 demo:demo
-    //host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
-    //host: "https://re-test-opencgahadoop.gel.zone/opencga", //opencga 1.3
+    // host: "http://51.104.252.173:8080/opencga", //opencga 2 demo:demo
+    // host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
+    // host: "https://re-test-opencgahadoop.gel.zone/opencga", //opencga 1.3
     // host: "http://bioinfodev.hpc.cam.ac.uk/web-apps/opencga-test", //TODO test for varianti interpretation "disorder" field missing
 
     version: "v1",
@@ -93,30 +93,48 @@ const application = {
             id: "browser",
             title: "Variant Browser",
             description: "",
-            icon: "",
+            icon: "variant_browser.svg",
             visibility: "public",
             submenu: [
                 {
                     id: "browser",
                     title: "Variant Browser",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
+                    description: `
+                        <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                        <ul>
+                            <li>Rich annotation and links to leading reference databases</li>
+                            <li>Filter by gene, consequence, frequency and much more</li>
+                        </ul>`,
+                    visibility: "public",
+                    thumbnail: "screenshot1.png",
+                    fa_icon: "fa fa-list",
+                    icon: "variant_browser.svg"
                 },
                 {
                     id: "facet",
                     title: "Aggregation Stats",
-                    icon: "",
-                    description: "",
+                    description: `<ul>
+                                      <li>Filter by gene, consequence, frequency and much more</li>
+                                      <li>Add nested facets to generate aggregate statistics</li>
+                                  </ul>`,
                     visibility: "public",
+                    thumbnail: "screenshot2.png",
+                    fa_icon: "fa fa-chart-bar",
+                    icon: "aggregation2.svg"
                 },
                 {
                     id: "genomeBrowser",
                     title: "Genome Browser",
-                    description: "",
-                    icon: "",
-                    visibility: "private"
-                },
+                    description: `<ul>
+                                    <li>Based on Genome Maps (http://genomemaps.org)</li>
+                                    <li>Smooth, interactive variant visualisation</li>
+                                    </ul>`,
+                    visibility: "private",
+                    thumbnail: "screenshot3.png",
+                    fa_icon: "fa fa-globe-europe",
+                    icon: "genome_browser.svg"
+
+                }
             ]
         },
 
@@ -140,7 +158,7 @@ const application = {
             id: "analysis",
             title: "Variant Analysis",
             description: "",
-            icon: "",
+            icon: "variant_browser.svg",
             visibility: "public",
             submenu: [
                 {
@@ -265,7 +283,7 @@ const application = {
             id: "clinical",
             title: "Clinical Analysis",
             description: "",
-            icon: "",
+            icon: "variant_browser.svg",
             visibility: "public",
             submenu: [
                 {
@@ -278,7 +296,7 @@ const application = {
                     title: "Interpretation Portal",
                     icon: "",
                     description: "",
-                    visibility: "public",
+                    visibility: "public"
                 },
                 // {
                 //     id: "interpretation",
@@ -325,13 +343,14 @@ const application = {
                     description: "",
                     icon: "",
                     visibility: "public"
-                },
+                }
             ]
         },
         {
             id: "catalog",
             title: "Catalog Metadata",
             visibility: "public",
+            icon: "variant_browser.svg",
             submenu: [
                 {
                     id: "projects",
@@ -408,7 +427,7 @@ const application = {
             id: "ga4gh",
             title: "GA4GH",
             description: "",
-            icon: "",
+            icon: "variant_browser.svg",
             visibility: "public",
             submenu: [
                 {
@@ -417,9 +436,9 @@ const application = {
                     description: "",
                     icon: "",
                     visibility: "public"
-                },
+                }
             ]
-        },
+        }
     ],
     search: {
         placeholder: "Search",

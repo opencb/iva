@@ -363,6 +363,10 @@ export default class WelcomeWeb extends LitElement {
                 margin-bottom: 80px;
             }
         
+            .hi-icon-wrap {
+                display: grid;
+                grid-template-columns: auto auto auto auto auto auto; /* TODO FIXME hi-icon:before seems to be a problem there are 5 items not 6 */
+            }
         </style>
         
         <!-- This is where main application is rendered -->
@@ -398,7 +402,7 @@ export default class WelcomeWeb extends LitElement {
                 </div>`
             : null }
              
-            <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
+             <!--<div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
                 ${this.components.map( tool => html`
                     <div class="col-md-3 col-sm-6">
                         <a class="icon-wrapper" href="#${tool.id}/${this.checkProjects ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
@@ -409,6 +413,19 @@ export default class WelcomeWeb extends LitElement {
                             <span class="smaller"></span>
                         </a>
                     </div> 
+                `)}
+            </div> -->
+            
+            
+            <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
+                ${this.config.menu.map( item => html`
+                        <a class="icon-wrapper" href="#cat-${item.id}/${this.checkProjects ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
+                            <div class="hi-icon">
+                                <img src="img/tools/icons/${item.icon}" /> 
+                            </div>
+                            <p>${item.title}</p>
+                            <span class="smaller"></span>
+                        </a>
                 `)}
             </div>
 

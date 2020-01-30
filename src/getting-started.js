@@ -45,18 +45,6 @@ export default class GettingStarted extends LitElement {
         this._prefix = "gs-" + Utils.randomString(6) + "_";
     }
 
-    firstUpdated(_changedProperties) {
-        this.setDescription();
-        console.log(this.opencgaSession);
-    }
-
-    setDescription() {
-        this.config.components.forEach( component => {
-            if (this.querySelector("#" + component.id + "_description")) {
-                this.querySelector("#" + component.id + "_description").innerHTML = component.description;
-            }
-        });
-    }
     openModal(e) {
         $("#thumbnail_modal img", this).attr("src", e.target.src);
         $("#thumbnail_modal", this).modal("show");
@@ -74,23 +62,31 @@ export default class GettingStarted extends LitElement {
         }
     }
 
+    renderHTML(html) {
+        return document.createRange().createContextualFragment(`${html}`);
+    }
+
     render() {
         return html`
         <style>
-        a:hover {
+            a:hover {
                 text-decoration: none;
             }
-            .position-relative {
+            
+            .getting-started .position-relative {
                 position: relative;
             }
-            section {
+            
+            .getting-started section {
                 padding: 50px 0;
                 border-bottom: 1px solid #d4d4d4;
             }
-            section:last-child {
+            
+            .getting-started section:last-child {
                 border:0
             }
-            section img {
+            
+            .getting-started section img {
                 cursor: pointer;
                 -webkit-transition: all 0.2s;
                 -moz-transition: all 0.2s;
@@ -100,23 +96,29 @@ export default class GettingStarted extends LitElement {
                 box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75);
                 position: relative;
             }
-            section img:hover {
+            
+            .getting-started section img:hover {
                 -webkit-box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.75);
                 -moz-box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.75);
                 box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.75);
             }
-            .modal .modal-dialog {
+            
+            .getting-started .modal .modal-dialog {
                 width: 80%;
             }
+            
+            .getting-started ul {
+                display: inline-block;
+            }
+            
         </style>
-        <div class="">
+        <div class="getting-started">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12"><h1>Getting started with IVA</h1>
                         <hr>
                     </div>
                 </div>
-
                 ${this.config.components.filter(this.isVisible).map( (tool, i) => html`
                     <section>
                         <div class="row">
@@ -125,13 +127,12 @@ export default class GettingStarted extends LitElement {
                             </div>
                             <div class="col-xs-6 col-md-7 ${ i % 2 ? "col-md-pull-5 text-right" : "" }">
                                 <h2><a href="#${tool.id}/${this.opencgaSession && this.opencgaSession.project? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}"> ${tool.title} </a></h2>
-                                <div id="${tool.id}_description"></div>
+                                <div>${this.renderHTML(tool.description)}</div>
                             </div>
                         </div>
                     </section>
                 `)}
             </div>
-
         </div>
 
         <div class="modal fade" id="thumbnail_modal" tabindex="-1" role="dialog">

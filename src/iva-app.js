@@ -23,6 +23,7 @@ import "./faq.js";
 import "./terms.js";
 import "./getting-started.js";
 import "./breadcrumb.js";
+import "./category-page.js";
 
 import {OpencgaLogin,
     OpencgaVariantBrowser
@@ -53,6 +54,10 @@ import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga
 import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-facet.js";
 import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-facet.js";
 import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-facet.js";
+import "./../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
+
+//TODO fix with new paths
+//import "./../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-interpretation.js";
 
 class IvaApp extends LitElement {
 
@@ -149,7 +154,13 @@ class IvaApp extends LitElement {
             "samples-facet",
             "individual-facet",
             "family-facet",
-            "cohort-facet"];
+            "cohort-facet",
+            "cat-browser",
+            "cat-analysis",
+            "cat-clinical",
+            "cat-catalog",
+            "cat-ga4gh",
+            "assoc"];
 
         for (let component of components) {
             _config.enabledComponents[component] = false;
@@ -935,6 +946,26 @@ class IvaApp extends LitElement {
         this.requestUpdate();
     }
 
+    /* Set the width of the side navigation to 250px */
+    openNav() {
+        this.querySelector("#side-nav").style.width = "250px";
+        console.log("open")
+    }
+
+    /* Set the width of the side navigation to 0 */
+    closeNav() {
+        this.querySelector("#side-nav").style.width = "0";
+    }
+
+    toggleSideNav(e) {
+        e.preventDefault();
+        let sidenav = this.querySelector("#side-nav");
+        $("#side-nav").toggleClass("active")
+
+
+    }
+
+
     render() {
         return html`
             <style include="jso-styles">            	
@@ -997,29 +1028,117 @@ class IvaApp extends LitElement {
                     align-items: center; 
                     justify-content: center;
                 }
+               
+                            
+            /* The side navigation menu TODO  use transform: translateX(); instead of margin */
+
+            #side-nav {
+                position: fixed;
+                z-index: 10; 
+                top: 0; 
+                left: 0;
+                background-color: #fff; 
+                overflow-x: hidden;
+                padding-top: 20px; 
+                transition: 0.5s;
+                width: 250px;
+                visibility: hidden;
+                transform: translate(-250px);                
+                height: 100vh;
+                -webkit-transform-origin: top left;
+                -ms-transform-origin: top left;
+                transform-origin: top left;
+                -webkit-animation-duration: .18s;
+                animation-duration: .18s;
+                -webkit-animation-timing-function: ease;
+                animation-timing-function: ease;
+            }
+            
+            #side-nav a.logo {
+                margin: 25px 0px 15px 30px;
+                display: block;;
+            }
+            
+            #side-nav .logo img{
+                width: 150px;
+            }
+            
+            #side-nav.active {
+                transform: translate(0px);
+                visibility: visible;
+
+            }        
+            
+            #side-nav .nav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+                font-size: 15px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+            
+            #side-nav .nav a:hover {            
+                color: #fff;
+                background-color: #204d74;
+            }
+
+            #side-nav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+                padding:0;
+                z-index: 99;
+            }
+            
+            #side-nav a.closebtn:hover {        
+                background: transparent;
+                text-decoration: none;
+                color: black;
+            }
+            
             </style>
 
+            <div id="side-nav" class="sidenav shadow-lg">
+                <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
+                <nav class="navbar" id="sidebar-wrapper" role="navigation">
+                    <div>
+                        <a href="#home" class="logo" @click="${this.changeTool}"><img src="${this.config.logo}" alt="logo"></a>
+                    </div>
+                    <ul class="nav sidebar-nav">
+                    ${this.config.menu && this.config.menu.length ? this.config.menu.map( item => html`
+                        <li>
+                            <a href="#cat-${item.id}" role="button" @click="${ e => {this.toggleSideNav(e); this.changeTool(e)} }">${item.title}</a>
+                         </li>
+                    `) : null}
+                    </ul>
+                </nav>
+            </div>
+            
 			<div>
 				<nav class="navbar navbar-inverse" style="margin-bottom: 5px; border-radius: 0px">
-					<div class="container-fluid">
+					<div>
 			
+			            <ul class="nav navbar-nav">
+			                <li>
+			                    <a href="#" @click="${this.toggleSideNav}" id="waffle-icon">
+			                       <img src="/src/styles/waffle-icon.svg" />
+                                </a>
+                            </li>
+                        </ul>
 						<!-- Brand and toggle get grouped for better mobile display -->
 						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-									data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
 							<a href="#home" class="navbar-brand" style="padding-top: 10px" @click="${this.changeTool}">
 								<img src="${this.config.logo}" width="100px" alt="logo">
 							</a>
 							<a class="navbar-brand" href="#home" @click="${this.changeTool}">
-								<b>${this.config.title} ${this.config.version}</b>
+								<b>${this.config.title} <sup>${this.config.version}</sup></b>
 							</a>
 						</div>
-			
 			
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -1128,7 +1247,7 @@ class IvaApp extends LitElement {
 								${this.config.about.dropdown ? html`
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-											<i class="fas fa-bars"></i>
+											<i class="fa fa-question-circle"></i>
 										</a>
 										<ul class="dropdown-menu">
 											${this.config.about.links && this.config.about.links.map( link => html`
@@ -1527,6 +1646,49 @@ class IvaApp extends LitElement {
 														    .query="${this.queries.clinicalAnalysis}"
 														    @urlchange="${this.onUrlChange}">
                         </opencga-clinical-analysis-browser>
+					</div>
+                ` : null }
+                
+                ${this.config.enabledComponents["cat-browser"] ? html`
+					<div class="content" id="cat-browser">
+						<category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find( item => item.id === "browser")}">
+                        </category-page>
+					</div>
+                ` : null }
+                
+                ${this.config.enabledComponents["cat-analysis"] ? html`
+					<div class="content" id="cat-analysis">
+						<category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find( item => item.id === "analysis")}">
+                        </category-page>
+					</div>
+                ` : null }
+                
+                ${this.config.enabledComponents["cat-clinical"] ? html`
+					<div class="content" id="cat-clinical">
+						<category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find( item => item.id === "clinical")}">
+                        </category-page>
+					</div>
+                ` : null }
+                
+                ${this.config.enabledComponents["cat-catalog"] ? html`
+					<div class="content" id="cat-catalog">
+						<category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find( item => item.id === "catalog")}">
+                        </category-page>
+					</div>
+                ` : null }
+                
+                ${this.config.enabledComponents["cat-ga4gh"] ? html`
+					<div class="content" id="cat-ga4gh">
+						<category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find( item => item.id === "ga4gh")}">
+                        </category-page>
+					</div>
+                ` : null }                                                                
+                                
+                                
+                ${this.config.enabledComponents.assoc ? html`
+					<div class="content" id="opencga-gwas-analysis">
+						<opencga-gwas-analysis>
+                        </opencga-gwas-analysis>
 					</div>
                 ` : null }
 				
