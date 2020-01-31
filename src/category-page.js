@@ -70,7 +70,6 @@ export default class CategoryPage extends LitElement {
     render() {
         return html`
         <style>
-            
             #category-page {
                 display: grid;
                 grid-template-columns: auto auto auto auto;
@@ -103,7 +102,6 @@ export default class CategoryPage extends LitElement {
                 margin-top: 2em;
                 color: #000966;
             }
-            
         </style>
 
         <h2>${this.config.title}</h2>
@@ -111,13 +109,13 @@ export default class CategoryPage extends LitElement {
             ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( item => item.category ? html`
                 <div class="section-title">${item.title}</div>
                 ` : item.separator ? null : html`
-                <a href="#${item.id}" class="shadow-lg item">
-                        <div class="title uppercase">${item.title}</div>                    
-                        <div class="icon inline-block">
-                            <img src="img/tools/icons/${item.icon || "variant_browser.svg"}" />
-                        </div>
-                        <div class="description inline-block">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>                    
-                </a>
+                    <a href="#${item.id}" class="shadow-lg item">
+                            <div class="title uppercase">${item.title}</div>                    
+                            <div class="icon inline-block">
+                                <img src="img/tools/icons/${item.icon || "variant_browser.svg"}" />
+                            </div>
+                            <div class="description inline-block">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>                    
+                    </a>
             `) : null }
         </div>
         `;

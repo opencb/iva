@@ -1181,7 +1181,18 @@ class IvaApp extends LitElement {
 											<i class="fa fa-user-circle" aria-hidden="true"></i>
 											${this.opencgaSession.user.id} <span class="caret"></span>
 										</a>
-										<ul class="dropdown-menu">											
+										<ul class="dropdown-menu">
+										    <li>
+										        <a href="#projects"><i class="fa fa-database" aria-hidden="true"></i> Projects</a>
+										    </li>
+											<li>
+											    <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+											</li>
+										    <li role="separator" class="divider"></li>
+										    <li>
+											    <a href="#logout"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> Logout</a>
+											</li>
+											<!--					
 											${this.config.userMenu.submenu.map( subitem =>
                                                 subitem.category ? html`
                                                     <li><a><label>${subitem.title}</label></a></li>
@@ -1196,6 +1207,7 @@ class IvaApp extends LitElement {
 													<a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
 												 </li>
 											` : null }
+											-->
 										</ul>
 									</li>
 								` : null}
