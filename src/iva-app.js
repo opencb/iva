@@ -961,6 +961,7 @@ class IvaApp extends LitElement {
         e.preventDefault();
         let sidenav = this.querySelector("#side-nav");
         $("#side-nav").toggleClass("active")
+        $("#overlay").toggleClass("active")
 
 
     }
@@ -984,16 +985,32 @@ class IvaApp extends LitElement {
 				.navbar-inverse .dropdown-menu>.active>a, .navbar-inverse .dropdown-menu>.active>a:focus, .navbar-inverse .dropdown-menu>.active>a:hover {
 					background-color: #0c2f4c;
 				}
-				
-				#nav-user > a {
-                    padding-left: 40px;
-				}
-				
-				#nav-user > a > i {
+								
+				.navbar-nav li.notification > a > i {
                     font-size: 25px;
                     position: absolute;
                     left: 10px;
                     top: 13px;
+				}
+				
+				.navbar-nav li.user-menu > a {
+                    width: 105px;
+                    padding-left: 40px;				
+				}
+    
+				.navbar-nav li.user-menu > a > i {
+				    font-size: 25px;
+                    position: absolute;
+                    left: 10px;
+                    top: 13px;
+				}
+				
+				.navbar-nav .badge  {
+                    position: relative;
+                    z-index: 10;
+                    bottom: 6px;
+                    left: 9px;
+                    background-color: #41a7ff;
 				}
 				
 				.center {
@@ -1066,7 +1083,6 @@ class IvaApp extends LitElement {
             #side-nav.active {
                 transform: translate(0px);
                 visibility: visible;
-
             }        
             
             #side-nav .nav a {
@@ -1101,8 +1117,33 @@ class IvaApp extends LitElement {
                 color: black;
             }
             
+            #overlay {
+                position: fixed;
+                transform: translate(-100%);
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0,0,0,.2);
+                z-index: 9;
+                transition: filter .3s, opacity .3s; 
+                opacity:0;                
+                filter:alpha(opacity=100);
+            }
+            
+            #overlay.active {
+                display: block;
+                opacity:1;                
+                filter:alpha(opacity=50);
+                transform: translate(0);
+            }
+
+            
             </style>
 
+            <div id="overlay" @click="${this.toggleSideNav}"></div>
             <div id="side-nav" class="sidenav shadow-lg">
                 <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
                 <nav class="navbar" id="sidebar-wrapper" role="navigation">
@@ -1171,12 +1212,24 @@ class IvaApp extends LitElement {
                                     }`
                                 ) }
 							</ul>
-			
 							<!-- Controls aligned to the RIGHT: settings and about-->
 							<ul class="nav navbar-nav navbar-right">
-								<!--User-->
+							   <!--User-->
 								${this.opencgaSession.token ? html`
-									<li class="dropdown" id="nav-user">
+                                    <li class="notification">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <span class="badge badge-pill badge-primary">666</span><i class="fas fa-bell"></i>
+                                        </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#projects">that would be a lot of notifications</a>
+										</li>
+										<li>
+                                            <a href="#projects"> All notifications </a>
+										</li>
+                                    </ul>                                           
+                                    </li>
+									<li class="dropdown user-menu">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 											<i class="fa fa-user-circle" aria-hidden="true"></i>
 											${this.opencgaSession.user.id} <span class="caret"></span>

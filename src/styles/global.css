@@ -137,15 +137,18 @@ h3.page-title {
     transition: color ease-in-out .3s;
 }
 
+.switch-toggle.text-white input[disabled] + label {
+    color: #bfbfbf;
+}
+
 .switch-toggle input[disabled] ~ a.btn {
     background: #e4e4e4;
     -webkit-box-shadow:none;
     box-shadow: none;
 }
 .switch-toggle input[disabled] ~ label {
-    color: #e4e4e4;
+    color: #bfbfbf;
 }
-
 
 /* waffle icon */
 #waffle-icon {
