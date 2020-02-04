@@ -55,9 +55,7 @@ import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/open
 import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-facet.js";
 import "./../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-facet.js";
 import "./../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
-
-//TODO fix with new paths
-//import "./../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-interpretation.js";
+import "./../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-interpretation.js";
 
 class IvaApp extends LitElement {
 
@@ -994,7 +992,6 @@ class IvaApp extends LitElement {
 				}
 				
 				.navbar-nav li.user-menu > a {
-                    width: 105px;
                     padding-left: 40px;				
 				}
     
@@ -1053,23 +1050,25 @@ class IvaApp extends LitElement {
                 position: fixed;
                 z-index: 10; 
                 top: 0; 
-                left: 0;
+                left: -250px;
                 background-color: #fff; 
                 overflow-x: hidden;
                 padding-top: 20px; 
-                transition: 0.5s;
                 width: 250px;
                 visibility: hidden;
-                transform: translate(-250px);                
+                /*transform: translate(-250px);*/                
                 height: 100vh;
-                -webkit-transform-origin: top left;
-                -ms-transform-origin: top left;
                 transform-origin: top left;
-                -webkit-animation-duration: .18s;
-                animation-duration: .18s;
-                -webkit-animation-timing-function: ease;
+                animation-duration: .3s;
                 animation-timing-function: ease;
+                animation-name: slideOutFrames
             }
+            
+            #side-nav.active {
+                left: 0px;
+                visibility: visible;
+                animation-name: slideInFrames
+            }  
             
             #side-nav a.logo {
                 margin: 25px 0px 15px 30px;
@@ -1079,11 +1078,6 @@ class IvaApp extends LitElement {
             #side-nav .logo img{
                 width: 150px;
             }
-            
-            #side-nav.active {
-                transform: translate(0px);
-                visibility: visible;
-            }        
             
             #side-nav .nav a {
                 padding: 8px 8px 8px 32px;

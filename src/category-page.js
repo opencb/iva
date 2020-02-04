@@ -72,7 +72,7 @@ export default class CategoryPage extends LitElement {
         <style>
             #category-page {
                 display: grid;
-                grid-template-columns: auto auto auto auto;
+                grid-template-columns: repeat( auto-fit, 25% );
                 grid-gap: 10px;
                 padding: 10px;
             }

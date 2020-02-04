@@ -1,3 +1,12 @@
+a:link, a:visited {
+    color: #286090;
+}
+
+a:focus, a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
 .uppercase {
     font-size: 15px;
     text-transform: uppercase;
@@ -6,6 +15,26 @@
 
 .inline-block {
     display: inline-block;
+}
+
+
+input[type="text"] {
+    width: 100%;
+}
+
+/* TODO input material effect continue*/
+.input {
+    border: 0;
+    transition: 0.5s;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0px 0px 4px rgba(0,0,0,.1);
+}
+
+.input:focus {
+    transition: 0.5s;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(12, 47, 76);
+    box-shadow: 0px 0px 4px rgba(0,0,0,.3);
 }
 
 /* Bootstrap panel and button  overrides */
@@ -19,8 +48,13 @@ h3.page-title {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
-.panel-default>.panel-heading {
+
+.panel-default > .panel-heading {
     background: none;
+}
+
+.panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border: none;
 }
 
 .btn-primary.ripple {
@@ -31,18 +65,22 @@ h3.page-title {
     margin: 0;
 }
 
-.shadow{
-    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-    -webkit-transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
-    transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
+.shadow {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
 .shadow-lg {
-    -webkit-box-shadow: 0 0 16px rgba(0,0,0,.28);
-    box-shadow: 0 0 16px rgba(0,0,0,.28);
+    -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, .28);
+    box-shadow: 0 0 16px rgba(0, 0, 0, .28);
 }
 
+.shadow-sm {
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .16), 0 0 2px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .16), 0 0 2px 0 rgba(0, 0, 0, .12);
+}
 .ripple {
     margin: 0 .375rem; /* visual issues with toggle-switch*/
     margin: 0;
@@ -52,10 +90,10 @@ h3.page-title {
     cursor: pointer;
     border: 0;
     border-radius: 0px;
-    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-    -webkit-transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
-    transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out,-webkit-box-shadow 0.15s ease-in-out;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
     padding: 0.8rem 2.2rem;
     position: relative;
     overflow: hidden;
@@ -64,13 +102,13 @@ h3.page-title {
 
 .ripple:hover {
     outline: 0;
-    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
 .ripple:active, .ripple:focus {
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.18), 0 3px 10px 0 rgba(0,0,0,0.15);
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.18), 0 3px 10px 0 rgba(0,0,0,0.15);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.18), 0 3px 10px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.18), 0 3px 10px 0 rgba(0, 0, 0, 0.15);
 }
 
 .ripple:after {
@@ -89,6 +127,7 @@ h3.page-title {
     opacity: 0;
     transition: transform .4s, opacity .6s;
 }
+
 .ripple:active:after {
     transform: scale(0, 0);
     opacity: .2;
@@ -100,7 +139,7 @@ h3.page-title {
 }
 
 .ripple-disabled:active, .ripple-disabled:hover, .ripple-disabled:focus {
-    -webkit-box-shadow:none;
+    -webkit-box-shadow: none;
     box-shadow: none;
     cursor: default;
 
@@ -120,6 +159,7 @@ h3.page-title {
     text-align: center;
     margin: 0 0 20px 0;
 }
+
 .search-button-wrapper i {
     padding: 0 5px;
 }
@@ -132,6 +172,7 @@ h3.page-title {
 .switch-toggle-wrapper {
     margin-top: 10px;
 }
+
 .switch-toggle.text-white input[type=radio]:checked + label {
     color: white;
     transition: color ease-in-out .3s;
@@ -143,9 +184,10 @@ h3.page-title {
 
 .switch-toggle input[disabled] ~ a.btn {
     background: #e4e4e4;
-    -webkit-box-shadow:none;
+    -webkit-box-shadow: none;
     box-shadow: none;
 }
+
 .switch-toggle input[disabled] ~ label {
     color: #bfbfbf;
 }
@@ -161,4 +203,103 @@ h3.page-title {
 #waffle-icon img {
     width: 30px;
     height: 30px;
+}
+
+
+/* sidenav */
+.ms-sidenav {
+    position: absolute;
+    z-index: 1000000;
+    background-color: #fff;
+    width: 320px;
+    min-width: 320px;
+    max-width: 320px;
+    box-sizing: border-box;
+    outline: none;
+    overflow-y: auto;
+    visibility: visible;
+    pointer-events: auto;
+    top: 0;
+    left: 0;
+    right: auto;
+    height: 100vh;
+    -webkit-transform-origin: top left;
+    -ms-transform-origin: top left;
+    transform-origin: top left;
+    -webkit-animation-duration: .18s;
+    animation-duration: .18s;
+    -webkit-animation-timing-function: ease;
+    animation-timing-function: ease;
+    -webkit-animation-name: slideOutFrames;
+    animation-name: slideOutFrames
+
+}
+
+.ms-sidenav.active {
+    -webkit-animation-name: slideInFrames;
+    animation-name: slideInFrames
+}
+
+@-webkit-keyframes slideInFrames {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.95);
+        -ms-transform: scale(.95);
+        transform: scale(.95)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@keyframes slideInFrames {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.95);
+        -ms-transform: scale(.95);
+        transform: scale(.95)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-webkit-keyframes slideOutFrames {
+    0% {
+        visibility: visible;
+        opacity: 1;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1)
+    }
+    to {
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transform: scale(.95);
+        -ms-transform: scale(.95);
+        transform: scale(.95)
+    }
+}
+
+@keyframes slideOutFrames {
+    0% {
+        visibility: visible;
+        opacity: 1;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1)
+    }
+    to {
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transform: scale(.95);
+        -ms-transform: scale(.95);
+        transform: scale(.95)
+    }
 }

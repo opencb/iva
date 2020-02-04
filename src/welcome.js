@@ -20,7 +20,6 @@ export default class WelcomeWeb extends LitElement {
     constructor() {
         super();
         this.checkProjects = false;
-        this.components = [];
     }
 
     createRenderRoot() {
@@ -57,8 +56,6 @@ export default class WelcomeWeb extends LitElement {
         //console.log("opencgaSessionObserver")
         //console.log(this.opencgaSession)
         this.checkProjects = !!(UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project));
-        this.components = this.config.components.filter(this.isVisible).slice(0, 4);
-
     }
 
     onExampleClick(e) {
@@ -402,21 +399,6 @@ export default class WelcomeWeb extends LitElement {
                 </div>`
             : null }
              
-             <!--<div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
-                ${this.components.map( tool => html`
-                    <div class="col-md-3 col-sm-6">
-                        <a class="icon-wrapper" href="#${tool.id}/${this.checkProjects ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
-                            <div class="hi-icon">
-                                <img src="img/tools/icons/${tool.icon}" />
-                            </div>
-                            <p>${tool.title}</p>
-                            <span class="smaller"></span>
-                        </a>
-                    </div> 
-                `)}
-            </div> -->
-            
-            
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
                 ${this.config.menu.map( item => html`
                             ${item.submenu ? html`
