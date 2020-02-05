@@ -118,8 +118,6 @@ class IvaApp extends LitElement {
         _config.enabledComponents.terms = false;
         _config.enabledComponents.faq = false;
         _config.enabledComponents.gettingstarted = false;
-        _config.enabledComponents["files-facet"] = false;
-        _config.enabledComponents["sample-grid"] = false;
 
         // Enable tools reading the configuration
         for (let tool in _config.tools) {
@@ -148,6 +146,7 @@ class IvaApp extends LitElement {
             "transcript",
             "protein",
             "files-facet",
+            "sample-grid",
             "sample-browser",
             "samples-facet",
             "individual-facet",
@@ -1078,19 +1077,18 @@ class IvaApp extends LitElement {
             }
             
             #side-nav .nav a {
-                padding: 8px 8px 8px 32px;
+                padding: 8px;
                 text-decoration: none;
                 color: #818181;
                 display: block;
                 transition: 0.3s;
-                font-size: 15px;
+                font-size: 14px;
                 text-transform: uppercase;
                 letter-spacing: 2px;
             }
             
             #side-nav .nav a:hover {            
-                color: #fff;
-                background-color: #204d74;
+                color: #204d74;
             }
 
             #side-nav .closebtn {
@@ -1107,6 +1105,10 @@ class IvaApp extends LitElement {
                 background: transparent;
                 text-decoration: none;
                 color: black;
+            }
+            
+            #side-nav a > img {
+                width:48px
             }
             
             #overlay {
@@ -1145,7 +1147,7 @@ class IvaApp extends LitElement {
                     <ul class="nav sidebar-nav">
                     ${this.config.menu && this.config.menu.length ? this.config.menu.map( item => html`
                         <li>
-                            <a href="#cat-${item.id}" role="button" @click="${ e => {this.toggleSideNav(e); this.changeTool(e)} }">${item.title}</a>
+                            <a href="#cat-${item.id}" role="button" @click="${ e => {this.toggleSideNav(e); this.changeTool(e)} }"> <img src="img/tools/icons/${item.icon}" />  ${item.title}</a>
                          </li>
                     `) : null}
                     </ul>

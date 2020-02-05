@@ -98,23 +98,28 @@ export default class CategoryPage extends LitElement {
             
             #category-page .section-title {
                 grid-column: 1 / span 4;
-                font-size: 2em;
+                font-size: 4em;
+                font-variant: all-small-caps;
+                font-weight: 600;
+                letter-spacing: 10px;
                 margin-top: 2em;
                 color: #000966;
+                font-family: "Roboto",serif;
             }
         </style>
 
         <h2>${this.config.title}</h2>
         <div id="category-page">
-            ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( item => item.category ? html`
+            ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item,i) => item.category ? html`
                 <div class="section-title">${item.title}</div>
                 ` : item.separator ? null : html`
                     <a href="#${item.id}" class="shadow-lg item">
                             <div class="title uppercase">${item.title}</div>                    
-                            <div class="icon inline-block">
-                                <img src="img/tools/icons/${item.icon || "variant_browser.svg"}" />
+                            <div class="text-icon ${i % 2 === 0 ? "green": ""} ${i % 3 === 0 ? "red": ""}">
+                                ${item.title[0]}${item.title[1]}${item.title[2].toLowerCase()}
+                                <!--<img src="img/tools/icons/${item.icon || "variant_browser.svg"}" /> -->
                             </div>
-                            <div class="description inline-block">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>                    
+                            <div class="description">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>                    
                     </a>
             `) : null }
         </div>
