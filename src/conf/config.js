@@ -95,6 +95,35 @@ const application = {
             description: "",
             icon: "variant_browser.svg",
             visibility: "public",
+            submenu: [
+                {
+                    id: "browser",
+                    title: "Variant Browser",
+                    description: `
+                            <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                            <ul>
+                                <li>Rich annotation and links to leading reference databases</li>
+                                <li>Filter by gene, consequence, frequency and much more</li>
+                            </ul>`,
+                    visibility: "public",
+                    thumbnail: "screenshot1.png",
+                    fa_icon: "fa fa-list",
+                    icon: "variant_browser.svg"
+                },
+                {
+                    id: "genomeBrowser",
+                    title: "Genome Browser",
+                    description: `<ul>
+                                    <li>Based on Genome Maps (http://genomemaps.org)</li>
+                                    <li>Smooth, interactive variant visualisation</li>
+                                    </ul>`,
+                    visibility: "private",
+                    thumbnail: "screenshot3.png",
+                    fa_icon: "fa fa-globe-europe",
+                    icon: "genome_browser.svg"
+
+                },
+            ]
             // submenu: [
             //     {
             //         id: "browser",
@@ -122,7 +151,6 @@ const application = {
             //         fa_icon: "fa fa-chart-bar",
             //         icon: "aggregation2.svg"
             //     },
-            //
             // ]
         },
 
@@ -169,15 +197,8 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "h-w",
+                    id: "hw",
                     title: "Hardy-Weinberg",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "mendel",
-                    title: "Mendel Errors",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -187,20 +208,20 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    title: "GWAS",
+                    title: "Association Analysis",
                     category: true,
                     visibility: "public"
                 },
                 {
-                    id: "assoc",
-                    title: "Association",
-                    description: "",
+                    id: "gwas",
+                    title: "Genome-Wide Association Study (GWAS)",
+                    description: "Study of a genome-wide set of genetic variants in different individuals to see if any variant is associated with a trait",
                     icon: "",
                     visibility: "public"
                 },
                 {
                     id: "tdt",
-                    title: "Family-based Association (TDT)",
+                    title: "Family-Based Association (TDT)",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -273,19 +294,6 @@ const application = {
                     title: "Other",
                     category: true,
                     visibility: "public"
-                },
-                {
-                    id: "genomeBrowser",
-                    title: "Genome Browser",
-                    description: `<ul>
-                                    <li>Based on Genome Maps (http://genomemaps.org)</li>
-                                    <li>Smooth, interactive variant visualisation</li>
-                                    </ul>`,
-                    visibility: "private",
-                    thumbnail: "screenshot3.png",
-                    fa_icon: "fa fa-globe-europe",
-                    icon: "genome_browser.svg"
-
                 },
                 {
                     id: "exporter",

@@ -160,7 +160,7 @@ class IvaApp extends LitElement {
             "cat-clinical",
             "cat-catalog",
             "cat-ga4gh",
-            "assoc"];
+            "gwas"];
 
         for (let component of components) {
             _config.enabledComponents[component] = false;
@@ -1697,7 +1697,7 @@ class IvaApp extends LitElement {
                 ` : null }                                                                
                                 
                                 
-                ${this.config.enabledComponents.assoc ? html`
+                ${this.config.enabledComponents.gwas ? html`
 					<div class="content" id="opencga-gwas-analysis">
 						<opencga-gwas-analysis>
                         </opencga-gwas-analysis>
