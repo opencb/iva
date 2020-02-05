@@ -31,7 +31,7 @@ import "./contact.js";
 import "./faq.js";
 import "./terms.js";
 import "./getting-started.js";
-import "./breadcrumb.js";
+import "./opencga-breadcrumb.js";
 import "./category-page.js";
 
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-facet.js";
@@ -1321,7 +1321,7 @@ class IvaApp extends LitElement {
 				<!--<div>
 					<ol id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
 				</div>-->
-				<bread-crumb .config="${this.config}" .opencgaSession="${this.opencgaSession}"></bread-crumb>
+				<opencga-breadcrumb .config="${this.config}" .opencgaSession="${this.opencgaSession}"></opencga-breadcrumb>
 			` : null}
 			
 			<!-- This is where main application is rendered -->
