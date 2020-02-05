@@ -32,9 +32,6 @@ export default class Breadcrumb extends LitElement {
             opencgaSession: {
                 type: Object
             },
-            query: {
-                type: Object
-            },
             config: {
                 type: Object
             }
@@ -61,38 +58,39 @@ export default class Breadcrumb extends LitElement {
 
     render() {
         return html`
-        <style>
-            .breadcrumb{
-                padding-left: 40px;
-            }
-        </style>
-        <div>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="#projects/${this.buildHash()}" data-category="${this.config.breadcrumb.title}">${this.config.breadcrumb.title}</a></li>
-                </li>
-                ${!this.opencgaSession.study || Object.keys(this.opencgaSession.study).length === 0 ? html`
-                    <li class="active">
-                        ${this.opencgaSession.project.alias}
-                    </li>` : html`
+            <style>
+                .breadcrumb{
+                    padding-left: 40px;
+                }
+            </style>
+            <div>
+                <ol class="breadcrumb">
                     <li>
-                        <a href="#project/${this.buildHash()}" data-category="project">${this.opencgaSession.project.alias}</a></li>
+                        <a href="#projects/${this.buildHash()}" data-category="${this.config.breadcrumb.title}">${this.config.breadcrumb.title}</a></li>
                     </li>
-                    ${this.samples && this.samples.length ? html`
-                        <li>
-                            <a href="#browser/${this.buildHash()}" data-category="study">${this.opencgaSession.study.alias}</a>
-                        </li>
-                        <li class="active">
-                            ${this.samples.map( sample => html`${sample.name}`)}
-                        </li>
-                    ` : html`
-                       <li class="active">
-                            ${this.opencgaSession.study.alias}
-                        </li>
-                    `}
-                 `}
-            </ol>
-        </div>
+                    ${!this.opencgaSession.study || Object.keys(this.opencgaSession.study).length === 0 
+                        ? html`<li class="active">
+                                    ${this.opencgaSession.project.id}
+                               </li>` 
+                        : html`
+                            <li>
+                                <a href="#project/${this.buildHash()}" data-category="project">${this.opencgaSession.project.id}</a></li>
+                            </li>
+                            ${this.samples && this.samples.length ? html`
+                                <li>
+                                    <a href="#browser/${this.buildHash()}" data-category="study">${this.opencgaSession.study.id}</a>
+                                </li>
+                                <li class="active">
+                                    ${this.samples.map( sample => html`${sample.name}`)}
+                                </li>
+                            ` : html`
+                               <li class="active">
+                                    ${this.opencgaSession.study.id}
+                                </li>
+                            `}
+                         `}
+                </ol>
+            </div>
         `;
     }
 

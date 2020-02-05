@@ -124,34 +124,6 @@ const application = {
 
                 },
             ]
-            // submenu: [
-            //     {
-            //         id: "browser",
-            //         title: "Variant Browser",
-            //         description: `
-            //             <p>Explore all variants identified by the 100,000 Genomes Project</p>
-            //             <ul>
-            //                 <li>Rich annotation and links to leading reference databases</li>
-            //                 <li>Filter by gene, consequence, frequency and much more</li>
-            //             </ul>`,
-            //         visibility: "public",
-            //         thumbnail: "screenshot1.png",
-            //         fa_icon: "fa fa-list",
-            //         icon: "variant_browser.svg"
-            //     },
-            //     {
-            //         id: "facet",
-            //         title: "Aggregation Stats",
-            //         description: `<ul>
-            //                           <li>Filter by gene, consequence, frequency and much more</li>
-            //                           <li>Add nested facets to generate aggregate statistics</li>
-            //                       </ul>`,
-            //         visibility: "public",
-            //         thumbnail: "screenshot2.png",
-            //         fa_icon: "fa fa-chart-bar",
-            //         icon: "aggregation2.svg"
-            //     },
-            // ]
         },
 
         // {
@@ -467,9 +439,6 @@ const application = {
     ],
     search: {
         placeholder: "Search",
-        visible: true
-    },
-    settings: {
         visible: false
     },
     about: {
@@ -487,96 +456,6 @@ const application = {
     },
     login: {
         visible: true
-    },
-    userMenu: {
-        visible: true,
-        id: "usermenu",
-        title: "User Menu",
-        visibility: "public",
-        submenu: [
-            {
-                id: "projects",
-                title: "Projects",
-                icon: "fa fa-database",
-                visibility: "public",
-            },
-            // {
-            //     id: "sample",
-            //     title: "Sample View",
-            //     visibility: "public",
-            //     icon: "fa fa-users"
-            // },
-            {
-                separator: true,
-                visibility: "public"
-            },
-            {
-                id: "logout",
-                title: "Logout",
-                icon: "fa fa-sign-out-alt fa-lg",
-                visibility: "private",
-            },
-            // {
-            //     title: "Browsers",
-            //     category: true,
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "files",
-            //     title: "File Browser",
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "files-facet",
-            //     title: "File Facet",
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "samples",
-            //     title: "Sample Browser",
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "samples-facet",
-            //     title: "Sample Facet",
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "individuals",
-            //     title: "Individual Browser",
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "individual-facet",
-            //     title: "Individual Facet",
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "families",
-            //     title: "Family Browser",
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "family-facet",
-            //     title: "Family Facet",
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "cohorts",
-            //     title: "Cohort Browser",
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "cohort-facet",
-            //     title: "Cohort Facet",
-            //     visibility: "public"
-            // },
-            // {
-            //     id: "clinicalAnalysis",
-            //     title: "Clinical Analysis Browser",
-            //     visibility: "public"
-            // }
-        ]
     },
     breadcrumb: {
         title: "Projects",
@@ -677,40 +556,6 @@ const application = {
         }*/
 
     ]
-};
-
-const sampleBrowser = {
-    title: "Sample Browser",
-    showTitle: true,
-    filter: {
-
-    },
-    grid: {
-        showSelect: true
-    }
-};
-
-const fileBrowser = {
-    title: "File Browser",
-    showTitle: true,
-    filter: {
-
-    },
-    grid: {
-        showSelect: true
-    }
-};
-
-
-const cohortBrowser = {
-    title: "Cohort Browser",
-    showTitle: true,
-    filter: {
-
-    },
-    grid: {
-        showSelect: true
-    }
 };
 
 const beacon = {
