@@ -98,17 +98,17 @@ export default class CategoryPage extends LitElement {
             
             #category-page .section-title {
                 grid-column: 1 / span 4;
-                font-size: 4em;
+                font-size: 2.5em;
                 font-variant: all-small-caps;
-                font-weight: 600;
-                letter-spacing: 10px;
-                margin-top: 2em;
+                font-weight: 500;
+                letter-spacing: 5px;
+                margin-top: 1em;
                 color: #000966;
                 font-family: "Roboto",serif;
             }
         </style>
 
-        <h2>${this.config.title}</h2>
+        <h1>${this.config.title}</h1>
         <div id="category-page">
             ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item,i) => item.category ? html`
                 <div class="section-title">${item.title}</div>
@@ -116,7 +116,7 @@ export default class CategoryPage extends LitElement {
                     <a href="#${item.id}" class="shadow-lg item">
                             <div class="title uppercase">${item.title}</div>                    
                             <div class="text-icon ${i % 2 === 0 ? "green": ""} ${i % 3 === 0 ? "red": ""}">
-                                ${item.title[0]}${item.title[1]}${item.title[2].toLowerCase()}
+                                ${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}
                                 <!--<img src="img/tools/icons/${item.icon || "variant_browser.svg"}" /> -->
                             </div>
                             <div class="description">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>                    

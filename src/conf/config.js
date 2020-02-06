@@ -24,9 +24,9 @@ const opencga = {
     // host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test-1.4.2",
     // host: "https://bio-uat-opencgainternal.gel.zone/opencga/webservices/",
     // host: "http://bioinfo.hpc.cam.ac.uk/hgva", // public instance
-    // host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", // small demo instance
+    host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", // small demo instance
 
-    host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
+    // host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
     // host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
     // host: "https://re-test-opencgahadoop.gel.zone/opencga", //opencga 1.3
     // host: "http://bioinfodev.hpc.cam.ac.uk/web-apps/opencga-test", //TODO test for varianti interpretation "disorder" field missing
@@ -99,6 +99,7 @@ const application = {
                 {
                     id: "browser",
                     title: "Variant Browser",
+                    acronym: "VB",
                     description: `
                             <p>Explore all variants identified by the 100,000 Genomes Project</p>
                             <ul>
@@ -113,6 +114,7 @@ const application = {
                 {
                     id: "genomeBrowser",
                     title: "Genome Browser",
+                    acronym: "GB",
                     description: `<ul>
                                     <li>Based on Genome Maps (http://genomemaps.org)</li>
                                     <li>Smooth, interactive variant visualisation</li>
@@ -157,6 +159,7 @@ const application = {
                 {
                     id: "stats",
                     title: "Cohort Variant Stats",
+                    acronym: "CS",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -164,6 +167,7 @@ const application = {
                 {
                     id: "ibs",
                     title: "IBS/IBD",
+                    acronym: "IBS",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -171,6 +175,7 @@ const application = {
                 {
                     id: "hw",
                     title: "Hardy-Weinberg",
+                    acronym: "HW",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -187,6 +192,7 @@ const application = {
                 {
                     id: "gwas",
                     title: "Genome-Wide Association Study (GWAS)",
+                    acronym: "GWAS",
                     description: "Study of a genome-wide set of genetic variants in different individuals to see if any variant is associated with a trait",
                     icon: "",
                     visibility: "public"
@@ -194,6 +200,7 @@ const application = {
                 {
                     id: "tdt",
                     title: "Family-Based Association (TDT)",
+                    acronym: "TDT",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -210,6 +217,7 @@ const application = {
                 {
                     id: "knockout",
                     title: "Knockout Analysis",
+                    acronym: "KO",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -224,6 +232,7 @@ const application = {
                 {
                     id: "sampleFacet",
                     title: "Phenotype-Genotype Sample Analysis",
+                    acronym: "PhG",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -231,6 +240,7 @@ const application = {
                 {
                     id: "compound",
                     title: "Compound Heterozygous",
+                    acronym: "CH",
                     description: "",
                     icon: "aggregation.svg",
                     visibility: "public"
@@ -238,6 +248,7 @@ const application = {
                 {
                     id: "mendel",
                     title: "Mendelian Errors",
+                    acronym: "ME",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -254,6 +265,7 @@ const application = {
                 {
                     id: "signature",
                     title: "Signature Analysis",
+                    acronym: "SG",
                     description: "",
                     icon: "aggregation.svg",
                     visibility: "public"
@@ -270,6 +282,7 @@ const application = {
                 {
                     id: "exporter",
                     title: "Exporter",
+                    acronym: "EX",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -291,6 +304,7 @@ const application = {
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Interpretation Portal",
+                    acronym: "RDI",
                     icon: "",
                     description: "",
                     visibility: "public"
@@ -336,7 +350,8 @@ const application = {
                 },
                 {
                     id: "cva",
-                    title: "Reported Browser",
+                    title: "CVA",
+                    acronym: "CVA",
                     description: "",
                     icon: "",
                     visibility: "public"
