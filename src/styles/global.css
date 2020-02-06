@@ -173,23 +173,18 @@ h3.page-title {
     margin-top: 10px;
 }
 
-.switch-toggle.text-white input[type=radio]:checked + label {
-    color: white;
-    transition: color ease-in-out .3s;
-}
-
 .switch-toggle.text-white input[disabled] + label {
     color: #bfbfbf;
+}
+
+.switch-toggle.text-white input + label {
+    color: #dcdcdc;
 }
 
 .switch-toggle input[disabled] ~ a.btn {
     background: #e4e4e4;
     -webkit-box-shadow: none;
     box-shadow: none;
-}
-
-.switch-toggle input[disabled] ~ label {
-    color: #bfbfbf;
 }
 
 /* waffle icon */
@@ -322,20 +317,31 @@ h3.page-title {
     -moz-box-shadow: 5px 5px 5px -2px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 5px -2px rgba(0,0,0,0.75);
     float: left;
-    background: #A3BFD8;
     margin: 10px 30px 10px 10px;
     background: linear-gradient(135deg, #c4d3e0 0%, #c4d3e0 50%, #c4d3e0 100%);
+    background: #c6ddf3;
     text-shadow:2px 2px 0px rgba(12,47,76,0.3),
     4px 4px 3px rgba(163, 191, 216, 1),
+    6px 6px 3px rgba(163, 191, 216, 1),
     8px 8px 3px rgba(163, 191, 216, 1),
+    10px 10px 3px rgba(163, 191, 216, 1),
     12px 12px 3px rgba(163, 191, 216, 1),
+    14px 14px 3px rgba(163, 191, 216, 1),
     16px 16px 3px rgba(163, 191, 216, 1),
+    18px 18px 3px rgba(163, 191, 216, 1),
     20px 20px 3px rgba(163, 191, 216, 1),
+    22px 22px 3px rgba(163, 191, 216, 1),
     24px 24px 3px rgba(163, 191, 216, 1),
+    26px 26px 3px rgba(163, 191, 216, 1),
     28px 28px 3px rgba(163, 191, 216, 1),
-    32px 32px 1px rgba(163, 191, 216, 1),
-    36px 36px 1px rgba(163, 191, 216, 1),
-    42px 42px 1px rgba(163, 191, 216, 1)
+    30px 30px 3px rgba(163, 191, 216, 1),
+    32px 32px 3px rgba(163, 191, 216, 1),
+    34px 34px 3px rgba(163, 191, 216, 1),
+    36px 36px 3px rgba(163, 191, 216, 1),
+    38px 38px 3px rgba(163, 191, 216, 1),
+    40px 40px 3px rgba(163, 191, 216, 1),
+    42px 42px 3px rgba(163, 191, 216, 1),
+    44px 44px 3px rgba(163, 191, 216, 1)
 }
 
 .text-icon.green {
@@ -344,15 +350,26 @@ h3.page-title {
     background: #d2ffd2;
     text-shadow:2px 2px 0px rgba(12,47,76,0.3),
     4px 4px 3px rgba(171, 211, 174, 1),
+    6px 6px 3px rgba(171, 211, 174, 1),
     8px 8px 3px rgba(171, 211, 174, 1),
+    10px 10px 3px rgba(171, 211, 174, 1),
     12px 12px 3px rgba(171, 211, 174, 1),
+    14px 14px 3px rgba(171, 211, 174, 1),
     16px 16px 3px rgba(171, 211, 174, 1),
+    18px 18px 3px rgba(171, 211, 174, 1),
     20px 20px 3px rgba(171, 211, 174, 1),
+    22px 22px 3px rgba(171, 211, 174, 1),
     24px 24px 3px rgba(171, 211, 174, 1),
+    26px 26px 3px rgba(171, 211, 174, 1),
     28px 28px 3px rgba(171, 211, 174, 1),
-    32px 32px 1px rgba(171, 211, 174, 1),
-    36px 36px 1px rgba(171, 211, 174, 1),
-    42px 42px 1px rgba(171, 211, 174, 1)
+    30px 30px 3px rgba(171, 211, 174, 1),
+    32px 32px 3px rgba(171, 211, 174, 1),
+    34px 34px 3px rgba(171, 211, 174, 1),
+    36px 36px 3px rgba(171, 211, 174, 1),
+    38px 38px 3px rgba(171, 211, 174, 1),
+    40px 40px 3px rgba(171, 211, 174, 1),
+    42px 42px 3px rgba(171, 211, 174, 1),
+    44px 44px 3px rgba(171, 211, 174, 1)
 }
 
 .text-icon.red {
@@ -362,13 +379,24 @@ h3.page-title {
     color: #bb0000;
     text-shadow:2px 2px 0px rgba(12,47,76,0.3),
     4px 4px 3px rgba(218, 166, 166, 1),
+    6px 6px 3px rgba(218, 166, 166, 1),
     8px 8px 3px rgba(218, 166, 166, 1),
+    10px 10px 3px rgba(218, 166, 166, 1),
     12px 12px 3px rgba(218, 166, 166, 1),
+    14px 14px 3px rgba(218, 166, 166, 1),
     16px 16px 3px rgba(218, 166, 166, 1),
+    18px 18px 3px rgba(218, 166, 166, 1),
     20px 20px 3px rgba(218, 166, 166, 1),
+    22px 22px 3px rgba(218, 166, 166, 1),
     24px 24px 3px rgba(218, 166, 166, 1),
+    26px 26px 3px rgba(218, 166, 166, 1),
     28px 28px 3px rgba(218, 166, 166, 1),
-    32px 32px 1px rgba(218, 166, 166, 1),
-    36px 36px 1px rgba(218, 166, 166, 1),
-    42px 42px 1px rgba(218, 166, 166, 1)
+    30px 30px 3px rgba(218, 166, 166, 1),
+    32px 32px 3px rgba(218, 166, 166, 1),
+    34px 34px 3px rgba(218, 166, 166, 1),
+    36px 36px 3px rgba(218, 166, 166, 1),
+    38px 38px 3px rgba(218, 166, 166, 1),
+    40px 40px 3px rgba(218, 166, 166, 1),
+    42px 42px 3px rgba(218, 166, 166, 1),
+    44px 44px 3px rgba(218, 166, 166, 1)
 }

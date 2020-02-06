@@ -115,7 +115,7 @@ export default class CategoryPage extends LitElement {
                 ` : item.separator ? null : html`
                     <a href="#${item.id}" class="shadow-lg item">
                             <div class="title uppercase">${item.title}</div>                    
-                            <div class="text-icon ${i % 2 === 0 ? "green": ""} ${i % 3 === 0 ? "red": ""}">
+                            <div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">
                                 ${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}
                                 <!--<img src="img/tools/icons/${item.icon || "variant_browser.svg"}" /> -->
                             </div>

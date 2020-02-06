@@ -33,6 +33,8 @@ import "./terms.js";
 import "./getting-started.js";
 import "./opencga-breadcrumb.js";
 import "./category-page.js";
+import "./iva-profile.js";
+import "./iva-settings.js";
 
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-portal.js";
@@ -157,7 +159,9 @@ class IvaApp extends LitElement {
             "cat-clinical",
             "cat-catalog",
             "cat-ga4gh",
-            "gwas"];
+            "gwas",
+            "settings",
+            "account"];
 
         for (let component of components) {
             _config.enabledComponents[component] = false;
@@ -1232,7 +1236,7 @@ class IvaApp extends LitElement {
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 										    <i class="fa fa-database fa-lg" style="padding-right: 5px"></i>Studies <span class="caret"></span>
 										</a>
-										<ul class="dropdown-menu pre-scrollable">
+										<ul class="dropdown-menu">
 											${this.opencgaSession.projects.map(project => html`
 												<li><a><b>${project.name}</b></a></li>
 												${project.studies && project.studies.length && project.studies && project.studies.map(study => html`
@@ -1408,7 +1412,7 @@ class IvaApp extends LitElement {
 						<opencga-variant-facet  .opencgaSession="${this.opencgaSession}"
 											    .opencgaClient="${this.opencgaSession.opencgaClient}"
 										        .query="${this.queries.variant}"
-												.config="${this.config.tools.facet}"
+												.config="${this.config.tools.browser}"
 											    .cellbaseClient="${this.cellbaseClient}"
 											    .populationFrequencies="${this.config.populationFrequencies}"
 											    .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
@@ -1735,8 +1739,22 @@ class IvaApp extends LitElement {
                                 
                 ${this.config.enabledComponents.gwas ? html`
 					<div class="content" id="opencga-gwas-analysis">
-						<opencga-gwas-analysis>
+						<opencga-gwas-analysis .opencgaSession="${this.opencgaSession}">
                         </opencga-gwas-analysis>
+					</div>
+                ` : null }
+                
+                ${this.config.enabledComponents.account ? html`
+					<div class="content" id="account">
+						<iva-profile .opencgaSession="${this.opencgaSession}">
+                        </iva-profile>
+					</div>
+                ` : null }
+                                
+                ${this.config.enabledComponents.settings ? html`
+					<div class="content" id="settings">
+						<iva-settings .opencgaSession="${this.opencgaSession}">
+                        </iva-settings>
 					</div>
                 ` : null }
 				

@@ -112,6 +112,16 @@ const application = {
                     icon: "variant_browser.svg"
                 },
                 {
+                    id: "facet",
+                    title: "Variant Browser v2",
+                    acronym: "VB2",
+                    description: "",
+                    visibility: "public",
+                    thumbnail: "screenshot1.png",
+                    fa_icon: "fa fa-list",
+                    icon: "variant_browser.svg"
+                },
+                {
                     id: "genomeBrowser",
                     title: "Genome Browser",
                     acronym: "GB",
