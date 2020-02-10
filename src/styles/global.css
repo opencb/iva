@@ -178,7 +178,7 @@ h3.page-title {
 }
 
 .switch-toggle.text-white input + label {
-    color: #dcdcdc;
+    color: #c7c7c7;
 }
 
 .switch-toggle input[disabled] ~ a.btn {
@@ -399,4 +399,25 @@ h3.page-title {
     40px 40px 3px rgba(218, 166, 166, 1),
     42px 42px 3px rgba(218, 166, 166, 1),
     44px 44px 3px rgba(218, 166, 166, 1)
+}
+
+/*  TODO move in jsorolla */
+.browser-subsection {
+    font-size: 1.35rem;
+    font-weight: bold;
+    padding: 7px 0px;
+    color: #444444;
+    border:none
+}
+.panel-body > .form-group:not(:first-child) {
+    border-top: 1px solid rgba(221, 221, 221, 0.8);
+}
+
+.subsection-content {
+    margin: 5px 5px;
+}
+
+.panel.filter-section {
+    margin-bottom: 10px;
+    font-size: 12px;
 }

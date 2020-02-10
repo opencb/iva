@@ -53,6 +53,7 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencg
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-analysis-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-analysis-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/files/opencga-file-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-samples-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-facet.js";
@@ -154,6 +155,7 @@ class IvaApp extends LitElement {
             "individual-facet",
             "family-facet",
             "cohort-facet",
+            "clinical-analysis-facet",
             "cat-browser",
             "cat-analysis",
             "cat-clinical",
@@ -1701,6 +1703,17 @@ class IvaApp extends LitElement {
 					</div>
                 ` : null }
                 
+                ${this.config.enabledComponents["clinical-analysis-facet"] ? html`
+					<div class="content" id="clinical-analysis-facet">
+						<opencga-clinical-analysis-facet    .opencgaSession="${this.opencgaSession}"
+														    .config="${this.config.clinicalAnalysisBrowser}"
+														    .query="${this.queries.clinicalAnalysis}"
+                                                            @querySearch="${e => this.onQueryFilterSearch(e, "clinical-analysis")}"
+                                                            @activeFilterChange="${e => this.onQueryFilterSearch(e, "clinical-analysis")}">  
+                        </opencga-clinical-analysis-facet>
+					</div>
+                ` : null }
+                                
                 ${this.config.enabledComponents["cat-browser"] ? html`
 					<div class="content" id="cat-browser">
 						<category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find( item => item.id === "browser")}">

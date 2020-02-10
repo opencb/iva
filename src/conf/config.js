@@ -442,6 +442,11 @@ const application = {
                     id: "clinicalAnalysis",
                     title: "Clinical Analysis Browser",
                     visibility: "public"
+                },
+                {
+                    id: "clinical-analysis-facet",
+                    title: "Clinical Analysis Facet",
+                    visibility: "public"
                 }
             ]
         },
