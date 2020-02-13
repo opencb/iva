@@ -27,7 +27,7 @@ const opencga = {
     host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", // small demo instance
 
     // host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
-    // host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
+    //host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
     // host: "https://re-test-opencgahadoop.gel.zone/opencga", //opencga 1.3
     // host: "http://bioinfodev.hpc.cam.ac.uk/web-apps/opencga-test", //TODO test for varianti interpretation "disorder" field missing
 
@@ -1005,3 +1005,5 @@ const consequenceTypes = {
 //         },
 //     ],
 // };
+
+//export {application, beacon, cellbase, consequenceTypes, opencga, populationFrequencies, proteinSubstitutionScores}

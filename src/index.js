@@ -1,1 +1,1 @@
-console.log("webpack tmp entry point")
+console.log("webpack entry point")

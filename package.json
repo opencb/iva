@@ -51,9 +51,15 @@
     "urijs": "~1.18.10"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
     "@pika/web": "^0.6.1",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
     "bower": "*",
     "browser-sync": "^2.26.7",
+    "clean-webpack-plugin": "^3.0.0",
     "crisper": "~2.1.1",
     "eslint": "^6.5.1",
     "eslint-config-google": "^0.14.0",
@@ -67,7 +73,12 @@
     "vulcanize": "~1.16.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "xmldom": "0.1.27"
+    "webpack-glob-entries": "^1.0.1",
+    "xmldom": "0.1.27",
+    "css-loader": "^3.4.2",
+    "file-loader": "^5.0.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0"
   },
   "@pika/web": {
     "webDependencies": [

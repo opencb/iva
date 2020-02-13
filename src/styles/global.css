@@ -154,7 +154,7 @@ h3.page-title {
     font-size: .8em;
 }
 
-/* search button in browsers */
+/********** search button in browsers ************/
 .search-button-wrapper {
     text-align: center;
     margin: 0 0 20px 0;
@@ -168,7 +168,7 @@ h3.page-title {
     width: 100%;
 }
 
-/* toggle-switch plugin override */
+/********** toggle-switch plugin override ************/
 .switch-toggle-wrapper {
     margin-top: 10px;
 }
@@ -187,7 +187,8 @@ h3.page-title {
     box-shadow: none;
 }
 
-/* waffle icon */
+
+/********** waffle icon ************/
 #waffle-icon {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MXtkaXNwbGF5OmlubGluZTtmaWxsOiM1QzVDNUM7c3Ryb2tlOiNGRkZGRkY7c3Ryb2tlLXdpZHRoOjY7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQoJLnN0MntmaWxsOiNGRkZGRkY7c3Ryb2tlOiNGRkZGRkY7c3Ryb2tlLXdpZHRoOjY7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQo8L3N0eWxlPgo8ZyBpZD0iTGl2ZWxsb18xIj4KCTxnPgoJCTxjaXJjbGUgY2xhc3M9InN0MiIgY3g9IjQ0IiBjeT0iNDEuMSIgcj0iNy4yIi8+CgkJPGNpcmNsZSBjbGFzcz0ic3QyIiBjeD0iNDQiIGN5PSI4NC4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSI0NCIgY3k9IjEyNy4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIxMzAuMSIgY3k9IjEyNy4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSI4Ny4xIiBjeT0iMTI3LjIiIHI9IjcuMiIvPgoJCTxjaXJjbGUgY2xhc3M9InN0MiIgY3g9Ijg3LjEiIGN5PSI0MS4xIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIxMzAuMSIgY3k9IjQxLjEiIHI9IjcuMiIvPgoJCTxjaXJjbGUgY2xhc3M9InN0MiIgY3g9Ijg3LjEiIGN5PSI4NC4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIxMzAuMSIgY3k9Ijg0LjIiIHI9IjcuMiIvPgoJPC9nPgo8L2c+Cjwvc3ZnPg==");
     background-attachment: fixed;
@@ -200,8 +201,7 @@ h3.page-title {
     height: 30px;
 }
 
-
-/* sidenav */
+/********** sidenav ************/
 .ms-sidenav {
     position: absolute;
     z-index: 1000000;
@@ -299,7 +299,7 @@ h3.page-title {
     }
 }
 
-/* analysis icons*/
+/********** text-only icons in category pages ************/
 .text-icon {
     height: 100px;
     width: 100px;
@@ -374,7 +374,6 @@ h3.page-title {
 
 .text-icon.red {
     background: #e4c5c5;
-
     border: 5px solid #bb0000;
     color: #bb0000;
     text-shadow:2px 2px 0px rgba(12,47,76,0.3),
@@ -420,4 +419,172 @@ h3.page-title {
 .panel.filter-section {
     margin-bottom: 10px;
     font-size: 12px;
+}
+
+
+/********** checkbox widget ************/
+.checkbox-container {
+    margin:0;
+    padding:0;
+}
+.checkbox-container li{
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.checkbox-container > li > a {
+    padding: 3px 10px 3px 0;
+    display: block;
+}
+.checkbox-container span + span {
+    margin: 0 5px;
+}
+.checkbox-container .checkmark-label {
+    padding:0 0 0 30px;
+    color: #333;
+}
+.checkbox-container input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.checkbox-container .checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #f5f5f5;
+}
+.checkbox-container input:checked ~ .checkmark {
+    background-color: #337ab7;
+}
+.checkbox-container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+.checkbox-container .checkmark:after {
+    left: 8px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.checkbox-container a:focus .checkmark-label,
+.checkbox-container a:hover .checkmark-label {
+    color: #337ab7;
+}
+
+.checkbox-container li a:focus,
+.checkbox-container li a:hover {
+    text-decoration: none;
+}
+
+/********** switch widget ************/
+.switch-container {
+    position: relative;
+    width: 180px;
+    padding-top: 10px;
+}
+
+.switch-container .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch-container .rating-label {
+    position: relative;
+    text-align: center;
+    flex: 0.5;
+    z-index: 3;
+    font-weight: bold;
+    cursor: pointer;
+    color: #bbbbbb;
+    transition: 500ms;
+}
+
+.switch-container .rating-label:hover,
+.switch-container .rating-label:active {
+    color: #bbbbbb;
+}
+
+.switch-container .rating-label-and {
+    left: -27px;
+    text-align: right;
+}
+
+.switch-container .rating-label-or {
+    left: 33px;
+    text-align: left;
+    color: #222;
+}
+
+.switch-container input {
+    display: none;
+}
+
+.switch-container .toggle-rating-pill {
+    position: relative;
+    height: 30px;
+    width: 60px;
+    background: #347ab7;
+    border-radius: 50px;
+    transition: all 500ms;
+}
+
+.switch-container .rating-toggle {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background-color: white;
+    left: 62px;
+    border-radius: 50%;
+    transition: all 300ms;
+    z-index: 4;
+}
+
+.switch-container input[disabled].radio-or ~ .rating-label-or,
+.switch-container input[disabled].radio-and ~ .rating-label-and{
+    color: #e4e4e4;
+}
+.switch-container input[disabled] ~ .toggle-rating-pill{
+    background: #e4e4e4;
+}
+/*
+Toggle Changes
+*/
+.switch-container .radio-or:checked ~ .rating-label-or {
+    color: #555e63;
+}
+
+.switch-container .radio-and:checked ~ .rating-label-or {
+    color: #bbbbbb;
+}
+
+.switch-container .radio-and:checked ~ .rating-label-and {
+    color: #555e63;
+}
+
+.switch-container .radio-and:checked ~ .rating-toggle {
+    left: 92px;
+}
+
+.switch-container .radio-and:checked ~ .toggle-rating-pill {
+    /*background-color: #00b9ee;*/
 }

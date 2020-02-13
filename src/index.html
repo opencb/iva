@@ -219,16 +219,10 @@
 
 </head>
 
-<body onload="setTitle()">
-    <script>
-
-
-        function setTitle() {
-//       $("title").text(application.title);
-            document.title = application.title;
-        }
-
+<body>
+    <script type="module">
         $(document).ready(function(){
+            document.title = application.title;
             // Back to top button
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 100) {
@@ -246,7 +240,6 @@
             });
         });
     </script>
-
 
 <iva-app></iva-app>
 
