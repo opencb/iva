@@ -17,13 +17,13 @@
 //import { LitElement, html } from 'lit-element'; // bare import by name doesn't work yet in browser,
 // see: https://www.polymer-project.org/blog/2018-02-26-3.0-preview-paths-and-names
 import {LitElement, html} from "/web_modules/lit-element.js";
+
+//import Utils from "../lib/jsorolla/src/core/utils.js";
+
 import {OpenCGAClient, OpenCGAClientConfig} from "../lib/jsorolla/src/core/clients/opencga-client.js";
 import {CellBaseClient, CellBaseClientConfig} from "../lib/jsorolla/src/core/clients/cellbase-client.js";
 import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome-client.js";
 
-// import {OpencgaLogin,
-//     OpencgaVariantBrowser
-// } from "../lib/jsorolla/components.js";
 
 import "./welcome.js";
 import "./about.js";
@@ -101,6 +101,8 @@ class IvaApp extends LitElement {
      * @private
      */
     _init() {
+
+        console.log("UTILS", Utils.formatText("defdef", "---"))
         // Create the 'config' , this objects contains all the different configuration
         let _config = application;
         _config.menu.counter = 0;
