@@ -302,23 +302,23 @@ const tools = {
         detail: [
             {
                 id: "annotation",
-                component: "cellbase-variantannotation-view",
+                // component: "cellbase-variantannotation-view",
                 title: "Advanced Annotation",
                 active: true
             },
             {
                 id: "cohortStats",
-                component: "opencga-variant-cohort-stats",
+                // component: "opencga-variant-cohort-stats",
                 title: "Cohort Stats"
             },
             {
                 id: "samples",
-                component: "opencga-variant-samples",
+                // component: "opencga-variant-samples",
                 title: "Samples"
             },
             {
                 id: "beacon",
-                component: "variant-beacon-network",
+                // component: "variant-beacon-network",
                 title: "Beacon"
                 // Uncomment and edit Beacon hosts to change default hosts
                 // hosts: [
@@ -328,7 +328,7 @@ const tools = {
             },
             {
                 id: "network",
-                component: "reactome-variant-network",
+                // component: "reactome-variant-network",
                 title: "Reactome Pathways"
             }
             // {
