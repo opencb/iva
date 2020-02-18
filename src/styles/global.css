@@ -1,3 +1,7 @@
+body, * {
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+}
+
 a:link, a:visited {
     color: #286090;
 }
@@ -467,6 +471,14 @@ h3.page-title {
 }
 
 /*  TODO move in jsorolla */
+.bootstrap-table {
+    font-size: 12px;
+}
+
+.bootstrap-table thead {
+    background-color: #f5f5f5;
+}
+
 .browser-subsection {
     font-size: 1.35rem;
     font-weight: bold;
@@ -488,7 +500,8 @@ opencga-facet .panel-body > .form-group:not(:first-child) {
 }
 
 
-/********** checkbox widget ************/
+/********** checkbox widget TODO remove ************/
+/*
 .checkbox-container {
     margin:0;
     padding:0;
@@ -559,8 +572,43 @@ opencga-facet .panel-body > .form-group:not(:first-child) {
 .checkbox-container li a:focus,
 .checkbox-container li a:hover {
     text-decoration: none;
+}*/
+
+/********** checkbox container 2 ************/
+ul.checkbox-container {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
+.checkbox-container input[type=checkbox] {
+    display: none;
+}
+/* Draw our custom check box */
+.checkbox-container {
+    line-height: 20px;
+}
+.checkbox-container label {
+    cursor: pointer;
+    transition: all 1s;
+}
+.checkbox-container label:before {
+    display: inline-block;
+    width: 20px;
+    margin-right: 5px;
+    content: "\00a0";
+    text-align: center;
+    background: #eee;
+}
+.checkbox-container label:hover::before{
+    background: #d2d2d2;
+}
+
+.checkbox-container input:checked ~ label:before {
+    content: "\02714";
+    background: #337ab7;
+    color: #fff;
+}
 /********** switch widget ************/
 .switch-container {
     position: relative;
