@@ -51,7 +51,6 @@ export default class CategoryPage extends LitElement {
     }
 
     isVisible(item) {
-        console.log("this" ,this)
         switch (item.visibility) {
         case "public":
             return true;
@@ -80,6 +79,7 @@ export default class CategoryPage extends LitElement {
                 padding: 10px;
                 display: block;
                 color: #333;
+                position: relative;
             }
             
             #category-page > a.item:hover{
@@ -106,13 +106,38 @@ export default class CategoryPage extends LitElement {
                 color: #000966;
                 font-family: "Roboto",serif;
             }
+            
+            #category-page .lock-overlay {            
+                position: absolute;
+                background-image: linear-gradient(45deg, #4d4d4d80 25%, #47474780 25%, #47474780 50%, #4d4d4d80 50%, #4d4d4d80 75%, #47474780 75%, #47474780 100%);
+                background-size: 40px 40px;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: -10px;
+            }
         </style>
 
         <h1>${this.config.title}</h1>
         <div id="category-page">
             ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item,i) => item.category ? html`
                 <div class="section-title">${item.title}</div>
-                ` : item.separator ? null : html`
+                ` : item.separator ? null : item.disabled ? html`
+                    <a  class="shadow-lg item ${item.disabled ? "disabled" : ""}">
+                    <div class="lock-overlay">
+                        <i class="fas fa-4x fa-lock"></i>
+                    </div>
+                        <div class="title uppercase">${item.title}</div>                    
+                            <div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">
+                                ${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}
+                                <!--<img src="img/tools/icons/${item.icon || "variant_browser.svg"}" /> -->
+                            </div>
+                            <div class="description">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>
+                    
+                                                
+                    </a>` : html`
                     <a href="#${item.id}" class="shadow-lg item">
                             <div class="title uppercase">${item.title}</div>                    
                             <div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">

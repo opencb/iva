@@ -246,7 +246,7 @@ interpreterMenu.sections = interpreterSections;
 
 
 const tools = {
-    browser: {
+    /*browser: {
         title: "Variant Browser",
         active: false,
         showSummary: true,
@@ -337,14 +337,14 @@ const tools = {
             //     title: "Template"
             // }
         ]
-    },
+    },*/
     interpretation: {
         title: "Variant Interpreter",
         disableSaveInterpretation: false,
         active: false,
         showOtherTools: true,
         filter: {
-            menu: interpreterMenu,
+            ...interpreterMenu,
             lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
                 "stop_lost", "start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
             examples: [
@@ -450,6 +450,7 @@ const tools = {
             }
         }
     },
+    //TODO remove
     facet: {
         // title: "Facet Analysis",
         active: false,
@@ -717,5 +718,8 @@ const tools = {
     },
     genomeBrowser: {
         active: false
-    }
+    },
+    // overrides the default config
+    fileBrowser: {},
+    sampleBrowser: {blue:"red"}
 };

@@ -172,7 +172,8 @@ const application = {
                     acronym: "CS",
                     description: "",
                     icon: "",
-                    visibility: "public"
+                    visibility: "public",
+                    disabled: true
                 },
                 {
                     id: "ibs",
@@ -404,7 +405,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "samples-facet",
+                    id: "sample-facet",
                     title: "Sample Facet",
                     visibility: "public"
                 },
