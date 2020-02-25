@@ -39,7 +39,7 @@ export default class OpencgaBreadcrumb extends LitElement {
     }
 
     _init() {
-        this._prefix = "bc-" + Utils.randomString(6);
+        this._prefix = "bc-";
     }
 
     render() {

@@ -15,6 +15,7 @@
  */
 
 import {LitElement, html} from "/web_modules/lit-element.js";
+import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 
 export default class GettingStarted extends LitElement {
 

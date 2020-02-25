@@ -18,13 +18,6 @@
 // see: https://www.polymer-project.org/blog/2018-02-26-3.0-preview-paths-and-names
 import {LitElement, html} from "/web_modules/lit-element.js";
 
-// import Utils from "../lib/jsorolla/src/core/utils.js";
-
-import {OpenCGAClient, OpenCGAClientConfig} from "../lib/jsorolla/src/core/clients/opencga-client.js";
-import {CellBaseClient, CellBaseClientConfig} from "../lib/jsorolla/src/core/clients/cellbase-client.js";
-import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome-client.js";
-
-
 import "./welcome.js";
 import "./about.js";
 import "./contact.js";
@@ -35,6 +28,14 @@ import "./opencga-breadcrumb.js";
 import "./category-page.js";
 import "./iva-profile.js";
 import "./iva-settings.js";
+
+import {OpenCGAClient, OpenCGAClientConfig} from "../lib/jsorolla/src/core/clients/opencga-client.js";
+import {CellBaseClient, CellBaseClientConfig} from "../lib/jsorolla/src/core/clients/cellbase-client.js";
+import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome-client.js";
+
+import Utils from "../lib/jsorolla/src/core/utils.js";
+import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
+import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
 
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-portal.js";
@@ -61,6 +62,12 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-fa
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-interpretation.js";
+
+/*
+
+import {OpenCGAClientConfig, OpenCGAClient, CellBaseClientConfig, CellBaseClient, ReactomeClient, Utils, UtilsNew} from "../lib/jsorolla/dist/main.js";
+*/
+
 
 class IvaApp extends LitElement {
 
@@ -102,7 +109,6 @@ class IvaApp extends LitElement {
      */
     _init() {
 
-        console.log("UTILS", Utils.formatText("defdef", "---"));
         // Create the 'config' , this objects contains all the different configuration
         const _config = application;
         _config.menu.counter = 0;

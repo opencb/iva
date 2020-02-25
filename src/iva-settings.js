@@ -42,7 +42,7 @@ export default class IvaSettings extends LitElement {
     }
 
     _init(){
-        this._prefix = "s-" + Utils.randomString(6) + "_";
+        this._prefix = "s-";
     }
 
     updated(changedProperties) {

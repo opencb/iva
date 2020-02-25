@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 import {LitElement, html} from "/web_modules/lit-element.js";
+import UtilsNew from "./../lib/jsorolla/src/core/utilsNew.js";
+
 
 export default class WelcomeWeb extends LitElement {
 
@@ -400,7 +402,7 @@ export default class WelcomeWeb extends LitElement {
             : null }
              
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
-                ${this.config.menu.map( item => html`
+                ${this.config.menu.filter(this.isVisible).map( item => html`
                             ${item.submenu ? html`
                                 <a class="icon-wrapper" href="#cat-${item.id}/${this.checkProjects ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
                                     <div class="hi-icon">

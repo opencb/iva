@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import {LitElement, html, css} from "/web_modules/lit-element.js";
+import {LitElement, html} from "/web_modules/lit-element.js";
+import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
+import Utils from "../lib/jsorolla/src/core/utilsNew.js";
 
 export default class CategoryPage extends LitElement {
 
