@@ -29,7 +29,10 @@ import "./category-page.js";
 import "./iva-profile.js";
 import "./iva-settings.js";
 
-import {OpenCGAClient, OpenCGAClientConfig} from "../lib/jsorolla/src/core/clients/opencga-client.js";
+
+
+// @dev[jsorolla]
+import {OpenCGAClient} from "../lib/jsorolla/src/core/clients/opencga/opencga-client.js";
 import {CellBaseClient, CellBaseClientConfig} from "../lib/jsorolla/src/core/clients/cellbase-client.js";
 import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome-client.js";
 
@@ -62,11 +65,12 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-fa
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-interpretation.js";
+// /@dev
 
-/*
 
-import {OpenCGAClientConfig, OpenCGAClient, CellBaseClientConfig, CellBaseClient, ReactomeClient, Utils, UtilsNew} from "../lib/jsorolla/dist/main.js";
-*/
+
+//import {OpenCGAClient, CellBaseClientConfig, CellBaseClient, ReactomeClient, Utils, UtilsNew, NotificationUtils} from "../lib/jsorolla/dist/main.js";
+
 
 
 class IvaApp extends LitElement {
@@ -221,21 +225,29 @@ class IvaApp extends LitElement {
 
 
         // Initialise clients and create the session
-        this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host, this.config.opencga.version, true, this.config.opencga.cookie.prefix);
-        this.opencgaClientConfig.serverVersion = this.config.opencga.serverVersion;
-        this.opencgaClient = new OpenCGAClient(this.opencgaClientConfig);
+        // this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host, this.config.opencga.version, true, this.config.opencga.cookie.prefix);
+        // this.opencgaClientConfig.serverVersion = this.config.opencga.serverVersion;
+        const sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
+        const userId = Cookies.get(this.config.opencga.cookie.prefix + "_userId");
+        this.opencgaClient = new OpenCGAClient({
+            host: this.config.opencga.host,
+            version: this.config.opencga.version,
+            token: sid,
+            userId: userId,
+            cookies: {active: true, prefix: this.config.opencga.cookie.prefix},
+            // TODO remove this soon!
+            serverVersion: this.config.opencga.serverVersion
+        });
 
         this.cellBaseClientConfig = new CellBaseClientConfig(this.config.cellbase.hosts, this.config.cellbase.version, "hsapiens");
         this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
-
 
         console.log("cellbaseClient iva-app", this.cellbaseClient);
 
         this.reactomeClient = new ReactomeClient();
 
-        const sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
         if (UtilsNew.isNotEmpty(sid)) { // && !this._publicMode
-            this.opencgaClient._config.sessionId = sid;
+            // this.opencgaClient._config.token = sid;
             this._createOpenCGASession();
             // This must happen after creating the OpencgaClient
             this.checkSessionActive();
@@ -325,10 +337,11 @@ class IvaApp extends LitElement {
             })
             .catch(function(response) {
                 console.log("An error when creating the OpenCGA session:");
-                console.log(response);
+                console.error(response);
             });
     }
 
+    //TODO turn this into a Promise
     _createOpencgaSessionFromConfig() {
         // Create a private opencga-session to avoid calling to the Observer
         const opencgaSession = this.opencgaClient.createAnonymousSession();
@@ -352,7 +365,7 @@ class IvaApp extends LitElement {
                 // When no 'projects' is defined we fetch all public projects
                 if (UtilsNew.isNotUndefinedOrNull(this.config.opencga.anonymous.user)) {
                     const _this = this;
-                    this.opencgaClient.users().getProjects(this.config.opencga.anonymous.user, {})
+                    this.opencgaClient.users().projects(this.config.opencga.anonymous.user, {})
                         .then(function(response) {
                             // _this._setup(_projects);
 
@@ -367,7 +380,8 @@ class IvaApp extends LitElement {
                             _this.opencgaSession = opencgaSession;
                         })
                         .catch(function(response) {
-                            console.log("An error when getting projects: ", response);
+                            console.log("An error when getting projects");
+                            console.log(response)
                         });
                 }
             }
@@ -377,11 +391,11 @@ class IvaApp extends LitElement {
         }
     }
 
-    login(credentials) {
+    onLogin(credentials) {
         // This creates a new authenticated opencga-session object
 
         console.log("iva-app: roger I'm in", credentials);
-        this.opencgaClient._config.sessionId = credentials.detail.sessionId;
+        this.opencgaClient._config.token = credentials.detail.token;
         this._createOpenCGASession();
 
 
@@ -397,8 +411,8 @@ class IvaApp extends LitElement {
         this.opencgaClient.refresh();
     }
 
-    logout() {
-        // this delete sessionId in the client and removes the Cookies
+    async logout() {
+        // this delete token in the client and removes the Cookies
         this.opencgaClient.logout();
         this._createOpencgaSessionFromConfig();
 
@@ -437,9 +451,9 @@ class IvaApp extends LitElement {
         // We check if refresh token has updated session id cookie
         // let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
 
-        if (UtilsNew.isNotUndefinedOrNull(this.opencgaClient._config.sessionId)) { // UtilsNew.isNotEmpty(this.opencgaSession.token) &&
-            // this.sessionId = sid;
-            const decoded = jwt_decode(this.opencgaClient._config.sessionId);
+        if (UtilsNew.isNotUndefinedOrNull(this.opencgaClient._config.token)) { // UtilsNew.isNotEmpty(this.opencgaSession.token) &&
+            // this.token = sid;
+            const decoded = jwt_decode(this.opencgaClient._config.token);
             const currentTime = new Date().getTime();
             const remainingTime = ((decoded.exp * 1000) - currentTime);
             // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
@@ -1055,8 +1069,7 @@ class IvaApp extends LitElement {
                 }
                
                             
-            /* The side navigation menu TODO  use transform: translateX(); instead of margin */
-
+            /* The side navigation menu */
             #side-nav {
                 position: fixed;
                 z-index: 10; 
@@ -1162,7 +1175,7 @@ class IvaApp extends LitElement {
                     ${this.config.menu && this.config.menu.length ? this.config.menu.map(item => html`
                         <li>
                             <a href="#cat-${item.id}" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
-                                <img src="img/tools/icons/${item.icon}" />  ${item.title}
+                                <img src="img/tools/icons/${item.icon}"  alt="${item.title}"/>  ${item.title}
                             </a>
                          </li>
                     `) : null}
@@ -1225,7 +1238,7 @@ class IvaApp extends LitElement {
                             <!-- Controls aligned to the RIGHT: settings and about-->
                             <ul class="nav navbar-nav navbar-right">
                                <!-- Jobs -->
-                                ${this.opencgaSession.token ? html`
+                                ${1 || this.opencgaSession.token ? html`
                                     <li class="notification">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <span class="badge badge-pill badge-primary">666</span><i class="fas fa-bell"></i>
@@ -1391,7 +1404,7 @@ class IvaApp extends LitElement {
                         <opencga-login  .opencgaClient="${this.opencgaClient}"
                                         loginTitle="Sign in"
                                         .notifyEventMessage="${this.config.notifyEventMessage}"
-                                        @login="${this.login}"
+                                        @login="${this.onLogin}"
                                         @notifymessage="${this.onNotifyMessage}">
                         </opencga-login>
                     </div>

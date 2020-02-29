@@ -15,8 +15,8 @@
  */
 
 import {LitElement, html} from "/web_modules/lit-element.js";
+import Utils from "../lib/jsorolla/src/core/utils.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
-import Utils from "../lib/jsorolla/src/core/utilsNew.js";
 
 export default class CategoryPage extends LitElement {
 
@@ -37,30 +37,28 @@ export default class CategoryPage extends LitElement {
             config: {
                 type: Object
             }
-        }
+        };
     }
 
-    _init(){
+    _init() {
         this._prefix = "sf-" + Utils.randomString(6) + "_";
-
-        this.hh = "<button>button</button>"
     }
 
     updated(changedProperties) {
-        if(changedProperties.has("property")) {
+        if (changedProperties.has("property")) {
             this.propertyObserver();
         }
     }
 
     isVisible(item) {
         switch (item.visibility) {
-        case "public":
-            return true;
-        case "private":
-            return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
-        case "none":
-        default:
-            return false;
+            case "public":
+                return true;
+            case "private":
+                return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
+            case "none":
+            default:
+                return false;
         }
     }
 
@@ -124,7 +122,7 @@ export default class CategoryPage extends LitElement {
 
         <h1>${this.config.title}</h1>
         <div id="category-page">
-            ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item,i) => item.category ? html`
+            ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item, i) => item.category ? html`
                 <div class="section-title">${item.title}</div>
                 ` : item.separator ? null : item.disabled ? html`
                     <a  class="shadow-lg item ${item.disabled ? "disabled" : ""}">
@@ -152,6 +150,7 @@ export default class CategoryPage extends LitElement {
         </div>
         `;
     }
+
 }
 
 customElements.define("category-page", CategoryPage);
