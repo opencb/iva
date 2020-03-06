@@ -30,7 +30,6 @@ import "./iva-profile.js";
 import "./iva-settings.js";
 
 
-
 // @dev[jsorolla]
 import {OpenCGAClient} from "../lib/jsorolla/src/core/clients/opencga/opencga-client.js";
 import {CellBaseClient, CellBaseClientConfig} from "../lib/jsorolla/src/core/clients/cellbase-client.js";
@@ -63,13 +62,15 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-s
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-facet.js";
+import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/jobs/opencga-jobs-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-interpretation.js";
 // /@dev
 
 
 
-//import {OpenCGAClient, CellBaseClientConfig, CellBaseClient, ReactomeClient, Utils, UtilsNew, NotificationUtils} from "../lib/jsorolla/dist/main.js";
+
+//import {OpenCGAClient, CellBaseClientConfig, CellBaseClient, ReactomeClient, UtilsNew, NotificationUtils} from "../lib/jsorolla/dist/main.js";
 
 
 
@@ -168,6 +169,7 @@ class IvaApp extends LitElement {
             "family-facet",
             "cohort-facet",
             "clinical-analysis-facet",
+            "jobs-facet",
             "cat-browser",
             "cat-analysis",
             "cat-clinical",
@@ -1174,7 +1176,10 @@ class IvaApp extends LitElement {
                     <ul class="nav sidebar-nav">
                     ${this.config.menu && this.config.menu.length ? this.config.menu.map(item => html`
                         <li>
-                            <a href="#cat-${item.id}" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
+                            <a href="#cat-${item.id}" role="button" @click="${e => {
+            this.toggleSideNav(e);
+            this.changeTool(e);
+        }}">
                                 <img src="img/tools/icons/${item.icon}"  alt="${item.title}"/>  ${item.title}
                             </a>
                          </li>
@@ -1190,7 +1195,7 @@ class IvaApp extends LitElement {
                         <ul class="nav navbar-nav">
                             <li>
                                 <a href="#" @click="${this.toggleSideNav}" id="waffle-icon">
-                                   <img src="/src/styles/waffle-icon.svg" />
+                                   <img src="img/waffle-icon.svg" />
                                 </a>
                             </li>
                         </ul>
@@ -1223,7 +1228,7 @@ class IvaApp extends LitElement {
                                             </a>
                                             <ul class="dropdown-menu">
                                                 ${item.submenu.map(subitem =>
-                                                    subitem.category ? html`
+                subitem.category ? html`
                                                         <li><a><label>${subitem.title}</label></a></li>
                                                     ` : subitem.separator ? html`
                                                         <li role="separator" class="divider"></li>
@@ -1232,8 +1237,8 @@ class IvaApp extends LitElement {
                                                 `)}
                                             </ul>
                                         </li>`
-                                    }`
-                                )}
+            }`
+        )}
                             </ul>
                             <!-- Controls aligned to the RIGHT: settings and about-->
                             <ul class="nav navbar-nav navbar-right">
@@ -1733,6 +1738,17 @@ class IvaApp extends LitElement {
                                                             @querySearch="${e => this.onQueryFilterSearch(e, "clinical-analysis")}"
                                                             @activeFilterChange="${e => this.onQueryFilterSearch(e, "clinical-analysis")}">  
                         </opencga-clinical-analysis-facet>
+                    </div>
+                ` : null}
+                                
+                ${this.config.enabledComponents["jobs-facet"] ? html`
+                    <div class="content" id="jobs-facet">
+                        <opencga-jobs-facet .opencgaSession="${this.opencgaSession}"
+                                            .config="${this.config.tools.jobsBrowser}"
+                                            .query="${this.queries.jobs}"
+                                            @querySearch="${e => this.onQueryFilterSearch(e, "jobs")}"
+                                            @activeFilterChange="${e => this.onQueryFilterSearch(e, "jobs")}">  
+                        </opencga-jobs-facet>
                     </div>
                 ` : null}
                                 
