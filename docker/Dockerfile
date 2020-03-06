@@ -1,20 +1,26 @@
-FROM httpd
+FROM httpd:2.4-alpine
 
-# Minimum compatible git commit, please only use later commits.
+## To run the docker use:
+##   docker build -t iva-httpd .
+##   docker run -dit --name httpd-alpine -p 81:80 iva-httpd
+## Then open:  http://localhost:81/iva
 
-# Install dependencies
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y curl gnupg2 && \
-    curl -sL https://deb.nodesource.com/setup_8.x | bash && \
-    apt-get install -y git nodejs npm
+LABEL org.label-schema.vendor="OpenCB" \
+      org.label-schema.name="iva" \
+      org.label-schema.url="http://docs.opencb.org/display/iva" \
+      org.label-schema.description="An open-source web app for interactive variant analysis" \
+      maintainer="Antonio Altamura <antonioaltamura7@gmail.com>" \
+      org.label-schema.schema-version="1.0"
 
-RUN echo '{ "allow_root": true }' > /root/.bowerrc && \
-    npm install -g grunt-cli
+## Create and change user
+#RUN addgroup -S iva && adduser -S iva -G iva
+#USER iva
 
-COPY ./build /usr/local/apache2/htdocs
+## Copy files
+COPY entrypoint.sh /usr/local/bin
+#COPY ./build /usr/local/apache2/htdocs/iva
 
+VOLUME /usr/local/apache2/htdocs/iva/conf
 EXPOSE 80
 
-VOLUME /usr/local/apache2/htdocs/conf
-
+ENTRYPOINT ["entrypoint.sh"]
