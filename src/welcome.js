@@ -15,7 +15,7 @@
  */
 import {LitElement, html} from "/web_modules/lit-element.js";
 import UtilsNew from "./../lib/jsorolla/src/core/utilsNew.js";
-
+import PolymerUtils from "../lib/jsorolla/src/core/webcomponents/PolymerUtils.js";
 
 export default class WelcomeWeb extends LitElement {
 
@@ -161,7 +161,6 @@ export default class WelcomeWeb extends LitElement {
         
             #title span {
                 font-size: 20px;
-                margin-top: -30px;
                 letter-spacing: 0;
             }
             
@@ -339,7 +338,6 @@ export default class WelcomeWeb extends LitElement {
 
             #title span.subtitle {
                 font-size: 20px;
-                margin-top: -30px;
                 display: block;
                 letter-spacing: 0;
             }
@@ -368,9 +366,13 @@ export default class WelcomeWeb extends LitElement {
             }
         </style>
         
+                                           
+
         <!-- This is where main application is rendered -->
         <div class="col-md-6 col-md-offset-3 welcome-center text-muted text-justify">
-            <h1 id="title">IVA
+            <h1 id="title">
+                
+                <img style="width: 2.5em" src="./img/iva.svg" />
                 <p class="version">
                     <span class="bracket">(</span><span>${this.version}</span><span class="bracket">)</span>
                 </p>

@@ -159,6 +159,11 @@ h3.page-title {
 }
 
 /********** browser components (opencga-facet and opencga-variant-facet TODO rename to browser) ************/
+h2.page-title {
+    text-transform: uppercase;
+    letter-spacing: .2em;
+}
+
 .search-button-wrapper {
     text-align: center;
     margin: 0 0 20px 0;

@@ -1,3 +1,5 @@
+const path = require("path");
+
 /*
  |--------------------------------------------------------------------------
  | IVA Browser-sync config file
@@ -9,7 +11,10 @@ module.exports = {
         "lib/jsorolla/src",
         "lib/jsorolla/styles"
     ],
-    server: true,
+    server: {
+        //baseDir: path.resolve(__dirname),
+        //directory: true
+    },
     startPath: "src",
     open: true,
     timestamps: true,
