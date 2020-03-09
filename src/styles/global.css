@@ -708,16 +708,66 @@ Toggle Changes
     /*background-color: #00b9ee;*/
 }
 
-/* notification utils*/
+/* Notification */
 
-
-.notification-item {
-    display: inline-block;
-    margin: 0px auto;
+#notifications-queue {
     position: fixed;
-    transition: all 0.5s ease-in-out 0s;
-    z-index: 1031;
     top: 20px;
-    left: 0px;
+    z-index: 9999;
+    left: 33%;
+}
+
+#notifications-queue .alert {
+    margin: 10px auto;
+    position: relative;
+    transition: all 0.5s ease-in-out 0s;
+    z-index: 2020;
+
+    box-shadow: 0 1px 3px 0 rgba(60,64,67,0.302), 0 4px 8px 3px rgba(60,64,67,0.149);
+    font-size: .9em;
+    letter-spacing: .2px;
+    background-color: #35363a;
+    border: none;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    bottom: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #fff;
+    font-weight: 400;
+    left: 0;
+    padding: 10px 24px 8px 24px;
+    white-space: normal;
+}
+
+#notifications-queue .alert p.title {
+    font-size: 1.3em;
+}
+
+#notifications-queue .alert p.title i {
+    vertical-align: sub;
+}
+
+#notifications-queue .alert .close {
+    position: absolute;
+    top: 5px;
     right: 0px;
+    font-size: 1em;
+}
+
+#notifications-queue .alert .fa {
+    margin-right:.3em;
+}
+
+#notifications-queue .alert-success i{
+    color: #91f096;
+}
+#notifications-queue .alert-info i{
+    color: #d2e6f7;
+}
+#notifications-queue .alert-warning i{
+    color: #f9fc81;
+}
+#notifications-queue .alert-danger i {
+    color: #f2b1af;
 }

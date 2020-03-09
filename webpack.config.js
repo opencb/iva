@@ -8,6 +8,7 @@ const EsmWebpackPlugin = require("@purtuga/esm-webpack-plugin");
 const PluginProposalExportDefaultFrom = require("@babel/plugin-proposal-export-default-from"); // Allows `export .. from` syntax in the entry point
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+//const uglifyJS = require("uglify-js");
 
 const DIST_PATH = path.resolve(__dirname, "dist/webpack/");
 const tpl = path => ({
@@ -16,6 +17,8 @@ const tpl = path => ({
     js: `<script type="text/javascript" src="${path}"></script>`,
     void: ""
 });
+
+// TODO add CSS loader and group all fonts in one directory rewriting urls
 
 module.exports = {
     mode: "production",
@@ -32,9 +35,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/index.html",
             minify: {
-                // removeAttributeQuotes: true,
-                // collapseWhitespace: true,
-                // removeComments: true
+                removeAttributeQuotes: true,
+                collapseWhitespace: true,
+                //removeComments: true
             }
         }),
         new HtmlReplaceWebpackPlugin([
@@ -49,38 +52,12 @@ module.exports = {
         ),
         new MergeIntoSingleFilePlugin({
             files: {
-                "styles.css": [
-                    "../lib/jsorolla/styles/css/style.css",
-                    "styles/toggle-switch.css",
-                    "styles/global.css"
+                "assets/css/styles.css": [
+                    "lib/jsorolla/styles/css/style.css",
+                    "src/styles/toggle-switch.css",
+                    "src/styles/global.css"
                 ],
-                "vendor.js": [
-                    "./node_modules/jquery/dist/jquery.js",
-                    // "./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js",
-                    "./node_modules/underscore/underscore-min.js",
-                    "./node_modules/backbone/backbone-min.js",
-                    "./node_modules/highcharts/highcharts.js",
-                    "./node_modules/qtip2/dist/jquery.qtip.min.js",
-                    "./node_modules/urijs/src/URI.min.js",
-                    "./node_modules/cookies-js/dist/cookies.min.js",
-                    "./node_modules/crypto-js/core.js",
-                    "./node_modules/crypto-js/sha256.js",
-                    "./node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.js",
-
-                    "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-                    "./node_modules/bootstrap-table/dist/bootstrap-table.min.js",
-                    "./node_modules/bootstrap-select/dist/js/bootstrap-select.js",
-                    "./node_modules/bootstrap-treeview/dist/bootstrap-treeview.min.js",
-                    "./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js",
-                    "./node_modules/bootstrap-validator/dist/validator.min.js",
-                    "./node_modules/moment/min/moment.min.js",
-                    "./node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
-                    "./node_modules/bootstrap-notify/bootstrap-notify.js",
-                    // "./node_modules/jwt-decode/build/jwt-decode.js",
-                    "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js"
-
-                ],
-                "vendor.css": [
+                "assets/css/vendor.css": [
                     "./node_modules/bootstrap/dist/css/bootstrap.min.css",
                     "./node_modules/animate.css/animate.min.css",
                     "./node_modules/bootstrap-table/dist/bootstrap-table.min.css",
@@ -91,6 +68,30 @@ module.exports = {
                     "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
                     "./node_modules/qtip2/dist/jquery.qtip.min.css",
                     "./node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.css"
+                ],
+                "assets/js/vendor.js": [
+                    "./node_modules/jquery/dist/jquery.js",
+                    "./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js",
+                    "./node_modules/underscore/underscore-min.js",
+                    "./node_modules/backbone/backbone-min.js",
+                    "./node_modules/highcharts/highcharts.js",
+                    "./node_modules/qtip2/dist/jquery.qtip.min.js",
+                    "./node_modules/urijs/src/URI.min.js",
+                    "./node_modules/cookies-js/dist/cookies.min.js",
+                    "./node_modules/crypto-js/core.js",
+                    "./node_modules/crypto-js/sha256.js",
+                    "./node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.js",
+                    "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+                    "./node_modules/bootstrap-table/dist/bootstrap-table.min.js",
+                    "./node_modules/bootstrap-select/dist/js/bootstrap-select.js",
+                    "./node_modules/bootstrap-treeview/dist/bootstrap-treeview.min.js",
+                    "./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js",
+                    "./node_modules/bootstrap-validator/dist/validator.min.js",
+                    "./node_modules/moment/min/moment.min.js",
+                    "./node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
+                    "./node_modules/bootstrap-notify/bootstrap-notify.js",
+                    "./node_modules/jwt-decode/build/jwt-decode.min.js",
+                    "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js"
                 ]
             }
         }),
@@ -106,19 +107,30 @@ module.exports = {
                 to: DIST_PATH + "/img"
             },
             {
-                context: "./src/fonts",
+                context: "./lib/jsorolla/styles/fonts",
                 from: "**/*",
-                to: DIST_PATH + "/fonts"
+                to: DIST_PATH + "/assets/fonts"
+            },
+            {
+                context: "./node_modules/bootstrap/dist/fonts",
+                from: "**/*",
+                to: DIST_PATH + "/assets/fonts"
             },
             {
                 context: "node_modules/@webcomponents/webcomponentsjs",
                 from: "**/*.js",
                 to: DIST_PATH + "/webcomponents"
+            },
+            {
+                context: "node_modules/@fortawesome/fontawesome-free/webfonts",
+                from: "fa-solid-900.*",
+                to: DIST_PATH + "/assets/webfonts"
+
             }
-        ])
+    ])
         // ignore is not the best way to externalize a resource, but webpack don't support external ES modules yet.
         // ignore makes sense because iva-app bundle will be an ES module on its own, so import X from "/jsorolla.min.js" won't be a problem if not processed by webpack
-        //  why do whe need to bundle iva-app in webpack at all then? Because we need to process litElement imports
+        // why do whe need to bundle iva-app in webpack at all then? Because we need to process litElement imports
         /* new webpack.IgnorePlugin({
             //resourceRegExp: /import [\s\S]+? from "\.\/\.\.\/lib\/jsorolla\/dist\/main\.js";/
             //resourceRegExp: /import [\s\S]+? from "main\.js";/
@@ -127,7 +139,7 @@ module.exports = {
         })*/
     ],
     optimization: {
-        minimize: false
+        minimize: true
     },
     externals: [
         {
@@ -175,7 +187,8 @@ module.exports = {
                             search: "/node_modules/countup.js/dist/countUp.min.js",
                             replace: "countup.js"
                         }
-                        /*                        {
+                        /* js string replacement
+                        {
                             search: "// @dev\\[([\\s\\S]*?)\\][\\s\\S]*?// /@dev",
                             replace: (match, p1, offset, string) => `import ${p1} from "main.js";`,
                             //replace: (match, p1, offset, string) => `${p1}`,

@@ -38,6 +38,7 @@ import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome-client.j
 import Utils from "../lib/jsorolla/src/core/utils.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
+import {NotificationElement, NotificationQueue} from "../lib/jsorolla/src/core/Notification.js";
 
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-facet.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-portal.js";
@@ -68,10 +69,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-interpret
 // /@dev
 
 
-
-
-//import {OpenCGAClient, CellBaseClientConfig, CellBaseClient, ReactomeClient, UtilsNew, NotificationUtils} from "../lib/jsorolla/dist/main.js";
-
+// import {OpenCGAClient, CellBaseClientConfig, CellBaseClient, ReactomeClient, UtilsNew, NotificationUtils} from "../lib/jsorolla/dist/main.js";
 
 
 class IvaApp extends LitElement {
@@ -267,6 +265,8 @@ class IvaApp extends LitElement {
         this.browserSearchQuery = {};
         // keeps track of the executedQueries transitioning from browser tool to facet tool
         this.queries = [];
+
+        this.notificationQueue = new NotificationQueue(this);
     }
 
     updated(changedProperties) {
@@ -343,7 +343,7 @@ class IvaApp extends LitElement {
             });
     }
 
-    //TODO turn this into a Promise
+    // TODO turn this into a Promise
     _createOpencgaSessionFromConfig() {
         // Create a private opencga-session to avoid calling to the Observer
         const opencgaSession = this.opencgaClient.createAnonymousSession();
@@ -383,7 +383,7 @@ class IvaApp extends LitElement {
                         })
                         .catch(function(response) {
                             console.log("An error when getting projects");
-                            console.log(response)
+                            console.log(response);
                         });
                 }
             }
@@ -991,6 +991,85 @@ class IvaApp extends LitElement {
         $("#overlay").toggleClass("active");
     }
 
+    /*push(title, summary = "", details = "", severity = "info", dismissible = true, autoDismiss = true, appendToId = "notifications-queue") {
+
+        const iconMap = {
+            info: "fa fa-info-circle fa-2x",
+            success: "fa fa-thumbs-up fa-2x",
+            warning: "fa fa-exclamation-triangle fa-2x",
+            danger: "fa ffa fa-exclamation-circle fa-2x"
+        };
+
+        let iconAdded = false;
+
+        const alertClasses = ["alert", "animated", "slideInDown"];
+        alertClasses.push("alert-" + severity.toLowerCase());
+
+        if (dismissible) {
+            alertClasses.push("alert-dismissible");
+        }
+
+        const msgIcon = $("<i />", {
+            "class": iconMap[severity] // you need to quote "class" since it's a reserved keyword
+        });
+
+        const msg = $("<div />", {
+            "class": alertClasses.join(" ") // you need to quote "class" since it's a reserved keyword
+        });
+
+        if (title) {
+            const msgTitle = $("<h4 />", {
+                html: html`${title}`
+            }).appendTo(msg);
+
+            if (!iconAdded) {
+                msgTitle.prepend(msgIcon);
+                iconAdded = true;
+            }
+        }
+
+        if (summary) {
+            const msgSummary = $("<strong />", {
+                html: html`${summary}`
+            }).appendTo(msg);
+
+            if (!iconAdded) {
+                msgSummary.prepend(msgIcon);
+                iconAdded = true;
+            }
+        }
+
+        if (details) {
+            const msgDetails = $("<p />", {
+                html: details
+            }).appendTo(msg);
+
+            if (!iconAdded) {
+                msgDetails.prepend(msgIcon);
+                iconAdded = true;
+            }
+        }
+
+
+        if (dismissible) {
+            const msgClose = $("<span />", {
+                "class": "close", // you need to quote "class" since it's a reserved keyword
+                "data-dismiss": "alert",
+                "html": "<i class='fa fa-times-circle'></i>"
+            }).appendTo(msg);
+        }
+
+        $("#" + appendToId).append(msg);
+
+        if (autoDismiss) {
+            setTimeout(function() {
+                msg.addClass("slideOutUp");
+                setTimeout(function() {
+                    msg.remove();
+                }, 150000);
+            }, 500000);
+        }
+    }*/
 
     render() {
         return html`
@@ -1166,6 +1245,8 @@ class IvaApp extends LitElement {
             
             </style>
 
+            
+            
             <div id="overlay" @click="${this.toggleSideNav}"></div>
             <div id="side-nav" class="sidenav shadow-lg">
                 <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
@@ -1177,9 +1258,8 @@ class IvaApp extends LitElement {
                     ${this.config.menu && this.config.menu.length ? this.config.menu.map(item => html`
                         <li>
                             <a href="#cat-${item.id}" role="button" @click="${e => {
-            this.toggleSideNav(e);
-            this.changeTool(e);
-        }}">
+    this.toggleSideNav(e); this.changeTool(e);
+}}">
                                 <img src="img/tools/icons/${item.icon}"  alt="${item.title}"/>  ${item.title}
                             </a>
                          </li>
@@ -1228,7 +1308,7 @@ class IvaApp extends LitElement {
                                             </a>
                                             <ul class="dropdown-menu">
                                                 ${item.submenu.map(subitem =>
-                subitem.category ? html`
+        subitem.category ? html`
                                                         <li><a><label>${subitem.title}</label></a></li>
                                                     ` : subitem.separator ? html`
                                                         <li role="separator" class="divider"></li>
@@ -1237,8 +1317,8 @@ class IvaApp extends LitElement {
                                                 `)}
                                             </ul>
                                         </li>`
-            }`
-        )}
+}`
+    )}
                             </ul>
                             <!-- Controls aligned to the RIGHT: settings and about-->
                             <ul class="nav navbar-nav navbar-right">
@@ -1255,13 +1335,13 @@ class IvaApp extends LitElement {
                                             <li>
                                                 <a href="#projects"> All notifications </a>
                                             </li>
-                                        </ul>                                           
+                                        </ul>
                                     </li>
                                 ` : null}
-            
-                                
+
+
                                 <!--Studies dropdown and Search menu-->
-                                ${this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
+                                ${this.opencgaSession && this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-database fa-lg" style="padding-right: 5px"></i>Studies <span class="caret"></span>
@@ -1280,7 +1360,7 @@ class IvaApp extends LitElement {
                                 ` : null}
             
                                 <!--Search menu-->
-                                ${this.opencgaSession.projects && this.config.search.visible ? html`
+                                ${this.opencgaSession && this.opencgaSession.projects && this.config.search.visible ? html`
                                         <form class="navbar-form navbar-left" role="search">
                                             <div class="form-group">
                                                 <div class="input-group search-box-wrapper">
@@ -1850,7 +1930,12 @@ class IvaApp extends LitElement {
                 </template>
                 -->
             
-            </div>`;
+            <div id="notifications-queue" class="col-xs-11 col-sm-4"></div>
+
+            </div>
+
+            <notification-element .queue="${this.notificationQueue.get()}"></notification-element>`;
+
     }
 
 }

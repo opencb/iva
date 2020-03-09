@@ -86,7 +86,7 @@
     "shelljs": "0.7.8",
     "string-replace-loader": "^2.2.0",
     "string-replace-webpack-plugin": "^0.1.3",
-    "uglify-js": "^2.7.3",
+    "uglify-js": "^3.8.0",
     "vulcanize": "~1.16.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
