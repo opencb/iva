@@ -364,9 +364,7 @@ export default class WelcomeWeb extends LitElement {
                 display: grid;
                 grid-template-columns: auto auto auto auto auto auto; /* TODO FIXME hi-icon:before seems to be a problem there are 5 items not 6 */
             }
-        </style>
-        
-                                           
+        </style>                                         
 
         <!-- This is where main application is rendered -->
         <div class="col-md-6 col-md-offset-3 welcome-center text-muted text-justify">

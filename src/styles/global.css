@@ -741,13 +741,16 @@ Toggle Changes
 }
 
 #notifications-queue .alert p.title {
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 #notifications-queue .alert p.title i {
     vertical-align: sub;
 }
 
+#notifications-queue .alert a {
+    color: #c9c9c9;
+}
 #notifications-queue .alert .close {
     position: absolute;
     top: 5px;

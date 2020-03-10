@@ -224,6 +224,25 @@ class IvaApp extends LitElement {
         this._samplesPerTool = {};
 
 
+
+
+        // this.browserSearchQuery = {gene: "BRCA2", sample: "NA12877", study: "platinum"};
+        // this.browserSearchQuery = {};
+
+        // run the observer the first time doesnt work TODO check why
+        // this.opencgaSessionObserver();
+
+        this.browserSearchQuery = {};
+        // keeps track of the executedQueries transitioning from browser tool to facet tool
+        this.queries = [];
+
+
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        new NotificationQueue().setContext(this);
+
         // Initialise clients and create the session
         // this.opencgaClientConfig = new OpenCGAClientConfig(this.config.opencga.host, this.config.opencga.version, true, this.config.opencga.cookie.prefix);
         // this.opencgaClientConfig.serverVersion = this.config.opencga.serverVersion;
@@ -255,18 +274,6 @@ class IvaApp extends LitElement {
         } else {
             this._createOpencgaSessionFromConfig();
         }
-
-        // this.browserSearchQuery = {gene: "BRCA2", sample: "NA12877", study: "platinum"};
-        // this.browserSearchQuery = {};
-
-        // run the observer the first time doesnt work TODO check why
-        // this.opencgaSessionObserver();
-
-        this.browserSearchQuery = {};
-        // keeps track of the executedQueries transitioning from browser tool to facet tool
-        this.queries = [];
-
-        this.notificationQueue = new NotificationQueue(this);
     }
 
     updated(changedProperties) {
@@ -461,7 +468,7 @@ class IvaApp extends LitElement {
             // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
             if (remainingTime <= this.config.session.maxRemainingTime && remainingTime >= this.config.session.minRemainingTime) {
                 const remainingMinutes = Math.floor(remainingTime / this.config.session.minRemainingTime);
-                _message = "Your session is close to expire. <strong>" + remainingMinutes + " minutes remaining</strong>. <a href=\"#\" onclick='eval(NotificationUtils.refreshToken()); return false;'>Click here to refresh</a>";
+                _message = html`Your session is close to expire. <strong>${remainingMinutes} minutes remaining</strong> <a href="javascript:void 0" @click="${() => NotificationUtils.refreshToken()}"> Click here to refresh </a>`
             } else {
                 if (remainingTime < this.config.session.minRemainingTime) {
                     _message = "Your session has expired.";
@@ -1278,7 +1285,9 @@ class IvaApp extends LitElement {
                                    <img src="img/waffle-icon.svg" />
                                 </a>
                             </li>
+                            
                         </ul>
+
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
                             <a href="#home" class="navbar-brand" style="padding-top: 10px" @click="${this.changeTool}">
@@ -1934,7 +1943,7 @@ class IvaApp extends LitElement {
 
             </div>
 
-            <notification-element .queue="${this.notificationQueue.get()}"></notification-element>`;
+            <notification-element .queue="${new NotificationQueue().get()}"></notification-element>`;
 
     }
 
