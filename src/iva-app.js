@@ -33,7 +33,7 @@ import "./iva-settings.js";
 // @dev[jsorolla]
 import {OpenCGAClient} from "../lib/jsorolla/src/core/clients/opencga/opencga-client.js";
 import {CellBaseClient} from "../lib/jsorolla/src/core/clients/cellbase/cellbase-client.js";
-import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome-client.js";
+import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome/reactome-client.js";
 
 import Utils from "../lib/jsorolla/src/core/utils.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
