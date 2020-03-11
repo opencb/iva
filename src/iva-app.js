@@ -32,7 +32,7 @@ import "./iva-settings.js";
 
 // @dev[jsorolla]
 import {OpenCGAClient} from "../lib/jsorolla/src/core/clients/opencga/opencga-client.js";
-import {CellBaseClient, CellBaseClientConfig} from "../lib/jsorolla/src/core/clients/cellbase-client.js";
+import {CellBaseClient} from "../lib/jsorolla/src/core/clients/cellbase-client.js";
 import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome-client.js";
 
 import Utils from "../lib/jsorolla/src/core/utils.js";
@@ -258,8 +258,12 @@ class IvaApp extends LitElement {
             serverVersion: this.config.opencga.serverVersion
         });
 
-        this.cellBaseClientConfig = new CellBaseClientConfig(this.config.cellbase.hosts, this.config.cellbase.version, "hsapiens");
-        this.cellbaseClient = new CellBaseClient(this.cellBaseClientConfig);
+        // this.cellBaseClientConfig = new CellBaseClientConfig(this.config.cellbase.hosts, this.config.cellbase.version, "hsapiens");
+        this.cellbaseClient = new CellBaseClient({
+            hosts: this.config.cellbase.hosts,
+            version: this.config.cellbase.version,
+            species: "hsapiens"
+        });
 
         console.log("cellbaseClient iva-app", this.cellbaseClient);
 
