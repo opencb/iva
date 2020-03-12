@@ -484,6 +484,14 @@ h2.page-title {
     background-color: #f5f5f5;
 }
 
+.bootstrap-table .fixed-table-body {
+   /* min-height: 170px; /* making space for the loading spinner */
+}
+
+.bootstrap-table .fixed-table-loading {
+    min-height: 85px;
+}
+
 .browser-subsection {
     font-size: 1.35rem;
     font-weight: bold;
@@ -712,13 +720,13 @@ Toggle Changes
 
 #notifications-queue {
     position: fixed;
-    top: 20px;
+    top: 10px;
     z-index: 9999;
     left: 33%;
 }
 
 #notifications-queue .alert {
-    margin: 10px auto;
+    margin: 5px auto;
     position: relative;
     transition: all 0.5s ease-in-out 0s;
     z-index: 2020;
@@ -769,8 +777,20 @@ Toggle Changes
     color: #d2e6f7;
 }
 #notifications-queue .alert-warning i{
-    color: #f9fc81;
+    color: #f5e513;
 }
 #notifications-queue .alert-danger i {
-    color: #f2b1af;
+    color: #f28c8b;
+}
+
+.guard-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+.guard-page i {
+    color: grey;
 }

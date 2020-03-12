@@ -112,16 +112,6 @@ const application = {
                     icon: "variant_browser.svg"
                 },
                 {
-                    id: "facet",
-                    title: "Variant Browser v2",
-                    acronym: "VB2",
-                    description: "",
-                    visibility: "public",
-                    thumbnail: "screenshot1.png",
-                    fa_icon: "fa fa-list",
-                    icon: "variant_browser.svg"
-                },
-                {
                     id: "genomeBrowser",
                     title: "Genome Browser",
                     acronym: "GB",
@@ -393,18 +383,8 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "files-facet",
-                    title: "File Facet",
-                    visibility: "public"
-                },
-                {
                     id: "samples",
                     title: "Sample Browser",
-                    visibility: "public"
-                },
-                {
-                    id: "sample-facet",
-                    title: "Sample Facet",
                     visibility: "public"
                 },
                 {
@@ -413,18 +393,8 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "individual-facet",
-                    title: "Individual Facet",
-                    visibility: "public"
-                },
-                {
                     id: "families",
                     title: "Family Browser",
-                    visibility: "public"
-                },
-                {
-                    id: "family-facet",
-                    title: "Family Facet",
                     visibility: "public"
                 },
                 {
@@ -433,22 +403,12 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "cohort-facet",
-                    title: "Cohort Facet",
-                    visibility: "public"
-                },
-                {
                     id: "clinicalAnalysis",
                     title: "Clinical Analysis Browser",
                     visibility: "public"
                 },
                 {
-                    id: "clinical-analysis-facet",
-                    title: "Clinical Analysis Facet",
-                    visibility: "public"
-                },
-                {
-                    id: "jobs-facet",
+                    id: "jobs",
                     title: "Job Browser",
                     visibility: "public"
                 }

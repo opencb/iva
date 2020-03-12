@@ -18,6 +18,9 @@ import {LitElement, html} from "/web_modules/lit-element.js";
 import Utils from "../lib/jsorolla/src/core/utils.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 
+
+// TODO the property "disabled" in config have to be renamed in active (boolean for an user or an usergroup)
+
 export default class CategoryPage extends LitElement {
 
     constructor() {
@@ -42,6 +45,8 @@ export default class CategoryPage extends LitElement {
 
     _init() {
         this._prefix = "sf-" + Utils.randomString(6) + "_";
+        this._config = {...this.getDefaultConfig(), ...this.config};
+
     }
 
     updated(changedProperties) {
@@ -64,6 +69,10 @@ export default class CategoryPage extends LitElement {
 
     renderHTML(html) {
         return document.createRange().createContextualFragment(`${html}`);
+    }
+
+    getDefaultConfig() {
+
     }
 
     render() {
@@ -124,29 +133,22 @@ export default class CategoryPage extends LitElement {
         <div id="category-page">
             ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item, i) => item.category ? html`
                 <div class="section-title">${item.title}</div>
-                ` : item.separator ? null : item.disabled ? html`
-                    <a  class="shadow-lg item ${item.disabled ? "disabled" : ""}">
-                    <div class="lock-overlay">
-                        <i class="fas fa-4x fa-lock"></i>
-                    </div>
+                ` : item.separator ? null : html`
+                    
+                    <a class="shadow-lg item ${item.disabled ? "disabled" : ""}" href="${ !item.disabled ? `#${item.id}` : "javascript: void 0"}">
+                    ${item.disabled ? html`
+                        <div class="lock-overlay">
+                            <i class="fas fa-4x fa-lock"></i>
+                        </div>
+                    ` : null}
                         <div class="title uppercase">${item.title}</div>                    
                             <div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">
                                 ${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}
                                 <!--<img src="img/tools/icons/${item.icon || "variant_browser.svg"}" /> -->
                             </div>
                             <div class="description">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>
-                    
-                                                
-                    </a>` : html`
-                    <a href="#${item.id}" class="shadow-lg item">
-                            <div class="title uppercase">${item.title}</div>                    
-                            <div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">
-                                ${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}
-                                <!--<img src="img/tools/icons/${item.icon || "variant_browser.svg"}" /> -->
-                            </div>
-                            <div class="description">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>                    
                     </a>
-            `) : null }
+                    ` ) : null}
         </div>
         `;
     }
