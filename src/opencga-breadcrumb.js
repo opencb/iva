@@ -66,6 +66,7 @@ export default class OpencgaBreadcrumb extends LitElement {
             <style>
                 .breadcrumb{
                     padding-left: 40px;
+                    margin-bottom: 10px;
                 }
             </style>
             <div>
