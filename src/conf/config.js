@@ -87,6 +87,7 @@ const application = {
     title: "IVA",
     version: "v2.0.0-dev",
     logo: "img/opencb-logo.png",
+    defaultStudy: "corpasome",
     // The order, title and nested submenus are respected
     menu: [
         {

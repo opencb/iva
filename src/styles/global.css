@@ -2,6 +2,10 @@ body, * {
     font-family: "Lato", Helvetica, Arial, sans-serif;
 }
 
+p {
+    margin: 0;
+}
+
 a:link, a:visited {
     color: #286090;
 }
@@ -764,8 +768,12 @@ Toggle Changes
     top: 5px;
     right: 0px;
     font-size: 1em;
+    opacity: .4;
 }
 
+#notifications-queue .alert .close i{
+    color: #fff;
+}
 #notifications-queue .alert .fa {
     margin-right:.3em;
 }
@@ -793,4 +801,12 @@ Toggle Changes
 
 .guard-page i {
     color: grey;
+}
+
+/* custom animations */
+.anim-rotate{
+    animation: rotate 1.5s linear infinite;
+}
+@keyframes rotate{
+    to{ transform: rotate(360deg); }
 }
