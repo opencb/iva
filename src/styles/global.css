@@ -30,6 +30,10 @@ input[type="text"] {
     width: 100%;
 }
 
+.v-space {
+    height: 100px;
+}
+
 /* TODO input material effect continue*/
 .input {
     border: 0;

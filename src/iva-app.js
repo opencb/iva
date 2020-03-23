@@ -1502,7 +1502,7 @@ class IvaApp extends LitElement {
                                             
                 ${this.config.enabledComponents.browser ? html`
                     <div class="content" id="browser">
-                        <opencga-variant-browser  .opencgaSession="${this.opencgaSession}"
+                        <opencga-variant-browser .opencgaSession="${this.opencgaSession}"
                                                 .opencgaClient="${this.opencgaSession.opencgaClient}"
                                                 .cellbaseClient="${this.cellbaseClient}"
                                                 .reactomeClient="${this.reactomeClient}"
