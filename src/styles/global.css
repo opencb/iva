@@ -166,10 +166,11 @@ h3.page-title {
     font-size: .8em;
 }
 
-/********** browser components (opencga-facet and opencga-variant-facet TODO rename to browser) ************/
+/********** browser components  *************/
 h2.page-title {
     text-transform: uppercase;
     letter-spacing: .2em;
+    margin: 10px 0 20px 0;
 }
 
 .search-button-wrapper {
@@ -195,6 +196,11 @@ h2.page-title {
 
 .active-filter-button:hover {
     text-decoration: line-through;
+}
+
+.left-menu-tabs {
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .left-menu-tabs li {
