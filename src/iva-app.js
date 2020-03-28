@@ -57,6 +57,8 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-c
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/jobs/opencga-jobs-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-analysis-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-stats-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-elegibility-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-interpretation.js";
 // /@dev
 
@@ -117,7 +119,7 @@ class IvaApp extends LitElement {
         _config.proteinSubstitutionScores = proteinSubstitutionScores;
         _config.consequenceTypes = consequenceTypes;
 
-        // We can customise which components are active by default, this improves the first loading time.
+        // We can customise whifgwasch components are active by default, this improves the first loading time.
         _config.enabledComponents.home = true;
         _config.enabledComponents.about = false;
         _config.enabledComponents.contact = false;
@@ -162,6 +164,8 @@ class IvaApp extends LitElement {
             "cat-clinical",
             "cat-catalog",
             "cat-ga4gh",
+            "cohort-stats",
+            "eligibility",
             "gwas",
             "settings",
             "account"];
@@ -1783,11 +1787,21 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}                                                                
                                 
-                                
+                ${this.config.enabledComponents["cohort-stats"] ? html`
+                    <div class="content" id="opencga-variant-stats-analysis">
+                        <opencga-variant-stats-analysis .opencgaSession="${this.opencgaSession}"></opencga-variant-stats-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["eligibility"] ? html`
+                    <div class="content" id="opencga-variant-eligibility-analysis">
+                        <opencga-variant-eligibility-analysis .opencgaSession="${this.opencgaSession}"></opencga-variant-eligibility-analysis>
+                    </div>
+                ` : null}
+                       
                 ${this.config.enabledComponents.gwas ? html`
                     <div class="content" id="opencga-gwas-analysis">
-                        <opencga-gwas-analysis .opencgaSession="${this.opencgaSession}">
-                        </opencga-gwas-analysis>
+                        <opencga-gwas-analysis .opencgaSession="${this.opencgaSession}"></opencga-gwas-analysis>
                     </div>
                 ` : null}
                 

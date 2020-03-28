@@ -158,13 +158,13 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "stats",
+                    id: "cohort-stats",
                     title: "Cohort Variant Stats",
                     acronym: "CS",
                     description: "",
                     icon: "",
                     visibility: "public",
-                    disabled: true
+                    // disabled: true
                 },
                 {
                     id: "ibs",
