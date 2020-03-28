@@ -67,7 +67,8 @@ module.exports = {
                     "./node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css",
                     "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
                     "./node_modules/qtip2/dist/jquery.qtip.min.css",
-                    "./node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.css"
+                    "./node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.css",
+                    "./node_modules/tokenize2/dist/tokenize2.min.css"
                 ],
                 "assets/js/vendor.js": [
                     "./node_modules/jquery/dist/jquery.js",
@@ -91,7 +92,7 @@ module.exports = {
                     "./node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
                     "./node_modules/bootstrap-notify/bootstrap-notify.js",
                     "./node_modules/jwt-decode/build/jwt-decode.min.js",
-                    "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js"
+                    "./node_modules/tokenize2/dist/tokenize2.min.js"
                 ]
             }
         }),

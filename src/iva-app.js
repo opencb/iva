@@ -217,14 +217,7 @@ class IvaApp extends LitElement {
         this._samplesPerTool = {};
 
 
-
-
-        // this.browserSearchQuery = {gene: "BRCA2", sample: "NA12877", study: "platinum"};
-        // this.browserSearchQuery = {};
-
-        // run the observer the first time doesnt work TODO check why
-        // this.opencgaSessionObserver();
-
+        // TODO remove browserSearchQuery
         this.browserSearchQuery = {};
         // keeps track of the executedQueries transitioning from browser tool to facet tool
         this.queries = [];
@@ -970,7 +963,6 @@ class IvaApp extends LitElement {
 
 
     onQueryFilterSearch(e, source) {
-
         // FIXME filters component emits a event containing {detail:{query:Object}} while active-filter emits {detail:{Object}}
         // TODO fix active-filters
         const q = e.detail.query || e.detail;
