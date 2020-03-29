@@ -40,9 +40,7 @@ import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
 import {NotificationElement, NotificationQueue} from "../lib/jsorolla/src/core/Notification.js";
 
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-portal.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
-import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-transcript-view.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-transcript-view.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-protein-view.js";
@@ -55,7 +53,8 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-login.js"
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/jobs/opencga-jobs-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/opencga/clinical/opencga-clinical-analysis-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-portal.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-stats-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-elegibility-analysis.js";

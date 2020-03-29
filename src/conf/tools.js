@@ -56,7 +56,7 @@ const filterMenu = {
         {
             title: "Study and Cohorts",
             collapsed: false,
-            subsections: [
+            fields: [
                 {
                     id: "study",
                     title: "Studies Filter",
@@ -68,9 +68,9 @@ const filterMenu = {
         {
             title: "Genomic",
             collapsed: true,
-            subsections: [
+            fields: [
                 {
-                    id: "location",
+                    id: "region",
                     title: "Chromosomal Location",
                     tooltip: "Filter out variants falling outside the genomic interval(s) defined"
                 },
@@ -109,7 +109,7 @@ const filterMenu = {
         {
             title: "Population Frequency",
             collapsed: true,
-            subsections: [
+            fields: [
                 {
                     id: "populationFrequency",
                     title: "Select Population Frequency",
@@ -121,7 +121,7 @@ const filterMenu = {
         {
             title: "Consequence Type",
             collapsed: true,
-            subsections: [
+            fields: [
                 {
                     id: "consequenceType",
                     title: "Select SO terms",
@@ -132,7 +132,7 @@ const filterMenu = {
         {
             title: "Deleteriousness",
             collapsed: true,
-            subsections: [
+            fields: [
                 {
                     id: "proteinSubstitutionScore",
                     title: "Protein Substitution Score",
@@ -153,7 +153,7 @@ const filterMenu = {
         {
             title: "Conservation",
             collapsed: true,
-            subsections: [
+            fields: [
                 {
                     id: "conservation",
                     title: "Conservation Score",
@@ -173,7 +173,7 @@ const filterMenu = {
         {
             title: "Gene Ontology",
             collapsed: true,
-            subsections: [
+            fields: [
                 {
                     id: "go",
                     title: "GO Accessions (max. 100 terms)",
@@ -184,7 +184,7 @@ const filterMenu = {
         {
             title: "Phenotype-Disease",
             collapsed: true,
-            subsections: [
+            fields: [
                 {
                     id: "hpo",
                     title: "HPO Accessions",
@@ -210,7 +210,7 @@ const filterMenu = {
 const clinical = {
     title: "Sample and File",
     collapsed: false,
-    subsections: [
+    fields: [
         {
             id: "sample",
             title: "Sample Genotype",
