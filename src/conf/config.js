@@ -553,13 +553,16 @@ const application = {
     ]
 };
 
+/* MOVED in opencga-variant-contants
 const beacon = {
     hosts: [
         "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience",
         "ucsc", "lovd", "hgmd", "icgc", "sahgp"
     ]
 };
+/*
 
+/* MOVED in opencga-variant-contants and opencga-variant-common-style */
 const populationFrequencies = {
     // This is based on this figure:
     // http://www.dialogues-cns.com/wp-content/uploads/2015/03/DialoguesClinNeurosci-17-69-g001.jpg
@@ -570,9 +573,9 @@ const populationFrequencies = {
         common: "#0000ff",
         unobserved: "black"
     },
-    tooltip: `<strong>1000 Genomes</strong> Only considers variants whose observed allelic frequency in the 1000 genomes phase 3 database 
+    tooltip: `<strong>1000 Genomes</strong> Only considers variants whose observed allelic frequency in the 1000 genomes phase 3 database
                 is below (or above) the defined value. Genome-wide allelic frequencies were obtained from more than 2.500 genomes.<br><br>
-              <strong>gnomAD Genomes</strong> Only considers variants whose observed allelic frequency in the gnomAD Genomes database is 
+              <strong>gnomAD Genomes</strong> Only considers variants whose observed allelic frequency in the gnomAD Genomes database is
                 below (or above) the defined value. Frequencies were calculated from about 15,000 unrelated individuals`,
     studies: [
         {
@@ -633,6 +636,7 @@ const populationFrequencies = {
     ]
 };
 
+/* Moved in and variant-common-style
 const proteinSubstitutionScores = {
     // This is to show the predictions in respective colors
     sift: {
@@ -646,7 +650,10 @@ const proteinSubstitutionScores = {
         unknown: "black"
     }
 };
+/*
 
+ */
+/* Moved in variant-contants and variant-common-style
 const consequenceTypes = {
     // This is the impact color. It allows to customise both the impact categories and desired colors
     color: {
@@ -931,7 +938,7 @@ const consequenceTypes = {
             impact: "high"
         }
     ]
-};
+};*/
 
 // const DEFAULT_SPECIES = {
 //     vertebrates: [

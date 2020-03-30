@@ -45,6 +45,7 @@ const cohortFileMenu = {
     tooltip: "Filter variants by cohort Alternate allele frequency"
 };
 
+/* MOVED in variant-browser config (TODO copy in interpretation portal) */
 const filterMenu = {
     searchButtonText: "Search",
     tooltip: {
