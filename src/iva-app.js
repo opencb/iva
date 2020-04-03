@@ -37,9 +37,9 @@ import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome/reactome
 import Utils from "../lib/jsorolla/src/core/utils.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
-import {NotificationElement, NotificationQueue} from "../lib/jsorolla/src/core/Notification.js";
-import {consequenceTypes} from "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-contants.js";
-import {proteinSubstitutionScoreStyle} from "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-common-style.js";
+import {NotificationElement, NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
+import {consequenceTypes} from "../lib/jsorolla/src/core/webcomponents/commons/opencga-variant-contants.js";
+import {proteinSubstitutionScore} from "../lib/jsorolla/src/core/webcomponents/commons/opencga-variant-contants.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.js";
@@ -116,7 +116,7 @@ class IvaApp extends LitElement {
         _config.enabledComponents = {};
         // _config.panelExamples = diseasePanels;
         _config.populationFrequencies = populationFrequencies;
-        _config.proteinSubstitutionScores = proteinSubstitutionScoreStyle;
+        _config.proteinSubstitutionScores = proteinSubstitutionScore.style;
         _config.consequenceTypes = consequenceTypes;
 
         // We can customise whifgwasch components are active by default, this improves the first loading time.
@@ -183,8 +183,8 @@ class IvaApp extends LitElement {
         if (UtilsNew.isNotUndefined(populationFrequencies)) {
             this.defaultConfig.populationFrequencies = JSON.parse(JSON.stringify(populationFrequencies));
         }
-        if (UtilsNew.isNotUndefined(proteinSubstitutionScoreStyle)) {
-            this.defaultConfig.proteinSubstitutionScores = JSON.parse(JSON.stringify(proteinSubstitutionScoreStyle));
+        if (UtilsNew.isNotUndefined(proteinSubstitutionScore.style)) {
+            this.defaultConfig.proteinSubstitutionScores = JSON.parse(JSON.stringify(proteinSubstitutionScore.style));
         }
         if (UtilsNew.isNotUndefined(consequenceTypes)) {
             this.defaultConfig.consequenceTypes = JSON.parse(JSON.stringify(consequenceTypes));
