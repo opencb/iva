@@ -55,6 +55,7 @@ module.exports = {
                 "assets/css/styles.css": [
                     "lib/jsorolla/styles/css/style.css",
                     "src/styles/toggle-switch.css",
+                    "src/styles/magic-check.css",
                     "src/styles/global.css"
                 ],
                 "assets/css/vendor.css": [

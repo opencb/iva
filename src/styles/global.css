@@ -834,7 +834,6 @@ Toggle Changes
     height: 20px;
 }
 
-/* The slider itself */
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
@@ -868,5 +867,10 @@ Toggle Changes
     background: #337ab7;
     cursor: pointer;
     border-radius: 50%;
+
+}
+
+/********** center page box  ************/
+.flex-center {
 
 }

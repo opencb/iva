@@ -155,7 +155,6 @@ class IvaApp extends LitElement {
             "protein",
             "sample-grid",
             "browser",
-            "individuals",
             "family",
             "cohorts",
             "jobs",
@@ -573,8 +572,10 @@ class IvaApp extends LitElement {
         }
 
         if (window.location.hash === hashFrag) {
+            //debugger
             this.hashFragmentListener(this);
         } else {
+            //debugger
             window.location.hash = hashFrag;
         }
 
@@ -591,6 +592,8 @@ class IvaApp extends LitElement {
 
         let arr = window.location.hash.split("/");
         const [hashTool, hashProject, hashStudy, feature] = arr;
+
+        //debugger
 
         // Stopping the recursive call
         if (hashTool !== this.tool || (UtilsNew.isNotUndefined(this.opencgaSession) && UtilsNew.isNotUndefined(this.opencgaSession.project) && hashProject !== this.opencgaSession.project.alias) ||
@@ -761,6 +764,7 @@ class IvaApp extends LitElement {
     buildQuery(e) {
         const query = {};
         let value = "";
+        // TODO searchTextBox is not used anymore. Remove related code
         if (UtilsNew.isNotUndefined(e) && UtilsNew.isNotUndefined(e.detail.value)) {
             value = e.detail.value; // It takes care of the fired event from welcome.html
         } else if (UtilsNew.isNotUndefined(e) && e.keyCode === "13" || UtilsNew.isNotUndefined(e) && e.type === "click") {
@@ -955,7 +959,7 @@ class IvaApp extends LitElement {
 
     // TODO geneSelected() is called by several components but it doesn't exists
 
-    // TODO CONTINUE this should keep in sync the query object between variant-browser and variant-facet
+    // TODO this should keep in sync the query object between variant-browser and variant-facet
     onQueryChange(e) {
         console.log("onQueryChange", e);
         this.browserSearchQuery = {...e.detail.query};
@@ -989,86 +993,6 @@ class IvaApp extends LitElement {
         $("#side-nav").toggleClass("active");
         $("#overlay").toggleClass("active");
     }
-
-    /*push(title, summary = "", details = "", severity = "info", dismissible = true, autoDismiss = true, appendToId = "notifications-queue") {
-
-        const iconMap = {
-            info: "fa fa-info-circle fa-2x",
-            success: "fa fa-thumbs-up fa-2x",
-            warning: "fa fa-exclamation-triangle fa-2x",
-            danger: "fa ffa fa-exclamation-circle fa-2x"
-        };
-
-        let iconAdded = false;
-
-        const alertClasses = ["alert", "animated", "slideInDown"];
-        alertClasses.push("alert-" + severity.toLowerCase());
-
-        if (dismissible) {
-            alertClasses.push("alert-dismissible");
-        }
-
-        const msgIcon = $("<i />", {
-            "class": iconMap[severity] // you need to quote "class" since it's a reserved keyword
-        });
-
-        const msg = $("<div />", {
-            "class": alertClasses.join(" ") // you need to quote "class" since it's a reserved keyword
-        });
-
-        if (title) {
-            const msgTitle = $("<h4 />", {
-                html: html`${title}`
-            }).appendTo(msg);
-
-            if (!iconAdded) {
-                msgTitle.prepend(msgIcon);
-                iconAdded = true;
-            }
-        }
-
-        if (summary) {
-            const msgSummary = $("<strong />", {
-                html: html`${summary}`
-            }).appendTo(msg);
-
-            if (!iconAdded) {
-                msgSummary.prepend(msgIcon);
-                iconAdded = true;
-            }
-        }
-
-        if (details) {
-            const msgDetails = $("<p />", {
-                html: details
-            }).appendTo(msg);
-
-            if (!iconAdded) {
-                msgDetails.prepend(msgIcon);
-                iconAdded = true;
-            }
-        }
-
-
-        if (dismissible) {
-            const msgClose = $("<span />", {
-                "class": "close", // you need to quote "class" since it's a reserved keyword
-                "data-dismiss": "alert",
-                "html": "<i class='fa fa-times-circle'></i>"
-            }).appendTo(msg);
-        }
-
-        $("#" + appendToId).append(msg);
-
-        if (autoDismiss) {
-            setTimeout(function() {
-                msg.addClass("slideOutUp");
-                setTimeout(function() {
-                    msg.remove();
-                }, 150000);
-            }, 500000);
-        }
-    }*/
 
     render() {
         return html`

@@ -303,8 +303,16 @@ const application = {
                 },
                 {
                     id: "clinicalAnalysisPortal",
-                    title: "Interpretation Portal",
-                    acronym: "RDI",
+                    title: "Clinical Analysis Case Manager",
+                    acronym: "",
+                    icon: "",
+                    description: "",
+                    visibility: "public"
+                },
+                {
+                    id: "interpretation",
+                    title: "Variant Interpreter",
+                    acronym: "",
                     icon: "",
                     description: "",
                     visibility: "public"
