@@ -264,7 +264,11 @@ h2.page-title {
 
 /********** toggle-switch plugin override ************/
 .switch-toggle-wrapper {
-    margin-top: 10px;
+    margin:10px 0;
+}
+
+.switch-toggle {
+    background: #f3f3f3;
 }
 
 .switch-toggle.text-white input[disabled] + label {
@@ -281,10 +285,10 @@ h2.page-title {
     box-shadow: none;
 }
 
-/* switch-toggle BUG trying to style the :checked input only
+/* switch-toggle BUG trying to style the :checked input only. A checked disabled radio input remains grey after you enable it (e.g.Study-filter). Same problem in somatic-filter too on "None" value */
 .switch-toggle input:checked + label {
     color:white
-}*/
+}
 /********** waffle icon ************/
 #waffle-icon {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MXtkaXNwbGF5OmlubGluZTtmaWxsOiM1QzVDNUM7c3Ryb2tlOiNGRkZGRkY7c3Ryb2tlLXdpZHRoOjY7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQoJLnN0MntmaWxsOiNGRkZGRkY7c3Ryb2tlOiNGRkZGRkY7c3Ryb2tlLXdpZHRoOjY7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQo8L3N0eWxlPgo8ZyBpZD0iTGl2ZWxsb18xIj4KCTxnPgoJCTxjaXJjbGUgY2xhc3M9InN0MiIgY3g9IjQ0IiBjeT0iNDEuMSIgcj0iNy4yIi8+CgkJPGNpcmNsZSBjbGFzcz0ic3QyIiBjeD0iNDQiIGN5PSI4NC4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSI0NCIgY3k9IjEyNy4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIxMzAuMSIgY3k9IjEyNy4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSI4Ny4xIiBjeT0iMTI3LjIiIHI9IjcuMiIvPgoJCTxjaXJjbGUgY2xhc3M9InN0MiIgY3g9Ijg3LjEiIGN5PSI0MS4xIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIxMzAuMSIgY3k9IjQxLjEiIHI9IjcuMiIvPgoJCTxjaXJjbGUgY2xhc3M9InN0MiIgY3g9Ijg3LjEiIGN5PSI4NC4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIxMzAuMSIgY3k9Ijg0LjIiIHI9IjcuMiIvPgoJPC9nPgo8L2c+Cjwvc3ZnPg==");

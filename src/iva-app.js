@@ -39,7 +39,7 @@ import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
 import {NotificationElement, NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
 import {consequenceTypes} from "../lib/jsorolla/src/core/webcomponents/commons/opencga-variant-contants.js";
-import {proteinSubstitutionScore} from "../lib/jsorolla/src/core/webcomponents/commons/opencga-variant-contants.js";
+import {proteinSubstitutionScore, populationFrequencies} from "../lib/jsorolla/src/core/webcomponents/commons/opencga-variant-contants.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.js";
@@ -221,7 +221,22 @@ class IvaApp extends LitElement {
         // keeps track of the executedQueries transitioning from browser tool to facet tool
         this.queries = [];
 
-
+        this.remoteCall = {completed: 0, total: 0};
+        globalThis.addEventListener("request", () => {
+            this.remoteCall.total++;
+            console.log("REMOTE CALL!", this.remoteCall.total)
+            this.requestUpdate();
+        }, false);
+        globalThis.addEventListener("response", () => {
+            //this.remoteCall.total--;
+            this.remoteCall.completed++;
+            if (this.remoteCall.completed >= this.remoteCall.total) {
+                this.remoteCall.total = 0;
+                this.remoteCall.completed = 0;
+            }
+            console.log("REMOTE CALL DONE!", this.remoteCall.total)
+            this.requestUpdate();
+        }, false);
     }
 
     connectedCallback() {
@@ -1165,10 +1180,18 @@ class IvaApp extends LitElement {
                 transform: translate(0);
             }
 
-            
+            #progress-bar {
+                width: 100%;
+                position: fixed;
+                height: 3px;
+                background: #41a7ff;
+                z-index: 10;
+                transition: width 2s ease-in-out, opacity 0.5s ease;
+            } 
             </style>
 
-            
+            <!-- total ${this.remoteCall.total} completed ${this.remoteCall.completed} W ${100 * (this.remoteCall.total / this.remoteCall.completed)} -->
+            <div id="progress-bar" style="opacity: ${~~this.remoteCall.total}; width:${100 * (this.remoteCall.total === this.remoteCall.completed === 0 ? 1 : this.remoteCall.total / this.remoteCall.completed)}%"></div>
             
             <div id="overlay" @click="${this.toggleSideNav}"></div>
             <div id="side-nav" class="sidenav shadow-lg">
@@ -1180,9 +1203,7 @@ class IvaApp extends LitElement {
                     <ul class="nav sidebar-nav">
                     ${this.config.menu && this.config.menu.length ? this.config.menu.map(item => html`
                         <li>
-                            <a href="#cat-${item.id}" role="button" @click="${e => {
-    this.toggleSideNav(e); this.changeTool(e);
-}}">
+                            <a href="#cat-${item.id}" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
                                 <img src="img/tools/icons/${item.icon}"  alt="${item.title}"/>  ${item.title}
                             </a>
                          </li>
@@ -1190,18 +1211,15 @@ class IvaApp extends LitElement {
                     </ul>
                 </nav>
             </div>
-            
             <div>
                 <nav class="navbar navbar-inverse" style="margin-bottom: 5px; border-radius: 0px">
                     <div>
-            
                         <ul class="nav navbar-nav">
                             <li>
                                 <a href="#" @click="${this.toggleSideNav}" id="waffle-icon">
                                    <img src="img/waffle-icon.svg" />
                                 </a>
                             </li>
-                            
                         </ul>
 
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -1213,10 +1231,8 @@ class IvaApp extends LitElement {
                                 <b>${this.config.title} <sup>${this.config.version}</sup></b>
                             </a>
                         </div>
-            
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            
                             <!-- Controls aligned to the LEFT -->
                             <ul class="nav navbar-nav">
                                 <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
@@ -1283,7 +1299,7 @@ class IvaApp extends LitElement {
                                         </ul>
                                     </li>
                                 ` : null}
-            
+
                                 <!--Search menu-->
                                 ${this.opencgaSession && this.opencgaSession.projects && this.config.search.visible ? html`
                                         <form class="navbar-form navbar-left" role="search">
@@ -1295,7 +1311,7 @@ class IvaApp extends LitElement {
                                             </div>
                                         </form>
                                 ` : null}
-            
+
                                 <!-- About dropdown menu-->
                                 ${this.config.about.dropdown ? html`
                                     <li class="dropdown">
@@ -1315,7 +1331,7 @@ class IvaApp extends LitElement {
                                         <a href="#${link.id}" role="button" @click="${this.changeTool}">${link.name}</a>
                                     </li>
                                 `)}
-                                
+
                                 <!-- Login/Logout button -->
                                 ${this.config.login.visible && (!this.opencgaSession || !this.opencgaSession.token) ? html`
                                     <li>
@@ -1324,7 +1340,7 @@ class IvaApp extends LitElement {
                                         </a>
                                     </li>
                                 ` : null}
-                                
+
                                 <!--User-->
                                 ${this.opencgaSession && this.opencgaSession.token ? html`
                                     <li class="dropdown user-menu">
@@ -1349,14 +1365,14 @@ class IvaApp extends LitElement {
                                             </li>
                                         </ul>
                                     </li>
-                                ` : null}                   
+                                ` : null}
                             </ul>
                         </div>
                     </div>
                 </nav>
             </div>
             <!-- End of navigation bar -->
-            
+
             <!--Breadcrumb-->
             ${this.config.breadcrumb.visible && this.opencgaSession && this.opencgaSession.projects ? html`
                 <!--<div>
@@ -1364,7 +1380,7 @@ class IvaApp extends LitElement {
                 </div>-->
                 <opencga-breadcrumb .config="${this.config}" .opencgaSession="${this.opencgaSession}"></opencga-breadcrumb>
             ` : null}
-            
+
             <!-- This is where main application is rendered -->
             <div>
                 ${this.config.enabledComponents.home ? html`
@@ -1372,43 +1388,43 @@ class IvaApp extends LitElement {
                         <welcome-web .opencgaSession="${this.opencgaSession}" version="${this.config.version}" .cellbaseClient=${this.cellbaseClient} @search="${this.quickSearch}" .config="${this.config}"> </welcome-web>
                     </div>
                 ` : null}
-            
+
                 ${this.config.enabledComponents.about ? html`
                     <div class="content" id="about">
                         <about-web version="${this.config.version}"></about-web>
                     </div>
                 ` : null}
-            
+
                 ${this.config.enabledComponents.terms ? html`
                     <div class="content" id="terms">
                         <terms-web version="${this.config.version}"></terms-web>
                     </div>
                 ` : null}
-            
+
                 ${this.config.enabledComponents.contact ? html`
                     <div class="content" id="contact">
                         <contact-web version="${this.config.version}"></contact-web>
                     </div>
                 ` : null}
-            
+
                 ${this.config.enabledComponents.faq ? html`
                 <div class="content" id="faq">
                     <faq-web version="${this.config.version}"></faq-web>
                 </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.gettingstarted ? html`
                 <div class="content" id="getting-started">
                     <getting-started .opencgaSession="${this.opencgaSession}" .config="${this.config}"></getting-started>
                 </div>
                 ` : null}
             </div>
-            
-             <!-- -<div class="alert alert-info">${JSON.stringify(this.queries)}</div> --> 
-            
+
+             <!-- -<div class="alert alert-info">${JSON.stringify(this.queries)}</div> -->
+
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
-            
+
                 ${this.config.enabledComponents.login ? html`
                     <div class="content" id="login">
                         <opencga-login  .opencgaClient="${this.opencgaClient}"
@@ -1419,7 +1435,7 @@ class IvaApp extends LitElement {
                         </opencga-login>
                     </div>
                 ` : null}
-                                            
+
                 ${this.config.enabledComponents.browser ? html`
                     <div class="content" id="browser">
                         <opencga-variant-browser .opencgaSession="${this.opencgaSession}"
@@ -1449,7 +1465,7 @@ class IvaApp extends LitElement {
                         </opencga-clinical-portal>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.interpretation ? html`
                     <div class="content" id="interpretation">
                         <opencga-variant-interpretation .opencgaSession="${this.opencgaSession}"
@@ -1465,7 +1481,7 @@ class IvaApp extends LitElement {
                         </opencga-variant-interpretation>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.beacon ? html`
                     <div class="content" id="beacon">
                         <variant-beacon .opencgaSession="${this.opencgaSession}"
@@ -1473,7 +1489,7 @@ class IvaApp extends LitElement {
                         </variant-beacon>
                     </div>
                 ` : null}
-                    
+
                 ${this.config.enabledComponents.genomeBrowser ? html`
                     <div class="content" id="genomeBrowser">
                         <opencga-genome-browser .opencgaSession="${this.opencgaSession}"
@@ -1481,8 +1497,8 @@ class IvaApp extends LitElement {
                                                 .opencgaClient="${this.opencgaClient}">
                         </opencga-genome-browser>
                     </div>
-                ` : null} 
-                
+                ` : null}
+
                 ${this.config.enabledComponents.projects ? html`
                     <div class="content" id="projects">
                         <opencga-projects  .opencgaSession="${this.opencgaSession}"  
@@ -1494,7 +1510,7 @@ class IvaApp extends LitElement {
                         </opencga-projects>
                     </div>
                 ` : null}
-                                
+
                 ${this.config.enabledComponents["samples"] ? html`
                     <div class="content" id="samples">
                         <opencga-sample-browser resource="sample"
@@ -1511,7 +1527,7 @@ class IvaApp extends LitElement {
                         </opencga-sample-browser>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.panel ? html`
                     <div class="content" id="panel">
                         <opencga-panel-browser  .opencgaSession="${this.opencgaSession}"
@@ -1522,7 +1538,7 @@ class IvaApp extends LitElement {
                         </opencga-panel-browser>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.files ? html`
                     <div class="content" id="files">
                         <opencga-file-browser .opencgaSession="${this.opencgaSession}"
@@ -1555,7 +1571,7 @@ class IvaApp extends LitElement {
                         </opencga-gene-view>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.sample ? html`
                     <div class="content" id="sample" style="margin: auto; width: 90%">
                         <opencga-sample-view    .opencgaSession="${this.opencgaSession}"
@@ -1563,8 +1579,8 @@ class IvaApp extends LitElement {
                         </opencga-sample-view>
                     </div>
                 ` : null}
-                
-                
+
+
                 ${this.config.enabledComponents.transcript ? html`
                     <div class="content feature-view" id="transcript">
                         <opencga-transcript-view .cellbaseClient="${this.cellbaseClient}"
@@ -1580,7 +1596,7 @@ class IvaApp extends LitElement {
                         </opencga-transcript-view>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.protein ? html`
                     <div class="content feature-view" id="protein">
                         <opencga-protein-view .opencgaSession="${this.opencgaSession}"
@@ -1596,7 +1612,7 @@ class IvaApp extends LitElement {
                         </opencga-protein-view>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.individuals ? html`
                     <div class="content" id="individuals">
                         <opencga-individual-browser .opencgaSession="${this.opencgaSession}"
@@ -1612,7 +1628,7 @@ class IvaApp extends LitElement {
                         </opencga-individual-browser>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.families ? html`
                     <div class="content" id="families">
                         <opencga-family-browser .opencgaSession="${this.opencgaSession}"
@@ -1628,7 +1644,7 @@ class IvaApp extends LitElement {
                         </opencga-family-browser>
                     </div>
                 ` : null}
-                
+
 
                 ${this.config.enabledComponents.cohorts ? html`
                     <div class="content" id="cohorts">
@@ -1645,7 +1661,7 @@ class IvaApp extends LitElement {
                         </opencga-cohort-browser>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.clinicalAnalysis ? html`
                     <div class="content" id="clinicalAnalysis">
                         <opencga-clinical-analysis-browser    .opencgaSession="${this.opencgaSession}"
@@ -1656,7 +1672,7 @@ class IvaApp extends LitElement {
                         </opencga-clinical-analysis-browser>
                     </div>
                 ` : null}
-                                
+
                 ${this.config.enabledComponents["jobs"] ? html`
                     <div class="content" id="jobs">
                         <opencga-jobs-browser .opencgaSession="${this.opencgaSession}"
@@ -1667,98 +1683,76 @@ class IvaApp extends LitElement {
                         </opencga-jobs-browser>
                     </div>
                 ` : null}
-                                
+
                 ${this.config.enabledComponents["cat-browser"] ? html`
                     <div class="content" id="cat-browser">
                         <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "browser")}">
                         </category-page>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents["cat-analysis"] ? html`
                     <div class="content" id="cat-analysis">
                         <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "analysis")}">
                         </category-page>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents["cat-clinical"] ? html`
                     <div class="content" id="cat-clinical">
                         <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "clinical")}">
                         </category-page>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents["cat-catalog"] ? html`
                     <div class="content" id="cat-catalog">
                         <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "catalog")}">
                         </category-page>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents["cat-ga4gh"] ? html`
                     <div class="content" id="cat-ga4gh">
                         <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "ga4gh")}">
                         </category-page>
                     </div>
-                ` : null}                                                                
-                                
+                ` : null}
+
                 ${this.config.enabledComponents["cohort-stats"] ? html`
                     <div class="content" id="opencga-variant-stats-analysis">
                         <opencga-variant-stats-analysis .opencgaSession="${this.opencgaSession}"></opencga-variant-stats-analysis>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents["eligibility"] ? html`
                     <div class="content" id="opencga-variant-eligibility-analysis">
                         <opencga-variant-eligibility-analysis .opencgaSession="${this.opencgaSession}"></opencga-variant-eligibility-analysis>
                     </div>
                 ` : null}
-                       
+
                 ${this.config.enabledComponents.gwas ? html`
                     <div class="content" id="opencga-gwas-analysis">
                         <opencga-gwas-analysis .opencgaSession="${this.opencgaSession}"></opencga-gwas-analysis>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents.account ? html`
                     <div class="content" id="account">
                         <iva-profile .opencgaSession="${this.opencgaSession}">
                         </iva-profile>
                     </div>
                 ` : null}
-                                
+
                 ${this.config.enabledComponents.settings ? html`
                     <div class="content" id="settings">
                         <iva-settings .opencgaSession="${this.opencgaSession}">
                         </iva-settings>
                     </div>
                 ` : null}
-                
-                
+
+
             <!-- TODO convert in lit-element
-                <template is="dom-if" if="{{config.enabledComponents.clinical}}">
-                    <div class="content" id="clinical">
-                        <opencga-variant-clinical opencga-session="{{opencgaSession}}" config="[[config.tools.clinical]]"
-                                                  population-frequencies="{{config.populationFrequencies}}"
-                                                  protein-substitution-scores="{{config.proteinSubstitutionScores}}"
-                                                  consequence-types="{{config.consequenceTypes}}"
-                                                  opencga-client="{{opencgaClient}}" cellbase-client="{{cellbaseClient}}"
-                                                  on-notifymessage="onNotifyMessage"
-                                                  event-notify-name="{{config.notifyEventMessage}}">
-                        </opencga-variant-clinical>
-                    </div>
-                </template>
-                
-                <template is="dom-if" if="{{config.enabledComponents.settings}}">
-                    <div class="content" id="settings" style="width: 40%; margin: auto">
-                        <br>
-                        <iva-settings opencga-client="{{opencgaClient}}" on-config="refreshConfig"
-                                      default-config="{{defaultConfig}}">
-                        </iva-settings>
-                    </div>
-                </template>
-            
                 <template is="dom-if" if="{{config.enabledComponents.project}}">
                     <div class="content" id="project">
                         <opencga-project opencga-client="{{opencgaClient}}" project="{{opencgaSession.project}}"
@@ -1767,7 +1761,7 @@ class IvaApp extends LitElement {
                         </opencga-project>
                     </div>
                 </template>
-            
+
                 <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisCreator}}">
                     <div class="content" id="clinicalAnalysisCreator">
                         <opencga-clinical-analysis-creator opencga-session="{{opencgaSession}}"
@@ -1775,7 +1769,7 @@ class IvaApp extends LitElement {
                     </div>
                 </template>
                 -->
-            
+
             <div id="notifications-queue" class="col-xs-11 col-sm-4"></div>
 
             </div>
