@@ -60,6 +60,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-ana
 //import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-stats-analysis.js";
 //import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-elegibility-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-interpretation.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-cancer-interpreter.js";
 // /@dev
 
 
@@ -91,9 +92,9 @@ class IvaApp extends LitElement {
             // tool: {
             //     type: String
             // },
-            cellbaseClient: {
-                type: Object
-            },
+            // cellbaseClient: {
+            //     type: Object
+            // },
             config: {
                 type: Object
             }
@@ -166,6 +167,11 @@ class IvaApp extends LitElement {
             "cohort-stats",
             "eligibility",
             "gwas",
+            "clinical-analysis-editor",
+            "rd-interpreter",
+            "cancer-interpreter",
+            "rd-tiering",
+            "cancer-tiering",
             "settings",
             "account"];
 
@@ -1466,8 +1472,8 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents.interpretation ? html`
-                    <div class="content" id="interpretation">
+                ${this.config.enabledComponents["rd-interpreter"] ? html`
+                    <div class="content" id="rd-interpreter">
                         <opencga-variant-interpretation .opencgaSession="${this.opencgaSession}"
                                                         .cellbaseClient="${this.cellbaseClient}"
                                                         .clinicalAnalysisId="${this.clinicalAnalysisId}"
@@ -1475,10 +1481,25 @@ class IvaApp extends LitElement {
                                                         .populationFrequencies="${this.config.populationFrequencies}"
                                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
                                                         .consequenceTypes="${this.config.consequenceTypes}"
-                                                        .config="${this.config.tools.interpretation}"
+                                                        .config="${this.config.tools["rd-interpreter"]}"
                                                         @gene="${this.geneSelected}"
                                                         @samplechange="${this.onSampleChange}">
                         </opencga-variant-interpretation>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["cancer-interpreter"] ? html`
+                    <div class="content" id="cancer-interpreter">
+                        <variant-cancer-interpreter .opencgaSession="${this.opencgaSession}"
+                                                        .cellbaseClient="${this.cellbaseClient}"
+                                                        .clinicalAnalysisId="${this.clinicalAnalysisId}"
+                                                        .query="${this.interpretationSearchQuery}"
+                                                        .populationFrequencies="${this.config.populationFrequencies}"
+                                                        .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
+                                                        .consequenceTypes="${this.config.consequenceTypes}"
+                                                        @gene="${this.geneSelected}"
+                                                        @samplechange="${this.onSampleChange}">
+                        </variant-cancer-interpreter>
                     </div>
                 ` : null}
 
@@ -1734,6 +1755,14 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.gwas ? html`
                     <div class="content" id="opencga-gwas-analysis">
                         <opencga-gwas-analysis .opencgaSession="${this.opencgaSession}"></opencga-gwas-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["clinical-analysis-editor"] ? html`
+                    <div class="content" id="opencga-clinical-analysis-editor">
+                        <opencga-clinical-analysis-editor .opencgaSession="${this.opencgaSession}"
+                                                              @clinicalanalysischange="${this.onClinicalAnalysisEditor}">
+                        </opencga-clinical-analysis-editor>
                     </div>
                 ` : null}
 

@@ -297,33 +297,51 @@ const application = {
             visibility: "public",
             submenu: [
                 {
-                    title: "Clinical Interpretation",
+                    title: "Clinical Management",
                     category: true,
                     visibility: "public"
                 },
                 {
                     id: "clinicalAnalysisPortal",
-                    title: "Clinical Analysis Case Manager",
+                    title: "Review Cases",
                     acronym: "",
                     icon: "",
                     description: "",
                     visibility: "public"
                 },
                 {
-                    id: "interpretation",
-                    title: "Variant Interpreter",
+                    id: "clinical-analysis-editor",
+                    title: "Create Case",
                     acronym: "",
                     icon: "",
                     description: "",
                     visibility: "public"
                 },
-                // {
-                //     id: "interpretation",
-                //     title: "Variant Interpreter",
-                //     description: "",
-                //     icon: "",
-                //     visibility: "public"
-                // },
+                {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
+                    title: "Variant Interpreters (DSS)",
+                    category: true,
+                    visibility: "public"
+                },
+                {
+                    id: "rd-interpreter",
+                    title: "Variant RD Interpreter",
+                    acronym: "",
+                    icon: "",
+                    description: "",
+                    visibility: "public"
+                },
+                {
+                    id: "cancer-interpreter",
+                    title: "Variant Cancer Interpreter",
+                    acronym: "",
+                    icon: "",
+                    description: "",
+                    visibility: "public"
+                },
                 {
                     separator: true,
                     visibility: "public"
@@ -334,8 +352,15 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "tiering",
-                    title: "OpenCGA Tiering (Based on GEL Tiering)",
+                    id: "rd-tiering",
+                    title: "OpenCGA RD Tiering (Based on GEL algorithm)",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    id: "cancer-tiering",
+                    title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -343,6 +368,13 @@ const application = {
                 {
                     id: "team",
                     title: "TEAM",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    id: "zetta",
+                    title: "Zetta",
                     description: "",
                     icon: "",
                     visibility: "public"

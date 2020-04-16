@@ -339,8 +339,8 @@ const tools = {
             // }
         ]
     },*/
-    interpretation: {
-        title: "Variant Interpreter",
+    "rd-interpreter": {
+        title: "Variant RD Interpreter",
         disableSaveInterpretation: false,
         active: false,
         showOtherTools: true,
