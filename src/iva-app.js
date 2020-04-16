@@ -59,7 +59,7 @@ import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysi
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
 //import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-stats-analysis.js";
 //import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-elegibility-analysis.js";
-import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-interpretation.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-rd-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-cancer-interpreter.js";
 // /@dev
 
@@ -1474,7 +1474,7 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents["rd-interpreter"] ? html`
                     <div class="content" id="rd-interpreter">
-                        <opencga-variant-interpretation .opencgaSession="${this.opencgaSession}"
+                        <variant-rd-interpreter .opencgaSession="${this.opencgaSession}"
                                                         .cellbaseClient="${this.cellbaseClient}"
                                                         .clinicalAnalysisId="${this.clinicalAnalysisId}"
                                                         .query="${this.interpretationSearchQuery}"
@@ -1484,7 +1484,7 @@ class IvaApp extends LitElement {
                                                         .config="${this.config.tools["rd-interpreter"]}"
                                                         @gene="${this.geneSelected}"
                                                         @samplechange="${this.onSampleChange}">
-                        </opencga-variant-interpretation>
+                        </variant-rd-interpreter>
                     </div>
                 ` : null}
                 
