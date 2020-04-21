@@ -1687,7 +1687,7 @@ class IvaApp extends LitElement {
                     <div class="content" id="clinicalAnalysis">
                         <opencga-clinical-analysis-browser    .opencgaSession="${this.opencgaSession}"
                                                             .config="${this.config.tools.clinicalAnalysisBrowser}"
-                                                            .query="${this.queries.clinicalAnalysis}"
+                                                            .query="${this.queries["clinical-analysis"]}"
                                                             @querySearch="${e => this.onQueryFilterSearch(e, "clinical-analysis")}"
                                                             @activeFilterChange="${e => this.onQueryFilterSearch(e, "clinical-analysis")}">  
                         </opencga-clinical-analysis-browser>
