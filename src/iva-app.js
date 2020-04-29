@@ -1536,7 +1536,6 @@ class IvaApp extends LitElement {
                     <div class="content" id="samples">
                         <opencga-sample-browser resource="sample"
                                         .opencgaSession="${this.opencgaSession}"
-                                        .opencgaClient="${this.opencgaSession.opencgaClient}"
                                         .query="${this.queries.sample}"
                                         .config="${this.config.tools.sampleBrowser}"
                                         .cellbaseClient="${this.cellbaseClient}"
@@ -1563,7 +1562,6 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.files ? html`
                     <div class="content" id="files">
                         <opencga-file-browser .opencgaSession="${this.opencgaSession}"
-                                        .opencgaClient="${this.opencgaSession.opencgaClient}"
                                         .query="${this.queries.files}"
                                         .config="${this.config.tools.fileBrowser}"
                                         .cellbaseClient="${this.cellbaseClient}"
@@ -1653,7 +1651,6 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.families ? html`
                     <div class="content" id="families">
                         <opencga-family-browser .opencgaSession="${this.opencgaSession}"
-                                        .opencgaClient="${this.opencgaSession.opencgaClient}"
                                         .query="${this.queries.families}"
                                         .config="${this.config.tools.familyBrowser}"
                                         .cellbaseClient="${this.cellbaseClient}"
@@ -1670,7 +1667,6 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.cohorts ? html`
                     <div class="content" id="cohorts">
                         <opencga-cohort-browser   .opencgaSession="${this.opencgaSession}"
-                                                .opencgaClient="${this.opencgaSession.opencgaClient}"
                                                 .query="${this.queries.cohorts}"
                                                 .config="${this.config.tools.cohortBrowser}"
                                                 .cellbaseClient="${this.cellbaseClient}"
@@ -1799,7 +1795,7 @@ class IvaApp extends LitElement {
                 </template>
                 -->
 
-            <div id="notifications-queue" class="col-xs-11 col-sm-4"></div>
+                <div id="notifications-queue" class="col-xs-11 col-sm-4"></div>
 
             </div>
 
