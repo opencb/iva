@@ -61,6 +61,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-ana
 //import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-elegibility-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-rd-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-cancer-interpreter.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-generic-interpreter.js";
 // /@dev
 
 
@@ -173,7 +174,8 @@ class IvaApp extends LitElement {
             "rd-tiering",
             "cancer-tiering",
             "settings",
-            "account"];
+            "account",
+            "generic-interpreter"];
 
         for (const component of components) {
             _config.enabledComponents[component] = false;
@@ -1777,6 +1779,15 @@ class IvaApp extends LitElement {
                     <div class="content" id="settings">
                         <iva-settings .opencgaSession="${this.opencgaSession}">
                         </iva-settings>
+                    </div>
+                ` : null}
+
+
+                ${this.config.enabledComponents["generic-interpreter"] ? html`
+                    <div class="content" id="settings">
+                        <variant-generic-interpreter    .opencgaSession="${this.opencgaSession}" 
+                                                        .cellbaseClient="${this.cellbaseClient}">
+                        </variant-generic-interpreter>
                     </div>
                 ` : null}
 

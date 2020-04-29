@@ -297,6 +297,14 @@ const application = {
             visibility: "public",
             submenu: [
                 {
+                    id: "generic-interpreter",
+                    title: "Generic Interpreter",
+                    acronym: "",
+                    icon: "",
+                    description: "",
+                    visibility: "public"
+                },
+                {
                     title: "Clinical Management",
                     category: true,
                     visibility: "public"
