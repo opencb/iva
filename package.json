@@ -18,7 +18,8 @@
     "build": "npm run clean && npm run copy && npm run copy-jsorolla && npm run vulcanize && npm run build-iva-app",
     "test-e2e": "./node_modules/.bin/nightwatch",
     "serve": "browser-sync start --config bs-config.js",
-    "prepare": "pika-web"
+    "prepare": "pika-web",
+    "e2e": "npx cypress open"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
@@ -69,8 +70,10 @@
     "copy-webpack-plugin": "^5.1.1",
     "crisper": "~2.1.1",
     "css-loader": "^3.4.2",
+    "cypress": "^4.5.0",
     "eslint": "^6.5.1",
     "eslint-config-google": "^0.14.0",
+    "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "^2.18.2",
     "file-loader": "^5.0.2",
     "html-loader": "^0.5.5",
