@@ -59,13 +59,10 @@ import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysi
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
 //import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-stats-analysis.js";
 //import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-elegibility-analysis.js";
-import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-rd-interpreter.js";
-import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-cancer-interpreter.js";
+//import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-rd-interpreter.js";
+//import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-cancer-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-generic-interpreter.js";
 // /@dev
-
-
-// import {OpenCGAClient, CellBaseClientConfig, CellBaseClient, ReactomeClient, UtilsNew, NotificationUtils} from "../lib/jsorolla/dist/main.js";
 
 
 class IvaApp extends LitElement {

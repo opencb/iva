@@ -164,120 +164,6 @@ export default class WelcomeWeb extends LitElement {
                 letter-spacing: 0;
             }
             
-            .hi-icon-wrap {
-                text-align: center;
-                margin: 0 auto;
-                padding: 2em 0 3em;
-            }
-            .hi-icon {
-                display: inline-block;
-                cursor: pointer;
-                margin: 15px 30px;
-                width: 110px;
-                height: 110px;
-                border-radius: 50%;
-                text-align: center;
-                position: relative;
-                z-index: 1;
-            }
-            .hi-icon a p {
-                text-decoration: none;
-                color: #000966;
-            }
-            .hi-icon a:hover p {
-                text-decoration: none;
-            }
-            .hi-icon:after {
-                pointer-events: none;
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                content: '';
-                -webkit-box-sizing: content-box;
-                -moz-box-sizing: content-box;
-                box-sizing: content-box;
-            }
-            .hi-icon:before {
-                /*font-family: 'ecoicon';*/
-                speak: none;
-                font-size: 48px;
-                line-height: 110px;
-                font-style: normal;
-                font-variant: normal;
-                text-transform: none;
-                display: block;
-                -webkit-font-smoothing: antialiased;
-                color: #000966;
-            }
-            .hi-icon-mobile:before {
-                content: "\\e009";
-            }
-            .hi-icon-animation .hi-icon {
-                -webkit-transition: box-shadow 0.2s;
-                -moz-transition: box-shadow 0.2s;
-                transition: box-shadow 0.2s;
-            }
-            .hi-icon-animation p {
-                -webkit-transition: all 0.3s;
-                -moz-transition: all 0.3s;
-                transition: all 0.3s;
-                color: #797979;
-            }
-            .hi-icon-animation .hi-icon svg {
-                -webkit-transition: -webkit-transform 0.2s, all 0.2s;
-                -moz-transition: -moz-transform 0.2s, all 0.2s;
-                transition: transform 0.2s, all 0.2s;
-                fill: #000966;
-                height: 90px;
-                width: 90px;
-            }
-            .hi-icon-animation .hi-icon.fa,
-            .hi-icon-animation .icon-wrapper:hover .hi-icon img{
-                -webkit-transition: -webkit-transform 0.2s, all 0.2s;
-                -moz-transition: -moz-transform 0.2s, all 0.2s;
-                transition: transform 0.2s, all 0.2s;
-            }
-            .hi-icon-animation .hi-icon svg image{
-                height: 90px;
-                width: 90px;
-            }
-            .hi-icon-animation .hi-icon:after {
-                top: 0;
-                left: 0;
-                padding: 0;
-                box-shadow: 0 0 0 4px #000966;
-                -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
-                -moz-transition: -moz-transform 0.2s, opacity 0.2s;
-                transition: transform 0.2s, opacity 0.2s;
-            }
-            .hi-icon-animation .icon-wrapper:hover {
-                display: inline-block;
-                text-decoration: none;
-            }
-            .hi-icon-animation .icon-wrapper:hover .hi-icon:after {
-                -webkit-transform: scale(0.85);
-                -moz-transform: scale(0.85);
-                -ms-transform: scale(0.85);
-                transform: scale(0.85);
-                opacity: 0.5;
-            }
-            /* in case of svg or image[src=svg] icon */
-            .hi-icon-animation .icon-wrapper:hover .hi-icon svg,
-            .hi-icon-animation .icon-wrapper:hover .hi-icon img{
-                transform: scale(0.85);
-            }
-            /* in case of fa icon*/
-            .hi-icon-animation .icon-wrapper:hover .hi-icon.fa {
-                transform: scale(0.85);
-            }
-            .hi-icon-animation .icon-wrapper:hover .hi-icon {
-                box-shadow: 0 0 0 10px rgba(0, 9, 102, 1);
-                color: #fff;
-            }
-            .hi-icon-animation .icon-wrapper:hover p {
-                color: #000966;
-            }
             .smaller {
                 font-size: 75%;
             }
@@ -360,10 +246,7 @@ export default class WelcomeWeb extends LitElement {
                 margin-bottom: 80px;
             }
         
-            .hi-icon-wrap {
-                display: grid;
-                grid-template-columns: auto auto auto auto auto auto; /* TODO FIXME hi-icon:before seems to be a problem there are 5 items not 6 */
-            }
+            
         </style>                                         
 
         <!-- This is where main application is rendered -->
