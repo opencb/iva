@@ -884,12 +884,15 @@ Toggle Changes
     text-align: center;
     margin: 0 auto;
     padding: 2em 0 3em;
+    padding-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 .hi-icon {
     display: inline-block;
-    margin: 15px 30px;
-    width: 110px;
-    height: 110px;
+    margin: 10px 20px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     text-align: center;
     position: relative;
@@ -917,7 +920,7 @@ Toggle Changes
     /*font-family: 'ecoicon';*/
     speak: none;
     font-size: 48px;
-    line-height: 110px;
+    line-height: 80px;
     font-style: normal;
     font-variant: normal;
     text-transform: none;
@@ -1037,11 +1040,11 @@ Toggle Changes
 .hi-icon-wrap.wizard a.icon-wrapper:before {
     content: "";
     position: absolute;
-    width: 105px;
-    height: 4px;
+    width: 115px;
+    height: 3px;
     top: 42%;
     background: #000966;
-    left: 130px;
+    left: 110px;
 }
 
 .hi-icon-wrap.wizard a.icon-wrapper.disabled:before {

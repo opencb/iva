@@ -166,13 +166,9 @@ class IvaApp extends LitElement {
             "eligibility",
             "gwas",
             "clinical-analysis-editor",
-            "rd-interpreter",
-            "cancer-interpreter",
-            "rd-tiering",
-            "cancer-tiering",
+            "interpreter",
             "settings",
-            "account",
-            "generic-interpreter"];
+            "account"];
 
         for (const component of components) {
             _config.enabledComponents[component] = false;
@@ -1776,7 +1772,7 @@ class IvaApp extends LitElement {
                 ` : null}
 
 
-                ${this.config.enabledComponents["generic-interpreter"] ? html`
+                ${this.config.enabledComponents["interpreter"] ? html`
                     <div class="content" id="settings">
                         <variant-generic-interpreter    .opencgaSession="${this.opencgaSession}" 
                                                         .cellbaseClient="${this.cellbaseClient}">

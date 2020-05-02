@@ -297,21 +297,13 @@ const application = {
             visibility: "public",
             submenu: [
                 {
-                    id: "generic-interpreter",
-                    title: "Generic Interpreter",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                },
-                {
                     title: "Clinical Management",
                     category: true,
                     visibility: "public"
                 },
                 {
                     id: "clinicalAnalysisPortal",
-                    title: "Review Cases",
+                    title: "Interpretation Portal",
                     acronym: "",
                     icon: "",
                     description: "",
@@ -330,63 +322,71 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    title: "Variant Interpreters (DSS)",
+                    title: "Interpretation",
                     category: true,
                     visibility: "public"
                 },
                 {
-                    id: "rd-interpreter",
-                    title: "Variant RD Interpreter",
+                    id: "interpreter",
+                    title: "Variant Interpreter",
                     acronym: "",
                     icon: "",
                     description: "",
                     visibility: "public"
                 },
-                {
-                    id: "cancer-interpreter",
-                    title: "Variant Cancer Interpreter",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Interpretation Analysis",
-                    category: true,
-                    visibility: "public"
-                },
-                {
-                    id: "rd-tiering",
-                    title: "OpenCGA RD Tiering (Based on GEL algorithm)",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "cancer-tiering",
-                    title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "team",
-                    title: "TEAM",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "zetta",
-                    title: "Zetta",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
+                // {
+                //     id: "rd-interpreter",
+                //     title: "Variant RD Interpreter",
+                //     acronym: "",
+                //     icon: "",
+                //     description: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "cancer-interpreter",
+                //     title: "Variant Cancer Interpreter",
+                //     acronym: "",
+                //     icon: "",
+                //     description: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Interpretation Analysis",
+                //     category: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "rd-tiering",
+                //     title: "OpenCGA RD Tiering (Based on GEL algorithm)",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "cancer-tiering",
+                //     title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "team",
+                //     title: "TEAM",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "zetta",
+                //     title: "Zetta",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 {
                     separator: true,
                     visibility: "public"
