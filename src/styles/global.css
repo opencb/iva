@@ -878,3 +878,175 @@ Toggle Changes
 .flex-center {
 
 }
+
+/********** welcome page / interpreter icons ************/
+.hi-icon-wrap {
+    text-align: center;
+    margin: 0 auto;
+    padding: 2em 0 3em;
+}
+.hi-icon {
+    display: inline-block;
+    margin: 15px 30px;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.hi-icon a p {
+    text-decoration: none;
+    color: #000966;
+}
+.hi-icon a:hover p {
+    text-decoration: none;
+}
+.hi-icon:after {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    content: '';
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.hi-icon:before {
+    /*font-family: 'ecoicon';*/
+    speak: none;
+    font-size: 48px;
+    line-height: 110px;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    display: block;
+    -webkit-font-smoothing: antialiased;
+    color: #000966;
+}
+.hi-icon-mobile:before {
+    content: "\e009";
+}
+.hi-icon-animation .hi-icon {
+    background: #fff;
+    -webkit-transition: box-shadow 0.2s;
+    -moz-transition: box-shadow 0.2s;
+    transition: box-shadow 0.2s;
+}
+.hi-icon-animation p {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    color: #797979;
+}
+.hi-icon-animation .hi-icon svg {
+    -webkit-transition: -webkit-transform 0.2s, all 0.2s;
+    -moz-transition: -moz-transform 0.2s, all 0.2s;
+    transition: transform 0.2s, all 0.2s;
+    fill: #000966;
+    height: 90px;
+    width: 90px;
+}
+.hi-icon-animation .hi-icon.fa,
+.hi-icon-animation .icon-wrapper:hover .hi-icon img{
+    -webkit-transition: -webkit-transform 0.2s, all 0.2s;
+    -moz-transition: -moz-transform 0.2s, all 0.2s;
+    transition: transform 0.2s, all 0.2s;
+}
+.hi-icon-animation .hi-icon svg image{
+    height: 90px;
+    width: 90px;
+}
+.hi-icon-animation .hi-icon:after {
+    top: 0;
+    left: 0;
+    padding: 0;
+    box-shadow: 0 0 0 4px #000966;
+    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+    -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.hi-icon-animation .icon-wrapper:not(.disabled):hover .hi-icon:after,
+.hi-icon-animation .icon-wrapper:not(.disabled).active .hi-icon:after {
+    -webkit-transform: scale(0.85);
+    -moz-transform: scale(0.85);
+    -ms-transform: scale(0.85);
+    transform: scale(0.85);
+    opacity: 0.5;
+}
+/* in case of svg or image[src=svg] icon */
+.hi-icon-animation .icon-wrapper:hover .hi-icon svg,
+.hi-icon-animation .icon-wrapper:hover .hi-icon img,
+.hi-icon-animation .icon-wrapper.active .hi-icon svg,
+.hi-icon-animation .icon-wrapper.active .hi-icon img{
+    transform: scale(0.85);
+}
+/* in case of fa icon*/
+.hi-icon-animation .icon-wrapper:not(.disabled):hover .hi-icon.fa,
+.hi-icon-animation .icon-wrapper.active:not(.disabled) .hi-icon.fa {
+    transform: scale(0.85);
+}
+.hi-icon-animation .icon-wrapper:hover .hi-icon,
+.hi-icon-animation .icon-wrapper.active .hi-icon{
+    box-shadow: 0 0 0 10px rgba(0, 9, 102, 1);
+    color: #fff;
+}
+
+.hi-icon-animation .icon-wrapper:not(.disabled):hover p,
+.hi-icon-animation .icon-wrapper:not(.disabled).active p{
+    color: #000966;
+}
+
+.hi-icon-animation .icon-wrapper.disabled  .hi-icon:after,
+.hi-icon-animation .icon-wrapper.active.disabled .hi-icon.fa,
+.hi-icon-animation .icon-wrapper.disabled:hover .hi-icon.fa,
+.hi-icon-animation .icon-wrapper.disabled:hover .hi-icon:after{
+    transform: none;
+    opacity: 1;
+    box-shadow: 0 0 0 4px #8e8e8e;
+}
+
+.hi-icon-animation .icon-wrapper.disabled {
+    cursor: not-allowed;
+}
+
+.hi-icon-animation .icon-wrapper.disabled .hi-icon.fa:before {
+    color: #8e8e8e;
+}
+
+.hi-icon-animation .icon-wrapper.active:not(.disabled) .hi-icon:before {
+    transition: all .2s;
+    font-size: 70px;
+}
+.hi-icon-wrap.wizard a.icon-wrapper:before {
+    background: #8e8e8e;
+}
+
+.hi-icon-wrap {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* valid for the wizard only */
+.hi-icon-wrap.wizard a.icon-wrapper {
+    position: relative;
+}
+
+.hi-icon-wrap.wizard a.icon-wrapper:before {
+    content: "";
+    position: absolute;
+    width: 105px;
+    height: 4px;
+    top: 42%;
+    background: #000966;
+    left: 130px;
+}
+
+.hi-icon-wrap.wizard a.icon-wrapper.disabled:before {
+    background: #8e8e8e;
+}
+.hi-icon-wrap.wizard a.icon-wrapper:last-child:before {
+    content: none;
+}

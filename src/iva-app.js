@@ -65,9 +65,6 @@ import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-ge
 // /@dev
 
 
-// import {OpenCGAClient, CellBaseClientConfig, CellBaseClient, ReactomeClient, UtilsNew, NotificationUtils} from "../lib/jsorolla/dist/main.js";
-
-
 class IvaApp extends LitElement {
 
     constructor() {
