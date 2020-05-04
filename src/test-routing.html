@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>e2e</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <style>
+        .tab {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    menu
+    <ul>
+        <li><a href="#home" id="home-menu" class="menu">home</a></li>
+        <li><a href="#about" id="about-menu" class="menu">about</a></li>
+    </ul>
+</div>
+
+<div id="home" class="tab">home</div>
+<div id="about" class="tab">about</div>
+
+
+<script>
+
+    let activeTool = "home";
+
+    let enabledComponents = {"home": false, "about": false};
+    let tool = "";
+
+    window.onhashchange = function() {
+        hashFragmentListener();
+    };
+
+    function hashFragmentListener() {
+        console.log("hashFragmentListener - DEBUG", tool);
+        // Hide all elements
+        for (const element in enabledComponents) {
+            enabledComponents[element] = false;
+        }
+
+        let arr = window.location.hash.split("/");
+        const [hashTool, hashProject, hashStudy, feature] = arr;
+
+        tool = hashTool;
+
+        //hide all tabs and then show just the current one
+        $(".tab").css("display", "none");
+        if (enabledComponents[tool.replace("#", "")] === false) {
+            enabledComponents[tool.replace("#", "")] = true;
+            console.log(document.querySelector(tool))
+            document.querySelector(tool).style.display = "block"
+        }
+    }
+
+    function renderHashFragments() {
+        let hashFrag = tool;
+        if (window.location.hash === hashFrag) {
+            hashFragmentListener();
+        } else {
+            window.location.hash = hashFrag;
+        }
+    }
+
+    function changeTool(e) {
+        $("ul.navbar > li").removeClass("active");
+        $(e.target).parent("li").addClass("active");
+
+        e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
+
+        if (e.target && e.target.attributes.href) {
+            tool = e.target.attributes.href.value;
+
+        } else {
+            tool = "#home";
+        }
+
+        this.renderHashFragments();
+    }
+
+
+    $("li a.menu").on("click", e => changeTool(e))
+
+
+</script>
+</body>
+</html>
