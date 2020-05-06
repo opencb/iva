@@ -20,17 +20,8 @@ const cellbase = {
 };
 
 const opencga = {
-    // host: "http://localhost:8080/opencga-test",
-    // host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test-1.4.2",
-    // host: "https://bio-uat-opencgainternal.gel.zone/opencga/webservices/",
     // host: "http://bioinfo.hpc.cam.ac.uk/hgva", // public instance
-    // host: "http://bioinfo.hpc.cam.ac.uk/opencga-demo", // small demo instance
-
     host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
-    // host: "https://re-preprod-opencgahadoop.gel.zone/opencga", //opencga 1.4
-    // host: "https://re-test-opencgahadoop.gel.zone/opencga", //opencga 1.3
-    // host: "http://bioinfodev.hpc.cam.ac.uk/web-apps/opencga-test", //TODO test for varianti interpretation "disorder" field missing
-
     version: "v2",
     serverVersion: "1.4",
 
@@ -85,7 +76,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.0.0-dev",
+    version: "v2.0.0-beta",
     logo: "img/opencb-logo.png",
     defaultStudy: "corpasome",
     // The order, title and nested submenus are respected
@@ -112,20 +103,20 @@ const application = {
                     fa_icon: "fa fa-list",
                     icon: "variant_browser.svg"
                 },
-                {
-                    id: "genomeBrowser",
-                    title: "Genome Browser",
-                    acronym: "GB",
-                    description: `<ul>
-                                    <li>Based on Genome Maps (http://genomemaps.org)</li>
-                                    <li>Smooth, interactive variant visualisation</li>
-                                    </ul>`,
-                    visibility: "private",
-                    thumbnail: "screenshot3.png",
-                    fa_icon: "fa fa-globe-europe",
-                    icon: "genome_browser.svg"
-
-                },
+                // {
+                //     id: "genomeBrowser",
+                //     title: "Genome Browser",
+                //     acronym: "GB",
+                //     description: `<ul>
+                //                     <li>Based on Genome Maps (http://genomemaps.org)</li>
+                //                     <li>Smooth, interactive variant visualisation</li>
+                //                     </ul>`,
+                //     visibility: "private",
+                //     thumbnail: "screenshot3.png",
+                //     fa_icon: "fa fa-globe-europe",
+                //     icon: "genome_browser.svg"
+                //
+                // },
             ]
         },
 
@@ -166,10 +157,18 @@ const application = {
                     visibility: "public",
                     // disabled: true
                 },
+                // {
+                //     id: "ibs",
+                //     title: "IBS/IBD",
+                //     acronym: "IBS",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 {
-                    id: "ibs",
-                    title: "IBS/IBD",
-                    acronym: "IBS",
+                    id: "sample-stats",
+                    title: "Sample Variant Stats",
+                    acronym: "SVS",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -392,14 +391,14 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    title: "CVA",
+                    title: "Reported Variants",
                     category: true,
                     visibility: "public"
                 },
                 {
                     id: "cva",
-                    title: "CVA",
-                    acronym: "CVA",
+                    title: "Clinical Variant Browser",
+                    acronym: "CVB",
                     description: "",
                     icon: "",
                     visibility: "public"
