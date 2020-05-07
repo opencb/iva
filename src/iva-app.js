@@ -232,7 +232,7 @@ class IvaApp extends LitElement {
         this.remoteCall = {completed: 0, total: 0};
         globalThis.addEventListener("request", () => {
             this.remoteCall.total++;
-            console.log("REMOTE CALL!", this.remoteCall.total)
+            //console.log("REMOTE CALL!", this.remoteCall.total)
             this.requestUpdate();
         }, false);
         globalThis.addEventListener("response", () => {
@@ -242,7 +242,7 @@ class IvaApp extends LitElement {
                 this.remoteCall.total = 0;
                 this.remoteCall.completed = 0;
             }
-            console.log("REMOTE CALL DONE!", this.remoteCall.total)
+            //console.log("REMOTE CALL DONE!", this.remoteCall.total)
             this.requestUpdate();
         }, false);
     }
@@ -680,9 +680,11 @@ class IvaApp extends LitElement {
         }
 
         if (UtilsNew.isNotUndefined(this.config.enabledComponents[this.tool.replace("#", "")])) {
+            //debugger
             this.config.enabledComponents[this.tool.replace("#", "")] = true;
         }
 
+        //debugger
         this.config = {...this.config};
     }
 
@@ -1833,8 +1835,8 @@ class IvaApp extends LitElement {
                 <div id="notifications-queue" class="col-xs-11 col-sm-4"></div>
 
             </div>
-
-            <notification-element .queue="${new NotificationQueue().get()}"></notification-element>`;
+            <notification-element .queue="${new NotificationQueue().get()}"></notification-element>
+`;
 
     }
 

@@ -165,6 +165,16 @@ h3.page-title {
     padding: 0.8rem 1.3rem;
     font-size: .8em;
 }
+/*********** bootstrap tabs center align support *****************/
+.nav-tabs.nav-center {
+    text-align: center;
+}
+
+.nav-tabs.nav-center > li {
+    float: none;
+    display: inline-block;
+}
+
 
 /*********** main view tabs *****************/
 .main-view .content-tab {
@@ -514,8 +524,13 @@ h2.page-title {
    /* min-height: 170px; /* making space for the loading spinner */
 }
 
+/* hide the default loading animation */
+.bootstrap-table .animation-wrap {
+    display: none !important;
+}
+
 .bootstrap-table .fixed-table-loading {
-    min-height: 85px;
+    min-height: 90px;
 }
 
 .browser-subsection {
@@ -919,7 +934,7 @@ Toggle Changes
 .hi-icon:before {
     /*font-family: 'ecoicon';*/
     speak: none;
-    font-size: 48px;
+    font-size: 32px;
     line-height: 80px;
     font-style: normal;
     font-variant: normal;
@@ -1021,10 +1036,7 @@ Toggle Changes
 
 .hi-icon-animation .icon-wrapper.active:not(.disabled) .hi-icon:before {
     transition: all .2s;
-    font-size: 70px;
-}
-.hi-icon-wrap.wizard a.icon-wrapper:before {
-    background: #8e8e8e;
+    font-size: 36px;
 }
 
 .hi-icon-wrap {
@@ -1032,7 +1044,7 @@ Toggle Changes
     justify-content: space-evenly;
 }
 
-/* valid for the wizard only */
+/* valid for the wizard only (interpreter page) */
 .hi-icon-wrap.wizard a.icon-wrapper {
     position: relative;
 }
@@ -1040,11 +1052,11 @@ Toggle Changes
 .hi-icon-wrap.wizard a.icon-wrapper:before {
     content: "";
     position: absolute;
-    width: 115px;
+    width: 180px;
     height: 3px;
-    top: 42%;
+    top: 50px;
     background: #000966;
-    left: 110px;
+    left: 60px;
 }
 
 .hi-icon-wrap.wizard a.icon-wrapper.disabled:before {
