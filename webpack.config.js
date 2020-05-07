@@ -8,6 +8,8 @@ const EsmWebpackPlugin = require("@purtuga/esm-webpack-plugin");
 const PluginProposalExportDefaultFrom = require("@babel/plugin-proposal-export-default-from"); // Allows `export .. from` syntax in the entry point
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
+
 //const uglifyJS = require("uglify-js");
 
 const DIST_PATH = path.resolve(__dirname, "dist/webpack/");
@@ -95,7 +97,8 @@ module.exports = {
                     "./node_modules/bootstrap-notify/bootstrap-notify.js",
                     "./node_modules/jwt-decode/build/jwt-decode.min.js",
                     "./node_modules/tokenize2/dist/tokenize2.min.js",
-                    "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js"
+                    "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js",
+                    "./node_modules/@svgdotjs/svg.js/dist/svg.min.js"
                 ]
             }
         }),
@@ -143,7 +146,15 @@ module.exports = {
         })*/
     ],
     optimization: {
-        minimize: true
+        minimize: true,
+        /*minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    keep_classnames: true,
+                    keep_fnames: true
+                }
+            })
+        ]*/
     },
     externals: [
         {
@@ -166,13 +177,14 @@ module.exports = {
                             "@babel/preset-env",
                             {
                                 // useBuiltIns: "usage",
-                                targets: ">1%, not dead, not ie 11"
+                                // targets: ">20%, not dead, not ie 11" //browserslist query now defined in package.json
                                 // corejs: 3
                             }
                         ]],
                         plugins: [
                             "@babel/plugin-proposal-export-default-from",
-                            // "@babel/transform-runtime",
+                            //"@babel/regenerator-runtime/runtime",
+                            "@babel/transform-runtime",
                             ["@babel/plugin-proposal-class-properties", {"loose": true}]
                         ]
                     }
@@ -186,6 +198,11 @@ module.exports = {
                         {
                             search: "/web_modules/lit-element.js",
                             replace: "lit-element"
+                        },
+
+                        {
+                            search: "/web_modules/lit-html.js",
+                            replace: "lit-html"
                         },
                         {
                             search: "/node_modules/countup.js/dist/countUp.min.js",
