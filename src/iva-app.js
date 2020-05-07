@@ -57,8 +57,11 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/jobs/opencga-jobs
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-portal.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
-//import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-stats-analysis.js";
-//import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-elegibility-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-variant-stats-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-cohort-variant-stats-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-mutational-signature-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-elegibility-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-knockout-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-rd-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-cancer-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-generic-interpreter.js";
@@ -162,9 +165,13 @@ class IvaApp extends LitElement {
             "cat-clinical",
             "cat-catalog",
             "cat-ga4gh",
-            "cohort-stats",
             "eligibility",
             "gwas",
+            "sample-variant-stats",
+            "cohort-variant-stats",
+            "sample-eligibility",
+            "knockout",
+            "mutational-signature",
             "clinical-analysis-editor",
             "interpreter",
             "settings",
@@ -1730,10 +1737,16 @@ class IvaApp extends LitElement {
                         </category-page>
                     </div>
                 ` : null}
-
-                ${this.config.enabledComponents["cohort-stats"] ? html`
-                    <div class="content" id="opencga-variant-stats-analysis">
-                        <opencga-variant-stats-analysis .opencgaSession="${this.opencgaSession}"></opencga-variant-stats-analysis>
+            
+                ${this.config.enabledComponents["sample-variant-stats"] ? html`
+                    <div class="content" id="opencga-sample-variant-stats-analysis">
+                        <opencga-sample-variant-stats-analysis .opencgaSession="${this.opencgaSession}"></opencga-sample-variant-stats-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["cohort-variant-stats"] ? html`
+                    <div class="content" id="opencga-cohort-variant-stats-analysis">
+                        <opencga-cohort-variant-stats-analysis .opencgaSession="${this.opencgaSession}"></opencga-cohort-variant-stats-analysis>
                     </div>
                 ` : null}
 
@@ -1742,13 +1755,31 @@ class IvaApp extends LitElement {
                         <opencga-variant-eligibility-analysis .opencgaSession="${this.opencgaSession}"></opencga-variant-eligibility-analysis>
                     </div>
                 ` : null}
+                
+                 ${this.config.enabledComponents["sample-eligibility"] ? html`
+                    <div class="content" id="opencga-sample-eligibility-analysis">
+                        <opencga-sample-eligibility-analysis .opencgaSession="${this.opencgaSession}"></opencga-sample-eligibility-analysis>
+                    </div>
+                ` : null}
+                 
+                 ${this.config.enabledComponents["knockout"] ? html`
+                    <div class="content" id="opencga-knockout-analysis">
+                        <opencga-knockout-analysis .opencgaSession="${this.opencgaSession}"></opencga-knockout-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["mutational-signature"] ? html`
+                    <div class="content" id="opencga-mutational-signature-analysis">
+                        <opencga-mutational-signature-analysis .opencgaSession="${this.opencgaSession}"></opencga-mutational-signature-analysis>
+                    </div>
+                ` : null}
 
                 ${this.config.enabledComponents.gwas ? html`
                     <div class="content" id="opencga-gwas-analysis">
                         <opencga-gwas-analysis .opencgaSession="${this.opencgaSession}"></opencga-gwas-analysis>
                     </div>
                 ` : null}
-                
+    
                 ${this.config.enabledComponents["clinical-analysis-editor"] ? html`
                     <div class="content" id="opencga-clinical-analysis-editor">
                         <opencga-clinical-analysis-editor .opencgaSession="${this.opencgaSession}"

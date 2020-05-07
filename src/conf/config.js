@@ -149,7 +149,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "cohort-stats",
+                    id: "cohort-variant-stats",
                     title: "Cohort Variant Stats",
                     acronym: "CS",
                     description: "",
@@ -166,7 +166,7 @@ const application = {
                 //     visibility: "public"
                 // },
                 {
-                    id: "sample-stats",
+                    id: "sample-variant-stats",
                     title: "Sample Variant Stats",
                     acronym: "SVS",
                     description: "",
@@ -222,7 +222,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "eligibility",
+                    id: "sample-eligibility",
                     title: "Eligibility Analysis",
                     description: "",
                     icon: "",
@@ -262,8 +262,8 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "signature",
-                    title: "Signature Analysis",
+                    id: "mutational-signature",
+                    title: "Mutational Signature",
                     acronym: "SG",
                     description: "",
                     icon: "aggregation.svg",
