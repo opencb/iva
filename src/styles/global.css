@@ -150,11 +150,16 @@ h3.page-title {
     display: none;
 }
 
-.ripple-disabled:active, .ripple-disabled:hover, .ripple-disabled:focus {
+.ripple-disabled, .ripple-disabled:active, .ripple-disabled:hover, .ripple-disabled:focus, .btn-primary.ripple-disabled:active:hover{
     -webkit-box-shadow: none;
     box-shadow: none;
     cursor: default;
+    outline: 0;
+}
 
+.btn-primary.ripple-disabled:hover,
+.btn-primary.ripple-disabled:active:hover{
+    background: #337ab7;
 }
 
 .ripple.no-transform {
@@ -785,7 +790,7 @@ Toggle Changes
     color: #fff;
     font-weight: 400;
     left: 0;
-    padding: 10px 24px 8px 24px;
+    padding: 10px 24px 11px 24px;
     white-space: normal;
 }
 

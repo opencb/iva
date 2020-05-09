@@ -480,8 +480,12 @@ class IvaApp extends LitElement {
             // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
             if (remainingTime <= this.config.session.maxRemainingTime && remainingTime >= this.config.session.minRemainingTime) {
                 const remainingMinutes = Math.floor(remainingTime / this.config.session.minRemainingTime);
-                _message = html`Your session is close to expire. <strong>${remainingMinutes} minutes remaining</strong> <a href="javascript:void 0" @click="${() => NotificationUtils.refreshToken()}"> Click here to refresh </a>`
+
+                //_message = html`Your session is close to expire. <strong>${remainingMinutes} minutes remaining</strong> <a href="javascript:void 0" @click="${() => this.notifySession.refreshToken()}"> Click here to refresh </a>`
+                new NotificationQueue().pushRemainingTime(remainingMinutes, this.opencgaClient);
+
             } else {
+                // TODO remove NotificationUtils
                 if (remainingTime < this.config.session.minRemainingTime) {
                     _message = "Your session has expired.";
                     this.logout();
@@ -498,7 +502,7 @@ class IvaApp extends LitElement {
             // window.clearInterval(this.intervalCheckSession);
         }
         // delay = 0 to fix the notify until user closes it.
-        if (UtilsNew.isNotEmpty(_message)) {
+       if (UtilsNew.isNotEmpty(_message)) {
             this.notifySession = NotificationUtils.showNotify(_message, UtilsNew.MESSAGE_INFO,
                 {}, {
                     delay: 0,

@@ -1,6 +1,6 @@
 {
   "name": "iva",
-  "version": "1.0.4-dev",
+  "version": "2.0.0-beta",
   "description": "IVA description",
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
     "serve": "browser-sync start --config bs-config.js",
     "prepare": "pika-web",
     "e2e": "npx cypress open",
-    "browser-support": "npm browserlist",
+    "browser-support": "npx browserslist",
     "build": "npx webpack"
   },
   "dependencies": {
@@ -74,6 +74,7 @@
     "crisper": "~2.1.1",
     "css-loader": "^3.4.2",
     "cypress": "^4.5.0",
+    "cypress-wait-until": "^1.7.0",
     "eslint": "^6.5.1",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-cypress": "^2.10.3",
@@ -112,7 +113,8 @@
     "not dead",
     "not ie 11"
   ],
-  "__browserslist": [
-    "Chrome > 79"
+  "_browserslist": [
+    "chrome > 79",
+    "firefox > 75"
   ]
 }

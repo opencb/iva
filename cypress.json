@@ -1,3 +1,4 @@
 {
-  "baseUrl": "http://localhost:3000/src/"
+  "baseUrl": "http://localhost:3000/src/",
+  "chromeWebSecurity": false
 }
