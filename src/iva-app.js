@@ -1280,8 +1280,8 @@ class IvaApp extends LitElement {
                                <!-- Jobs -->
                                 ${this.opencgaSession && this.opencgaSession.token ? html`
                                     <li class="notification">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <span class="badge badge-pill badge-primary">666</span><i class="fas fa-bell"></i>
+                                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                           <span class="badge badge-pill badge-primary"></span><i class="fas fa-bell"></i>
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li>
@@ -1290,7 +1290,7 @@ class IvaApp extends LitElement {
                                             <li>
                                                 <a href="#projects"> All notifications </a>
                                             </li>
-                                        </ul>
+                                        </ul>-->
                                     </li>
                                 ` : null}
 

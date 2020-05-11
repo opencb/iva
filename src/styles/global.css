@@ -170,6 +170,10 @@ h3.page-title {
     padding: 0.8rem 1.3rem;
     font-size: .8em;
 }
+
+.button-wrapper {
+    padding: 15px 0;
+}
 /*********** bootstrap tabs center align support *****************/
 .nav-tabs.nav-center {
     text-align: center;
@@ -1069,4 +1073,10 @@ Toggle Changes
 }
 .hi-icon-wrap.wizard a.icon-wrapper:last-child:before {
     content: none;
+}
+
+/****** magic checkbox / radio ********/
+.magic-radio + .magic-horizontal-label {
+    display: inline-block;
+    margin-right: 15px;
 }
