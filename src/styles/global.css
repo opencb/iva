@@ -179,7 +179,7 @@ h3.page-title {
 .button-wrapper {
     padding: 15px 0;
 }
-/*********** bootstrap tabs center align support *****************/
+/*********** bootstrap tabs customisation *****************/
 .nav-tabs.nav-center {
     text-align: center;
 }
@@ -189,6 +189,9 @@ h3.page-title {
     display: inline-block;
 }
 
+.content-tab-wrapper .content-tab:not(.active) {
+    display: none;
+}
 
 /*********** main view tabs *****************/
 .main-view .content-tab {
