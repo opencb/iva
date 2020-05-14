@@ -51,7 +51,7 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-s
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/files/opencga-file-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-login.js";
-import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/individual/opencga-individual-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/individual/opencga-individual-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/jobs/opencga-jobs-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-portal.js";
