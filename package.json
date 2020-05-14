@@ -18,7 +18,7 @@
     "build_old": "npm run clean && npm run copy && npm run copy-jsorolla && npm run vulcanize && npm run build-iva-app",
     "test-e2e_old": "./node_modules/.bin/nightwatch",
     "serve": "browser-sync start --config bs-config.js",
-    "prepare": "pika-web",
+    "prepare": "npx snowpack",
     "e2e": "npx cypress open",
     "browser-support": "npx browserslist",
     "build": "npx webpack"
@@ -93,6 +93,7 @@
     "rollup-plugin-fill-html": "^1.1.0",
     "selenium-download": "^2.0.10",
     "shelljs": "0.7.8",
+    "snowpack": "^1.7.1",
     "string-replace-loader": "^2.2.0",
     "string-replace-webpack-plugin": "^0.1.3",
     "uglify-js": "^3.8.0",
@@ -102,10 +103,12 @@
     "webpack-merge-and-include-globally": "^2.1.24",
     "xmldom": "0.1.27"
   },
-  "@pika/web": {
+  "snowpack": {
     "webDependencies": [
       "lit-element",
-      "lit-html"
+      "lit-html",
+      "lit-html/directives/class-map.js",
+      "lit-html/directives/if-defined.js"
     ]
   },
   "browserslist": [

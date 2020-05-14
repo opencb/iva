@@ -109,6 +109,10 @@ module.exports = {
                 to: DIST_PATH + "/conf"
             },
             {
+                from: "./favicon.ico",
+                to: DIST_PATH + "/"
+            },
+            {
                 context: "./src/img",
                 from: "**/*",
                 to: DIST_PATH + "/img"
@@ -199,10 +203,17 @@ module.exports = {
                             search: "/web_modules/lit-element.js",
                             replace: "lit-element"
                         },
-
                         {
                             search: "/web_modules/lit-html.js",
                             replace: "lit-html"
+                        },
+                        {
+                            search: "/web_modules/lit-html/directives/class-map.js",
+                            replace: "lit-html/directives/class-map.js"
+                        },
+                        {
+                            search: "/web_modules/lit-html/directives/if-defined.js",
+                            replace: "lit-html/directives/if-defined.js"
                         },
                         {
                             search: "/node_modules/countup.js/dist/countUp.min.js",
