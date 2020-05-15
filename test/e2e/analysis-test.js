@@ -30,7 +30,7 @@ module.exports = {
             .waitForElementVisible('variant-clinical-upload-new', 1000)
             .assert.visible('button[data-id="SamplesButton"]')
             .click('button[data-id="SamplesButton"]')
-            .assert.elementPresent('variant-clinical-samples')
+            .assert.elementPresent('variant-clinical-sample')
             .waitForElementVisible('variant-sample-grid',1000)
             .assert.visible('table[data-test-id="variant-sample-grid-sample-selector"]')
             .saveScreenshot(config.imgpath(browser) + "analysis.png")

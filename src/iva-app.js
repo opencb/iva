@@ -46,8 +46,8 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-transcript-view.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-protein-view.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-projects.js";
-import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/samples/opencga-sample-view.js";
+import "../lib/jsorolla/src/core/webcomponents/samples/opencga-sample-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/samples/opencga-sample-view.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/files/opencga-file-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-family-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-login.js";
@@ -84,7 +84,7 @@ class IvaApp extends LitElement {
             opencgaSession: {
                 type: Object
             },
-            // samples: {
+            // sample: {
             //     type: Array
             // },
             // studySummaries: {
@@ -219,7 +219,7 @@ class IvaApp extends LitElement {
         // Other initialisations
         this.icd10 = ICD_10;
         this._isBreadcrumbVisible = false;
-        // This manages the samples selected in each tool for updating the breadcrumb
+        // This manages the sample selected in each tool for updating the breadcrumb
         this.samples = [];
         this._samplesPerTool = {};
 
@@ -908,15 +908,15 @@ class IvaApp extends LitElement {
     //                 let project = this._createBreadcrumbElement(this.opencgaSession.project.alias, false, "project");
     //                 breadcrumbElement.appendChild(project);
     //
-    //                 if (UtilsNew.isNotUndefined(this.samples) && this.samples.length > 0) {
+    //                 if (UtilsNew.isNotUndefined(this.sample) && this.sample.length > 0) {
     //                     let study = this._createBreadcrumbElement(this.opencgaSession.study.alias, false, "study");
     //                     let sampleNames = [];
-    //                     for (let i in this.samples) {
-    //                         sampleNames.push(this.samples[i].name);
+    //                     for (let i in this.sample) {
+    //                         sampleNames.push(this.sample[i].name);
     //                     }
-    //                     let samples = this._createBreadcrumbElement(sampleNames.join(","), true, "sample");
+    //                     let sample = this._createBreadcrumbElement(sampleNames.join(","), true, "sample");
     //                     breadcrumbElement.appendChild(study);
-    //                     breadcrumbElement.appendChild(samples);
+    //                     breadcrumbElement.appendChild(sample);
     //                 } else {
     //                     let study = this._createBreadcrumbElement(this.opencgaSession.study.alias, true, "study");
     //                     breadcrumbElement.appendChild(study);

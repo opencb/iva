@@ -313,8 +313,8 @@ const tools = {
                 title: "Cohort Stats"
             },
             {
-                id: "samples",
-                // component: "opencga-variant-samples",
+                id: "sample",
+                // component: "opencga-variant-sample",
                 title: "Samples"
             },
             {
@@ -582,7 +582,7 @@ const tools = {
             name: "clinical_vs",
             exclude: [
                 {
-                    webComponent: "variant-samples-filter",
+                    webComponent: "variant-sample-filter",
                     variables: ["HPO", "diagnosis"]
                 }
             ]
