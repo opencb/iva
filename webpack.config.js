@@ -100,6 +100,10 @@ module.exports = {
                     "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js",
                     "./node_modules/@svgdotjs/svg.js/dist/svg.min.js"
                 ]
+            },
+            transform: {
+                'assets/js/vendor.js': code => require("uglify-js").minify(code).code,
+                'assets/css/styles.css': code => require("uglifycss").processString(code)
             }
         }),
         new CopyWebpackPlugin([
@@ -138,16 +142,25 @@ module.exports = {
                 to: DIST_PATH + "/assets/webfonts"
 
             }
-    ])
+        ]),
+        /*new MethodExtractor({options: true, output: DIST_PATH + "/conf", components: [
+            "./lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.js"
+            ]})*/
         // ignore is not the best way to externalize a resource, but webpack don't support external ES modules yet.
         // ignore makes sense because iva-app bundle will be an ES module on its own, so import X from "/jsorolla.min.js" won't be a problem if not processed by webpack
         // why do whe need to bundle iva-app in webpack at all then? Because we need to process litElement imports
-        /* new webpack.IgnorePlugin({
+        new webpack.IgnorePlugin({
+            checkResource (resource) {
+                //console.log("res", resource)
+                //if (resource === "./conf/opencga-variant-browser.config.js") return true;
+                //return false;
+            }
+
             //resourceRegExp: /import [\s\S]+? from "\.\/\.\.\/lib\/jsorolla\/dist\/main\.js";/
             //resourceRegExp: /import [\s\S]+? from "main\.js";/
             //resourceRegExp: /^\.\/locale$/,
             //contextRegExp: /moment$/
-        })*/
+        })
     ],
     optimization: {
         minimize: true,
@@ -160,11 +173,11 @@ module.exports = {
             })
         ]*/
     },
-    externals: [
+/*    externals: [
         {
-
+            "externalConfig": "./conf/external-config.js"
         }
-    ],
+    ],*/
     module: {
         rules: [
             {

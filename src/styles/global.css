@@ -54,6 +54,11 @@ input[type="text"] {
     box-shadow: 0px 0px 4px rgba(0,0,0,.3);
 }
 
+/* bringing bootstrap dropdown (opencga-active-filters) above bootstraptable */
+.dropdown-menu {
+    z-index: 1001;
+}
+
 /* Bootstrap panel and button  overrides */
 h3.page-title {
     margin: 10px 10px 10px 15px;
@@ -225,10 +230,6 @@ h2.page-title {
     margin: 0 0 20px 0;
 }
 
-.left-menu .nav-tabs {
-    margin-bottom: 20px;
-}
-
 .active-filter-button:hover {
     text-decoration: line-through;
 }
@@ -236,6 +237,7 @@ h2.page-title {
 .left-menu-tabs {
     font-size: 1.2em;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .left-menu-tabs li {

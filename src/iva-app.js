@@ -28,7 +28,6 @@ import "./category-page.js";
 import "./iva-profile.js";
 import "./iva-settings.js";
 
-
 // @dev[jsorolla]
 import {OpenCGAClient} from "../lib/jsorolla/src/core/clients/opencga/opencga-client.js";
 import {CellBaseClient} from "../lib/jsorolla/src/core/clients/cellbase/cellbase-client.js";
@@ -37,7 +36,7 @@ import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome/reactome
 import Utils from "../lib/jsorolla/src/core/utils.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
-import {NotificationElement, NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
+import {NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
 import {consequenceTypes} from "../lib/jsorolla/src/core/webcomponents/commons/opencga-variant-contants.js";
 import {proteinSubstitutionScore, populationFrequencies} from "../lib/jsorolla/src/core/webcomponents/commons/opencga-variant-contants.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
@@ -121,13 +120,8 @@ class IvaApp extends LitElement {
         _config.proteinSubstitutionScores = proteinSubstitutionScore.style;
         _config.consequenceTypes = consequenceTypes;
 
-        // We can customise whifgwasch components are active by default, this improves the first loading time.
+        // We can customise which components are active by default, this improves the first loading time.
         _config.enabledComponents.home = true;
-        _config.enabledComponents.about = false;
-        _config.enabledComponents.contact = false;
-        _config.enabledComponents.terms = false;
-        _config.enabledComponents.faq = false;
-        _config.enabledComponents.gettingstarted = false;
 
         // Enable tools reading the configuration
         for (const tool in _config.tools) {
@@ -137,8 +131,13 @@ class IvaApp extends LitElement {
         }
 
         // console.log("this.config.enabledComponents",_config.enabledComponents)
-        // Enabled components catalog
         const components = [
+            "home",
+            "about",
+            "contact",
+            "terms",
+            "faq",
+            "gettingstarted",
             "login",
             "projects",
             "project",
@@ -185,8 +184,9 @@ class IvaApp extends LitElement {
         this.config = _config;
 
 
+        // TODO do we need this?
         // We deep clone some config sections for having a default initial copy, this allows us to reset config.
-        this.defaultConfig = {};
+        /*this.defaultConfig = {};
         if (UtilsNew.isNotUndefined(populationFrequencies)) {
             this.defaultConfig.populationFrequencies = JSON.parse(JSON.stringify(populationFrequencies));
         }
@@ -195,7 +195,7 @@ class IvaApp extends LitElement {
         }
         if (UtilsNew.isNotUndefined(consequenceTypes)) {
             this.defaultConfig.consequenceTypes = JSON.parse(JSON.stringify(consequenceTypes));
-        }
+        }*/
 
 
         // We need to listen to hash fragment changes to update the display and breadcrumb
@@ -1453,11 +1453,10 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.browser ? html`
                     <div class="content" id="browser">
                         <opencga-variant-browser .opencgaSession="${this.opencgaSession}"
-                                                .opencgaClient="${this.opencgaSession.opencgaClient}"
                                                 .cellbaseClient="${this.cellbaseClient}"
                                                 .reactomeClient="${this.reactomeClient}"
                                                 .query="${this.queries.variant}"
-                                                .config="${this.config.tools.browser}"
+                                                .config="${OpencgaVariantBrowserConfig}"
                                                 .populationFrequencies="${this.config.populationFrequencies}"
                                                 .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
                                                 .consequenceTypes="${this.config.consequenceTypes}"
