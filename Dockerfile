@@ -17,8 +17,8 @@ LABEL org.label-schema.vendor="OpenCB" \
 #USER iva
 
 ## Copy files
-COPY ./docker/entrypoint.sh /usr/local/bin
-#COPY ./dist /usr/local/apache2/htdocs/iva
+#COPY ./docker/entrypoint.sh /usr/local/bin
+COPY ./dist /usr/local/apache2/htdocs/iva
 
 VOLUME /usr/local/apache2/htdocs/iva/conf
 EXPOSE 80

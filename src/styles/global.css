@@ -1090,3 +1090,8 @@ Toggle Changes
     display: inline-block;
     margin-right: 15px;
 }
+
+/****** data-view ********/
+.detail-row {
+    padding: 20px 0;
+}

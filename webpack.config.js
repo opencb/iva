@@ -8,11 +8,12 @@ const EsmWebpackPlugin = require("@purtuga/esm-webpack-plugin");
 const PluginProposalExportDefaultFrom = require("@babel/plugin-proposal-export-default-from"); // Allows `export .. from` syntax in the entry point
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 //const uglifyJS = require("uglify-js");
 
-const DIST_PATH = path.resolve(__dirname, "dist/webpack/");
+
+const DIST_PATH = path.resolve(__dirname, "dist/");
 const tpl = path => ({
     img: `<img alt="${path}" src="${path}" />`,
     css: `<link rel="stylesheet" type="text/css" href="${path}">`,
@@ -38,7 +39,7 @@ module.exports = {
             template: "./src/index.html",
             minify: {
                 removeAttributeQuotes: true,
-                collapseWhitespace: true,
+                collapseWhitespace: true
                 //removeComments: true
             }
         }),
@@ -102,8 +103,8 @@ module.exports = {
                 ]
             },
             transform: {
-                'assets/js/vendor.js': code => require("uglify-js").minify(code).code,
-                'assets/css/styles.css': code => require("uglifycss").processString(code)
+                "assets/js/vendor.js": code => require("uglify-js").minify(code).code,
+                "assets/css/styles.css": code => require("uglifycss").processString(code)
             }
         }),
         new CopyWebpackPlugin([
@@ -163,7 +164,7 @@ module.exports = {
         })
     ],
     optimization: {
-        minimize: true,
+        minimize: true
         /*minimizer: [
             new TerserPlugin({
                 terserOptions: {
@@ -180,6 +181,12 @@ module.exports = {
     ],*/
     module: {
         rules: [
+            /*{
+                // Test for a polyfill (or any file) and it won't be included in your
+                // bundle
+                test: path.resolve(__dirname, "src/conf/external-config.js"),
+                use: "null-loader"
+            },*/
             {
                 test: /\.html$/,
                 use: ["html-loader"] // rewrite html content (replace automatically <img src="img.jpg"/> in require("img.jpg"))
