@@ -1006,6 +1006,10 @@ class IvaApp extends LitElement {
         this.requestUpdate();
     }
 
+    onSelectClinicalAnalysis(e) {
+        this.clinicalAnalysis = e.detail.clinicalAnalysis;
+    }
+
     /* Set the width of the side navigation to 250px */
     openNav() {
         this.querySelector("#side-nav").style.width = "250px";
@@ -1818,7 +1822,9 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["interpreter"] ? html`
                     <div class="content" id="settings">
                         <variant-generic-interpreter    .opencgaSession="${this.opencgaSession}" 
-                                                        .cellbaseClient="${this.cellbaseClient}">
+                                                        .cellbaseClient="${this.cellbaseClient}"
+                                                        .clinicalAnalysis="${this.clinicalAnalysis}"
+                                                        @selectClinicalAnalysis="${this.onSelectClinicalAnalysis}">
                         </variant-generic-interpreter>
                     </div>
                 ` : null}
