@@ -33,7 +33,6 @@ import {OpenCGAClient} from "../lib/jsorolla/src/core/clients/opencga/opencga-cl
 import {CellBaseClient} from "../lib/jsorolla/src/core/clients/cellbase/cellbase-client.js";
 import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome/reactome-client.js";
 
-import Utils from "../lib/jsorolla/src/core/utils.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
 import {NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
@@ -64,6 +63,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-knockout
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-rd-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-cancer-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-generic-interpreter.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
 // /@dev
 
 
@@ -173,6 +173,7 @@ class IvaApp extends LitElement {
             "mutational-signature",
             "clinical-analysis-editor",
             "interpreter",
+            "rd-tiering",
             "settings",
             "account"];
 
@@ -1782,6 +1783,12 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.gwas ? html`
                     <div class="content" id="opencga-gwas-analysis">
                         <opencga-gwas-analysis .opencgaSession="${this.opencgaSession}"></opencga-gwas-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["rd-tiering"] ? html`
+                    <div class="content" id="opencga-rd-tiering-analysis">
+                        <opencga-rd-tiering-analysis .opencgaSession="${this.opencgaSession}"></opencga-rd-tiering-analysis>
                     </div>
                 ` : null}
     

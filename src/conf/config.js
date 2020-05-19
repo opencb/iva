@@ -257,6 +257,23 @@ const application = {
                     visibility: "public"
                 },
                 {
+                    title: "Clinical Interpretation",
+                    category: true,
+                    visibility: "public"
+                },
+                {
+                    id: "rd-tiering",
+                    title: "RD Tiering",
+                    acronym: "RDT",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
                     title: "Other",
                     category: true,
                     visibility: "public"
