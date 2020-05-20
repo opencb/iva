@@ -78,47 +78,10 @@ const application = {
     title: "IVA",
     version: "v2.0.0-beta",
     logo: "img/opencb-logo.png",
-    defaultStudy: "corpasome",
+    defaultStudy: "family:corpasome",
     // The order, title and nested submenus are respected
     menu: [
-        {
-            id: "browser",
-            title: "Variant Browser",
-            description: "",
-            icon: "variant_browser.svg",
-            visibility: "public",
-            submenu: [
-                {
-                    id: "browser",
-                    title: "Variant Browser",
-                    acronym: "VB",
-                    description: `
-                            <p>Explore all variants identified by the 100,000 Genomes Project</p>
-                            <ul>
-                                <li>Rich annotation and links to leading reference databases</li>
-                                <li>Filter by gene, consequence, frequency and much more</li>
-                            </ul>`,
-                    visibility: "public",
-                    thumbnail: "screenshot1.png",
-                    fa_icon: "fa fa-list",
-                    icon: "variant_browser.svg"
-                },
-                // {
-                //     id: "genomeBrowser",
-                //     title: "Genome Browser",
-                //     acronym: "GB",
-                //     description: `<ul>
-                //                     <li>Based on Genome Maps (http://genomemaps.org)</li>
-                //                     <li>Smooth, interactive variant visualisation</li>
-                //                     </ul>`,
-                //     visibility: "private",
-                //     thumbnail: "screenshot3.png",
-                //     fa_icon: "fa fa-globe-europe",
-                //     icon: "genome_browser.svg"
-                //
-                // },
-            ]
-        },
+
         {
             id: "analysis",
             title: "Variant Analysis",
@@ -286,6 +249,44 @@ const application = {
                     icon: "",
                     visibility: "public"
                 }
+            ]
+        },
+        {
+            id: "browser",
+            title: "Variant Browser",
+            description: "",
+            icon: "variant_browser.svg",
+            visibility: "public",
+            submenu: [
+                {
+                    id: "browser",
+                    title: "Variant Browser",
+                    acronym: "VB",
+                    description: `
+                            <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                            <ul>
+                                <li>Rich annotation and links to leading reference databases</li>
+                                <li>Filter by gene, consequence, frequency and much more</li>
+                            </ul>`,
+                    visibility: "public",
+                    thumbnail: "screenshot1.png",
+                    fa_icon: "fa fa-list",
+                    icon: "variant_browser.svg"
+                },
+                // {
+                //     id: "genomeBrowser",
+                //     title: "Genome Browser",
+                //     acronym: "GB",
+                //     description: `<ul>
+                //                     <li>Based on Genome Maps (http://genomemaps.org)</li>
+                //                     <li>Smooth, interactive variant visualisation</li>
+                //                     </ul>`,
+                //     visibility: "private",
+                //     thumbnail: "screenshot3.png",
+                //     fa_icon: "fa fa-globe-europe",
+                //     icon: "genome_browser.svg"
+                //
+                // },
             ]
         },
         {
