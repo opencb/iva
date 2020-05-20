@@ -2,7 +2,7 @@ FROM httpd:2.4-alpine
 
 ## To run the docker use:
 ## docker build -f ./docker/Dockerfile -t iva-httpd .
-##   docker run -dit --name httpd-alpine -p 81:80 iva-httpd
+## docker run -dit --name iva -p 81:80 -v  [ABS_PATH]/iva/dist/conf/:/usr/local/apache2/htdocs/iva/conf iva-httpd
 ## Then open:  http://localhost:81/iva
 
 LABEL org.label-schema.vendor="OpenCB" \
@@ -17,11 +17,10 @@ LABEL org.label-schema.vendor="OpenCB" \
 #USER iva
 
 ## Copy files
-#COPY ./docker/entrypoint.sh /usr/local/bin
-COPY ./dist /usr/local/apache2/htdocs/iva
+COPY ./docker/entrypoint.sh /usr/local/bin
 
-VOLUME /usr/local/apache2/htdocs/iva/conf
+COPY ./dist/ /usr/local/apache2/htdocs/iva/
+
 EXPOSE 80
 
-#ENTRYPOINT ["entrypoint.sh"]
-# ENTRYPOINT ["entrypoint.sh", "--host", "http://opencga"]
+#ENTRYPOINT ["entrypoint.sh", "--host", "http://opencga"]
