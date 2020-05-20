@@ -51,7 +51,7 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/family/opencga-fa
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/opencga-login.js";
 import "../lib/jsorolla/src/core/webcomponents/individual/opencga-individual-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/opencga/catalog/jobs/opencga-jobs-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/jobs/opencga-jobs-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-portal.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
@@ -1002,7 +1002,7 @@ class IvaApp extends LitElement {
         const q = e.detail.query || e.detail;
         this.queries[source] = {...q};
         this.queries = {...this.queries};
-        // console.log("this.queries",this.queries);
+        //console.log("this.queries",this.queries);
         this.requestUpdate();
     }
 
@@ -1439,7 +1439,7 @@ class IvaApp extends LitElement {
                 ` : null}
             </div>
 
-             <!-- -<div class="alert alert-info">${JSON.stringify(this.queries)}</div> -->
+            <!-- <div class="alert alert-info">${JSON.stringify(this.queries)}</div> --> 
 
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
