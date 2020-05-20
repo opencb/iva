@@ -1665,10 +1665,6 @@ class IvaApp extends LitElement {
                         <opencga-family-browser .opencgaSession="${this.opencgaSession}"
                                         .query="${this.queries.families}"
                                         .config="${this.config.tools.familyBrowser}"
-                                        .cellbaseClient="${this.cellbaseClient}"
-                                        .populationFrequencies="${this.config.populationFrequencies}"
-                                        .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                        .consequenceTypes="${this.config.consequenceTypes}"
                                         @querySearch="${e => this.onQueryFilterSearch(e, "families")}"
                                         @activeFilterChange="${e => this.onQueryFilterSearch(e, "families")}">                                        
                         </opencga-family-browser>

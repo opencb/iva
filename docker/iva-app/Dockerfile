@@ -17,10 +17,9 @@ LABEL org.label-schema.vendor="OpenCB" \
 #USER iva
 
 ## Copy files
-COPY ./docker/entrypoint.sh /usr/local/bin
-
-COPY ./dist/ /usr/local/apache2/htdocs/iva/
+COPY    ./docker/iva-app/entrypoint.sh      /usr/local/bin
+COPY    ./dist/                             /usr/local/apache2/htdocs/iva/
 
 EXPOSE 80
 
-#ENTRYPOINT ["entrypoint.sh", "--host", "http://opencga"]
+CMD ["httpd-foreground"]
