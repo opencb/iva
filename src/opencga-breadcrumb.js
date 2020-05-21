@@ -49,7 +49,7 @@ export default class OpencgaBreadcrumb extends LitElement {
             projectAndStudy = this.opencgaSession.project.id + "/" + studyId;
             breadcrumHtml = html`
                                 <li>
-                                    <a href="#project/${projectAndStudy}" data-category="project">${this.opencgaSession.project.id}</a>
+                                    ${this.opencgaSession.project.id}
                                 </li>
                                 <li class="active">
                                     ${studyId}

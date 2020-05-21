@@ -512,8 +512,7 @@ const application = {
         // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
         maxRemainingTime: 600000
     },
-    // Components in the getting_started page
-    // NOTE the first 4 tools are going to be shown in the landing page as well
+    // Components in the welcome page
     components: [
         {
             id: "browser",
@@ -570,33 +569,6 @@ const application = {
                     <li>Find databases that have information about specific variants</li>
                 </ul>`
         }
-        /* {
-             id:"genomeBrowser",
-             title:"Genome Browser",
-             visibility: "none",
-             thumbnail:"screenshot3.png",
-             fa_icon:"fa fa-globe-europe",
-             icon:"genome_browser.svg",
-             description:`
-                 <ul>
-                     <li>Based on Genome Maps (http://genomemaps.org)</li>
-                     <li>Smooth, interactive variant visualisation</li>
-                 </ul>`,
-         },*/
-        /* {
-            id:"###",
-            title:"Catalog Metadata",
-            visibility: "none",
-            thumbnail:"screenshot3.png",
-            fa_icon:"fa fa-globe-europe",
-            icon:"genome_browser.svg",
-            description:`
-                <ul>
-                    <li>Browse, aggregate and compare clinical metadata</li>
-                    <li>Browse by sample, individual, family or cohort</li>
-                </ul>`,
-        }*/
-
     ]
 };
 
