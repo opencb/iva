@@ -64,6 +64,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-in
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-cancer-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-generic-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-create.js";
 // /@dev
 
 
@@ -172,6 +173,7 @@ class IvaApp extends LitElement {
             "knockout",
             "mutational-signature",
             "clinical-analysis-editor",
+            "clinical-analysis-create",
             "interpreter",
             "rd-tiering",
             "settings",
@@ -1797,6 +1799,14 @@ class IvaApp extends LitElement {
                         <opencga-clinical-analysis-editor .opencgaSession="${this.opencgaSession}"
                                                               @clinicalanalysischange="${this.onClinicalAnalysisEditor}">
                         </opencga-clinical-analysis-editor>
+                    </div>
+                ` : null}
+
+                ${this.config.enabledComponents["clinical-analysis-create"] ? html`
+                    <div class="content" id="opencga-clinical-analysis-create">
+                        <opencga-clinical-analysis-create .opencgaSession="${this.opencgaSession}"
+                                                          @clinicalanalysischange="${this.onClinicalAnalysisEditor}">
+                        </opencga-clinical-analysis-create>
                     </div>
                 ` : null}
 
