@@ -78,7 +78,7 @@ export default class IvaProfile extends LitElement {
                 collapsable: true,
                 showTitle: false,
                 labelWidth: 2,
-                defaultVale: "-"
+                defaultValue: "-"
             },
             sections: [
                 {
@@ -110,13 +110,16 @@ export default class IvaProfile extends LitElement {
                             }
                         },
                         {
+                            name: "Project and studies (you belong / permission)"
+                        }
+                        /*{
                             name: "Quota",
                             field: "quota",
                             type: "custom",
                             display: {
                                 render: field => html`${Object.entries(field).map( ([k, v]) => html`${k}:${v}<br>`)}`
                             }
-                        }
+                        }*/
                     ]
                 }
             ]
