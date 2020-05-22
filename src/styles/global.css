@@ -1099,7 +1099,10 @@ Toggle Changes
     display: inline-block;
     margin-right: 15px;
 }
-
+.magic-checkbox:checked + label:before {
+    border: #337ab7;
+    background: #337ab7;
+}
 /****** data-view ********/
 .detail-row {
     padding: 5px 0;
