@@ -39,6 +39,15 @@ input[type="text"] {
     height: 100px;
 }
 
+.badge {;
+    margin: 0 1px;
+    background: #337ab7;
+}
+
+.badge .close-icon {
+    cursor:pointer;
+}
+
 /* TODO input material effect continue*/
 .input {
     border: 0;

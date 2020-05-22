@@ -36,8 +36,6 @@ import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome/reactome
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
 import {NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
-import {consequenceTypes} from "../lib/jsorolla/src/core/webcomponents/commons/opencga-variant-contants.js";
-import {proteinSubstitutionScore, populationFrequencies} from "../lib/jsorolla/src/core/webcomponents/commons/opencga-variant-contants.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.js";
@@ -62,7 +60,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-e
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-knockout-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-rd-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-cancer-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-generic-interpreter.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-create.js";
 // /@dev
@@ -345,7 +343,7 @@ class IvaApp extends LitElement {
                     }
 
                     // TODO we must query projects/info URL to get the whole object
-                    response.projects = activeProjects;
+                    response.projects = activeProjects || [];
                     if (UtilsNew.isNotEmptyArray(response.projects[0].studies)) {
                         response.project = response.projects[0];
                         response.study = response.projects[0].studies[0];
@@ -695,6 +693,7 @@ class IvaApp extends LitElement {
         this.config = {...this.config};
     }
 
+    // TODO recheck what's the use for this
     refreshConfig(e) {
         const colorConfig = e.detail.config;
         const _this = this;
@@ -1551,7 +1550,7 @@ class IvaApp extends LitElement {
                         <opencga-sample-browser resource="sample"
                                         .opencgaSession="${this.opencgaSession}"
                                         .query="${this.queries.sample}"
-                                        .config="${this.config.tools.sampleBrowser}"
+                                        .config="${OpencgaSampleBrowserConfig}"
                                         .cellbaseClient="${this.cellbaseClient}"
                                         .populationFrequencies="${this.config.populationFrequencies}"
                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
@@ -1577,7 +1576,7 @@ class IvaApp extends LitElement {
                     <div class="content" id="files">
                         <opencga-file-browser .opencgaSession="${this.opencgaSession}"
                                         .query="${this.queries.files}"
-                                        .config="${this.config.tools.fileBrowser}"
+                                        .config="${OpencgaFileBrowserConfig}"
                                         .cellbaseClient="${this.cellbaseClient}"
                                         .populationFrequencies="${this.config.populationFrequencies}"
                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
@@ -1651,7 +1650,7 @@ class IvaApp extends LitElement {
                         <opencga-individual-browser .opencgaSession="${this.opencgaSession}"
                                         .opencgaClient="${this.opencgaSession.opencgaClient}"
                                         .query="${this.queries.individuals}"
-                                        .config="${this.config.tools.individualBrowser}"
+                                        .config="${OpencgaIndividualBrowserConfig}"
                                         .cellbaseClient="${this.cellbaseClient}"
                                         .populationFrequencies="${this.config.populationFrequencies}"
                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
@@ -1666,7 +1665,7 @@ class IvaApp extends LitElement {
                     <div class="content" id="families">
                         <opencga-family-browser .opencgaSession="${this.opencgaSession}"
                                         .query="${this.queries.families}"
-                                        .config="${this.config.tools.familyBrowser}"
+                                        .config="${OpencgaFamilyBrowserConfig}"
                                         @querySearch="${e => this.onQueryFilterSearch(e, "families")}"
                                         @activeFilterChange="${e => this.onQueryFilterSearch(e, "families")}">                                        
                         </opencga-family-browser>
@@ -1678,7 +1677,7 @@ class IvaApp extends LitElement {
                     <div class="content" id="cohorts">
                         <opencga-cohort-browser   .opencgaSession="${this.opencgaSession}"
                                                 .query="${this.queries.cohorts}"
-                                                .config="${this.config.tools.cohortBrowser}"
+                                                .config="${OpencgaCohortBrowserConfig}"
                                                 .cellbaseClient="${this.cellbaseClient}"
                                                 .populationFrequencies="${this.config.populationFrequencies}"
                                                 .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
@@ -1703,7 +1702,7 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["jobs"] ? html`
                     <div class="content" id="jobs">
                         <opencga-jobs-browser .opencgaSession="${this.opencgaSession}"
-                                            .config="${this.config.tools.jobsBrowser}"
+                                            .config="${OpencgaJobsBrowserConfig}"
                                             .query="${this.queries.jobs}"
                                             @querySearch="${e => this.onQueryFilterSearch(e, "jobs")}"
                                             @activeFilterChange="${e => this.onQueryFilterSearch(e, "jobs")}">  
@@ -1827,32 +1826,13 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents["interpreter"] ? html`
                     <div class="content" id="settings">
-                        <variant-generic-interpreter    .opencgaSession="${this.opencgaSession}" 
+                        <variant-interpreter    .opencgaSession="${this.opencgaSession}" 
                                                         .cellbaseClient="${this.cellbaseClient}"
                                                         .clinicalAnalysis="${this.clinicalAnalysis}"
                                                         @selectClinicalAnalysis="${this.onSelectClinicalAnalysis}">
-                        </variant-generic-interpreter>
+                        </variant-interpreter>
                     </div>
                 ` : null}
-
-
-            <!-- TODO convert in lit-element
-                <template is="dom-if" if="{{config.enabledComponents.project}}">
-                    <div class="content" id="project">
-                        <opencga-project opencga-client="{{opencgaClient}}" project="{{opencgaSession.project}}"
-                                         study-summaries="{{studySummaries}}"
-                                         on-study="updateStudy">
-                        </opencga-project>
-                    </div>
-                </template>
-
-                <template is="dom-if" if="{{config.enabledComponents.clinicalAnalysisCreator}}">
-                    <div class="content" id="clinicalAnalysisCreator">
-                        <opencga-clinical-analysis-creator opencga-session="{{opencgaSession}}"
-                                                           config="{{config.clinicalAnalysisBrowser}}"></opencga-clinical-analysis-creator>
-                    </div>
-                </template>
-                -->
 
                 <div id="notifications-queue" class="col-xs-11 col-sm-4"></div>
 

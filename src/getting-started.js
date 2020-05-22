@@ -43,7 +43,7 @@ export default class GettingStarted extends LitElement {
     }
 
     _init() {
-        this._prefix = "gs-" + Utils.randomString(6) + "_";
+        this._prefix = "gs-" + UtilsNew.randomString(6) + "_";
     }
 
     openModal(e) {

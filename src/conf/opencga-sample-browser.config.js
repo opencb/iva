@@ -1,4 +1,4 @@
-const opencgaSampleBrowserConfig = {
+const OpencgaSampleBrowserConfig = {
     title: "Sample Browser",
     icon: "fas fa-chart-bar",
     searchButtonText: "Run",
