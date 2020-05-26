@@ -308,17 +308,17 @@ const application = {
                     description: "",
                     visibility: "public"
                 },
+                // {
+                //     id: "clinical-analysis-editor",
+                //     title: "Create Case",
+                //     acronym: "",
+                //     icon: "",
+                //     description: "",
+                //     visibility: "public"
+                // },
                 {
-                    id: "clinical-analysis-editor",
+                    id: "clinical-analysis-writer",
                     title: "Create Case",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                },
-                {
-                    id: "clinical-analysis-create",
-                    title: "Create Case New",
                     acronym: "",
                     icon: "",
                     description: "",

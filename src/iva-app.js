@@ -62,7 +62,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-in
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-cancer-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
-import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-create.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
 // /@dev
 
 
@@ -170,8 +170,7 @@ class IvaApp extends LitElement {
             "sample-eligibility",
             "knockout",
             "mutational-signature",
-            "clinical-analysis-editor",
-            "clinical-analysis-create",
+            "clinical-analysis-writer",
             "interpreter",
             "rd-tiering",
             "settings",
@@ -1793,19 +1792,11 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
     
-                ${this.config.enabledComponents["clinical-analysis-editor"] ? html`
-                    <div class="content" id="opencga-clinical-analysis-editor">
-                        <opencga-clinical-analysis-editor .opencgaSession="${this.opencgaSession}"
-                                                              @clinicalanalysischange="${this.onClinicalAnalysisEditor}">
-                        </opencga-clinical-analysis-editor>
-                    </div>
-                ` : null}
-
-                ${this.config.enabledComponents["clinical-analysis-create"] ? html`
+                ${this.config.enabledComponents["clinical-analysis-writer"] ? html`
                     <div class="content" id="opencga-clinical-analysis-create">
-                        <opencga-clinical-analysis-create .opencgaSession="${this.opencgaSession}"
+                        <opencga-clinical-analysis-writer .opencgaSession="${this.opencgaSession}"
                                                           @clinicalanalysischange="${this.onClinicalAnalysisEditor}">
-                        </opencga-clinical-analysis-create>
+                        </opencga-clinical-analysis-writer>
                     </div>
                 ` : null}
 
