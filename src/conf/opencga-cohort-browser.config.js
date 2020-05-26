@@ -1,5 +1,5 @@
 const OpencgaCohortBrowserConfig = {
-    title: "Cohort Browser",
+    /*title: "Cohort Browser",
     icon: "fas fa-chart-bar",
     searchButtonText: "Run",
     views: [
@@ -160,5 +160,5 @@ const OpencgaCohortBrowserConfig = {
                 ]
             }
         ]
-    }
+    }*/
 };

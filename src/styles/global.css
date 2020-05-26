@@ -1107,3 +1107,8 @@ Toggle Changes
 .detail-row {
     padding: 5px 0;
 }
+
+/****** sweetalert2 fix ********/
+.swal2-popup {
+    font-size: 1em;
+}

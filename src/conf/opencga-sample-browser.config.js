@@ -1,5 +1,5 @@
 const OpencgaSampleBrowserConfig = {
-    title: "Sample Browser",
+    /*title: "Sample Browser",
     icon: "fas fa-chart-bar",
     searchButtonText: "Run",
     views: [
@@ -11,11 +11,11 @@ const OpencgaSampleBrowserConfig = {
         {
             id: "facet-tab",
             name: "Aggregation stats"
-        }/*
+        }/!*
                 {
                     id: "comparator-tab",
                     name: "Comparator"
-                }*/
+                }*!/
     ],
     filter: {
         sections: [
@@ -207,5 +207,5 @@ const OpencgaSampleBrowserConfig = {
                 ]
             }
         ]
-    }
+    }*/
 };
