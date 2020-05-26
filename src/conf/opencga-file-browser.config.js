@@ -1,5 +1,5 @@
 const OpencgaFileBrowserConfig = {
-    title: "File Browser",
+    /*title: "File Browser",
     //active: false,
     icon: "fas fa-chart-bar",
     description: "",
@@ -13,11 +13,11 @@ const OpencgaFileBrowserConfig = {
         {
             id: "facet-tab",
             name: "Aggregation stats"
-        },/*
+        },/!*
                 {
                     id: "comparator-tab",
                     name: "Comparator"
-                }*/
+                }*!/
     ],
     filter: {
         sections: [
@@ -246,5 +246,5 @@ const OpencgaFileBrowserConfig = {
                 ]
             }
         ]
-    }
+    }*/
 };

@@ -16,6 +16,7 @@
 
 import {LitElement, html} from "/web_modules/lit-element.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
+import "../lib/jsorolla/src/core/webcomponents/commons/view/data-form.js";
 
 export default class IvaProfile extends LitElement {
 
@@ -40,7 +41,7 @@ export default class IvaProfile extends LitElement {
     }
 
     _init() {
-        this._prefix = "p-";
+
     }
 
     connectedCallback() {
@@ -53,24 +54,23 @@ export default class IvaProfile extends LitElement {
         if (changedProperties.has("property")) {
             this.propertyObserver();
         }
+        if (changedProperties.has("opencgaSession")) {
+            this.opencgaSessionObserver();
+        }
     }
 
-    /*
-    * */
+    opencgaSessionObserver() {
+        this.currentUser = this.opencgaSession.user;
+        this.requestUpdate();
+
+    }
+
+    onFilterChange(field, value) {
+        console.log("field, value", field, value)
+
+    }
+
     getDefaultConfig() {
-        const u = {
-            "id": "aaltamura",
-            "name": "Antonio Altamura",
-            "email": "aaltamura@opencb.org",
-            "organization": "",
-            "account": {"type": "FULL", "creationDate": "", "expirationDate": "", "authentication": {"id": "internal", "application": false}},
-            "internal": {"status": {"name": "READY", "date": "20200204101741", "description": ""}},
-            "quota": {"diskUsage": -1, "cpuUsage": -1, "maxDisk": -1, "maxCpu": -1},
-            "projects": [],
-            "configs": {},
-            "filters": [],
-            "attributes": {}
-        };
         return {
             title: "Your profile",
             icon: "",
@@ -121,7 +121,47 @@ export default class IvaProfile extends LitElement {
                             }
                         }*/
                     ]
-                }
+                },
+                {
+                    title: "Administration",
+                    collapsed: false,
+                    elements: [
+                        {
+                            name: "User",
+                            field: "user.id",
+                            type: "custom",
+                            display: {
+                                render: data => {
+                                    const config = {
+                                        addButton: false,
+                                        fields: item => ({
+                                            name: item.id
+                                        }),
+                                        dataSource: (query, process) => {
+                                            this.opencgaSession.opencgaClient.studies().acl(this.opencgaSession.study.fqn).then(restResponse => {
+                                                const results = restResponse.getResults();
+                                                process(results.map(config.fields));
+                                            });
+                                        }
+                                    };
+                                    return html`<select-field-filter-autocomplete .opencgaSession="${this.opencgaSession}" .config=${config} .value="${this.value}" @filterChange="${e => this.onFilterChange("userid", e.detail.value)}"></select-field-filter-autocomplete>`
+                                }
+                            }
+                        },
+                        {
+                            name: "Study",
+                            field: "study",
+                            type: "select",
+                            allowedValues: ["study1"],
+                            defaultValue: ["study1"],
+                            errorMessage: "No found...",
+                            display: {
+                                width: 9
+                            }
+                        }
+                    ]
+                },
+
             ]
         };
     }
@@ -137,7 +177,7 @@ export default class IvaProfile extends LitElement {
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <data-view .data=${this.opencgaSession?.user} .config="${this._config}"></data-view>
+                        <data-form .data=${this.currentUser} .config="${this._config}"></data-form>
                     </div>
                 </div>
             </div>

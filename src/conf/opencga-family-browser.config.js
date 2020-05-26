@@ -1,5 +1,5 @@
 const OpencgaFamilyBrowserConfig = {
-    title: "Family Browser",
+    /*title: "Family Browser",
     icon: "fas fa-chart-bar",
     searchButtonText: "Run",
     views: [
@@ -11,11 +11,11 @@ const OpencgaFamilyBrowserConfig = {
         {
             id: "facet-tab",
             name: "Aggregation stats"
-        },/*
+        },/!*
                 {
                     id: "comparator-tab",
                     name: "Comparator"
-                }*/
+                }*!/
     ],
     filter: {
         sections: [
@@ -181,5 +181,5 @@ const OpencgaFamilyBrowserConfig = {
             }
         ]
     },
-    annotations: {},
+    annotations: {},*/
 };
