@@ -446,7 +446,7 @@ const tools = {
         reviewCases: {
             grid: {
                 columns: {
-                    hidden: ["dueDate"]
+                    hidden: []
                 }
             }
         }
