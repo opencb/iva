@@ -1112,3 +1112,19 @@ Toggle Changes
 .swal2-popup {
     font-size: 1em;
 }
+
+.list-item-arrow {
+    margin-left: 1em;
+    position: relative;
+    color: #2b388f;
+    font-weight: bold;
+}
+
+.list-item-arrow:before {
+    content: "";
+    position: absolute;
+    width: .9em;
+    height: 1.1em;
+    left: -1.1em;
+    background: transparent url('data:image/svg+xml;base64, PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjYuNTEgMTgwLjc5Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzJiMzg4Zjt9LmNscy0ye2ZpbGw6IzFiNzViYjt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPlVudGl0bGVkLTE8L3RpdGxlPjxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIwIDAgMCAxMiAwIDI0IDAgMzYgMTY2LjUxIDEwOC41MSAxNjYuNTEgOTYuNTEgMTY2LjUxIDg0LjUxIDE2Ni41MSA3Mi41MSAwIDAiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMCAxNDQuNzkgMCAxNTYuNzkgMCAxNjguNzkgMCAxODAuNzkgMTY2LjUxIDEwOC4yOCAxNjYuNTEgOTYuMjggMTY2LjUxIDg0LjI4IDE2Ni41MSA3Mi4yOCAwIDE0NC43OSIvPjwvc3ZnPgo=') no-repeat center center;
+}
