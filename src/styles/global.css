@@ -48,6 +48,10 @@ input[type="text"] {
     cursor:pointer;
 }
 
+.align-middle {
+    vertical-align: middle;
+}
+
 /* TODO input material effect continue*/
 .input {
     border: 0;

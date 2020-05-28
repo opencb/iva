@@ -149,6 +149,21 @@ export default class IvaProfile extends LitElement {
                             }
                         },
                         {
+                            name: "Permissions",
+                            type: "select",
+                            multiple: true,
+                            defaultValue: ["WRITE_FILES"],
+                            allowedValues: ["CONFIDENTIAL_VARIABLE_SET_ACCESS", "EXECUTION",
+                                {name: "Files", fields: ["WRITE_FILES", "VIEW_FILE_HEADERS", "VIEW_FILE_CONTENTS", "VIEW_FILES", "DELETE_FILES", "DOWNLOAD_FILES", "UPLOAD_FILES", "WRITE_FILE_ANNOTATIONS", "VIEW_FILE_ANNOTATIONS", "DELETE_FILE_ANNOTATIONS"]},
+                                {name: "Jobs", fields: ["VIEW_JOBS", "WRITE_JOBS", "DELETE_JOBS"]},
+                                {name: "Sample", fields: ["VIEW_SAMPLES", "WRITE_SAMPLES", "DELETE_SAMPLES", "WRITE_SAMPLE_ANNOTATIONS", "VIEW_SAMPLE_ANNOTATIONS", "DELETE_SAMPLE_ANNOTATIONS"]},
+                                {name: "Individual", fields: ["VIEW_INDIVIDUALS", "WRITE_INDIVIDUALS", "DELETE_INDIVIDUALS", "WRITE_INDIVIDUAL_ANNOTATIONS", "VIEW_INDIVIDUAL_ANNOTATIONS", "DELETE_INDIVIDUAL_ANNOTATIONS"]},
+                                {name: "Family", fields: ["VIEW_FAMILIES", "WRITE_FAMILIES", "DELETE_FAMILIES", "WRITE_FAMILY_ANNOTATIONS", "VIEW_FAMILY_ANNOTATIONS", "DELETE_FAMILY_ANNOTATIONS"]},
+                                {name: "Cohort", fields: ["VIEW_COHORTS", "WRITE_COHORTS", "DELETE_COHORTS", "WRITE_COHORT_ANNOTATIONS", "VIEW_COHORT_ANNOTATIONS", "DELETE_COHORT_ANNOTATIONS"]},
+                                {name: "Disease Panels", fields: ["VIEW_PANELS", "WRITE_PANELS", "DELETE_PANELS"]},
+                                {name: "Clinical Analysis", fields: ["VIEW_CLINICAL_ANALYSIS", "WRITE_CLINICAL_ANALYSIS", "DELETE_CLINICAL_ANALYSIS"]}]
+                        },
+                        {
                             name: "Study",
                             field: "study",
                             type: "select",
