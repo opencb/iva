@@ -236,6 +236,14 @@ const application = {
                     visibility: "public"
                 },
                 {
+                    id: "inferred-sex",
+                    title: "Inferred Sex",
+                    acronym: "IS",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
                     separator: true,
                     visibility: "public"
                 },
@@ -269,6 +277,27 @@ const application = {
                     icon: "",
                     visibility: "public"
                 },
+                // {
+                //     id: "team",
+                //     title: "TEAM",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "zetta",
+                //     title: "Zetta",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "cancer-tiering",
+                //     title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 {
                     separator: true,
                     visibility: "public"
@@ -308,14 +337,6 @@ const application = {
                     description: "",
                     visibility: "public"
                 },
-                // {
-                //     id: "clinical-analysis-editor",
-                //     title: "Create Case",
-                //     acronym: "",
-                //     icon: "",
-                //     description: "",
-                //     visibility: "public"
-                // },
                 {
                     id: "clinical-analysis-writer",
                     title: "Create Case",
@@ -341,59 +362,6 @@ const application = {
                     description: "",
                     visibility: "public"
                 },
-                // {
-                //     id: "rd-interpreter",
-                //     title: "Variant RD Interpreter",
-                //     acronym: "",
-                //     icon: "",
-                //     description: "",
-                //     visibility: "public"
-                // },
-                // {
-                //     id: "cancer-interpreter",
-                //     title: "Variant Cancer Interpreter",
-                //     acronym: "",
-                //     icon: "",
-                //     description: "",
-                //     visibility: "public"
-                // },
-                // {
-                //     separator: true,
-                //     visibility: "public"
-                // },
-                // {
-                //     title: "Interpretation Analysis",
-                //     category: true,
-                //     visibility: "public"
-                // },
-                // {
-                //     id: "rd-tiering",
-                //     title: "OpenCGA RD Tiering (Based on GEL algorithm)",
-                //     description: "",
-                //     icon: "",
-                //     visibility: "public"
-                // },
-                // {
-                //     id: "cancer-tiering",
-                //     title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
-                //     description: "",
-                //     icon: "",
-                //     visibility: "public"
-                // },
-                // {
-                //     id: "team",
-                //     title: "TEAM",
-                //     description: "",
-                //     icon: "",
-                //     visibility: "public"
-                // },
-                // {
-                //     id: "zetta",
-                //     title: "Zetta",
-                //     description: "",
-                //     icon: "",
-                //     visibility: "public"
-                // },
                 {
                     separator: true,
                     visibility: "public"
@@ -415,7 +383,7 @@ const application = {
         },
         {
             id: "catalog",
-            title: "Catalog Metadata",
+            title: "Catalog",
             visibility: "public",
             icon: "aggregation2.svg",
             submenu: [
