@@ -1001,7 +1001,7 @@ class IvaApp extends LitElement {
     onQueryFilterSearch(e, source) {
         // FIXME filters component emits a event containing {detail:{query:Object}} while active-filter emits {detail:{Object}}
         // TODO fix active-filters
-        const q = e.detail.query || e.detail;
+        const q = e.detail.query ? {...e.detail.query} : {...e.detail};
         this.queries[source] = {...q};
         this.queries = {...this.queries};
         //console.log("this.queries",this.queries);

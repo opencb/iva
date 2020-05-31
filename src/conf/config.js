@@ -356,7 +356,7 @@ const application = {
                 },
                 {
                     id: "interpreter",
-                    title: "Steiner OpenCGA Interpreter",
+                    title: "Variant Interpreter",
                     acronym: "",
                     icon: "",
                     description: "",
