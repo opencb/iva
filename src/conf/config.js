@@ -314,6 +314,13 @@ const application = {
                     description: "",
                     icon: "",
                     visibility: "public"
+                },
+                {
+                    id: "beacon",
+                    title: "GA4GH Beacon",
+                    description: "",
+                    icon: "beacon.svg",
+                    visibility: "public"
                 }
             ]
         },
@@ -382,6 +389,50 @@ const application = {
             ]
         },
         {
+            id: "alignment",
+            title: "Alignment",
+            description: "",
+            icon: "",
+            visibility: "public",
+            submenu: [
+                {
+                    title: "Data Management",
+                    category: true,
+                    visibility: "public"
+                },
+                {
+                    id: "alignment-index",
+                    title: "Alignment Index",
+                    description: "Create a .bai index file.",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    id: "coverage-index",
+                    title: "Coverage Index",
+                    description: "Precompute coverage in a BigWig file",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
+                    title: "Summary Stats",
+                    category: true,
+                    visibility: "public"
+                },
+                {
+                    id: "alignment-stats",
+                    title: "Alignment Stats",
+                    description: "Compute BAM stats using samtools",
+                    icon: "",
+                    visibility: "public"
+                },
+            ]
+        },
+        {
             id: "catalog",
             title: "Catalog",
             visibility: "public",
@@ -438,22 +489,6 @@ const application = {
                 }
             ]
         },
-        {
-            id: "ga4gh",
-            title: "GA4GH",
-            description: "",
-            icon: "beacon.svg",
-            visibility: "public",
-            submenu: [
-                {
-                    id: "beacon",
-                    title: "Beacon",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                }
-            ]
-        }
     ],
     search: {
         placeholder: "Search",

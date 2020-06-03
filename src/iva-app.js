@@ -64,6 +64,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-in
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
+import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
 // /@dev
 
 
@@ -139,6 +140,8 @@ class IvaApp extends LitElement {
             "faq",
             "gettingstarted",
             "login",
+            "settings",
+            "account",
             "projects",
             "project",
             "sample",
@@ -164,6 +167,7 @@ class IvaApp extends LitElement {
             "cat-clinical",
             "cat-catalog",
             "cat-ga4gh",
+            // Variant
             "eligibility",
             "gwas",
             "sample-variant-stats",
@@ -172,11 +176,14 @@ class IvaApp extends LitElement {
             "knockout",
             "inferred-sex",
             "mutational-signature",
+            // Clinical
             "clinical-analysis-writer",
             "interpreter",
             "rd-tiering",
-            "settings",
-            "account"];
+            // Alignment
+            "alignment-index",
+            "alignment-stats",
+            "coverage-index"];
 
         for (const component of components) {
             _config.enabledComponents[component] = false;
@@ -1824,12 +1831,31 @@ class IvaApp extends LitElement {
 
 
                 ${this.config.enabledComponents["interpreter"] ? html`
-                    <div class="content" id="settings">
+                    <div class="content" id="interpreter">
                         <variant-interpreter    .opencgaSession="${this.opencgaSession}" 
-                                                        .cellbaseClient="${this.cellbaseClient}"
-                                                        .clinicalAnalysis="${this.clinicalAnalysis}"
-                                                        @selectClinicalAnalysis="${this.onSelectClinicalAnalysis}">
+                                                .cellbaseClient="${this.cellbaseClient}"
+                                                .clinicalAnalysis="${this.clinicalAnalysis}"
+                                                @selectClinicalAnalysis="${this.onSelectClinicalAnalysis}">
                         </variant-interpreter>
+                    </div>
+                ` : null}
+
+                <!-- Alignment Analysis-->
+                ${this.config.enabledComponents["alignment-index"] ? html`
+                    <div id="alignment-index" class="content">
+                        <opencga-alignment-index-analysis .opencgaSession="${this.opencgaSession}"></opencga-alignment-index-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["coverage-index"] ? html`
+                    <div id="coverage-index" class="content">
+                        <opencga-coverage-index-analysis .opencgaSession="${this.opencgaSession}"></opencga-coverage-index-analysis>
+                    </div>
+                ` : null}
+
+                ${this.config.enabledComponents["alignment-stats"] ? html`
+                    <div id="alignment-stats" class="content col-md-6 col-md-offset-3">
+                        <opencga-alignment-stats-analysis .opencgaSession="${this.opencgaSession}"></opencga-alignment-stats-analysis>
                     </div>
                 ` : null}
 
