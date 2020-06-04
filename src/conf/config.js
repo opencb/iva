@@ -78,7 +78,8 @@ const application = {
     title: "IVA",
     version: "v2.0.0-beta",
     logo: "img/opencb-logo.png",
-    defaultStudy: "family:corpasome",
+    // defaultStudy: "family:corpasome",
+    defaultStudy: "reference_grch37_test:test",
     // The order, title and nested submenus are respected
     menu: [
         {
