@@ -143,6 +143,7 @@ class IvaApp extends LitElement {
             "settings",
             "account",
             "projects",
+            "file-manager",
             "project",
             "sample",
             "files",
@@ -1382,6 +1383,9 @@ class IvaApp extends LitElement {
                                             <li>
                                                 <a href="#projects"><i class="fa fa-database" aria-hidden="true"></i> Projects</a>
                                             </li>
+                                            <li>
+                                                <a href="#file-manager"><i class="fa fa-file" aria-hidden="true"></i> File Manager</a>
+                                            </li>
                                             <li role="separator" class="divider"></li>
                                             <li>
                                                 <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
@@ -1455,7 +1459,7 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents.login ? html`
                     <div class="content" id="login">
-                        <opencga-login  .opencgaClient="${this.opencgaClient}"
+                        <opencga-login  .opencgaSession="${this.opencgaSession}"
                                         loginTitle="Sign in"
                                         .notifyEventMessage="${this.config.notifyEventMessage}"
                                         @login="${this.onLogin}"
@@ -1543,8 +1547,7 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents.projects ? html`
                     <div class="content" id="projects">
-                        <opencga-projects  .opencgaSession="${this.opencgaSession}"  
-                                           .opencgaClient="${this.opencgaClient}"
+                        <opencga-projects  .opencgaSession="${this.opencgaSession}"
                                            .projects="${this.opencgaSession.projects}"
                                            .studySummaries="${this.studySummaries}"
                                            @project="${this.updateProject}"
@@ -1656,7 +1659,6 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.individuals ? html`
                     <div class="content" id="individuals">
                         <opencga-individual-browser .opencgaSession="${this.opencgaSession}"
-                                        .opencgaClient="${this.opencgaSession.opencgaClient}"
                                         .query="${this.queries.individuals}"
                                         .config="${OpencgaIndividualBrowserConfig}"
                                         .cellbaseClient="${this.cellbaseClient}"
@@ -1819,6 +1821,13 @@ class IvaApp extends LitElement {
                     <div class="content" id="account">
                         <iva-profile .opencgaSession="${this.opencgaSession}">
                         </iva-profile>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["file-manager"] ? html`
+                    <div class="content" id="file-manager">
+                        <opencga-file-tree .opencgaSession="${this.opencgaSession}" .config="${ {a:1} }">
+                        </opencga-file-tree>
                     </div>
                 ` : null}
 
