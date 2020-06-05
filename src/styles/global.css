@@ -1222,3 +1222,30 @@ Toggle Changes
     position: absolute;
     display: inline-block;
 }
+
+.file-manager-tree ul{
+    font-size: 12px;
+}
+
+.file-manager-tree ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.file-manager-tree .folder {
+    padding: 10px;
+}
+
+.file-manager-tree .folder-name{
+    font-weight: bold;
+}
+
+.file-manager-tree .folder-name:hover  {
+    background: #b3ddff;
+    cursor: pointer;
+}
+
+.file-manager-tree .folder-name + ul{
+    display: none;
+}

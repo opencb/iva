@@ -64,7 +64,8 @@ import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-in
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
-import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/files/opencga-file-manager.js";
+//import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
 // /@dev
 
 
@@ -1826,8 +1827,8 @@ class IvaApp extends LitElement {
                 
                 ${this.config.enabledComponents["file-manager"] ? html`
                     <div class="content" id="file-manager">
-                        <opencga-file-tree .opencgaSession="${this.opencgaSession}" .config="${ {a:1} }">
-                        </opencga-file-tree>
+                        <opencga-file-manager .opencgaSession="${this.opencgaSession}" .config="${ {a:1} }">
+                        </opencga-file-manager>
                     </div>
                 ` : null}
 
