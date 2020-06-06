@@ -1559,16 +1559,11 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents["samples"] ? html`
                     <div class="content" id="samples">
-                        <opencga-sample-browser resource="sample"
-                                        .opencgaSession="${this.opencgaSession}"
-                                        .query="${this.queries.sample}"
-                                        .config="${OpencgaSampleBrowserConfig}"
-                                        .cellbaseClient="${this.cellbaseClient}"
-                                        .populationFrequencies="${this.config.populationFrequencies}"
-                                        .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                        .consequenceTypes="${this.config.consequenceTypes}"
-                                        @querySearch="${e => this.onQueryFilterSearch(e, "sample")}"
-                                        @activeFilterChange="${e => this.onQueryFilterSearch(e, "sample")}">
+                        <opencga-sample-browser .opencgaSession="${this.opencgaSession}"
+                                                .query="${this.queries.sample}"
+                                                .config="${OpencgaSampleBrowserConfig}"
+                                                @querySearch="${e => this.onQueryFilterSearch(e, "sample")}"
+                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "sample")}">
                         </opencga-sample-browser>
                     </div>
                 ` : null}
@@ -1586,15 +1581,11 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents.files ? html`
                     <div class="content" id="files">
-                        <opencga-file-browser .opencgaSession="${this.opencgaSession}"
-                                        .query="${this.queries.files}"
-                                        .config="${OpencgaFileBrowserConfig}"
-                                        .cellbaseClient="${this.cellbaseClient}"
-                                        .populationFrequencies="${this.config.populationFrequencies}"
-                                        .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                        .consequenceTypes="${this.config.consequenceTypes}"
-                                        @querySearch="${e => this.onQueryFilterSearch(e, "files")}"
-                                        @activeFilterChange="${e => this.onQueryFilterSearch(e, "files")}">
+                        <opencga-file-browser   .opencgaSession="${this.opencgaSession}"
+                                                .query="${this.queries.files}"
+                                                .config="${OpencgaFileBrowserConfig}"
+                                                @querySearch="${e => this.onQueryFilterSearch(e, "files")}"
+                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "files")}">
                         </opencga-file-browser>
                     </div>
                 ` : null}
@@ -1660,14 +1651,10 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.individuals ? html`
                     <div class="content" id="individuals">
                         <opencga-individual-browser .opencgaSession="${this.opencgaSession}"
-                                        .query="${this.queries.individuals}"
-                                        .config="${OpencgaIndividualBrowserConfig}"
-                                        .cellbaseClient="${this.cellbaseClient}"
-                                        .populationFrequencies="${this.config.populationFrequencies}"
-                                        .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                        .consequenceTypes="${this.config.consequenceTypes}"
-                                        @querySearch="${e => this.onQueryFilterSearch(e, "individuals")}"
-                                        @activeFilterChange="${e => this.onQueryFilterSearch(e, "individuals")}">
+                                                    .query="${this.queries.individuals}"
+                                                    .config="${OpencgaIndividualBrowserConfig}"
+                                                    @querySearch="${e => this.onQueryFilterSearch(e, "individuals")}"
+                                                    @activeFilterChange="${e => this.onQueryFilterSearch(e, "individuals")}">
                         </opencga-individual-browser>
                     </div>
                 ` : null}
@@ -1675,48 +1662,43 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.families ? html`
                     <div class="content" id="families">
                         <opencga-family-browser .opencgaSession="${this.opencgaSession}"
-                                        .query="${this.queries.families}"
-                                        .config="${OpencgaFamilyBrowserConfig}"
-                                        @querySearch="${e => this.onQueryFilterSearch(e, "families")}"
-                                        @activeFilterChange="${e => this.onQueryFilterSearch(e, "families")}">                                        
+                                                .query="${this.queries.families}"
+                                                .config="${OpencgaFamilyBrowserConfig}"
+                                                @querySearch="${e => this.onQueryFilterSearch(e, "families")}"
+                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "families")}">                                        
                         </opencga-family-browser>
                     </div>
                 ` : null}
 
-
                 ${this.config.enabledComponents.cohorts ? html`
                     <div class="content" id="cohorts">
-                        <opencga-cohort-browser   .opencgaSession="${this.opencgaSession}"
-                                                .query="${this.queries.cohorts}"
-                                                .config="${OpencgaCohortBrowserConfig}"
-                                                .cellbaseClient="${this.cellbaseClient}"
-                                                .populationFrequencies="${this.config.populationFrequencies}"
-                                                .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                                .consequenceTypes="${this.config.consequenceTypes}"
-                                                @querySearch="${e => this.onQueryFilterSearch(e, "cohorts")}"
-                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "cohorts")}"
+                        <opencga-cohort-browser     .opencgaSession="${this.opencgaSession}"
+                                                    .query="${this.queries.cohorts}"
+                                                    .config="${OpencgaCohortBrowserConfig}"
+                                                    @querySearch="${e => this.onQueryFilterSearch(e, "cohorts")}"
+                                                    @activeFilterChange="${e => this.onQueryFilterSearch(e, "cohorts")}"
                         </opencga-cohort-browser>
                     </div>
                 ` : null}
 
                 ${this.config.enabledComponents.clinicalAnalysis ? html`
                     <div class="content" id="clinicalAnalysis">
-                        <opencga-clinical-analysis-browser    .opencgaSession="${this.opencgaSession}"
-                                                            .config="${this.config.tools.clinicalAnalysisBrowser}"
-                                                            .query="${this.queries["clinical-analysis"]}"
-                                                            @querySearch="${e => this.onQueryFilterSearch(e, "clinical-analysis")}"
-                                                            @activeFilterChange="${e => this.onQueryFilterSearch(e, "clinical-analysis")}">  
+                        <opencga-clinical-analysis-browser      .opencgaSession="${this.opencgaSession}"
+                                                                .config="${this.config.tools.clinicalAnalysisBrowser}"
+                                                                .query="${this.queries["clinical-analysis"]}"
+                                                                @querySearch="${e => this.onQueryFilterSearch(e, "clinical-analysis")}"
+                                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "clinical-analysis")}">  
                         </opencga-clinical-analysis-browser>
                     </div>
                 ` : null}
 
                 ${this.config.enabledComponents["jobs"] ? html`
                     <div class="content" id="jobs">
-                        <opencga-jobs-browser .opencgaSession="${this.opencgaSession}"
-                                            .config="${OpencgaJobsBrowserConfig}"
-                                            .query="${this.queries.jobs}"
-                                            @querySearch="${e => this.onQueryFilterSearch(e, "jobs")}"
-                                            @activeFilterChange="${e => this.onQueryFilterSearch(e, "jobs")}">  
+                        <opencga-jobs-browser   .opencgaSession="${this.opencgaSession}"
+                                                .config="${OpencgaJobsBrowserConfig}"
+                                                .query="${this.queries.jobs}"
+                                                @querySearch="${e => this.onQueryFilterSearch(e, "jobs")}"
+                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "jobs")}">  
                         </opencga-jobs-browser>
                     </div>
                 ` : null}
