@@ -65,6 +65,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-in
 import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
 import "../lib/jsorolla/src/core/webcomponents/files/opencga-file-manager.js";
+import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
 //import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
 // /@dev
 
@@ -168,6 +169,7 @@ class IvaApp extends LitElement {
             "cat-analysis",
             "cat-clinical",
             "cat-catalog",
+            "cat-alignment",
             "cat-ga4gh",
             // Variant
             "eligibility",
@@ -1076,7 +1078,11 @@ class IvaApp extends LitElement {
                     top: 13px;
                 }
                 
-                .navbar-nav .badge  {
+                .notification-nav {
+                    margin-right: 0;
+                }
+                
+               .navbar-nav .badge  {
                     position: relative;
                     z-index: 10;
                     bottom: 6px;
@@ -1241,176 +1247,157 @@ class IvaApp extends LitElement {
                     </ul>
                 </nav>
             </div>
-            <div>
-                <nav class="navbar navbar-inverse" style="margin-bottom: 5px; border-radius: 0px">
-                    <div>
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="#" @click="${this.toggleSideNav}" id="waffle-icon">
-                                   <img src="img/waffle-icon.svg" />
-                                </a>
-                            </li>
-                        </ul>
-
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <a href="#home" class="navbar-brand" style="padding-top: 10px" @click="${this.changeTool}">
-                                <img src="${this.config.logo}" width="100px" alt="logo">
+            <nav class="navbar navbar-inverse main-navbar">
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#" @click="${this.toggleSideNav}" id="waffle-icon">
+                               <img src="img/waffle-icon.svg" />
                             </a>
-                            <a class="navbar-brand" href="#home" @click="${this.changeTool}">
-                                <b>${this.config.title} <sup>${this.config.version}</sup></b>
-                            </a>
-                        </div>
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <!-- Controls aligned to the LEFT -->
-                            <ul class="nav navbar-nav">
-                                <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                                ${this.config.menu.length && this.config.menu.map(item => html`
-                                    <!-- If there is not submenu we just display a button -->
-                                    ${!item.submenu ? html`
-                                        <li>
-                                            <a href="#${item.id}" role="button" @click="${this.changeTool}">${item.title}</a>
-                                        </li>` : html`
-                                        <!-- If there is a submenu we create a dropdown menu item -->
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                ${item.title} <span class="caret"></span>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                ${item.submenu.map(subitem =>
-        subitem.category ? html`
-                                                        <li><a><label>${subitem.title}</label></a></li>
-                                                    ` : subitem.separator ? html`
-                                                        <li role="separator" class="divider"></li>
-                                                    ` : html`
-                                                    <li><a href="#${subitem.id}" @click="${this.changeTool}" data-id="${subitem.id}">${subitem.title}</a></li>
-                                                `)}
-                                            </ul>
-                                        </li>`
-}`
-    )}
-                            </ul>
-                            <!-- Controls aligned to the RIGHT: settings and about-->
-                            <ul class="nav navbar-nav navbar-right">
-                               <!-- Jobs -->
-                                ${this.opencgaSession && this.opencgaSession.token ? html`
-                                    <li class="notification">
-                                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                           <span class="badge badge-pill badge-primary"></span><i class="fas fa-bell"></i>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="#projects">that would be a lot of notifications</a>
-                                            </li>
-                                            <li>
-                                                <a href="#projects"> All notifications </a>
-                                            </li>
-                                        </ul>-->
-                                    </li>
-                                ` : null}
+                        </li>
+                    </ul>
 
-
-                                <!--Studies dropdown and Search menu-->
-                                ${this.opencgaSession && this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-database fa-lg" style="padding-right: 5px"></i>Studies <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            ${this.opencgaSession.projects.map(project => html`
-                                                <li><a><b>${project.name}</b></a></li>
-                                                ${project.studies && project.studies.length && project.studies && project.studies.map(study => html`
-                                                    <li>
-                                                        <a href="#" data-study="${study.alias}" data-project="${project.name}" @click="${this.onStudySelect}">${study.alias}</a>
-                                                    </li>
-                                                `)}                                            
-                                            `)}
-                                        </ul>
-                                    </li>
-                                ` : null}
-
-                                <!--Search menu-->
-                                ${this.opencgaSession && this.opencgaSession.projects && this.config.search.visible ? html`
-                                        <form class="navbar-form navbar-left" role="search">
-                                            <div class="form-group">
-                                                <div class="input-group search-box-wrapper">
-                                                    <input class="form-control" id="searchTextBox"  placeholder="${this.config.search.placeholder}" @input="${this.buildQuery}">
-                                                    <span class="input-group-addon"><span class="fa fa-search" aria-hidden="true" @click="${this.onQuickSearch}"></span></span>
-                                                </div>
-                                            </div>
-                                        </form>
-                                ` : null}
-
-                                <!-- About dropdown menu-->
-                                ${this.config.about.dropdown ? html`
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-question-circle fa-lg" style="padding-right: 5px"></i>About
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            ${this.config.about.links && this.config.about.links.map(link => html`
-                                                <li>
-                                                    <a href="${link.url}" ><i class="${link.icon}" aria-hidden="true"></i> ${link.name}</a>
-                                                </li>
-                                            `)}
-                                        </ul>
-                                    </li>
-                                ` : this.config.about.links && this.config.about.links.map(link => html`
-                                    <li>
-                                        <a href="#${link.id}" role="button" @click="${this.changeTool}">${link.name}</a>
-                                    </li>
-                                `)}
-
-                                <!-- Login/Logout button -->
-                                ${this.config.login.visible && (!this.opencgaSession || !this.opencgaSession.token) ? html`
-                                    <li>
-                                        <a href="#login" id="loginButton" role="button" @click="${this.changeTool}">
-                                            <i href="#login" class="fa fa-sign-in-alt fa-lg" aria-hidden="true" style="padding-right: 5px"></i>Login
-                                        </a>
-                                    </li>
-                                ` : null}
-
-                                <!--User-->
-                                ${this.opencgaSession && this.opencgaSession.token ? html`
-                                    <li class="dropdown user-menu">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-user-circle" aria-hidden="true" style="padding-right: 5px"></i>${this.opencgaSession.user.id} <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="#account"><i class="fa fa-user" aria-hidden="true"></i> Your account</a>
-                                            </li>
-                                            <li>
-                                                <a href="#projects"><i class="fa fa-database" aria-hidden="true"></i> Projects</a>
-                                            </li>
-                                            <li>
-                                                <a href="#file-manager"><i class="fa fa-file" aria-hidden="true"></i> File Manager</a>
-                                            </li>
-                                            <li role="separator" class="divider"></li>
-                                            <li>
-                                                <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                                            </li>
-                                            <li>
-                                                <a id="logoutButton" role="button" @click="${this.logout}">
-                                                    <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Logout
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                ` : null}
-                            </ul>
-                        </div>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <a href="#home" class="navbar-brand" style="padding-top: 10px" @click="${this.changeTool}">
+                            <img src="${this.config.logo}" width="100px" alt="logo">
+                        </a>
+                        <a class="navbar-brand" href="#home" @click="${this.changeTool}">
+                            <b>${this.config.title} <sup>${this.config.version}</sup></b>
+                        </a>
                     </div>
-                </nav>
-            </div>
-            <!-- End of navigation bar -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <!-- Controls aligned to the LEFT -->
+                        <ul class="nav navbar-nav">
+                            <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
+                            ${this.config.menu.length && this.config.menu.map(item => html`
+                                <!-- If there is not submenu we just display a button -->
+                                ${!item.submenu ? html`
+                                    <li>
+                                        <a href="#${item.id}" role="button" @click="${this.changeTool}">${item.title}</a>
+                                    </li>` : html`
+                                    <!-- If there is a submenu we create a dropdown menu item -->
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            ${item.title} <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            ${item.submenu.map(subitem =>
+                                                subitem.category ? html`
+                                                    <li><a><label>${subitem.title}</label></a></li>
+                                                ` : subitem.separator ? html`
+                                                    <li role="separator" class="divider"></li>
+                                                ` : html`
+                                                <li><a href="#${subitem.id}" @click="${this.changeTool}" data-id="${subitem.id}">${subitem.title}</a></li>
+                                            `)}
+                                        </ul>
+                                    </li>`
+                                }`
+                            )}
+                        </ul>
+                        <!-- Controls aligned to the RIGHT: settings and about-->
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--Studies dropdown and Search menu-->
+                            ${this.opencgaSession && this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-database fa-lg" style="padding-right: 5px"></i>Studies <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        ${this.opencgaSession.projects.map(project => html`
+                                            <li><a><b>${project.name}</b></a></li>
+                                            ${project.studies && project.studies.length && project.studies && project.studies.map(study => html`
+                                                <li>
+                                                    <a href="#" data-study="${study.alias}" data-project="${project.name}" @click="${this.onStudySelect}">${study.alias}</a>
+                                                </li>
+                                            `)}                                            
+                                        `)}
+                                    </ul>
+                                </li>
+                            ` : null}
 
+                            <!--Search menu-->
+                            ${this.opencgaSession && this.opencgaSession.projects && this.config.search.visible ? html`
+                                    <form class="navbar-form navbar-left" role="search">
+                                        <div class="form-group">
+                                            <div class="input-group search-box-wrapper">
+                                                <input class="form-control" id="searchTextBox"  placeholder="${this.config.search.placeholder}" @input="${this.buildQuery}">
+                                                <span class="input-group-addon"><span class="fa fa-search" aria-hidden="true" @click="${this.onQuickSearch}"></span></span>
+                                            </div>
+                                        </div>
+                                    </form>
+                            ` : null}
+
+                            <!-- About dropdown menu-->
+                            ${this.config.about.dropdown ? html`
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-question-circle fa-lg" style="padding-right: 5px"></i>About
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        ${this.config.about.links && this.config.about.links.map(link => html`
+                                            <li>
+                                                <a href="${link.url}" ><i class="${link.icon}" aria-hidden="true"></i> ${link.name}</a>
+                                            </li>
+                                        `)}
+                                    </ul>
+                                </li>
+                            ` : this.config.about.links && this.config.about.links.map(link => html`
+                                <li>
+                                    <a href="#${link.id}" role="button" @click="${this.changeTool}">${link.name}</a>
+                                </li>
+                            `)}
+
+                            <!-- Login/Logout button -->
+                            ${this.config.login.visible && (!this.opencgaSession || !this.opencgaSession.token) ? html`
+                                <li>
+                                    <a href="#login" id="loginButton" role="button" @click="${this.changeTool}">
+                                        <i href="#login" class="fa fa-sign-in-alt fa-lg" aria-hidden="true" style="padding-right: 5px"></i>Login
+                                    </a>
+                                </li>
+                            ` : null}
+
+                            <!--User-->
+                            ${this.opencgaSession && this.opencgaSession.token ? html`
+                                <li class="dropdown user-menu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-user-circle" aria-hidden="true" style="padding-right: 5px"></i>${this.opencgaSession.user.id} <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#account"><i class="fa fa-user" aria-hidden="true"></i> Your account</a>
+                                        </li>
+                                        <li>
+                                            <a href="#projects"><i class="fa fa-database" aria-hidden="true"></i> Projects</a>
+                                        </li>
+                                        <li>
+                                            <a href="#file-manager"><i class="fa fa-file" aria-hidden="true"></i> File Manager</a>
+                                        </li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>
+                                            <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+                                        </li>
+                                        <li>
+                                            <a id="logoutButton" role="button" @click="${this.logout}">
+                                                <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            ` : null}
+                        </ul>
+                        <!-- Jobs -->
+                            ${this.opencgaSession && this.opencgaSession.token ? html`
+                                <job-monitor .opencgaSession="${this.opencgaSession}"></job-monitor>
+                            ` : null}
+                        
+                    </div>
+                </div>
+            </nav>
+            <!-- End of navigation bar -->
             <!--Breadcrumb-->
             ${this.config.breadcrumb.visible && this.opencgaSession && this.opencgaSession.projects ? html`
-                <!--<div>
-                    <ol id="breadcrumb" class="breadcrumb" style="margin-bottom: 1px;padding-left: 40px"></ol>
-                </div>-->
                 <opencga-breadcrumb .config="${this.config}" .opencgaSession="${this.opencgaSession}"></opencga-breadcrumb>
             ` : null}
 
@@ -1727,6 +1714,13 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["cat-catalog"] ? html`
                     <div class="content" id="cat-catalog">
                         <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "catalog")}">
+                        </category-page>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["cat-alignment"] ? html`
+                    <div class="content" id="cat-alignment">
+                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "alignment")}">
                         </category-page>
                     </div>
                 ` : null}

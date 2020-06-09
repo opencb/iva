@@ -393,7 +393,7 @@ const application = {
             id: "alignment",
             title: "Alignment",
             description: "",
-            icon: "",
+            icon: "alignment.svg",
             visibility: "public",
             submenu: [
                 {

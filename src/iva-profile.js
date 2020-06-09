@@ -122,7 +122,7 @@ export default class IvaProfile extends LitElement {
                         }*/
                     ]
                 },
-                {
+                /*{
                     title: "Administration",
                     collapsed: false,
                     elements: [
@@ -175,7 +175,7 @@ export default class IvaProfile extends LitElement {
                             }
                         }
                     ]
-                },
+                },*/
 
             ]
         };

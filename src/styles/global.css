@@ -72,6 +72,10 @@ input[type="text"] {
     z-index: 1001;
 }
 
+.main-navbar {
+    margin: 0;
+    border-radius: 0px;
+}
 /* Bootstrap panel and button  overrides */
 h3.page-title {
     margin: 10px 10px 10px 15px;
@@ -137,13 +141,16 @@ h3.page-title {
 
 .ripple:hover {
     outline: 0;
-    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.18), 0 3px 10px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.18), 0 3px 10px 0 rgba(0, 0, 0, 0.15);
+
 }
 
 .ripple:active, .ripple:focus {
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.18), 0 3px 10px 0 rgba(0, 0, 0, 0.15);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.18), 0 3px 10px 0 rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+
+
 }
 
 .ripple:after {
@@ -220,10 +227,26 @@ h3.page-title {
 }
 
 /********** browser components  *************/
-h2.page-title {
+.page-title h2{
     text-transform: uppercase;
     letter-spacing: .2em;
-    margin: 10px 0 20px 0;
+    margin: 0px 0 20px 0;
+    padding: 8px;
+    text-decoration: none;
+    color: #0c2f4c;
+    display: block;
+    transition: 0.3s;
+    font-size: 2em;
+}
+.page-title h2 .inverse{
+    background: #0c2f4c;
+    color: white;
+    display: inline-block;
+    padding: 4px 10px;
+}
+.page-title img,
+.page-title i {
+    width: 50px;
 }
 
 .search-button-wrapper {
@@ -1224,7 +1247,7 @@ Toggle Changes
 }
 
 .file-manager-tree ul{
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .file-manager-tree ul{
@@ -1234,18 +1257,43 @@ Toggle Changes
 }
 
 .file-manager-tree .folder {
-    padding: 10px;
+    padding: 10px 0 0 15px;
 }
 
 .file-manager-tree .folder-name{
     font-weight: bold;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .file-manager-tree .folder-name:hover  {
-    background: #b3ddff;
     cursor: pointer;
 }
 
 .file-manager-tree .folder-name + ul{
     display: none;
+}
+
+.file-manager-tree .file {
+    word-break: break-all;
+    padding: 2px 0 6px 12px;
+}
+
+/* jobs-monitor*/
+.notification-nav .media-body .media-heading {
+    font-size: 14px;
+}
+.media-heading {
+    width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.notification-nav .media-body p{
+    width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: grey;
 }

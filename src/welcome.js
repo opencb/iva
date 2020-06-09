@@ -225,7 +225,8 @@ export default class WelcomeWeb extends LitElement {
             #title span.subtitle {
                 font-size: 20px;
                 display: block;
-                letter-spacing: 0;
+                font-variant: all-small-caps;
+                letter-spacing: .3em;
             }
 
             #title .version {
@@ -289,7 +290,7 @@ export default class WelcomeWeb extends LitElement {
                             ${item.submenu ? html`
                                 <a class="icon-wrapper" href="#cat-${item.id}/${this.checkProjects ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
                                     <div class="hi-icon">
-                                        <img src="img/tools/icons/${item.icon}" /> 
+                                        <img src="img/tools/icons/${item.icon}?abc" /> 
                                     </div>
                                     <p>${item.title}</p>
                                     <span class="smaller"></span>

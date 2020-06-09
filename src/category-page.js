@@ -79,15 +79,14 @@ export default class CategoryPage extends LitElement {
         return html`
         <style>
             #category-page {
-                display: grid;
-                grid-template-columns: repeat( auto-fit, 25% );
-                grid-gap: 10px;
                 padding: 10px;
             }
             #category-page > a.item{
                 padding: 10px;
-                display: block;
+                display: inline-block;
                 color: #333;
+                width: 400px;
+                min-height: 160px;
                 position: relative;
             }
             
@@ -107,8 +106,7 @@ export default class CategoryPage extends LitElement {
             
             #category-page .section-title {
                 grid-column: 1 / span 4;
-                font-size: 2.5em;
-                font-variant: all-small-caps;
+                font-size: 1.6em;
                 font-weight: 500;
                 letter-spacing: 5px;
                 margin-top: 1em;
@@ -129,7 +127,12 @@ export default class CategoryPage extends LitElement {
             }
         </style>
 
-        <h1>${this.config.title}</h1>
+        <div class="page-title">
+            <h2>
+                ${this.config.title}
+            </h2>
+        </div>
+            
         <div id="category-page">
             ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item, i) => item.category ? html`
                 <div class="section-title">${item.title}</div>
