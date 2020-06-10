@@ -153,6 +153,7 @@ export default class WelcomeWeb extends LitElement {
                 text-align: center;
                 font-weight: bold;
                 letter-spacing: -20px;
+                margin-bottom: 25px;
             }
         
             #title::first-letter {

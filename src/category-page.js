@@ -84,10 +84,12 @@ export default class CategoryPage extends LitElement {
             #category-page > a.item{
                 padding: 10px;
                 display: inline-block;
-                color: #333;
+                color: #fff;
+                background-color: #42424E;
                 width: 400px;
-                min-height: 160px;
+                min-height: 120px;
                 position: relative;
+                margin: 10px;
             }
             
             #category-page > a.item:hover{
@@ -101,11 +103,11 @@ export default class CategoryPage extends LitElement {
             }
             
             #category-page .description {
-                padding: 10px
+                float: left;
+                width: 255px;
             }
             
             #category-page .section-title {
-                grid-column: 1 / span 4;
                 font-size: 1.6em;
                 font-weight: 500;
                 letter-spacing: 5px;
@@ -138,18 +140,23 @@ export default class CategoryPage extends LitElement {
                 <div class="section-title">${item.title}</div>
                 ` : item.separator ? null : html`
                     
-                    <a class="shadow-lg item ${item.disabled ? "disabled" : ""}" href="${ !item.disabled ? `#${item.id}` : "javascript: void 0"}">
+                    <a class="item ${item.disabled ? "disabled" : ""}" href="${ !item.disabled ? `#${item.id}` : "javascript: void 0"}">
                     ${item.disabled ? html`
                         <div class="lock-overlay">
                             <i class="fas fa-4x fa-lock"></i>
                         </div>
                     ` : null}
-                        <div class="title uppercase">${item.title}</div>                    
-                            <div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">
-                                ${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}
-                                <!--<img src="img/tools/icons/${item.icon || "variant_browser.svg"}" /> -->
+                        
+                            <div class="text-icon-wrapper">
+                                <div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">
+                                    ${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}
+                                    <!--<img src="img/tools/icons/${item.icon || "variant_browser.svg"}" /> -->
+                                </div>
                             </div>
-                            <div class="description">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>
+                            <div class="description">
+                                <div class="title uppercase">${item.title}</div>
+                                ${this.renderHTML(item.description || "Lorem ipsom sic dolor")}
+                            </div>
                     </a>
                     ` ) : null}
         </div>

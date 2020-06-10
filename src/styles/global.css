@@ -45,7 +45,7 @@ input[type="text"] {
 }
 
 .badge .close-icon {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .align-middle {
@@ -57,14 +57,14 @@ input[type="text"] {
     border: 0;
     transition: 0.5s;
     border-bottom: 1px solid #ccc;
-    box-shadow: 0px 0px 4px rgba(0,0,0,.1);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, .1);
 }
 
 .input:focus {
     transition: 0.5s;
     border-radius: 0;
     border-bottom: 1px solid rgba(12, 47, 76);
-    box-shadow: 0px 0px 4px rgba(0,0,0,.3);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, .3);
 }
 
 /* bringing bootstrap dropdown (opencga-active-filters) above bootstraptable */
@@ -76,6 +76,7 @@ input[type="text"] {
     margin: 0;
     border-radius: 0px;
 }
+
 /* Bootstrap panel and button  overrides */
 h3.page-title {
     margin: 10px 10px 10px 15px;
@@ -92,7 +93,7 @@ h3.page-title {
     background: none;
 }
 
-.panel-default>.panel-heading+.panel-collapse>.panel-body {
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
     border: none;
 }
 
@@ -120,6 +121,7 @@ h3.page-title {
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .16), 0 0 2px 0 rgba(0, 0, 0, .12);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .16), 0 0 2px 0 rgba(0, 0, 0, .12);
 }
+
 .ripple {
     margin: 0 .375rem; /* visual issues with toggle-switch*/
     margin: 0;
@@ -180,7 +182,7 @@ h3.page-title {
     display: none;
 }
 
-.ripple-disabled, .ripple-disabled:active, .ripple-disabled:hover, .ripple-disabled:focus, .btn-primary.ripple-disabled:active:hover{
+.ripple-disabled, .ripple-disabled:active, .ripple-disabled:hover, .ripple-disabled:focus, .btn-primary.ripple-disabled:active:hover {
     -webkit-box-shadow: none;
     box-shadow: none;
     cursor: default;
@@ -188,7 +190,7 @@ h3.page-title {
 }
 
 .btn-primary.ripple-disabled:hover,
-.btn-primary.ripple-disabled:active:hover{
+.btn-primary.ripple-disabled:active:hover {
     background: #337ab7;
 }
 
@@ -204,6 +206,7 @@ h3.page-title {
 .button-wrapper {
     padding: 15px 0;
 }
+
 /*********** bootstrap tabs customisation *****************/
 .nav-tabs.nav-center {
     text-align: center;
@@ -222,12 +225,13 @@ h3.page-title {
 .main-view .content-tab {
     display: none;
 }
+
 .main-view .content-tab.active {
     display: block;
 }
 
 /********** browser components  *************/
-.page-title h2{
+.page-title h2 {
     text-transform: uppercase;
     letter-spacing: .2em;
     margin: 0px 0 20px 0;
@@ -238,12 +242,14 @@ h3.page-title {
     transition: 0.3s;
     font-size: 2em;
 }
-.page-title h2 .inverse{
+
+.page-title h2 .inverse {
     background: #0c2f4c;
     color: white;
     display: inline-block;
     padding: 4px 10px;
 }
+
 .page-title img,
 .page-title i {
     width: 50px;
@@ -290,7 +296,7 @@ h3.page-title {
     border-top: 1px solid rgba(221, 221, 221, 1);
 }
 
-.facet-box:not(:first-child){
+.facet-box:not(:first-child) {
     border-top: 1px solid rgba(221, 221, 221, 1);
 }
 
@@ -307,7 +313,7 @@ h3.page-title {
     /*padding: 15px;*/
 }
 
-.panel-title p{
+.panel-title p {
     margin: 0;
 }
 
@@ -352,8 +358,9 @@ h3.page-title {
 
 /* switch-toggle BUG trying to style the :checked input only. A checked disabled radio input remains grey after you enable it (e.g.Study-filter). Same problem in somatic-filter too on "None" value */
 .switch-toggle input:checked + label {
-    color:white
+    color: white
 }
+
 /********** waffle icon ************/
 #waffle-icon {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzIgMzIiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MXtkaXNwbGF5OmlubGluZTtmaWxsOiM1QzVDNUM7c3Ryb2tlOiNGRkZGRkY7c3Ryb2tlLXdpZHRoOjY7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQoJLnN0MntmaWxsOiNGRkZGRkY7c3Ryb2tlOiNGRkZGRkY7c3Ryb2tlLXdpZHRoOjY7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQo8L3N0eWxlPgo8ZyBpZD0iTGl2ZWxsb18xIj4KCTxnPgoJCTxjaXJjbGUgY2xhc3M9InN0MiIgY3g9IjQ0IiBjeT0iNDEuMSIgcj0iNy4yIi8+CgkJPGNpcmNsZSBjbGFzcz0ic3QyIiBjeD0iNDQiIGN5PSI4NC4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSI0NCIgY3k9IjEyNy4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIxMzAuMSIgY3k9IjEyNy4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSI4Ny4xIiBjeT0iMTI3LjIiIHI9IjcuMiIvPgoJCTxjaXJjbGUgY2xhc3M9InN0MiIgY3g9Ijg3LjEiIGN5PSI0MS4xIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIxMzAuMSIgY3k9IjQxLjEiIHI9IjcuMiIvPgoJCTxjaXJjbGUgY2xhc3M9InN0MiIgY3g9Ijg3LjEiIGN5PSI4NC4yIiByPSI3LjIiLz4KCQk8Y2lyY2xlIGNsYXNzPSJzdDIiIGN4PSIxMzAuMSIgY3k9Ijg0LjIiIHI9IjcuMiIvPgoJPC9nPgo8L2c+Cjwvc3ZnPg==");
@@ -465,10 +472,41 @@ h3.page-title {
     }
 }
 
+/********** cards  ************/
+.card {
+    background: #fff;
+    display: inline-block;
+    border: 1px solid #ddd;
+}
+
+.card .image {
+    float: left;
+    background: #000;
+    width: 25%;
+    height: 150px
+}
+
+.card .content {
+    float: left;
+    height: 140px;
+    width: 73%;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.card .content h4 {
+    margin: 5px 0;
+}
+
 /********** text-only icons in category pages ************/
-.text-icon {
+.text-icon-wrapper {
+    float: left;
     height: 100px;
     width: 100px;
+    margin: 0 15px 0 0;
+}
+
+.text-icon {
     border: 5px solid #0c2f4c;
     color: #0c2f4c;
     font-size: 32px;
@@ -479,14 +517,12 @@ h3.page-title {
     letter-spacing: -2px;
     font-family: "Lato", serif;
     overflow: hidden;
-    -webkit-box-shadow: 5px 5px 5px -2px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 5px -2px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 5px -2px rgba(0,0,0,0.75);
-    float: left;
-    margin: 10px 30px 10px 10px;
+    -webkit-box-shadow: 5px 5px 5px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 5px 5px 5px -2px rgba(0, 0, 0, 0.75);
+    box-shadow: 5px 5px 5px -2px rgba(0, 0, 0, 0.75);
     background: linear-gradient(135deg, #c4d3e0 0%, #c4d3e0 50%, #c4d3e0 100%);
     background: #c6ddf3;
-    text-shadow:2px 2px 0px rgba(12,47,76,0.3),
+    text-shadow: 2px 2px 0px rgba(12, 47, 76, 0.3),
     4px 4px 3px rgba(163, 191, 216, 1),
     6px 6px 3px rgba(163, 191, 216, 1),
     8px 8px 3px rgba(163, 191, 216, 1),
@@ -510,11 +546,40 @@ h3.page-title {
     44px 44px 3px rgba(163, 191, 216, 1)
 }
 
+.text-icon.grey {
+    border: 5px solid #0c2f4c;
+    color: #0c2f4c;
+    background: linear-gradient(135deg, #c4d3e0 0%, #c4d3e0 50%, #c4d3e0 100%);
+    background: #ffffff;
+    text-shadow: 2px 2px 0px rgba(12, 47, 76, 0.3),
+    4px 4px 3px rgb(236, 236, 236),
+    6px 6px 3px rgb(236, 236, 236),
+    8px 8px 3px rgb(236, 236, 236),
+    10px 10px 3px rgb(236, 236, 236),
+    12px 12px 3px rgb(236, 236, 236),
+    14px 14px 3px rgb(236, 236, 236),
+    16px 16px 3px rgb(236, 236, 236),
+    18px 18px 3px rgb(236, 236, 236),
+    20px 20px 3px rgb(236, 236, 236),
+    22px 22px 3px rgb(236, 236, 236),
+    24px 24px 3px rgb(236, 236, 236),
+    26px 26px 3px rgb(236, 236, 236),
+    28px 28px 3px rgb(236, 236, 236),
+    30px 30px 3px rgb(236, 236, 236),
+    32px 32px 3px rgb(236, 236, 236),
+    34px 34px 3px rgb(236, 236, 236),
+    36px 36px 3px rgb(236, 236, 236),
+    38px 38px 3px rgb(236, 236, 236),
+    40px 40px 3px rgb(236, 236, 236),
+    42px 42px 3px rgb(236, 236, 236),
+    44px 44px 3px rgb(236, 236, 236)
+}
+
 .text-icon.green {
     border: 5px solid green;
     color: green;
     background: #d2ffd2;
-    text-shadow:2px 2px 0px rgba(12,47,76,0.3),
+    text-shadow: 2px 2px 0px rgba(12, 47, 76, 0.3),
     4px 4px 3px rgba(171, 211, 174, 1),
     6px 6px 3px rgba(171, 211, 174, 1),
     8px 8px 3px rgba(171, 211, 174, 1),
@@ -542,7 +607,7 @@ h3.page-title {
     background: #e4c5c5;
     border: 5px solid #bb0000;
     color: #bb0000;
-    text-shadow:2px 2px 0px rgba(12,47,76,0.3),
+    text-shadow: 2px 2px 0px rgba(12, 47, 76, 0.3),
     4px 4px 3px rgba(218, 166, 166, 1),
     6px 6px 3px rgba(218, 166, 166, 1),
     8px 8px 3px rgba(218, 166, 166, 1),
@@ -576,7 +641,7 @@ h3.page-title {
 }
 
 .bootstrap-table .fixed-table-body {
-   /* min-height: 170px; /* making space for the loading spinner */
+    /* min-height: 170px; /* making space for the loading spinner */
 }
 
 /* hide the default loading animation */
@@ -593,8 +658,9 @@ h3.page-title {
     font-weight: bold;
     padding: 7px 0px 5px 0px;
     color: #444444;
-    border:none
+    border: none
 }
+
 opencga-facet .panel-body > .form-group:not(:first-child) {
     border-top: 1px solid rgba(221, 221, 221, 0.8);
 }
@@ -693,14 +759,17 @@ ul.checkbox-container {
 .checkbox-container input[type=checkbox] {
     display: none;
 }
+
 /* Draw our custom check box */
 .checkbox-container {
     line-height: 20px;
 }
+
 .checkbox-container label {
     cursor: pointer;
     transition: all 1s;
 }
+
 .checkbox-container label:before {
     display: inline-block;
     width: 20px;
@@ -709,7 +778,8 @@ ul.checkbox-container {
     text-align: center;
     background: #eee;
 }
-.checkbox-container label:hover::before{
+
+.checkbox-container label:hover::before {
     background: #d2d2d2;
 }
 
@@ -718,6 +788,7 @@ ul.checkbox-container {
     background: #337ab7;
     color: #fff;
 }
+
 /********** switch widget ************/
 .switch-container {
     position: relative;
@@ -783,12 +854,14 @@ ul.checkbox-container {
 }
 
 .switch-container input[disabled].radio-or ~ .rating-label-or,
-.switch-container input[disabled].radio-and ~ .rating-label-and{
+.switch-container input[disabled].radio-and ~ .rating-label-and {
     color: #e4e4e4;
 }
-.switch-container input[disabled] ~ .toggle-rating-pill{
+
+.switch-container input[disabled] ~ .toggle-rating-pill {
     background: #e4e4e4;
 }
+
 /*
 Toggle Changes
 */
@@ -827,7 +900,7 @@ Toggle Changes
     transition: all 0.5s ease-in-out 0s;
     z-index: 2020;
 
-    box-shadow: 0 1px 3px 0 rgba(60,64,67,0.302), 0 4px 8px 3px rgba(60,64,67,0.149);
+    box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302), 0 4px 8px 3px rgba(60, 64, 67, 0.149);
     font-size: .9em;
     letter-spacing: .2px;
     background-color: #35363a;
@@ -855,6 +928,7 @@ Toggle Changes
 #notifications-queue .alert a {
     color: #c9c9c9;
 }
+
 #notifications-queue .alert .close {
     position: absolute;
     top: 5px;
@@ -863,22 +937,26 @@ Toggle Changes
     opacity: .4;
 }
 
-#notifications-queue .alert .close i{
+#notifications-queue .alert .close i {
     color: #fff;
 }
+
 #notifications-queue .alert .fa {
-    margin-right:.3em;
+    margin-right: .3em;
 }
 
-#notifications-queue .alert-success i{
+#notifications-queue .alert-success i {
     color: #91f096;
 }
-#notifications-queue .alert-info i{
+
+#notifications-queue .alert-info i {
     color: #d2e6f7;
 }
-#notifications-queue .alert-warning i{
+
+#notifications-queue .alert-warning i {
     color: #f5e513;
 }
+
 #notifications-queue .alert-danger i {
     color: #f28c8b;
 }
@@ -896,11 +974,14 @@ Toggle Changes
 }
 
 /* custom animations */
-.anim-rotate{
+.anim-rotate {
     animation: rotate 1.5s linear infinite;
 }
-@keyframes rotate{
-    to{ transform: rotate(360deg); }
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /********** range slider ************/
@@ -909,7 +990,7 @@ Toggle Changes
 }
 
 .slider {
-    -webkit-appearance: none;  /* Override default CSS styles */
+    -webkit-appearance: none; /* Override default CSS styles */
     appearance: none;
     width: 100%;
     height: 5px;
@@ -958,6 +1039,7 @@ Toggle Changes
     padding-top: 10px;
     padding-bottom: 20px;
 }
+
 .hi-icon {
     display: inline-block;
     margin: 10px 20px;
@@ -968,13 +1050,16 @@ Toggle Changes
     position: relative;
     z-index: 1;
 }
+
 .hi-icon a p {
     text-decoration: none;
     color: #000966;
 }
+
 .hi-icon a:hover p {
     text-decoration: none;
 }
+
 .hi-icon:after {
     pointer-events: none;
     position: absolute;
@@ -986,6 +1071,7 @@ Toggle Changes
     -moz-box-sizing: content-box;
     box-sizing: content-box;
 }
+
 .hi-icon:before {
     /*font-family: 'ecoicon';*/
     speak: none;
@@ -998,21 +1084,25 @@ Toggle Changes
     -webkit-font-smoothing: antialiased;
     color: #000966;
 }
+
 .hi-icon-mobile:before {
     content: "\e009";
 }
+
 .hi-icon-animation .hi-icon {
     background: #fff;
     -webkit-transition: box-shadow 0.2s;
     -moz-transition: box-shadow 0.2s;
     transition: box-shadow 0.2s;
 }
+
 .hi-icon-animation p {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
     color: #797979;
 }
+
 .hi-icon-animation .hi-icon svg {
     -webkit-transition: -webkit-transform 0.2s, all 0.2s;
     -moz-transition: -moz-transform 0.2s, all 0.2s;
@@ -1021,16 +1111,19 @@ Toggle Changes
     height: 90px;
     width: 90px;
 }
+
 .hi-icon-animation .hi-icon.fa,
-.hi-icon-animation .icon-wrapper:hover .hi-icon img{
+.hi-icon-animation .icon-wrapper:hover .hi-icon img {
     -webkit-transition: -webkit-transform 0.2s, all 0.2s;
     -moz-transition: -moz-transform 0.2s, all 0.2s;
     transition: transform 0.2s, all 0.2s;
 }
-.hi-icon-animation .hi-icon svg image{
+
+.hi-icon-animation .hi-icon svg image {
     height: 90px;
     width: 90px;
 }
+
 .hi-icon-animation .hi-icon:after {
     top: 0;
     left: 0;
@@ -1049,33 +1142,36 @@ Toggle Changes
     transform: scale(0.85);
     opacity: 0.5;
 }
+
 /* in case of svg or image[src=svg] icon */
 .hi-icon-animation .icon-wrapper:hover .hi-icon svg,
 .hi-icon-animation .icon-wrapper:hover .hi-icon img,
 .hi-icon-animation .icon-wrapper.active .hi-icon svg,
-.hi-icon-animation .icon-wrapper.active .hi-icon img{
+.hi-icon-animation .icon-wrapper.active .hi-icon img {
     transform: scale(0.85);
 }
+
 /* in case of fa icon*/
 .hi-icon-animation .icon-wrapper:not(.disabled):hover .hi-icon.fa,
 .hi-icon-animation .icon-wrapper.active:not(.disabled) .hi-icon.fa {
     transform: scale(0.85);
 }
+
 .hi-icon-animation .icon-wrapper:hover .hi-icon,
-.hi-icon-animation .icon-wrapper.active .hi-icon{
+.hi-icon-animation .icon-wrapper.active .hi-icon {
     box-shadow: 0 0 0 10px rgba(0, 9, 102, 1);
     color: #fff;
 }
 
 .hi-icon-animation .icon-wrapper:not(.disabled):hover p,
-.hi-icon-animation .icon-wrapper:not(.disabled).active p{
+.hi-icon-animation .icon-wrapper:not(.disabled).active p {
     color: #000966;
 }
 
-.hi-icon-animation .icon-wrapper.disabled  .hi-icon:after,
+.hi-icon-animation .icon-wrapper.disabled .hi-icon:after,
 .hi-icon-animation .icon-wrapper.active.disabled .hi-icon.fa,
 .hi-icon-animation .icon-wrapper.disabled:hover .hi-icon.fa,
-.hi-icon-animation .icon-wrapper.disabled:hover .hi-icon:after{
+.hi-icon-animation .icon-wrapper.disabled:hover .hi-icon:after {
     transform: none;
     opacity: 1;
     box-shadow: 0 0 0 4px #8e8e8e;
@@ -1117,6 +1213,7 @@ Toggle Changes
 .hi-icon-wrap.wizard a.icon-wrapper.disabled:before {
     background: #8e8e8e;
 }
+
 .hi-icon-wrap.wizard a.icon-wrapper:last-child:before {
     content: none;
 }
@@ -1126,10 +1223,12 @@ Toggle Changes
     display: inline-block;
     margin-right: 15px;
 }
+
 .magic-checkbox:checked + label:before {
     border: #337ab7;
     background: #337ab7;
 }
+
 /****** data-view ********/
 .detail-row {
     padding: 5px 0;
@@ -1187,12 +1286,13 @@ Toggle Changes
     transition: 0.3s background-color;
 
 }
+
 .file-manager-breadcrumbs {
     padding: 10px;
 }
 
 .file-manager-breadcrumbs a,
-.file-manager-breadcrumbs .path-separator{
+.file-manager-breadcrumbs .path-separator {
     font-size: 1.5em;
     cursor: pointer;
 }
@@ -1209,7 +1309,7 @@ Toggle Changes
     background-color: #42424E;
 }
 
-.file-manager li:hover .icon{
+.file-manager li:hover .icon {
     color: #286090;
 }
 
@@ -1246,11 +1346,11 @@ Toggle Changes
     display: inline-block;
 }
 
-.file-manager-tree ul{
+.file-manager-tree ul {
     font-size: 13px;
 }
 
-.file-manager-tree ul{
+.file-manager-tree ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
@@ -1260,7 +1360,7 @@ Toggle Changes
     padding: 10px 0 0 15px;
 }
 
-.file-manager-tree .folder-name{
+.file-manager-tree .folder-name {
     font-weight: bold;
     word-break: break-all;
     white-space: nowrap;
@@ -1268,11 +1368,11 @@ Toggle Changes
     text-overflow: ellipsis;
 }
 
-.file-manager-tree .folder-name:hover  {
+.file-manager-tree .folder-name:hover {
     cursor: pointer;
 }
 
-.file-manager-tree .folder-name + ul{
+.file-manager-tree .folder-name + ul {
     display: none;
 }
 
@@ -1285,12 +1385,14 @@ Toggle Changes
 .notification-nav .media-body .media-heading {
     font-size: 14px;
 }
+
 .media-heading {
     width: 220px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.notification-nav .media-body p{
+
+.notification-nav .media-body p {
     width: 220px;
     overflow: hidden;
     text-overflow: ellipsis;

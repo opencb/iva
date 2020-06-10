@@ -1787,7 +1787,7 @@ class IvaApp extends LitElement {
                 ` : null}
     
                 ${this.config.enabledComponents["clinical-analysis-writer"] ? html`
-                    <div class="content" id="opencga-clinical-analysis-create">
+                    <div class="content container" id="opencga-clinical-analysis-create">
                         <opencga-clinical-analysis-writer .opencgaSession="${this.opencgaSession}"
                                                           @clinicalanalysischange="${this.onClinicalAnalysisEditor}">
                         </opencga-clinical-analysis-writer>
