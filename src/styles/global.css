@@ -84,7 +84,7 @@ h3.page-title {
 }
 
 .panel-title {
-    font-size: 15px;
+    font-size: 1.2em;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -632,10 +632,6 @@ h3.page-title {
 }
 
 /*  TODO move in jsorolla */
-.bootstrap-table {
-    font-size: 12px;
-}
-
 .bootstrap-table thead {
     background-color: #f5f5f5;
 }
@@ -654,7 +650,7 @@ h3.page-title {
 }
 
 .browser-subsection {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     font-weight: bold;
     padding: 7px 0px 5px 0px;
     color: #444444;
@@ -671,7 +667,7 @@ opencga-facet .panel-body > .form-group:not(:first-child) {
 
 .panel.filter-section {
     margin-bottom: 10px;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 
@@ -1344,6 +1340,12 @@ Toggle Changes
     white-space: nowrap;
     position: absolute;
     display: inline-block;
+}
+.file-manager .format {
+    display: block;
+    color: #fff;
+    text-align: center;
+    margin-top: 3px;
 }
 
 .file-manager-tree ul {

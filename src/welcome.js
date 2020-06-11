@@ -162,7 +162,9 @@ export default class WelcomeWeb extends LitElement {
         
             #title span {
                 font-size: 20px;
-                letter-spacing: 0;
+                letter-spacing: 1px;
+                font-family: "Lato", Helvetica, Arial, sans-serif;
+                font-variant: all-small-caps;
             }
             
             .smaller {
@@ -231,16 +233,21 @@ export default class WelcomeWeb extends LitElement {
             }
 
             #title .version {
-                font-size: 15px;
+                font-size: 20px;
                 display: inline-block;
                 vertical-align: top;
                 letter-spacing: 0px;
-                margin: 25px 0 0 0;
+                margin: 13px 0 0 0;
                 position: absolute;
             }
+            
+            #title .version span{
+                font-size: 1.1em;
+            }
+
 
             #title .bracket {
-                font-size: 2em;
+                font-size: 1em;
                 color: black;
             }
 

@@ -17,6 +17,7 @@
 import {LitElement, html} from "/web_modules/lit-element.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import "../lib/jsorolla/src/core/webcomponents/commons/view/data-form.js";
+import "../lib/jsorolla/src/core/webcomponents/tool-header.js";
 
 export default class IvaProfile extends LitElement {
 
@@ -184,11 +185,7 @@ export default class IvaProfile extends LitElement {
 
     render() {
         return html`
-            <div class="page-title">
-                <h2>
-                    <i class="${this._config.icon}" aria-hidden="true"></i>&nbsp;${this._config.title}
-                </h2>
-            </div>
+            <tool-header title="${this._config.title}" icon="${this._config.icon}"></tool-header>
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">

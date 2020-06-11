@@ -310,9 +310,8 @@ class IvaApp extends LitElement {
 
     opencgaSessionObserver() {
         this.renderHashFragments();
-        // this._isBreadcrumbVisible = this.config.breadcrumb.visible && this.opencgaSession.projects !== undefined && this.opencgaSession.projects.length !== 0;
+        //this.queries = {};
         this.requestUpdate();
-        // this.renderBreadcrumb();
     }
 
     _createOpenCGASession() {

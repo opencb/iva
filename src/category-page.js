@@ -16,8 +16,7 @@
 
 import {LitElement, html} from "/web_modules/lit-element.js";
 import Utils from "../lib/jsorolla/src/core/utils.js";
-import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
-
+import "../lib/jsorolla/src/core/webcomponents/tool-header.js";
 
 // TODO the property "disabled" in config have to be renamed in active (boolean for an user or an usergroup)
 
@@ -102,9 +101,13 @@ export default class CategoryPage extends LitElement {
                 vertical-align: bottom;
             }
             
-            #category-page .description {
+            #category-page .content {
                 float: left;
                 width: 255px;
+            }
+            
+            #category-page .description {
+                color: #b6c1c9;
             }
             
             #category-page .section-title {
@@ -129,11 +132,8 @@ export default class CategoryPage extends LitElement {
             }
         </style>
 
-        <div class="page-title">
-            <h2>
-                ${this.config.title}
-            </h2>
-        </div>
+        <tool-header title="${this._config.title}" icon="${this._config.icon}"></tool-header>
+
             
         <div id="category-page">
             ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item, i) => item.category ? html`
@@ -153,9 +153,9 @@ export default class CategoryPage extends LitElement {
                                     <!--<img src="img/tools/icons/${item.icon || "variant_browser.svg"}" /> -->
                                 </div>
                             </div>
-                            <div class="description">
+                            <div class="content">
                                 <div class="title uppercase">${item.title}</div>
-                                ${this.renderHTML(item.description || "Lorem ipsom sic dolor")}
+                                <div class="description">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>
                             </div>
                     </a>
                     ` ) : null}

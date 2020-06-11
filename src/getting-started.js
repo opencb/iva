@@ -113,6 +113,8 @@ export default class GettingStarted extends LitElement {
             }
             
         </style>
+        
+        <h1>TODO Video-Tutorial</h1>
         <div class="getting-started">
             <div class="container">
                 <div class="row">
