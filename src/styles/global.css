@@ -1410,6 +1410,10 @@ Toggle Changes
     color: #747474;
 }
 /* jobs-monitor*/
+.notification-nav .info {
+    padding: 3px 20px;
+}
+
 .notification-nav .media-body .media-heading {
     font-size: 14px;
 }
