@@ -1439,7 +1439,7 @@ class IvaApp extends LitElement {
                 ` : null}
             </div>
 
-            <!-- <div class="alert alert-info">${JSON.stringify(this.queries)}</div> --> 
+             <!-- <div class="alert alert-info">${JSON.stringify(this.queries)}</div> --> 
 
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
