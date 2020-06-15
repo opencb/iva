@@ -1364,6 +1364,10 @@ Toggle Changes
     text-overflow: ellipsis;
     overflow: hidden;
 }
+.file-manager .file.active {
+    background-color: #626269;
+    outline: thick solid #d0d0d0;
+}
 
 .file-manager-tree ul {
     font-size: 13px;
@@ -1404,14 +1408,31 @@ Toggle Changes
 .file-manager-tree .file {
     word-break: break-all;
     padding: 5px 0 0px 12px;
+    cursor: pointer;
+    color: #337ab7;
 }
+
 .file-manager-tree .file i{
     margin-right: 10px;
     color: #747474;
 }
+
+.file-manager-tree .file.active {
+    color: black;
+}
+
 /* jobs-monitor*/
+.notification-nav .dropdown-menu {
+    width: 340px;
+}
+
 .notification-nav .info {
     padding: 3px 20px;
+    font-weight: bold;
+}
+
+.notification-nav .dropdown-menu a {
+    border-top: 1px solid #dedede;
 }
 
 .notification-nav .media-body .media-heading {
@@ -1419,13 +1440,13 @@ Toggle Changes
 }
 
 .media-heading {
-    width: 220px;
+    width: 270px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .notification-nav .media-body p {
-    width: 220px;
+    width: 270px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
