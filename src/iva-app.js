@@ -556,49 +556,6 @@ class IvaApp extends LitElement {
         this.renderHashFragments();
     }
 
-    // _setup(projects) {
-    //     // We check that at least one project with one study exist, otherwise we do not do anything
-    //     if (UtilsNew.isNotUndefined(projects) && projects.length > 0 && projects[0].studies.length > 0) {
-    //         this.projects = projects;
-    //         this.project = projects[0];
-    //         this.study = projects[0].studies[0];
-    //
-    //         let _this = this;
-    //         let projectPromises = [];
-    //         projects.forEach(function (project) {
-    //             let studyPromises = [];
-    //             project.studies.forEach(function (study) {
-    //                 studyPromises.push(_this.opencgaClient.studies().summary(project.alias + ":" + study.alias));
-    //             });
-    //             projectPromises.push(Promise.all(studyPromises)
-    //                 .then(function (responses) {
-    //                     let studies = [];
-    //                     responses.forEach(function (response) {
-    //                         let study = response.response[0].result[0];
-    //                         study.creationDate = moment(study.creationDate, "YYYYMMDDHHmmss").format('D MMM YY');
-    //                         studies.push(study);
-    //                     });
-    //                     return studies;
-    //                 }));
-    //         });
-    //
-    //         let _projects = [];
-    //         Promise.all(projectPromises)
-    //             .then(function (responses) {
-    //                 for (let i = 0; i < responses.length; i++) {
-    //                     _projects.push({
-    //                         id: _this.projects[i].id,
-    //                         alias: _this.projects[i].alias,
-    //                         name: _this.projects[i].name,
-    //                         organism: _this.projects[i].organism,
-    //                         studies: responses[i]
-    //                     });
-    //                 }
-    //                 _this.studySummaries = _projects;
-    //             });
-    //     }
-    // }
-
     renderHashFragments() {
         console.log("renderHashFragments - DEBUG", this.tool);
         let hashFrag = this.tool;
@@ -755,8 +712,7 @@ class IvaApp extends LitElement {
             if (this.opencgaSession.projects[i].name === _projectname) {
                 _project = this.opencgaSession.projects[i];
                 for (let j = 0; j < this.opencgaSession.projects[i].studies.length; j++) {
-                    if (this.opencgaSession.projects[i].studies[j].name === _studyname ||
-                        this.opencgaSession.projects[i].studies[j].alias === _studyname) {
+                    if (this.opencgaSession.projects[i].studies[j].name === _studyname || this.opencgaSession.projects[i].studies[j].id === _studyname) {
                         _study = this.opencgaSession.projects[i].studies[j];
                         break;
                     }
@@ -883,101 +839,6 @@ class IvaApp extends LitElement {
         // this.browserQuery = {xref: e.detail.value};
         this.browserSearchQuery = e.detail;
     }
-
-    // _checkBreadcrumbVisible() {
-    //     if (UtilsNew.isNotUndefinedOrNull(this.config) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession)) {
-    //         this._isBreadcrumbVisible = this.config.breadcrumb.visible && this.opencgaSession.projects !== undefined && this.opencgaSession.projects.length !== 0;
-    //     }
-    // }
-
-    //     renderBreadcrumb() {
-    //         debugger
-    //         this._checkBreadcrumbVisible();
-    //
-    //         let breadcrumbElement = PolymerUtils.getElementById("breadcrumb");
-    //
-    //         if (UtilsNew.isNotNull(breadcrumbElement) && UtilsNew.isNotUndefined(this.config)
-    //             && UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmptyArray(this.opencgaSession.projects)) {
-    //
-    //             // If there is no project in config, breadcrumb is set private so that it is shown only when logged in
-    //             // if (UtilsNew.isUndefined(this.config.opencga.projects) || this.config.opencga.projects.length === 0) {
-    //             //     this.config.breadcrumb.visibility = "private";
-    //             // }
-    //
-    //             // we empty everything
-    // //                    console.log(this.breadcrumbElement)
-    //             PolymerUtils.innerHTML("breadcrumb", "");
-    //             // we add the 'Projects' link
-    //             let projects = this._createBreadcrumbElement(this.config.breadcrumb.title, false, this.config.breadcrumb.title);
-    //             breadcrumbElement.appendChild(projects);
-    //
-    //             // We first check if one study is selected, for this study must be defined and have at least one key
-    //             if (UtilsNew.isUndefined(this.opencgaSession.study) || Object.keys(this.opencgaSession.study).length === 0) {
-    //                 if (UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project)) {
-    //                     let project = this._createBreadcrumbElement(this.opencgaSession.project.alias, true, "project"); // render only project if exists
-    //                     breadcrumbElement.appendChild(project);
-    //                 }
-    //             } else {
-    //                 let project = this._createBreadcrumbElement(this.opencgaSession.project.alias, false, "project");
-    //                 breadcrumbElement.appendChild(project);
-    //
-    //                 if (UtilsNew.isNotUndefined(this.sample) && this.sample.length > 0) {
-    //                     let study = this._createBreadcrumbElement(this.opencgaSession.study.alias, false, "study");
-    //                     let sampleNames = [];
-    //                     for (let i in this.sample) {
-    //                         sampleNames.push(this.sample[i].name);
-    //                     }
-    //                     let sample = this._createBreadcrumbElement(sampleNames.join(","), true, "sample");
-    //                     breadcrumbElement.appendChild(study);
-    //                     breadcrumbElement.appendChild(sample);
-    //                 } else {
-    //                     let study = this._createBreadcrumbElement(this.opencgaSession.study.alias, true, "study");
-    //                     breadcrumbElement.appendChild(study);
-    //                 }
-    //             }
-    //
-    //             let _this = this;
-    //             PolymerUtils.querySelectorAll(".breadcrumb li a").forEach(function (element) {
-    //                 element.addEventListener("click", function (e) {
-    //                     e.preventDefault();
-    //                     switch (e.target.dataset.category) {
-    //                     case _this.config.breadcrumb.title:
-    //                         _this.tool = "projects";
-    //                         break;
-    //                     case "project":
-    //                         _this.tool = "project";
-    //                         break;
-    //                     case "study":
-    //                         _this.tool = "browser";
-    //                         break;
-    //                     }
-    //                     _this.renderHashFragments();
-    //                 });
-    //             });
-    //         }
-    //         this.requestUpdate();
-    //     }
-
-    // _createBreadcrumbElement(name, active, category) {
-    //     // name can be undefined when Polymer initialise
-    //     if (typeof name === "undefined") {
-    //         name = "undefined";
-    //     }
-    //
-    //     let li = document.createElement("li");
-    //     if (active === true) {
-    //         li.setAttribute("class", "active");
-    //         li.textContent = name;
-    //     } else {
-    //         let a = document.createElement("a");
-    //         a.setAttribute("href", "#");
-    //         a.setAttribute("class", "");
-    //         a.setAttribute("data-category", category);
-    //         a.textContent = name;
-    //         li.appendChild(a);
-    //     }
-    //     return li;
-    // }
 
     _isMenuItemVisible(item) {
         switch (item.visibility) {
@@ -1295,20 +1156,21 @@ class IvaApp extends LitElement {
                                 }`
                             )}
                         </ul>
+                        
                         <!-- Controls aligned to the RIGHT: settings and about-->
                         <ul class="nav navbar-nav navbar-right">
                             <!--Studies dropdown and Search menu-->
                             ${this.opencgaSession && this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-database fa-lg" style="padding-right: 5px"></i>Studies <span class="caret"></span>
+                                        <i class="fa fa-database fa-lg" style="padding-right: 10px"></i>${this.opencgaSession.study.id} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         ${this.opencgaSession.projects.map(project => html`
-                                            <li><a><b>${project.name}</b></a></li>
-                                            ${project.studies && project.studies.length && project.studies && project.studies.map(study => html`
+                                            <li><a title="${project.fqn}"><b>${project.name} [${project.fqn.split("@")[0]}]</b></a></li>
+                                            ${project.studies && project.studies.length && project.studies.map(study => html`
                                                 <li>
-                                                    <a href="#" data-study="${study.alias}" data-project="${project.name}" @click="${this.onStudySelect}">${study.alias}</a>
+                                                    <a href="#" data-study="${study.id}" data-project="${project.name}" @click="${this.onStudySelect}">${study.id}</a>
                                                 </li>
                                             `)}                                            
                                         `)}
@@ -1332,12 +1194,12 @@ class IvaApp extends LitElement {
                             ${this.config.about.dropdown ? html`
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-question-circle fa-lg" style="padding-right: 5px"></i>About
+                                        <i class="fa fa-question-circle fa-lg" style="padding-right: 10px"></i>About <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         ${this.config.about.links && this.config.about.links.map(link => html`
                                             <li>
-                                                <a href="${link.url}" ><i class="${link.icon}" aria-hidden="true"></i> ${link.name}</a>
+                                                <a href="${link.url}"><i class="${link.icon}" aria-hidden="true" style="padding-right: 5px"></i> ${link.name}</a>
                                             </li>
                                         `)}
                                     </ul>
@@ -1350,7 +1212,7 @@ class IvaApp extends LitElement {
 
                             <!-- Login/Logout button -->
                             ${this.config.login.visible && (!this.opencgaSession || !this.opencgaSession.token) ? html`
-                                <li>
+                                <li class="dropdown">
                                     <a href="#login" id="loginButton" role="button" @click="${this.changeTool}">
                                         <i href="#login" class="fa fa-sign-in-alt fa-lg" aria-hidden="true" style="padding-right: 5px"></i>Login
                                     </a>
@@ -1359,27 +1221,29 @@ class IvaApp extends LitElement {
 
                             <!--User-->
                             ${this.opencgaSession && this.opencgaSession.token ? html`
-                                <li class="dropdown user-menu">
+                                <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-user-circle" aria-hidden="true" style="padding-right: 5px"></i>${this.opencgaSession.user.id} <span class="caret"></span>
+                                        <i class="fa fa-user-circle fa-lg" aria-hidden="true" style="padding-right: 10px"></i>${this.opencgaSession.user.id} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#account"><i class="fa fa-user" aria-hidden="true"></i> Your account</a>
+                                            <a href="#account"><i class="fa fa-user" aria-hidden="true" style="padding-right: 5px"></i> Your account</a>
                                         </li>
                                         <li>
-                                            <a href="#projects"><i class="fa fa-database" aria-hidden="true"></i> Projects</a>
+                                            <a href="#projects"><i class="fa fa-database" aria-hidden="true" style="padding-right: 5px"></i> Projects</a>
                                         </li>
                                         <li>
-                                            <a href="#file-manager"><i class="fa fa-file" aria-hidden="true"></i> File Manager</a>
+                                            <a href="#file-manager"><i class="fa fa-file" aria-hidden="true" style="padding-right: 5px"></i> File Explorer</a>
                                         </li>
                                         <li role="separator" class="divider"></li>
-                                        <li>
-                                            <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                                        </li>
+                                        <!--
+                                            <li>
+                                                <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+                                            </li>
+                                        -->
                                         <li>
                                             <a id="logoutButton" role="button" @click="${this.logout}">
-                                                <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Logout
+                                                <i class="fa fa-sign-out-alt" aria-hidden="true" style="padding-right: 5px"></i> Logout
                                             </a>
                                         </li>
                                     </ul>
@@ -1395,11 +1259,11 @@ class IvaApp extends LitElement {
                 </div>
             </nav>
             <!-- End of navigation bar -->
-            <!--Breadcrumb-->
+            <!--Breadcrumb
             ${this.config.breadcrumb.visible && this.opencgaSession && this.opencgaSession.projects ? html`
                 <opencga-breadcrumb .config="${this.config}" .opencgaSession="${this.opencgaSession}"></opencga-breadcrumb>
             ` : null}
-
+-->
             <!-- This is where main application is rendered -->
             <div>
                 ${this.config.enabledComponents.home ? html`
