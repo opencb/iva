@@ -1183,7 +1183,7 @@ class IvaApp extends LitElement {
                                     <form class="navbar-form navbar-left" role="search">
                                         <div class="form-group">
                                             <div class="input-group search-box-wrapper">
-                                                <input class="form-control" id="searchTextBox"  placeholder="${this.config.search.placeholder}" @input="${this.buildQuery}">
+                                                <input class="form-control" id="searchTextBox" placeholder="${this.config.search.placeholder}" @input="${this.buildQuery}">
                                                 <span class="input-group-addon"><span class="fa fa-search" aria-hidden="true" @click="${this.onQuickSearch}"></span></span>
                                             </div>
                                         </div>
