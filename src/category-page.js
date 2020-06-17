@@ -16,7 +16,9 @@
 
 import {LitElement, html} from "/web_modules/lit-element.js";
 import Utils from "../lib/jsorolla/src/core/utils.js";
+import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import "../lib/jsorolla/src/core/webcomponents/tool-header.js";
+import "../lib/jsorolla/src/core/webcomponents/text-icon.js";
 
 // TODO the property "disabled" in config have to be renamed in active (boolean for an user or an usergroup)
 
@@ -114,9 +116,10 @@ export default class CategoryPage extends LitElement {
                 font-size: 1.6em;
                 font-weight: 500;
                 letter-spacing: 5px;
-                margin-top: 1em;
+                margin: 10px 0 0 10px;
                 color: #000966;
                 font-family: "Roboto",serif;
+                text-transform: uppercase;
             }
             
             #category-page .lock-overlay {            
@@ -132,8 +135,8 @@ export default class CategoryPage extends LitElement {
             }
         </style>
 
-        <tool-header title="${this._config.title}" icon="${this._config.icon}"></tool-header>
-
+        <tool-header title="${this.config.title}" icon="${this.config.icon}"></tool-header>
+        
             
         <div id="category-page">
             ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item, i) => item.category ? html`
@@ -148,10 +151,11 @@ export default class CategoryPage extends LitElement {
                     ` : null}
                         
                             <div class="text-icon-wrapper">
-                                <div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">
+                                <text-icon title="${item.title}" color="${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}" acronym="${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}"></text-icon>
+                                <!--<div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">
                                     ${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}
-                                    <!--<img src="img/tools/icons/${item.icon || "variant_browser.svg"}" /> -->
-                                </div>
+                                    
+                                </div> -->
                             </div>
                             <div class="content">
                                 <div class="title uppercase">${item.title}</div>

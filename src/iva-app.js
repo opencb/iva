@@ -942,22 +942,22 @@ class IvaApp extends LitElement {
                     margin-right: 0;
                 }
                 
-               .navbar-nav .badge  {
+                .navbar-nav .badge  {
                     position: relative;
                     z-index: 10;
-                    bottom: 6px;
-                    left: 9px;
+                    bottom: -7px;
+                    left: 11px;
                     background-color: #41a7ff;
                 }
                 
                 .center {
-                    margin: auto;
-                    text-align: justify;
-                    width: 60%;
-                    font-size: 18px;
-                    color: #797979;
+                   margin: auto;
+                   text-align: justify;
+                   width: 60%;
+                   font-size: 18px;
+                   color: #797979;
                 }
-            
+                
                 .feature-view {
                     margin: auto;
                     text-align: justify;
@@ -984,106 +984,106 @@ class IvaApp extends LitElement {
                 }
                
                             
-            /* The side navigation menu */
-            #side-nav {
-                position: fixed;
-                z-index: 10; 
-                top: 0; 
-                left: -250px;
-                background-color: #fff; 
-                overflow-x: hidden;
-                padding-top: 20px; 
-                width: 250px;
-                visibility: hidden;
-                /*transform: translate(-250px);*/                
-                height: 100vh;
-                transform-origin: top left;
-                animation-duration: .3s;
-                animation-timing-function: ease;
-                animation-name: slideOutFrames
-            }
-            
-            #side-nav.active {
-                left: 0px;
-                visibility: visible;
-                animation-name: slideInFrames
-            }  
-            
-            #side-nav a.logo {
-                margin: 25px 0px 15px 30px;
-                display: block;;
-            }
-            
-            #side-nav .logo img{
-                width: 150px;
-            }
-            
-            #side-nav .nav a {
-                padding: 8px;
-                text-decoration: none;
-                color: #818181;
-                display: block;
-                transition: 0.3s;
-                font-size: 14px;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-            }
-            
-            #side-nav .nav a:hover {            
-                color: #204d74;
-            }
-
-            #side-nav .closebtn {
-                position: absolute;
-                top: 0;
-                right: 25px;
-                font-size: 36px;
-                margin-left: 50px;
-                padding:0;
-                z-index: 99;
-            }
-            
-            #side-nav a.closebtn:hover {        
-                background: transparent;
-                text-decoration: none;
-                color: black;
-            }
-            
-            #side-nav a > img {
-                width:48px
-            }
-            
-            #overlay {
-                position: fixed;
-                transform: translate(-100%);
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0,0,0,.2);
-                z-index: 9;
-                transition: filter .3s, opacity .3s; 
-                opacity:0;                
-                filter:alpha(opacity=100);
-            }
-            
-            #overlay.active {
-                display: block;
-                opacity:1;                
-                filter:alpha(opacity=50);
-                transform: translate(0);
-            }
-
-            #progress-bar {
-                width: 100%;
-                position: fixed;
-                height: 3px;
-                background: #41a7ff;
-                z-index: 10;
-                transition: width 2s ease-in-out, opacity 0.5s ease;
-            } 
+                /* The side navigation menu */
+                #side-nav {
+                    position: fixed;
+                    z-index: 10; 
+                    top: 0; 
+                    left: -250px;
+                    background-color: #fff; 
+                    overflow-x: hidden;
+                    padding-top: 20px; 
+                    width: 250px;
+                    visibility: hidden;
+                    /*transform: translate(-250px);*/                
+                    height: 100vh;
+                    transform-origin: top left;
+                    animation-duration: .3s;
+                    animation-timing-function: ease;
+                    animation-name: slideOutFrames
+                }
+                
+                #side-nav.active {
+                    left: 0px;
+                    visibility: visible;
+                    animation-name: slideInFrames
+                }  
+                
+                #side-nav a.logo {
+                    margin: 25px 0px 15px 30px;
+                    display: block;;
+                }
+                
+                #side-nav .logo img{
+                    width: 150px;
+                }
+                
+                #side-nav .nav a {
+                    padding: 8px;
+                    text-decoration: none;
+                    color: #818181;
+                    display: block;
+                    transition: 0.3s;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                }
+                
+                #side-nav .nav a:hover {            
+                    color: #204d74;
+                }
+    
+                #side-nav .closebtn {
+                    position: absolute;
+                    top: 0;
+                    right: 25px;
+                    font-size: 36px;
+                    margin-left: 50px;
+                    padding:0;
+                    z-index: 99;
+                }
+                
+                #side-nav a.closebtn:hover {        
+                    background: transparent;
+                    text-decoration: none;
+                    color: black;
+                }
+                
+                #side-nav a > img {
+                    width:48px
+                }
+                
+                #overlay {
+                    position: fixed;
+                    transform: translate(-100%);
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba(0,0,0,.2);
+                    z-index: 9;
+                    transition: filter .3s, opacity .3s; 
+                    opacity:0;                
+                    filter:alpha(opacity=100);
+                }
+                
+                #overlay.active {
+                    display: block;
+                    opacity:1;                
+                    filter:alpha(opacity=50);
+                    transform: translate(0);
+                }
+    
+                #progress-bar {
+                    width: 100%;
+                    position: fixed;
+                    height: 3px;
+                    background: #41a7ff;
+                    z-index: 10;
+                    transition: width 2s ease-in-out, opacity 0.5s ease;
+                }
             </style>
 
             <!-- total ${this.remoteCall.total} completed ${this.remoteCall.completed} W ${100 * (this.remoteCall.total / this.remoteCall.completed)} -->
@@ -1119,11 +1119,11 @@ class IvaApp extends LitElement {
 
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <a href="#home" class="navbar-brand" style="padding-top: 10px" @click="${this.changeTool}">
+                        <!--<a href="#home" class="navbar-brand" style="padding-top: 10px" @click="${this.changeTool}">
                             <img src="${this.config.logo}" width="100px" alt="logo">
-                        </a>
-                        <a class="navbar-brand" href="#home" @click="${this.changeTool}">
-                            <b>${this.config.title} <sup>${this.config.version}</sup></b>
+                        </a>-->
+                        <a class="navbar-brand iva-logo" href="#home" @click="${this.changeTool}">
+                            <img src="img/iva-white.svg" alt="logo"> <b><sup>${this.config.version}</sup></b>
                         </a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -1162,8 +1162,13 @@ class IvaApp extends LitElement {
                             <!--Studies dropdown and Search menu-->
                             ${this.opencgaSession && this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-database fa-lg" style="padding-right: 10px"></i>${this.opencgaSession.study.id} <span class="caret"></span>
+                                    <a href="#" class="dropdown-toggle study-switcher" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <div><i class="fa fa-database fa-lg" style="padding-right: 10px"></i></div>
+                                        <div>
+                                            <p class="project-name">${this.opencgaSession.project.id}</p>
+                                            <p class="study-id">${this.opencgaSession.study.id}</p>
+                                        </div>
+                                        <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         ${this.opencgaSession.projects.map(project => html`
