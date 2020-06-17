@@ -40,7 +40,6 @@ const cohortFileMenu = {
                 {id: "ALL", name: "ALL"}
             ]
         }
-
     },
     tooltip: "Filter variants by cohort Alternate allele frequency"
 };
