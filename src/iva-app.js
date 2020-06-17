@@ -255,7 +255,7 @@ class IvaApp extends LitElement {
                 this.remoteCall.total = 0;
                 this.remoteCall.completed = 0;
             }
-            //console.log("REMOTE CALL DONE!", this.remoteCall.total)
+            //console.log("REMOTE CALL DONE! total", this.remoteCall.total, "completed", this.remoteCall.completed)
             this.requestUpdate();
         }, false);
     }
@@ -942,7 +942,7 @@ class IvaApp extends LitElement {
                     margin-right: 0;
                 }
                 
-                .navbar-nav .badge  {
+                .notification-nav > li > a .badge  {
                     position: relative;
                     z-index: 10;
                     bottom: -7px;
@@ -987,7 +987,7 @@ class IvaApp extends LitElement {
                 /* The side navigation menu */
                 #side-nav {
                     position: fixed;
-                    z-index: 10; 
+                    z-index: 1002;
                     top: 0; 
                     left: -250px;
                     background-color: #fff; 
@@ -1063,7 +1063,7 @@ class IvaApp extends LitElement {
                     right: 0;
                     bottom: 0;
                     background-color: rgba(0,0,0,.2);
-                    z-index: 9;
+                    z-index: 1001;
                     transition: filter .3s, opacity .3s; 
                     opacity:0;                
                     filter:alpha(opacity=100);
@@ -1086,8 +1086,7 @@ class IvaApp extends LitElement {
                 }
             </style>
 
-            <!-- total ${this.remoteCall.total} completed ${this.remoteCall.completed} W ${100 * (this.remoteCall.total / this.remoteCall.completed)} -->
-            <div id="progress-bar" style="opacity: ${~~this.remoteCall.total}; width:${100 * (this.remoteCall.total === this.remoteCall.completed === 0 ? 1 : this.remoteCall.total / this.remoteCall.completed)}%"></div>
+            <!--<div id="progress-bar" style="opacity: ${~~this.remoteCall.total}; width:${(this.remoteCall.total === 0 || this.remoteCall.completed === 0 ? 100 : (100 * this.remoteCall.completed) / this.remoteCall.total)}%"></div>-->
             
             <div id="overlay" @click="${this.toggleSideNav}"></div>
             <div id="side-nav" class="sidenav shadow-lg">
@@ -1671,7 +1670,7 @@ class IvaApp extends LitElement {
                 
                 ${this.config.enabledComponents["file-manager"] ? html`
                     <div class="content" id="file-manager">
-                        <opencga-file-manager .opencgaSession="${this.opencgaSession}" .config="${ {a:1} }">
+                        <opencga-file-manager .opencgaSession="${this.opencgaSession}">
                         </opencga-file-manager>
                     </div>
                 ` : null}

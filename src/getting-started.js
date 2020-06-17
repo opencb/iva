@@ -17,6 +17,8 @@
 import {LitElement, html} from "/web_modules/lit-element.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 
+// TODO Video-Tutorial here?
+
 export default class GettingStarted extends LitElement {
 
     constructor() {
@@ -113,8 +115,6 @@ export default class GettingStarted extends LitElement {
             }
             
         </style>
-        
-        <h1>TODO Video-Tutorial</h1>
         <div class="getting-started">
             <div class="container">
                 <div class="row">

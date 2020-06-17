@@ -75,6 +75,12 @@ input[type="text"] {
     width: 70px;
     display: inline-block;
 }
+
+.iva-logo sup{
+    font-variant: all-small-caps;
+    top: -.8em;
+}
+
 /* bringing bootstrap dropdown (opencga-active-filters) above bootstraptable */
 .dropdown-menu {
     z-index: 1001;
@@ -1509,4 +1515,12 @@ Toggle Changes
     text-overflow: ellipsis;
     white-space: nowrap;
     color: grey;
+}
+
+.notification-nav .updated.status-ERROR {
+    background: rgba(255, 0, 0, 0.05);
+}
+
+.notification-nav .updated.status-DONE {
+    background: rgba(72, 255, 0, 0.05);
 }
