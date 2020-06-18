@@ -1281,6 +1281,15 @@ Toggle Changes
     background: #337ab7;
 }
 
+/****** detail-tabs ********/
+.detail-tabs .nav-tabs li a{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.detail-tabs .tab-content {
+    padding: 10px 20px
+}
 /****** data-view ********/
 .detail-row {
     padding: 5px 0;
@@ -1492,6 +1501,7 @@ Toggle Changes
 
 .notification-nav .media-body .media-heading {
     font-size: 14px;
+    margin: 3px 0 0px 0;
 }
 .notification-nav .media-body small {
     color: #5d5d5d;
