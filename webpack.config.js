@@ -141,7 +141,7 @@ module.exports = {
             },
             {
                 context: "node_modules/@fortawesome/fontawesome-free/webfonts",
-                from: "fa-solid-900.*",
+                from: "*",
                 to: DIST_PATH + "/assets/webfonts"
 
             }
