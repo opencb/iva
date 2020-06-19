@@ -1163,9 +1163,9 @@ class IvaApp extends LitElement {
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle study-switcher" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         <div><i class="fa fa-database fa-lg" style="padding-right: 10px"></i></div>
-                                        <div>
-                                            <p class="project-name">${this.opencgaSession.project.id}</p>
-                                            <p class="study-id">${this.opencgaSession.study.id}</p>
+                                        <div style="margin-right: 5px">
+                                            <!--<p class="project-name">${this.opencgaSession.project.id}</p>-->
+                                            <p class="study-id">${this.opencgaSession.project.id} : ${this.opencgaSession.study.id}</p>
                                         </div>
                                         <span class="caret"></span>
                                     </a>
