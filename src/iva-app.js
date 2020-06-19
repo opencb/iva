@@ -50,6 +50,7 @@ import "../lib/jsorolla/src/core/webcomponents/user/opencga-login.js";
 import "../lib/jsorolla/src/core/webcomponents/individual/opencga-individual-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/cohorts/opencga-cohort-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/jobs/opencga-jobs-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/jobs/opencga-jobs-view.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-portal.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
@@ -187,7 +188,8 @@ class IvaApp extends LitElement {
             // Alignment
             "alignment-index",
             "alignment-stats",
-            "coverage-index"];
+            "coverage-index",
+            "job-view"];
 
         for (const component of components) {
             _config.enabledComponents[component] = false;
@@ -587,6 +589,8 @@ class IvaApp extends LitElement {
         }
 
         let arr = window.location.hash.split("/");
+
+        // TODO evaluate refactor
         const [hashTool, hashProject, hashStudy, feature] = arr;
 
         //debugger
@@ -838,6 +842,13 @@ class IvaApp extends LitElement {
         window.location.hash = "facet/" + this.opencgaSession.project.id + "/" + this.opencgaSession.study.id;
         // this.browserQuery = {xref: e.detail.value};
         this.browserSearchQuery = e.detail;
+    }
+
+    onJobSelected(e) {
+        console.log("JOB", e.detail)
+        this.jobSelected = e.detail.jobId;
+        this.requestUpdate();
+
     }
 
     _isMenuItemVisible(item) {
@@ -1256,7 +1267,7 @@ class IvaApp extends LitElement {
                         </ul>
                         <!-- Jobs -->
                             ${this.opencgaSession && this.opencgaSession.token ? html`
-                                <job-monitor .opencgaSession="${this.opencgaSession}"></job-monitor>
+                                <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
                             ` : null}
                         
                     </div>
@@ -1709,6 +1720,13 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["alignment-stats"] ? html`
                     <div id="alignment-stats" class="content col-md-6 col-md-offset-3">
                         <opencga-alignment-stats-analysis .opencgaSession="${this.opencgaSession}"></opencga-alignment-stats-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["job-view"] ? html`
+                    <tool-header title="${this.jobSelected}" icon="${"fas fa-rocket"}"></tool-header>
+                    <div id="alignment-stats" class="content col-md-6 col-md-offset-3">
+                        <opencga-jobs-view .jobId="${this.jobSelected}" .opencgaSession="${this.opencgaSession}"></opencga-jobs-view>
                     </div>
                 ` : null}
 
