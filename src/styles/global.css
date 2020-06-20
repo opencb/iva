@@ -81,6 +81,12 @@ input[type="text"] {
     top: -.8em;
 }
 
+/* plain text in form-group (instead of input text) */
+.form-group .text {
+    padding-top: 7px;
+    margin-bottom: 0;
+}
+
 /* bringing bootstrap dropdown (opencga-active-filters) above bootstraptable */
 .dropdown-menu {
     z-index: 1001;
