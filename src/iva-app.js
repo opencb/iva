@@ -867,8 +867,7 @@ class IvaApp extends LitElement {
     onNotifyMessage(e) {
         //NotificationUtils.closeNotify(this.notifySession);
         //NotificationUtils.showNotify(e.detail.message, e.detail.type, e.detail.options, e.detail.settings);
-        new NotificationQueue().push(e.detail.message, "", e.detail.type);
-
+        new NotificationQueue().push(e.detail.title, e.detail.message, e.detail.type);
     }
 
     // TODO geneSelected() is called by several components but it doesn't exists
