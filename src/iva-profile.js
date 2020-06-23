@@ -61,7 +61,6 @@ export default class IvaProfile extends LitElement {
     }
 
     opencgaSessionObserver() {
-        this.currentUser = this.opencgaSession.user;
         this.requestUpdate();
 
     }
@@ -88,31 +87,55 @@ export default class IvaProfile extends LitElement {
                     elements: [
                         {
                             name: "id",
-                            field: "id"
+                            field: "user.id"
                         },
                         {
                             name: "Name",
-                            field: "name"
+                            field: "user.name"
                         },
                         {
                             name: "Organization",
-                            field: "organization"
+                            field: "user.organization"
                         },
                         {
                             name: "Account type",
-                            field: "account.type"
+                            field: "user.account.type"
                         },
                         {
                             name: "Status",
-                            field: "internal.status",
+                            field: "user.internal.status",
                             type: "custom",
                             display: {
                                 render: field => html`${field.name} (${UtilsNew.dateFormatter(field.date)})`
                             }
                         },
                         {
-                            name: "Project and studies (you belong / permission)"
-                        }
+                            name: "Project and studies",
+                            field: "projects",
+                            type: "table",
+                            display: {
+                                columns: [
+                                    {
+                                        name: "Id",
+                                        field: "id"
+                                    },
+                                    {
+                                        name: "Name",
+                                        field: "name"
+                                    },
+                                    {
+                                        name: "Studies",
+                                        field: "studies",
+                                        type: "custom",
+                                        display: {
+                                            render: studies => {
+                                                return html`${studies.map( study => UtilsNew.renderHTML(`<li>${study.name}</li>`))}`;
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
                         /*{
                             name: "Quota",
                             field: "quota",
@@ -189,7 +212,7 @@ export default class IvaProfile extends LitElement {
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <data-form .data=${this.currentUser} .config="${this._config}"></data-form>
+                        <data-form .data=${this.opencgaSession} .config="${this._config}"></data-form>
                     </div>
                 </div>
             </div>

@@ -1019,13 +1019,10 @@ class IvaApp extends LitElement {
                     animation-name: slideInFrames
                 }  
                 
-                #side-nav a.logo {
-                    margin: 25px 0px 15px 30px;
-                    display: block;;
-                }
-                
-                #side-nav .logo img{
-                    width: 150px;
+                #side-nav .iva-logo {
+                    font-size: 5px;
+                    text-align: center;
+                    margin-top: 30px;
                 }
                 
                 #side-nav .nav a {
@@ -1102,9 +1099,12 @@ class IvaApp extends LitElement {
             <div id="side-nav" class="sidenav shadow-lg">
                 <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
                 <nav class="navbar" id="sidebar-wrapper" role="navigation">
-                    <div>
-                        <a href="#home" class="logo" @click="${this.changeTool}"><img src="${this.config.logo}" alt="logo"></a>
-                    </div>
+                    <a href="#home" @click="${this.changeTool}">
+                        <div class="iva-logo">
+                            <img src="./img/iva.svg" />
+                            <span class="subtitle">Interactive Variant Analysis</span>
+                        </div>
+                    </a>
                     <ul class="nav sidebar-nav">
                     ${this.config.menu && this.config.menu.length ? this.config.menu.map(item => html`
                         <li>
@@ -1128,10 +1128,10 @@ class IvaApp extends LitElement {
 
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <!--<a href="#home" class="navbar-brand" style="padding-top: 10px" @click="${this.changeTool}">
-                            <img src="${this.config.logo}" width="100px" alt="logo">
+                        <!--<a href="#home" class="navbar-brand company-logo" @click="${this.changeTool}">
+                            <img src="img/Genomics-England-logo-2015-white.png" alt="logo">
                         </a>-->
-                        <a class="navbar-brand iva-logo" href="#home" @click="${this.changeTool}">
+                        <a class="navbar-brand iva-logo-white" href="#home" @click="${this.changeTool}">
                             <img src="img/iva-white.svg" alt="logo"> <b><sup>${this.config.version}</sup></b>
                         </a>
                     </div>
@@ -1723,7 +1723,7 @@ class IvaApp extends LitElement {
                 ` : null}
                 
                 ${this.config.enabledComponents["job-view"] ? html`
-                    <tool-header title="${this.jobSelected}" icon="${"fas fa-rocket"}"></tool-header>
+                    <tool-header title="${this.jobSelected || "No job selected"}" icon="${"fas fa-rocket"}"></tool-header>
                     <div id="alignment-stats" class="content col-md-6 col-md-offset-3">
                         <opencga-jobs-view .jobId="${this.jobSelected}" .opencgaSession="${this.opencgaSession}"></opencga-jobs-view>
                     </div>
