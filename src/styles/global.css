@@ -67,16 +67,63 @@ input[type="text"] {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, .3);
 }
 
-.iva-logo {
+#welcome-page-title {
+    font-size: 10px;
+    text-align: center;
+    letter-spacing: -20px;
+    position: relative;
+}
+
+#welcome-page-title .iva-logo{
+
+}
+
+.company-logo {
+    padding: 1px;
+}
+.company-logo img{
+    height: 45px;
+}
+
+.iva-logo img {
+    width: 35em;
+}
+
+.iva-logo span.subtitle {
+    font-size: 2em;
+    display: block;
+    font-variant: all-small-caps;
+    letter-spacing: .3em;
+    font-weight: bold;
+}
+
+.iva-logo .version {
+    font-size: 2.5em;
+    font-variant: all-small-caps;
+    display: inline-block;
+    vertical-align: top;
+    letter-spacing: 0px;
+    margin: 0px 0 0 10px;
+    position: absolute;
+}
+
+
+.iva-logo .bracket {
+    font-size: 1em;
+    color: black;
+    font-weight: bold;
+}
+
+.iva-logo-white {
     padding: 10px;
 }
 
-.iva-logo img{
+.iva-logo-white img{
     width: 70px;
     display: inline-block;
 }
 
-.iva-logo sup{
+.iva-logo-white sup{
     font-variant: all-small-caps;
     top: -.8em;
 }
@@ -104,6 +151,7 @@ input[type="text"] {
     align-items: center;
     padding: 0;
     height: 50px;
+    min-width: 150px;
 }
 
 .study-switcher p{
@@ -1351,7 +1399,6 @@ Toggle Changes
     cursor: pointer;
     box-sizing: border-box;
     transition: 0.3s background-color;
-
 }
 
 .file-manager-breadcrumbs {
@@ -1389,7 +1436,6 @@ Toggle Changes
 }
 .file-manager .content {
     width: 200px;
-
 }
 
 .file-manager .name {
@@ -1539,4 +1585,54 @@ Toggle Changes
 
 .notification-nav .updated.status-DONE {
     background: rgba(72, 255, 0, 0.05);
+}
+
+/****** animation ********/
+
+.anim-spaceOutUp {
+    animation: spaceOutUp 4s infinite;
+
+
+}
+.anim-float {
+    animation: float .5s infinite;
+
+}
+@keyframes float {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    50% {
+        -webkit-transform: translateY(-6px);
+        transform: translateY(-6px);
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes spaceOutUp {
+    0% {
+        opacity: 1;
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+        -webkit-transform: scale(1) translate(-200%, 200%);
+        transform: scale(1) translate(-200%, 200%);
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+        -webkit-transform: scale(1) translate(0%, 0%);
+        transform: scale(1) translate(0%, 0%);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+        -webkit-transform: scale(.2) translate(200%, -200%);
+        transform: scale(.2) translate(200%, -200%);
+    }
 }

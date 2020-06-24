@@ -147,26 +147,7 @@ export default class WelcomeWeb extends LitElement {
                 width: 200px;
                 margin: 50px 0 0 0;
             }
-        
-            #title {
-                font-size: 10em;
-                text-align: center;
-                font-weight: bold;
-                letter-spacing: -20px;
-                margin-bottom: 25px;
-            }
-        
-            #title::first-letter {
-                letter-spacing: -5px;
-            }
-        
-            #title span {
-                font-size: 20px;
-                letter-spacing: 1px;
-                font-family: "Lato", Helvetica, Arial, sans-serif;
-                font-variant: all-small-caps;
-            }
-            
+                    
             .smaller {
                 font-size: 75%;
             }
@@ -213,44 +194,6 @@ export default class WelcomeWeb extends LitElement {
                 color: #fff
             }
 
-            #title {
-                font-size: 10em;
-                text-align: center;
-                font-weight: bold;
-                letter-spacing: -20px;
-                position: relative;
-            }
-
-            #title::first-letter {
-                letter-spacing: -5px;
-            }
-
-            #title span.subtitle {
-                font-size: 20px;
-                display: block;
-                font-variant: all-small-caps;
-                letter-spacing: .3em;
-            }
-
-            #title .version {
-                font-size: 20px;
-                display: inline-block;
-                vertical-align: top;
-                letter-spacing: 0px;
-                margin: 13px 0 0 0;
-                position: absolute;
-            }
-            
-            #title .version span{
-                font-size: 1.1em;
-            }
-
-
-            #title .bracket {
-                font-size: 1em;
-                color: black;
-            }
-
             .footer {
                 margin-bottom: 80px;
             }
@@ -260,13 +203,14 @@ export default class WelcomeWeb extends LitElement {
 
         <!-- This is where main application is rendered -->
         <div class="col-md-6 col-md-offset-3 welcome-center text-muted text-justify">
-            <h1 id="title">
-                
-                <img style="width: 2.5em" src="./img/iva.svg" />
-                <p class="version">
-                    <span class="bracket">(</span><span>${this.version}</span><span class="bracket">)</span>
-                </p>
-                <span class="subtitle">Interactive Variant Analysis</span>
+            <h1 id="welcome-page-title">
+                <div class="iva-logo">
+                    <img src="./img/iva.svg" />
+                    <p class="version">
+                        <span class="bracket">(</span><span>${this.version}</span><span class="bracket">)</span>
+                    </p>
+                    <span class="subtitle">Interactive Variant Analysis</span>
+                </div>
             </h1>
             
             <p class="text-center">

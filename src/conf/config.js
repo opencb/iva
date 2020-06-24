@@ -77,7 +77,7 @@ const opencga = {
 const application = {
     title: "IVA",
     version: "v2.0.0-beta",
-    logo: "img/opencb-logo.png",
+    logo: "img/iva.svg",
     defaultStudy: "family:corpasome",
     // defaultStudy: "reference_grch37_test:test",
     // The order, title and nested submenus are respected
