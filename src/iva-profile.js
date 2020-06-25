@@ -205,14 +205,15 @@ export default class IvaProfile extends LitElement {
         };
     }
 
-
     render() {
         return html`
-            <tool-header title="${this._config.title}" icon="${this._config.icon}"></tool-header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <data-form .data=${this.opencgaSession} .config="${this._config}"></data-form>
+            <div class="container-fluid">
+                <tool-header title="${this._config.title}" icon="${this._config.icon}"></tool-header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <data-form .data=${this.opencgaSession} .config="${this._config}"></data-form>
+                        </div>
                     </div>
                 </div>
             </div>

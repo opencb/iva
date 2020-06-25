@@ -1099,7 +1099,7 @@ class IvaApp extends LitElement {
             <div id="side-nav" class="sidenav shadow-lg">
                 <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
                 <nav class="navbar" id="sidebar-wrapper" role="navigation">
-                    <a href="#home" @click="${this.changeTool}">
+                    <a href="#home" @click="${e => {this.toggleSideNav(e); this.changeTool(e)}}">
                         <div class="iva-logo">
                             <img src="./img/iva.svg" />
                             <span class="subtitle">Interactive Variant Analysis</span>
@@ -1174,8 +1174,8 @@ class IvaApp extends LitElement {
                                     <a href="#" class="dropdown-toggle study-switcher" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         <div><i class="fa fa-database fa-lg" style="padding-right: 10px"></i></div>
                                         <div style="margin-right: 5px">
-                                            <!--<p class="project-name">${this.opencgaSession.project.id}</p>-->
-                                            <p class="study-id">${this.opencgaSession.project.id} : ${this.opencgaSession.study.id}</p>
+                                            <p class="project-name">${this.opencgaSession.project.id}</p>
+                                            <p class="study-id">${this.opencgaSession.study.id}</p>
                                         </div>
                                         <span class="caret"></span>
                                     </a>

@@ -76,6 +76,7 @@ input[type="text"] {
     text-align: center;
     letter-spacing: -20px;
     position: relative;
+    margin-top: 40px;
 }
 
 #welcome-page-title .iva-logo{
@@ -155,12 +156,12 @@ input[type="text"] {
     align-items: center;
     padding: 0;
     height: 50px;
-    min-width: 150px;
+    min-width: 160px;
 }
 
 .study-switcher p{
     padding: 0;
-    line-height: .9em;
+    line-height: 1.1em;
 }
 
 .study-switcher p.project-name {
@@ -168,7 +169,7 @@ input[type="text"] {
 }
 
 .study-switcher p.study-id{
-    font-size: 1.1em;
+    font-size: 1.3em;
     font-weight: bold;
 }
 
@@ -1340,6 +1341,20 @@ Toggle Changes
 }
 
 /****** detail-tabs ********/
+.detail-tabs h3,
+.cellbase-variant-annotation-summary h3 /* TODO refactor this component in detail-tabs*/{
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    margin: 0;
+    padding: 15px 0 8px 0;
+    color: #0c2f4c;
+    display: block;
+    font-size: 1.6em;
+}
+.cellbase-variant-annotation-summary h3 {
+
+}
+
 .detail-tabs .nav-tabs li a{
     font-weight: bold;
     font-size: 1.2em;

@@ -15,6 +15,8 @@
  */
 
 import {LitElement, html} from "/web_modules/lit-element.js";
+import "../lib/jsorolla/src/core/webcomponents/tool-header.js";
+
 
 export default class ContactWeb extends LitElement {
 
@@ -28,11 +30,15 @@ export default class ContactWeb extends LitElement {
 
     render() {
         return html`
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <h1>Contact</h1>
+            <div class="container-fluid">
+                <tool-header title="${"Contact"}" icon="${"fas fa-mail-bulk"}"></tool-header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
         `;
     }
 

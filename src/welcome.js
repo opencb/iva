@@ -187,10 +187,10 @@ export default class WelcomeWeb extends LitElement {
             }
 
             .getting-started:hover span {
-                -webkit-transform: scale(.8);
-                -moz-transform: scale(.8);
-                -ms-transform: scale(.8);
-                transform: scale(.8);
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                transform: scale(1);
                 color: #fff
             }
 
@@ -202,7 +202,7 @@ export default class WelcomeWeb extends LitElement {
         </style>                                         
 
         <!-- This is where main application is rendered -->
-        <div class="col-md-6 col-md-offset-3 welcome-center text-muted text-justify">
+        <div class="col-md-6 col-md-offset-3 col-sm-12 welcome-center text-muted text-justify">
             <h1 id="welcome-page-title">
                 <div class="iva-logo">
                     <img src="./img/iva.svg" />
@@ -215,7 +215,7 @@ export default class WelcomeWeb extends LitElement {
             
             <p class="text-center">
                 Welcome to the IVA tool for whole genome variant analysis.<br />
-                This interactive tool allows finding genes affected by deleterious variants that segregate along family
+                This interactive tool allows finding genes affected by deleterious variants<br />that segregate along family
                 pedigrees, case-controls or sporadic samples.
             </p>
             <br>
@@ -223,7 +223,7 @@ export default class WelcomeWeb extends LitElement {
             <!--placeholder="Search for a gene, transcript, protein or a variant" on-blur="onBlur" on-keyup="onKeyup">-->
             <!--<br>-->
         
-            ${this.checkProjects ? html`
+            <!--${false && this.checkProjects ? html`
                 <div>
                     <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist" @change="${this.callAutocomplete}" placeholder="Search for gene symbols, genomic regions or variants" value="">
                         <datalist id="FeatureDatalist"></datalist>
@@ -236,6 +236,7 @@ export default class WelcomeWeb extends LitElement {
                     </span>
                 </div>`
             : null }
+            -->
              
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
                 ${this.config.menu.filter(this.isVisible).map( item => html`

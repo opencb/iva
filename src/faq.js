@@ -15,6 +15,8 @@
  */
 
 import {LitElement, html} from "/web_modules/lit-element.js";
+import "../lib/jsorolla/src/core/webcomponents/tool-header.js";
+
 
 export default class FaqWeb extends LitElement {
 
@@ -28,9 +30,13 @@ export default class FaqWeb extends LitElement {
 
     render() {
         return html`
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <h1>Frequently Asked Questions</h1>
+        <div class="container-fluid">
+            <tool-header title="${"Frequently Asked Questions"}" icon="${"fas fa-question-circle"}"></tool-header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                    </div>
+                </div>
             </div>
         </div>
         `;
