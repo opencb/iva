@@ -1,3 +1,7 @@
+:root {
+    --main-bg-color: #0c2f4c;
+}
+
 body, * {
     font-family: "Lato", Helvetica, Arial, sans-serif;
 }
@@ -1188,7 +1192,7 @@ Toggle Changes
     text-transform: none;
     display: block;
     -webkit-font-smoothing: antialiased;
-    color: #000966;
+    color: var(--main-bg-color);
 }
 
 .hi-icon-mobile:before {
@@ -1213,7 +1217,7 @@ Toggle Changes
     -webkit-transition: -webkit-transform 0.2s, all 0.2s;
     -moz-transition: -moz-transform 0.2s, all 0.2s;
     transition: transform 0.2s, all 0.2s;
-    fill: #000966;
+    fill: var(--main-bg-color);
     height: 90px;
     width: 90px;
 }
@@ -1234,7 +1238,7 @@ Toggle Changes
     top: 0;
     left: 0;
     padding: 0;
-    box-shadow: 0 0 0 4px #000966;
+    box-shadow: 0 0 0 4px var(--main-bg-color);
     -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
     -moz-transition: -moz-transform 0.2s, opacity 0.2s;
     transition: transform 0.2s, opacity 0.2s;
@@ -1265,13 +1269,13 @@ Toggle Changes
 
 .hi-icon-animation .icon-wrapper:hover .hi-icon,
 .hi-icon-animation .icon-wrapper.active .hi-icon {
-    box-shadow: 0 0 0 10px rgba(0, 9, 102, 1);
+    box-shadow: 0 0 0 10px var(--main-bg-color);
     color: #fff;
 }
 
 .hi-icon-animation .icon-wrapper:not(.disabled):hover p,
 .hi-icon-animation .icon-wrapper:not(.disabled).active p {
-    color: #000966;
+    color: var(--main-bg-color);
 }
 
 .hi-icon-animation .icon-wrapper.disabled .hi-icon:after,
@@ -1312,7 +1316,7 @@ Toggle Changes
     width: 240px;
     height: 3px;
     top: 50px;
-    background: #000966;
+    background: var(--main-bg-color);
     left: 60px;
 }
 

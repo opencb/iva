@@ -154,7 +154,7 @@ export default class WelcomeWeb extends LitElement {
 
             .getting-started {
                 display: inline-block;
-                border: 4px #000966 solid;
+                border: 4px var(--main-bg-color) solid;
                 background: white;
                 position: relative;
                 padding: 10px 35px;
@@ -169,7 +169,7 @@ export default class WelcomeWeb extends LitElement {
             }
 
             .getting-started span {
-                color: #000966;
+                color: var(--main-bg-color);
                 font-size: .8em;
                 display: inline-block;
                 -webkit-transition: all 0.3s;
@@ -183,7 +183,7 @@ export default class WelcomeWeb extends LitElement {
                 -ms-transform: scale(1.2);
                 transform: scale(1.2);
                 border: 4px #fff solid;
-                background: #000966;
+                background: var(--main-bg-color);
             }
 
             .getting-started:hover span {
