@@ -72,10 +72,6 @@ export default class GettingStarted extends LitElement {
     render() {
         return html`
         <style>
-            a:hover {
-                text-decoration: none;
-            }
-            
             .getting-started .position-relative {
                 position: relative;
             }
@@ -139,7 +135,7 @@ export default class GettingStarted extends LitElement {
         </div>
 
         <div class="modal fade" id="thumbnail_modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
                         <img class="img-responsive" src="img/tools/thumbnails/screenshot1.png">

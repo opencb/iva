@@ -1456,7 +1456,7 @@ class IvaApp extends LitElement {
 
                 <!--todo check-->
                 ${this.config.enabledComponents.gene ? html`
-                    <div class="content" id="gene" style="margin: auto; width: 90%">
+                    <div class="content" id="gene">
                         <opencga-gene-view .opencgaSession="${this.opencgaSession}"
                                            .cellbaseClient="${this.cellbaseClient}"
                                            .project="${this.opencgaSession.project}"
@@ -1472,7 +1472,7 @@ class IvaApp extends LitElement {
                 ` : null}
 
                 ${this.config.enabledComponents.sample ? html`
-                    <div class="content" id="sample" style="margin: auto; width: 90%">
+                    <div class="content" id="sample">
                         <opencga-sample-view    .opencgaSession="${this.opencgaSession}"
                                                 .config="${this.config.sampleView}">
                         </opencga-sample-view>
@@ -1664,8 +1664,10 @@ class IvaApp extends LitElement {
                 ` : null}
     
                 ${this.config.enabledComponents["clinical-analysis-writer"] ? html`
+                    <tool-header title="${"Create Case"}" icon="${"fas fa-window-restore"}"></tool-header>
                     <div class="content container" id="opencga-clinical-analysis-create">
                         <opencga-clinical-analysis-writer .opencgaSession="${this.opencgaSession}"
+                                                          .config="${{display: {showTitle: false}}}"
                                                           @clinicalanalysischange="${this.onClinicalAnalysisEditor}">
                         </opencga-clinical-analysis-writer>
                     </div>

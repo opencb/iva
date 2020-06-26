@@ -34,6 +34,9 @@ a.disabled, a.disabled:hover {
     display: inline-block;
 }
 
+.pad5 {
+    padding: 5px;
+}
 
 input[type="text"] {
     width: 100%;
@@ -112,7 +115,6 @@ input[type="text"] {
     position: absolute;
 }
 
-
 .iva-logo .bracket {
     font-size: 1em;
     color: black;
@@ -148,6 +150,19 @@ input[type="text"] {
     margin: 0;
     border-radius: 0px;
 }
+/*********** bootstrap override *****************/
+@media (min-width: 576px) {
+    .modal-lg {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .modal-lg {
+        width: 60%;
+    }
+}
+
 /*********** bootstrap tabs customisation *****************/
 
 .study-switcher {
@@ -275,16 +290,25 @@ h3.page-title {
     opacity: .2;
     transition: 0s;
 }
-
+/* TODO evaluate remove .ripple-disabled */
 .ripple-disabled:after {
     display: none;
 }
 
-.ripple-disabled, .ripple-disabled:active, .ripple-disabled:hover, .ripple-disabled:focus, .btn-primary.ripple-disabled:active:hover {
+.ripple-disabled,
+.ripple-disabled:active,
+.ripple-disabled:hover,
+.ripple-disabled:focus,
+.btn-primary.ripple-disabled:active:hover,
+.ripple[disabled] {
     -webkit-box-shadow: none;
     box-shadow: none;
     cursor: default;
     outline: 0;
+}
+
+.ripple[disabled] {
+    cursor: not-allowed;
 }
 
 .btn-primary.ripple-disabled:hover,
@@ -351,6 +375,7 @@ h3.page-title {
     color: white;
     display: inline-block;
     padding: 4px 10px;
+    margin: 0 0 0 10px;
 }
 
 .page-title img,
@@ -377,8 +402,66 @@ h3.page-title {
     margin: 0 0 20px 0;
 }
 
+/********** active-filters  *************/
 .active-filter-button:hover {
     text-decoration: line-through;
+}
+
+.facet-wrapper {
+    margin: 10px 0 0 0;
+}
+
+.double-arrow {
+    transform: rotate(90deg);
+    width: 60px;
+    display: block;
+    margin: 0 auto;
+    height: 60px;
+}
+
+.double-arrow-wrapper {
+    display: flex;
+    margin: 5px 0;
+}
+
+.button-list{
+    padding-left: 20px;
+    display: inline-block;
+}
+
+.active-filter-label{
+    display: inline-block;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    height: 34px;
+    line-height: 34px;
+    margin: 0;
+    padding-right: 10px;
+}
+
+.lhs {
+    display: inline-block;
+    padding: 5px 0;
+}
+
+.lhs .btn-group {
+    padding: 2px 0;
+}
+
+.rhs {
+    float: right;
+    padding:5px
+}
+
+.rhs .dropdown {
+    display: inline-block;
+}
+
+.filter-warning {
+    padding: 10px;
+    margin-bottom: 10px;
+    display: none;
 }
 
 .left-menu-tabs {
@@ -428,6 +511,10 @@ h3.page-title {
 
 .content-pills {
     margin: 0 0 20px 0;
+}
+
+.icon-padding {
+    padding-right: 5px;
 }
 
 .or-text {
@@ -1342,6 +1429,7 @@ Toggle Changes
 
 /****** detail-tabs ********/
 .detail-tabs h3,
+data-form h3,
 .cellbase-variant-annotation-summary h3 /* TODO refactor this component in detail-tabs*/{
     text-transform: uppercase;
     letter-spacing: .2em;
@@ -1360,7 +1448,8 @@ Toggle Changes
     font-size: 1.2em;
 }
 
-.detail-tabs .tab-content {
+.detail-tabs .tab-content,
+.cellbase-variant-annotation-summary /* TODO refactor this component in detail-tabs*/{
     padding: 10px 30px
 }
 /****** data-view ********/

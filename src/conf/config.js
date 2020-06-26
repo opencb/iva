@@ -530,7 +530,7 @@ const application = {
             id: "browser",
             title: "Variant Browser",
             visibility: "public",
-            thumbnail: "screenshot1.png",
+            thumbnail: "variant-browser.png",
             fa_icon: "fa fa-list",
             icon: "variant_browser.svg",
             description: `
@@ -544,7 +544,7 @@ const application = {
             id: "facet",
             title: "Aggregation Stats",
             visibility: "public",
-            thumbnail: "screenshot2.png",
+            thumbnail: "variant-browser_aggregation.png",
             fa_icon: "fa fa-chart-bar",
             icon: "aggregation2.svg",
             description: `
@@ -558,7 +558,7 @@ const application = {
             id: "clinicalAnalysisPortal",
             title: "Interpretation portal",
             visibility: "public",
-            thumbnail: "screenshot3.png",
+            thumbnail: "interpretation_portal.png",
             fa_icon: "fa fa-user-md",
             icon: "interpretation_portal.svg",
             description: `
