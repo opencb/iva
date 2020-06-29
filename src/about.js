@@ -30,7 +30,7 @@ export default class AboutWeb extends LitElement {
 
     render() {
         return html`
-            <div class="container-fluid">
+            <div>
                 <tool-header title="${"About"}" icon="${"fas fa-info-circle"}"></tool-header>
                 <div class="container">
                     <div class="row">

@@ -207,7 +207,7 @@ export default class IvaProfile extends LitElement {
 
     render() {
         return html`
-            <div class="container-fluid">
+            <div>
                 <tool-header title="${this._config.title}" icon="${this._config.icon}"></tool-header>
                 <div class="container">
                     <div class="row">

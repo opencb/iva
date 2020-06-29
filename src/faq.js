@@ -30,15 +30,15 @@ export default class FaqWeb extends LitElement {
 
     render() {
         return html`
-        <div class="container-fluid">
-            <tool-header title="${"Frequently Asked Questions"}" icon="${"fas fa-question-circle"}"></tool-header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
+            <div>
+                <tool-header title="${"Frequently Asked Questions"}" icon="${"fas fa-question-circle"}"></tool-header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         `;
     }
 
