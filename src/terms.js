@@ -30,7 +30,7 @@ export default class TermsWeb extends LitElement {
 
     render() {
         return html`
-            <div class="container-fluid">
+            <div>
                 <tool-header title="${"Terms"}" icon="${"fas fa-info-circle"}"></tool-header>
                 <div class="container">
                     <div class="row">

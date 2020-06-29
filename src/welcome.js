@@ -243,7 +243,7 @@ export default class WelcomeWeb extends LitElement {
                             ${item.submenu ? html`
                                 <a class="icon-wrapper" href="#cat-${item.id}/${this.checkProjects ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
                                     <div class="hi-icon">
-                                        <img src="img/tools/icons/${item.icon}?abc" /> 
+                                        <img src="img/tools/icons/${item.icon}" /> 
                                     </div>
                                     <p>${item.title}</p>
                                     <span class="smaller"></span>

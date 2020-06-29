@@ -30,7 +30,7 @@ export default class ContactWeb extends LitElement {
 
     render() {
         return html`
-            <div class="container-fluid">
+            <div>
                 <tool-header title="${"Contact"}" icon="${"fas fa-mail-bulk"}"></tool-header>
                 <div class="container">
                     <div class="row">

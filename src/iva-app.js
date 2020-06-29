@@ -593,8 +593,6 @@ class IvaApp extends LitElement {
         // TODO evaluate refactor
         const [hashTool, hashProject, hashStudy, feature] = arr;
 
-        //debugger
-
         // Stopping the recursive call
         if (hashTool !== this.tool || (UtilsNew.isNotUndefined(this.opencgaSession) && UtilsNew.isNotUndefined(this.opencgaSession.project) && hashProject !== this.opencgaSession.project.alias) ||
             (UtilsNew.isNotUndefined(this.study) && hashStudy !== this.opencgaSession.study.alias)) {
@@ -626,7 +624,7 @@ class IvaApp extends LitElement {
                     break;
                 case "#protein":
                     break;
-                case "#interpretation":
+                case "#interpreter":
                     this.clinicalAnalysisId = feature;
                     break;
             }
@@ -915,19 +913,20 @@ class IvaApp extends LitElement {
         return html`
             <style include="jso-styles">                
                 .navbar-inverse {
-                    background-color: #0c2f4c;
+                    background-color: var(--main-bg-color);
                 }
                 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
-                    background-color: #09243a;
+                    background-color: var(--main-bg-color-darker);
+                    /*filter: brightness(0.8); this involves text as well..*/ 
                 }
                 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
-                    background-color: #09243a;
+                    background-color: var(--main-bg-color-darker);
                 }
                 .navbar-inverse .navbar-nav>li>a {
                     color: #d2d2d2;
                 }
                 .navbar-inverse .dropdown-menu>.active>a, .navbar-inverse .dropdown-menu>.active>a:focus, .navbar-inverse .dropdown-menu>.active>a:hover {
-                    background-color: #0c2f4c;
+                    background-color: var(--main-bg-color);
                 }
                                 
                 .navbar-nav li.notification > a > i {
@@ -1213,7 +1212,7 @@ class IvaApp extends LitElement {
                                     <ul class="dropdown-menu">
                                         ${this.config.about.links && this.config.about.links.map(link => html`
                                             <li>
-                                                <a href="${link.url}"><i class="${link.icon}" aria-hidden="true" style="padding-right: 5px"></i> ${link.name}</a>
+                                                <a href="${link.url}"><i class="${link.icon} icon-padding" aria-hidden="true"></i> ${link.name}</a>
                                             </li>
                                         `)}
                                     </ul>
@@ -1228,7 +1227,7 @@ class IvaApp extends LitElement {
                             ${this.config.login.visible && (!this.opencgaSession || !this.opencgaSession.token) ? html`
                                 <li class="dropdown">
                                     <a href="#login" id="loginButton" role="button" @click="${this.changeTool}">
-                                        <i href="#login" class="fa fa-sign-in-alt fa-lg" aria-hidden="true" style="padding-right: 5px"></i>Login
+                                        <i href="#login" class="fa fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
                                     </a>
                                 </li>
                             ` : null}
@@ -1237,17 +1236,17 @@ class IvaApp extends LitElement {
                             ${this.opencgaSession && this.opencgaSession.token ? html`
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-user-circle fa-lg" aria-hidden="true" style="padding-right: 10px"></i>${this.opencgaSession.user.id} <span class="caret"></span>
+                                        <i class="fa fa-user-circle fa-lg icon-padding" aria-hidden="true"></i>${this.opencgaSession.user.id} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#account"><i class="fa fa-user" aria-hidden="true" style="padding-right: 5px"></i> Your account</a>
+                                            <a href="#account"><i class="fa fa-user icon-padding" aria-hidden="true"></i> Your account</a>
                                         </li>
                                         <li>
-                                            <a href="#projects"><i class="fa fa-database" aria-hidden="true" style="padding-right: 5px"></i> Projects</a>
+                                            <a href="#projects"><i class="fa fa-database icon-padding" aria-hidden="true"></i> Projects</a>
                                         </li>
                                         <li>
-                                            <a href="#file-manager"><i class="fa fa-file" aria-hidden="true" style="padding-right: 5px"></i> File Explorer</a>
+                                            <a href="#file-manager"><i class="fas fa-folder-open icon-padding"></i> File Explorer</a>
                                         </li>
                                         <li role="separator" class="divider"></li>
                                         <!--
@@ -1257,7 +1256,7 @@ class IvaApp extends LitElement {
                                         -->
                                         <li>
                                             <a id="logoutButton" role="button" @click="${this.logout}">
-                                                <i class="fa fa-sign-out-alt" aria-hidden="true" style="padding-right: 5px"></i> Logout
+                                                <i class="fa fa-sign-out-alt icon-padding" aria-hidden="true"></i> Logout
                                             </a>
                                         </li>
                                     </ul>
@@ -1278,8 +1277,10 @@ class IvaApp extends LitElement {
                 <opencga-breadcrumb .config="${this.config}" .opencgaSession="${this.opencgaSession}"></opencga-breadcrumb>
             ` : null}
 -->
-            <!-- This is where main application is rendered -->
-            <div>
+             <!-- <div class="alert alert-info">${JSON.stringify(this.queries)}</div> --> 
+
+            <!-- This is where main IVA application is rendered -->
+            <div class="container-fluid">
                 ${this.config.enabledComponents.home ? html`
                     <div class="content" id="home">
                         <welcome-web .opencgaSession="${this.opencgaSession}" version="${this.config.version}" .cellbaseClient=${this.cellbaseClient} @search="${this.quickSearch}" .config="${this.config}"> </welcome-web>
@@ -1315,13 +1316,7 @@ class IvaApp extends LitElement {
                     <getting-started .opencgaSession="${this.opencgaSession}" .config="${this.config}"></getting-started>
                 </div>
                 ` : null}
-            </div>
-
-             <!-- <div class="alert alert-info">${JSON.stringify(this.queries)}</div> --> 
-
-            <!-- This is where main IVA application is rendered -->
-            <div class="container-fluid">
-
+                
                 ${this.config.enabledComponents.login ? html`
                     <div class="content" id="login">
                         <opencga-login  .opencgaSession="${this.opencgaSession}"
@@ -1700,6 +1695,7 @@ class IvaApp extends LitElement {
                         <variant-interpreter    .opencgaSession="${this.opencgaSession}" 
                                                 .cellbaseClient="${this.cellbaseClient}"
                                                 .clinicalAnalysis="${this.clinicalAnalysis}"
+                                                .clinicalAnalysisId="${this.clinicalAnalysisId}"
                                                 @selectClinicalAnalysis="${this.onSelectClinicalAnalysis}">
                         </variant-interpreter>
                     </div>
