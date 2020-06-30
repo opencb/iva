@@ -130,6 +130,7 @@ const application = {
                 {
                     title: "Summary Stats",
                     category: true,
+                    id: "cat-analysis",
                     visibility: "public"
                 },
                 {
@@ -170,6 +171,7 @@ const application = {
                 {
                     title: "Association Analysis",
                     category: true,
+                    id: "cat-analysis",
                     visibility: "public"
                 },
                 {
@@ -195,6 +197,7 @@ const application = {
                 {
                     title: "Sample Analysis",
                     category: true,
+                    id: "cat-analysis",
                     visibility: "public"
                 },
                 {
@@ -211,7 +214,7 @@ const application = {
                     description: "",
                     icon: "",
                     visibility: "public"
-                },
+                },/*
                 {
                     id: "sampleFacet",
                     title: "Phenotype-Genotype Sample Analysis",
@@ -219,7 +222,7 @@ const application = {
                     description: "",
                     icon: "",
                     visibility: "public"
-                },
+                },*/
                 {
                     id: "compound",
                     title: "Compound Heterozygous",
@@ -251,6 +254,7 @@ const application = {
                 {
                     title: "Cancer Analysis",
                     category: true,
+                    id: "cat-analysis",
                     visibility: "public"
                 },
                 {
@@ -268,6 +272,7 @@ const application = {
                 {
                     title: "Clinical Interpretation",
                     category: true,
+                    id: "cat-analysis",
                     visibility: "public"
                 },
                 {
@@ -306,6 +311,7 @@ const application = {
                 {
                     title: "Other",
                     category: true,
+                    id: "cat-analysis",
                     visibility: "public"
                 },
                 {
@@ -335,6 +341,7 @@ const application = {
                 {
                     title: "Clinical Management",
                     category: true,
+                    id: "cat-clinical",
                     visibility: "public"
                 },
                 {
@@ -360,6 +367,7 @@ const application = {
                 {
                     title: "Interpretation",
                     category: true,
+                    id: "cat-clinical",
                     visibility: "public"
                 },
                 {
@@ -377,6 +385,7 @@ const application = {
                 {
                     title: "Reported Variants",
                     category: true,
+                    id: "cat-clinical",
                     visibility: "public"
                 },
                 {
@@ -399,6 +408,7 @@ const application = {
                 {
                     title: "Data Management",
                     category: true,
+                    id: "cat-alignment",
                     visibility: "public"
                 },
                 {
@@ -422,6 +432,7 @@ const application = {
                 {
                     title: "Summary Stats",
                     category: true,
+                    id: "cat-alignment",
                     visibility: "public"
                 },
                 {
@@ -451,6 +462,7 @@ const application = {
                 {
                     title: "Browsers",
                     category: true,
+                    id: "cat-catalog",
                     visibility: "public"
                 },
                 {
