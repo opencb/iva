@@ -33,14 +33,13 @@ module.exports = {
         path: DIST_PATH
     },
     plugins: [
-        // --------------copy html
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: "./src/index.html",
             minify: {
                 removeAttributeQuotes: true,
                 collapseWhitespace: true
-                //removeComments: true
+                //removeComments: true //cannot be uncommented because of HtmlReplaceWebpackPlugin depends on comments
             }
         }),
         new HtmlReplaceWebpackPlugin([
@@ -53,7 +52,6 @@ module.exports = {
             }
         ]
         ),
-        // TODO add minify flag
         new MergeIntoSingleFilePlugin({
             files: {
                 "assets/css/styles.css": [
@@ -153,7 +151,7 @@ module.exports = {
         // ignore makes sense because iva-app bundle will be an ES module on its own, so import X from "/jsorolla.min.js" won't be a problem if not processed by webpack
         // why do whe need to bundle iva-app in webpack at all then? Because we need to process litElement imports
         new webpack.IgnorePlugin({
-            checkResource (resource) {
+            checkResource(resource) {
                 //console.log("res", resource)
                 //if (resource === "./conf/opencga-variant-browser.config.js") return true;
                 //return false;
@@ -176,7 +174,7 @@ module.exports = {
             })
         ]*/
     },
-/*    externals: [
+    /* externals: [
         {
             "externalConfig": "./conf/external-config.js"
         }
