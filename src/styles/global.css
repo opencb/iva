@@ -198,7 +198,7 @@ input[type="text"] {
 }
 
 .study-switcher p.study-id{
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
@@ -1726,28 +1726,24 @@ data-form h3,
 }
 
 #job-monitor .job-monitor-item {
-    
+}
+
+.rocket-RUNNING {
+    animation: spaceOutUp 2s infinite;
+}
+
+.rocket-PENDING,
+.rocket-QUEUED,
+.rocket-REGISTERING {
+    animation: float-rocket .5s infinite;
 }
 
 /****** animation ********/
-
-.rocket-ERROR {
-
-}
-
-
-.rocket-ERROR {
-    animation: spaceOutUp 4s infinite;
-}
-
-.anim-spaceOutUp {
-    animation: spaceOutUp 4s infinite;
-}
 .anim-float {
     animation: float .5s infinite;
 }
-.anim-float-rotated {
-    animation: float-rotated .5s infinite;
+.anim-spaceOutUp {
+    animation: spaceOutUp .5s infinite;
 }
 
 @keyframes float {
@@ -1765,18 +1761,18 @@ data-form h3,
     }
 }
 
-@keyframes float-rotated {
+@keyframes float-rocket {
     0% {
         -webkit-transform: translateY(0);
-        transform: translateY(0) rotate(-30deg);
+        transform: translateY(5px) translateX(10px) rotate(-45deg);
     }
     50% {
         -webkit-transform: translateY(-6px);
-        transform: translateY(-6px) rotate(-30deg);
+        transform: translateY(7px) translateX(10px) rotate(-45deg);
     }
     100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0) rotate(-30deg);
+        -webkit-transform: translateY(0) translateX(10px);
+        transform: translateY(5px) translateX(10px) rotate(-45deg);
     }
 }
 
