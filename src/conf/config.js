@@ -134,23 +134,6 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "cohort-variant-stats",
-                    title: "Cohort Variant Stats",
-                    acronym: "CS",
-                    description: "",
-                    icon: "",
-                    visibility: "public",
-                    // disabled: true
-                },
-                // {
-                //     id: "ibs",
-                //     title: "IBS/IBD",
-                //     acronym: "IBS",
-                //     description: "",
-                //     icon: "",
-                //     visibility: "public"
-                // },
-                {
                     id: "sample-variant-stats",
                     title: "Sample Variant Stats",
                     acronym: "SVS",
@@ -159,11 +142,19 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "hw", title: "Hardy-Weinberg", acronym: "HW",
+                    id: "cohort-variant-stats",
+                    title: "Cohort Variant Stats",
+                    acronym: "CS",
                     description: "",
                     icon: "",
-                    visibility: "public"
+                    visibility: "public",
                 },
+                // {
+                //     id: "hw", title: "Hardy-Weinberg", acronym: "HW",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 {
                     separator: true,
                     visibility: "public"
@@ -182,14 +173,14 @@ const application = {
                     icon: "",
                     visibility: "public"
                 },
-                {
-                    id: "tdt",
-                    title: "Family-Based Association (TDT)",
-                    acronym: "TDT",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
+                // {
+                //     id: "tdt",
+                //     title: "Family-Based Association (TDT)",
+                //     acronym: "TDT",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 {
                     separator: true,
                     visibility: "public"
@@ -214,35 +205,38 @@ const application = {
                     description: "",
                     icon: "",
                     visibility: "public"
-                },/*
+                },
+
                 {
-                    id: "sampleFacet",
-                    title: "Phenotype-Genotype Sample Analysis",
-                    acronym: "PhG",
+                    separator: true,
+                    visibility: "public"
+                },
+                {
+                    title: "Individual Analysis",
+                    category: true,
+                    id: "cat-analysis",
+                    visibility: "public"
+                },
+                {
+                    id: "inferred-sex",
+                    title: "Sex Inference",
+                    acronym: "SI",
                     description: "",
                     icon: "",
                     visibility: "public"
-                },*/
+                },
                 {
-                    id: "compound",
-                    title: "Compound Heterozygous",
-                    acronym: "CH",
+                    id: "relatedness",
+                    title: "Relatedness",
+                    acronym: "RL",
                     description: "",
-                    icon: "aggregation.svg",
+                    icon: "",
                     visibility: "public"
                 },
                 {
                     id: "mendel",
                     title: "Mendelian Errors",
                     acronym: "ME",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "inferred-sex",
-                    title: "Inferred Sex",
-                    acronym: "IS",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -309,6 +303,56 @@ const application = {
                     visibility: "public"
                 },
                 {
+                    title: "Quality Control",
+                    category: true,
+                    id: "cat-analysis",
+                    visibility: "public"
+                },
+                {
+                    id: "sample-qc",
+                    title: "Sample Quality Control",
+                    description: "Calculate different genetic checks and metrics and store data in Sample Catalog",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    id: "individual-qc",
+                    title: "Individual Quality Control",
+                    description: "Calculate different genetic checks and metrics and store data in Individual Catalog",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
+                    title: "External Tools",
+                    category: true,
+                    id: "cat-analysis",
+                    visibility: "public"
+                },
+                {
+                    id: "plink",
+                    title: "Plink",
+                    acronym: "Pl",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    id: "gatk",
+                    title: "GATK",
+                    acronym: "GT",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    separator: true,
+                    visibility: "public"
+                },
+                {
                     title: "Other",
                     category: true,
                     id: "cat-analysis",
@@ -316,11 +360,19 @@ const application = {
                 },
                 {
                     id: "exporter",
-                    title: "Exporter",
+                    title: "Variant Exporter",
                     acronym: "EX",
                     description: "",
                     icon: "",
                     visibility: "public"
+                },
+                {
+                    id: "variant-stats-exporter",
+                    title: "Variant Stats Exporter",
+                    acronym: "VSE",
+                    description: "Export variant stats for different cohorts",
+                    icon: "",
+                    visibility: "public",
                 },
                 {
                     id: "beacon",
