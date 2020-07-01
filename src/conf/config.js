@@ -417,7 +417,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    title: "Interpretation",
+                    title: "Clinical Interpretation",
                     category: true,
                     id: "cat-clinical",
                     visibility: "public"
@@ -430,24 +430,24 @@ const application = {
                     description: "",
                     visibility: "public"
                 },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Reported Variants",
-                    category: true,
-                    id: "cat-clinical",
-                    visibility: "public"
-                },
-                {
-                    id: "cva",
-                    title: "Clinical Variant Browser",
-                    acronym: "CVB",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                }
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Reported Variants",
+                //     category: true,
+                //     id: "cat-clinical",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "cva",
+                //     title: "Clinical Variant Browser",
+                //     acronym: "CVB",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // }
             ]
         },
         {
