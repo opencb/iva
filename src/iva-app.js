@@ -708,13 +708,14 @@ class IvaApp extends LitElement {
 
     onStudySelect(e) {
         e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
-        const [_studyname, _projectname] = [e.target.getAttribute("data-study"), e.target.getAttribute("data-project")];
-        let _project; let _study;
+
+        const [_studyId, _projectId] = [e.target.getAttribute("data-study"), e.target.getAttribute("data-project")];
+        let _project, _study;
         for (let i = 0; i < this.opencgaSession.projects.length; i++) {
-            if (this.opencgaSession.projects[i].name === _projectname) {
+            if (this.opencgaSession.projects[i].id === _projectId) {
                 _project = this.opencgaSession.projects[i];
                 for (let j = 0; j < this.opencgaSession.projects[i].studies.length; j++) {
-                    if (this.opencgaSession.projects[i].studies[j].name === _studyname || this.opencgaSession.projects[i].studies[j].id === _studyname) {
+                    if (this.opencgaSession.projects[i].studies[j].id === _studyId) {
                         _study = this.opencgaSession.projects[i].studies[j];
                         break;
                     }
@@ -1171,7 +1172,7 @@ class IvaApp extends LitElement {
                             ${this.opencgaSession && this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle study-switcher" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <div><i class="fa fa-database fa-lg pad5"></i></div>
+                                        <div><i class="fa fa-database fa-lg" style="padding-right: 10px"></i></div>
                                         <div style="margin-right: 5px">
                                             <p class="project-name">${this.opencgaSession.project.id}</p>
                                             <p class="study-id">${this.opencgaSession.study.name}</p>
@@ -1183,14 +1184,16 @@ class IvaApp extends LitElement {
                                             <li><a title="${project.fqn}"><b>${project.name} [${project.fqn.split("@")[0]}]</b></a></li>
                                             ${project.studies && project.studies.length && project.studies.map(study => html`
                                                 <li>
-                                                    <a href="#" data-study="${study.id}" data-project="${project.name}" @click="${this.onStudySelect}">${study.name}</a>
+                                                    <a href="#" data-study="${study.id}" data-project="${project.id}" title="${study.fqn}" @click="${this.onStudySelect}">${study.name}</a>
                                                 </li>
                                             `)}                                            
                                         `)}
                                     </ul>
                                 </li>
                             ` : null}
+                            
                             <li class="separator"></li>
+                            
                             <!-- Jobs -->
                             ${this.opencgaSession && this.opencgaSession.token ? html`
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
