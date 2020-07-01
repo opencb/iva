@@ -400,7 +400,8 @@ h3.page-title {
     font-size: 2em;
 }
 
-.page-title h2 .inverse {
+.page-title h2 .inverse,
+.detail-tabs h3 .inverse {
     background: var(--main-bg-color);
     color: white;
     display: inline-block;
@@ -1256,6 +1257,24 @@ Toggle Changes
 .flex-center {
 
 }
+/********** interpreter side-nav & opencga-project side-nav ************/
+.side-tabs.side-nav button{
+    padding: 15px;
+}
+
+.side-tabs.side-nav button.active {
+    padding: 15px;
+    font-weight: bold;
+    background-color: #EEEEEE;
+    color: #555;
+    border-color: #ddd #ddd #ddd var(--main-bg-color);
+}
+
+.side-tabs.side-nav button:focus {
+    border-color: #ddd;
+    outline: 0;
+}
+
 
 /********** welcome page / interpreter icons ************/
 .hi-icon-wrap {
