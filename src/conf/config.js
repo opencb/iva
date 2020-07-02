@@ -323,6 +323,13 @@ const application = {
                     visibility: "public"
                 },
                 {
+                    id: "family-qc",
+                    title: "Family Quality Control",
+                    description: "Calculate different genetic checks and metrics and store data in Family Catalog",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
                     separator: true,
                     visibility: "public"
                 },

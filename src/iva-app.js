@@ -60,6 +60,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-mutation
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-elegibility-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-knockout-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-inferred-sex-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-qc-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-rd-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-cancer-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter.js";
@@ -181,6 +182,10 @@ class IvaApp extends LitElement {
             "knockout",
             "inferred-sex",
             "mutational-signature",
+            // Quality Control
+            "sample-qc",
+            "individual-qc",
+            "family-qc",
             // Clinical
             "clinical-analysis-writer",
             "interpreter",
@@ -1640,6 +1645,12 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["inferred-sex"] ? html`
                     <div class="content" id="opencga-inferred-sex-analysis">
                         <opencga-inferred-sex-analysis .opencgaSession="${this.opencgaSession}"></opencga-inferred-sex-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["sample-qc"] ? html`
+                    <div class="content" id="opencga-sample-qc-analysis">
+                        <opencga-sample-qc-analysis .opencgaSession="${this.opencgaSession}"></opencga-sample-qc-analysis>
                     </div>
                 ` : null}
                 
