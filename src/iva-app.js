@@ -63,6 +63,12 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-inferred
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-individual-relatedness-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-individual-mendelian-error-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-qc-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-individual-qc-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-family-qc-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-plink-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gatk-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-exporter-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-stats-exporter-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-rd-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-cancer-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter.js";
@@ -186,6 +192,10 @@ class IvaApp extends LitElement {
             "mutational-signature",
             "individual-relatedness",
             "mendelian-errors",
+            "plink",
+            "gatk",
+            "variant-exporter",
+            "variant-stats-exporter",
             // Quality Control
             "sample-qc",
             "individual-qc",
@@ -1667,6 +1677,42 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["sample-qc"] ? html`
                     <div class="content" id="opencga-sample-qc-analysis">
                         <opencga-sample-qc-analysis .opencgaSession="${this.opencgaSession}"></opencga-sample-qc-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["individual-qc"] ? html`
+                    <div class="content" id="opencga-individual-qc-analysis">
+                        <opencga-individual-qc-analysis .opencgaSession="${this.opencgaSession}"></opencga-individual-qc-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["family-qc"] ? html`
+                    <div class="content" id="opencga-family-qc-analysis">
+                        <opencga-family-qc-analysis .opencgaSession="${this.opencgaSession}"></opencga-family-qc-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["plink"] ? html`
+                    <div class="content" id="opencga-plink-analysis">
+                        <opencga-plink-analysis .opencgaSession="${this.opencgaSession}"></opencga-plink-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["gatk"] ? html`
+                    <div class="content" id="opencga-gatk-analysis">
+                        <opencga-gatk-analysis .opencgaSession="${this.opencgaSession}"></opencga-gatk-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["variant-exporter"] ? html`
+                    <div class="content" id="opencga-variant-exporter-analysis">
+                        <opencga-variant-exporter-analysis .opencgaSession="${this.opencgaSession}"></opencga-variant-exporter-analysis>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["variant-stats-exporter"] ? html`
+                    <div class="content" id="opencga-variant-stats-exporter-analysis">
+                        <opencga-variant-stats-exporter-analysis .opencgaSession="${this.opencgaSession}"></opencga-variant-stats-exporter-analysis>
                     </div>
                 ` : null}
                 
