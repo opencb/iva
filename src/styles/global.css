@@ -1719,7 +1719,7 @@ data-form h3,
 .notification-nav .media-left {
     font-size: 20px;
     color: #5d5d5d;
-    /*vertical-align: middle;*/
+    vertical-align: middle;
 }
 
 .media-heading {
@@ -1783,15 +1783,15 @@ data-form h3,
 @keyframes float-rocket {
     0% {
         -webkit-transform: translateY(0);
-        transform: translateY(5px) translateX(10px) rotate(-45deg);
+        transform: translateY(-2px) translateX(0px) rotate(-45deg);
     }
     50% {
         -webkit-transform: translateY(-6px);
-        transform: translateY(7px) translateX(10px) rotate(-45deg);
+        transform: translateY(0px) translateX(0px) rotate(-45deg);
     }
     100% {
         -webkit-transform: translateY(0) translateX(10px);
-        transform: translateY(5px) translateX(10px) rotate(-45deg);
+        transform: translateY(-2px) translateX(0px) rotate(-45deg);
     }
 }
 
