@@ -589,6 +589,13 @@ const application = {
         maxRemainingTime: 600000
     },
     // Components in the welcome page
+    welcomePageContent: `<p class="text-center">
+                Welcome to the IVA tool for whole genome variant analysis.<br />
+                This interactive tool allows finding genes affected by deleterious variants<br />that segregate along family
+                pedigrees, case-controls or sporadic samples.
+            </p>
+            <br>`,
+    welcomePageFooter: `<p><img id="logo" src="img/opencb-logo.png" alt="opencb-logo"/></p>`,
     components: [
         {
             id: "browser",
@@ -636,7 +643,7 @@ const application = {
             id: "beacon",
             title: "GA4GH Beacon",
             visibility: "public",
-            thumbnail: "screenshot3.png",
+            thumbnail: "beacon.png",
             fa_icon: "fa fa-globe-europe",
             icon: "beacon.svg",
             description: `
