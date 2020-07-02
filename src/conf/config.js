@@ -401,7 +401,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "exporter",
+                    id: "variant-exporter",
                     title: "Variant Exporter",
                     acronym: "EX",
                     description: "",

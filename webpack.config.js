@@ -10,10 +10,8 @@ const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
-//const uglifyJS = require("uglify-js");
+const DIST_PATH = path.resolve(__dirname, "build/");
 
-
-const DIST_PATH = path.resolve(__dirname, "dist/");
 const tpl = path => ({
     img: `<img alt="${path}" src="${path}" />`,
     css: `<link rel="stylesheet" type="text/css" href="${path}">`,
