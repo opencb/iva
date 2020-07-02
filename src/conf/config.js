@@ -261,7 +261,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "relatedness",
+                    id: "individual-relatedness",
                     title: "Relatedness",
                     acronym: "RL",
                     description: "",
@@ -269,7 +269,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "mendel",
+                    id: "mendelian-errors",
                     title: "Mendelian Errors",
                     acronym: "ME",
                     description: "",
@@ -354,6 +354,13 @@ const application = {
                     id: "individual-qc",
                     title: "Individual Quality Control",
                     description: "Calculate different genetic checks and metrics and store data in Individual Catalog",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    id: "family-qc",
+                    title: "Family Quality Control",
+                    description: "Calculate different genetic checks and metrics and store data in Family Catalog",
                     icon: "",
                     visibility: "public"
                 },

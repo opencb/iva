@@ -117,6 +117,7 @@ basedir = str(Path(__file__).resolve().parents[1])
 if args.tag is not None:
     tag = args.tag
 else:
+    # read version from package.json
     stream = os.popen(basedir + "/bin/iva-admin.sh 2>&1 | grep Version | sed 's/ //g' | cut -d ':' -f 2")
     tag = stream.read()
     tag = tag.rstrip()
