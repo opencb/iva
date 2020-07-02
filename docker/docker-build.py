@@ -8,7 +8,6 @@ import json
 import pathlib
 from pathlib import Path
 
-
 ## Configure command-line options
 parser = argparse.ArgumentParser()
 parser.add_argument('action', help="Action to execute", choices=["build", "push", "delete"], default="build")
@@ -32,19 +31,23 @@ def error(message):
     sys.stderr.write(shell_colors['red'] + 'ERROR: %s\n' % message + shell_colors['reset'])
     sys.exit(2)
 
-
 def run(command):
     print(shell_colors['bold'] + command + shell_colors['reset'])
     code = os.system(command)
     if code != 0:
         error("Error executing: " + command)
 
-
 def print_header(str):
     print(shell_colors['magenta'] + "*************************************************" + shell_colors['reset'])
     print(shell_colors['magenta'] + str + shell_colors['reset'])
     print(shell_colors['magenta'] + "*************************************************" + shell_colors['reset'])
 
+def package_json():
+    basedir = str(Path(__file__).resolve().parents[1])
+    p = Path(basedir + "/package.json")
+    with open(p, "r") as package_json:
+        data=package_json.read()
+    return json.loads(data)
 
 # def login(loginRequired=False):
 #     if args.username is None or args.password is None:
@@ -61,7 +64,6 @@ def print_header(str):
 def build():
     print_header('Building docker images: ' + ', '.join(images))
     for image in images:
-        print()
         print(shell_colors['blue'] + "Building opencb/iva-" + image + ":" + tag + " ..." + shell_colors['reset'])
         run("docker build -t opencb/iva-" + image + ":" + tag + " -f " + build_folder + "/docker/iva-" + image + "/Dockerfile " + build_folder)
 
@@ -117,10 +119,7 @@ basedir = str(Path(__file__).resolve().parents[1])
 if args.tag is not None:
     tag = args.tag
 else:
-    # read version from package.json
-    stream = os.popen(basedir + "/bin/iva-admin.sh 2>&1 | grep Version | sed 's/ //g' | cut -d ':' -f 2")
-    tag = stream.read()
-    tag = tag.rstrip()
+    tag = package_json()["version"]
 
 # 3. init build_folder: set build folder to default value if not set
 if args.build_folder is not None:
