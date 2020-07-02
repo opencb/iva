@@ -213,12 +213,8 @@ export default class WelcomeWeb extends LitElement {
                 </div>
             </h1>
             
-            <p class="text-center">
-                Welcome to the IVA tool for whole genome variant analysis.<br />
-                This interactive tool allows finding genes affected by deleterious variants<br />that segregate along family
-                pedigrees, case-controls or sporadic samples.
-            </p>
-            <br>
+            ${UtilsNew.renderHTML(this.config.welcomePageContent)}
+            
             <!--<input type="text" class="form-control input-lg" id="welcomeSearchTextBoxOld" style="text-align: center;"-->
             <!--placeholder="Search for a gene, transcript, protein or a variant" on-blur="onBlur" on-keyup="onKeyup">-->
             <!--<br>-->
@@ -271,7 +267,8 @@ export default class WelcomeWeb extends LitElement {
                 so only modern web browsers are fully supported, these include Chrome 49+, Firefox 45+, Microsoft Edge 14+,
                 Safari 10+ and Opera 36+.
             </small>-->
-            <p><img id="logo" src="img/opencb-logo.png"/></p>
+            ${UtilsNew.renderHTML(this.config.welcomePageFooter)}
+
         </div>
         `;
     }

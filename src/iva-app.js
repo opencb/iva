@@ -62,6 +62,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-knockout
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-inferred-sex-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-individual-relatedness-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-individual-mendelian-error-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-qc-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-rd-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-cancer-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter.js";
@@ -185,6 +186,10 @@ class IvaApp extends LitElement {
             "mutational-signature",
             "individual-relatedness",
             "mendelian-errors",
+            // Quality Control
+            "sample-qc",
+            "individual-qc",
+            "family-qc",
             // Clinical
             "clinical-analysis-writer",
             "interpreter",
@@ -1417,8 +1422,6 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.projects ? html`
                     <div class="content" id="projects">
                         <opencga-projects  .opencgaSession="${this.opencgaSession}"
-                                           .projects="${this.opencgaSession.projects}"
-                                           .studySummaries="${this.studySummaries}"
                                            @project="${this.updateProject}"
                                            @study="${this.updateStudy}">
                         </opencga-projects>
@@ -1648,7 +1651,7 @@ class IvaApp extends LitElement {
                         <opencga-inferred-sex-analysis .opencgaSession="${this.opencgaSession}"></opencga-inferred-sex-analysis>
                     </div>
                 ` : null}
-                
+
                 ${this.config.enabledComponents["individual-relatedness"] ? html`
                     <div class="content" id="opencga-individual-relatedness-analysis">
                         <opencga-individual-relatedness-analysis .opencgaSession="${this.opencgaSession}"></opencga-individual-relatedness-analysis>
@@ -1661,6 +1664,11 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
                 
+                ${this.config.enabledComponents["sample-qc"] ? html`
+                    <div class="content" id="opencga-sample-qc-analysis">
+                        <opencga-sample-qc-analysis .opencgaSession="${this.opencgaSession}"></opencga-sample-qc-analysis>
+                    </div>
+                ` : null}
                 
                 ${this.config.enabledComponents["mutational-signature"] ? html`
                     <div class="content" id="opencga-mutational-signature-analysis">
