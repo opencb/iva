@@ -60,6 +60,10 @@ input[type="text"] {
     vertical-align: middle;
 }
 
+.break-word {
+    word-wrap: break-word;
+}
+
 /* TODO input material effect continue*/
 .input {
     border: 0;
@@ -133,7 +137,9 @@ input[type="text"] {
 
 .iva-logo-white sup{
     font-variant: all-small-caps;
-    top: -.8em;
+    top: -1em;
+    text-transform: uppercase;
+    font-size: .6em;
 }
 
 /* plain text in form-group (instead of input text) */

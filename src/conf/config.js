@@ -100,7 +100,6 @@ const application = {
                                 <li>Filter by gene, consequence, frequency and much more</li>
                             </ul>`,
                     visibility: "public",
-                    thumbnail: "screenshot1.png",
                     fa_icon: "fa fa-list",
                     icon: "variant_browser.svg"
                 },

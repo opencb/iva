@@ -549,19 +549,20 @@ class IvaApp extends LitElement {
     }
 
     changeTool(e) {
+        const target = e.currentTarget;
         $(".navbar-inverse ul > li", this).removeClass("active");
-        $(e.target).parent("li").addClass("active");
-        if ($(e.target).closest("ul").hasClass("dropdown-menu")) {
-            $(e.target).closest("ul").closest("li").addClass("active");
+        $(target).parent("li").addClass("active");
+        if ($(target).closest("ul").hasClass("dropdown-menu")) {
+            $(target).closest("ul").closest("li").addClass("active");
         }
 
         if (UtilsNew.isNotUndefined(e)) {
             e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
         }
 
-        if (UtilsNew.isNotUndefined(e.target) && UtilsNew.isNotUndefined(e.target.attributes.href)) {
+        if (UtilsNew.isNotUndefined(target) && UtilsNew.isNotUndefined(target.attributes.href)) {
             //                    $(e.target.attributes.href.value).show(); // get the href and use it find which div to show
-            this.tool = e.target.attributes.href.value;
+            this.tool = target.attributes.href.value;
             if (UtilsNew.isNotUndefinedOrNull(this._samplesPerTool)) {
                 if (this._samplesPerTool.hasOwnProperty(this.tool.replace("#", ""))) {
                     this.samples = this._samplesPerTool[this.tool.replace("#", "")];
@@ -950,7 +951,7 @@ class IvaApp extends LitElement {
                 }
                                 
                 .navbar-nav li.notification > a > i {
-                    font-size: 25px;
+                    font-size: 20px;
                     position: absolute;
                     left: 10px;
                     top: 13px;
@@ -1229,7 +1230,15 @@ class IvaApp extends LitElement {
                                         </div>
                                     </form>
                             ` : null}
-
+                            
+                            <li>
+                                <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
+                                    <i class="fas fa-folder-open icon-padding"></i>
+                                </a>
+                            </li>
+                            
+                            <li class="separator"></li>
+                            
                             <!-- About dropdown menu-->
                             ${this.config.about.dropdown ? html`
                                 <li class="dropdown">
