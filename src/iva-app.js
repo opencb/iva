@@ -1808,7 +1808,7 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["job-view"] ? html`
                     <tool-header title="${this.jobSelected || "No job selected"}" icon="${"fas fa-rocket"}"></tool-header>
                     <div id="alignment-stats" class="content col-md-6 col-md-offset-3">
-                        <opencga-jobs-view .jobId="${this.jobSelected}" .opencgaSession="${this.opencgaSession}"></opencga-jobs-view>
+                        <opencga-jobs-view .jobId="${this.jobSelected}" mode="full" .opencgaSession="${this.opencgaSession}"></opencga-jobs-view>
                     </div>
                 ` : null}
 
