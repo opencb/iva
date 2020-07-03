@@ -138,7 +138,7 @@ export default class GettingStarted extends LitElement {
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <img class="img-responsive" src="img/tools/thumbnails/screenshot1.png">
+                        <img class="img-responsive" src="">
                     </div>
                 </div>
             </div>
