@@ -21,7 +21,8 @@
     "prepare": "npx snowpack",
     "e2e": "npx cypress open",
     "browser-support": "npx browserslist",
-    "build": "npx webpack"
+    "build": "npx webpack",
+    "deploy": "npx webpack && ./docker/docker-build.py push"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
