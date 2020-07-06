@@ -240,41 +240,40 @@ const application = {
                     icon: "",
                     visibility: "public"
                 },
-
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Individual Analysis",
-                    category: true,
-                    id: "cat-analysis",
-                    visibility: "public"
-                },
-                {
-                    id: "inferred-sex",
-                    title: "Sex Inference",
-                    acronym: "SI",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "individual-relatedness",
-                    title: "Relatedness",
-                    acronym: "RL",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "mendelian-errors",
-                    title: "Mendelian Errors",
-                    acronym: "ME",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Individual Analysis",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "inferred-sex",
+                //     title: "Sex Inference",
+                //     acronym: "SI",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "individual-relatedness",
+                //     title: "Relatedness",
+                //     acronym: "RL",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "mendelian-errors",
+                //     title: "Mendelian Errors",
+                //     acronym: "ME",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 {
                     separator: true,
                     visibility: "public"
@@ -293,24 +292,24 @@ const application = {
                     icon: "aggregation.svg",
                     visibility: "public"
                 },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Clinical Interpretation",
-                    category: true,
-                    id: "cat-analysis",
-                    visibility: "public"
-                },
-                {
-                    id: "rd-tiering",
-                    title: "RD Tiering",
-                    acronym: "RDT",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Clinical Interpretation",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "rd-tiering",
+                //     title: "RD Tiering",
+                //     acronym: "RDT",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 // {
                 //     id: "team",
                 //     title: "TEAM",
@@ -332,63 +331,63 @@ const application = {
                 //     icon: "",
                 //     visibility: "public"
                 // },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Quality Control",
-                    category: true,
-                    id: "cat-analysis",
-                    visibility: "public"
-                },
-                {
-                    id: "sample-qc",
-                    title: "Sample Quality Control",
-                    description: "Calculate different genetic checks and metrics and store data in Sample Catalog",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "individual-qc",
-                    title: "Individual Quality Control",
-                    description: "Calculate different genetic checks and metrics and store data in Individual Catalog",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "family-qc",
-                    title: "Family Quality Control",
-                    description: "Calculate different genetic checks and metrics and store data in Family Catalog",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "External Tools",
-                    category: true,
-                    id: "cat-analysis",
-                    visibility: "public"
-                },
-                {
-                    id: "plink",
-                    title: "Plink",
-                    acronym: "Pl",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "gatk",
-                    title: "GATK",
-                    acronym: "GT",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Quality Control",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "sample-qc",
+                //     title: "Sample Quality Control",
+                //     description: "Calculate different genetic checks and metrics and store data in Sample Catalog",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "individual-qc",
+                //     title: "Individual Quality Control",
+                //     description: "Calculate different genetic checks and metrics and store data in Individual Catalog",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "family-qc",
+                //     title: "Family Quality Control",
+                //     description: "Calculate different genetic checks and metrics and store data in Family Catalog",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "External Tools",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "plink",
+                //     title: "Plink",
+                //     acronym: "Pl",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "gatk",
+                //     title: "GATK",
+                //     acronym: "GT",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 {
                     separator: true,
                     visibility: "public"
@@ -415,13 +414,13 @@ const application = {
                     icon: "",
                     visibility: "public",
                 },
-                {
-                    id: "beacon",
-                    title: "GA4GH Beacon",
-                    description: "",
-                    icon: "beacon.svg",
-                    visibility: "public"
-                }
+                // {
+                //     id: "beacon",
+                //     title: "GA4GH Beacon",
+                //     description: "",
+                //     icon: "beacon.svg",
+                //     visibility: "public"
+                // }
             ]
         },
         {
@@ -445,14 +444,14 @@ const application = {
                     description: "",
                     visibility: "public"
                 },
-                {
-                    id: "clinical-analysis-writer",
-                    title: "Create Case",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                },
+                // {
+                //     id: "clinical-analysis-writer",
+                //     title: "Create Case",
+                //     acronym: "",
+                //     icon: "",
+                //     description: "",
+                //     visibility: "public"
+                // },
                 {
                     separator: true,
                     visibility: "public"
@@ -491,52 +490,52 @@ const application = {
                 // }
             ]
         },
-        {
-            id: "alignment",
-            title: "Alignment",
-            description: "",
-            icon: "alignment.svg",
-            visibility: "public",
-            submenu: [
-                {
-                    title: "Data Management",
-                    category: true,
-                    id: "cat-alignment",
-                    visibility: "public"
-                },
-                {
-                    id: "alignment-index",
-                    title: "Alignment Index",
-                    description: "Create a .bai index file.",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "coverage-index",
-                    title: "Coverage Index",
-                    description: "Precompute coverage in a BigWig file",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Summary Stats",
-                    category: true,
-                    id: "cat-alignment",
-                    visibility: "public"
-                },
-                {
-                    id: "alignment-stats",
-                    title: "Alignment Stats",
-                    description: "Compute BAM stats using samtools",
-                    icon: "",
-                    visibility: "public"
-                },
-            ]
-        },
+        // {
+        //     id: "alignment",
+        //     title: "Alignment",
+        //     description: "",
+        //     icon: "alignment.svg",
+        //     visibility: "public",
+        //     submenu: [
+        //         {
+        //             title: "Data Management",
+        //             category: true,
+        //             id: "cat-alignment",
+        //             visibility: "public"
+        //         },
+        //         {
+        //             id: "alignment-index",
+        //             title: "Alignment Index",
+        //             description: "Create a .bai index file.",
+        //             icon: "",
+        //             visibility: "public"
+        //         },
+        //         {
+        //             id: "coverage-index",
+        //             title: "Coverage Index",
+        //             description: "Precompute coverage in a BigWig file",
+        //             icon: "",
+        //             visibility: "public"
+        //         },
+        //         {
+        //             separator: true,
+        //             visibility: "public"
+        //         },
+        //         {
+        //             title: "Summary Stats",
+        //             category: true,
+        //             id: "cat-alignment",
+        //             visibility: "public"
+        //         },
+        //         {
+        //             id: "alignment-stats",
+        //             title: "Alignment Stats",
+        //             description: "Compute BAM stats using samtools",
+        //             icon: "",
+        //             visibility: "public"
+        //         },
+        //     ]
+        // },
         {
             id: "catalog",
             title: "Catalog",
