@@ -1210,10 +1210,9 @@ class IvaApp extends LitElement {
                                         `)}
                                     </ul>
                                 </li>
+                                <li class="separator"></li>
                             ` : null}
-                            
-                            <li class="separator"></li>
-                            
+                                                        
                             <!-- Jobs -->
                             ${this.opencgaSession && this.opencgaSession.token ? html`
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
@@ -1231,13 +1230,15 @@ class IvaApp extends LitElement {
                                     </form>
                             ` : null}
                             
-                            <li>
-                                <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
-                                    <i class="fas fa-folder-open icon-padding"></i>
-                                </a>
-                            </li>
+                            ${this.opencgaSession?.token ? html`
+                                <li>
+                                    <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
+                                        <i class="fas fa-folder-open icon-padding"></i>
+                                    </a>
+                                </li>
+                                <li class="separator"></li>
+                            ` : null }
                             
-                            <li class="separator"></li>
                             
                             <!-- About dropdown menu-->
                             ${this.config.about.dropdown ? html`
