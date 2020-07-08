@@ -79,6 +79,7 @@ const application = {
     version: "v2.0.0-beta",
     logo: "img/iva.svg",
     defaultStudy: "demo@family:corpasome",
+    mode: "development",
     // defaultStudy: "reference_grch37_test:test",
     // The order, title and nested submenus are respected
     menu: [
