@@ -339,7 +339,6 @@ class IvaApp extends LitElement {
         const _this = this;
         const opencgaSession = this.opencgaClient.createSession()
             .then(function(response) {
-
                 console.log("_createOpenCGASession", response);
                 // check if project array has been defined in the config.js
                 if (UtilsNew.isNotEmptyArray(_this.config.opencga.projects)) {
@@ -384,6 +383,7 @@ class IvaApp extends LitElement {
 
                 // this forces the observer to be executed.
                 _this.opencgaSession = Object.assign({}, response);
+                _this.opencgaSession.mode = _this.config.mode;
                 // _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
                 // TODO check if render works
                 _this.config.menu = application.menu.slice();
@@ -451,7 +451,6 @@ class IvaApp extends LitElement {
         console.log("iva-app: roger I'm in", credentials);
         this.opencgaClient._config.token = credentials.detail.token;
         this._createOpenCGASession();
-
 
         if (this.tool === "#login") {
             this.tool = "#home";
@@ -1212,10 +1211,9 @@ class IvaApp extends LitElement {
                                         `)}
                                     </ul>
                                 </li>
+                                <li class="separator"></li>
                             ` : null}
-                            
-                            <li class="separator"></li>
-                            
+                                                        
                             <!-- Jobs -->
                             ${this.opencgaSession && this.opencgaSession.token ? html`
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
@@ -1233,13 +1231,15 @@ class IvaApp extends LitElement {
                                     </form>
                             ` : null}
                             
-                            <li>
-                                <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
-                                    <i class="fas fa-folder-open icon-padding"></i>
-                                </a>
-                            </li>
+                            ${this.opencgaSession?.token ? html`
+                                <li>
+                                    <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
+                                        <i class="fas fa-folder-open icon-padding"></i>
+                                    </a>
+                                </li>
+                                <li class="separator"></li>
+                            ` : null }
                             
-                            <li class="separator"></li>
                             
                             <!-- About dropdown menu-->
                             ${this.config.about.dropdown ? html`
