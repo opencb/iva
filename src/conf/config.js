@@ -78,8 +78,8 @@ const application = {
     title: "IVA",
     version: "v2.0.0-beta",
     logo: "img/iva.svg",
-    defaultStudy: "demo@family:corpasome",
-    mode: "development",
+    defaultStudy: "serena@cancer37:test",
+    // mode: "development",
     // defaultStudy: "reference_grch37_test:test",
     // The order, title and nested submenus are respected
     menu: [
@@ -155,24 +155,24 @@ const application = {
                 //     icon: "",
                 //     visibility: "public"
                 // },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Association Analysis",
-                    category: true,
-                    id: "cat-analysis",
-                    visibility: "public"
-                },
-                {
-                    id: "gwas",
-                    title: "Genome-Wide Association Study (GWAS)",
-                    acronym: "GWAS",
-                    description: "Study of a genome-wide set of genetic variants in different individuals to see if any variant is associated with a trait",
-                    icon: "",
-                    visibility: "public"
-                },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Association Analysis",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "gwas",
+                //     title: "Genome-Wide Association Study (GWAS)",
+                //     acronym: "GWAS",
+                //     description: "Study of a genome-wide set of genetic variants in different individuals to see if any variant is associated with a trait",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 // {
                 //     id: "tdt",
                 //     title: "Family-Based Association (TDT)",
@@ -181,66 +181,65 @@ const application = {
                 //     icon: "",
                 //     visibility: "public"
                 // },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Sample Analysis",
-                    category: true,
-                    id: "cat-analysis",
-                    visibility: "public"
-                },
-                {
-                    id: "knockout",
-                    title: "Knockout Analysis",
-                    acronym: "KO",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "sample-eligibility",
-                    title: "Eligibility Analysis",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Individual Analysis",
-                    category: true,
-                    id: "cat-analysis",
-                    visibility: "public"
-                },
-                {
-                    id: "inferred-sex",
-                    title: "Sex Inference",
-                    acronym: "SI",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "individual-relatedness",
-                    title: "Relatedness",
-                    acronym: "RL",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "mendelian-errors",
-                    title: "Mendelian Errors",
-                    acronym: "ME",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Sample Analysis",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "knockout",
+                //     title: "Knockout Analysis",
+                //     acronym: "KO",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "sample-eligibility",
+                //     title: "Eligibility Analysis",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Individual Analysis",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "inferred-sex",
+                //     title: "Sex Inference",
+                //     acronym: "SI",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "individual-relatedness",
+                //     title: "Relatedness",
+                //     acronym: "RL",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "mendelian-errors",
+                //     title: "Mendelian Errors",
+                //     acronym: "ME",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 {
                     separator: true,
                     visibility: "public"
@@ -259,24 +258,24 @@ const application = {
                     icon: "aggregation.svg",
                     visibility: "public"
                 },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Clinical Interpretation",
-                    category: true,
-                    id: "cat-analysis",
-                    visibility: "public"
-                },
-                {
-                    id: "rd-tiering",
-                    title: "RD Tiering",
-                    acronym: "RDT",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Clinical Interpretation",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "rd-tiering",
+                //     title: "RD Tiering",
+                //     acronym: "RDT",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 // {
                 //     id: "team",
                 //     title: "TEAM",
@@ -381,18 +380,18 @@ const application = {
                     icon: "",
                     visibility: "public",
                 },
-                {
-                    id: "beacon",
-                    title: "GA4GH Beacon",
-                    description: "",
-                    icon: "beacon.svg",
-                    visibility: "public"
-                }
+                // {
+                //     id: "beacon",
+                //     title: "GA4GH Beacon",
+                //     description: "",
+                //     icon: "beacon.svg",
+                //     visibility: "public"
+                // }
             ]
         },
         {
             id: "clinical",
-            title: "Clinical Analysis",
+            title: "Steiner Clinical Analysis",
             description: "",
             icon: "interpretation_portal.svg",
             visibility: "public",
@@ -411,14 +410,14 @@ const application = {
                     description: "",
                     visibility: "public"
                 },
-                {
-                    id: "clinical-analysis-writer",
-                    title: "Create Case",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                },
+                // {
+                //     id: "clinical-analysis-writer",
+                //     title: "Create Case",
+                //     acronym: "",
+                //     icon: "",
+                //     description: "",
+                //     visibility: "public"
+                // },
                 {
                     separator: true,
                     visibility: "public"
@@ -431,7 +430,7 @@ const application = {
                 },
                 {
                     id: "interpreter",
-                    title: "Variant Interpreter",
+                    title: "Steiner Variant Interpreter",
                     acronym: "",
                     icon: "",
                     description: "",
@@ -457,52 +456,52 @@ const application = {
                 // }
             ]
         },
-        {
-            id: "alignment",
-            title: "Alignment",
-            description: "",
-            icon: "alignment.svg",
-            visibility: "public",
-            submenu: [
-                {
-                    title: "Data Management",
-                    category: true,
-                    id: "cat-alignment",
-                    visibility: "public"
-                },
-                {
-                    id: "alignment-index",
-                    title: "Alignment Index",
-                    description: "Create a .bai index file.",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "coverage-index",
-                    title: "Coverage Index",
-                    description: "Precompute coverage in a BigWig file",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Summary Stats",
-                    category: true,
-                    id: "cat-alignment",
-                    visibility: "public"
-                },
-                {
-                    id: "alignment-stats",
-                    title: "Alignment Stats",
-                    description: "Compute BAM stats using samtools",
-                    icon: "",
-                    visibility: "public"
-                },
-            ]
-        },
+        // {
+        //     id: "alignment",
+        //     title: "Alignment",
+        //     description: "",
+        //     icon: "alignment.svg",
+        //     visibility: "public",
+        //     submenu: [
+        //         {
+        //             title: "Data Management",
+        //             category: true,
+        //             id: "cat-alignment",
+        //             visibility: "public"
+        //         },
+        //         {
+        //             id: "alignment-index",
+        //             title: "Alignment Index",
+        //             description: "Create a .bai index file.",
+        //             icon: "",
+        //             visibility: "public"
+        //         },
+        //         {
+        //             id: "coverage-index",
+        //             title: "Coverage Index",
+        //             description: "Precompute coverage in a BigWig file",
+        //             icon: "",
+        //             visibility: "public"
+        //         },
+        //         {
+        //             separator: true,
+        //             visibility: "public"
+        //         },
+        //         {
+        //             title: "Summary Stats",
+        //             category: true,
+        //             id: "cat-alignment",
+        //             visibility: "public"
+        //         },
+        //         {
+        //             id: "alignment-stats",
+        //             title: "Alignment Stats",
+        //             description: "Compute BAM stats using samtools",
+        //             icon: "",
+        //             visibility: "public"
+        //         },
+        //     ]
+        // },
         {
             id: "catalog",
             title: "Catalog",
