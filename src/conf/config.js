@@ -20,7 +20,7 @@ const cellbase = {
 };
 
 const opencga = {
-    // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
+    //host: "https://eglh.app.zettagenomics.com/opencga", // public instance
     host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
     version: "v2",
     serverVersion: "1.4",
@@ -78,7 +78,7 @@ const application = {
     title: "IVA",
     version: "v2.0.0-beta",
     logo: "img/iva.svg",
-    defaultStudy: "corpasome",
+    defaultStudy: "demo@family:corpasome",
     // defaultStudy: "reference_grch37_test:test",
     // The order, title and nested submenus are respected
     menu: [
