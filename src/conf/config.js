@@ -321,39 +321,39 @@ const application = {
                     icon: "",
                     visibility: "public"
                 },
-                {
-                    id: "family-qc",
-                    title: "Family Quality Control",
-                    description: "Calculate different genetic checks and metrics and store data in Family Catalog",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "External Tools",
-                    category: true,
-                    id: "cat-analysis",
-                    visibility: "public"
-                },
-                {
-                    id: "plink",
-                    title: "Plink",
-                    acronym: "Pl",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
-                {
-                    id: "gatk",
-                    title: "GATK",
-                    acronym: "GT",
-                    description: "",
-                    icon: "",
-                    visibility: "public"
-                },
+                // {
+                //     id: "family-qc",
+                //     title: "Family Quality Control",
+                //     description: "Calculate different genetic checks and metrics and store data in Family Catalog",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "External Tools",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "plink",
+                //     title: "Plink",
+                //     acronym: "Pl",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "gatk",
+                //     title: "GATK",
+                //     acronym: "GT",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
                 {
                     separator: true,
                     visibility: "public"
@@ -372,14 +372,14 @@ const application = {
                     icon: "",
                     visibility: "public"
                 },
-                {
-                    id: "variant-stats-exporter",
-                    title: "Variant Stats Exporter",
-                    acronym: "VSE",
-                    description: "Export variant stats for different cohorts",
-                    icon: "",
-                    visibility: "public",
-                },
+                // {
+                //     id: "variant-stats-exporter",
+                //     title: "Variant Stats Exporter",
+                //     acronym: "VSE",
+                //     description: "Export variant stats for different cohorts",
+                //     icon: "",
+                //     visibility: "public",
+                // },
                 // {
                 //     id: "beacon",
                 //     title: "GA4GH Beacon",
