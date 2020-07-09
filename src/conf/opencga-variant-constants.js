@@ -376,9 +376,9 @@ const populationFrequencies = {
                 {
                     id: "NFE", title: "Non-Finnish European [NFE]"
                 },
-                {
-                    id: "SAS", title: "South Asian [SAS]"
-                }
+                // {
+                //     id: "SAS", title: "South Asian [SAS]"
+                // }
             ]
         }
     ]
