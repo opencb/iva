@@ -23,7 +23,9 @@ const opencga = {
     // host: "https://re-opencgahadoop.gel.zone/opencga-test",
     // host: "http://re-prod-opencgahadoop-tomcat-01.gel.zone:8080/opencga-test",
     // host: "https://re-opencgahadoop.gel.zone/opencga",
-    host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
+    host: "http://175.25.1.6/opencga",
+    // host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
+    // host: "http://localhost:9090/opencga", // private instance 175.25.1.6
     version: "v2",
     serverVersion: "1.4",
 
@@ -112,8 +114,13 @@ const application = {
     title: "IVA",
     version: "v2.0.0-beta",
     logo: "img/iva.svg",
+<<<<<<< HEAD
     companyLogo: "img/Genomics-England-logo-2015-white.png",
     // defaultStudy: "family:corpasome",
+=======
+    // defaultStudy: "demo@family:corpasome",
+    mode: "development",
+>>>>>>> develop
     // defaultStudy: "reference_grch37_test:test",
     // The order, title and nested submenus are respected
     menu: [
