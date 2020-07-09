@@ -1636,7 +1636,7 @@ data-form h3,
     overflow: hidden;
 }
 .file-manager .content {
-    width: 200px;
+    width: 210px;
 }
 
 .file-manager .name {
@@ -1668,13 +1668,17 @@ data-form h3,
     color: #fff;
     text-align: center;
     margin-top: 3px;
-    width: 66px;
+    width: 45px;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 .file-manager .file.active {
     background-color: #626269;
     outline: thick solid #d0d0d0;
+}
+
+.file-manager-tree {
+    border-right: 1px solid gainsboro;
 }
 
 .file-manager-tree ul {
@@ -1727,6 +1731,10 @@ data-form h3,
 
 .file-manager-tree .file.active {
     color: black;
+}
+
+.opencga-file-manager .opencga-file-view {
+    margin-left: 5px;
 }
 
 /* jobs-monitor*/
