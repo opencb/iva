@@ -331,7 +331,7 @@ class IvaApp extends LitElement {
 
     opencgaSessionObserver() {
         this.renderHashFragments();
-        //this.queries = {};
+        this.queries = {};
         this.requestUpdate();
     }
 
@@ -1383,8 +1383,7 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.clinicalAnalysisPortal ? html`
                     <div class="content" id="clinicalAnalysisPortal">
                         <opencga-clinical-portal .opencgaSession="${this.opencgaSession}"
-                                                .opencgaClient="${this.opencgaSession.opencgaClient}"
-                                                .config="${this.config.tools.clinicalPortal}"
+                                                .config="${OpencgaClinicalPortalConfig}"
                                                 .cellbaseClient="${this.cellbaseClient}">
                         </opencga-clinical-portal>
                     </div>

@@ -440,8 +440,8 @@ const tools = {
             style: "font-size: 12px"
         }
     },
-    clinicalPortal: {
-        title: "Clinical Interpretation Portal",
+/*    clinicalPortal: {
+        title: "Case Portal",
         reviewCases: {
             grid: {
                 columns: {
@@ -449,7 +449,7 @@ const tools = {
                 }
             }
         }
-    },
+    },*/
     //TODO remove
     facet: {
         // title: "Facet Analysis",
