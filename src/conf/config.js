@@ -79,7 +79,7 @@ const application = {
     title: "IVA",
     version: "v2.0.0-beta",
     logo: "img/iva.svg",
-    // defaultStudy: "demo@family:corpasome",
+    defaultStudy: "demo@family:corpasome",
     mode: "development",
     // defaultStudy: "reference_grch37_test:test",
     // The order, title and nested submenus are respected
@@ -393,7 +393,7 @@ const application = {
         },
         {
             id: "clinical",
-            title: "Clinical Analysis",
+            title: "Case Analysis",
             description: "",
             icon: "interpretation_portal.svg",
             visibility: "public",
@@ -406,7 +406,7 @@ const application = {
                 },
                 {
                     id: "clinicalAnalysisPortal",
-                    title: "Interpretation Portal",
+                    title: "Case Portal",
                     acronym: "",
                     icon: "",
                     description: "",
@@ -432,7 +432,7 @@ const application = {
                 },
                 {
                     id: "interpreter",
-                    title: "Variant Interpreter",
+                    title: "Case Interpreter",
                     acronym: "",
                     icon: "",
                     description: "",
