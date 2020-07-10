@@ -111,15 +111,9 @@ const application = {
     title: "IVA",
     version: "v2.0.0-beta",
     logo: "img/iva.svg",
-<<<<<<< HEAD
     companyLogo: "img/Genomics-England-logo-2015-white.png",
     defaultStudy: "re-opencgahadoop@100k_genomes_grch37_germline:RD37",
     // mode: "development",
-=======
-    defaultStudy: "demo@family:corpasome",
-    mode: "development",
-    // defaultStudy: "reference_grch37_test:test",
->>>>>>> develop
     // The order, title and nested submenus are respected
     menu: [
         {
