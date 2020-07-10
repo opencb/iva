@@ -393,7 +393,7 @@ const application = {
         },
         {
             id: "clinical",
-            title: "Case Analysis",
+            title: "Clinical Interpretation",
             description: "",
             icon: "interpretation_portal.svg",
             visibility: "public",
