@@ -1780,6 +1780,7 @@ class IvaApp extends LitElement {
                                                 .cellbaseClient="${this.cellbaseClient}"
                                                 .clinicalAnalysis="${this.clinicalAnalysis}"
                                                 .clinicalAnalysisId="${this.clinicalAnalysisId}"
+                                                .config="${VariantInterpreterConfig}"
                                                 @selectClinicalAnalysis="${this.onSelectClinicalAnalysis}">
                         </variant-interpreter>
                     </div>

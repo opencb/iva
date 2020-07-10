@@ -452,7 +452,7 @@ h3.page-title {
 }
 
 /********** active-filters  *************/
-.active-filter-button:hover {
+.active-filter-button:not(.active-filter-button[disabled]):hover {
     text-decoration: line-through;
 }
 
@@ -1870,3 +1870,6 @@ data-form h3,
         transform: scale(.2) translate(200%, -200%);
     }
 }
+
+/********** variant-interpreter-landing  *************/
+
