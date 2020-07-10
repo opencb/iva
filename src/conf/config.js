@@ -20,7 +20,7 @@ const cellbase = {
 };
 
 const opencga = {
-    //host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod-legacy",
+    // host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
     host: "http://172.25.1.6/opencga",
     // host: "http://localhost:9090/opencga",
     version: "v2",
