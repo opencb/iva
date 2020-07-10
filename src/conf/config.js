@@ -424,7 +424,7 @@ const application = {
         },
         {
             id: "clinical",
-            title: "Clinical Interpretation",
+            title: "Case Interpretation",
             description: "",
             icon: "interpretation_portal.svg",
             visibility: "public",
@@ -456,7 +456,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    title: "Clinical Interpretation",
+                    title: "Case Interpretation",
                     category: true,
                     id: "cat-clinical",
                     visibility: "public"
