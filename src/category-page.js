@@ -158,7 +158,7 @@ export default class CategoryPage extends LitElement {
                             </div>
                             <div class="content">
                                 <div class="title uppercase">${item.title}</div>
-                                <div class="description">${this.renderHTML(item.description || "Lorem ipsom sic dolor")}</div>
+                                <div class="description">${this.renderHTML(item.description || "")}</div>
                             </div>
                     </a>
                     ` ) : null}

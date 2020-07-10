@@ -20,7 +20,7 @@ const cellbase = {
 };
 
 const opencga = {
-    //host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod-legacy",
+    //host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
     host: "http://172.25.1.6/opencga",
     // host: "http://localhost:9090/opencga",
     version: "v2",
@@ -424,17 +424,17 @@ const application = {
         },
         {
             id: "clinical",
-            title: "Clinical Interpretation",
+            title: "Case Interpretation",
             description: "",
             icon: "interpretation_portal.svg",
             visibility: "public",
             submenu: [
-                {
+                /*{
                     title: "Clinical Management",
                     category: true,
                     id: "cat-clinical",
                     visibility: "public"
-                },
+                },*/
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
@@ -451,12 +451,12 @@ const application = {
                 //     description: "",
                 //     visibility: "public"
                 // },
-                {
+                /*{
                     separator: true,
                     visibility: "public"
                 },
                 {
-                    title: "Clinical Interpretation",
+                    title: "Case Interpretation",
                     category: true,
                     id: "cat-clinical",
                     visibility: "public"
@@ -468,7 +468,7 @@ const application = {
                     icon: "",
                     description: "",
                     visibility: "public"
-                },
+                },*/
                 // {
                 //     separator: true,
                 //     visibility: "public"
