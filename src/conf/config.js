@@ -429,12 +429,12 @@ const application = {
             icon: "interpretation_portal.svg",
             visibility: "public",
             submenu: [
-                {
-                    title: "Clinical Management",
-                    category: true,
-                    id: "cat-clinical",
-                    visibility: "public"
-                },
+                // {
+                //     title: "Clinical Management",
+                //     category: true,
+                //     id: "cat-clinical",
+                //     visibility: "public"
+                // },
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
@@ -451,24 +451,24 @@ const application = {
                 //     description: "",
                 //     visibility: "public"
                 // },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Case Interpretation",
-                    category: true,
-                    id: "cat-clinical",
-                    visibility: "public"
-                },
-                {
-                    id: "interpreter",
-                    title: "Case Interpreter",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Case Interpretation",
+                //     category: true,
+                //     id: "cat-clinical",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "interpreter",
+                //     title: "Case Interpreter",
+                //     acronym: "",
+                //     icon: "",
+                //     description: "",
+                //     visibility: "public"
+                // },
                 // {
                 //     separator: true,
                 //     visibility: "public"
