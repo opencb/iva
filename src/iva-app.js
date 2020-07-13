@@ -580,7 +580,7 @@ class IvaApp extends LitElement {
     renderHashFragments() {
         console.log("renderHashFragments - DEBUG", this.tool);
         let hashFrag = this.tool;
-        if (UtilsNew.isNotUndefined(this.opencgaSession) && UtilsNew.isNotUndefined(this.opencgaSession.project) && UtilsNew.isNotEmpty(this.opencgaSession.project.alias)) {
+        if (this.opencgaSession?.project?.alias) {
 
             hashFrag += "/" + this.opencgaSession.project.id;
             if (UtilsNew.isNotUndefined(this.opencgaSession.study) && UtilsNew.isNotEmpty(this.opencgaSession.study.alias)) {
@@ -613,15 +613,15 @@ class IvaApp extends LitElement {
         const [hashTool, hashProject, hashStudy, feature] = arr;
 
         // Stopping the recursive call
-        if (hashTool !== this.tool || (UtilsNew.isNotUndefined(this.opencgaSession) && UtilsNew.isNotUndefined(this.opencgaSession.project) && hashProject !== this.opencgaSession.project.alias) ||
+        if (hashTool !== this.tool || (this.opencgaSession?.project && hashProject !== this.opencgaSession.project.alias) ||
             (UtilsNew.isNotUndefined(this.study) && hashStudy !== this.opencgaSession.study.alias)) {
             if (arr.length > 1) {
                 // Field 'project' is being observed, just in case Polymer triggers
                 // an unnecessary event we can check they are really different
-                if (ctx.opencgaSession.project.alias !== hashProject) {
+                if (ctx.opencgaSession?.project?.alias && ctx.opencgaSession.project.alias !== hashProject) {
                     ctx.opencgaSession.project.alias = hashProject;
                 }
-                if (arr.length > 2 && ctx.opencgaSession.study !== hashStudy) {
+                if (ctx.opencgaSession?.study && arr.length > 2 && ctx.opencgaSession.study !== hashStudy) {
                     for (let i = 0; i < ctx.opencgaSession.projects.length; i++) {
                         if (ctx.opencgaSession.projects[i].name === ctx.opencgaSession.project.name ||
                             ctx.opencgaSession.projects[i].alias === ctx.opencgaSession.project.alias) {
