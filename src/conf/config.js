@@ -429,21 +429,12 @@ const application = {
             icon: "interpretation_portal.svg",
             visibility: "public",
             submenu: [
-<<<<<<< HEAD
                 // {
                 //     title: "Clinical Management",
                 //     category: true,
                 //     id: "cat-clinical",
                 //     visibility: "public"
                 // },
-=======
-                /*{
-                    title: "Clinical Management",
-                    category: true,
-                    id: "cat-clinical",
-                    visibility: "public"
-                },*/
->>>>>>> e004f088837c5f3f840f5cb7db83189c47500fae
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
@@ -460,7 +451,6 @@ const application = {
                 //     description: "",
                 //     visibility: "public"
                 // },
-<<<<<<< HEAD
                 // {
                 //     separator: true,
                 //     visibility: "public"
@@ -479,26 +469,6 @@ const application = {
                 //     description: "",
                 //     visibility: "public"
                 // },
-=======
-                /*{
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Case Interpretation",
-                    category: true,
-                    id: "cat-clinical",
-                    visibility: "public"
-                },
-                {
-                    id: "interpreter",
-                    title: "Case Interpreter",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                },*/
->>>>>>> e004f088837c5f3f840f5cb7db83189c47500fae
                 // {
                 //     separator: true,
                 //     visibility: "public"
