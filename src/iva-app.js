@@ -1045,14 +1045,15 @@ class IvaApp extends LitElement {
                 }
                 
                 #side-nav .nav a {
-                    padding: 8px;
+                    padding: 6px 1px 6px 1px;
                     text-decoration: none;
                     color: #818181;
                     display: block;
                     transition: 0.3s;
-                    font-size: 14px;
+                    font-size: 13px;
                     text-transform: uppercase;
                     letter-spacing: 2px;
+                    letter-spacing: .2em;
                 }
                 
                 #side-nav .nav a:hover {            
@@ -1782,6 +1783,7 @@ class IvaApp extends LitElement {
                                                 .cellbaseClient="${this.cellbaseClient}"
                                                 .clinicalAnalysis="${this.clinicalAnalysis}"
                                                 .clinicalAnalysisId="${this.clinicalAnalysisId}"
+                                                .config="${VariantInterpreterConfig}"
                                                 @selectClinicalAnalysis="${this.onSelectClinicalAnalysis}">
                         </variant-interpreter>
                     </div>
