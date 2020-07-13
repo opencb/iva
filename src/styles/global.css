@@ -39,6 +39,10 @@ a.disabled, a.disabled:hover {
     padding: 5px;
 }
 
+.mag5 {
+    margin: 5px;
+}
+
 input[type="text"] {
     width: 100%;
 }
@@ -432,6 +436,29 @@ h3.page-title {
     width: 40px;
     font-size: 40px;
     vertical-align: middle;
+}
+
+.variant-interpreter-interpretation > tool-header > .page-title {
+    height: 5em;
+}
+
+.variant-interpreter-interpretation > tool-header > .page-title h2 {
+    float: left;
+}
+
+.variant-interpreter-interpretation > tool-header > .page-title .page-title-right i{
+   font-size: 14px;
+}
+.variant-interpreter-interpretation .page-title-right {
+    padding: 7px;
+}
+.variant-interpreter-interpretation .page-title-right a,
+.variant-interpreter-interpretation .page-title-right button{
+    background: var(--main-bg-color);
+}
+
+.page-title-right {
+    float: right;
 }
 
 .search-button-wrapper {
