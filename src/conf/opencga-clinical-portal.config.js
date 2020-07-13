@@ -1,3 +1,3 @@
 const OpencgaClinicalPortalConfig = {
-    showCreate: true
+    showCreate: false,
 };

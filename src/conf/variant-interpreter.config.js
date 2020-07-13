@@ -1,7 +1,7 @@
 const VariantInterpreterConfig = {
     title: "Case Interpreter",
     icon: "fas fa-user-md",
-    clinicalAnalysisSelector: true,
+    clinicalAnalysisSelector: false,
     tools: [
         {
             id: "select",
