@@ -57,7 +57,12 @@ export default class WelcomeWeb extends LitElement {
     opencgaSessionObserver() {
         //console.log("opencgaSessionObserver")
         //console.log(this.opencgaSession)
-        this.checkProjects = !!(UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project));
+        this._checkProjects();
+    }
+
+    _checkProjects() {
+        return !!(UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project));
+
     }
 
     onExampleClick(e) {
@@ -219,7 +224,7 @@ export default class WelcomeWeb extends LitElement {
             <!--placeholder="Search for a gene, transcript, protein or a variant" on-blur="onBlur" on-keyup="onKeyup">-->
             <!--<br>-->
         
-            <!--${false && this.checkProjects ? html`
+            <!--${false && this._checkProjects() ? html`
                 <div>
                     <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist" @change="${this.callAutocomplete}" placeholder="Search for gene symbols, genomic regions or variants" value="">
                         <datalist id="FeatureDatalist"></datalist>
@@ -237,7 +242,7 @@ export default class WelcomeWeb extends LitElement {
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
                 ${this.config.menu.filter(this.isVisible).map( item => html`
                             ${item.submenu ? html`
-                                <a class="icon-wrapper" href="#cat-${item.id}/${this.checkProjects ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
+                                <a class="icon-wrapper" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
                                     <div class="hi-icon">
                                         <img src="img/tools/icons/${item.icon}" /> 
                                     </div>
@@ -245,7 +250,7 @@ export default class WelcomeWeb extends LitElement {
                                     <span class="smaller"></span>
                                 </a>
                                 ` : html`
-                                    <a class="icon-wrapper" href="#${item.id}/${this.checkProjects ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
+                                    <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
                                     <div class="hi-icon">
                                         <img src="img/tools/icons/${item.icon}" /> 
                                     </div>
