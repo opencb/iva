@@ -963,6 +963,17 @@ opencga-facet .panel-body > .form-group:not(:first-child) {
     font-size: 13px;
 }
 
+/********** annotation-filter-modal ************/
+.map-field-input {
+
+}
+.map-field-wrapper {
+    margin-: 10px 0;
+}
+.map-field-inputs {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
 
 /********** checkbox widget TODO remove ************/
 /*

@@ -418,7 +418,8 @@ const tooltips = {
     cadd: "Raw values have relative meaning, with higher values indicating that a variant is more likely to be " +
         "simulated (or not observed) and therefore more likely to have deleterious effects. If discovering causal variants " +
         "within an individual, or small groups, of exomes or genomes te use of the scaled CADD score is recommended",
-    cohort: "-" //TODO add tooltip
+    cohort: "Filter variants by the cohort alternate allele frequency",
+    sample: "Filter variants by sample genotypes or mode of inheritance (Compounf Het., de Novo, ...)"
 };
 
 const beacon = {

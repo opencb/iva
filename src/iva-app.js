@@ -1307,11 +1307,11 @@ class IvaApp extends LitElement {
             </nav>
             <!-- End of navigation bar -->
             <!--Breadcrumb
-            ${this.config.breadcrumb.visible && this.opencgaSession && this.opencgaSession.projects ? html`
+            ${false && this.config.breadcrumb.visible && this.opencgaSession && this.opencgaSession.projects ? html`
                 <opencga-breadcrumb .config="${this.config}" .opencgaSession="${this.opencgaSession}"></opencga-breadcrumb>
             ` : null}
--->
-             <!-- <div class="alert alert-info">${JSON.stringify(this.queries)}</div> --> 
+            -->
+            <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>--> 
 
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
