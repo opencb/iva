@@ -1251,7 +1251,7 @@ class IvaApp extends LitElement {
                                     <ul class="dropdown-menu">
                                         ${this.config.about.links && this.config.about.links.map(link => html`
                                             <li>
-                                                <a href="${link.url}"><i class="${link.icon} icon-padding" aria-hidden="true"></i> ${link.name}</a>
+                                                <a href="${link.url}" target="_blank"><i class="${link.icon} icon-padding" aria-hidden="true"></i> ${link.name}</a>
                                             </li>
                                         `)}
                                     </ul>
