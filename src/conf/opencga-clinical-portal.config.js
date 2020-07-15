@@ -47,7 +47,10 @@ const OpencgaClinicalPortalConfig = {
             pageList: [5, 10, 25],
             detailView: false,
             multiSelection: false,
-            showDeleteButton: false
+            showDeleteButton: false,
+            columns: {
+                hidden: ["priority", "assignedTo"]
+            }
         }
     }
 };
