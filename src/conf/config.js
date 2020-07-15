@@ -81,6 +81,7 @@ const application = {
     logo: "img/iva.svg",
     defaultStudy: "demo@family:corpasome",
     mode: "development",
+    appConfig: "opencb",
     // defaultStudy: "reference_grch37_test:test",
     // The order, title and nested submenus are respected
     menu: [
