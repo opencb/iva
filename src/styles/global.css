@@ -1931,5 +1931,11 @@ data-form h3,
     }
 }
 
-/********** variant-interpreter-landing  *************/
-
+/********** variant-interpreter  *************/
+.zygosity-formatter {
+    width: 250px;
+}
+.zygosity-formatter .col-md-5,
+.zygosity-formatter .col-md-7{
+    padding: 0;
+}

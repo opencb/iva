@@ -17,9 +17,9 @@ const OpencgaClinicalPortalConfig = {
                         {
                             id: "proband"
                         },
-                        /*{
+                        {
                             id: "family"
-                        },*/
+                        },
                         {
                             id: "disorder"
                         },
@@ -34,12 +34,21 @@ const OpencgaClinicalPortalConfig = {
                         },
                         {
                             id: "assignee"
-                        }*/
+                        },
+                        {
+                            id: "status"
+                        },*/
                     ]
                 }
             ],
             examples: [
-
+                {
+                    name: "Intellectual disability",
+                    active: false,
+                    query: {
+                        disorder: "Intellectual disability"
+                    }
+                }
             ]
         },
         grid: {
@@ -49,8 +58,9 @@ const OpencgaClinicalPortalConfig = {
             multiSelection: false,
             showDeleteButton: false,
             columns: {
-                hidden: ["priority", "assignedTo"]
-            }
+                hidden: ["type", "interpretation", "status", "priority", "assignedTo", "creationDate", "dueDate"]
+            },
+            showReport: false
         }
     }
 };

@@ -1216,7 +1216,7 @@ class IvaApp extends LitElement {
                             ` : null}
                                                         
                             <!-- Jobs -->
-                            ${this.opencgaSession && this.opencgaSession.token ? html`
+                            ${application.appConfig === "opencb" && this.opencgaSession && this.opencgaSession.token ? html`
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
                             ` : null}
                             
@@ -1232,7 +1232,7 @@ class IvaApp extends LitElement {
                                     </form>
                             ` : null}
                             
-                            ${this.opencgaSession?.token ? html`
+                            ${this.opencgaSession?.token && application.menu.find( item => item.id === "files") ? html`
                                 <li>
                                     <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
                                         <i class="fas fa-folder-open icon-padding"></i>
@@ -1284,9 +1284,11 @@ class IvaApp extends LitElement {
                                         <li>
                                             <a href="#projects"><i class="fa fa-database icon-padding" aria-hidden="true"></i> Projects</a>
                                         </li>
-                                        <li>
-                                            <a href="#file-manager"><i class="fas fa-folder-open icon-padding"></i> File Explorer</a>
-                                        </li>
+                                        ${application.appConfig === "opencb" ? html`
+                                            <li>
+                                                <a href="#file-manager"><i class="fas fa-folder-open icon-padding"></i> File Explorer</a>
+                                            </li>
+                                        ` : null }
                                         <li role="separator" class="divider"></li>
                                         <!--
                                             <li>

@@ -556,12 +556,12 @@ const application = {
                     category: true,
                     id: "cat-catalog",
                     visibility: "public"
-                },
+                },/*
                 {
                     id: "files",
                     title: "File Browser",
                     visibility: "public"
-                },
+                },*/
                 {
                     id: "samples",
                     title: "Sample Browser",
