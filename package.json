@@ -40,6 +40,7 @@
     "bootstrap-table": "^1.16.0",
     "bootstrap-treeview": "1.2.0",
     "bootstrap-validator": "~0.11.9",
+    "lodash": "^4.17.19",
     "cookies-js": "~1.2.3",
     "countup.js": "^2.0.4",
     "crypto-js": "~3.1.9-1",
