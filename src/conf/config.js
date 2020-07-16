@@ -603,9 +603,9 @@ const application = {
         dropdown: true,
         links: [
             //{id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},
-            {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva", icon: "fa fa-book"},
-            {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
-            /*{id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: "fa fa-archive"},
+            {id: "documentation", name: "Documentation", url: "https://re-confluence.gel.zone/pages/viewpage.action?pageId=19628521", icon: "fa fa-book"},
+            /*{id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
+            {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: "fa fa-archive"},
             {id: "about", name: "About", url: "#about", icon: "fa fa-info-circle"},
             {id: "terms", name: "Terms", url: "#terms", icon: "fa fa-file-alt"},
             {id: "contact", name: "Contact", url: "#contact", icon: "fa fa-envelope"},
