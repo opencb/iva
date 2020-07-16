@@ -542,7 +542,7 @@ const application = {
             visibility: "public",
             icon: "aggregation2.svg",
             submenu: [
-                {
+                /*{
                     id: "projects",
                     title: "Projects",
                     visibility: "public"
@@ -550,7 +550,7 @@ const application = {
                 {
                     separator: true,
                     visibility: "public"
-                },
+                },*/
                 {
                     title: "Browsers",
                     category: true,
