@@ -389,9 +389,16 @@ class IvaApp extends LitElement {
                 _this.config.menu = application.menu.slice();
                 _this.config = {..._this.config};
             })
-            .catch(function(response) {
-                console.log("An error when creating the OpenCGA session:");
-                console.error(response);
+            .catch( e => {
+                console.log("An error occurred creating the OpenCGA session:");
+                const restResponse = e.value;
+                console.error(restResponse);
+                if (restResponse?.getEvents("ERROR")?.length) {
+                    const msg = restResponse.getEvents("ERROR").map(error => error.message).join("<br>");
+                    new NotificationQueue().push(e.message, msg, "error");
+                } else {
+                    new NotificationQueue().push("Server error!", null, "error");
+                }
             });
     }
 
