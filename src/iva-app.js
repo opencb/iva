@@ -1288,10 +1288,10 @@ class IvaApp extends LitElement {
                                         <li>
                                             <a href="#account"><i class="fa fa-user icon-padding" aria-hidden="true"></i> Your account</a>
                                         </li>
-                                        <li>
-                                            <a href="#projects"><i class="fa fa-database icon-padding" aria-hidden="true"></i> Projects</a>
-                                        </li>
                                         ${application.appConfig === "opencb" ? html`
+                                            <li>
+                                                <a href="#projects"><i class="fa fa-database icon-padding" aria-hidden="true"></i> Projects</a>
+                                            </li>
                                             <li>
                                                 <a href="#file-manager"><i class="fas fa-folder-open icon-padding"></i> File Explorer</a>
                                             </li>
