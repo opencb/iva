@@ -451,7 +451,7 @@ h3.page-title {
 }
 
 .variant-interpreter-interpretation > tool-header > .page-title .page-title-right i{
-   font-size: 14px;
+    font-size: 14px;
 }
 .variant-interpreter-interpretation .page-title-right {
     padding: 7px;
@@ -1962,4 +1962,13 @@ opencga-gene-view h3.section-title /* TODO refactor */{
     font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+/********** variant-interpreter  *************/
+.zygosity-formatter {
+    width: 250px;
+}
+.zygosity-formatter .col-md-5,
+.zygosity-formatter .col-md-7{
+    padding: 0;
 }
