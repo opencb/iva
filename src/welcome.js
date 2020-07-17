@@ -212,7 +212,7 @@ export default class WelcomeWeb extends LitElement {
                 <div class="iva-logo">
                     <img src="./img/iva.svg" />
                     <p class="version">
-                        <span class="bracket">( </span><span>${this.version}</span><span class="bracket"> )</span>
+                        <span class="bracket">(</span><span>${this.version}</span><span class="bracket">)</span>
                     </p>
                     <span class="subtitle">Interactive Variant Analysis</span>
                 </div>
