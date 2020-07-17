@@ -72,6 +72,10 @@ input[type="text"] {
     word-break: break-all;
 }
 
+.multi-line {
+    white-space: normal;
+}
+
 .bg-white {
     background: white !important;
 }
