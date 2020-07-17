@@ -577,7 +577,7 @@ const application = {
                     title: "Family Browser",
                     visibility: "public"
                 },
-                {
+                /*{
                     id: "cohorts",
                     title: "Cohort Browser",
                     visibility: "public"
@@ -591,7 +591,7 @@ const application = {
                     id: "jobs",
                     title: "Job Browser",
                     visibility: "public"
-                }
+                }*/
             ]
         },
     ],

@@ -31,7 +31,7 @@ const VariantInterpreterConfig = {
             acronym: "VB",
             description: "",
             icon: "fa fa-search"
-        },
+        },/*
         {
             id: "review",
             title: "Interpretation Review",
@@ -46,6 +46,6 @@ const VariantInterpreterConfig = {
             description: "",
             disabled: true,
             icon: "fa fa-file-alt"
-        }
+        }*/
     ]
 };
