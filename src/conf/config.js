@@ -76,10 +76,10 @@ const opencga = {
 };
 
 const application = {
-    title: "IVA",
+    title: "EMEE-GLH Data Portal",
     version: "v2.0.0",
     logo: "img/iva.svg",
-    defaultStudy: "demo@family:corpasome",
+    // defaultStudy: "pilot:rd",
     mode: "development",
     appConfig: "opencb",
     // defaultStudy: "reference_grch37_test:test",
