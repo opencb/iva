@@ -109,7 +109,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.0.0-beta",
+    version: "v2.0.0",
     logo: "img/iva.svg",
     companyLogo: "img/Genomics-England-logo-2015-white.png",
     defaultStudy: "re-opencgahadoop@100k_genomes_grch37_germline:RD37",

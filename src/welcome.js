@@ -212,7 +212,7 @@ export default class WelcomeWeb extends LitElement {
                 <div class="iva-logo">
                     <img src="./img/iva.svg" />
                     <p class="version">
-                        <span class="bracket">(</span><span>${this.version}</span><span class="bracket">)</span>
+                        <span class="bracket">( </span><span>${this.version}</span><span class="bracket"> )</span>
                     </p>
                     <span class="subtitle">Interactive Variant Analysis</span>
                 </div>
@@ -261,9 +261,16 @@ export default class WelcomeWeb extends LitElement {
                 `)}
             </div>
 
-            <div class="row text-center">
-                <a class="getting-started" href="#gettingstarted"><span>Getting started with IVA</span></a>
-            </div>
+            ${application.appConfig === "openscb" ? html`
+                <div class="row text-center">
+                    <a class="getting-started" href="#gettingstarted"><span>Getting started with IVA</span></a>
+                </div>
+            ` : html`
+                <div class="row text-center">
+                    <a class="getting-started" href="${this.config.about.links.find( link => link.id === "documentation").url}" target="_blank"><span>Documentation</span></a>
+                </div>
+            `}
+            
                        
            <!-- <h4>Note</h4>
             <small>
