@@ -77,7 +77,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.0.0-beta",
+    version: "v2.0.0",
     logo: "img/iva.svg",
     defaultStudy: "demo@family:corpasome",
     mode: "development",

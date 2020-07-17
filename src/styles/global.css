@@ -1231,6 +1231,7 @@ Toggle Changes
 
 #notifications-queue .alert p.details {
     color: #b6c1c9;
+    word-break: break-all;
 }
 
 #notifications-queue .alert a {
