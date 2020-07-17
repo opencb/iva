@@ -631,19 +631,13 @@ const application = {
     // Components in the welcome page
     welcomePageContent: `
         <p>
-            Please be aware that this is a pre-release version of IVA.
-        </p>
-
-        <p>
             The Interactive Variant Analysis tool (IVA) enables whole-genome variant browsing and analysis. Query across cohorts to find variants that segregate in family pedigrees, between cases and controls, or in sporadic samples. Utilise a range of filters; including population frequency, consequence type, mode of inheritance and phenotype associations. IVA and OpenCGA are part of the <a href="https://github.com/opencb" target="_blank">OpenCB</a> Project.
         </p>
-
         <p>
             The OpenCGA database currently holds all interpreted genomes that are available from the 100,000 Genomes
             Project from Genomics England. These are divided into the following studies: GRCh37 rare disease (RD37),
             GRCh38 rare disease (RD38), cancer germline GRCh38 (CG38), and cancer somatic GRCh38 (CS38).
         </p>
-
         <p>
             We are very keen to get user's feedback on IVA including:
         </p>
