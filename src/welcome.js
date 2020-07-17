@@ -261,7 +261,7 @@ export default class WelcomeWeb extends LitElement {
                 `)}
             </div>
 
-            ${application.appConfig === "openscb" ? html`
+            ${application.appConfig === "opencb" ? html`
                 <div class="row text-center">
                     <a class="getting-started" href="#gettingstarted"><span>Getting started with IVA</span></a>
                 </div>
