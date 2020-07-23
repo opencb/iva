@@ -76,6 +76,14 @@ input[type="text"] {
     white-space: normal;
 }
 
+.one-line {
+    white-space: nowrap !important;
+}
+
+.force-text-left {
+    text-align: left !important;
+}
+
 .bg-white {
     background: white !important;
 }
@@ -934,6 +942,12 @@ a#waffle-icon-wrapper {
 .bootstrap-table > .fixed-table-pagination .pagination{
 
 }
+
+/* fix the dropdown hidden in a bootstrap table */
+.force-overflow .fixed-table-body {
+    overflow: visible !important;
+}
+
 /* custom pagination-detail on top of the grid */
 .bootstrap-table.bootstrap3 .fixed-table-pagination:nth-child(2) .pagination-info {
     line-height: 1;
