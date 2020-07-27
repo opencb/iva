@@ -1984,11 +1984,14 @@ opencga-gene-view h3.section-title /* TODO refactor */{
     letter-spacing: 2px;
 }
 
-/********** variant-interpreter  *************/
-.zygosity-formatter {
+/********** TODO refactor. variant-interpreter tooltip quickfix  *************/
+.zygosity-formatter,
+.predictionTooltip-inner {
     width: 250px;
 }
 .zygosity-formatter .col-md-5,
-.zygosity-formatter .col-md-7{
+.predictionTooltip-inner .col-md-5,
+.zygosity-formatter .col-md-7
+.predictionTooltip-inner .col-md-7{
     padding: 0;
 }

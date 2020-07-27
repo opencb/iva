@@ -393,7 +393,7 @@ class IvaApp extends LitElement {
                 console.log("An error occurred creating the OpenCGA session:");
                 const restResponse = e.value;
                 console.error(restResponse);
-                if (restResponse?.getEvents("ERROR")?.length) {
+                if(restResponse.getEvents?.("ERROR")?.length) {
                     const msg = restResponse.getEvents("ERROR").map(error => error.message).join("<br>");
                     new NotificationQueue().push(e.message, msg, "error");
                 } else {
