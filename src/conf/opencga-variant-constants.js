@@ -384,7 +384,6 @@ const populationFrequencies = {
     ]
 };
 
-// TODO complete this
 const tooltips = {
     conservation: "<strong>PhyloP</strong> scores measure evolutionary conservation at individual alignment sites. The scores " +
         "are interpreted as follows compared to the evolution expected under neutral drift: positive scores (max 3.0) mean " +
