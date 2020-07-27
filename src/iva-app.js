@@ -35,6 +35,7 @@ import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome/reactome
 
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import {NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
@@ -1408,7 +1409,7 @@ class IvaApp extends LitElement {
                                                         .populationFrequencies="${this.config.populationFrequencies}"
                                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
                                                         .consequenceTypes="${this.config.consequenceTypes}"
-                                                        .config="${this.config.tools["rd-interpreter"]}"
+                                                        .config="${true}"
                                                         @gene="${this.geneSelected}"
                                                         @samplechange="${this.onSampleChange}">
                         </variant-rd-interpreter>
@@ -1432,8 +1433,7 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents.beacon ? html`
                     <div class="content" id="beacon">
-                        <variant-beacon .opencgaSession="${this.opencgaSession}"
-                                        .hosts="${this.config.tools.beacon.hosts}">
+                        <variant-beacon .opencgaSession="${this.opencgaSession}">
                         </variant-beacon>
                     </div>
                 ` : null}
@@ -1583,7 +1583,7 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.clinicalAnalysis ? html`
                     <div class="content" id="clinicalAnalysis">
                         <opencga-clinical-analysis-browser      .opencgaSession="${this.opencgaSession}"
-                                                                .config="${this.config.tools.clinicalAnalysisBrowser}"
+                                                                .config="${OpencgaClinicalAnalysisBrowserConfig}"
                                                                 .query="${this.queries["clinical-analysis"]}"
                                                                 @querySearch="${e => this.onQueryFilterSearch(e, "clinical-analysis")}"
                                                                 @activeFilterChange="${e => this.onQueryFilterSearch(e, "clinical-analysis")}">  
