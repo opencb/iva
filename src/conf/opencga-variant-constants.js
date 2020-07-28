@@ -436,10 +436,10 @@ const proteinSubstitutionScore = {
             tolerated: "green"
         },
         polyphen: {
-            probablyDamaging: "red",
-            possiblyDamaging: "darkorange",
-            benign: "green",
-            unknown: "black"
+            "probably damaging": "red",
+            "possibly damaging": "darkorange",
+            "benign": "green",
+            "unknown": "black"
         }
     }
 };
