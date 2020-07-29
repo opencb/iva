@@ -235,7 +235,8 @@ class IvaApp extends LitElement {
 
         // We need to listen to hash fragment changes to update the display and breadcrumb
         const _this = this;
-        window.onhashchange = function() {
+        window.onhashchange = function(e) {
+            //e.preventDefault();
             _this.hashFragmentListener(_this);
         };
 
@@ -556,6 +557,7 @@ class IvaApp extends LitElement {
     }
 
     changeTool(e) {
+        e.preventDefault()
         const target = e.currentTarget;
         $(".navbar-inverse ul > li", this).removeClass("active");
         $(target).parent("li").addClass("active");
@@ -688,6 +690,10 @@ class IvaApp extends LitElement {
 
         //debugger
         this.config = {...this.config};
+        // TODO quickfix to avoid hash browser scroll
+        $('body,html').animate({
+            scrollTop: 0
+        }, 1);
     }
 
     // TODO recheck what's the use for this
