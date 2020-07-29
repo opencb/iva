@@ -948,7 +948,10 @@ a#waffle-icon-wrapper {
     overflow: visible !important;
 }
 
-/* custom pagination-detail on top of the grid */
+/* Custom pagination-detail on top of the boostrap-table grids.
+   This removes the pager buttons on top pf the grids leaving only the counter of records.
+   nth-child(2) is the top pager while nth-child(4) would the bottom pager.
+*/
 .bootstrap-table.bootstrap3 .fixed-table-pagination:nth-child(2) .pagination-info {
     line-height: 1;
 }
