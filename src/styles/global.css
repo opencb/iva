@@ -496,8 +496,12 @@ h3.page-title {
 }
 
 /********** active-filters  *************/
-.active-filter-button:not(.active-filter-button[disabled]):hover {
+.active-filter-button:hover {
     text-decoration: line-through;
+}
+
+.active-filter-button[disabled]:hover {
+    text-decoration: none;
 }
 
 .facet-wrapper {
@@ -928,6 +932,10 @@ a#waffle-icon-wrapper {
 
 .bootstrap-table .fixed-table-body {
     /* min-height: 170px; /* making space for the loading spinner */
+}
+
+.bootstrap-table .fixed-table-body{
+    min-height: 20vh;
 }
 
 /* hide the default loading animation */
