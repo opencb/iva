@@ -1329,7 +1329,7 @@ class IvaApp extends LitElement {
             -->
             <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>--> 
 
-            ${JSON.stringify(this.config.enabledComponents)}
+            <!-- ${JSON.stringify(this.config.enabledComponents)} -->
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
                 ${this.config.enabledComponents.home ? html`
