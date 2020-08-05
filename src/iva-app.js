@@ -945,7 +945,7 @@ class IvaApp extends LitElement {
 
     render() {
         return html`
-            <style include="jso-styles">                
+            <style>                
                 .navbar-inverse {
                     background-color: var(--main-bg-color);
                 }
@@ -1329,6 +1329,7 @@ class IvaApp extends LitElement {
             -->
             <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>--> 
 
+            ${JSON.stringify(this.config.enabledComponents)}
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
                 ${this.config.enabledComponents.home ? html`
@@ -1500,8 +1501,6 @@ class IvaApp extends LitElement {
                     <div class="content" id="gene">
                         <opencga-gene-view .opencgaSession="${this.opencgaSession}"
                                            .cellbaseClient="${this.cellbaseClient}"
-                                           .project="${this.opencgaSession.project}"
-                                           .study="${this.opencgaSession.study}"
                                            .gene="${this.gene}"
                                            .populationFrequencies="${this.config.populationFrequencies}"
                                            .consequenceTypes="${this.config.consequenceTypes}"
@@ -1523,10 +1522,9 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents.transcript ? html`
                     <div class="content feature-view" id="transcript">
-                        <opencga-transcript-view .cellbaseClient="${this.cellbaseClient}"
+                        <opencga-transcript-view .opencgaSession="${this.opencgaSession}"
+                                                 .cellbaseClient="${this.cellbaseClient}"
                                                  .opencgaClient="${this.opencgaClient}"
-                                                 .project="${this.opencgaSession.project}"
-                                                 .study="${this.opencgaSession.study}"
                                                  .transcript="${this.transcript}"
                                                  .gene="${this.gene}"
                                                  .populationFrequencies="${this.config.populationFrequencies}"

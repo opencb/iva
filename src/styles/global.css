@@ -16,7 +16,7 @@ a:link, a:visited {
 }
 
 a:focus, a:hover {
-    color: #333;
+    /*color: #333;*/
     text-decoration: none;
 }
 
@@ -62,6 +62,42 @@ input[type="text"] {
 
 .badge .close-icon {
     cursor: pointer;
+}
+
+/* badge style from bootstrap 4 */
+.badge-info {
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+.badge-success {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
+}
+
+.badge-warning {
+    color: #212529;
+    background-color: #ffc107;
+}
+
+.badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+.badge-light {
+    color: #ffffff;
+    background-color: #a5a5a5;
+}
+
+.badge-dark {
+    color: #fff;
+    background-color: #343a40;
 }
 
 .align-middle {
@@ -951,6 +987,14 @@ a#waffle-icon-wrapper {
 
 }
 
+.bootstrap-table .detail-view:hover {
+    background-color: white;
+}
+
+.bootstrap-table .detail-view-row:hover {
+    background-color: #f5f5f5;
+}
+
 /* fix the dropdown hidden in a bootstrap table */
 .force-overflow .fixed-table-body {
     overflow: visible !important;
@@ -973,6 +1017,11 @@ a#waffle-icon-wrapper {
 
 .bootstrap-table .pagination-info {
     font-size: 12px;
+}
+
+/* qtip tooltip style */
+.qtip-content > p {
+    padding: 5px 0;
 }
 
 /* browsers style */
