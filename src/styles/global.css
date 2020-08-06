@@ -2017,15 +2017,21 @@ opencga-gene-view h3.section-title /* TODO refactor */{
 }
 
 /********** opencga-projects  *************/
+#projects .project-tab .project-name {
+    padding: 15px 0 20px 0;
+}
+
 #projects .panel-container {
     display: flex;
     justify-content: center;
 }
+
 #projects .panel-container .panel{
     flex-basis: 250px;
     margin: 1em;
     background: #f1f1f1;
 }
+
 #projects .panel-container .panel .counter {
     font-size: 4em;
     color: #204d74;

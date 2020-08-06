@@ -1165,7 +1165,7 @@ class IvaApp extends LitElement {
                         <!--<a href="#home" class="navbar-brand company-logo" @click="${this.changeTool}">
                             <img src="img/Genomics-England-logo-2015-white.png" alt="logo">
                         </a>-->
-                        <a class="navbar-brand iva-logo-white" href="#home" @click="${this.changeTool}">
+                        <a class="navbar-brand iva-logo-white" href="#home" id="home-nav" @click="${this.changeTool}">
                             <img src="img/iva-white.svg" alt="logo"> <b><sup>${this.config.version}</sup></b>
                         </a>
                     </div>
