@@ -1165,7 +1165,7 @@ class IvaApp extends LitElement {
                         <!--<a href="#home" class="navbar-brand company-logo" @click="${this.changeTool}">
                             <img src="img/Genomics-England-logo-2015-white.png" alt="logo">
                         </a>-->
-                        <a class="navbar-brand iva-logo-white" href="#home" @click="${this.changeTool}">
+                        <a class="navbar-brand iva-logo-white" href="#home" id="home-nav" @click="${this.changeTool}">
                             <img src="img/iva-white.svg" alt="logo"> <b><sup>${this.config.version}</sup></b>
                         </a>
                     </div>
@@ -1329,7 +1329,7 @@ class IvaApp extends LitElement {
             -->
             <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>--> 
 
-            ${JSON.stringify(this.config.enabledComponents)}
+            <!-- ${JSON.stringify(this.config.enabledComponents)} -->
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
                 ${this.config.enabledComponents.home ? html`
