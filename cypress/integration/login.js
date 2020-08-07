@@ -16,8 +16,8 @@ context("Login", () => {
         const username = Cypress.env("username")
         const password = Cypress.env("password")
 
-        console.log("username", username)
-        console.log("password", password)
+        //console.log("username", username)
+        //console.log("password", password)
 
         expect(username, "username was set").to.be.a("string").and.not.be.empty
         expect(password, "password was set").to.be.a("string").and.not.be.empty
