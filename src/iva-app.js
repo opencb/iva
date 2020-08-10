@@ -982,6 +982,9 @@ class IvaApp extends LitElement {
                     top: 13px;
                 }
                 
+                .study-switcher + .dropdown-menu a[data-study]{
+                }
+                
                 .notification-nav {
                     margin-right: 0;
                 }
@@ -1168,7 +1171,7 @@ class IvaApp extends LitElement {
                                 <img src="${this.config.companyLogo}" alt="logo">
                             </a>
                         ` : null}
-                        <a class="navbar-brand iva-logo-white" href="#home" @click="${this.changeTool}">
+                        <a class="navbar-brand iva-logo-white" href="#home" id="home-nav" @click="${this.changeTool}">
                             <img src="img/iva-white.svg" alt="logo"> <b><sup>${this.config.version}</sup></b>
                         </a>
                     </div>
@@ -1231,7 +1234,7 @@ class IvaApp extends LitElement {
                             ` : null}
                                                         
                             <!-- Jobs -->
-                            ${application.appConfig === "opencb" && this.opencgaSession && this.opencgaSession.token ? html`
+                            ${this.opencgaSession && this.opencgaSession.token ? html`
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
                             ` : null}
                             
@@ -1247,7 +1250,7 @@ class IvaApp extends LitElement {
                                     </form>
                             ` : null}
                             
-                            ${this.opencgaSession?.token && application.menu.find( item => item.id === "files") ? html`
+                            ${this.opencgaSession?.token ? html`
                                 <li>
                                     <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
                                         <i class="fas fa-folder-open icon-padding"></i>
@@ -1332,6 +1335,7 @@ class IvaApp extends LitElement {
             -->
             <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>--> 
 
+            <!-- ${JSON.stringify(this.config.enabledComponents)} -->
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
                 ${this.config.enabledComponents.home ? html`
