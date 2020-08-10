@@ -206,7 +206,7 @@ const filterMenu = {
 
 
 // Clone menu for interpretation and add clinical section
-const clinical = {
+/*const clinical = {
     title: "Sample and File",
     collapsed: false,
     fields: [
@@ -241,7 +241,7 @@ const interpreterMenu = JSON.parse(JSON.stringify(filterMenu));
 const interpreterSections = interpreterMenu.sections.slice(1); // remove first section "Study and Cohorts"
 interpreterSections.unshift(clinical); // insert "Clinical" section
 // interpreterSections[1].subsections.splice(2,1);                 // remove "Disease Panels" subsection from "Genomic" section
-interpreterMenu.sections = interpreterSections;
+interpreterMenu.sections = interpreterSections;*/
 
 
 const tools = {
@@ -337,7 +337,7 @@ const tools = {
             // }
         ]
     },*/
-    "rd-interpreter": {
+    /*"rd-interpreter": {
         title: "Variant RD Interpreter",
         disableSaveInterpretation: false,
         active: false,
@@ -438,7 +438,7 @@ const tools = {
         css: {
             style: "font-size: 12px"
         }
-    },
+    },*/
 /*    clinicalPortal: {
         title: "Case Portal",
         reviewCases: {
@@ -449,58 +449,8 @@ const tools = {
             }
         }
     },*/
-    //TODO remove
-    facet: {
-        // title: "Facet Analysis",
-        active: false,
-        // fields: [
-        //     {
-        //         name: "Chromosome", value: "chromosome"
-        //     },
-        //     {
-        //         name: "Studies", value: "studies"
-        //     },
-        //     {
-        //         name: "Variant Type", value: "type"
-        //     },
-        //     {
-        //         name: "Genes", value: "genes"
-        //     },
-        //     {
-        //         name: "Biotypes", value: "biotypes"
-        //     },
-        //     {
-        //         name: "Consequence Type", value: "soAcc"
-        //     }
-        // ],
-        // ranges: [
-        //     {
-        //         name: "PhastCons", value: "phastCons"
-        //     },
-        //     {
-        //         name: "PhyloP", value: "phylop"
-        //     },
-        //     {
-        //         name: "Gerp", value: "gerp"
-        //     },
-        //     {
-        //         name: "CADD Raw", value: "caddRaw"
-        //     },
-        //     {
-        //         name: "CADD Scaled", value: "caddScaled"
-        //     },
-        //     {
-        //         name: "Sift", value: "sift"
-        //     },
-        //     {
-        //         name: "Polyphen", value: "polyphen"
-        //     }
-        // ],
-        filter: {
-            menu: {...filterMenu, skipSubsections: ["sample"]}
-        }
-    },
-    panel: {
+
+    /*panel: {
         active: false
     },
     individual: {
@@ -508,7 +458,7 @@ const tools = {
     },
     family: {
         active: false
-    },
+    },*/
     gene: {
         protein: {
             color: {
@@ -524,13 +474,13 @@ const tools = {
         },
         active: false
     },
-    beacon: {
+    /*beacon: {
         active: false,
         hosts: [
             "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
         ]
-    },
-    clinical: {
+    },*/
+    /*clinical: {
         icd10: ICD_10,
         upload: {
             visible: true
@@ -715,7 +665,7 @@ const tools = {
             downloadQcSample: false
         }
     },
-    genomeBrowser: {
-        active: false,
-    }
+    /*genomeBrowser: {
+        active: false
+    }*/
 };

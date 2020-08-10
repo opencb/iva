@@ -35,6 +35,7 @@ import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome/reactome
 
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import {NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
@@ -156,6 +157,7 @@ class IvaApp extends LitElement {
             "account",
             "projects",
             "file-manager",
+            //"beacon",
             "project",
             "sample",
             "files",
@@ -234,7 +236,8 @@ class IvaApp extends LitElement {
 
         // We need to listen to hash fragment changes to update the display and breadcrumb
         const _this = this;
-        window.onhashchange = function() {
+        window.onhashchange = function(e) {
+            //e.preventDefault();
             _this.hashFragmentListener(_this);
         };
 
@@ -393,7 +396,7 @@ class IvaApp extends LitElement {
                 console.log("An error occurred creating the OpenCGA session:");
                 const restResponse = e.value;
                 console.error(restResponse);
-                if (restResponse?.getEvents("ERROR")?.length) {
+                if(restResponse.getEvents?.("ERROR")?.length) {
                     const msg = restResponse.getEvents("ERROR").map(error => error.message).join("<br>");
                     new NotificationQueue().push(e.message, msg, "error");
                 } else {
@@ -555,6 +558,7 @@ class IvaApp extends LitElement {
     }
 
     changeTool(e) {
+        e.preventDefault()
         const target = e.currentTarget;
         $(".navbar-inverse ul > li", this).removeClass("active");
         $(target).parent("li").addClass("active");
@@ -687,6 +691,10 @@ class IvaApp extends LitElement {
 
         //debugger
         this.config = {...this.config};
+        // TODO quickfix to avoid hash browser scroll
+        $('body,html').animate({
+            scrollTop: 0
+        }, 1);
     }
 
     // TODO recheck what's the use for this
@@ -938,7 +946,7 @@ class IvaApp extends LitElement {
 
     render() {
         return html`
-            <style include="jso-styles">                
+            <style>                
                 .navbar-inverse {
                     background-color: var(--main-bg-color);
                 }
@@ -1410,7 +1418,7 @@ class IvaApp extends LitElement {
                                                         .populationFrequencies="${this.config.populationFrequencies}"
                                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
                                                         .consequenceTypes="${this.config.consequenceTypes}"
-                                                        .config="${this.config.tools["rd-interpreter"]}"
+                                                        .config="${true}"
                                                         @gene="${this.geneSelected}"
                                                         @samplechange="${this.onSampleChange}">
                         </variant-rd-interpreter>
@@ -1434,8 +1442,7 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents.beacon ? html`
                     <div class="content" id="beacon">
-                        <variant-beacon .opencgaSession="${this.opencgaSession}"
-                                        .hosts="${this.config.tools.beacon.hosts}">
+                        <variant-beacon .opencgaSession="${this.opencgaSession}">
                         </variant-beacon>
                     </div>
                 ` : null}
@@ -1496,14 +1503,13 @@ class IvaApp extends LitElement {
                     <div class="content" id="gene">
                         <opencga-gene-view .opencgaSession="${this.opencgaSession}"
                                            .cellbaseClient="${this.cellbaseClient}"
-                                           .project="${this.opencgaSession.project}"
-                                           .study="${this.opencgaSession.study}"
-                                           .gene="${this.gene}"
+                                           .geneId="${this.gene}"
                                            .populationFrequencies="${this.config.populationFrequencies}"
                                            .consequenceTypes="${this.config.consequenceTypes}"
                                            .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
                                            .config="${this.config.tools.gene}"
-                                           .summary="${this.config.opencga.summary}">
+                                           .summary="${this.config.opencga.summary}"
+                                           @querySearch="${e => this.onQueryFilterSearch(e, "variant")}">
                         </opencga-gene-view>
                     </div>
                 ` : null}
@@ -1519,10 +1525,9 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents.transcript ? html`
                     <div class="content feature-view" id="transcript">
-                        <opencga-transcript-view .cellbaseClient="${this.cellbaseClient}"
+                        <opencga-transcript-view .opencgaSession="${this.opencgaSession}"
+                                                 .cellbaseClient="${this.cellbaseClient}"
                                                  .opencgaClient="${this.opencgaClient}"
-                                                 .project="${this.opencgaSession.project}"
-                                                 .study="${this.opencgaSession.study}"
                                                  .transcript="${this.transcript}"
                                                  .gene="${this.gene}"
                                                  .populationFrequencies="${this.config.populationFrequencies}"
@@ -1585,7 +1590,7 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.clinicalAnalysis ? html`
                     <div class="content" id="clinicalAnalysis">
                         <opencga-clinical-analysis-browser      .opencgaSession="${this.opencgaSession}"
-                                                                .config="${this.config.tools.clinicalAnalysisBrowser}"
+                                                                .config="${OpencgaClinicalAnalysisBrowserConfig}"
                                                                 .query="${this.queries["clinical-analysis"]}"
                                                                 @querySearch="${e => this.onQueryFilterSearch(e, "clinical-analysis")}"
                                                                 @activeFilterChange="${e => this.onQueryFilterSearch(e, "clinical-analysis")}">  

@@ -154,7 +154,7 @@ const application = {
                 // },
             ]
         },
-        /*{
+        {
             id: "analysis",
             title: "Variant Analysis",
             description: "",
@@ -422,7 +422,7 @@ const application = {
                 //     visibility: "public"
                 // }
             ]
-        },*/
+        },
         {
             id: "clinical",
             title: "Case Interpretation",
@@ -430,12 +430,12 @@ const application = {
             icon: "interpretation_portal.svg",
             visibility: "public",
             submenu: [
-                // {
-                //     title: "Clinical Management",
-                //     category: true,
-                //     id: "cat-clinical",
-                //     visibility: "public"
-                // },
+                {
+                    title: "Clinical Management",
+                    category: true,
+                    id: "cat-clinical",
+                    visibility: "public"
+                },
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
@@ -456,20 +456,20 @@ const application = {
                 //     separator: true,
                 //     visibility: "public"
                 // },
-                // {
-                //     title: "Case Interpretation",
-                //     category: true,
-                //     id: "cat-clinical",
-                //     visibility: "public"
-                // },
-                // {
-                //     id: "interpreter",
-                //     title: "Case Interpreter",
-                //     acronym: "",
-                //     icon: "",
-                //     description: "",
-                //     visibility: "public"
-                // },
+                {
+                    title: "Case Interpretation",
+                    category: true,
+                    id: "cat-clinical",
+                    visibility: "public"
+                },
+                {
+                    id: "interpreter",
+                    title: "Case Interpreter",
+                    acronym: "",
+                    icon: "",
+                    description: "",
+                    visibility: "public"
+                },
                 // {
                 //     separator: true,
                 //     visibility: "public"
@@ -542,7 +542,7 @@ const application = {
             visibility: "public",
             icon: "aggregation2.svg",
             submenu: [
-                /*{
+                {
                     id: "projects",
                     title: "Projects",
                     visibility: "public"
@@ -550,18 +550,18 @@ const application = {
                 {
                     separator: true,
                     visibility: "public"
-                },*/
+                },
                 {
                     title: "Browsers",
                     category: true,
                     id: "cat-catalog",
                     visibility: "public"
-                },/*
+                },
                 {
                     id: "files",
                     title: "File Browser",
                     visibility: "public"
-                },*/
+                },
                 {
                     id: "samples",
                     title: "Sample Browser",
@@ -577,7 +577,7 @@ const application = {
                     title: "Family Browser",
                     visibility: "public"
                 },
-                /*{
+                {
                     id: "cohorts",
                     title: "Cohort Browser",
                     visibility: "public"
@@ -591,7 +591,7 @@ const application = {
                     id: "jobs",
                     title: "Job Browser",
                     visibility: "public"
-                }*/
+                }
             ]
         },
     ],
@@ -602,14 +602,14 @@ const application = {
     about: {
         dropdown: true,
         links: [
-            //{id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},
+            {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},
             {id: "documentation", name: "Documentation", url: "https://re-confluence.gel.zone/pages/viewpage.action?pageId=19628521", icon: "fa fa-book"},
-            /*{id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
+            {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
             {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: "fa fa-archive"},
             {id: "about", name: "About", url: "#about", icon: "fa fa-info-circle"},
             {id: "terms", name: "Terms", url: "#terms", icon: "fa fa-file-alt"},
             {id: "contact", name: "Contact", url: "#contact", icon: "fa fa-envelope"},
-            {id: "faq", name: "FAQ", url: "#faq", icon: "fa fa-question"}*/
+            {id: "faq", name: "FAQ", url: "#faq", icon: "fa fa-question"}
         ]
     },
     login: {
