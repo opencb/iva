@@ -982,6 +982,9 @@ class IvaApp extends LitElement {
                     top: 13px;
                 }
                 
+                .study-switcher + .dropdown-menu a[data-study]{
+                }
+                
                 .notification-nav {
                     margin-right: 0;
                 }
@@ -1439,7 +1442,7 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents.beacon ? html`ddddddddd
+                ${this.config.enabledComponents.beacon ? html`
                     <div class="content" id="beacon">
                         <variant-beacon .opencgaSession="${this.opencgaSession}">
                         </variant-beacon>
