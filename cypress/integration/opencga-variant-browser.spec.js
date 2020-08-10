@@ -2,8 +2,6 @@ import {login} from "../plugins/utils.js"
 
 context("Variant Browser", () => {
     beforeEach(() => {
-
-
     })
 
     it("query", () => {

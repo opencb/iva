@@ -157,6 +157,7 @@ class IvaApp extends LitElement {
             "account",
             "projects",
             "file-manager",
+            //"beacon",
             "project",
             "sample",
             "files",
@@ -1438,7 +1439,7 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents.beacon ? html`
+                ${this.config.enabledComponents.beacon ? html`ddddddddd
                     <div class="content" id="beacon">
                         <variant-beacon .opencgaSession="${this.opencgaSession}">
                         </variant-beacon>
@@ -1501,12 +1502,13 @@ class IvaApp extends LitElement {
                     <div class="content" id="gene">
                         <opencga-gene-view .opencgaSession="${this.opencgaSession}"
                                            .cellbaseClient="${this.cellbaseClient}"
-                                           .gene="${this.gene}"
+                                           .geneId="${this.gene}"
                                            .populationFrequencies="${this.config.populationFrequencies}"
                                            .consequenceTypes="${this.config.consequenceTypes}"
                                            .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
                                            .config="${this.config.tools.gene}"
-                                           .summary="${this.config.opencga.summary}">
+                                           .summary="${this.config.opencga.summary}"
+                                           @querySearch="${e => this.onQueryFilterSearch(e, "variant")}">
                         </opencga-gene-view>
                     </div>
                 ` : null}
