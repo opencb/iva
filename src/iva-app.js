@@ -45,6 +45,8 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-protein-view.js";
 import "../lib/jsorolla/src/core/webcomponents/user/opencga-projects.js";
 import "../lib/jsorolla/src/core/webcomponents/samples/opencga-sample-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/samples/opencga-sample-view.js";
+import "../lib/jsorolla/src/core/webcomponents/samples/sample-variant-stats-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/samples/sample-cancer-variant-stats-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/files/opencga-file-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/family/opencga-family-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/user/opencga-login.js";
@@ -157,6 +159,7 @@ class IvaApp extends LitElement {
             "account",
             "projects",
             "file-manager",
+            //"beacon",
             "project",
             "sample",
             "files",
@@ -182,6 +185,9 @@ class IvaApp extends LitElement {
             "cat-catalog",
             "cat-alignment",
             "cat-ga4gh",
+            // Sample
+            "sampleVariantStatsBrowser",
+            "sampleCancerVariantStatsBrowser",
             // Variant
             "eligibility",
             "gwas",
@@ -656,6 +662,10 @@ class IvaApp extends LitElement {
                 case "#interpreter":
                     this.clinicalAnalysisId = feature;
                     break;
+                case "#sampleVariantStatsBrowser":
+                case "#sampleCancerVariantStatsBrowser":
+                    this.sampleId = feature;
+                    break;
             }
 
 
@@ -945,7 +955,7 @@ class IvaApp extends LitElement {
 
     render() {
         return html`
-            <style include="jso-styles">                
+            <style>                
                 .navbar-inverse {
                     background-color: var(--main-bg-color);
                 }
@@ -979,6 +989,9 @@ class IvaApp extends LitElement {
                     position: absolute;
                     left: 10px;
                     top: 13px;
+                }
+                
+                .study-switcher + .dropdown-menu a[data-study]{
                 }
                 
                 .notification-nav {
@@ -1162,10 +1175,12 @@ class IvaApp extends LitElement {
 
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <!--<a href="#home" class="navbar-brand company-logo" @click="${this.changeTool}">
-                            <img src="img/Genomics-England-logo-2015-white.png" alt="logo">
-                        </a>-->
-                        <a class="navbar-brand iva-logo-white" href="#home" @click="${this.changeTool}">
+                        ${this.config.companyLogo ? html`
+                            <a href="#home" class="navbar-brand company-logo" @click="${this.changeTool}">
+                                <img src="${this.config.companyLogo}" alt="logo">
+                            </a>
+                        ` : null}
+                        <a class="navbar-brand iva-logo-white" href="#home" id="home-nav" @click="${this.changeTool}">
                             <img src="img/iva-white.svg" alt="logo"> <b><sup>${this.config.version}</sup></b>
                         </a>
                     </div>
@@ -1329,6 +1344,7 @@ class IvaApp extends LitElement {
             -->
             <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>--> 
 
+            <!-- ${JSON.stringify(this.config.enabledComponents)} -->
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
                 ${this.config.enabledComponents.home ? html`
@@ -1500,14 +1516,13 @@ class IvaApp extends LitElement {
                     <div class="content" id="gene">
                         <opencga-gene-view .opencgaSession="${this.opencgaSession}"
                                            .cellbaseClient="${this.cellbaseClient}"
-                                           .project="${this.opencgaSession.project}"
-                                           .study="${this.opencgaSession.study}"
-                                           .gene="${this.gene}"
+                                           .geneId="${this.gene}"
                                            .populationFrequencies="${this.config.populationFrequencies}"
                                            .consequenceTypes="${this.config.consequenceTypes}"
                                            .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
                                            .config="${this.config.tools.gene}"
-                                           .summary="${this.config.opencga.summary}">
+                                           .summary="${this.config.opencga.summary}"
+                                           @querySearch="${e => this.onQueryFilterSearch(e, "variant")}">
                         </opencga-gene-view>
                     </div>
                 ` : null}
@@ -1523,10 +1538,9 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents.transcript ? html`
                     <div class="content feature-view" id="transcript">
-                        <opencga-transcript-view .cellbaseClient="${this.cellbaseClient}"
+                        <opencga-transcript-view .opencgaSession="${this.opencgaSession}"
+                                                 .cellbaseClient="${this.cellbaseClient}"
                                                  .opencgaClient="${this.opencgaClient}"
-                                                 .project="${this.opencgaSession.project}"
-                                                 .study="${this.opencgaSession.study}"
                                                  .transcript="${this.transcript}"
                                                  .gene="${this.gene}"
                                                  .populationFrequencies="${this.config.populationFrequencies}"
@@ -1649,7 +1663,19 @@ class IvaApp extends LitElement {
                         </category-page>
                     </div>
                 ` : null}
-            
+                
+                ${this.config.enabledComponents["sampleVariantStatsBrowser"] ? html`
+                    <div class="content" id="sampleVariantStatsBrowser">
+                        <sample-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}"></sample-variant-stats-browser>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["sampleCancerVariantStatsBrowser"] ? html`
+                    <div class="content" id="sampleCancerVariantStatsBrowser">
+                        <sample-cancer-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}" .active="true"></sample-cancer-variant-stats-browser>
+                    </div>
+                ` : null}
+                
                 ${this.config.enabledComponents["sample-variant-stats"] ? html`
                     <div class="content" id="opencga-sample-variant-stats-analysis">
                         <opencga-sample-variant-stats-analysis .opencgaSession="${this.opencgaSession}"></opencga-sample-variant-stats-analysis>

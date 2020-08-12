@@ -82,7 +82,7 @@ const application = {
     // defaultStudy: "pilot:rd",
     mode: "development",
     appConfig: "opencb",
-    // defaultStudy: "reference_grch37_test:test",
+    // defaultStudy: "emee-glh@cancer:myeloid",
     // The order, title and nested submenus are respected
     menu: [
         {
