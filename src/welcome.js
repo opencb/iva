@@ -85,9 +85,11 @@ export default class WelcomeWeb extends LitElement {
     }
 
     notify(query) {
-        query.study = this.opencgaSession.study.fqn;
         this.dispatchEvent(new CustomEvent("search", {
-            detail: query,
+            detail: {
+                ...query,
+                study: this.opencgaSession.study.fqn
+            },
             bubbles: true,
             composed: true
         }));
@@ -95,7 +97,7 @@ export default class WelcomeWeb extends LitElement {
 
     callAutocomplete(e) {
         // Only gene symbols are going to be searched and not Ensembl IDs
-        const featureId = PolymerUtils.getElementById("welcomeSearchTextBox").value;
+        const featureId = this.querySelector("#welcomeSearchTextBox").value;
         if (UtilsNew.isNotEmpty(featureId)) {
             const query = {};
             if (featureId.startsWith("chr") || featureId.startsWith("X") || featureId.startsWith("Y") || featureId.startsWith("MT") || featureId.match(/^\d/)) {
@@ -125,7 +127,7 @@ export default class WelcomeWeb extends LitElement {
 
             if (e.keyCode === 13) {
                 this.notify(query);
-                PolymerUtils.getElementById("welcomeSearchTextBox").value = "";
+                this.querySelector("#welcomeSearchTextBox").value = "";
             }
 
         } else {

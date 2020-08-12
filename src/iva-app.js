@@ -159,6 +159,7 @@ class IvaApp extends LitElement {
             "account",
             "projects",
             "file-manager",
+            //"beacon",
             "project",
             "sample",
             "files",
@@ -990,6 +991,9 @@ class IvaApp extends LitElement {
                     top: 13px;
                 }
                 
+                .study-switcher + .dropdown-menu a[data-study]{
+                }
+                
                 .notification-nav {
                     margin-right: 0;
                 }
@@ -1171,9 +1175,11 @@ class IvaApp extends LitElement {
 
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <!--<a href="#home" class="navbar-brand company-logo" @click="${this.changeTool}">
-                            <img src="img/Genomics-England-logo-2015-white.png" alt="logo">
-                        </a>-->
+                        ${this.config.companyLogo ? html`
+                            <a href="#home" class="navbar-brand company-logo" @click="${this.changeTool}">
+                                <img src="${this.config.companyLogo}" alt="logo">
+                            </a>
+                        ` : null}
                         <a class="navbar-brand iva-logo-white" href="#home" id="home-nav" @click="${this.changeTool}">
                             <img src="img/iva-white.svg" alt="logo"> <b><sup>${this.config.version}</sup></b>
                         </a>
@@ -1510,12 +1516,13 @@ class IvaApp extends LitElement {
                     <div class="content" id="gene">
                         <opencga-gene-view .opencgaSession="${this.opencgaSession}"
                                            .cellbaseClient="${this.cellbaseClient}"
-                                           .gene="${this.gene}"
+                                           .geneId="${this.gene}"
                                            .populationFrequencies="${this.config.populationFrequencies}"
                                            .consequenceTypes="${this.config.consequenceTypes}"
                                            .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
                                            .config="${this.config.tools.gene}"
-                                           .summary="${this.config.opencga.summary}">
+                                           .summary="${this.config.opencga.summary}"
+                                           @querySearch="${e => this.onQueryFilterSearch(e, "variant")}">
                         </opencga-gene-view>
                     </div>
                 ` : null}
