@@ -45,6 +45,8 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-protein-view.js";
 import "../lib/jsorolla/src/core/webcomponents/user/opencga-projects.js";
 import "../lib/jsorolla/src/core/webcomponents/samples/opencga-sample-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/samples/opencga-sample-view.js";
+import "../lib/jsorolla/src/core/webcomponents/samples/sample-variant-stats-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/samples/sample-cancer-variant-stats-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/files/opencga-file-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/family/opencga-family-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/user/opencga-login.js";
@@ -182,6 +184,9 @@ class IvaApp extends LitElement {
             "cat-catalog",
             "cat-alignment",
             "cat-ga4gh",
+            // Sample
+            "sampleVariantStatsBrowser",
+            "sampleCancerVariantStatsBrowser",
             // Variant
             "eligibility",
             "gwas",
@@ -655,6 +660,10 @@ class IvaApp extends LitElement {
                     break;
                 case "#interpreter":
                     this.clinicalAnalysisId = feature;
+                    break;
+                case "#sampleVariantStatsBrowser":
+                case "#sampleCancerVariantStatsBrowser":
+                    this.sampleId = feature;
                     break;
             }
 
@@ -1647,7 +1656,19 @@ class IvaApp extends LitElement {
                         </category-page>
                     </div>
                 ` : null}
-            
+                
+                ${this.config.enabledComponents["sampleVariantStatsBrowser"] ? html`
+                    <div class="content" id="sampleVariantStatsBrowser">
+                        <sample-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}"></sample-variant-stats-browser>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["sampleCancerVariantStatsBrowser"] ? html`
+                    <div class="content" id="sampleCancerVariantStatsBrowser">
+                        <sample-cancer-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}" .active="true"></sample-cancer-variant-stats-browser>
+                    </div>
+                ` : null}
+                
                 ${this.config.enabledComponents["sample-variant-stats"] ? html`
                     <div class="content" id="opencga-sample-variant-stats-analysis">
                         <opencga-sample-variant-stats-analysis .opencgaSession="${this.opencgaSession}"></opencga-sample-variant-stats-analysis>
