@@ -75,7 +75,7 @@ module.exports = {
                 "assets/js/vendor.js": [
                     "./node_modules/jquery/dist/jquery.js",
                     "./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js",
-                    "./node_modules/underscore/underscore-min.js",
+                    "./node_modules/lodash/lodash.min.js",
                     "./node_modules/backbone/backbone-min.js",
                     "./node_modules/highcharts/highcharts.js",
                     "./node_modules/qtip2/dist/jquery.qtip.min.js",

@@ -20,8 +20,9 @@ const cellbase = {
 };
 
 const opencga = {
-    // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
     host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
+    // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
+    //host: "http://localhost:9090/opencga", // private instance 175.25.1.6
     version: "v2",
     serverVersion: "1.4",
 
@@ -76,7 +77,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.0.0-beta",
+    version: "v2.0.0",
     logo: "img/iva.svg",
     defaultStudy: "serena@cancer37:test",
     // mode: "development",
@@ -404,7 +405,7 @@ const application = {
                 },
                 {
                     id: "clinicalAnalysisPortal",
-                    title: "Interpretation Portal",
+                    title: "Case Portal",
                     acronym: "",
                     icon: "",
                     description: "",
@@ -423,7 +424,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    title: "Clinical Interpretation",
+                    title: "Case Interpretation",
                     category: true,
                     id: "cat-clinical",
                     visibility: "public"

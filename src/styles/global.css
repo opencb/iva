@@ -16,7 +16,7 @@ a:link, a:visited {
 }
 
 a:focus, a:hover {
-    color: #333;
+    /*color: #333;*/
     text-decoration: none;
 }
 
@@ -39,6 +39,14 @@ a.disabled, a.disabled:hover {
     padding: 5px;
 }
 
+.pad15 {
+    padding: 15px;
+}
+
+.mag5 {
+    margin: 5px;
+}
+
 input[type="text"] {
     width: 100%;
 }
@@ -56,12 +64,60 @@ input[type="text"] {
     cursor: pointer;
 }
 
+/* badge style from bootstrap 4 */
+.badge-info {
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+.badge-success {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
+}
+
+.badge-warning {
+    color: #212529;
+    background-color: #ffc107;
+}
+
+.badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+.badge-light {
+    color: #ffffff;
+    background-color: #a5a5a5;
+}
+
+.badge-dark {
+    color: #fff;
+    background-color: #343a40;
+}
+
 .align-middle {
     vertical-align: middle;
 }
 
 .break-word {
-    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.multi-line {
+    white-space: normal;
+}
+
+.one-line {
+    white-space: nowrap !important;
+}
+
+.force-text-left {
+    text-align: left !important;
 }
 
 .bg-white {
@@ -127,6 +183,7 @@ input[type="text"] {
     font-size: 1em;
     color: black;
     font-weight: bold;
+    margin: 0 4px;
 }
 
 .iva-logo-white {
@@ -434,6 +491,29 @@ h3.page-title {
     vertical-align: middle;
 }
 
+.variant-interpreter-interpretation > tool-header > .page-title {
+    height: 5em;
+}
+
+.variant-interpreter-interpretation > tool-header > .page-title h2 {
+    float: left;
+}
+
+.variant-interpreter-interpretation > tool-header > .page-title .page-title-right i{
+    font-size: 14px;
+}
+.variant-interpreter-interpretation .page-title-right {
+    padding: 7px;
+}
+.variant-interpreter-interpretation .page-title-right a,
+.variant-interpreter-interpretation .page-title-right button{
+    background: var(--main-bg-color);
+}
+
+.page-title-right {
+    float: right;
+}
+
 .search-button-wrapper {
     text-align: center;
     margin: 0 0 20px 0;
@@ -454,6 +534,10 @@ h3.page-title {
 /********** active-filters  *************/
 .active-filter-button:hover {
     text-decoration: line-through;
+}
+
+.active-filter-button[disabled]:hover {
+    text-decoration: none;
 }
 
 .facet-wrapper {
@@ -886,6 +970,10 @@ a#waffle-icon-wrapper {
     /* min-height: 170px; /* making space for the loading spinner */
 }
 
+.bootstrap-table .fixed-table-body{
+    min-height: 20vh;
+}
+
 /* hide the default loading animation */
 .bootstrap-table .animation-wrap {
     display: none !important;
@@ -898,7 +986,24 @@ a#waffle-icon-wrapper {
 .bootstrap-table > .fixed-table-pagination .pagination{
 
 }
-/* custom pagination-detail on top of the grid */
+
+.bootstrap-table .detail-view:hover {
+    background-color: white;
+}
+
+.bootstrap-table .detail-view-row:hover {
+    background-color: #f5f5f5;
+}
+
+/* fix the dropdown hidden in a bootstrap table */
+.force-overflow .fixed-table-body {
+    overflow: visible !important;
+}
+
+/* Custom pagination-detail on top of the boostrap-table grids.
+   This removes the pager buttons on top pf the grids leaving only the counter of records.
+   nth-child(2) is the top pager while nth-child(4) would the bottom pager.
+*/
 .bootstrap-table.bootstrap3 .fixed-table-pagination:nth-child(2) .pagination-info {
     line-height: 1;
 }
@@ -912,6 +1017,11 @@ a#waffle-icon-wrapper {
 
 .bootstrap-table .pagination-info {
     font-size: 12px;
+}
+
+/* qtip tooltip style */
+.qtip-content > p {
+    padding: 5px 0;
 }
 
 /* browsers style */
@@ -936,6 +1046,17 @@ opencga-facet .panel-body > .form-group:not(:first-child) {
     font-size: 13px;
 }
 
+/********** annotation-filter-modal ************/
+.map-field-input {
+
+}
+.map-field-wrapper {
+    margin-: 10px 0;
+}
+.map-field-inputs {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
 
 /********** checkbox widget TODO remove ************/
 /*
@@ -1189,6 +1310,7 @@ Toggle Changes
 
 #notifications-queue .alert p.details {
     color: #b6c1c9;
+    word-break: break-all;
 }
 
 #notifications-queue .alert a {
@@ -1493,7 +1615,7 @@ Toggle Changes
 .hi-icon-wrap.wizard a.icon-wrapper:before {
     content: "";
     position: absolute;
-    width: 240px;
+    width: 270px;
     height: 3px;
     top: 50px;
     background: var(--main-bg-color);
@@ -1522,18 +1644,25 @@ Toggle Changes
 /****** detail-tabs ********/
 .detail-tabs h3,
 data-form h3,
-.cellbase-variant-annotation-summary h3,
-.interpreter-content-tab h3 /* TODO refactor this component in detail-tabs*/{
+.cellbase-variant-annotation-summary h3 /* TODO refactor this component in detail-tabs*/,
+.interpreter-content-tab h3,
+.modal-header,
+opencga-gene-view h3.section-title /* TODO refactor */{
     text-transform: uppercase;
     letter-spacing: .2em;
     margin: 0;
-    padding: 20px 0 10px 0;
+    padding: 10px 0 10px 0;
     color: var(--main-bg-color);
     display: block;
     font-size: 1.6em;
 }
+
 .cellbase-variant-annotation-summary h3 {
 
+}
+
+.modal-header {
+    padding: 15px;
 }
 
 .detail-tabs .nav-tabs li a{
@@ -1636,7 +1765,7 @@ data-form h3,
     overflow: hidden;
 }
 .file-manager .content {
-    width: 200px;
+    width: 210px;
 }
 
 .file-manager .name {
@@ -1668,13 +1797,17 @@ data-form h3,
     color: #fff;
     text-align: center;
     margin-top: 3px;
-    width: 66px;
+    width: 45px;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 .file-manager .file.active {
     background-color: #626269;
     outline: thick solid #d0d0d0;
+}
+
+.file-manager-tree {
+    border-right: 1px solid gainsboro;
 }
 
 .file-manager-tree ul {
@@ -1727,6 +1860,26 @@ data-form h3,
 
 .file-manager-tree .file.active {
     color: black;
+}
+
+.opencga-file-manager .opencga-file-view {
+    margin-left: 5px;
+}
+
+.opencga-file-manager .file-manager-full-height,
+.opencga-file-manager .file-manager-tree{
+    min-height: calc(100vh - 160px);
+}
+
+/* temp fix for long filenames in opencga-file-manager  */
+.opencga-file-manager .file-manager-tree .file {
+    display: flex;
+}
+.file-manager-tree .file {
+    word-break: normal;
+}
+.file-manager-tree .folder {
+    overflow: auto;
 }
 
 /* jobs-monitor*/
@@ -1861,4 +2014,50 @@ data-form h3,
         -webkit-transform: scale(.2) translate(200%, -200%);
         transform: scale(.2) translate(200%, -200%);
     }
+}
+
+/********** opencga-projects  *************/
+#projects .project-tab .project-name {
+    padding: 15px 0 20px 0;
+}
+
+#projects .panel-container {
+    display: flex;
+    justify-content: center;
+}
+
+#projects .panel-container .panel{
+    flex-basis: 250px;
+    margin: 1em;
+    background: #f1f1f1;
+}
+
+#projects .panel-container .panel .counter {
+    font-size: 4em;
+    color: #204d74;
+}
+
+#projects .panel-container .panel .counter-title {
+    margin: -20px 0 0 0;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#projects .study-title {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/********** TODO refactor. variant-interpreter tooltip quickfix  *************/
+.zygosity-formatter,
+.predictionTooltip-inner {
+    width: 250px;
+}
+.zygosity-formatter .col-md-5,
+.predictionTooltip-inner .col-md-5,
+.zygosity-formatter .col-md-7
+.predictionTooltip-inner .col-md-7{
+    padding: 0;
 }

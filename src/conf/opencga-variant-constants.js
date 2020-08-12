@@ -376,15 +376,14 @@ const populationFrequencies = {
                 {
                     id: "NFE", title: "Non-Finnish European [NFE]"
                 },
-                {
-                    id: "SAS", title: "South Asian [SAS]"
-                }
+                // {
+                //     id: "SAS", title: "South Asian [SAS]"
+                // }
             ]
         }
     ]
 };
 
-// TODO complete this
 const tooltips = {
     conservation: "<strong>PhyloP</strong> scores measure evolutionary conservation at individual alignment sites. The scores " +
         "are interpreted as follows compared to the evolution expected under neutral drift: positive scores (max 3.0) mean " +
@@ -418,7 +417,8 @@ const tooltips = {
     cadd: "Raw values have relative meaning, with higher values indicating that a variant is more likely to be " +
         "simulated (or not observed) and therefore more likely to have deleterious effects. If discovering causal variants " +
         "within an individual, or small groups, of exomes or genomes te use of the scaled CADD score is recommended",
-    cohort: "-" //TODO add tooltip
+    cohort: "Filter variants by the cohort alternate allele frequency",
+    sample: "Filter variants by sample genotypes or mode of inheritance (Compounf Het., de Novo, ...)"
 };
 
 const beacon = {
@@ -436,10 +436,10 @@ const proteinSubstitutionScore = {
             tolerated: "green"
         },
         polyphen: {
-            probablyDamaging: "red",
-            possiblyDamaging: "darkorange",
-            benign: "green",
-            unknown: "black"
+            "probably damaging": "red",
+            "possibly damaging": "darkorange",
+            "benign": "green",
+            "unknown": "black"
         }
     }
 };

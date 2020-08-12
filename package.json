@@ -1,6 +1,6 @@
 {
   "name": "iva",
-  "version": "2.0.0-beta",
+  "version": "2.0.0",
   "description": "IVA description",
   "repository": {
     "type": "git",
@@ -19,10 +19,10 @@
     "test-e2e_old": "./node_modules/.bin/nightwatch",
     "serve": "browser-sync start --config bs-config.js",
     "prepare": "npx snowpack",
-    "e2e": "npx cypress open",
     "browser-support": "npx browserslist",
     "build": "npx webpack",
-    "deploy": "npx webpack && ./docker/docker-build.py push"
+    "deploy": "npx webpack && ./docker/docker-build.py push",
+    "e2e": "./credentials.sh npx cypress open"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
@@ -50,6 +50,7 @@
     "jquery.json-viewer": "^1.4.0",
     "jwt-decode": "^2.2.0",
     "lit-element": "^2.3.1",
+    "lodash": "^4.17.19",
     "moment": "^2.15.1",
     "qtip2": "~3.0.3",
     "sweetalert2": "^9.13.1",
@@ -74,7 +75,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "crisper": "~2.1.1",
     "css-loader": "^3.4.2",
-    "cypress": "^4.5.0",
+    "cypress": "^4.12.1",
     "cypress-wait-until": "^1.7.0",
     "eslint": "^6.5.1",
     "eslint-config-google": "^0.14.0",

@@ -106,7 +106,7 @@ export default class IvaProfile extends LitElement {
                             field: "user.internal.status",
                             type: "custom",
                             display: {
-                                render: field => html`${field.name} (${UtilsNew.dateFormatter(field.date)})`
+                                render: field => `${field?.name} (${UtilsNew.dateFormatter(field?.date)})`
                             }
                         },
                         {
@@ -129,7 +129,7 @@ export default class IvaProfile extends LitElement {
                                         type: "custom",
                                         display: {
                                             render: studies => {
-                                                return html`${studies.map( study => UtilsNew.renderHTML(`<li>${study.name}</li>`))}`;
+                                                return studies.map( study => study.name).join(", ")
                                             }
                                         }
                                     }
@@ -208,7 +208,7 @@ export default class IvaProfile extends LitElement {
     render() {
         return html`
             <div>
-                <tool-header title="${this._config.title}" icon="${this._config.icon}"></tool-header>
+                <tool-header title="${this._config.title}" icon="${"fa fa-user-circle"}"></tool-header>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
