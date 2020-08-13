@@ -79,7 +79,7 @@ const application = {
     title: "IVA",
     version: "v2.0.0",
     logo: "img/iva.svg",
-    // defaultStudy: "demo@family:corpasome",
+    // defaultStudy: "serena@cancer37:test",
     mode: "development",
     appConfig: "opencb",
     // defaultStudy: "emee-glh@cancer:myeloid",
