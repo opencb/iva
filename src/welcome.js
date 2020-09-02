@@ -137,13 +137,13 @@ export default class WelcomeWeb extends LitElement {
 
     isVisible(item) {
         switch (item.visibility) {
-        case "public":
-            return true;
-        case "private":
-            return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
-        case "none":
-        default:
-            return false;
+            case "public":
+                return true;
+            case "private":
+                return !!this?.opencgaSession?.token;
+            case "none":
+            default:
+                return false;
         }
     }
 
@@ -243,23 +243,23 @@ export default class WelcomeWeb extends LitElement {
              
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
                 ${this.config.menu.filter(this.isVisible).map( item => html`
-                            ${item.submenu ? html`
-                                <a class="icon-wrapper" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
-                                    <div class="hi-icon">
-                                        <img src="img/tools/icons/${item.icon}" /> 
-                                    </div>
-                                    <p>${item.title}</p>
-                                    <span class="smaller"></span>
-                                </a>
-                                ` : html`
-                                    <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
-                                    <div class="hi-icon">
-                                        <img src="img/tools/icons/${item.icon}" /> 
-                                    </div>
-                                    <p>${item.title}</p>
-                                    <span class="smaller"></span>
-                                </a>
-                                `}
+                    ${item.submenu ? html`
+                        <a class="icon-wrapper" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
+                            <div class="hi-icon">
+                                <img src="img/tools/icons/${item.icon}" /> 
+                            </div>
+                            <p>${item.title}</p>
+                            <span class="smaller"></span>
+                        </a>
+                        ` : html`
+                            <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
+                            <div class="hi-icon">
+                                <img src="img/tools/icons/${item.icon}" /> 
+                            </div>
+                            <p>${item.title}</p>
+                            <span class="smaller"></span>
+                        </a>
+                    `}
                 `)}
             </div>
 
