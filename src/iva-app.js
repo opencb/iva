@@ -1123,6 +1123,10 @@ class IvaApp extends LitElement {
                     width:48px
                 }
                 
+                #side-nav .nav a.sidebar-nav-login {
+                    padding: 20px 0;
+                }
+                
                 #overlay {
                     position: fixed;
                     transform: translate(-100%);
@@ -1169,21 +1173,20 @@ class IvaApp extends LitElement {
                         </div>
                     </a>
                     <ul class="nav sidebar-nav">
-                    
-                    ${this.isLoggedIn() ? html`
+                        ${!this.isLoggedIn() ? html`
+                            <li>
+                                <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e); }}">
+                                    <i href="#login" class="fa fa-3x fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
+                                </a>
+                            </li>
+                        ` : null }
                         ${this.config?.menu?.filter?.(this.isVisible).map(item => html`
                             <li>
                                 <a href="#cat-${item.id}" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
                                     <img src="img/tools/icons/${item.icon}"  alt="${item.title}"/>  ${item.title}
                                 </a>
                              </li>
-                        `)}` : html`
-                            <li>
-                                <a href="#login" class="text-center" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
-                                    <i href="#login" class="fa fa-3x fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
-                                </a>
-                            </li>`
-                    }
+                        `)}
                     </ul>
                 </nav>
             </div>
