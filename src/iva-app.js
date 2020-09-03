@@ -45,6 +45,8 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-protein-view.js";
 import "../lib/jsorolla/src/core/webcomponents/user/opencga-projects.js";
 import "../lib/jsorolla/src/core/webcomponents/samples/opencga-sample-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/samples/opencga-sample-view.js";
+import "../lib/jsorolla/src/core/webcomponents/samples/sample-variant-stats-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/samples/sample-cancer-variant-stats-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/files/opencga-file-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/family/opencga-family-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/user/opencga-login.js";
@@ -183,6 +185,9 @@ class IvaApp extends LitElement {
             "cat-catalog",
             "cat-alignment",
             "cat-ga4gh",
+            // Sample
+            "sampleVariantStatsBrowser",
+            "sampleCancerVariantStatsBrowser",
             // Variant
             "eligibility",
             "gwas",
@@ -657,6 +662,10 @@ class IvaApp extends LitElement {
                 case "#interpreter":
                     this.clinicalAnalysisId = feature;
                     break;
+                case "#sampleVariantStatsBrowser":
+                case "#sampleCancerVariantStatsBrowser":
+                    this.sampleId = feature;
+                    break;
             }
 
 
@@ -944,6 +953,22 @@ class IvaApp extends LitElement {
         $("#overlay").toggleClass("active");
     }
 
+    isVisible(item) {
+        switch (item.visibility) {
+            case "public":
+                return true;
+            case "private":
+                return !!this?.opencgaSession?.token;
+            case "none":
+            default:
+                return false;
+        }
+    }
+
+    isLoggedIn() {
+        return !!this?.opencgaSession?.token;
+    }
+
     render() {
         return html`
             <style>                
@@ -1070,7 +1095,6 @@ class IvaApp extends LitElement {
                     transition: 0.3s;
                     font-size: 13px;
                     text-transform: uppercase;
-                    letter-spacing: 2px;
                     letter-spacing: .2em;
                 }
                 
@@ -1094,8 +1118,13 @@ class IvaApp extends LitElement {
                     color: black;
                 }
                 
-                #side-nav a > img {
+                #side-nav a > img,
+                #side-nav a > i {
                     width:48px
+                }
+                
+                #side-nav .nav a.sidebar-nav-login {
+                    padding: 20px 0;
                 }
                 
                 #overlay {
@@ -1144,13 +1173,20 @@ class IvaApp extends LitElement {
                         </div>
                     </a>
                     <ul class="nav sidebar-nav">
-                    ${this.config.menu && this.config.menu.length ? this.config.menu.map(item => html`
-                        <li>
-                            <a href="#cat-${item.id}" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
-                                <img src="img/tools/icons/${item.icon}"  alt="${item.title}"/>  ${item.title}
-                            </a>
-                         </li>
-                    `) : null}
+                        ${!this.isLoggedIn() ? html`
+                            <li>
+                                <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e); }}">
+                                    <i href="#login" class="fa fa-3x fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
+                                </a>
+                            </li>
+                        ` : null }
+                        ${this.config?.menu?.filter?.(item => this.isVisible(item)).map(item => html`
+                            <li>
+                                <a href="#cat-${item.id}" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
+                                    <img src="img/tools/icons/${item.icon}"  alt="${item.title}"/>  ${item.title}
+                                </a>
+                             </li>
+                        `)}
                     </ul>
                 </nav>
             </div>
@@ -1179,8 +1215,8 @@ class IvaApp extends LitElement {
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <!-- Controls aligned to the LEFT -->
                         <ul class="nav navbar-nav">
-                            <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                            ${this.config.menu.length && this.config.menu.map(item => html`
+                            <!-- This code parse the config menu arrays and creates a custom menu taking into account visibility -->
+                            ${this.config?.menu?.filter?.(item => this.isVisible(item)).map(item => html`
                                 <!-- If there is not submenu we just display a button -->
                                 ${!item.submenu ? html`
                                     <li>
@@ -1234,7 +1270,7 @@ class IvaApp extends LitElement {
                             ` : null}
                                                         
                             <!-- Jobs -->
-                            ${this.opencgaSession && this.opencgaSession.token ? html`
+                            ${this.isLoggedIn() ? html`
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
                             ` : null}
                             
@@ -1250,7 +1286,7 @@ class IvaApp extends LitElement {
                                     </form>
                             ` : null}
                             
-                            ${this.opencgaSession?.token ? html`
+                            ${this.isLoggedIn() ? html`
                                 <li>
                                     <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
                                         <i class="fas fa-folder-open icon-padding"></i>
@@ -1281,7 +1317,7 @@ class IvaApp extends LitElement {
                             `) }
 
                             <!-- Login/Logout button -->
-                            ${this.config.login.visible && (!this.opencgaSession || !this.opencgaSession.token) ? html`
+                            ${this.config.login.visible && !this.isLoggedIn() ? html`
                                 <li class="dropdown">
                                     <a href="#login" id="loginButton" role="button" @click="${this.changeTool}">
                                         <i href="#login" class="fa fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
@@ -1290,7 +1326,7 @@ class IvaApp extends LitElement {
                             ` : null}
 
                             <!--User-->
-                            ${this.opencgaSession && this.opencgaSession.token ? html`
+                            ${this.isLoggedIn() ? html`
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-user-circle fa-lg icon-padding" aria-hidden="true"></i>${this.opencgaSession.user?.name ?? this.opencgaSession.user?.email} <span class="caret"></span>
@@ -1654,7 +1690,19 @@ class IvaApp extends LitElement {
                         </category-page>
                     </div>
                 ` : null}
-            
+                
+                ${this.config.enabledComponents["sampleVariantStatsBrowser"] ? html`
+                    <div class="content" id="sampleVariantStatsBrowser">
+                        <sample-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}"></sample-variant-stats-browser>
+                    </div>
+                ` : null}
+                
+                ${this.config.enabledComponents["sampleCancerVariantStatsBrowser"] ? html`
+                    <div class="content" id="sampleCancerVariantStatsBrowser">
+                        <sample-cancer-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}" .active="true"></sample-cancer-variant-stats-browser>
+                    </div>
+                ` : null}
+                
                 ${this.config.enabledComponents["sample-variant-stats"] ? html`
                     <div class="content" id="opencga-sample-variant-stats-analysis">
                         <opencga-sample-variant-stats-analysis .opencgaSession="${this.opencgaSession}"></opencga-sample-variant-stats-analysis>

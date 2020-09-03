@@ -118,7 +118,7 @@ export default class GettingStarted extends LitElement {
                         <hr>
                     </div>
                 </div>
-                ${this.config.components.filter(this.isVisible).map( (tool, i) => html`
+                ${this.config.components.filter(item => this.isVisible(item)).map( (tool, i) => html`
                     <section>
                         <div class="row">
                             <div class="col-sm-6 col-md-5 ${ i % 2 ? "col-md-push-7" : "" } position-relative">

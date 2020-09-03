@@ -122,7 +122,7 @@ const application = {
             title: "Variant Browser",
             description: "",
             icon: "variant_browser.svg",
-            visibility: "public",
+            visibility: "private",
             submenu: [
                 {
                     id: "browser",
@@ -159,7 +159,7 @@ const application = {
             title: "Variant Analysis",
             description: "",
             icon: "aggregation.svg",
-            visibility: "public",
+            visibility: "private",
             submenu: [
                 {
                     title: "Summary Stats",
@@ -428,7 +428,7 @@ const application = {
             title: "Case Interpretation",
             description: "",
             icon: "interpretation_portal.svg",
-            visibility: "public",
+            visibility: "private",
             submenu: [
                 {
                     title: "Clinical Management",
@@ -539,7 +539,7 @@ const application = {
         {
             id: "catalog",
             title: "Catalog",
-            visibility: "public",
+            visibility: "private",
             icon: "aggregation2.svg",
             submenu: [
                 {
