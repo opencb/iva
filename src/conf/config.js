@@ -79,9 +79,9 @@ const application = {
     title: "IVA",
     version: "v2.0.0",
     logo: "img/iva.svg",
-    // defaultStudy: "serena@cancer37:test",
     mode: "development",
     appConfig: "opencb",
+    // defaultStudy: "serena@cancer37:test",
     // defaultStudy: "emee-glh@cancer:myeloid",
     // The order, title and nested submenus are respected
     menu: [
