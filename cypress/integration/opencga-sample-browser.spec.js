@@ -3,20 +3,19 @@ import {login} from "../plugins/utils.js";
 context("File Browser", () => {
     before(() => {
         login();
-        cy.wait(7000);
     })
 
     it("query", () => {
         cy.get("a[data-id=samples]").click({force: true})
-        cy.get("div.page-title h2").contains("Sample Browser")
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Sample Browser")
 
         cy.get("#somatic + .subsection-content label").contains( "True").click({force: true})
 
-        cy.get(".lhs button").should("have.length", 1);
+        cy.get(".lhs button[data-filter-name]").should("have.length", 1);
         cy.get("div.search-button-wrapper button").click();
 
         cy.get(".lhs .somaticActiveFilter").click();
-        cy.get(".lhs button").should("have.length", 0);
+        cy.get(".lhs button[data-filter-name]").should("have.length", 0);
 
     })
 

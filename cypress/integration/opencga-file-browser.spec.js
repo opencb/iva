@@ -3,16 +3,16 @@ import {login} from "../plugins/utils.js";
 context("File Browser", () => {
     before(() => {
         login();
-        cy.wait(7000);
     })
 
     it("query", () => {
         cy.get("a[data-id=files]").click({force: true})
-        cy.get("div.page-title h2").contains("File Browser")
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "File Browser")
+
         cy.get("#format + .subsection-content a").contains( "VCF").click({force: true})
         cy.get("#bioformat + .subsection-content a").contains( "VARIANT").click({force: true})
 
-        cy.get(".lhs button").should("have.length", 2)
+        cy.get(".lhs button[data-filter-name]").should("have.length", 2)
 
         //cy.get('.fixed-table-toolbar').find(".pagination-info", {log:true})
         cy.get("div.search-button-wrapper button").click()

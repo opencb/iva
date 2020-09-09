@@ -3,13 +3,12 @@ import {login} from "../plugins/utils.js";
 context("Variant Browser", () => {
     before(() => {
         login();
-        cy.wait(7000);
     })
 
     it("query", () => {
         cy.get("a[data-id=browser]").click({force: true})
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser")
 
-       cy.get("div.page-title h2").contains("Variant Browser")
 
         cy.get("input#lof").click({force: true});
         cy.get("opencga-active-filters").contains("Consequence Types 10")
