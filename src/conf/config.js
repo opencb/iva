@@ -15,14 +15,14 @@
  */
 
 const cellbase = {
-    hosts: ["https://bioinfo.hpc.cam.ac.uk/cellbase"],
+    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
     version: "v4"
 };
 
 const opencga = {
     // host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
-    host: "http://re-opencga-prod.gel.zone/opencga",
-    // host: "http://localhost:9090/opencga",
+    //host: "http://re-opencga-prod.gel.zone/opencga",
+    host: "http://localhost:9090/opencga",
     version: "v2",
     serverVersion: "1.4",
 
@@ -154,7 +154,7 @@ const application = {
                 // },
             ]
         },
-        {
+        /*{
             id: "analysis",
             title: "Variant Analysis",
             description: "",
@@ -422,7 +422,7 @@ const application = {
                 //     visibility: "public"
                 // }
             ]
-        },
+        },*/
         {
             id: "clinical",
             title: "Case Interpretation",
