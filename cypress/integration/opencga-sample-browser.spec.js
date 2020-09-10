@@ -6,8 +6,8 @@ context("File Browser", () => {
     })
 
     it("query", () => {
-        cy.get("a[data-id=samples]").click({force: true})
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Sample Browser")
+        cy.get("a[data-id=samples]", {timeout: 60000}).click({force: true})
+        cy.get("div.page-title h2").should("be.visible").and("contain", "Sample Browser")
 
         cy.get("#somatic + .subsection-content label").contains( "True").click({force: true})
 

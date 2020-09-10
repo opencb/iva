@@ -12,10 +12,10 @@ context("Case Portal", () => {
             return Boolean(cookie && cookie.value)
         }));*/
 
-        cy.get("a[data-id=clinicalAnalysisPortal]").click({force: true})
+        cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true})
 
         //long timeout to make sure you are logged in
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal")
+        cy.get("div.page-title h2").should("be.visible").and("contain", "Case Portal")
 
         //cy.get(".lhs button").should("have.length", 2)
         cy.get(".clearfix > .pull-left > .pagination-info", {timeout: 10000})

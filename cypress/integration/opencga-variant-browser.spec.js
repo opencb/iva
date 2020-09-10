@@ -6,8 +6,8 @@ context("Variant Browser", () => {
     })
 
     it("query", () => {
-        cy.get("a[data-id=browser]").click({force: true})
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser")
+        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true})
+        cy.get("div.page-title h2").should("be.visible").and("contain", "Variant Browser")
 
 
         cy.get("input#lof").click({force: true});
