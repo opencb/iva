@@ -1,8 +1,11 @@
 
 build
+dist
 bower_components
 node_modules
+web_modules
 private
+web_modules
 
 # General
 *.jar

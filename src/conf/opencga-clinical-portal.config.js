@@ -1,0 +1,3 @@
+const OpencgaClinicalPortalConfig = {
+    showCreate: true
+};
