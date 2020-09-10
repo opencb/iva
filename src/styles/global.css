@@ -532,6 +532,10 @@ h3.page-title {
 }
 
 /********** active-filters  *************/
+.active-filter-button {
+    word-break: break-all;
+}
+
 .active-filter-button:hover {
     text-decoration: line-through;
 }
