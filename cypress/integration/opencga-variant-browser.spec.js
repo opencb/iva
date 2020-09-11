@@ -7,12 +7,15 @@ context("Variant Browser", () => {
 
     it("query", () => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true})
-        cy.get("div.page-title h2").should("be.visible").and("contain", "Variant Browser")
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser")
 
+        cy.get("opencga-variant-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gt", 1) //.should("be.gte", 1);
 
         cy.get("input#lof").click({force: true});
-        cy.get("opencga-active-filters").contains("Consequence Types 10")
-        cy.get("button.ctActiveFilter").click()
+        cy.get("opencga-active-filters").contains("Consequence Types 10");
+        cy.get("button.ctActiveFilter").click();
+
+
     })
 
     it("aggregated query", () => {

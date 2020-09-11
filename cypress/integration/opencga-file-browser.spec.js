@@ -7,7 +7,9 @@ context("File Browser", () => {
 
     it("query", () => {
         cy.get("a[data-id=files]", {timeout: 60000}).click({force: true})
-        cy.get("div.page-title h2").should("be.visible").and("contain", "File Browser")
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "File Browser")
+
+        cy.get("opencga-file-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gt", 1) //.should("be.gte", 1);
 
         cy.get("#format + .subsection-content a").contains( "VCF").click({force: true})
         cy.get("#bioformat + .subsection-content a").contains( "VARIANT").click({force: true})
