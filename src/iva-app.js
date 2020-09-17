@@ -27,6 +27,7 @@ import "./opencga-breadcrumb.js";
 import "./category-page.js";
 import "./iva-profile.js";
 import "./iva-settings.js";
+//import "./progress-bar.js";
 
 // @dev[jsorolla]
 import {OpenCGAClient} from "../lib/jsorolla/src/core/clients/opencga/opencga-client.js";
@@ -271,22 +272,7 @@ class IvaApp extends LitElement {
         // keeps track of the executedQueries transitioning from browser tool to facet tool
         this.queries = [];
 
-        this.remoteCall = {completed: 0, total: 0};
-        globalThis.addEventListener("request", () => {
-            this.remoteCall.total++;
-            //console.log("REMOTE CALL!", this.remoteCall.total)
-            this.requestUpdate();
-        }, false);
-        globalThis.addEventListener("response", () => {
-            //this.remoteCall.total--;
-            this.remoteCall.completed++;
-            if (this.remoteCall.completed >= this.remoteCall.total) {
-                this.remoteCall.total = 0;
-                this.remoteCall.completed = 0;
-            }
-            //console.log("REMOTE CALL DONE! total", this.remoteCall.total, "completed", this.remoteCall.completed)
-            this.requestUpdate();
-        }, false);
+
     }
 
     connectedCallback() {
@@ -549,7 +535,7 @@ class IvaApp extends LitElement {
             // window.clearInterval(this.intervalCheckSession);
         }
         // delay = 0 to fix the notify until user closes it.
-       if (UtilsNew.isNotEmpty(_message)) {
+        if (UtilsNew.isNotEmpty(_message)) {
             this.notifySession = NotificationUtils.showNotify(_message, UtilsNew.MESSAGE_INFO,
                 {}, {
                     delay: 0,
@@ -701,7 +687,7 @@ class IvaApp extends LitElement {
         //debugger
         this.config = {...this.config};
         // TODO quickfix to avoid hash browser scroll
-        $('body,html').animate({
+        $("body,html").animate({
             scrollTop: 0
         }, 1);
     }
@@ -1160,8 +1146,7 @@ class IvaApp extends LitElement {
                 }
             </style>
 
-            <!--<div id="progress-bar" style="opacity: ${~~this.remoteCall.total}; width:${(this.remoteCall.total === 0 || this.remoteCall.completed === 0 ? 100 : (100 * this.remoteCall.completed) / this.remoteCall.total)}%"></div>-->
-            
+            <progress-bar></progress-bar>
             <div id="overlay" @click="${this.toggleSideNav}"></div>
             <div id="side-nav" class="sidenav shadow-lg">
                 <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
@@ -1229,7 +1214,7 @@ class IvaApp extends LitElement {
                                         </a>
                                         <ul class="dropdown-menu">
                                             ${item.submenu.map(subitem =>
-                                                subitem.category ? html`
+    subitem.category ? html`
                                                     <li><a class="nav-item-category" href="${subitem.id ? "#" + subitem.id : "javascript: void 0"}">${subitem.title}</a></li>
                                                 ` : subitem.separator ? html`
                                                     <li role="separator" class="divider"></li>

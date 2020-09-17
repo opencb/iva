@@ -105,7 +105,7 @@ const application = {
                     visibility: "public",
                     fa_icon: "fa fa-list",
                     icon: "variant_browser.svg"
-                },
+                }
                 // {
                 //     id: "genomeBrowser",
                 //     title: "Genome Browser",
@@ -149,7 +149,7 @@ const application = {
                     acronym: "CS",
                     description: "",
                     icon: "",
-                    visibility: "public",
+                    visibility: "public"
                 },
                 // {
                 //     id: "hw", title: "Hardy-Weinberg", acronym: "HW",
@@ -381,7 +381,7 @@ const application = {
                     acronym: "VSE",
                     description: "Export variant stats for different cohorts",
                     icon: "",
-                    visibility: "public",
+                    visibility: "public"
                 },
                 {
                     id: "beacon",
@@ -438,7 +438,7 @@ const application = {
                     icon: "",
                     description: "",
                     visibility: "public"
-                },
+                }
                 // {
                 //     separator: true,
                 //     visibility: "public"
@@ -502,7 +502,7 @@ const application = {
                     description: "Compute BAM stats using samtools",
                     icon: "",
                     visibility: "public"
-                },
+                }
             ]
         },
         {
@@ -562,7 +562,7 @@ const application = {
                     visibility: "public"
                 }
             ]
-        },
+        }
     ],
     search: {
         placeholder: "Search",
@@ -604,7 +604,7 @@ const application = {
                 pedigrees, case-controls or sporadic samples.
             </p>
             <br>`,
-    welcomePageFooter: `<p><img id="logo" src="img/opencb-logo.png" alt="opencb-logo"/></p>`,
+    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
     components: [
         {
             id: "browser",

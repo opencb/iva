@@ -179,6 +179,12 @@ module.exports = {
     ],*/
     module: {
         rules: [
+            // es-lint check step
+            /*{
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: ["babel-loader", "eslint-loader"]
+            },*/
             /*{
                 // Test for a polyfill (or any file) and it won't be included in your
                 // bundle
@@ -248,7 +254,8 @@ module.exports = {
                     ]
 
                 }
-            }
+            },
+
         ]
 
     }
