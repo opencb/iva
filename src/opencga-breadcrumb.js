@@ -79,6 +79,7 @@ export default class OpencgaBreadcrumb extends LitElement {
             </div>
         `;
     }
+
 }
 
 customElements.define("opencga-breadcrumb", OpencgaBreadcrumb);

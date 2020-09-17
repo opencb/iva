@@ -535,7 +535,7 @@ class IvaApp extends LitElement {
             // window.clearInterval(this.intervalCheckSession);
         }
         // delay = 0 to fix the notify until user closes it.
-       if (UtilsNew.isNotEmpty(_message)) {
+        if (UtilsNew.isNotEmpty(_message)) {
             this.notifySession = NotificationUtils.showNotify(_message, UtilsNew.MESSAGE_INFO,
                 {}, {
                     delay: 0,
@@ -687,7 +687,7 @@ class IvaApp extends LitElement {
         //debugger
         this.config = {...this.config};
         // TODO quickfix to avoid hash browser scroll
-        $('body,html').animate({
+        $("body,html").animate({
             scrollTop: 0
         }, 1);
     }
@@ -1214,7 +1214,7 @@ class IvaApp extends LitElement {
                                         </a>
                                         <ul class="dropdown-menu">
                                             ${item.submenu.map(subitem =>
-                                                subitem.category ? html`
+    subitem.category ? html`
                                                     <li><a class="nav-item-category" href="${subitem.id ? "#" + subitem.id : "javascript: void 0"}">${subitem.title}</a></li>
                                                 ` : subitem.separator ? html`
                                                     <li role="separator" class="divider"></li>

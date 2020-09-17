@@ -507,7 +507,10 @@ h3.page-title {
 }
 .variant-interpreter-interpretation .page-title-right a,
 .variant-interpreter-interpretation .page-title-right button{
-    background: var(--main-bg-color);
+    /*background: var(--main-bg-color);*/
+    background: #f5f5f5;
+    color: var(--main-bg-color);;
+    padding: 0.8rem 1.8rem 0.8rem .3rem;
 }
 
 .page-title-right {
