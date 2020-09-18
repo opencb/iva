@@ -78,7 +78,7 @@
     "css-loader": "^3.4.2",
     "cypress": "^4.12.1",
     "cypress-wait-until": "^1.7.0",
-    "eslint": "^6.5.1",
+    "eslint": "^7.9.0",
     "eslint-config-google": "^0.14.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-cypress": "^2.10.3",
