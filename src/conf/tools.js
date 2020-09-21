@@ -439,7 +439,7 @@ const tools = {
             style: "font-size: 12px"
         }
     },*/
-/*    clinicalPortal: {
+    /*    clinicalPortal: {
         title: "Case Portal",
         reviewCases: {
             grid: {
@@ -473,7 +473,7 @@ const tools = {
             }
         },
         active: false
-    },
+    }
     /*beacon: {
         active: false,
         hosts: [

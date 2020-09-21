@@ -135,7 +135,7 @@ export default class IvaProfile extends LitElement {
                                     }
                                 ]
                             }
-                        },
+                        }
                         /*{
                             name: "Quota",
                             field: "quota",
@@ -145,7 +145,7 @@ export default class IvaProfile extends LitElement {
                             }
                         }*/
                     ]
-                },
+                }
                 /*{
                     title: "Administration",
                     collapsed: false,
@@ -219,6 +219,7 @@ export default class IvaProfile extends LitElement {
             </div>
         `;
     }
+
 }
 
 customElements.define("iva-profile", IvaProfile);

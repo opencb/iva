@@ -58,6 +58,7 @@ export default class IvaSettings extends LitElement {
         </div>
         `;
     }
+
 }
 
 customElements.define("iva-settings", IvaSettings);

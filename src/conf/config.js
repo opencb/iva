@@ -137,7 +137,7 @@ const application = {
                     visibility: "public",
                     fa_icon: "fa fa-list",
                     icon: "variant_browser.svg"
-                },
+                }
                 // {
                 //     id: "genomeBrowser",
                 //     title: "Genome Browser",
@@ -181,7 +181,7 @@ const application = {
                     acronym: "CS",
                     description: "",
                     icon: "",
-                    visibility: "public",
+                    visibility: "public"
                 },
                 // {
                 //     id: "hw", title: "Hardy-Weinberg", acronym: "HW",
@@ -412,7 +412,7 @@ const application = {
                     acronym: "VSE",
                     description: "Export variant stats for different cohorts",
                     icon: "",
-                    visibility: "public",
+                    visibility: "public"
                 },
                 // {
                 //     id: "beacon",
@@ -469,7 +469,7 @@ const application = {
                     icon: "",
                     description: "",
                     visibility: "public"
-                },
+                }
                 // {
                 //     separator: true,
                 //     visibility: "public"
@@ -593,7 +593,7 @@ const application = {
                     visibility: "public"
                 }
             ]
-        },
+        }
     ],
     search: {
         placeholder: "Search",
@@ -648,7 +648,7 @@ const application = {
             <li>any bugs or issues encountered when using IVA</li>
             <li>whether you think IVA will expand the utility of the research environment to a new user base</li>
         </ul>`,
-    welcomePageFooter: `<p><img id="logo" src="img/opencb-logo.png" alt="opencb-logo"/></p>`,
+    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
     components: [
         {
             id: "browser",
