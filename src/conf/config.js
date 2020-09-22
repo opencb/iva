@@ -596,10 +596,10 @@ const application = {
         }
     ],
     fileExplorer: {
-        visibility: "private"
+        visibility: "none"
     },
     jobMonitor: {
-        visibility: "private"
+        visibility: "none"
     },
     search: {
         placeholder: "Search",
