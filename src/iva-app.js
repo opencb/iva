@@ -879,18 +879,6 @@ class IvaApp extends LitElement {
 
     }
 
-    _isMenuItemVisible(item) {
-        switch (item.visibility) {
-            case "public":
-                return true;
-            case "private":
-                return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
-            case "none":
-            default:
-                return false;
-        }
-    }
-
     //TODO remove
     onNotifyMessage(e) {
         //NotificationUtils.closeNotify(this.notifySession);
@@ -1255,7 +1243,7 @@ class IvaApp extends LitElement {
                             ` : null}
                                                         
                             <!-- Jobs -->
-                            ${this.isLoggedIn() ? html`
+                            ${this.isVisible(this.config.jobMonitor) ? html`
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
                             ` : null}
                             
@@ -1271,9 +1259,9 @@ class IvaApp extends LitElement {
                                     </form>
                             ` : null}
                             
-                            ${this.isLoggedIn() ? html`
+                            ${this.isVisible(this.config.fileExplorer) ? html`
                                 <li>
-                                    <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
+                                    <a href="#file-manager" title="File Manager" role="button" @click="${this.changeTool}">
                                         <i class="fas fa-folder-open icon-padding"></i>
                                     </a>
                                 </li>

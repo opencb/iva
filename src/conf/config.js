@@ -564,6 +564,12 @@ const application = {
             ]
         }
     ],
+    fileExplorer: {
+        visibility: "private"
+    },
+    jobMonitor: {
+        visibility: "private"
+    },
     search: {
         placeholder: "Search",
         visible: false
