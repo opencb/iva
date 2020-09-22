@@ -383,17 +383,21 @@ class IvaApp extends LitElement {
                 _this.config.menu = application.menu.slice();
                 _this.config = {..._this.config};
             })
-            .catch( e => {
-                console.log("An error occurred creating the OpenCGA session:");
-                const restResponse = e.value;
-                console.error(restResponse);
-                if(restResponse.getEvents?.("ERROR")?.length) {
-                    const msg = restResponse.getEvents("ERROR").map(error => error.message).join("<br>");
-                    new NotificationQueue().push(e.message, msg, "error");
+            .catch(e => {
+                // in case it is a restResponse
+                console.log(e);
+                if (e?.getEvents?.("ERROR")?.length) {
+                    const errors = e.getEvents("ERROR");
+                    errors.forEach(error => {
+                        new NotificationQueue().push(error.name, error.message, "ERROR");
+                        console.log(error);
+                    });
+                } else if (e instanceof Error) {
+                    new NotificationQueue().push(e.name, e.message, "ERROR");
                 } else {
-                    new NotificationQueue().push("Server error!", null, "error");
+                    new NotificationQueue().push("Generic Error", JSON.stringify(e), "ERROR");
                 }
-            });
+            })
     }
 
     // TODO turn this into a Promise
@@ -879,18 +883,6 @@ class IvaApp extends LitElement {
 
     }
 
-    _isMenuItemVisible(item) {
-        switch (item.visibility) {
-            case "public":
-                return true;
-            case "private":
-                return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
-            case "none":
-            default:
-                return false;
-        }
-    }
-
     //TODO remove
     onNotifyMessage(e) {
         //NotificationUtils.closeNotify(this.notifySession);
@@ -1255,7 +1247,7 @@ class IvaApp extends LitElement {
                             ` : null}
                                                         
                             <!-- Jobs -->
-                            ${this.isLoggedIn() ? html`
+                            ${this.isVisible(this.config.jobMonitor) ? html`
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
                             ` : null}
                             
@@ -1271,9 +1263,9 @@ class IvaApp extends LitElement {
                                     </form>
                             ` : null}
                             
-                            ${this.isLoggedIn() ? html`
+                            ${this.isVisible(this.config.fileExplorer) ? html`
                                 <li>
-                                    <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
+                                    <a href="#file-manager" title="File Manager" role="button" @click="${this.changeTool}">
                                         <i class="fas fa-folder-open icon-padding"></i>
                                     </a>
                                 </li>
@@ -1317,23 +1309,12 @@ class IvaApp extends LitElement {
                                         <i class="fa fa-user-circle fa-lg icon-padding" aria-hidden="true"></i>${this.opencgaSession.user?.name ?? this.opencgaSession.user?.email} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#account"><i class="fa fa-user icon-padding" aria-hidden="true"></i> Your account</a>
-                                        </li>
-                                        ${application.appConfig === "opencb" ? html`
+                                        ${this.config.userMenu.length ? this.config.userMenu.map( item => html`
                                             <li>
-                                                <a href="#projects"><i class="fa fa-database icon-padding" aria-hidden="true"></i> Projects</a>
+                                                <a href="${item.url}"><i class="${item.icon} icon-padding" aria-hidden="true"></i> ${item.name}</a>
                                             </li>
-                                            <li>
-                                                <a href="#file-manager"><i class="fas fa-folder-open icon-padding"></i> File Explorer</a>
-                                            </li>
-                                        ` : null }
+                                        `) : null }
                                         <li role="separator" class="divider"></li>
-                                        <!--
-                                            <li>
-                                                <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                                            </li>
-                                        -->
                                         <li>
                                             <a id="logoutButton" role="button" @click="${this.logout}">
                                                 <i class="fa fa-sign-out-alt icon-padding" aria-hidden="true"></i> Logout
