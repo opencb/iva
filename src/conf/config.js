@@ -588,9 +588,9 @@ const application = {
         ]
     },
     userMenu: [
-        {id: "account", name: "Your Account", url: "#account", icon: "fa fa-user"},
-        {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database"},
-        {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open"},
+        {id: "account", name: "Your Account", url: "#account", icon: "fa fa-user", visibility: "private"},
+        {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
+        {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"},
         // {id: "settings", name: "Settings", url: "#settings", icon: "fas fa-cogs"}
     ],
     login: {
