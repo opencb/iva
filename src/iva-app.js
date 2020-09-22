@@ -1305,23 +1305,12 @@ class IvaApp extends LitElement {
                                         <i class="fa fa-user-circle fa-lg icon-padding" aria-hidden="true"></i>${this.opencgaSession.user?.name ?? this.opencgaSession.user?.email} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#account"><i class="fa fa-user icon-padding" aria-hidden="true"></i> Your account</a>
-                                        </li>
-                                        ${application.appConfig === "opencb" ? html`
+                                        ${this.config.userMenu.length ? this.config.userMenu.map( item => html`
                                             <li>
-                                                <a href="#projects"><i class="fa fa-database icon-padding" aria-hidden="true"></i> Projects</a>
+                                                <a href="${item.url}"><i class="${item.icon} icon-padding" aria-hidden="true"></i> ${item.name}</a>
                                             </li>
-                                            <li>
-                                                <a href="#file-manager"><i class="fas fa-folder-open icon-padding"></i> File Explorer</a>
-                                            </li>
-                                        ` : null }
+                                        `) : null }
                                         <li role="separator" class="divider"></li>
-                                        <!--
-                                            <li>
-                                                <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                                            </li>
-                                        -->
                                         <li>
                                             <a id="logoutButton" role="button" @click="${this.logout}">
                                                 <i class="fa fa-sign-out-alt icon-padding" aria-hidden="true"></i> Logout
