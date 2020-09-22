@@ -383,17 +383,21 @@ class IvaApp extends LitElement {
                 _this.config.menu = application.menu.slice();
                 _this.config = {..._this.config};
             })
-            .catch( e => {
-                console.log("An error occurred creating the OpenCGA session:");
-                const restResponse = e.value;
-                console.error(restResponse);
-                if(restResponse.getEvents?.("ERROR")?.length) {
-                    const msg = restResponse.getEvents("ERROR").map(error => error.message).join("<br>");
-                    new NotificationQueue().push(e.message, msg, "error");
+            .catch(e => {
+                // in case it is a restResponse
+                console.log(e);
+                if (e?.getEvents?.("ERROR")?.length) {
+                    const errors = e.getEvents("ERROR");
+                    errors.forEach(error => {
+                        new NotificationQueue().push(error.name, error.message, "ERROR");
+                        console.log(error);
+                    });
+                } else if (e instanceof Error) {
+                    new NotificationQueue().push(e.name, e.message, "ERROR");
                 } else {
-                    new NotificationQueue().push("Server error!", null, "error");
+                    new NotificationQueue().push("Generic Error", JSON.stringify(e), "ERROR");
                 }
-            });
+            })
     }
 
     // TODO turn this into a Promise
