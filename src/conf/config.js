@@ -430,12 +430,12 @@ const application = {
             icon: "interpretation_portal.svg",
             visibility: "private",
             submenu: [
-                {
+                /*{
                     title: "Clinical Management",
                     category: true,
                     id: "cat-clinical",
                     visibility: "public"
-                },
+                },*/
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
