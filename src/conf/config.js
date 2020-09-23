@@ -20,9 +20,9 @@ const cellbase = {
 };
 
 const opencga = {
-    // host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
-    host: "http://re-uat.opencga.gel.zone/opencga",
-    //host: "http://localhost:9090/opencga",
+    //host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
+    //host: "http://re-uat.opencga.gel.zone/opencga",
+    host: "http://localhost:9090/opencga",
     version: "v2",
     serverVersion: "1.4",
 
@@ -456,7 +456,7 @@ const application = {
                 //     separator: true,
                 //     visibility: "public"
                 // },
-                {
+                /*{
                     title: "Case Interpretation",
                     category: true,
                     id: "cat-clinical",
@@ -469,7 +469,7 @@ const application = {
                     icon: "",
                     description: "",
                     visibility: "public"
-                }
+                }*/
                 // {
                 //     separator: true,
                 //     visibility: "public"
@@ -546,22 +546,22 @@ const application = {
                     id: "projects",
                     title: "Projects",
                     visibility: "public"
-                },*/
+                },
                 {
                     separator: true,
                     visibility: "public"
-                },
+                },*/
                 {
                     title: "Browsers",
                     category: true,
                     id: "cat-catalog",
                     visibility: "public"
                 },
-                {
+                /*{
                     id: "files",
                     title: "File Browser",
                     visibility: "public"
-                },
+                },*/
                 {
                     id: "samples",
                     title: "Sample Browser",
@@ -577,7 +577,7 @@ const application = {
                     title: "Family Browser",
                     visibility: "public"
                 },
-                {
+                /*{
                     id: "cohorts",
                     title: "Cohort Browser",
                     visibility: "public"
@@ -591,7 +591,7 @@ const application = {
                     id: "jobs",
                     title: "Job Browser",
                     visibility: "public"
-                }
+                }*/
             ]
         }
     ],
