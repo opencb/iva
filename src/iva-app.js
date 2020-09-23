@@ -1309,7 +1309,7 @@ class IvaApp extends LitElement {
                                         <i class="fa fa-user-circle fa-lg icon-padding" aria-hidden="true"></i>${this.opencgaSession.user?.name ?? this.opencgaSession.user?.email} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        ${this.config.userMenu.length ? this.config.userMenu.map( item => html`
+                                        ${this.config.userMenu.length ? this.config.userMenu.filter(item => this.isVisible(item)).map( item => html`
                                             <li>
                                                 <a href="${item.url}"><i class="${item.icon} icon-padding" aria-hidden="true"></i> ${item.name}</a>
                                             </li>
