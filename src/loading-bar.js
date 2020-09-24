@@ -16,7 +16,7 @@
 
 import {LitElement, html} from "/web_modules/lit-element.js";
 
-export default class ProgressBar extends LitElement {
+export default class LoadingBar extends LitElement {
 
     constructor() {
         super();
@@ -42,23 +42,56 @@ export default class ProgressBar extends LitElement {
     }
 
     _init(){
-        /*this.remoteCall = {completed: 0, total: 0};
+        /* The total number of requests made */
+        this.reqsTotal = 0;
+
+        /*The number of requests completed (either successfully or not)*/
+        this.reqsCompleted = 0;
+
+        /* The amount of time spent fetching before showing the loading bar*/
+        this.latencyThreshold = 1000 //ProgressBar.latencyThreshold;
+
+        /*$timeout handle for latencyThreshold*/
+        this.startTimeout = null;
+
+        this.startTimeout = null;
+
+        // logic commented at the moment
+        this.completeTimeout = null;
+
         globalThis.addEventListener("request", () => {
-            this.remoteCall.total++;
-            //console.log("REMOTE CALL!", this.remoteCall.total)
+            if (this.reqsTotal === 0) {
+                this.startTimeout = setTimeout(() => {
+                    this._start();
+                }, 1000);
+            }
+            this.reqsTotal++;
+            //ProgressBar.set(this.reqsCompleted / this.reqsTotal);
+            console.log("SET", this.reqsCompleted / this.reqsTotal)
             this.requestUpdate();
         }, false);
-        globalThis.addEventListener("response", () => {
-            //this.remoteCall.total--;
-            this.remoteCall.completed++;
-            if (this.remoteCall.completed >= this.remoteCall.total) {
-                this.remoteCall.total = 0;
-                this.remoteCall.completed = 0;
-            }
-            //console.log("REMOTE CALL DONE! total", this.remoteCall.total, "completed", this.remoteCall.completed)
-            this.requestUpdate();
-        }, false);*/
 
+        globalThis.addEventListener("response", () => {
+            this.reqsCompleted++;
+            if (this.reqsCompleted >= this.reqsTotal) {
+                //$rootScope.$broadcast('cfpLoadingBar:loaded', {url: response.config.url, result: response});
+                this.setComplete();
+            } else {
+                //ProgressBar.set(this.reqsCompleted / this.reqsTotal);
+                console.log("SET", this.reqsCompleted / this.reqsTotal)
+            }
+            this.requestUpdate();
+        }, false);
+
+        /*onResponseError() {
+            this.reqsCompleted++;
+            if (this.reqsCompleted >= this.reqsTotal) {
+                //$rootScope.$broadcast('cfpLoadingBar:loaded', {url: rejection.config.url, result: rejection});
+                this.setComplete();
+            } else {
+                ProgressBar.set(this.reqsCompleted / this.reqsTotal);
+            }
+        }*/
 
 
         this.autoIncrement = true;
@@ -71,11 +104,11 @@ export default class ProgressBar extends LitElement {
         this.loadingBarTemplate = "<div id=\"loading-bar\"><div class=\"bar\"><div class=\"peg\"></div></div></div>";
 
 
-        var $animate;
+        /*var $animate;
         var $parentSelector = this.parentSelector,
             loadingBarContainer = angular.element(this.loadingBarTemplate),
             loadingBar = loadingBarContainer.find("div").eq(0),
-            spinner = angular.element(this.spinnerTemplate);
+            spinner = angular.element(this.spinnerTemplate);*/
 
         var incTimeout,
             completeTimeout,
@@ -124,7 +157,7 @@ export default class ProgressBar extends LitElement {
             return;
         }
 
-        var document = $document[0];
+        /*var document = $document[0];
         var parent = document.querySelector ?
             document.querySelector($parentSelector)
             : $document.find($parentSelector)[0]
@@ -135,9 +168,10 @@ export default class ProgressBar extends LitElement {
         }
 
         var $parent = angular.element(parent);
-        var $after = parent.lastChild && angular.element(parent.lastChild);
+        var $after = parent.lastChild && angular.element(parent.lastChild);*/
 
-        $rootScope.$broadcast("cfpLoadingBar:started");
+        //$rootScope.$broadcast("cfpLoadingBar:started");
+
         this.started = true;
 
         if (this.includeBar) {
@@ -155,20 +189,22 @@ export default class ProgressBar extends LitElement {
      * Set the loading bar's width to a certain percent.
      * @param n any value between 0 and 1
      */
-    _set(n) {
+    async _set(n) {
         if (!this.started) {
             return;
         }
-        var pct = (n * 100) + "%";
-        loadingBar.css("width", pct);
-        status = n;
+        this.WIDTH = (n * 100) + "%";
+        await this.requestUpdate();
+        //loadingBar.css("width", pct);
+
+        this.status = n;
 
         // increment loadingbar to give the illusion that there is always
         // progress but make sure to cancel the previous timeouts so we don't
         // have multiple incs running at the same time.
         if (this.autoIncrement) {
             clearTimeout(this.incTimeout);
-            this.incTimeout = setTimeout(function() {
+            this.incTimeout = setTimeout(() => {
                 this._inc();
             }, 250);
         }
@@ -210,31 +246,40 @@ export default class ProgressBar extends LitElement {
     }
 
     _status() {
-        return status;
+        return this.status;
     }
 
     _completeAnimation() {
         this.status = 0;
-        started = false;
+        this.started = false;
     }
 
     _complete() {
-        if (!$animate) {
+        /*if (!$animate) {
             $animate = $injector.get("$animate");
-        }
+        }*/
 
         this._set(1);
         clearTimeout(this.completeTimeout);
 
+        this._completeAnimation();
+
         // Attempt to aggregate any start/complete calls within 500ms:
-        this.completeTimeout = setTimeout(function() {
+        /*this.completeTimeout = setTimeout(function() {
             var promise = $animate.leave(loadingBarContainer, _completeAnimation);
             if (promise && promise.then) {
                 promise.then(_completeAnimation);
             }
             $animate.leave(spinner);
             //$rootScope.$broadcast('cfpLoadingBar:completed');
-        }, 500);
+        }, 500);*/
+    }
+
+    setComplete() {
+        clearTimeout(this.startTimeout);
+        this._complete();
+        this.reqsCompleted = 0;
+        this.reqsTotal = 0;
     }
 
     getDefaultConfig() {
@@ -243,15 +288,14 @@ export default class ProgressBar extends LitElement {
     }
 
     render() {
-        return html`
-            <div id="progress-bar" style="opacity: ${~~this.remoteCall.total}; width:${(this.remoteCall.total === 0 || this.remoteCall.completed === 0 ? 100 : (100 * this.remoteCall.completed) / this.remoteCall.total)}%"></div>
-
+        return html`           
+            <div id="loading-bar"><div class="bar" style="width:${this.WIDTH}"><div class="peg"></div></div></div>
         `;
     }
 
 }
 
-customElements.define("progress-bar", ProgressBar);
+customElements.define("loading-bar", LoadingBar);
 
 class RequestInterceptor {
 
@@ -272,11 +316,11 @@ class RequestInterceptor {
     /*calls cfpLoadingBar.complete() which removes the loading bar from the DOM.*/
     setComplete() {
         clearTimeout(this.startTimeout);
-        ProgressBar.complete();
+        LoadingBar.complete();
         this.reqsCompleted = 0;
         this.reqsTotal = 0;
     }
-
+/*
     onRequest() {
         //$rootScope.$broadcast('cfpLoadingBar:loading', {url: config.url});
         if (this.reqsTotal === 0) {
@@ -306,9 +350,7 @@ class RequestInterceptor {
         } else {
             ProgressBar.set(this.reqsCompleted / this.reqsTotal);
         }
-
-    //return $q.reject(rejection);
-    }
+    }*/
 
 }
 
