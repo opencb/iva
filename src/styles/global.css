@@ -2100,3 +2100,12 @@ interpretation-editor .comment-wrapper .col-sx {
 interpretation-editor .comment-wrapper .col-sx > div {
     margin-bottom: 10px;
 }
+
+interpretation-editor .status-wrapper .row > div {
+    padding-left: 0;
+}
+interpretation-editor .status-wrapper .row > div:last-child {
+
+    padding-right: 0px;
+}
+
