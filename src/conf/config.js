@@ -15,7 +15,7 @@
  */
 
 const cellbase = {
-    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
+    hosts: ["https://cellbase.gel.zone/cellbase"],
     version: "v4"
 };
 
