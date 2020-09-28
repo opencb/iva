@@ -21,8 +21,8 @@ const cellbase = {
 
 const opencga = {
     //host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
-    //host: "http://re-uat.opencga.gel.zone/opencga",
-    host: "http://localhost:9090/opencga",
+    host: "http://re-uat.opencga.gel.zone/opencga",
+    //host: "http://localhost:9090/opencga",
     version: "v2",
     serverVersion: "1.4",
 
