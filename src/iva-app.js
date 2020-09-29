@@ -80,6 +80,8 @@ import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tier
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
 import "../lib/jsorolla/src/core/webcomponents/files/opencga-file-manager.js";
 import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
+// import "./loading-bar.js";
+
 //import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
 // /@dev
 
@@ -1128,17 +1130,17 @@ class IvaApp extends LitElement {
                     transform: translate(0);
                 }
     
-                #progress-bar {
+                /*#progress-bar {
                     width: 100%;
                     position: fixed;
                     height: 3px;
                     background: #41a7ff;
                     z-index: 10;
                     transition: width 2s ease-in-out, opacity 0.5s ease;
-                }
+                }*/
             </style>
 
-            <progress-bar></progress-bar>
+            <loading-bar></loading-bar>
             <div id="overlay" @click="${this.toggleSideNav}"></div>
             <div id="side-nav" class="sidenav shadow-lg">
                 <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
