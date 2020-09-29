@@ -25,6 +25,10 @@ a.disabled, a.disabled:hover {
     text-decoration: none;
 }
 
+.icon-padding {
+    padding-right: 5px;
+}
+
 .uppercase {
     font-size: 15px;
     text-transform: uppercase;
@@ -49,6 +53,10 @@ a.disabled, a.disabled:hover {
 
 input[type="text"] {
     width: 100%;
+}
+
+input[type="number"] {
+    padding-right: 2px;
 }
 
 .v-space {
@@ -631,6 +639,8 @@ h3.page-title {
     border-top: 1px solid rgba(221, 221, 221, 1);
 }
 
+/********** aggregation tab ************/
+
 .facet-row {
     margin: 0;
 }
@@ -656,10 +666,6 @@ h3.page-title {
     margin: 0 0 20px 0;
 }
 
-.icon-padding {
-    padding-right: 5px;
-}
-
 .or-text {
     text-align: center;
 }
@@ -668,6 +674,9 @@ h3.page-title {
     display: block;
 }
 
+.number-field input[type=text]{
+    padding: 6px;
+}
 /********** toggle-switch plugin override ************/
 .switch-toggle-wrapper {
     margin: 10px 0;
@@ -2179,3 +2188,41 @@ opencga-gene-view h3.section-title /* TODO refactor */{
     0%   { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+
+/********** case interpreter  *************/
+
+interpretation-editor .comment-wrapper {
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    padding: 10px 60px 10px 10px;
+    position: relative;
+}
+
+interpretation-editor .comment-wrapper .close-button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+interpretation-editor .comment-wrapper .col-sx,
+interpretation-editor .comment-wrapper .col-dx {
+}
+interpretation-editor .comment-wrapper .col-sx {
+    padding-right: 20px;
+}
+
+interpretation-editor .comment-wrapper .col-sx > div {
+    margin-bottom: 10px;
+}
+
+interpretation-editor .status-wrapper .row > div {
+    padding-left: 0;
+}
+interpretation-editor .status-wrapper .row > div:last-child {
+    padding-right: 0;
+}
+
