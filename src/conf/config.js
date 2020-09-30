@@ -609,7 +609,7 @@ const application = {
         dropdown: true,
         links: [
             /*{id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},*/
-            {id: "documentation", name: "Documentation", url: "https://cnfl.extge.co.uk/pages/viewpage.action?pageId=97027062", icon: "fa fa-book"},
+            {id: "documentation", name: "Documentation", url: "https://re-confluence.gel.zone/pages/viewpage.action?pageId=38047206", icon: "fa fa-book"},
             /*{id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
             {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: "fa fa-archive"},
             {id: "about", name: "About", url: "#about", icon: "fa fa-info-circle"},
@@ -643,7 +643,7 @@ const application = {
     // Components in the welcome page
     welcomePageContent: `
         <p>
-            The Interactive Variant Analysis tool (IVA) enables whole-genome variant browsing and analysis. Query across cohorts to find variants that segregate in family pedigrees, between cases and controls, or in sporadic samples. Utilise a range of filters; including population frequency, consequence type, mode of inheritance and phenotype associations. IVA and OpenCGA are part of the <a href="https://github.com/opencb" target="_blank">OpenCB</a> Project.
+            The Interactive Variant Analysis tool (IVA) enables whole-genome variant browsing and analysis. Query across cohorts to find variants that segregate in family pedigrees, between cases and controls, or in sporadic samples. Utilise a range of filters; including population frequency, consequence type, mode of inheritance and phenotype associations. IVA and OpenCGA are part of the <a href="http://docs.opencb.org/" target="_blank">OpenCB</a> Project.
         </p>
         <p>
             The OpenCGA database currently holds all interpreted genomes that are available from the 100,000 Genomes
