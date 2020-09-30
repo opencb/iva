@@ -609,10 +609,10 @@ const application = {
         dropdown: true,
         links: [
             /*{id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},*/
+            {id: "about", name: "About OpenCB", url: "http://docs.opencb.org/", icon: "fa fa-info-circle"},
             {id: "documentation", name: "Documentation", url: "https://re-confluence.gel.zone/pages/viewpage.action?pageId=38047206", icon: "fa fa-book"},
             /*{id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
             {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: "fa fa-archive"},
-            {id: "about", name: "About", url: "#about", icon: "fa fa-info-circle"},
             {id: "terms", name: "Terms", url: "#terms", icon: "fa fa-file-alt"},
             {id: "contact", name: "Contact", url: "#contact", icon: "fa fa-envelope"},
             {id: "faq", name: "FAQ", url: "#faq", icon: "fa fa-question"}*/
