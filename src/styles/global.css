@@ -72,6 +72,11 @@ input[type="number"] {
     cursor: pointer;
 }
 
+.badge-dark-blue {
+    color: #fff;
+    background-color: var(--main-bg-color);
+}
+
 /* badge style from bootstrap 4 */
 .badge-info {
     color: #fff;
@@ -2226,3 +2231,59 @@ interpretation-editor .status-wrapper .row > div:last-child {
     padding-right: 0;
 }
 
+interpretation-grid .interpretation-wrapper {
+    line-height: 2;
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    border-left: 5px solid #eee;
+    position: relative;
+}
+
+interpretation-grid .interpretation-wrapper.primary {
+    border-left: 5px solid var(--main-bg-color) ;
+    background: #f3f3f3;
+
+}
+
+interpretation-grid .interpretation-wrapper .version {
+    display: inline-block;
+    color: grey;
+}
+
+interpretation-grid .interpretation-wrapper .id {
+    font-size: 1.3em;
+}
+
+interpretation-grid .interpretation-wrapper .analyst {
+    margin-left: 50px;
+    display: inline-block;
+}
+
+interpretation-grid .interpretation-wrapper .modificationDate {
+    color: grey;
+    margin-left: 50px;
+    display: inline-block;
+}
+
+interpretation-grid .interpretation-wrapper .status .READY_FOR_INTERPRETATION,
+interpretation-grid .interpretation-wrapper .status .NOT_REVIEWED {
+    color: #458aaa;
+}
+
+interpretation-grid .interpretation-wrapper .status .READY_FOR_REPORT {
+    color: #2ca525;
+}
+
+interpretation-grid .interpretation-wrapper .status .CLOSED {
+    color: #848484;
+}
+
+interpretation-grid .interpretation-wrapper .status .REJECTED {
+    color: #8a6d3b;
+}
+
+interpretation-grid .interpretation-wrapper .action-dropdown{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
