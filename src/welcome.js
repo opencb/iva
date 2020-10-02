@@ -68,18 +68,18 @@ export default class WelcomeWeb extends LitElement {
     onExampleClick(e) {
         const query = {study: this.opencgaSession.study.fqn};
         switch (e.currentTarget.dataset.type) {
-        case "gene":
-            query.gene = e.currentTarget.text;
-            break;
-        case "region":
-            query.region = e.currentTarget.text;
-            break;
-        case "snp":
-            query.xref = e.currentTarget.text;
-            break;
-        case "variant":
-            query.xref = e.currentTarget.text;
-            break;
+            case "gene":
+                query.gene = e.currentTarget.text;
+                break;
+            case "region":
+                query.region = e.currentTarget.text;
+                break;
+            case "snp":
+                query.xref = e.currentTarget.text;
+                break;
+            case "variant":
+                query.xref = e.currentTarget.text;
+                break;
         }
         this.notify(query);
     }
@@ -137,13 +137,13 @@ export default class WelcomeWeb extends LitElement {
 
     isVisible(item) {
         switch (item.visibility) {
-        case "public":
-            return true;
-        case "private":
-            return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
-        case "none":
-        default:
-            return false;
+            case "public":
+                return true;
+            case "private":
+                return !!this?.opencgaSession?.token;
+            case "none":
+            default:
+                return false;
         }
     }
 
@@ -238,28 +238,28 @@ export default class WelcomeWeb extends LitElement {
                             Variant: <a @click="${this.onExampleClick}" data-type="variant" style="cursor: pointer">13:32962274:G:T</a>
                     </span>
                 </div>`
-            : null }
+        : null }
             -->
              
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
                 ${this.config.menu.filter(this.isVisible).map( item => html`
-                            ${item.submenu ? html`
-                                <a class="icon-wrapper" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
-                                    <div class="hi-icon">
-                                        <img src="img/tools/icons/${item.icon}" /> 
-                                    </div>
-                                    <p>${item.title}</p>
-                                    <span class="smaller"></span>
-                                </a>
-                                ` : html`
-                                    <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
-                                    <div class="hi-icon">
-                                        <img src="img/tools/icons/${item.icon}" /> 
-                                    </div>
-                                    <p>${item.title}</p>
-                                    <span class="smaller"></span>
-                                </a>
-                                `}
+                    ${item.submenu ? html`
+                        <a class="icon-wrapper" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
+                            <div class="hi-icon">
+                                <img src="img/tools/icons/${item.icon}" /> 
+                            </div>
+                            <p>${item.title}</p>
+                            <span class="smaller"></span>
+                        </a>
+                        ` : html`
+                            <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
+                            <div class="hi-icon">
+                                <img src="img/tools/icons/${item.icon}" /> 
+                            </div>
+                            <p>${item.title}</p>
+                            <span class="smaller"></span>
+                        </a>
+                    `}
                 `)}
             </div>
 

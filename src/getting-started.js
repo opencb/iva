@@ -55,13 +55,13 @@ export default class GettingStarted extends LitElement {
 
     isVisible(item) {
         switch (item.visibility) {
-        case "public":
-            return true;
-        case "private":
-            return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
-        case "none":
-        default:
-            return false;
+            case "public":
+                return true;
+            case "private":
+                return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
+            case "none":
+            default:
+                return false;
         }
     }
 

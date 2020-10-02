@@ -15,13 +15,13 @@
  */
 
 const cellbase = {
-    hosts: ["https://bioinfo.hpc.cam.ac.uk/cellbase"],
+    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
     version: "v4"
 };
 
 const opencga = {
     // host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
-    host: "https://eglh.app.zettagenomics.com/opencga", // public instance
+    host: "https://test.eglh.app.zettagenomics.com/opencga", // public instance
     // host: "http://localhost:9090/opencga", // private instance 175.25.1.6
     version: "v2",
     serverVersion: "1.4",
@@ -82,6 +82,7 @@ const application = {
     // defaultStudy: "pilot:rd",
     mode: "development",
     appConfig: "opencb",
+    // defaultStudy: "serena@cancer37:test",
     // defaultStudy: "emee-glh@cancer:myeloid",
     // The order, title and nested submenus are respected
     menu: [
@@ -105,7 +106,7 @@ const application = {
                     visibility: "public",
                     fa_icon: "fa fa-list",
                     icon: "variant_browser.svg"
-                },
+                }
                 // {
                 //     id: "genomeBrowser",
                 //     title: "Genome Browser",
@@ -149,7 +150,7 @@ const application = {
                     acronym: "CS",
                     description: "",
                     icon: "",
-                    visibility: "public",
+                    visibility: "public"
                 },
                 // {
                 //     id: "hw", title: "Hardy-Weinberg", acronym: "HW",
@@ -381,7 +382,7 @@ const application = {
                     acronym: "VSE",
                     description: "Export variant stats for different cohorts",
                     icon: "",
-                    visibility: "public",
+                    visibility: "public"
                 },
                 {
                     id: "beacon",
@@ -438,7 +439,7 @@ const application = {
                     icon: "",
                     description: "",
                     visibility: "public"
-                },
+                }
                 // {
                 //     separator: true,
                 //     visibility: "public"
@@ -502,7 +503,7 @@ const application = {
                     description: "Compute BAM stats using samtools",
                     icon: "",
                     visibility: "public"
-                },
+                }
             ]
         },
         {
@@ -562,8 +563,14 @@ const application = {
                     visibility: "public"
                 }
             ]
-        },
+        }
     ],
+    fileExplorer: {
+        visibility: "private"
+    },
+    jobMonitor: {
+        visibility: "private"
+    },
     search: {
         placeholder: "Search",
         visible: false
@@ -581,6 +588,12 @@ const application = {
             {id: "faq", name: "FAQ", url: "#faq", icon: "fa fa-question"}
         ]
     },
+    userMenu: [
+        {id: "account", name: "Your Account", url: "#account", icon: "fa fa-user", visibility: "private"},
+        {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
+        {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"},
+        // {id: "settings", name: "Settings", url: "#settings", icon: "fas fa-cogs"}
+    ],
     login: {
         visible: true
     },
@@ -604,7 +617,7 @@ const application = {
                 pedigrees, case-controls or sporadic samples.
             </p>
             <br>`,
-    welcomePageFooter: `<p><img id="logo" src="img/opencb-logo.png" alt="opencb-logo"/></p>`,
+    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
     components: [
         {
             id: "browser",
