@@ -162,7 +162,7 @@ module.exports = {
             //resourceRegExp: /^\.\/locale$/,
             //contextRegExp: /moment$/
         }),
-        new ESLintPlugin({fix:true})
+        //new ESLintPlugin({fix:true})
 
     ],
     optimization: {
