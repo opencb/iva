@@ -9,6 +9,8 @@ const PluginProposalExportDefaultFrom = require("@babel/plugin-proposal-export-d
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
+
 
 const DIST_PATH = path.resolve(__dirname, "build/");
 
@@ -159,7 +161,9 @@ module.exports = {
             //resourceRegExp: /import [\s\S]+? from "main\.js";/
             //resourceRegExp: /^\.\/locale$/,
             //contextRegExp: /moment$/
-        })
+        }),
+        new ESLintPlugin({fix:true})
+
     ],
     optimization: {
         minimize: true
@@ -254,7 +258,7 @@ module.exports = {
                     ]
 
                 }
-            },
+            }
 
         ]
 
