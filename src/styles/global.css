@@ -2287,3 +2287,59 @@ interpretation-grid .interpretation-wrapper .action-dropdown{
     top: 15px;
     right: 20px;
 }
+
+/**** audit timeline *****/
+#interpretation-audit .buttons-wrapper {
+    margin-bottom: 20px;
+    float: right;
+}
+.interpretation-audit-timeline ul li{
+    list-style-type: none
+}
+
+.interpretation-audit-timeline ul .date{
+    color: #bbbbbb;
+    font-weight: 900;
+    font-size: 1.5em;
+    margin-left: -40px;
+}
+
+.interpretation-audit-timeline .event {
+    border-left: 2px solid var(--main-bg-color);
+    padding: 5px 5px 5px 20px;
+    margin: 0 0px 15px 60px;
+    position: relative;
+    background: #f1f1f1;
+}
+
+.interpretation-audit-timeline .event:before {
+    left: -140px;
+    top: 40%;
+    color: var(--main-bg-color);
+    content: attr(data-date);
+    text-align: right;
+    font-size: 0.9em;
+    min-width: 120px;
+    position: absolute;
+}
+
+.interpretation-audit-timeline .event:after {
+    content: '';
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    background-color: #f1f1f1;
+    left: -9px;
+    top: 40%;
+    border-top: var(--main-bg-color) solid 2px;
+    border-left: var(--main-bg-color) solid 2px;
+    transform: rotate(-45deg);
+}
+.interpretation-audit-timeline .event h3{
+    margin: 10px 0;
+    color: var(--main-bg-color);
+}
+.interpretation-audit-timeline .event .author {
+    color: #a0a0a0;
+    font-weight: bold;
+}
