@@ -27,6 +27,7 @@ import "./opencga-breadcrumb.js";
 import "./category-page.js";
 import "./iva-profile.js";
 import "./iva-settings.js";
+//import "./progress-bar.js";
 
 // @dev[jsorolla]
 import {OpenCGAClient} from "../lib/jsorolla/src/core/clients/opencga/opencga-client.js";
@@ -79,6 +80,8 @@ import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tier
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
 import "../lib/jsorolla/src/core/webcomponents/files/opencga-file-manager.js";
 import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
+// import "./loading-bar.js";
+
 //import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
 // /@dev
 
@@ -271,22 +274,7 @@ class IvaApp extends LitElement {
         // keeps track of the executedQueries transitioning from browser tool to facet tool
         this.queries = [];
 
-        this.remoteCall = {completed: 0, total: 0};
-        globalThis.addEventListener("request", () => {
-            this.remoteCall.total++;
-            //console.log("REMOTE CALL!", this.remoteCall.total)
-            this.requestUpdate();
-        }, false);
-        globalThis.addEventListener("response", () => {
-            //this.remoteCall.total--;
-            this.remoteCall.completed++;
-            if (this.remoteCall.completed >= this.remoteCall.total) {
-                this.remoteCall.total = 0;
-                this.remoteCall.completed = 0;
-            }
-            //console.log("REMOTE CALL DONE! total", this.remoteCall.total, "completed", this.remoteCall.completed)
-            this.requestUpdate();
-        }, false);
+
     }
 
     connectedCallback() {
@@ -397,17 +385,21 @@ class IvaApp extends LitElement {
                 _this.config.menu = application.menu.slice();
                 _this.config = {..._this.config};
             })
-            .catch( e => {
-                console.log("An error occurred creating the OpenCGA session:");
-                const restResponse = e.value;
-                console.error(restResponse);
-                if(restResponse.getEvents?.("ERROR")?.length) {
-                    const msg = restResponse.getEvents("ERROR").map(error => error.message).join("<br>");
-                    new NotificationQueue().push(e.message, msg, "error");
+            .catch(e => {
+                // in case it is a restResponse
+                console.log(e);
+                if (e?.getEvents?.("ERROR")?.length) {
+                    const errors = e.getEvents("ERROR");
+                    errors.forEach(error => {
+                        new NotificationQueue().push(error.name, error.message, "ERROR");
+                        console.log(error);
+                    });
+                } else if (e instanceof Error) {
+                    new NotificationQueue().push(e.name, e.message, "ERROR");
                 } else {
-                    new NotificationQueue().push("Server error!", null, "error");
+                    new NotificationQueue().push("Generic Error", JSON.stringify(e), "ERROR");
                 }
-            });
+            })
     }
 
     // TODO turn this into a Promise
@@ -549,7 +541,7 @@ class IvaApp extends LitElement {
             // window.clearInterval(this.intervalCheckSession);
         }
         // delay = 0 to fix the notify until user closes it.
-       if (UtilsNew.isNotEmpty(_message)) {
+        if (UtilsNew.isNotEmpty(_message)) {
             this.notifySession = NotificationUtils.showNotify(_message, UtilsNew.MESSAGE_INFO,
                 {}, {
                     delay: 0,
@@ -701,7 +693,7 @@ class IvaApp extends LitElement {
         //debugger
         this.config = {...this.config};
         // TODO quickfix to avoid hash browser scroll
-        $('body,html').animate({
+        $("body,html").animate({
             scrollTop: 0
         }, 1);
     }
@@ -893,18 +885,6 @@ class IvaApp extends LitElement {
 
     }
 
-    _isMenuItemVisible(item) {
-        switch (item.visibility) {
-            case "public":
-                return true;
-            case "private":
-                return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
-            case "none":
-            default:
-                return false;
-        }
-    }
-
     //TODO remove
     onNotifyMessage(e) {
         //NotificationUtils.closeNotify(this.notifySession);
@@ -951,6 +931,22 @@ class IvaApp extends LitElement {
         const sidenav = this.querySelector("#side-nav");
         $("#side-nav").toggleClass("active");
         $("#overlay").toggleClass("active");
+    }
+
+    isVisible(item) {
+        switch (item.visibility) {
+            case "public":
+                return true;
+            case "private":
+                return !!this?.opencgaSession?.token;
+            case "none":
+            default:
+                return false;
+        }
+    }
+
+    isLoggedIn() {
+        return !!this?.opencgaSession?.token;
     }
 
     render() {
@@ -1079,7 +1075,6 @@ class IvaApp extends LitElement {
                     transition: 0.3s;
                     font-size: 13px;
                     text-transform: uppercase;
-                    letter-spacing: 2px;
                     letter-spacing: .2em;
                 }
                 
@@ -1103,8 +1098,13 @@ class IvaApp extends LitElement {
                     color: black;
                 }
                 
-                #side-nav a > img {
+                #side-nav a > img,
+                #side-nav a > i {
                     width:48px
+                }
+                
+                #side-nav .nav a.sidebar-nav-login {
+                    padding: 20px 0;
                 }
                 
                 #overlay {
@@ -1130,18 +1130,17 @@ class IvaApp extends LitElement {
                     transform: translate(0);
                 }
     
-                #progress-bar {
+                /*#progress-bar {
                     width: 100%;
                     position: fixed;
                     height: 3px;
                     background: #41a7ff;
                     z-index: 10;
                     transition: width 2s ease-in-out, opacity 0.5s ease;
-                }
+                }*/
             </style>
 
-            <!--<div id="progress-bar" style="opacity: ${~~this.remoteCall.total}; width:${(this.remoteCall.total === 0 || this.remoteCall.completed === 0 ? 100 : (100 * this.remoteCall.completed) / this.remoteCall.total)}%"></div>-->
-            
+            <loading-bar></loading-bar>
             <div id="overlay" @click="${this.toggleSideNav}"></div>
             <div id="side-nav" class="sidenav shadow-lg">
                 <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
@@ -1153,13 +1152,20 @@ class IvaApp extends LitElement {
                         </div>
                     </a>
                     <ul class="nav sidebar-nav">
-                    ${this.config.menu && this.config.menu.length ? this.config.menu.map(item => html`
-                        <li>
-                            <a href="#cat-${item.id}" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
-                                <img src="img/tools/icons/${item.icon}"  alt="${item.title}"/>  ${item.title}
-                            </a>
-                         </li>
-                    `) : null}
+                        ${!this.isLoggedIn() ? html`
+                            <li>
+                                <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e); }}">
+                                    <i href="#login" class="fa fa-3x fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
+                                </a>
+                            </li>
+                        ` : null }
+                        ${this.config?.menu?.filter?.(this.isVisible).map(item => html`
+                            <li>
+                                <a href="#cat-${item.id}" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
+                                    <img src="img/tools/icons/${item.icon}"  alt="${item.title}"/>  ${item.title}
+                                </a>
+                             </li>
+                        `)}
                     </ul>
                 </nav>
             </div>
@@ -1188,8 +1194,8 @@ class IvaApp extends LitElement {
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <!-- Controls aligned to the LEFT -->
                         <ul class="nav navbar-nav">
-                            <!-- This code parse the config menu arrays and creates a custom menu taken into account visibility -->
-                            ${this.config.menu.length && this.config.menu.map(item => html`
+                            <!-- This code parse the config menu arrays and creates a custom menu taking into account visibility -->
+                            ${this.config?.menu?.filter?.(this.isVisible).map(item => html`
                                 <!-- If there is not submenu we just display a button -->
                                 ${!item.submenu ? html`
                                     <li>
@@ -1202,7 +1208,7 @@ class IvaApp extends LitElement {
                                         </a>
                                         <ul class="dropdown-menu">
                                             ${item.submenu.map(subitem =>
-                                                subitem.category ? html`
+    subitem.category ? html`
                                                     <li><a class="nav-item-category" href="${subitem.id ? "#" + subitem.id : "javascript: void 0"}">${subitem.title}</a></li>
                                                 ` : subitem.separator ? html`
                                                     <li role="separator" class="divider"></li>
@@ -1243,7 +1249,7 @@ class IvaApp extends LitElement {
                             ` : null}
                                                         
                             <!-- Jobs -->
-                            ${this.opencgaSession && this.opencgaSession.token ? html`
+                            ${this.isVisible(this.config.jobMonitor) ? html`
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
                             ` : null}
                             
@@ -1259,9 +1265,9 @@ class IvaApp extends LitElement {
                                     </form>
                             ` : null}
                             
-                            ${this.opencgaSession?.token ? html`
+                            ${this.isVisible(this.config.fileExplorer) ? html`
                                 <li>
-                                    <a href="#file-manager" title="File Explorer" role="button" @click="${this.changeTool}">
+                                    <a href="#file-manager" title="File Manager" role="button" @click="${this.changeTool}">
                                         <i class="fas fa-folder-open icon-padding"></i>
                                     </a>
                                 </li>
@@ -1290,7 +1296,7 @@ class IvaApp extends LitElement {
                             `) }
 
                             <!-- Login/Logout button -->
-                            ${this.config.login.visible && (!this.opencgaSession || !this.opencgaSession.token) ? html`
+                            ${this.config.login.visible && !this.isLoggedIn() ? html`
                                 <li class="dropdown">
                                     <a href="#login" id="loginButton" role="button" @click="${this.changeTool}">
                                         <i href="#login" class="fa fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
@@ -1299,29 +1305,18 @@ class IvaApp extends LitElement {
                             ` : null}
 
                             <!--User-->
-                            ${this.opencgaSession && this.opencgaSession.token ? html`
+                            ${this.isLoggedIn() ? html`
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-user-circle fa-lg icon-padding" aria-hidden="true"></i>${this.opencgaSession.user?.name ?? this.opencgaSession.user?.email} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#account"><i class="fa fa-user icon-padding" aria-hidden="true"></i> Your account</a>
-                                        </li>
-                                        ${application.appConfig === "opencb" ? html`
+                                        ${this.config.userMenu.length ? this.config.userMenu.filter(item => this.isVisible(item)).map( item => html`
                                             <li>
-                                                <a href="#projects"><i class="fa fa-database icon-padding" aria-hidden="true"></i> Projects</a>
+                                                <a href="${item.url}"><i class="${item.icon} icon-padding" aria-hidden="true"></i> ${item.name}</a>
                                             </li>
-                                            <li>
-                                                <a href="#file-manager"><i class="fas fa-folder-open icon-padding"></i> File Explorer</a>
-                                            </li>
-                                        ` : null }
+                                        `) : null }
                                         <li role="separator" class="divider"></li>
-                                        <!--
-                                            <li>
-                                                <a href="#settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
-                                            </li>
-                                        -->
                                         <li>
                                             <a id="logoutButton" role="button" @click="${this.logout}">
                                                 <i class="fa fa-sign-out-alt icon-padding" aria-hidden="true"></i> Logout
