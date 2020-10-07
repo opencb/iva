@@ -644,17 +644,17 @@ h3.page-title {
     border-top: 1px solid rgba(221, 221, 221, 1);
 }
 
-opencga-active-filters .filtersLink {
+.saved-filter-wrapper .filtersLink {
     display: flex !important;
     justify-content: space-between;
 }
 
-opencga-active-filters .delete-filter-button {
+.saved-filter-wrapper .delete-filter-button {
     padding: 0 0 0 10px;
     color: #adadad;
 }
 
-opencga-active-filters .delete-filter-button:hover {
+.saved-filter-wrapper .delete-filter-button:hover {
     color: black;
 }
 
