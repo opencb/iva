@@ -2289,7 +2289,10 @@ interpretation-grid .interpretation-wrapper .action-dropdown{
 }
 
 /**** audit timeline *****/
-#interpretation-audit .buttons-wrapper {
+#interpretation-audit .view-button-wrapper {
+    margin-right: 20px;
+}
+#interpretation-audit .control-bar-wrapper {
     margin-bottom: 20px;
     float: right;
 }
