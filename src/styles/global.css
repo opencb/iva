@@ -26,7 +26,7 @@ a.disabled, a.disabled:hover {
 }
 
 .icon-padding {
-    padding-right: 5px;
+    margin-right: 5px;
 }
 
 .uppercase {
@@ -607,7 +607,7 @@ h3.page-title {
 
 .rhs {
     float: right;
-    padding:5px
+    padding: 5px
 }
 
 .rhs .dropdown {
