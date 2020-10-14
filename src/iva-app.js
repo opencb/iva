@@ -1317,7 +1317,6 @@ class IvaApp extends LitElement {
                 </div>
             </nav>
             <!-- End of navigation bar -->
-            
             ${this.signingIn ? html`
                     <div class="login-overlay"><loading-spinner></loading-spinner></div>
             ` : null}

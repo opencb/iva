@@ -476,7 +476,7 @@ h3.page-title {
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,.2);
-    z-index: 1001;
+    z-index: 1000;
     transition: filter .3s, opacity .3s;
     opacity:0;
     filter:alpha(opacity=100);
@@ -620,6 +620,10 @@ h3.page-title {
     display: inline-block;
 }
 
+.saved-filter-dropdown {
+    display: inline-block;
+}
+
 .active-filter-label{
     display: inline-block;
     font-size: 15px;
@@ -628,7 +632,13 @@ h3.page-title {
     height: 34px;
     line-height: 34px;
     margin: 0;
-    padding-right: 10px;
+    background: transparent;
+    border: none;
+    padding: 2px 10px;
+    vertical-align: middle;
+}
+.active-filter-label:hover {
+    background-color: #efefef;
 }
 
 .lhs {
