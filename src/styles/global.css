@@ -539,11 +539,13 @@ h3.page-title {
     vertical-align: middle;
 }
 
-.variant-interpreter-interpretation > tool-header > .page-title {
-    height: 5em;
+.variant-interpreter-interpretation > tool-header > .page-title,
+.opencga-analysis-tool > tool-header > .page-title {
+    min-height: 5em;
 }
 
-.variant-interpreter-interpretation > tool-header > .page-title h2 {
+.variant-interpreter-interpretation > tool-header > .page-title h2,
+.opencga-analysis-tool > tool-header > .page-title h2 {
     float: left;
 }
 
@@ -637,7 +639,8 @@ h3.page-title {
     padding: 2px 10px;
     vertical-align: middle;
 }
-.active-filter-label:hover {
+
+button.active-filter-label:hover {
     background-color: #efefef;
 }
 
