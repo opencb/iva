@@ -203,6 +203,14 @@ const application = {
                     visibility: "public"
                 },
                 {
+                    id: "knockout-result",
+                    title: "Knockout Analysis result",
+                    acronym: "KO",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
                     id: "sample-eligibility",
                     title: "Eligibility Analysis",
                     description: "",

@@ -62,7 +62,8 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-v
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-cohort-variant-stats-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-mutational-signature-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-elegibility-analysis.js";
-import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-knockout-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-knockout-analysis-form.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-knockout-analysis-result.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-inferred-sex-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-individual-relatedness-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-individual-mendelian-error-analysis.js";
@@ -80,6 +81,7 @@ import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tier
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
 import "../lib/jsorolla/src/core/webcomponents/files/opencga-file-manager.js";
 import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
+import "../lib/jsorolla/src/core/webcomponents/loading-spinner.js";
 // import "./loading-bar.js";
 
 //import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
@@ -198,6 +200,7 @@ class IvaApp extends LitElement {
             "cohort-variant-stats",
             "sample-eligibility",
             "knockout",
+            "knockout-result",
             "inferred-sex",
             "mutational-signature",
             "individual-relatedness",
@@ -331,7 +334,9 @@ class IvaApp extends LitElement {
         this.requestUpdate();
     }
 
-    _createOpenCGASession() {
+    async _createOpenCGASession() {
+        this.signingIn = true;
+        await this.requestUpdate();
         const _this = this;
         const opencgaSession = this.opencgaClient.createSession()
             .then(function(response) {
@@ -380,8 +385,6 @@ class IvaApp extends LitElement {
                 // this forces the observer to be executed.
                 _this.opencgaSession = Object.assign({}, response);
                 _this.opencgaSession.mode = _this.config.mode;
-                // _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
-                // TODO check if render works
                 _this.config.menu = application.menu.slice();
                 _this.config = {..._this.config};
             })
@@ -399,6 +402,9 @@ class IvaApp extends LitElement {
                 } else {
                     new NotificationQueue().push("Generic Error", JSON.stringify(e), "ERROR");
                 }
+            }).finally( () => {
+                this.signingIn = false;
+                this.requestUpdate();
             })
     }
 
@@ -1107,28 +1113,7 @@ class IvaApp extends LitElement {
                     padding: 20px 0;
                 }
                 
-                #overlay {
-                    position: fixed;
-                    transform: translate(-100%);
-                    width: 100%;
-                    height: 100%;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background-color: rgba(0,0,0,.2);
-                    z-index: 1001;
-                    transition: filter .3s, opacity .3s; 
-                    opacity:0;                
-                    filter:alpha(opacity=100);
-                }
                 
-                #overlay.active {
-                    display: block;
-                    opacity:1;                
-                    filter:alpha(opacity=50);
-                    transform: translate(0);
-                }
     
                 /*#progress-bar {
                     width: 100%;
@@ -1208,7 +1193,7 @@ class IvaApp extends LitElement {
                                         </a>
                                         <ul class="dropdown-menu">
                                             ${item.submenu.map(subitem =>
-    subitem.category ? html`
+                                                subitem.category ? html`
                                                     <li><a class="nav-item-category" href="${subitem.id ? "#" + subitem.id : "javascript: void 0"}">${subitem.title}</a></li>
                                                 ` : subitem.separator ? html`
                                                     <li role="separator" class="divider"></li>
@@ -1332,11 +1317,9 @@ class IvaApp extends LitElement {
                 </div>
             </nav>
             <!-- End of navigation bar -->
-            <!--Breadcrumb
-            ${false && this.config.breadcrumb.visible && this.opencgaSession && this.opencgaSession.projects ? html`
-                <opencga-breadcrumb .config="${this.config}" .opencgaSession="${this.opencgaSession}"></opencga-breadcrumb>
+            ${this.signingIn ? html`
+                    <div class="login-overlay"><loading-spinner></loading-spinner></div>
             ` : null}
-            -->
             <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>--> 
 
             <!-- ${JSON.stringify(this.config.enabledComponents)} -->
@@ -1697,7 +1680,13 @@ class IvaApp extends LitElement {
                  
                  ${this.config.enabledComponents["knockout"] ? html`
                     <div class="content" id="opencga-knockout-analysis">
-                        <opencga-knockout-analysis .opencgaSession="${this.opencgaSession}"></opencga-knockout-analysis>
+                        <opencga-knockout-analysis-form .opencgaSession="${this.opencgaSession}"></opencga-knockout-analysis-form>
+                    </div>
+                ` : null}
+                 
+                 ${this.config.enabledComponents["knockout-result"] ? html`
+                    <div class="content" id="opencga-knockout-analysis-result">
+                        <opencga-knockout-analysis-result .opencgaSession="${this.opencgaSession}"></opencga-knockout-analysis-result>
                     </div>
                 ` : null}
                 
@@ -1844,7 +1833,7 @@ class IvaApp extends LitElement {
                 
                 ${this.config.enabledComponents["job-view"] ? html`
                     <tool-header title="${this.jobSelected || "No job selected"}" icon="${"fas fa-rocket"}"></tool-header>
-                    <div id="alignment-stats" class="content col-md-6 col-md-offset-3">
+                    <div id="job-view" class="content col-md-8 col-md-offset-2">
                         <opencga-jobs-view .jobId="${this.jobSelected}" mode="full" .opencgaSession="${this.opencgaSession}"></opencga-jobs-view>
                     </div>
                 ` : null}
