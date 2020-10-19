@@ -490,7 +490,7 @@ h3.page-title {
 }
 
 .login-overlay {
-    background-color: rgba(255,255,255,.8);
+    background-color: rgba(255,255,255,.9);
     display: flex;
     top: 52px;
     justify-content: center;
@@ -2390,4 +2390,9 @@ interpretation-grid .interpretation-wrapper .action-dropdown{
 .interpretation-audit-timeline .event .author {
     color: #a0a0a0;
     font-weight: bold;
+}
+
+/************  Analysis forms  ************/
+.opencga-analysis-tool-form-field {
+    margin: 0 0 20px 0;
 }
