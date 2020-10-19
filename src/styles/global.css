@@ -29,6 +29,10 @@ a.disabled, a.disabled:hover {
     margin-right: 5px;
 }
 
+.icon-padding {
+    padding-right: 5px;
+}
+
 .uppercase {
     font-size: 15px;
     text-transform: uppercase;
@@ -690,6 +694,20 @@ button.active-filter-label:hover {
 
 .facet-box:not(:first-child) {
     border-top: 1px solid rgba(221, 221, 221, 1);
+}
+
+.saved-filter-wrapper .filtersLink {
+    display: flex !important;
+    justify-content: space-between;
+}
+
+.saved-filter-wrapper .delete-filter-button {
+    padding: 0 0 0 10px;
+    color: #adadad;
+}
+
+.saved-filter-wrapper .delete-filter-button:hover {
+    color: black;
 }
 
 /********** aggregation tab ************/
