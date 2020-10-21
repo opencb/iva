@@ -51,7 +51,7 @@ module.exports = {
                 }
             },
             {
-                pattern: /\[build-signature\]/m,
+                pattern: /\[build-sifieldgnature\]/m,
                 replacement: function(match, type, path) {
                     return `${packageJson.name} ${packageJson.version} - Build generated on: ${new Date()}`;
                 }

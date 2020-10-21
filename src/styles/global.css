@@ -1721,6 +1721,10 @@ Toggle Changes
 }
 
 /****** magic checkbox / radio ********/
+ul.magic-checkbox-wrapper {
+    list-style: none;
+    padding: 0;
+}
 .magic-radio + .magic-horizontal-label {
     display: inline-block;
     margin-right: 15px;
