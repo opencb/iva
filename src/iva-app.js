@@ -36,8 +36,9 @@ import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome/reactome
 
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
-import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import {NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
+import AnalysisRegistry from "../lib/jsorolla/src/core/webcomponents/variant/analysis/analysis-registry.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.js";
@@ -889,10 +890,8 @@ class IvaApp extends LitElement {
     }
 
     onJobSelected(e) {
-        console.log("JOB", e.detail)
         this.jobSelected = e.detail.jobId;
         this.requestUpdate();
-
     }
 
     //TODO remove
@@ -1684,7 +1683,8 @@ class IvaApp extends LitElement {
                  
                  ${this.config.enabledComponents["knockout"] ? html`
                     <div class="content" id="opencga-knockout-analysis">
-                        <opencga-knockout-analysis-form .opencgaSession="${this.opencgaSession}" .cellbaseClient="${this.cellbaseClient}"></opencga-knockout-analysis-form>
+                        ${AnalysisRegistry.get("knockout").form(this.opencgaSession, this.cellbaseClient)}
+            
                     </div>
                 ` : null}
                  
