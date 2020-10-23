@@ -9,6 +9,8 @@ const PluginProposalExportDefaultFrom = require("@babel/plugin-proposal-export-d
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
+const packageJson = require("./package.json");
 
 const DIST_PATH = path.resolve(__dirname, "build/");
 
@@ -46,6 +48,12 @@ module.exports = {
                 pattern: /<!-- build:([\s\S]*?)\[([\s\S]*?)] -->[\s\S]*?<!-- \/build -->/m,
                 replacement: function(match, type, path) {
                     return tpl(path)[type];
+                }
+            },
+            {
+                pattern: /\[build-sifieldgnature\]/m,
+                replacement: function(match, type, path) {
+                    return `${packageJson.name} ${packageJson.version} - Build generated on: ${new Date()}`;
                 }
             }
         ]
@@ -160,6 +168,8 @@ module.exports = {
             //resourceRegExp: /^\.\/locale$/,
             //contextRegExp: /moment$/
         })
+        //new ESLintPlugin({fix:false})
+
     ],
     optimization: {
         minimize: true
@@ -254,7 +264,7 @@ module.exports = {
                     ]
 
                 }
-            },
+            }
 
         ]
 

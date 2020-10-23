@@ -36,8 +36,9 @@ import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome/reactome
 
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
-import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import {NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
+import AnalysisRegistry from "../lib/jsorolla/src/core/webcomponents/variant/analysis/analysis-registry.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.js";
@@ -277,6 +278,10 @@ class IvaApp extends LitElement {
         // keeps track of the executedQueries transitioning from browser tool to facet tool
         this.queries = [];
 
+        globalThis.addEventListener("signingIn", e => {
+            this.signingIn = e.detail.value;
+            this.requestUpdate();
+        }, false);
 
     }
 
@@ -335,7 +340,7 @@ class IvaApp extends LitElement {
     }
 
     async _createOpenCGASession() {
-        this.signingIn = true;
+        this.signingIn = "Creating session..";
         await this.requestUpdate();
         const _this = this;
         const opencgaSession = this.opencgaClient.createSession()
@@ -885,10 +890,8 @@ class IvaApp extends LitElement {
     }
 
     onJobSelected(e) {
-        console.log("JOB", e.detail)
         this.jobSelected = e.detail.jobId;
         this.requestUpdate();
-
     }
 
     //TODO remove
@@ -1318,7 +1321,7 @@ class IvaApp extends LitElement {
             </nav>
             <!-- End of navigation bar -->
             ${this.signingIn ? html`
-                    <div class="login-overlay"><loading-spinner></loading-spinner></div>
+                    <div class="login-overlay"><loading-spinner .description="${this.signingIn}"></loading-spinner></div>
             ` : null}
             <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>--> 
 
@@ -1680,7 +1683,8 @@ class IvaApp extends LitElement {
                  
                  ${this.config.enabledComponents["knockout"] ? html`
                     <div class="content" id="opencga-knockout-analysis">
-                        <opencga-knockout-analysis-form .opencgaSession="${this.opencgaSession}"></opencga-knockout-analysis-form>
+                        ${AnalysisRegistry.get("knockout").form(this.opencgaSession, this.cellbaseClient)}
+            
                     </div>
                 ` : null}
                  
