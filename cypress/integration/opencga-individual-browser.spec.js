@@ -6,7 +6,7 @@ context("Individual Browser", () => {
     })
 
     it("query", () => {
-        cy.get("a[data-id=individuals]", {timeout: 60000}).click({force: true})
+        cy.get("a[data-id=individual]", {timeout: 60000}).click({force: true})
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Individual Browser")
 
         cy.get("opencga-individual-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gt", 1) //.should("be.gte", 1);
@@ -22,7 +22,7 @@ context("Individual Browser", () => {
     })
 
     it("aggregated query", () => {
-        cy.get("a[data-id=individuals]").click({force: true})
+        cy.get("a[data-id=individual]").click({force: true})
 
         cy.get("a[href='#facet_tab']").click({force: true})
         cy.get("button.default-facets-button").click();

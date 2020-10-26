@@ -535,27 +535,27 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "files",
+                    id: "file",
                     title: "File Browser",
                     visibility: "public"
                 },
                 {
-                    id: "samples",
+                    id: "sample",
                     title: "Sample Browser",
                     visibility: "public"
                 },
                 {
-                    id: "individuals",
+                    id: "individual",
                     title: "Individual Browser",
                     visibility: "public"
                 },
                 {
-                    id: "families",
+                    id: "family",
                     title: "Family Browser",
                     visibility: "public"
                 },
                 {
-                    id: "cohorts",
+                    id: "cohort",
                     title: "Cohort Browser",
                     visibility: "public"
                 },
@@ -565,7 +565,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "jobs",
+                    id: "job",
                     title: "Job Browser",
                     visibility: "public"
                 }
