@@ -506,6 +506,7 @@ h3.page-title {
     background-color: #f5f5f5;
     margin: 0 -15px 10px -15px;
     padding: 10px 30px 10px 10px;
+    min-height: 5em;
 }
 
 .page-title.no-background {
@@ -522,6 +523,7 @@ h3.page-title {
     display: block;
     transition: 0.3s;
     font-size: 2em;
+    float: left;
 }
 
 .page-title h2 .inverse,
@@ -538,16 +540,6 @@ h3.page-title {
     width: 40px;
     font-size: 40px;
     vertical-align: middle;
-}
-
-.variant-interpreter-interpretation > tool-header > .page-title,
-.opencga-analysis-tool > tool-header > .page-title {
-    min-height: 5em;
-}
-
-.variant-interpreter-interpretation > tool-header > .page-title h2,
-.opencga-analysis-tool > tool-header > .page-title h2 {
-    float: left;
 }
 
 .variant-interpreter-interpretation > tool-header > .page-title .page-title-right i{
@@ -569,6 +561,7 @@ h3.page-title {
 
 .page-title-right {
     float: right;
+    padding: 8px;
 }
 
 .search-button-wrapper {

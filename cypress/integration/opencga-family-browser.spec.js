@@ -6,7 +6,7 @@ context("Individual Browser", () => {
     })
 
     it("query", () => {
-        cy.get("a[data-id=families]", {timeout: 60000}).click({force: true})
+        cy.get("a[data-id=family]", {timeout: 60000}).click({force: true})
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser")
 
         cy.get("opencga-family-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gte", 1) //.should("be.gte", 1);
