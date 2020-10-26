@@ -625,7 +625,7 @@ const application = {
             </p>
             <br>`,
     welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
-    components: [
+    /*components: [
         {
             id: "browser",
             title: "Variant Browser",
@@ -665,7 +665,7 @@ const application = {
                 <ul>
                     <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
                     <li>Filter by gene, consequence, frequency and much more</li>
-                </ul>                
+                </ul>
             `
         },
         {
@@ -681,7 +681,7 @@ const application = {
                     <li>Find databases that have information about specific variants</li>
                 </ul>`
         }
-    ]
+    ]*/
 };
 
 //export {application, beacon, cellbase, consequenceTypes, opencga, populationFrequencies, proteinSubstitutionScores}
