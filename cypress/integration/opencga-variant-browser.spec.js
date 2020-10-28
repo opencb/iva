@@ -24,13 +24,28 @@ context("Variant Browser", () => {
 
     it("query", () => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true})
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser")
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser") //should assertion comes from Chai and it follows its logic
 
         cy.get("opencga-variant-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gt", 1) //.should("be.gte", 1);
 
         cy.get("input#lof").click({force: true});
         cy.get("opencga-active-filters").contains("Consequence Types 10");
         cy.get("button.ctActiveFilter").click();
+    })
+
+    it("check Filter controls", () => {
+        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true})
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser")
+
+        cy.get("opencga-variant-grid .columns-toggle-wrapper button").should("be.visible").and("contain", "Columns").click()
+        cy.get("opencga-variant-grid .columns-toggle-wrapper ul li").and("have.length.gt", 1)
+
+        cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").click( {multiple: true, timeout: 60000}) // deactivate all the columns
+        cy.get("opencga-variant-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.lengthOf", 1);
+
+        /*cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
+            //Cypress.$("a", $li)
+        });*/
 
 
     })
@@ -41,7 +56,7 @@ context("Variant Browser", () => {
         cy.get("button.default-facets-button").click()
         cy.get("div.search-button-wrapper button").click()
 
-        cy.wait(2000);
+        //cy.wait(2000);
 
         cy.get("#bs-select-1-4").click({force: true}) // gene aggregation field
         cy.get("#type_Select a").contains( "INSERTION").click({force: true})

@@ -631,14 +631,17 @@ h3.page-title {
     height: 34px;
     line-height: 34px;
     margin: 0;
-    background: transparent;
     border: none;
     padding: 2px 10px;
     vertical-align: middle;
 }
 
+button.active-filter-label {
+    background: #eeeeee;
+}
+
 button.active-filter-label:hover {
-    background-color: #efefef;
+    background-color: #e2e2e2;
 }
 
 .lhs {
