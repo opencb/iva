@@ -82,6 +82,7 @@ const application = {
     mode: "development",
     appConfig: "opencb",
     defaultStudy: "serena@cancer37:test",
+    // defaultStudy: "demo@family:corpasome",
     // defaultStudy: "emee-glh@cancer:myeloid",
     // The order, title and nested submenus are respected
     menu: [
@@ -526,27 +527,27 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "files",
+                    id: "file",
                     title: "File Browser",
                     visibility: "public"
                 },
                 {
-                    id: "samples",
+                    id: "sample",
                     title: "Sample Browser",
                     visibility: "public"
                 },
                 {
-                    id: "individuals",
+                    id: "individual",
                     title: "Individual Browser",
                     visibility: "public"
                 },
                 {
-                    id: "families",
+                    id: "family",
                     title: "Family Browser",
                     visibility: "public"
                 },
                 {
-                    id: "cohorts",
+                    id: "cohort",
                     title: "Cohort Browser",
                     visibility: "public"
                 },
@@ -556,7 +557,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "jobs",
+                    id: "job",
                     title: "Job Browser",
                     visibility: "public"
                 }
@@ -587,9 +588,9 @@ const application = {
         ]
     },
     userMenu: [
-        {id: "account", name: "Your Account", url: "#account", icon: "fa fa-user", visibility: "private"},
+        {id: "account", name: "Your Profile", url: "#account", icon: "fa fa-user", visibility: "private"},
         {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
-        {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"},
+        {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"}
         // {id: "settings", name: "Settings", url: "#settings", icon: "fas fa-cogs"}
     ],
     login: {
@@ -616,7 +617,7 @@ const application = {
             </p>
             <br>`,
     welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
-    components: [
+    /*components: [
         {
             id: "browser",
             title: "Variant Browser",
@@ -656,7 +657,7 @@ const application = {
                 <ul>
                     <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
                     <li>Filter by gene, consequence, frequency and much more</li>
-                </ul>                
+                </ul>
             `
         },
         {
@@ -672,7 +673,7 @@ const application = {
                     <li>Find databases that have information about specific variants</li>
                 </ul>`
         }
-    ]
+    ]*/
 };
 
 //export {application, beacon, cellbase, consequenceTypes, opencga, populationFrequencies, proteinSubstitutionScores}

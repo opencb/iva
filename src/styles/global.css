@@ -26,6 +26,7 @@ a.disabled, a.disabled:hover {
 }
 
 .icon-padding {
+    /*margin-right: 5px;*/
     padding-right: 5px;
 }
 
@@ -465,11 +466,47 @@ h3.page-title {
     display: block;
 }
 
+#overlay,
+.login-overlay {
+    position: fixed;
+    transform: translate(-100%);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.2);
+    z-index: 1000;
+    transition: filter .3s, opacity .3s;
+    opacity:0;
+    filter:alpha(opacity=100);
+}
+
+#overlay.active {
+    display: block;
+    opacity:1;
+    filter:alpha(opacity=50);
+    transform: translate(0);
+}
+
+.login-overlay {
+    background-color: rgba(255,255,255,.9);
+    display: flex;
+    top: 52px;
+    justify-content: center;
+    align-items: center;
+    opacity:1;
+    filter:alpha(opacity=50);
+    transform: translate(0);
+}
+
 /********** browser components  *************/
 .page-title {
     background-color: #f5f5f5;
     margin: 0 -15px 10px -15px;
     padding: 10px 30px 10px 10px;
+    min-height: 5em;
 }
 
 .page-title.no-background {
@@ -486,6 +523,7 @@ h3.page-title {
     display: block;
     transition: 0.3s;
     font-size: 2em;
+    float: left;
 }
 
 .page-title h2 .inverse,
@@ -502,14 +540,6 @@ h3.page-title {
     width: 40px;
     font-size: 40px;
     vertical-align: middle;
-}
-
-.variant-interpreter-interpretation > tool-header > .page-title {
-    height: 5em;
-}
-
-.variant-interpreter-interpretation > tool-header > .page-title h2 {
-    float: left;
 }
 
 .variant-interpreter-interpretation > tool-header > .page-title .page-title-right i{
@@ -531,6 +561,7 @@ h3.page-title {
 
 .page-title-right {
     float: right;
+    padding: 8px;
 }
 
 .search-button-wrapper {
@@ -585,6 +616,10 @@ h3.page-title {
     display: inline-block;
 }
 
+.saved-filter-dropdown {
+    display: inline-block;
+}
+
 .active-filter-label{
     display: inline-block;
     font-size: 15px;
@@ -593,7 +628,14 @@ h3.page-title {
     height: 34px;
     line-height: 34px;
     margin: 0;
-    padding-right: 10px;
+    background: transparent;
+    border: none;
+    padding: 2px 10px;
+    vertical-align: middle;
+}
+
+button.active-filter-label:hover {
+    background-color: #efefef;
 }
 
 .lhs {
@@ -607,7 +649,7 @@ h3.page-title {
 
 .rhs {
     float: right;
-    padding:5px
+    padding: 5px
 }
 
 .rhs .dropdown {
@@ -642,6 +684,20 @@ h3.page-title {
 
 .facet-box:not(:first-child) {
     border-top: 1px solid rgba(221, 221, 221, 1);
+}
+
+.saved-filter-wrapper .filtersLink {
+    display: flex !important;
+    justify-content: space-between;
+}
+
+.saved-filter-wrapper .delete-filter-button {
+    padding: 0 0 0 10px;
+    color: #adadad;
+}
+
+.saved-filter-wrapper .delete-filter-button:hover {
+    color: black;
 }
 
 /********** aggregation tab ************/
@@ -1655,6 +1711,10 @@ Toggle Changes
 }
 
 /****** magic checkbox / radio ********/
+ul.magic-checkbox-wrapper {
+    list-style: none;
+    padding: 0;
+}
 .magic-radio + .magic-horizontal-label {
     display: inline-block;
     margin-right: 15px;
@@ -2231,7 +2291,7 @@ interpretation-editor .status-wrapper .row > div:last-child {
     padding-right: 0;
 }
 
-interpretation-grid .interpretation-wrapper {
+.interpretation-wrapper {
     line-height: 2;
     padding: 10px 20px;
     margin: 0 0 20px;
@@ -2239,50 +2299,49 @@ interpretation-grid .interpretation-wrapper {
     position: relative;
 }
 
-interpretation-grid .interpretation-wrapper.primary {
+.interpretation-wrapper.primary {
     border-left: 5px solid var(--main-bg-color) ;
     background: #f3f3f3;
-
 }
 
-interpretation-grid .interpretation-wrapper .version {
+.interpretation-wrapper .version {
     display: inline-block;
     color: grey;
 }
 
-interpretation-grid .interpretation-wrapper .id {
+.interpretation-wrapper .id {
     font-size: 1.3em;
 }
 
-interpretation-grid .interpretation-wrapper .analyst {
+.interpretation-wrapper .analyst {
     margin-left: 50px;
     display: inline-block;
 }
 
-interpretation-grid .interpretation-wrapper .modificationDate {
+.interpretation-wrapper .modificationDate {
     color: grey;
     margin-left: 50px;
     display: inline-block;
 }
 
-interpretation-grid .interpretation-wrapper .status .READY_FOR_INTERPRETATION,
-interpretation-grid .interpretation-wrapper .status .NOT_REVIEWED {
+.interpretation-wrapper .status .READY_FOR_INTERPRETATION,
+.interpretation-wrapper .status .NOT_REVIEWED {
     color: #458aaa;
 }
 
-interpretation-grid .interpretation-wrapper .status .READY_FOR_REPORT {
+.interpretation-wrapper .status .READY_FOR_REPORT {
     color: #2ca525;
 }
 
-interpretation-grid .interpretation-wrapper .status .CLOSED {
+.interpretation-wrapper .status .CLOSED {
     color: #848484;
 }
 
-interpretation-grid .interpretation-wrapper .status .REJECTED {
+.interpretation-wrapper .status .REJECTED {
     color: #8a6d3b;
 }
 
-interpretation-grid .interpretation-wrapper .action-dropdown{
+.interpretation-wrapper .action-dropdown{
     position: absolute;
     top: 15px;
     right: 20px;
@@ -2345,4 +2404,9 @@ interpretation-grid .interpretation-wrapper .action-dropdown{
 .interpretation-audit-timeline .event .author {
     color: #a0a0a0;
     font-weight: bold;
+}
+
+/************  Analysis forms  ************/
+.opencga-analysis-tool-form-field {
+    margin: 0 0 20px 0;
 }

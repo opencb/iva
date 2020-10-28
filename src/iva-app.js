@@ -36,25 +36,26 @@ import {ReactomeClient} from "../lib/jsorolla/src/core/clients/reactome/reactome
 
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
-import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import {NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
+import AnalysisRegistry from "../lib/jsorolla/src/core/webcomponents/variant/analysis/analysis-registry.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-transcript-view.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-protein-view.js";
 import "../lib/jsorolla/src/core/webcomponents/user/opencga-projects.js";
-import "../lib/jsorolla/src/core/webcomponents/samples/opencga-sample-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/samples/opencga-sample-view.js";
-import "../lib/jsorolla/src/core/webcomponents/samples/sample-variant-stats-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/samples/sample-cancer-variant-stats-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/files/opencga-file-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/sample/opencga-sample-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/sample/opencga-sample-view.js";
+import "../lib/jsorolla/src/core/webcomponents/sample/sample-variant-stats-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/sample/sample-cancer-variant-stats-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/file/opencga-file-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/family/opencga-family-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/user/opencga-login.js";
 import "../lib/jsorolla/src/core/webcomponents/individual/opencga-individual-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/cohorts/opencga-cohort-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/jobs/opencga-jobs-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/jobs/opencga-jobs-view.js";
+import "../lib/jsorolla/src/core/webcomponents/cohort/opencga-cohort-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/job/opencga-job-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/job/opencga-job-view.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-portal.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
@@ -62,7 +63,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-v
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-cohort-variant-stats-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-mutational-signature-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-elegibility-analysis.js";
-import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-knockout-analysis.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-knockout-analysis-result.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-inferred-sex-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-individual-relatedness-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-individual-mendelian-error-analysis.js";
@@ -78,8 +79,9 @@ import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-in
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
-import "../lib/jsorolla/src/core/webcomponents/files/opencga-file-manager.js";
+import "../lib/jsorolla/src/core/webcomponents/file/opencga-file-manager.js";
 import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
+import "../lib/jsorolla/src/core/webcomponents/loading-spinner.js";
 // import "./loading-bar.js";
 
 //import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
@@ -165,11 +167,11 @@ class IvaApp extends LitElement {
             //"beacon",
             "project",
             "sample",
-            "files",
-            "samples",
-            "individuals",
-            "families",
-            "cohorts",
+            "file",
+            "sample",
+            "sample-view",
+            "individual",
+            "cohort",
             "clinicalAnalysis",
             "clinicalAnalysisPortal",
             "clinicalAnalysisCreator",
@@ -180,8 +182,7 @@ class IvaApp extends LitElement {
             "sample-grid",
             "browser",
             "family",
-            "cohorts",
-            "jobs",
+            "job",
             "cat-browser",
             "cat-analysis",
             "cat-clinical",
@@ -198,6 +199,7 @@ class IvaApp extends LitElement {
             "cohort-variant-stats",
             "sample-eligibility",
             "knockout",
+            "knockout-result",
             "inferred-sex",
             "mutational-signature",
             "individual-relatedness",
@@ -274,6 +276,10 @@ class IvaApp extends LitElement {
         // keeps track of the executedQueries transitioning from browser tool to facet tool
         this.queries = [];
 
+        globalThis.addEventListener("signingIn", e => {
+            this.signingIn = e.detail.value;
+            this.requestUpdate();
+        }, false);
 
     }
 
@@ -331,7 +337,9 @@ class IvaApp extends LitElement {
         this.requestUpdate();
     }
 
-    _createOpenCGASession() {
+    async _createOpenCGASession() {
+        this.signingIn = "Creating session..";
+        await this.requestUpdate();
         const _this = this;
         const opencgaSession = this.opencgaClient.createSession()
             .then(function(response) {
@@ -380,8 +388,6 @@ class IvaApp extends LitElement {
                 // this forces the observer to be executed.
                 _this.opencgaSession = Object.assign({}, response);
                 _this.opencgaSession.mode = _this.config.mode;
-                // _this.set('config.menu', application.menu.slice()); // Do not remove: this is for refreshing the menu
-                // TODO check if render works
                 _this.config.menu = application.menu.slice();
                 _this.config = {..._this.config};
             })
@@ -399,6 +405,9 @@ class IvaApp extends LitElement {
                 } else {
                     new NotificationQueue().push("Generic Error", JSON.stringify(e), "ERROR");
                 }
+            }).finally( () => {
+                this.signingIn = false;
+                this.requestUpdate();
             })
     }
 
@@ -879,10 +888,8 @@ class IvaApp extends LitElement {
     }
 
     onJobSelected(e) {
-        console.log("JOB", e.detail)
         this.jobSelected = e.detail.jobId;
         this.requestUpdate();
-
     }
 
     //TODO remove
@@ -1107,28 +1114,7 @@ class IvaApp extends LitElement {
                     padding: 20px 0;
                 }
                 
-                #overlay {
-                    position: fixed;
-                    transform: translate(-100%);
-                    width: 100%;
-                    height: 100%;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background-color: rgba(0,0,0,.2);
-                    z-index: 1001;
-                    transition: filter .3s, opacity .3s; 
-                    opacity:0;                
-                    filter:alpha(opacity=100);
-                }
                 
-                #overlay.active {
-                    display: block;
-                    opacity:1;                
-                    filter:alpha(opacity=50);
-                    transform: translate(0);
-                }
     
                 /*#progress-bar {
                     width: 100%;
@@ -1208,7 +1194,7 @@ class IvaApp extends LitElement {
                                         </a>
                                         <ul class="dropdown-menu">
                                             ${item.submenu.map(subitem =>
-    subitem.category ? html`
+                                                subitem.category ? html`
                                                     <li><a class="nav-item-category" href="${subitem.id ? "#" + subitem.id : "javascript: void 0"}">${subitem.title}</a></li>
                                                 ` : subitem.separator ? html`
                                                     <li role="separator" class="divider"></li>
@@ -1332,11 +1318,9 @@ class IvaApp extends LitElement {
                 </div>
             </nav>
             <!-- End of navigation bar -->
-            <!--Breadcrumb
-            ${false && this.config.breadcrumb.visible && this.opencgaSession && this.opencgaSession.projects ? html`
-                <opencga-breadcrumb .config="${this.config}" .opencgaSession="${this.opencgaSession}"></opencga-breadcrumb>
+            ${this.signingIn ? html`
+                    <div class="login-overlay"><loading-spinner .description="${this.signingIn}"></loading-spinner></div>
             ` : null}
-            -->
             <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>--> 
 
             <!-- ${JSON.stringify(this.config.enabledComponents)} -->
@@ -1473,8 +1457,8 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents["samples"] ? html`
-                    <div class="content" id="samples">
+                ${this.config.enabledComponents.sample ? html`
+                    <div class="content" id="sample">
                         <opencga-sample-browser .opencgaSession="${this.opencgaSession}"
                                                 .query="${this.queries.sample}"
                                                 .config="${OpencgaSampleBrowserConfig}"
@@ -1495,13 +1479,13 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents.files ? html`
-                    <div class="content" id="files">
+                ${this.config.enabledComponents.file ? html`
+                    <div class="content" id="file">
                         <opencga-file-browser   .opencgaSession="${this.opencgaSession}"
-                                                .query="${this.queries.files}"
+                                                .query="${this.queries.file}"
                                                 .config="${OpencgaFileBrowserConfig}"
-                                                @querySearch="${e => this.onQueryFilterSearch(e, "files")}"
-                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "files")}">
+                                                @querySearch="${e => this.onQueryFilterSearch(e, "file")}"
+                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "file")}">
                         </opencga-file-browser>
                     </div>
                 ` : null}
@@ -1522,8 +1506,8 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents.sample ? html`
-                    <div class="content" id="sample">
+                ${this.config.enabledComponents["sample-view"] ? html`
+                    <div class="content" id="sample-view">
                         <opencga-sample-view    .opencgaSession="${this.opencgaSession}"
                                                 .config="${this.config.sampleView}">
                         </opencga-sample-view>
@@ -1562,35 +1546,35 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents.individuals ? html`
-                    <div class="content" id="individuals">
+                ${this.config.enabledComponents.individual ? html`
+                    <div class="content" id="individual">
                         <opencga-individual-browser .opencgaSession="${this.opencgaSession}"
-                                                    .query="${this.queries.individuals}"
+                                                    .query="${this.queries.individual}"
                                                     .config="${OpencgaIndividualBrowserConfig}"
-                                                    @querySearch="${e => this.onQueryFilterSearch(e, "individuals")}"
-                                                    @activeFilterChange="${e => this.onQueryFilterSearch(e, "individuals")}">
+                                                    @querySearch="${e => this.onQueryFilterSearch(e, "individual")}"
+                                                    @activeFilterChange="${e => this.onQueryFilterSearch(e, "individual")}">
                         </opencga-individual-browser>
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents.families ? html`
-                    <div class="content" id="families">
+                ${this.config.enabledComponents.family ? html`
+                    <div class="content" id="family">
                         <opencga-family-browser .opencgaSession="${this.opencgaSession}"
-                                                .query="${this.queries.families}"
+                                                .query="${this.queries.family}"
                                                 .config="${OpencgaFamilyBrowserConfig}"
-                                                @querySearch="${e => this.onQueryFilterSearch(e, "families")}"
-                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "families")}">                                        
+                                                @querySearch="${e => this.onQueryFilterSearch(e, "family")}"
+                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "family")}">                                        
                         </opencga-family-browser>
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents.cohorts ? html`
-                    <div class="content" id="cohorts">
+                ${this.config.enabledComponents.cohort ? html`
+                    <div class="content" id="cohort">
                         <opencga-cohort-browser     .opencgaSession="${this.opencgaSession}"
-                                                    .query="${this.queries.cohorts}"
+                                                    .query="${this.queries.cohort}"
                                                     .config="${OpencgaCohortBrowserConfig}"
-                                                    @querySearch="${e => this.onQueryFilterSearch(e, "cohorts")}"
-                                                    @activeFilterChange="${e => this.onQueryFilterSearch(e, "cohorts")}"
+                                                    @querySearch="${e => this.onQueryFilterSearch(e, "cohort")}"
+                                                    @activeFilterChange="${e => this.onQueryFilterSearch(e, "cohort")}"
                         </opencga-cohort-browser>
                     </div>
                 ` : null}
@@ -1606,14 +1590,14 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents["jobs"] ? html`
-                    <div class="content" id="jobs">
-                        <opencga-jobs-browser   .opencgaSession="${this.opencgaSession}"
-                                                .config="${OpencgaJobsBrowserConfig}"
-                                                .query="${this.queries.jobs}"
-                                                @querySearch="${e => this.onQueryFilterSearch(e, "jobs")}"
-                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "jobs")}">  
-                        </opencga-jobs-browser>
+                ${this.config.enabledComponents.job ? html`
+                    <div class="content" id="job">
+                        <opencga-job-browser   .opencgaSession="${this.opencgaSession}"
+                                                .config="${OpencgaJobBrowserConfig}"
+                                                .query="${this.queries.job}"
+                                                @querySearch="${e => this.onQueryFilterSearch(e, "job")}"
+                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "job")}">  
+                        </opencga-job-browser>
                     </div>
                 ` : null}
 
@@ -1697,7 +1681,14 @@ class IvaApp extends LitElement {
                  
                  ${this.config.enabledComponents["knockout"] ? html`
                     <div class="content" id="opencga-knockout-analysis">
-                        <opencga-knockout-analysis .opencgaSession="${this.opencgaSession}"></opencga-knockout-analysis>
+                        ${AnalysisRegistry.get("knockout").form(this.opencgaSession, this.cellbaseClient)}
+            
+                    </div>
+                ` : null}
+                 
+                 ${this.config.enabledComponents["knockout-result"] ? html`
+                    <div class="content" id="opencga-knockout-analysis-result">
+                        <opencga-knockout-analysis-result .opencgaSession="${this.opencgaSession}"></opencga-knockout-analysis-result>
                     </div>
                 ` : null}
                 
@@ -1844,8 +1835,8 @@ class IvaApp extends LitElement {
                 
                 ${this.config.enabledComponents["job-view"] ? html`
                     <tool-header title="${this.jobSelected || "No job selected"}" icon="${"fas fa-rocket"}"></tool-header>
-                    <div id="alignment-stats" class="content col-md-6 col-md-offset-3">
-                        <opencga-jobs-view .jobId="${this.jobSelected}" mode="full" .opencgaSession="${this.opencgaSession}"></opencga-jobs-view>
+                    <div id="job-view" class="content col-md-8 col-md-offset-2">
+                        <opencga-job-view .jobId="${this.jobSelected}" mode="full" .opencgaSession="${this.opencgaSession}"></opencga-job-view>
                     </div>
                 ` : null}
 

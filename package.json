@@ -23,7 +23,8 @@
     "build": "npx webpack",
     "deploy": "npx webpack && ./docker/docker-build.py push",
     "e2e": "./credentials.sh npx cypress open",
-    "e2e-headless": "./credentials.sh npx cypress run --headless"
+    "e2e-headless": "./credentials.sh npx cypress run --headless",
+    "eslint": "eslint -c .eslintrc.json . --ignore-pattern '/web_modules/'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
@@ -83,6 +84,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-webpack-plugin": "^2.1.0",
     "file-loader": "^5.0.2",
     "html-loader": "^0.5.5",
     "html-replace-webpack-plugin": "^2.5.6",
