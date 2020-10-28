@@ -26,10 +26,7 @@ a.disabled, a.disabled:hover {
 }
 
 .icon-padding {
-    margin-right: 5px;
-}
-
-.icon-padding {
+    /*margin-right: 5px;*/
     padding-right: 5px;
 }
 
