@@ -641,6 +641,10 @@ button.active-filter-label:hover {
     background-color: #e2e2e2;
 }
 
+.filtersLink .id-filter-button {
+    padding-left: 20px;
+}
+
 .lhs {
     display: inline-block;
     padding: 5px 0;
