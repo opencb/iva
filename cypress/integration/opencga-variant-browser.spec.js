@@ -15,7 +15,7 @@
  */
 
 
-import {login} from "../plugins/utils.js";
+import {login, randomString} from "../plugins/utils.js";
 
 context("Variant Browser", () => {
     before(() => {
@@ -33,7 +33,7 @@ context("Variant Browser", () => {
         cy.get("button.ctActiveFilter").click();
     })
 
-    it("check Filter controls", () => {
+    it("check Columns togglability", () => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true})
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser")
 
@@ -46,8 +46,6 @@ context("Variant Browser", () => {
         /*cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
             //Cypress.$("a", $li)
         });*/
-
-
     })
 
     it("aggregated query", () => {
@@ -63,4 +61,43 @@ context("Variant Browser", () => {
         cy.get("div.search-button-wrapper button").click()
 
     })
+
+    // TODO fix bugs
+    /*it("check Filter controls", () => {
+        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true})
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser")
+
+        cy.get("input#lof").click({force: true});
+        cy.get("opencga-active-filters").contains("Consequence Types 10");
+
+        cy.get("button[data-cy='filter-button']").click({force: true});
+        //cy.get("ul.saved-filter-wrapper a").contains("Save filter...").click(); // it also works
+        cy.get("ul.saved-filter-wrapper a[data-action='active-filter-save']").contains("Save filter...").click();
+
+        let name = randomString();
+        cy.get("input[data-cy='modal-filter-name']").type(name); // TODO FIXME for some reason here isn't typed the whole `name` string.
+        cy.get("input[data-cy='modal-filter-description']").type(randomString(3));
+        cy.get("button[data-cy='modal-filter-save-button']").click();
+
+        cy.get(".swal2-actions").contains("OK").click();
+        cy.get("button[data-cy='filter-button']").click();
+        cy.get("ul.saved-filter-wrapper").contains(name);
+        cy.get(`span.delete-filter-button[data-filter-id='${name}']`).click();
+        cy.get(".swal2-title").contains("Are you sure?");
+        cy.get(".swal2-confirm").click(); //confirm action
+        cy.get(".swal2-title").contains("Filter Deleted"); // TODO FIXME this selector refers to the previous .swal2-title which has been detatched from DOM
+        cy.get(".swal2-confirm").click(); //dismiss confirmation modal
+
+    })*/
+/*
+
+    it("checks the links of the first row", () => {
+        //cy.get('.menu-item').trigger('mouseover')
+        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true})
+        cy.get("button[data-id='table-tab']", {timeout: 60000}).click()
+
+        //cy.get("opencga-variant-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td:nth-child(4) span").trigger('mouseover')
+        //cy.get('.gene-tooltip').should('be.visible')
+
+    })*/
 })

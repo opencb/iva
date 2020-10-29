@@ -6,3 +6,12 @@ export const login = () => {
     cy.get("#opencgaPassword").type(password, {log: false})
     cy.get("form#formLogin").submit()
 }
+export const randomString = length => {
+    let result = "";
+    const _length = length || 6;
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    for (let i = 0; i < _length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}
