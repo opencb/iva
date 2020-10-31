@@ -43,6 +43,9 @@ context("Variant Browser", () => {
         cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").click( {multiple: true, timeout: 60000}) // deactivate all the columns
         cy.get("opencga-variant-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.lengthOf", 1);
 
+        cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").click( {multiple: true, timeout: 60000}) // reactivate all the columns
+        cy.get("opencga-variant-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.length.gt", 1);
+
         /*cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
             //Cypress.$("a", $li)
         });*/

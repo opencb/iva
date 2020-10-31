@@ -634,11 +634,13 @@ h3.page-title {
 }
 
 button.active-filter-label {
-    background: #eeeeee;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    background: white;
 }
 
 button.active-filter-label:hover {
-    background-color: #e2e2e2;
+    background-color: #efefef;
 }
 
 .filtersLink .id-filter-button {
