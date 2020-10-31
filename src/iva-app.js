@@ -1806,7 +1806,6 @@ class IvaApp extends LitElement {
                     <div class="content" id="interpreter">
                         <variant-interpreter    .opencgaSession="${this.opencgaSession}" 
                                                 .cellbaseClient="${this.cellbaseClient}"
-                                                .clinicalAnalysis="${this.clinicalAnalysis}"
                                                 .clinicalAnalysisId="${this.clinicalAnalysisId}"
                                                 .config="${VariantInterpreterConfig}"
                                                 @selectClinicalAnalysis="${this.onSelectClinicalAnalysis}">
