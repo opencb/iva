@@ -1392,12 +1392,16 @@ class IvaApp extends LitElement {
                     </div>                
                 ` : null}
 
-                ${this.config.enabledComponents.clinicalAnalysisPortal ? html`
+                ${this.config.enabledComponents["clinicalAnalysisPortal"] ? html`
                     <div class="content" id="clinicalAnalysisPortal">
+                        <!--
                         <opencga-clinical-portal .opencgaSession="${this.opencgaSession}"
                                                 .config="${OpencgaClinicalPortalConfig}"
                                                 .cellbaseClient="${this.cellbaseClient}">
                         </opencga-clinical-portal>
+                        -->
+                        <tool-header title="${"Case Review"}" icon="${"fas fa-window-restore"}"></tool-header>
+                        <opencga-clinical-review-cases  .opencgaSession="${this.opencgaSession}"></opencga-clinical-review-cases>
                     </div>
                 ` : null}
 
@@ -1758,7 +1762,7 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-                ${this.config.enabledComponents.gwas ? html`
+                ${this.config.enabledComponents["gwas"] ? html`
                     <div class="content" id="opencga-gwas-analysis">
                         <opencga-gwas-analysis .opencgaSession="${this.opencgaSession}"></opencga-gwas-analysis>
                     </div>
@@ -1774,7 +1778,6 @@ class IvaApp extends LitElement {
                     <tool-header title="${"Create Case"}" icon="${"fas fa-window-restore"}"></tool-header>
                     <div class="content container" id="opencga-clinical-analysis-create">
                         <opencga-clinical-analysis-writer .opencgaSession="${this.opencgaSession}"
-                                                          .config="${{display: {showTitle: false}}}"
                                                           @clinicalanalysischange="${this.onClinicalAnalysisEditor}">
                         </opencga-clinical-analysis-writer>
                     </div>
