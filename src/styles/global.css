@@ -25,6 +25,10 @@ a.disabled, a.disabled:hover {
     text-decoration: none;
 }
 
+.text-black, .text-black:link, .text-black:visited{
+    color: #000;
+}
+
 .icon-padding {
     /*margin-right: 5px;*/
     padding-right: 5px;
