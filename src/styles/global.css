@@ -25,6 +25,10 @@ a.disabled, a.disabled:hover {
     text-decoration: none;
 }
 
+.text-black, .text-black:link, .text-black:visited{
+    color: #000;
+}
+
 .icon-padding {
     /*margin-right: 5px;*/
     padding-right: 5px;
@@ -643,10 +647,6 @@ button.active-filter-label:hover {
     background-color: #efefef;
 }
 
-.filtersLink .id-filter-button {
-    padding-left: 20px;
-}
-
 .lhs {
     display: inline-block;
     padding: 5px 0;
@@ -696,13 +696,22 @@ button.active-filter-label:hover {
 }
 
 .saved-filter-wrapper .filtersLink {
-    display: flex !important;
-    justify-content: space-between;
+    position: relative;
+    padding: 3px 35px 3px 20px;
+}
+
+.saved-filter-wrapper .filtersLink .id-filter-button {
+    padding-left: 25px;
 }
 
 .saved-filter-wrapper .delete-filter-button {
     padding: 0 0 0 10px;
     color: #adadad;
+    position: absolute;
+    display: inline-block;
+    right: 15px;
+    top: 5px;
+
 }
 
 .saved-filter-wrapper .delete-filter-button:hover {
@@ -2418,4 +2427,15 @@ interpretation-editor .status-wrapper .row > div:last-child {
 /************  Analysis forms  ************/
 .opencga-analysis-tool-form-field {
     margin: 0 0 20px 0;
+}
+
+/************  case review / case portal  ************/
+.dropdown-menu a.right-icon {
+    position: relative;
+}
+.dropdown-menu a.right-icon i{
+    position: absolute;
+    display: inline-block;
+    right: 15px;
+    top: 5px;
 }
