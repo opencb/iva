@@ -84,12 +84,6 @@ const application = {
     // defaultStudy: "pilot:rd",
     mode: "development",
     appConfig: "opencb",
-<<<<<<< HEAD
-    // defaultStudy: "serena@cancer37:test",
-=======
-    defaultStudy: "serena@cancer37:test",
-    // defaultStudy: "demo@family:corpasome",
->>>>>>> develop
     // defaultStudy: "emee-glh@cancer:myeloid",
     // The order, title and nested submenus are respected
     menu: [
