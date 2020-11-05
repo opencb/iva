@@ -244,7 +244,7 @@ export default class WelcomeWeb extends LitElement {
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
                 ${this.config.menu.filter(this.isVisible).map( item => html`
                     ${item.submenu ? html`
-                        <a class="icon-wrapper" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
+                        <a class="icon-wrapper" data-cat-id="cat-${item.id}" data-title="${item.title}" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
                             <div class="hi-icon">
                                 <img src="img/tools/icons/${item.icon}" /> 
                             </div>
