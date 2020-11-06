@@ -1069,7 +1069,12 @@ a#waffle-icon-wrapper {
 }
 
 .bootstrap-table .fixed-table-body{
-    min-height: 20vh;
+    min-height: 35vh;
+}
+
+/* .loading-text is an internal bootstrap-table class */
+.bootstrap-table .loading-text {
+    min-height: 120px;
 }
 
 /* hide the default loading animation */
