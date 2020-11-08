@@ -77,24 +77,28 @@ context("Variant Browser", () => {
         //cy.get("ul.saved-filter-wrapper a").contains("Save filter...").click(); // it also works
         cy.get("ul.saved-filter-wrapper a[data-action='active-filter-save']").contains("Save filter...").click();
 
-        let name = randomString();
+        let name = "A";
         cy.get("input[data-cy='modal-filter-name']").type(name); // TODO FIXME for some reason here isn't typed the whole `name` string.
         cy.get("input[data-cy='modal-filter-description']").type(randomString(3));
-        cy.get("button[data-cy='modal-filter-save-button']").click();
+        cy.get("button[data-cy='modal-filter-save-button']").click(); //confirm save
 
-        cy.get(".swal2-actions").contains("OK").click();
+        cy.get(".swal2-actions").contains(/Yes|OK/).click(); //dismiss notification (either new filter or overwrite a saved one)
         cy.get("button[data-cy='filter-button']").click();
         cy.get("ul.saved-filter-wrapper").contains(name);
         cy.get(`span.delete-filter-button[data-filter-id='${name}']`).click();
         cy.get(".swal2-title").contains("Are you sure?");
-        cy.get(".swal2-confirm").click(); //confirm action
-        cy.get(".swal2-title").contains("Filter Deleted"); // TODO FIXME this selector refers to the previous .swal2-title which has been detatched from DOM
+        cy.get(".swal2-confirm").click(); //confirm deletion action
+        cy.get(".swal2-content").contains("Filter has been deleted"); // TODO FIXME this selector refers to the previous .swal2-title which has been detatched from DOM
         cy.get(".swal2-confirm").click(); //dismiss confirmation modal
 
-    })*/
-/*
+        /!*cy.get(".swal2-title")
+            .then($div => {
+                console.log($div)
+            })*!/
 
-    it("checks the links of the first row", () => {
+    })*/
+
+/*    it("checks the links of the first row", () => {
         //cy.get('.menu-item').trigger('mouseover')
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true})
         cy.get("button[data-id='table-tab']", {timeout: 60000}).click()
