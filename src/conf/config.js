@@ -20,10 +20,8 @@ const cellbase = {
 };
 
 const opencga = {
-    // host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
-    // host: "http://172.27.16.123:8080/opencga",
-    host: "https://eglh.app.zettagenomics.com/opencga", // public instance
-    // host: "http://localhost:9090/opencga", // private instance 175.25.1.6
+    host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
+    // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
     version: "v2",
     serverVersion: "1.4",
 
