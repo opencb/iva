@@ -25,6 +25,10 @@ a.disabled, a.disabled:hover {
     text-decoration: none;
 }
 
+.text-black, .text-black:link, .text-black:visited{
+    color: #000;
+}
+
 .icon-padding {
     /*margin-right: 5px;*/
     padding-right: 5px;
@@ -634,15 +638,13 @@ h3.page-title {
 }
 
 button.active-filter-label {
-    background: #eeeeee;
+    border: 1px solid #dedede;
+    border-radius: 4px;
+    background: white;
 }
 
 button.active-filter-label:hover {
-    background-color: #e2e2e2;
-}
-
-.filtersLink .id-filter-button {
-    padding-left: 20px;
+    background-color: #efefef;
 }
 
 .lhs {
@@ -694,20 +696,29 @@ button.active-filter-label:hover {
 }
 
 .saved-filter-wrapper .filtersLink {
-    display: flex !important;
-    justify-content: space-between;
+    position: relative;
+    padding: 3px 35px 3px 20px;
+}
+
+.saved-filter-wrapper .filtersLink .id-filter-button {
+    padding-left: 25px;
 }
 
 .saved-filter-wrapper .delete-filter-button {
     padding: 0 0 0 10px;
     color: #adadad;
+    position: absolute;
+    display: inline-block;
+    right: 15px;
+    top: 5px;
+
 }
 
 .saved-filter-wrapper .delete-filter-button:hover {
     color: black;
 }
 
-/********** aggregation tab ************/
+/********** aggregation tab and view ************/
 
 .facet-row {
     margin: 0;
@@ -745,6 +756,29 @@ button.active-filter-label:hover {
 .number-field input[type=text]{
     padding: 6px;
 }
+
+.facet-result-single-value {
+    border: 3px solid #c9c9c9;
+    margin: 10px 20px 10px 60px;
+    padding: 20px;
+    text-align: center;
+}
+
+.facet-result-single-value .aggregation-name{
+    background: var(--main-bg-color);
+    color: white;
+    display: inline-block;
+    padding: 6px 10px 8px;
+    line-height: 1;
+    border-radius: 3px;
+    font-variant: all-small-caps;
+    letter-spacing: .3em;
+}
+
+.facet-result-single-value .aggregation-values{
+    vertical-align: middle;
+}
+
 /********** toggle-switch plugin override ************/
 .switch-toggle-wrapper {
     margin: 10px 0;
@@ -1058,7 +1092,12 @@ a#waffle-icon-wrapper {
 }
 
 .bootstrap-table .fixed-table-body{
-    min-height: 20vh;
+    min-height: 35vh;
+}
+
+/* .loading-text is an internal bootstrap-table class */
+.bootstrap-table .loading-text {
+    min-height: 120px;
 }
 
 /* hide the default loading animation */
@@ -2416,4 +2455,19 @@ interpretation-editor .status-wrapper .row > div:last-child {
 /************  Analysis forms  ************/
 .opencga-analysis-tool-form-field {
     margin: 0 0 20px 0;
+}
+
+/************  case review / case portal  ************/
+.dropdown-menu a.right-icon {
+    position: relative;
+}
+.dropdown-menu a.right-icon i{
+    position: absolute;
+    display: inline-block;
+    right: 15px;
+    top: 5px;
+}
+
+.dropdown-menu li.active .text-muted {
+    color: white;
 }

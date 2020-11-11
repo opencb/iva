@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import {login} from "../plugins/utils.js";
 
 
 context("Login", () => {
@@ -42,4 +43,15 @@ context("Login", () => {
         //cy.url().should("include", "#home")
         cy.get(".subtitle", {timeout: 60000}).contains( "Interactive Variant Analysis")
     })
+
+    /*it("check sessions", () => {
+        login()
+
+        cy.window()
+            .then((win) => {
+                console.log(Cypress.$(win.document).application)
+                console.log(Cypress.$(win.document).get(0))
+            })
+
+    })*/
 })
