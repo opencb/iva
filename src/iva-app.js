@@ -1148,7 +1148,7 @@ class IvaApp extends LitElement {
                         ${this.config?.menu?.filter?.(this.isVisible).map(item => html`
                             <li>
                                 <a href="#cat-${item.id}" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
-                                    <img src="img/tools/icons/${item.icon}"  alt="${item.title}"/>  ${item.title}
+                                    <img src="img/tools/icons/${item.icon}" alt="${item.title}"/>  ${item.title}
                                 </a>
                              </li>
                         `)}

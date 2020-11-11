@@ -22,6 +22,7 @@ const cellbase = {
 const opencga = {
     host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
     // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
+    // host: "http://localhost:9090/opencga",
     version: "v2",
     serverVersion: "1.4",
 
@@ -88,7 +89,7 @@ const application = {
         {
             id: "browser",
             title: "Variant Browser",
-            description: "",
+            fa_icon: "fa fa-list",
             icon: "variant_browser.svg",
             visibility: "public",
             submenu: [
@@ -104,7 +105,8 @@ const application = {
                             </ul>`,
                     visibility: "public",
                     fa_icon: "fa fa-list",
-                    icon: "variant_browser.svg"
+                    icon: "variant_browser.svg",
+                    thumbnail: "variant-browser.png"
                 }
                 // {
                 //     id: "genomeBrowser",
@@ -399,6 +401,8 @@ const application = {
                             <li>Federated search from the Global Alliance for Genomics and Health</li>
                             <li>Find databases that have information about specific variants</li>
                         </ul>`,
+                    thumbnail: "beacon.png",
+                    fa_icon: "fa fa-globe-europe",
                     icon: "beacon.svg",
                     visibility: "public"
                 }
@@ -407,11 +411,6 @@ const application = {
         {
             id: "clinical",
             title: "Case Interpretation",
-            description: `
-                <ul>
-                    <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
-                    <li>Filter by gene, consequence, frequency and much more</li>
-                </ul>`,
             icon: "interpretation_portal.svg",
             visibility: "public",
             submenu: [
@@ -425,9 +424,16 @@ const application = {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
                     acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
+                    description: `
+                        <ul>
+                            <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
+                            <li>Filter by gene, consequence, frequency and much more</li>
+                        </ul>
+                    `,
+                    visibility: "public",
+                    fa_icon: "fa fa-user-md",
+                    icon: "interpretation_portal.svg",
+                    thumbnail: "interpretation_portal.png",
                 },
                 {
                     id: "clinical-analysis-writer",
@@ -632,7 +638,8 @@ const application = {
                 pedigrees, case-controls or sporadic samples.
             </p>
             <br>`,
-    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>"
+    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
+    gettingStartedComponents: ["browser", "clinicalAnalysisPortal"]
 };
 
 //export {application, beacon, cellbase, consequenceTypes, opencga, populationFrequencies, proteinSubstitutionScores}
