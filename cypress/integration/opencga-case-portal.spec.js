@@ -25,21 +25,20 @@ context("Case Portal", () => {
     it("check query results", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Review");
-        cy.get(".login-overlay", {timeout: 60000}).should("be.not.visible"); // temp fix
 
         cy.get("div[data-cy='form-priority'] select").select(["Urgent", "High", "Medium", "Low"], {force: true}); // check all priorities
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
-
-        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]")
-            .find("td:nth-child(1)")
-            .then($div => {
-                const caseId = $div.text().trim();
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000})
+            .find("td:nth-child(1) a[data-cy='case-id']")
+            .then($a => {
+                const caseId = $a.text().trim();
                 cy.get("div[data-cy='form-case'] button").click();
                 cy.get("div[data-cy='form-case'] input").type(caseId + "{enter}", {force: true});
                 cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
 
             })
-            .find("td:nth-child(2)")
+            // proband cell contains now proband and sample ids
+            /*.find("td:nth-child(2)")
             .then($div => {
                 const probandId = $div.text().trim();
                 console.log("probandId", probandId);
@@ -54,7 +53,7 @@ context("Case Portal", () => {
                 cy.get("div[data-cy='form-sample'] button").click();
                 cy.get("div[data-cy='form-sample'] input").type(sampleId + "{enter}", {force: true});
                 cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
-            });
+            });*/
 
         // cy.get("opencga-clinical-review-cases .rhs button", {timeout: 60000}).should("be.visible").and("contain", "Clear").click()
         cy.get("button[data-cy='filter-button']").click({force: true});
@@ -77,12 +76,9 @@ context("Case Portal", () => {
         cy.get("opencga-clinical-analysis-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // reactivate all the columns
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.length.gt", 1);
 
-        /* cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
-            //Cypress.$("a", $li)
-        });*/
 
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]")
-            .find("td:nth-child(1)")
+            .find("td:nth-child(1) a[data-cy='case-id']")
             .then($div => {
                 const caseId = $div.text().trim();
                 cy.get("div[data-cy='form-case'] button").click();
@@ -90,7 +86,10 @@ context("Case Portal", () => {
 
                 // TODO check clinical analysis view fields
             });
-
     });
 
 });
+
+/* cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
+    //Cypress.$("a", $li)
+});*/

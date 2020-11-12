@@ -1092,12 +1092,12 @@ a#waffle-icon-wrapper {
 }
 
 .bootstrap-table .fixed-table-body{
-    min-height: 35vh;
+    /*min-height: 35vh;*/
 }
 
 /* .loading-text is an internal bootstrap-table class */
 .bootstrap-table .loading-text {
-    min-height: 120px;
+    min-height: 135px;
 }
 
 /* hide the default loading animation */
@@ -2186,9 +2186,9 @@ opencga-gene-view h3.section-title /* TODO refactor */{
 .predictionTooltip-inner {
     width: 250px;
 }
-.zygosity-formatter .col-md-5,
+.zygosity-formatter .col-md-4,
 .predictionTooltip-inner .col-md-5,
-.zygosity-formatter .col-md-7
+.zygosity-formatter .col-md-8
 .predictionTooltip-inner .col-md-7{
     padding: 0;
 }
