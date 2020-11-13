@@ -28,7 +28,7 @@ const biotypes = [
     "translated_processed_pseudogene", "unitary_pseudogene", "unprocessed_pseudogene"
 ];
 
-const types = ["SNV", "INDEL", "CNV", "INSERTION", "DELETION", "MNV"];
+const types = ["SNV", "INDEL", "CNV", "INSERTION", "DELETION", "MNV", "SV"];
 
 const consequenceTypes = {
     style: {
