@@ -26,12 +26,12 @@ context("Individual Browser", () => {
         cy.get("a[data-id=individual]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Individual Browser");
 
-        cy.get("opencga-individual-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
+        cy.get("opencga-individual-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
 
-        cy.get("#sex + .subsection-content a").contains("MALE").click({force: true});
-        cy.get("#sex + .subsection-content a").contains("FEMALE").click({force: true});
+        cy.get("#sex + .subsection-content a").contains("MALE").click({force: true}); // query: sex=MALE
+        cy.get("#sex + .subsection-content a").contains("FEMALE").click({force: true}); // query: sex=FEMALE
 
-        cy.get("#date + .subsection-content input[data-tab=recent] + label").click(); // creationDate recent
+        cy.get("#date + .subsection-content input[data-tab=recent] + label").click(); // query: creationDate recent
 
         cy.get(".lhs button[data-filter-name]").should("have.length", 2);
         cy.get("div.search-button-wrapper button").click();

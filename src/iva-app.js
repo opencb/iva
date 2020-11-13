@@ -342,7 +342,7 @@ class IvaApp extends LitElement {
         await this.requestUpdate();
         const _this = this;
         const opencgaSession = this.opencgaClient.createSession()
-            .then(function (response) {
+            .then(response => {
                 console.log("_createOpenCGASession", response);
                 // check if project array has been defined in the config.js
                 if (UtilsNew.isNotEmptyArray(_this.config.opencga.projects)) {
@@ -384,27 +384,14 @@ class IvaApp extends LitElement {
                         response.study = response.projects[0].studies[0];
                     }
                 }
-
                 // this forces the observer to be executed.
-                _this.opencgaSession = Object.assign({}, response);
-                _this.opencgaSession.mode = _this.config.mode;
-                _this.config.menu = application.menu.slice();
-                _this.config = {..._this.config};
+                this.opencgaSession = Object.assign({}, response);
+                this.opencgaSession.mode = _this.config.mode;
+                this.config.menu = [...application.menu];
+                this.config = {..._this.config};
             })
             .catch(e => {
-                // in case it is a restResponse
-                console.log(e);
-                if (e?.getEvents?.("ERROR")?.length) {
-                    const errors = e.getEvents("ERROR");
-                    errors.forEach(error => {
-                        new NotificationQueue().push(error.name, error.message, "ERROR");
-                        console.log(error);
-                    });
-                } else if (e instanceof Error) {
-                    new NotificationQueue().push(e.name, e.message, "ERROR");
-                } else {
-                    new NotificationQueue().push("Generic Error", JSON.stringify(e), "ERROR");
-                }
+                UtilsNew.notifyError(e);
             }).finally(() => {
                 this.signingIn = false;
                 this.requestUpdate();
@@ -484,7 +471,7 @@ class IvaApp extends LitElement {
         await this.opencgaClient.logout();
         this._createOpencgaSessionFromConfig();
 
-        this.config.menu = {...application.menu};
+        this.config.menu = [...application.menu];
 
         this.tool = "#home";
         window.location.hash = "home";
