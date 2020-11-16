@@ -39,7 +39,7 @@ import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
 import {NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
 import AnalysisRegistry from "../lib/jsorolla/src/core/webcomponents/variant/analysis/analysis-registry.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/variant/opencga-variant-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/variant-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-transcript-view.js";
@@ -1375,20 +1375,20 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents.browser ? html`
                     <div class="content" id="browser">
-                        <opencga-variant-browser .opencgaSession="${this.opencgaSession}"
-                                                .cellbaseClient="${this.cellbaseClient}"
-                                                .reactomeClient="${this.reactomeClient}"
-                                                .query="${this.queries.variant}"
-                                                .config="${OpencgaVariantBrowserConfig}"
-                                                .populationFrequencies="${this.config.populationFrequencies}"
-                                                .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                                .consequenceTypes="${this.config.consequenceTypes}"
-                                                @onGene="${this.geneSelected}"
-                                                @onSamplechange="${this.onSampleChange}"
-                                                @querySearch="${e => this.onQueryFilterSearch(e, "variant")}"
-                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "variant")}"
-                                                @facetSearch="${this.quickFacetSearch}">
-                        </opencga-variant-browser>
+                        <variant-browser .opencgaSession="${this.opencgaSession}"
+                                         .cellbaseClient="${this.cellbaseClient}"
+                                         .reactomeClient="${this.reactomeClient}"
+                                         .query="${this.queries.variant}"
+                                         .config="${OpencgaVariantBrowserConfig}"
+                                         .populationFrequencies="${this.config.populationFrequencies}"
+                                         .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
+                                         .consequenceTypes="${this.config.consequenceTypes}"
+                                         @onGene="${this.geneSelected}"
+                                         @onSamplechange="${this.onSampleChange}"
+                                         @querySearch="${e => this.onQueryFilterSearch(e, "variant")}"
+                                         @activeFilterChange="${e => this.onQueryFilterSearch(e, "variant")}"
+                                         @facetSearch="${this.quickFacetSearch}">
+                        </variant-browser>
                     </div>                
                 ` : null}
 

@@ -83,7 +83,7 @@ const application = {
     appConfig: "opencb",
     defaultStudy: "serena@cancer37:test",
     // defaultStudy: "demo@family:corpasome",
-    // defaultStudy: "emee-glh@cancer:myeloid",
+    // defaultStudy: "emee-glh@cancer_grch38:myeloid",
     // The order, title and nested submenus are respected
     menu: [
         {
