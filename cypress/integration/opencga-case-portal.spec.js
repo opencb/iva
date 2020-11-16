@@ -27,7 +27,7 @@ context("Case Portal", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Review");
 
         cy.get("div[data-cy='form-priority'] select").select(["Urgent", "High", "Medium", "Low"], {force: true}); // check all priorities
-        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000})
             .find("td:nth-child(1) a[data-cy='case-id']")
             .then($a => {

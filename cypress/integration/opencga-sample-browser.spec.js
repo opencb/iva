@@ -26,7 +26,7 @@ context("File Browser", () => {
         cy.get("a[data-id=sample]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Sample Browser");
 
-        cy.get("opencga-sample-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
+        cy.get("opencga-sample-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
 
         cy.get("#somatic + .subsection-content label").contains("True").click({force: true});
 

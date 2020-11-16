@@ -27,7 +27,7 @@ import "./opencga-breadcrumb.js";
 import "./category-page.js";
 import "./iva-profile.js";
 import "./iva-settings.js";
-//import "./progress-bar.js";
+// import "./progress-bar.js";
 
 // @dev[jsorolla]
 import {OpenCGAClient} from "../lib/jsorolla/src/core/clients/opencga/opencga-client.js";
@@ -84,7 +84,7 @@ import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
 import "../lib/jsorolla/src/core/webcomponents/loading-spinner.js";
 // import "./loading-bar.js";
 
-//import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
+// import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
 // /@dev
 
 
@@ -164,7 +164,7 @@ class IvaApp extends LitElement {
             "account",
             "projects",
             "file-manager",
-            //"beacon",
+            // "beacon",
             "project",
             "sample",
             "file",
@@ -232,7 +232,7 @@ class IvaApp extends LitElement {
 
         // TODO do we need this?
         // We deep clone some config sections for having a default initial copy, this allows us to reset config.
-        /*this.defaultConfig = {};
+        /* this.defaultConfig = {};
         if (UtilsNew.isNotUndefined(populationFrequencies)) {
             this.defaultConfig.populationFrequencies = JSON.parse(JSON.stringify(populationFrequencies));
         }
@@ -246,8 +246,8 @@ class IvaApp extends LitElement {
 
         // We need to listen to hash fragment changes to update the display and breadcrumb
         const _this = this;
-        window.onhashchange = function(e) {
-            //e.preventDefault();
+        window.onhashchange = function (e) {
+            // e.preventDefault();
             _this.hashFragmentListener(_this);
         };
 
@@ -342,7 +342,7 @@ class IvaApp extends LitElement {
         await this.requestUpdate();
         const _this = this;
         const opencgaSession = this.opencgaClient.createSession()
-            .then(function(response) {
+            .then(response => {
                 console.log("_createOpenCGASession", response);
                 // check if project array has been defined in the config.js
                 if (UtilsNew.isNotEmptyArray(_this.config.opencga.projects)) {
@@ -384,31 +384,18 @@ class IvaApp extends LitElement {
                         response.study = response.projects[0].studies[0];
                     }
                 }
-
                 // this forces the observer to be executed.
-                _this.opencgaSession = Object.assign({}, response);
-                _this.opencgaSession.mode = _this.config.mode;
-                _this.config.menu = application.menu.slice();
-                _this.config = {..._this.config};
+                this.opencgaSession = Object.assign({}, response);
+                this.opencgaSession.mode = _this.config.mode;
+                this.config.menu = [...application.menu];
+                this.config = {..._this.config};
             })
             .catch(e => {
-                // in case it is a restResponse
-                console.log(e);
-                if (e?.getEvents?.("ERROR")?.length) {
-                    const errors = e.getEvents("ERROR");
-                    errors.forEach(error => {
-                        new NotificationQueue().push(error.name, error.message, "ERROR");
-                        console.log(error);
-                    });
-                } else if (e instanceof Error) {
-                    new NotificationQueue().push(e.name, e.message, "ERROR");
-                } else {
-                    new NotificationQueue().push("Generic Error", JSON.stringify(e), "ERROR");
-                }
-            }).finally( () => {
+                UtilsNew.notifyError(e);
+            }).finally(() => {
                 this.signingIn = false;
                 this.requestUpdate();
-            })
+            });
     }
 
     // TODO turn this into a Promise
@@ -434,12 +421,11 @@ class IvaApp extends LitElement {
             } else {
                 // When no 'projects' is defined we fetch all public projects
                 if (UtilsNew.isNotUndefinedOrNull(this.config.opencga.anonymous.user)) {
-                    const _this = this;
                     this.opencgaClient.users().projects(this.config.opencga.anonymous.user, {})
-                        .then(function(response) {
+                        .then(restResponse => {
                             // _this._setup(_projects);
 
-                            opencgaSession.projects = response.response[0].result;
+                            opencgaSession.projects = restResponse.response[0].result;
                             if (UtilsNew.isNotEmptyArray(opencgaSession.projects) && UtilsNew.isNotEmptyArray(opencgaSession.projects[0].studies)) {
                                 // this sets the current active project and study
                                 opencgaSession.project = opencgaSession.projects[0];
@@ -447,9 +433,9 @@ class IvaApp extends LitElement {
                             }
 
                             // This triggers the event and call to opencgaSessionObserver
-                            _this.opencgaSession = opencgaSession;
+                            this.opencgaSession = opencgaSession;
                         })
-                        .catch(function(response) {
+                        .catch(function (response) {
                             console.log("An error when getting projects");
                             console.log(response);
                         });
@@ -482,15 +468,13 @@ class IvaApp extends LitElement {
 
     async logout() {
         // this delete token in the client and removes the Cookies
-        this.opencgaClient.logout();
+        await this.opencgaClient.logout();
         this._createOpencgaSessionFromConfig();
 
-        // TODO check if render works
-        this.config.menu = application.menu.slice(); // Do not remove: this is for refreshing the menu
+        this.config.menu = [...application.menu];
 
         this.tool = "#home";
         window.location.hash = "home";
-
         window.clearInterval(this.intervalCheckSession);
     }
 
@@ -529,7 +513,7 @@ class IvaApp extends LitElement {
             if (remainingTime <= this.config.session.maxRemainingTime && remainingTime >= this.config.session.minRemainingTime) {
                 const remainingMinutes = Math.floor(remainingTime / this.config.session.minRemainingTime);
 
-                //_message = html`Your session is close to expire. <strong>${remainingMinutes} minutes remaining</strong> <a href="javascript:void 0" @click="${() => this.notifySession.refreshToken()}"> Click here to refresh </a>`
+                // _message = html`Your session is close to expire. <strong>${remainingMinutes} minutes remaining</strong> <a href="javascript:void 0" @click="${() => this.notifySession.refreshToken()}"> Click here to refresh </a>`
                 new NotificationQueue().pushRemainingTime(remainingMinutes, this.opencgaClient);
 
             } else {
@@ -564,7 +548,7 @@ class IvaApp extends LitElement {
     }
 
     changeTool(e) {
-        e.preventDefault()
+        e.preventDefault();
         const target = e.currentTarget;
         $(".navbar-inverse ul > li", this).removeClass("active");
         $(target).parent("li").addClass("active");
@@ -606,10 +590,10 @@ class IvaApp extends LitElement {
         }
 
         if (window.location.hash === hashFrag) {
-            //debugger
+            // debugger
             this.hashFragmentListener(this);
         } else {
-            //debugger
+            // debugger
             window.location.hash = hashFrag;
         }
 
@@ -695,11 +679,11 @@ class IvaApp extends LitElement {
         }
 
         if (UtilsNew.isNotUndefined(this.config.enabledComponents[this.tool.replace("#", "")])) {
-            //debugger
+            // debugger
             this.config.enabledComponents[this.tool.replace("#", "")] = true;
         }
 
-        //debugger
+        // debugger
         this.config = {...this.config};
         // TODO quickfix to avoid hash browser scroll
         $("body,html").animate({
@@ -707,75 +691,16 @@ class IvaApp extends LitElement {
         }, 1);
     }
 
-    // TODO recheck what's the use for this
-    refreshConfig(e) {
-        const colorConfig = e.detail.config;
-        const _this = this;
-        for (const key in colorConfig) {
-            switch (key) {
-                case "consequenceTypes":
-                    const ctColor = colorConfig[key].color;
-                    for (const impact in ctColor) {
-                        _this.consequenceTypes.color[impact] = ctColor[impact];
-                    }
-                    const ctModified = Object.assign({}, _this.consequenceTypes);
-                    _this.consequenceTypes = ctModified;
-                    break;
-                case "proteinSubstitutionScores":
-                    for (const source in colorConfig[key]) {
-                        if (source === "sift") {
-                            const sift = colorConfig[key].sift;
-                            for (const prediction in sift) {
-                                _this.proteinSubstitutionScores.sift[prediction] = sift[prediction];
-                            }
-                        } else if (source === "polyphen") {
-                            const polyphen = colorConfig[key].polyphen;
-                            for (const pred in polyphen) {
-                                _this.proteinSubstitutionScores.polyphen[pred] = polyphen[pred];
-                            }
-                        }
-                    }
-                    const pssModified = Object.assign({}, _this.proteinSubstitutionScores);
-                    _this.proteinSubstitutionScores = pssModified;
-                    break;
-                case "populationFrequencies":
-                    const pfColor = colorConfig[key].color;
-                    for (const i in pfColor) {
-                        _this.populationFrequencies.color[i] = pfColor[i];
-                    }
-                    const pfModified = Object.assign({}, _this.populationFrequencies);
-                    _this.populationFrequencies = pfModified;
-                    break;
-            }
-        }
-    }
-
     onStudySelect(e) {
         e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
-
-        const [_studyId, _projectId] = [e.target.getAttribute("data-study"), e.target.getAttribute("data-project")];
-        let _project, _study;
-        for (let i = 0; i < this.opencgaSession.projects.length; i++) {
-            if (this.opencgaSession.projects[i].id === _projectId) {
-                _project = this.opencgaSession.projects[i];
-                for (let j = 0; j < this.opencgaSession.projects[i].studies.length; j++) {
-                    if (this.opencgaSession.projects[i].studies[j].id === _studyId) {
-                        _study = this.opencgaSession.projects[i].studies[j];
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-        this.opencgaSession = {...this.opencgaSession, project: _project, study: _study};
+        const {study, project} = e.target.dataset;
+        const newProject = this.opencgaSession.projects.find(p => p.id === project);
+        const newStudy = newProject.studies.find(s => s.id === study);
+        this.opencgaSession = {...this.opencgaSession, project: newProject, study: newStudy};
     }
 
     updateProject(e) {
-        for (let i = 0; i < this.projects.length; i++) {
-            if (this.projects[i].name === e.detail.project.name) { // getting the selected project from projects array
-                this.project = this.projects[i];
-            }
-        }
+        this.project = this.projects.find(project => project.name === e.detail.project.name);
         this.tool = "#project";
         this.renderHashFragments();
         // this.renderBreadcrumb();
@@ -785,11 +710,7 @@ class IvaApp extends LitElement {
         if (UtilsNew.isNotUndefined(e.detail.project) && UtilsNew.isNotEmpty(e.detail.project.name)) {
             this.project = e.detail.project;
         }
-        for (let i = 0; i < this.project.studies.length; i++) {
-            if (this.project.studies[i].name === e.detail.study.name || this.project.studies[i].alias === e.detail.study.alias) {
-                this.study = this.project.studies[i];
-            }
-        }
+        this.study = this.project.studies.find(study => study.name === e.detail.study.name || study.alias === e.detail.study.alias);
 
         //                TODO: Opencga study will be shown later. For now variant browser is shown when the study changes
         //                this.tool = "studyInformation";
@@ -845,7 +766,7 @@ class IvaApp extends LitElement {
         }
     }
 
-    onQuickSearch(e) {
+    /*onQuickSearch(e) {
         const gene = PolymerUtils.getValue("searchTextBox");
         if (UtilsNew.isNotUndefinedOrNull(this.tool)) {
             const _query = {
@@ -869,7 +790,7 @@ class IvaApp extends LitElement {
         }
         // debugger
     }
-
+*/
     quickSearch(e) {
         // debugger
         this.tool = "#browser";
@@ -892,14 +813,12 @@ class IvaApp extends LitElement {
         this.requestUpdate();
     }
 
-    //TODO remove
+    // TODO remove
     onNotifyMessage(e) {
-        //NotificationUtils.closeNotify(this.notifySession);
-        //NotificationUtils.showNotify(e.detail.message, e.detail.type, e.detail.options, e.detail.settings);
+        // NotificationUtils.closeNotify(this.notifySession);
+        // NotificationUtils.showNotify(e.detail.message, e.detail.type, e.detail.options, e.detail.settings);
         new NotificationQueue().push(e.detail.title, e.detail.message, e.detail.type);
     }
-
-    // TODO geneSelected() is called by several components but it doesn't exists
 
     // TODO this should keep in sync the query object between variant-browser and variant-facet
     onQueryChange(e) {
@@ -914,7 +833,7 @@ class IvaApp extends LitElement {
         const q = e.detail.query ? {...e.detail.query} : {...e.detail};
         this.queries[source] = {...q};
         this.queries = {...this.queries};
-        //console.log("this.queries",this.queries);
+        // console.log("this.queries",this.queries);
         this.requestUpdate();
     }
 
@@ -1131,7 +1050,7 @@ class IvaApp extends LitElement {
             <div id="side-nav" class="sidenav shadow-lg">
                 <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
                 <nav class="navbar" id="sidebar-wrapper" role="navigation">
-                    <a href="#home" @click="${e => {this.toggleSideNav(e); this.changeTool(e)}}">
+                    <a href="#home" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
                         <div class="iva-logo">
                             <img src="./img/iva.svg" />
                             <span class="subtitle">Interactive Variant Analysis</span>
@@ -1140,7 +1059,7 @@ class IvaApp extends LitElement {
                     <ul class="nav sidebar-nav">
                         ${!this.isLoggedIn() ? html`
                             <li>
-                                <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e); }}">
+                                <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
                                     <i href="#login" class="fa fa-3x fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
                                 </a>
                             </li>
@@ -1297,7 +1216,7 @@ class IvaApp extends LitElement {
                                         <i class="fa fa-user-circle fa-lg icon-padding" aria-hidden="true"></i>${this.opencgaSession.user?.name ?? this.opencgaSession.user?.email} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        ${this.config.userMenu.length ? this.config.userMenu.filter(item => this.isVisible(item)).map( item => html`
+                                        ${this.config.userMenu.length ? this.config.userMenu.filter(item => this.isVisible(item)).map(item => html`
                                             <li>
                                                 <a href="${item.url}"><i class="${item.icon} icon-padding" aria-hidden="true"></i> ${item.name}</a>
                                             </li>
@@ -1367,8 +1286,7 @@ class IvaApp extends LitElement {
                         <opencga-login  .opencgaSession="${this.opencgaSession}"
                                         loginTitle="Sign in"
                                         .notifyEventMessage="${this.config.notifyEventMessage}"
-                                        @login="${this.onLogin}"
-                                        @notifymessage="${this.onNotifyMessage}">
+                                        @login="${this.onLogin}">
                         </opencga-login>
                     </div>
                 ` : null}
