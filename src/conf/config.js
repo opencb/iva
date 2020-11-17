@@ -21,9 +21,8 @@ const cellbase = {
 
 const opencga = {
     // host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
-    // host: "https://test.eglh.app.zettagenomics.com/opencga", // public instance
-    // host: "http://172.27.16.123:8080/opencga",
     host: "https://eglh.app.zettagenomics.com/opencga", // public instance
+    // host: "https://test.eglh.app.zettagenomics.com/opencga", // public instance
     // host: "http://localhost:9090/opencga", // private instance 175.25.1.6
     version: "v2",
     serverVersion: "1.4",
@@ -85,12 +84,14 @@ const application = {
     mode: "development",
     appConfig: "opencb",
     // defaultStudy: "emee-glh@cancer:myeloid",
+    // defaultStudy: "serena@cancer37:test",
+    // defaultStudy: "demo@family:corpasome",
     // The order, title and nested submenus are respected
     menu: [
         {
             id: "browser",
             title: "Variant Browser",
-            description: "",
+            fa_icon: "fa fa-list",
             icon: "variant_browser.svg",
             visibility: "public",
             submenu: [
@@ -106,7 +107,8 @@ const application = {
                             </ul>`,
                     visibility: "public",
                     fa_icon: "fa fa-list",
-                    icon: "variant_browser.svg"
+                    icon: "variant_browser.svg",
+                    thumbnail: "variant-browser.png"
                 }
                 // {
                 //     id: "genomeBrowser",
@@ -289,6 +291,14 @@ const application = {
                     icon: "",
                     visibility: "public"
                 },
+                {
+                    id: "recessive-gene",
+                    title: "Recessive Gene Analysis",
+                    acronym: "RG",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
                 // {
                 //     id: "team",
                 //     title: "TEAM",
@@ -401,6 +411,8 @@ const application = {
                             <li>Federated search from the Global Alliance for Genomics and Health</li>
                             <li>Find databases that have information about specific variants</li>
                         </ul>`,
+                    thumbnail: "beacon.png",
+                    fa_icon: "fa fa-globe-europe",
                     icon: "beacon.svg",
                     visibility: "public"
                 }
@@ -409,11 +421,6 @@ const application = {
         {
             id: "clinical",
             title: "Case Interpretation",
-            description: `
-                <ul>
-                    <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
-                    <li>Filter by gene, consequence, frequency and much more</li>
-                </ul>`,
             icon: "interpretation_portal.svg",
             visibility: "public",
             submenu: [
@@ -427,9 +434,16 @@ const application = {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
                     acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
+                    description: `
+                        <ul>
+                            <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
+                            <li>Filter by gene, consequence, frequency and much more</li>
+                        </ul>
+                    `,
+                    visibility: "public",
+                    fa_icon: "fa fa-user-md",
+                    icon: "interpretation_portal.svg",
+                    thumbnail: "interpretation_portal.png",
                 },
                 {
                     id: "clinical-analysis-writer",
@@ -634,7 +648,8 @@ const application = {
                 pedigrees, case-controls or sporadic samples.
             </p>
             <br>`,
-    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>"
+    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
+    gettingStartedComponents: ["browser", "clinicalAnalysisPortal"]
 };
 
 //export {application, beacon, cellbase, consequenceTypes, opencga, populationFrequencies, proteinSubstitutionScores}

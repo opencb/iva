@@ -17,7 +17,7 @@
 import {LitElement, html} from "/web_modules/lit-element.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import "../lib/jsorolla/src/core/webcomponents/commons/view/data-form.js";
-import "../lib/jsorolla/src/core/webcomponents/tool-header.js";
+import "../lib/jsorolla/src/core/webcomponents/commons/tool-header.js";
 
 export default class IvaProfile extends LitElement {
 

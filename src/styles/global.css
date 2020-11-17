@@ -718,7 +718,7 @@ button.active-filter-label:hover {
     color: black;
 }
 
-/********** aggregation tab ************/
+/********** aggregation tab and view ************/
 
 .facet-row {
     margin: 0;
@@ -756,6 +756,29 @@ button.active-filter-label:hover {
 .number-field input[type=text]{
     padding: 6px;
 }
+
+.facet-result-single-value {
+    border: 3px solid #c9c9c9;
+    margin: 10px 20px 10px 60px;
+    padding: 20px;
+    text-align: center;
+}
+
+.facet-result-single-value .aggregation-name{
+    background: var(--main-bg-color);
+    color: white;
+    display: inline-block;
+    padding: 6px 10px 8px;
+    line-height: 1;
+    border-radius: 3px;
+    font-variant: all-small-caps;
+    letter-spacing: .3em;
+}
+
+.facet-result-single-value .aggregation-values{
+    vertical-align: middle;
+}
+
 /********** toggle-switch plugin override ************/
 .switch-toggle-wrapper {
     margin: 10px 0;
@@ -1069,7 +1092,12 @@ a#waffle-icon-wrapper {
 }
 
 .bootstrap-table .fixed-table-body{
-    min-height: 20vh;
+    /*min-height: 35vh;*/
+}
+
+/* .loading-text is an internal bootstrap-table class */
+.bootstrap-table .loading-text {
+    min-height: 135px;
 }
 
 /* hide the default loading animation */
@@ -2158,9 +2186,9 @@ opencga-gene-view h3.section-title /* TODO refactor */{
 .predictionTooltip-inner {
     width: 250px;
 }
-.zygosity-formatter .col-md-5,
+.zygosity-formatter .col-md-4,
 .predictionTooltip-inner .col-md-5,
-.zygosity-formatter .col-md-7
+.zygosity-formatter .col-md-8
 .predictionTooltip-inner .col-md-7{
     padding: 0;
 }
@@ -2438,4 +2466,8 @@ interpretation-editor .status-wrapper .row > div:last-child {
     display: inline-block;
     right: 15px;
     top: 5px;
+}
+
+.dropdown-menu li.active .text-muted {
+    color: white;
 }
