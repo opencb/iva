@@ -81,7 +81,7 @@ const application = {
     logo: "img/iva.svg",
     mode: "development",
     appConfig: "opencb",
-    defaultStudy: "serena@cancer37:test",
+    // defaultStudy: "serena@cancer37:test",
     // defaultStudy: "demo@family:corpasome",
     // defaultStudy: "emee-glh@cancer_grch38:myeloid",
     // The order, title and nested submenus are respected
