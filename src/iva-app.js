@@ -199,6 +199,7 @@ class IvaApp extends LitElement {
             "cohort-variant-stats",
             "sample-eligibility",
             "knockout",
+            "recessive-gene",
             "knockout-result",
             "inferred-sex",
             "mutational-signature",
@@ -1685,13 +1686,19 @@ class IvaApp extends LitElement {
                         <opencga-gwas-analysis .opencgaSession="${this.opencgaSession}"></opencga-gwas-analysis>
                     </div>
                 ` : null}
-                
+                                
                 ${this.config.enabledComponents["rd-tiering"] ? html`
                     <div class="content" id="opencga-rd-tiering-analysis">
                         <opencga-rd-tiering-analysis .opencgaSession="${this.opencgaSession}"></opencga-rd-tiering-analysis>
                     </div>
                 ` : null}
-    
+                        
+                ${this.config.enabledComponents["recessive-gene"] ? html`
+                    <div class="content" id="opencga-knockout-analysis">
+                        ${AnalysisRegistry.get("recessive-gene").form(this.opencgaSession, this.cellbaseClient)}
+                    </div>
+                ` : null}
+                     
                 ${this.config.enabledComponents["clinical-analysis-writer"] ? html`
                     <tool-header title="${"Create Case"}" icon="${"fas fa-window-restore"}"></tool-header>
                     <div class="content container" id="opencga-clinical-analysis-create">

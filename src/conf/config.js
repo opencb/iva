@@ -289,6 +289,14 @@ const application = {
                     icon: "",
                     visibility: "public"
                 },
+                {
+                    id: "recessive-gene",
+                    title: "Recessive Gene Analysis",
+                    acronym: "RG",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
                 // {
                 //     id: "team",
                 //     title: "TEAM",
