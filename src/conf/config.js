@@ -15,13 +15,13 @@
  */
 
 const cellbase = {
-    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
+    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase-4.8.2"],
     version: "v4"
 };
 
 const opencga = {
-    host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
-    // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
+    // host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
+    host: "https://eglh.app.zettagenomics.com/opencga", // public instance
     // host: "http://localhost:9090/opencga",
     version: "v2",
     serverVersion: "1.4",
@@ -83,7 +83,7 @@ const application = {
     appConfig: "opencb",
     // defaultStudy: "serena@cancer37:test",
     // defaultStudy: "demo@family:corpasome",
-    // defaultStudy: "emee-glh@cancer_grch38:myeloid",
+    defaultStudy: "emee-glh@cancer_grch38:myeloid",
     // The order, title and nested submenus are respected
     menu: [
         {
