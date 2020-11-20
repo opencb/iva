@@ -1319,7 +1319,7 @@ class IvaApp extends LitElement {
                                                 .cellbaseClient="${this.cellbaseClient}">
                         </opencga-clinical-portal>
                         -->
-                        <tool-header title="${"Case Review"}" icon="${"fas fa-window-restore"}"></tool-header>
+                        <tool-header title="${"Case Portal"}" icon="${"fas fa-window-restore"}"></tool-header>
                         <opencga-clinical-review-cases  .opencgaSession="${this.opencgaSession}"></opencga-clinical-review-cases>
                     </div>
                 ` : null}

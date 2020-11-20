@@ -15,7 +15,7 @@
  */
 
 const cellbase = {
-    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
+    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase-4.8.2"],
     version: "v4"
 };
 
@@ -86,6 +86,7 @@ const application = {
     // defaultStudy: "emee-glh@cancer:myeloid",
     // defaultStudy: "serena@cancer37:test",
     // defaultStudy: "demo@family:corpasome",
+    defaultStudy: "emee-glh@cancer_grch38:myeloid",
     // The order, title and nested submenus are respected
     menu: [
         {
