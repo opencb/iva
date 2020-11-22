@@ -15,7 +15,7 @@
  */
 
 const cellbase = {
-    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase-4.8.2"],
+    hosts: ["https://ws.opencb.org/cellbase-4.8.2"],
     version: "v4"
 };
 
@@ -646,7 +646,8 @@ const application = {
                 pedigrees, case-controls or sporadic samples.
             </p>
             <br>`,
-    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
+    welcomePageFooter: "<p><img id=\"logo\" src=\"img/" +
+        "opencb-logo.png\" alt=\"opencb-logo\"/></p>",
     gettingStartedComponents: ["browser", "clinicalAnalysisPortal"]
 };
 
