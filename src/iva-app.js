@@ -1132,7 +1132,7 @@ class IvaApp extends LitElement {
                             <!--Studies dropdown and Search menu-->
                             ${this.opencgaSession && this.opencgaSession.projects && this.opencgaSession.projects.length ? html`
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle study-switcher" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <a href="#" class="dropdown-toggle study-switcher" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-cy="active-study">
                                         <div><i class="fa fa-database fa-lg" style="padding-right: 10px"></i></div>
                                         <div style="margin-right: 5px">
                                             <p class="project-name">${this.opencgaSession.project.id}</p>
@@ -1145,7 +1145,7 @@ class IvaApp extends LitElement {
                                             <li><a title="${project.fqn}"><b>${project.name} [${project.fqn.split("@")[0]}]</b></a></li>
                                             ${project.studies && project.studies.length && project.studies.map(study => html`
                                                 <li>
-                                                    <a href="#" data-study="${study.id}" data-project="${project.id}" title="${study.fqn}" @click="${this.onStudySelect}">${study.name}</a>
+                                                    <a href="#" data-study="${study.id}" data-project="${project.id}" data-study-name="${study.name}" title="${study.fqn}" @click="${this.onStudySelect}">${study.name}</a>
                                                 </li>
                                             `)}                                            
                                         `)}
@@ -1212,14 +1212,14 @@ class IvaApp extends LitElement {
 
                             <!--User-->
                             ${this.isLoggedIn() ? html`
-                                <li class="dropdown">
+                                <li class="dropdown" data-cy="user-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-user-circle fa-lg icon-padding" aria-hidden="true"></i>${this.opencgaSession.user?.name ?? this.opencgaSession.user?.email} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         ${this.config.userMenu.length ? this.config.userMenu.filter(item => this.isVisible(item)).map(item => html`
                                             <li>
-                                                <a href="${item.url}"><i class="${item.icon} icon-padding" aria-hidden="true"></i> ${item.name}</a>
+                                                <a href="${item.url}" data-user-menu="${item.id}"><i class="${item.icon} icon-padding" aria-hidden="true"></i> ${item.name}</a>
                                             </li>
                                         `) : null }
                                         <li role="separator" class="divider"></li>
