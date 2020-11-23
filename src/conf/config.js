@@ -15,13 +15,14 @@
  */
 
 const cellbase = {
-    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase"],
+    hosts: ["https://ws.opencb.org/cellbase-4.8.2"],
     version: "v4"
 };
 
 const opencga = {
     host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
     // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
+    // host: "http://localhost:9090/opencga",
     version: "v2",
     serverVersion: "1.4",
 
@@ -82,13 +83,13 @@ const application = {
     appConfig: "opencb",
     defaultStudy: "serena@cancer37:test",
     // defaultStudy: "demo@family:corpasome",
-    // defaultStudy: "emee-glh@cancer:myeloid",
+    // defaultStudy: "emee-glh@cancer_grch38:myeloid",
     // The order, title and nested submenus are respected
     menu: [
         {
             id: "browser",
             title: "Variant Browser",
-            description: "",
+            fa_icon: "fa fa-list",
             icon: "variant_browser.svg",
             visibility: "public",
             submenu: [
@@ -104,7 +105,8 @@ const application = {
                             </ul>`,
                     visibility: "public",
                     fa_icon: "fa fa-list",
-                    icon: "variant_browser.svg"
+                    icon: "variant_browser.svg",
+                    thumbnail: "variant-browser.png"
                 }
                 // {
                 //     id: "genomeBrowser",
@@ -408,9 +410,16 @@ const application = {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
                     acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
+                    description: `
+                        <ul>
+                            <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
+                            <li>Filter by gene, consequence, frequency and much more</li>
+                        </ul>
+                    `,
+                    visibility: "public",
+                    fa_icon: "fa fa-user-md",
+                    icon: "interpretation_portal.svg",
+                    thumbnail: "interpretation_portal.png",
                 },
                 // {
                 //     id: "clinical-analysis-writer",
@@ -615,7 +624,9 @@ const application = {
                 pedigrees, case-controls or sporadic samples.
             </p>
             <br>`,
-    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>"
+    welcomePageFooter: "<p><img id=\"logo\" src=\"img/" +
+        "opencb-logo.png\" alt=\"opencb-logo\"/></p>",
+    gettingStartedComponents: ["browser", "clinicalAnalysisPortal"]
 };
 
 //export {application, beacon, cellbase, consequenceTypes, opencga, populationFrequencies, proteinSubstitutionScores}

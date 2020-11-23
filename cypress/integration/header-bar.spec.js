@@ -17,16 +17,16 @@
 
 context("checks on Header Bar elements", () => {
     before(() => {
-        cy.visit("http://localhost:3000/src/")
+        cy.visit("http://localhost:3000/src/");
 
-    })
+    });
 
     it("check login page content", () => {
         cy.get("#loginButton", {timeout: 60000}).should("be.visible");
         cy.get("#loginButton").click();
         cy.get("#opencgaUser").should("be.visible");
         cy.get("#opencgaPassword").should("be.visible");
-    })
+    });
 
     it("check header-bar icons resolve correctly", () => {
         cy.get("a.navbar-brand").click();

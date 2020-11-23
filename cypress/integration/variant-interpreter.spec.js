@@ -20,17 +20,17 @@ import {login} from "../plugins/utils.js";
 context("Case Interpreter", () => {
     before(() => {
         login();
-    })
+    });
 
     it("open a Case", () => {
 
-        cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true})
+        cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
 
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Review")
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Review");
         cy.get(".login-overlay", {timeout: 60000}).should("be.not.visible");
 
-        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gt", 1) //.should("be.gte", 1);
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
 
-        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0] td:nth-child(1) a").click() //FIXME
-    })
-})
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0] td:nth-child(1) a").click(); // FIXME
+    });
+});
