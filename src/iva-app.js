@@ -1224,7 +1224,7 @@ class IvaApp extends LitElement {
                                         `) : null }
                                         <li role="separator" class="divider"></li>
                                         <li>
-                                            <a id="logoutButton" role="button" @click="${this.logout}">
+                                            <a id="logoutButton" role="button" @click="${this.logout}" data-user-menu="logout">
                                                 <i class="fa fa-sign-out-alt icon-padding" aria-hidden="true"></i> Logout
                                             </a>
                                         </li>

@@ -55,6 +55,7 @@ context("Checks each menu item in header-bar resolves correctly", () => {
     });*/
 
     it("checks study selector menu items", () => {
+        // switching between all the studies
         cy.get("a[data-study]").each(($el, index, $list) => {
             const study = $el.data("study");
             const studyName = $el.data("study-name");
@@ -65,8 +66,12 @@ context("Checks each menu item in header-bar resolves correctly", () => {
     });
 
     it("checks User menu items", () => {
-        cy.get("a[data-user-menu='account']", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Your Profile");
-    });
+        cy.get("li[data-cy='user-menu'] > a").click();
+        cy.get("a[data-user-menu='account']").click();
+        cy.get("div.page-title h2").should("be.visible").and("contain", "Your profile");
 
+        cy.get("li[data-cy='user-menu'] > a").click();
+        cy.get("a[data-user-menu='logout']").click();
+
+    });
 });

@@ -8,7 +8,7 @@ export const login = () => {
 
     // temp fix
     cy.get(".login-overlay", {timeout: 60000}).should("be.visible");
-    cy.get(".login-overlay", {timeout: 60000}).should("be.not.visible");
+    cy.get(".login-overlay", {timeout: 60000}).should("not.exist");
 
 };
 export const randomString = length => {
