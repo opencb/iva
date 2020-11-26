@@ -90,6 +90,6 @@ context("Case Portal", () => {
 
 });
 
-/* cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
+/* cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
     //Cypress.$("a", $li)
 });*/
