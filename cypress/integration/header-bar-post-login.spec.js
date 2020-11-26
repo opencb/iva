@@ -29,7 +29,7 @@ context("Checks each menu item in header-bar resolves correctly", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
     });
-/*
+
     it("checks Case Portal menu item", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal");
@@ -52,7 +52,7 @@ context("Checks each menu item in header-bar resolves correctly", () => {
         cy.get("a[data-id=family]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser"); // should assertion comes from Chai and it follows its logic
         cy.get("opencga-family-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
-    });*/
+    });
 
     it("checks study selector menu items", () => {
         // switching between all the studies

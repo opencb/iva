@@ -11,6 +11,7 @@ export const login = () => {
     cy.get(".login-overlay", {timeout: 60000}).should("not.exist");
 
 };
+
 export const randomString = length => {
     let result = "";
     const _length = length || 6;
