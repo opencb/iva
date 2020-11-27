@@ -15,7 +15,7 @@
  */
 
 
-import {login} from "../plugins/utils.js";
+import {login, waitTableResults, checkResultsOrNot, checkResults} from "../plugins/utils.js";
 
 context("File Browser", () => {
     before(() => {
@@ -26,18 +26,24 @@ context("File Browser", () => {
         cy.get("a[data-id=file]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "File Browser");
 
-        cy.get("opencga-file-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
+        checkResults("opencga-file-grid");
 
-        cy.get("#format + .subsection-content a").contains("VCF").click({force: true});
+        cy.get("file-name-autocomplete input").type("AR2.10039966-01T.copynumber.caveman.vcf.gz{enter}");
+        cy.get("div.search-button-wrapper button").click();
+
+        waitTableResults("opencga-file-grid");
+
+        checkResultsOrNot("opencga-file-grid");
+
+        /* cy.get("#format + .subsection-content a").contains("VCF").click({force: true});
         cy.get("#bioformat + .subsection-content a").contains("VARIANT").click({force: true});
 
         cy.get(".lhs button[data-filter-name]").should("have.length", 2);
 
-        // cy.get('.fixed-table-toolbar').find(".pagination-info", {log:true})
-        cy.get("div.search-button-wrapper button").click();
+        cy.get("div.search-button-wrapper button").click();*/
     });
 
-    it("aggregated query", () => {
+    /* it("aggregated query", () => {
         cy.get("a[data-id=file]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
         // cy.get("div.search-button-wrapper button").click()
@@ -49,5 +55,5 @@ context("File Browser", () => {
         cy.get("#bs-select-7-3").click({force: true}); // creation month nested in year field
         cy.get("div.search-button-wrapper button").click();
 
-    });
+    });*/
 });
