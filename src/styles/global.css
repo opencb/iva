@@ -52,6 +52,10 @@ a.disabled, a.disabled:hover {
     padding: 15px;
 }
 
+.pad-left-15 {
+    padding-left: 15px;
+}
+
 .mag5 {
     margin: 5px;
 }
