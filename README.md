@@ -18,6 +18,7 @@ IVA is versioned following the rules from [Semantic versioning](http://semver.or
 ### Maintainers
 We recommend to contact IVA developers by writing to OpenCB mailing list opencb@googlegroups.com. The main developers and maintainers are:
 * Ignacio Medina (im411@cam.ac.uk) (_Founder and Project Leader_)
+* Antonio Altamura (antonio.altamura@genomicsengland.co.uk)
 * Javier Perez Florido (javier.perez.florido.ext@juntadeandalucia.es)
 * Alexis Martínez (alexis.martinez@juntadeandalucia.es)
 
@@ -29,17 +30,15 @@ We recommend to contact IVA developers by writing to OpenCB mailing list opencb@
 IVA is an open-source and collaborative project, currently developement is mainly carried out by Stefan Gräf and Ignacio Medina teams from the University of Cambridge and Joaquin Dopazo team from CIBERER. We appreciate any help and feedback from users, you can contribute in many different ways such as simple bug reporting and feature request. Dependending on your skills you are more than welcome to develop client tools, new features or even fixing bugs.
 
 # How to build
-IVA is developed in HTML5, therefore it is mainly developed in JavaScript and makes a heavy usage of HTML and CSS. It uses Grunt as building tool. IVA also requires of OpenCB JSorolla project to be built, this is a JavaScript library developed for several OpenCB web-based projects, this can be found as Git submodule in IVA.
+IVA is mainly developed in JavaScript. It requires of OpenCB JSorolla project to be built, this is a JavaScript library developed for several OpenCB web-based projects, it can be found as Git submodule in IVA.
 
-Stable releases are merged and tagged at _master_ branch, you are encourage to use latest stable release for production. Current active development is carried out at _develop_ branch, only building is guaranteed and bugs are expected, use this branch for development or for testing new functionalities. The only dependency of IVA from OpenCB is JSorolla.
+Stable releases are merged and tagged at _master_ branch, you are encourage to use latest stable release for production. Current active development is carried out at _develop_ branch, only building is guaranteed and bugs are expected, use this branch for development or for testing new functionalities.
 
 ### Prerequisites
-The following technologies are needed to build IVA: [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/) and [Grunt](http://gruntjs.com/getting-started).
+To run and build IVA you need: [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.com/).
 
 ##### Installing Node.js and npm
 To install [Node.js](https://nodejs.org/en/) you can visit [this link](http://blog.teamtreehouse.com/install-node-js-npm-linux).
-
-[npm](https://www.npmjs.com/) stands for *node packaged modules* and it is the dependency manager of [Node.js](https://nodejs.org/en/).
 
 ### Cloning
 IVA is an open-source project and can be downloaded either as package(tar.gz) from GitHub releases or source code by cloning the repository.
@@ -49,11 +48,12 @@ Default ***develop*** branch can be downloaded by executing:
 ```
 $ git clone https://github.com/opencb/iva.git
 Cloning into 'iva'...
-remote: Counting objects: 624, done.
-remote: Total 624 (delta 0), reused 0 (delta 0), pack-reused 624
-Receiving objects: 100% (624/624), 139.37 KiB | 0 bytes/s, done.
-Resolving deltas: 100% (356/356), done.
-Checking connectivity... done.
+remote: Enumerating objects: 126, done.
+remote: Counting objects: 100% (126/126), done.
+remote: Compressing objects: 100% (72/72), done.
+remote: Total 10370 (delta 70), reused 85 (delta 38), pack-reused 10244
+Receiving objects: 100% (10370/10370), 4.70 MiB | 61.00 KiB/s, done.
+Resolving deltas: 100% (6064/6064), done.
 ```
 
 Latest stable release at ***master*** branch can be downloaded by executing:
@@ -74,48 +74,36 @@ After this, in both cases, you **must** execute the following command to fetch t
 git submodule update --init
 ```
 
-Go to lib/jsorolla and checkout to ***develop*** branch of Jsorolla by 
+Go to `./lib/jsorolla` and checkout to ***develop*** branch of Jsorolla by 
 
 ```
 cd lib/jsorolla
 git checkout develop
+npm run install
 ```
+
+### Run
+To buil IVA, run
+
+`
+npm run serve
+`.
 
 ### Build
-First, you must update JSorolla dependencies, from the root folder execute:
+To buil IVA, just run
 
-```
-cd lib/jsorolla
+`
 npm install
-```
-
-Finally, to build IVA execute:
-
-We have to install npm packages for IVA, from the the root folder execute:
-
-```
-npm install
-```
-
-And now execute:
-
-```
+` and then `
 npm run build
+`.
+
+### Test
+We use [Cypress.io](https://www.cypress.io/) as testing framework. You can run the E2E test suite running the command
 ```
-
-when completed, all compiled files will be located under the _build_ folder.
-
-### Testing
-You can copy build content to a web server such as Apache HTTP Server and open your favourite internet browser to open IVA.
-
-### Execute Tests in development with nightwatch(http://nightwatchjs.org/)
-Prerequisite: make sure you have JDK installed, with at least version 8. If you don't have it, you can grab it from http://www.oracle.com/technetwork/java/javase/downloads/index.html.
-
-1. npm install --dev
-2. Selenium server. Download the latest release .jar from http://selenium-release.storage.googleapis.com/index.html. i.e. selenium-server-standalone-3.7.0.jar
-3. Chromedriver. Download from https://sites.google.com/a/chromium.org/chromedriver/downloads that version which supports your chrome versión. You can review what version fits your browser here https://chromedriver.storage.googleapis.com/2.33/notes.txt.
-4. Create a bin folder inside your test folder in root path
-5. Move selenium bin and chrome bin inside that bin folder.
-6. npm run test-e2e ( or ./node_modules/.bin/nightwatch test/e2e/clinical-prioritization.js if you want execute just one)
-
-
+npm run e2e
+```
+or the headless version (no brower window)
+```
+npm run e2e-headless
+```

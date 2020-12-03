@@ -15,7 +15,7 @@
  */
 
 const cellbase = {
-    hosts: ["http://bioinfo.hpc.cam.ac.uk/cellbase-4.8.2"],
+    hosts: ["https://ws.opencb.org/cellbase-4.8.2"],
     version: "v4"
 };
 
@@ -83,10 +83,12 @@ const application = {
     // defaultStudy: "pilot:rd",
     mode: "development",
     appConfig: "opencb",
-    // defaultStudy: "emee-glh@cancer:myeloid",
+    defaultStudy: "emee-glh@cancer:myeloid",
+    // defaultStudy: "serena@cancer37:test",
     // defaultStudy: "serena@cancer37:test",
     // defaultStudy: "demo@family:corpasome",
-    defaultStudy: "emee-glh@cancer_grch38:myeloid",
+    // defaultStudy: "emee-glh@cancer_grch38:myeloid",
+    // defaultStudy: "sanger@poc:exomes",
     // The order, title and nested submenus are respected
     menu: [
         {
@@ -649,7 +651,8 @@ const application = {
                 pedigrees, case-controls or sporadic samples.
             </p>
             <br>`,
-    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
+    welcomePageFooter: "<p><img id=\"logo\" src=\"img/" +
+        "opencb-logo.png\" alt=\"opencb-logo\"/></p>",
     gettingStartedComponents: ["browser", "clinicalAnalysisPortal"]
 };
 

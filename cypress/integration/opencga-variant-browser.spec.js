@@ -22,33 +22,22 @@ context("Variant Browser", () => {
         login();
     });
 
-    it("query", () => {
-        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
-
-        cy.get("opencga-variant-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
-
-        cy.get("input#lof").click({force: true});
-        cy.get("opencga-active-filters").contains("Consequence Types 10");
-        cy.get("button.ctActiveFilter").click();
-    });
-
-    it("check Columns togglability", () => {
+    /*it("check Columns togglability", () => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
 
-        cy.get("opencga-variant-grid .columns-toggle-wrapper button").should("be.visible").and("contain", "Columns").click();
-        cy.get("opencga-variant-grid .columns-toggle-wrapper ul li").and("have.length.gt", 1);
+        cy.get("variant-browser-grid .columns-toggle-wrapper button").should("be.visible").and("contain", "Columns").click();
+        cy.get("variant-browser-grid .columns-toggle-wrapper ul li").and("have.length.gt", 1);
 
-        cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // deactivate all the columns
-        cy.get("opencga-variant-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.lengthOf", 1);
+        cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // deactivate all the columns
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.lengthOf", 1);
 
-        cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // reactivate all the columns
-        cy.get("opencga-variant-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.length.gt", 1);
+        cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // reactivate all the columns
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.length.gt", 1);
 
-        /* cy.get("opencga-variant-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
-            //Cypress.$("a", $li)
-        });*/
+        /!* cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
+                //Cypress.$("a", $li)
+            });*!/
     });
 
     it("aggregated query", () => {
@@ -66,45 +55,151 @@ context("Variant Browser", () => {
     });
 
     // TODO fix bugs
-    /* it("check Filter controls", () => {
-        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true})
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser")
+    it("check Saved Filter actions", () => {
+        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
 
-        cy.get("input#lof").click({force: true});
+        cy.get("input[value*=LoF]").click({force: true});
         cy.get("opencga-active-filters").contains("Consequence Types 10");
 
         cy.get("button[data-cy='filter-button']").click({force: true});
-        //cy.get("ul.saved-filter-wrapper a").contains("Save filter...").click(); // it also works
+        // cy.get("ul.saved-filter-wrapper a").contains("Save filter...").click(); // it also works
         cy.get("ul.saved-filter-wrapper a[data-action='active-filter-save']").contains("Save filter...").click();
 
-        let name = "A";
-        cy.get("input[data-cy='modal-filter-name']").type(name); // TODO FIXME for some reason here isn't typed the whole `name` string.
+        const name = randomString(5);
+        // cy.get("input[data-cy='modal-filter-name']").type(name); // TODO Cypress doesn't type the entire string. https://github.com/cypress-io/cypress/issues/5480  invoke("val") is a workaround
+        cy.get("input[data-cy='modal-filter-name']").invoke("val", name);
         cy.get("input[data-cy='modal-filter-description']").type(randomString(3));
-        cy.get("button[data-cy='modal-filter-save-button']").click(); //confirm save
+        cy.get("button[data-cy='modal-filter-save-button']").click(); // confirm save
 
-        cy.get(".swal2-actions").contains(/Yes|OK/).click(); //dismiss notification (either new filter or overwrite a saved one)
+        cy.get(".swal2-actions").contains(/Yes|OK/).click(); // dismiss notification (either new filter or overwrite a saved one)
         cy.get("button[data-cy='filter-button']").click();
         cy.get("ul.saved-filter-wrapper").contains(name);
         cy.get(`span.delete-filter-button[data-filter-id='${name}']`).click();
         cy.get(".swal2-title").contains("Are you sure?");
-        cy.get(".swal2-confirm").click(); //confirm deletion action
-        cy.get(".swal2-content").contains("Filter has been deleted"); // TODO FIXME this selector refers to the previous .swal2-title which has been detatched from DOM
-        cy.get(".swal2-confirm").click(); //dismiss confirmation modal
-
-        /!*cy.get(".swal2-title")
+        cy.get(".swal2-confirm").click(); // confirm deletion action
+        cy.get("#swal2-content", {timeout: 60000}).contains("Filter has been deleted."); // TODO FIXME this selector refers to the previous #swal2-content which has been detatched from DOM before
+        cy.get(".swal2-confirm").click({force: true}); // dismiss confirmation modal
+        /!* cy.get(".swal2-title")
             .then($div => {
                 console.log($div)
             })*!/
 
-    })*/
+    });
 
-/*    it("checks the links of the first row", () => {
-        //cy.get('.menu-item').trigger('mouseover')
-        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true})
-        cy.get("button[data-id='table-tab']", {timeout: 60000}).click()
+    it("checks the links of the first row", () => {
+        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
+        cy.get("button[data-id='table-tab']", {timeout: 60000}).click();
 
-        //cy.get("opencga-variant-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td:nth-child(4) span").trigger('mouseover')
-        //cy.get('.gene-tooltip').should('be.visible')
+        // FIXME hover doesn't work
+        // cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index='0']").find("a.gene-tooltip").trigger('mouseover');
+        // cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index='0']").find("a[data-cy='gene-view']").click({force: true});
 
-    })*/
+    });*/
+
+
+    it("query", () => {
+        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
+
+
+        // Study and Cohorts: Cohort Alternate Stats
+        cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").click();
+        cy.get("cohort-stats-filter input[data-field='value']").type("0.00001"); // set ALL cohort
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='cohortStatsAlt']").contains("Cohort ALT Stats");
+        cy.get("opencga-active-filters button[data-filter-name='cohortStatsAlt']").click();
+
+        // Genomic: Genomic Location
+        cy.get("opencga-variant-filter a[data-accordion-id='Genomic']").click();
+        cy.get("region-filter textarea").type("1:5000000-10000000");
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='region']").click();
+
+        // Genomic: Feature IDs
+        cy.get("feature-filter input").type("C5{enter}rs4680{enter}");
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='xref']").click();
+
+        // Genomic: Disease Panels
+        /* TODO decomment once opencga error 'URI Too Long' is fixed
+        cy.get("disease-panel-filter button").click();
+        cy.get("disease-panel-filter div.dropdown-menu a").click();
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='panel']").click();*/
+
+
+        // Genomic: Gene Biotype
+        cy.get("biotype-filter button").click();
+        cy.get("biotype-filter input[type='search']").type("protein"); // typing protein_coding using autocomplete
+        cy.get("biotype-filter div.dropdown-menu").find("a").should("have.length", 1);
+        cy.get("biotype-filter div.dropdown-menu a").click();
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='biotype']").click();
+
+        // Genomic: Variant type cy.get('.magic-checkbox-wrapper > :nth-child(1) > label')
+        cy.get("variant-type-filter input[value='SNV'] + label").click({force:true});
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='type']").click();
+
+        // Consequence type: SO Term - Use example: Missense
+        cy.get("consequence-type-select-filter button").click();
+        cy.get("consequence-type-select-filter input[type='search']").type("miss"); // typing missense using autocomplete
+        cy.get("consequence-type-select-filter div.dropdown-menu").find("a").should("have.length", 1);
+        cy.get("consequence-type-select-filter div.dropdown-menu a").click();
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='ct']").click();
+
+        // Consequence type: SO Term - LoF Enabled
+        cy.get("consequence-type-select-filter input[value='Loss-of-Function (LoF)'").click({force: true});
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='ct']").click();
+
+        // Population Frequency: 1000 Genomes - AFR < 0.0001 AND EUR > 0.0001
+        cy.get("opencga-variant-filter a[data-accordion-id='PopulationFrequency']").click();
+        cy.get("population-frequency-filter i[data-cy='pop-freq-toggle-1kG_phase3']").click();
+        cy.get("population-frequency-filter div[data-cy='pop-freq-codes-wrapper-1kG_phase3']").should("be.visible");
+        cy.get("population-frequency-filter div[data-cy='pop-freq-codes-wrapper-1kG_phase3'] div[data-cy='number-field-filter-wrapper-AFR'] input[data-field='value']").type("0.0001");
+        cy.get("population-frequency-filter div[data-cy='pop-freq-codes-wrapper-1kG_phase3'] div[data-cy='number-field-filter-wrapper-AFR'] select[data-field='comparator']").select("<");
+        cy.get("population-frequency-filter div[data-cy='pop-freq-codes-wrapper-1kG_phase3'] div[data-cy='number-field-filter-wrapper-EUR'] input[data-field='value']").type("0.0001");
+        cy.get("population-frequency-filter div[data-cy='pop-freq-codes-wrapper-1kG_phase3'] div[data-cy='number-field-filter-wrapper-EUR'] select[data-field='comparator']").select(">");
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='populationFrequencyAlt']").click();
+
+        // Population Frequency: gnomAD	- Set all < 0.00001
+        cy.get("population-frequency-filter i[data-cy='pop-freq-toggle-GNOMAD_GENOMES']").click();
+        cy.get("population-frequency-filter div[data-cy='pop-freq-codes-wrapper-GNOMAD_GENOMES']").should("be.visible");
+        cy.get("population-frequency-filter div[data-cy='pop-freq-codes-wrapper-GNOMAD_GENOMES'] div[data-cy='number-field-filter-wrapper-AFR'] input[data-field='value']").type("0.0001");
+        cy.get("population-frequency-filter div[data-cy='pop-freq-codes-wrapper-GNOMAD_GENOMES'] div[data-cy='number-field-filter-wrapper-AFR'] select[data-field='comparator']").select("<");
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='populationFrequencyAlt']").click();
+
+        // Clinical and Disease: ClinVar Accessions	Use example: Pathogenic
+        cy.get("opencga-variant-filter a[data-accordion-id='ClinicalandDisease']").click();
+        cy.get("clinvar-accessions-filter select").select("Pathogenic", {force: true});
+
+        // Clinical and Disease: Full text	Use example: ceroid
+        cy.get("fulltext-search-accessions-filter textarea").type("centroid");
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='traits']").click();
+
+        // Phenotype: GO Accessions	Use example
+        cy.get("opencga-variant-filter a[data-accordion-id='Phenotype']").click();
+        cy.get("go-accessions-filter > button").click();
+        cy.get(".modal-body .list-group-item").contains("biological_process").click();
+
+        // cy.get("input[value*=LoF]").click({force: true});
+    });
 });

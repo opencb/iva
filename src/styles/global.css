@@ -52,6 +52,10 @@ a.disabled, a.disabled:hover {
     padding: 15px;
 }
 
+.pad-left-15 {
+    padding-left: 15px;
+}
+
 .mag5 {
     margin: 5px;
 }
@@ -1731,6 +1735,7 @@ Toggle Changes
 .hi-icon-wrap {
     display: flex;
     justify-content: space-evenly;
+    overflow: hidden;
 }
 
 /* valid for the wizard only (interpreter page) */
@@ -1741,7 +1746,7 @@ Toggle Changes
 .hi-icon-wrap.wizard a.icon-wrapper:before {
     content: "";
     position: absolute;
-    width: 270px;
+    width: 1000px;
     height: 3px;
     top: 50px;
     background: var(--main-bg-color);
@@ -1753,7 +1758,7 @@ Toggle Changes
 }
 
 .hi-icon-wrap.wizard a.icon-wrapper:last-child:before {
-    content: none;
+    background: #fff;
 }
 
 /****** magic checkbox / radio ********/
