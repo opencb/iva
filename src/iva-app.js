@@ -1611,7 +1611,7 @@ class IvaApp extends LitElement {
                  
                  ${this.config.enabledComponents["knockout-result"] ? html`
                     <div class="content" id="opencga-knockout-analysis-result">
-                        <opencga-knockout-analysis-result .opencgaSession="${this.opencgaSession}" .cellbaseClient="${this.cellbaseClient}" ></opencga-knockout-analysis-result>
+                        <opencga-knockout-analysis-result .jobId="${"knockout_1521_01122020"}" .opencgaSession="${this.opencgaSession}" .cellbaseClient="${this.cellbaseClient}" ></opencga-knockout-analysis-result>
                     </div>
                 ` : null}
                 
