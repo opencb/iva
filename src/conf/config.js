@@ -83,7 +83,7 @@ const application = {
     // defaultStudy: "pilot:rd",
     mode: "development",
     appConfig: "opencb",
-    defaultStudy: "emee-glh@cancer:myeloid",
+    defaultStudy: "emee-glh@cancer_grch38:myeloid",
     // defaultStudy: "serena@cancer37:test",
     // defaultStudy: "serena@cancer37:test",
     // defaultStudy: "demo@family:corpasome",
