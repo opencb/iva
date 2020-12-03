@@ -22,7 +22,7 @@ const cellbase = {
 const opencga = {
     host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
     // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
-    // host: "http://re-uat.opencga.gel.zone:9090/opencga",
+    // host: "http://172.27.16.123:8080/opencga",
     version: "v2",
     serverVersion: "1.4",
 
@@ -84,6 +84,7 @@ const application = {
     defaultStudy: "serena@cancer37:test",
     // defaultStudy: "demo@family:corpasome",
     // defaultStudy: "emee-glh@cancer_grch38:myeloid",
+    // defaultStudy: "sanger@poc:exomes",
     // The order, title and nested submenus are respected
     menu: [
         {
