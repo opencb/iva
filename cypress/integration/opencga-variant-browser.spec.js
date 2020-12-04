@@ -194,6 +194,7 @@ context("Variant Browser", () => {
         cy.get("div.search-button-wrapper button").click();
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
         cy.get("opencga-active-filters button[data-filter-name='traits']").click();
+
         // Phenotype: GO Accessions	Use example
         cy.get("opencga-variant-filter a[data-accordion-id='Phenotype']").click();
         cy.get("go-accessions-filter > button").click();
@@ -201,15 +202,28 @@ context("Variant Browser", () => {
         cy.get(".modal-body .list-group-item[data-nodeid='1'] > .expand-icon").click(); // click on molecular_function
         // TODO
 
-
         // Phenotype: HPO Accessions Use example
         //cy.get("hpo-accessions-filter > button").click();
         //cy.get(".modal-body .list-group-item").contains("Minor finding").click();
         // TODO
 
-        // Deleteriousness: Sift
+        // Deleteriousness: Sift / Polyphen - OR operation
         cy.get("opencga-variant-filter a[data-accordion-id='Deleteriousness']").click();
-        cy.get("protein-substitution-score-filter input[name='Sift']").type("0.1")
+        cy.get("protein-substitution-score-filter .sift input[type='text']").type("0.1");
+        cy.get("protein-substitution-score-filter .polyphen input[type='text']").type("0.1");
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='protein_substitution']").click();
+
+        // Deleteriousness: Sift / Polyphen - AND operation
+        cy.get("protein-substitution-score-filter .sift input[type='text']").type("0.1");
+        cy.get("protein-substitution-score-filter .polyphen input[type='text']").type("0.1");
+        cy.get("protein-substitution-score-filter .rating-label-and").click();
+
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        cy.get("opencga-active-filters button[data-filter-name='protein_substitution']").click();
+
 
 
     });
