@@ -99,7 +99,7 @@ context("Variant Browser", () => {
 
 
     it("query", () => {
-        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
+       cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
 
@@ -194,12 +194,23 @@ context("Variant Browser", () => {
         cy.get("div.search-button-wrapper button").click();
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
         cy.get("opencga-active-filters button[data-filter-name='traits']").click();
-
         // Phenotype: GO Accessions	Use example
         cy.get("opencga-variant-filter a[data-accordion-id='Phenotype']").click();
         cy.get("go-accessions-filter > button").click();
-        cy.get(".modal-body .list-group-item").contains("biological_process").click();
 
-        // cy.get("input[value*=LoF]").click({force: true});
+        cy.get(".modal-body .list-group-item[data-nodeid='1'] > .expand-icon").click(); // click on molecular_function
+        // TODO
+
+
+        // Phenotype: HPO Accessions Use example
+        //cy.get("hpo-accessions-filter > button").click();
+        //cy.get(".modal-body .list-group-item").contains("Minor finding").click();
+        // TODO
+
+        // Deleteriousness: Sift
+        cy.get("opencga-variant-filter a[data-accordion-id='Deleteriousness']").click();
+        cy.get("protein-substitution-score-filter input[name='Sift']").type("0.1")
+
+
     });
 });
