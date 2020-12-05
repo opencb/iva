@@ -2476,3 +2476,11 @@ interpretation-editor .status-wrapper .row > div:last-child {
 .dropdown-menu li.active .text-muted {
     color: white;
 }
+
+/************  number-field-filter component style  ************/
+.number-field-filter {
+    margin: 5px 0px;
+}
+.number-field-filter > div:not(:first-child) {
+    padding: 0px 10px
+}
