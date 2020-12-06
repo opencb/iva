@@ -2484,3 +2484,8 @@ interpretation-editor .status-wrapper .row > div:last-child {
 .number-field-filter > div:not(:first-child) {
     padding: 0px 10px
 }
+
+/****   Updated color   ****/
+.updated {
+    border-color: darkorange;
+}
