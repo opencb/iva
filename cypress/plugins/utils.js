@@ -38,7 +38,7 @@ export const checkResults = gridSelector => {
  * it check the table contains results or the message "No matching records found"
  */
 export const checkResultsOrNot = gridSelector => {
-    cy.get(gridSelector + " .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tbody tr", {timeout: 60000})
+    cy.get(gridSelector + " table", {timeout: 60000}).find("tbody tr", {timeout: 60000})
         .should("satisfy", $els => {
             // it covers either the case of some results or 0 results
             return $els.data("index") !== undefined || $els.text().includes("No matching records found");
