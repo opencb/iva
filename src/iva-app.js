@@ -1767,8 +1767,6 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-                <div id="notifications-queue" class="col-xs-11 col-sm-4"></div>
-
             </div>
             <notification-element .queue="${new NotificationQueue().get()}"></notification-element>
 `;

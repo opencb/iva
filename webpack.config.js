@@ -61,6 +61,7 @@ module.exports = {
         new MergeIntoSingleFilePlugin({
             files: {
                 "assets/css/styles.css": [
+                    "lib/jsorolla/styles/css/global.css",
                     "lib/jsorolla/styles/css/style.css",
                     "src/styles/toggle-switch.css",
                     "src/styles/magic-check.css",
