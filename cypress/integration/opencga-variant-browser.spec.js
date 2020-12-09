@@ -22,8 +22,11 @@ context("Variant Browser", () => {
         login();
     });
 
-    it("check Columns togglability", () => {
+    beforeEach(() => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
+    });
+
+    it("check Columns togglability", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
 
         cy.get("variant-browser-grid .columns-toggle-wrapper button").should("be.visible").and("contain", "Columns").click();
@@ -41,7 +44,6 @@ context("Variant Browser", () => {
     });
 
     it("aggregated query", () => {
-        cy.get("a[data-id=browser]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
         cy.get("button.default-facets-button").click();
         cy.get("div.search-button-wrapper button").click();
@@ -54,9 +56,9 @@ context("Variant Browser", () => {
 
     });
 
+    // Variant Browser: Filter controls
     // TODO fix bugs
-    it("check Saved Filter actions", () => {
-        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
+    /*it("check Saved Filter actions", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
 
         cy.get("input[value*=LoF]").click({force: true});
@@ -78,17 +80,18 @@ context("Variant Browser", () => {
         cy.get(`span.delete-filter-button[data-filter-id='${name}']`).click();
         cy.get(".swal2-title").contains("Are you sure?");
         cy.get(".swal2-confirm").click(); // confirm deletion action
-        cy.get("#swal2-content", {timeout: 60000}).contains("Filter has been deleted."); // TODO FIXME this selector refers to the previous #swal2-content which has been detatched from DOM before
+
+        cy.get(".swal2-content", {timeout: 60000}).then( $div => console.log("DIV", $div))
+        cy.get(".swal2-content", {timeout: 60000}).contains("Filter has been deleted."); // TODO FIXME this selector refers to the previous #swal2-content which has been detatched from DOM before
         cy.get(".swal2-confirm").click({force: true}); // dismiss confirmation modal
         // cy.get(".swal2-title")
         //     .then($div => {
         //         console.log($div)
         //     })
 
-    });
+    });*/
 
     // it("checks the links of the first row", () => {
-    //     cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
     //     cy.get("button[data-id='table-tab']", {timeout: 60000}).click();
     //
     //     // FIXME hover doesn't work
@@ -98,8 +101,8 @@ context("Variant Browser", () => {
     // });
 
 
-    it("query", () => {
-        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
+    // Variant Browser: Individual filters
+     it("query", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
 
@@ -239,8 +242,8 @@ context("Variant Browser", () => {
     });
 
 
+    // Variant Browser: Tabs
     it("checks Variant Browser detail tabs", () => {
-        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
 
         cy.get("variant-browser-detail > div > h3").should("contain", /Variant: [a-z0-9:]+/gim);
         cy.get("cellbase-variant-annotation-summary").contains("Summary");

@@ -11,7 +11,9 @@
 
 <script>
 
-    let remoteRequest = () => Promise.resolve({data: 1});
+    let remoteRequest = ms => new Promise(resolve => {
+        setTimeout(() => resolve(), 1000);
+    })
 
     function req() {
         console.log("req")
