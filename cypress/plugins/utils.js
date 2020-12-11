@@ -28,6 +28,13 @@ export const waitTableResults = gridSelector => {
 };
 
 /**
+ * it check the table actually contains a single result
+ */
+export const checkSingleResult = gridSelector => {
+    cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.lengthOf", 1); // .should("be.gte", 1);
+};
+
+/**
  * it check the table actually contains results
  */
 export const checkResults = gridSelector => {

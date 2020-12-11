@@ -68,9 +68,9 @@ context("Case Portal", () => {
 
     });
 
-    /*it("check Columns togglability", () => {
+    it("check Columns togglability", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Review");
+        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal");
 
 
         cy.get("opencga-clinical-analysis-grid .columns-toggle-wrapper button").should("be.visible").and("contain", "Columns").click();
@@ -78,22 +78,13 @@ context("Case Portal", () => {
 
 
         cy.get("opencga-clinical-analysis-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // deactivate all the columns
-        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.lengthOf", 1);
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0] > td").should("have.lengthOf", 1);
 
         cy.get("opencga-clinical-analysis-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // reactivate all the columns
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.length.gt", 1);
 
 
-        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]")
-            .find("td:nth-child(1) a[data-cy='case-id']")
-            .then($div => {
-                const caseId = $div.text().trim();
-                cy.get("div[data-cy='form-case'] button").click();
-                cy.get("div[data-cy='form-case'] input").type(caseId + "{enter}", {force: true});
-
-                // TODO check clinical analysis view fields
-            });
-    });*/
+    });
 
 });
 
