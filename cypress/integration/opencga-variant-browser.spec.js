@@ -57,8 +57,7 @@ context("Variant Browser", () => {
     });
 
     // Variant Browser: Filter controls
-    // TODO fix bugs
-    /*it("check Saved Filter actions", () => {
+    it("check Saved Filter actions", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
 
         cy.get("input[value*=LoF]").click({force: true});
@@ -81,28 +80,27 @@ context("Variant Browser", () => {
         cy.get(".swal2-title").contains("Are you sure?");
         cy.get(".swal2-confirm").click(); // confirm deletion action
 
-        cy.get(".swal2-content", {timeout: 60000}).then( $div => console.log("DIV", $div))
-        cy.get(".swal2-content", {timeout: 60000}).contains("Filter has been deleted."); // TODO FIXME this selector refers to the previous #swal2-content which has been detatched from DOM before
+        // cy.get(".swal2-content", {timeout: 60000}).contains("Filter has been deleted."); // this selector doesn't work without .should("be.visible") assertion because it refers to the previous #swal2-content which has been detatched from DOM before
+        cy.contains(".swal2-content", "Filter has been deleted", {timeout: 60000}).should("be.visible");
         cy.get(".swal2-confirm").click({force: true}); // dismiss confirmation modal
-        // cy.get(".swal2-title")
-        //     .then($div => {
-        //         console.log($div)
-        //     })
 
-    });*/
+    });
 
-    // it("checks the links of the first row", () => {
-    //     cy.get("button[data-id='table-tab']", {timeout: 60000}).click();
-    //
-    //     // FIXME hover doesn't work
-    //     // cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index='0']").find("a.gene-tooltip").trigger('mouseover');
-    //     // cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index='0']").find("a[data-cy='gene-view']").click({force: true});
-    //
-    // });
+    it("checks the links of the first row", () => {
+        cy.get("button[data-id='table-tab']", {timeout: 60000}).click();
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index='0'] a.gene-tooltip")
+            .should("be.visible", {timeout: 60000})
+            .click({force: true});
+        // .trigger('mouseover'); // .trigger('mouseover') doesn't work in this case as the hover action changes the DOM
+        cy.get(".qtip-content").find("a[data-cy='gene-view']").click({force: true});
+        cy.get("div.page-title h2").contains(/Gene [a-z0-9:]+/gim);
+
+
+    });
 
 
     // Variant Browser: Individual filters
-     it("query", () => {
+    it("query", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
 
@@ -191,6 +189,8 @@ context("Variant Browser", () => {
         // Clinical and Disease: ClinVar Accessions	Use example: Pathogenic
         cy.get("opencga-variant-filter a[data-accordion-id='ClinicalandDisease']").click();
         cy.get("clinvar-accessions-filter select").select("Pathogenic", {force: true});
+        checkResultsOrNot("variant-browser-grid");
+        cy.get("opencga-active-filters button[data-filter-name='clinicalSignificance']").click();
 
         // Clinical and Disease: Full text	Use example: ceroid
         cy.get("fulltext-search-accessions-filter textarea").type("centroid");
@@ -201,6 +201,8 @@ context("Variant Browser", () => {
         // Phenotype: GO Accessions	Use example
         cy.get("opencga-variant-filter a[data-accordion-id='Phenotype']").click();
         cy.get("go-accessions-filter > textarea").type("GO:0032996");
+        checkResultsOrNot("variant-browser-grid");
+        cy.get("opencga-active-filters button[data-filter-name='go']").click();
 
         // TODO cannot relies on data-nodeid because the order in not guaranteed
         // cy.get("go-accessions-filter > button").click();
@@ -213,6 +215,7 @@ context("Variant Browser", () => {
         cy.get("hpo-accessions-filter > textarea").type("HP:0041054");
         cy.get("div.search-button-wrapper button").click();
         checkResultsOrNot("variant-browser-grid");
+        cy.get("opencga-active-filters button[data-filter-name='annot-hpo']").click();
 
         // Deleteriousness: Sift / Polyphen - OR operation
         cy.get("opencga-variant-filter a[data-accordion-id='Deleteriousness']").click();
@@ -241,11 +244,12 @@ context("Variant Browser", () => {
 
     });
 
-
     // Variant Browser: Tabs
     it("checks Variant Browser detail tabs", () => {
 
-        cy.get("variant-browser-detail > div > h3").should("contain", /Variant: [a-z0-9:]+/gim);
+        // TODO FIXME this line doesn't work if you run it along with other tests. It works if you run this test case alone..
+        cy.get("variant-browser-detail > div > h3", {timeout: 60000}).should("be.visible").should("contain", /Variant: [a-z0-9:]+/gim);
+
         cy.get("cellbase-variant-annotation-summary").contains("Summary");
 
         cy.get("variant-browser-detail [data-id='annotationConsType']").click();
