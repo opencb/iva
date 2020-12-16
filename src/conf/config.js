@@ -109,19 +109,21 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.0.1",
+    version: "v2.1.0",
     logo: "img/iva.svg",
     companyLogo: "img/Genomics-England-logo-2015-white.png",
-    defaultStudy: "re-opencgahadoop@100k_genomes_grch37_germline:RD37",
+    mode: "development",
     appConfig: "gel",
-    // mode: "development",
+    defaultStudy: "re-opencgahadoop@100k_genomes_grch37_germline:RD37",
+    // defaultStudy: "serena@cancer37:test",
+    // defaultStudy: "emee-glh@cancer:myeloid",
     // The order, title and nested submenus are respected
     menu: [
         {
             id: "browser",
             title: "Variant Browser",
-            description: "",
             icon: "variant_browser.svg",
+            fa_icon: "fa fa-list",
             visibility: "private",
             submenu: [
                 {
@@ -136,7 +138,8 @@ const application = {
                             </ul>`,
                     visibility: "public",
                     fa_icon: "fa fa-list",
-                    icon: "variant_browser.svg"
+                    icon: "variant_browser.svg",
+                    thumbnail: "variant-browser.png"
                 }
                 // {
                 //     id: "genomeBrowser",
@@ -234,6 +237,14 @@ const application = {
                     visibility: "public"
                 },
                 {
+                    id: "knockout-result",
+                    title: "Knockout Analysis result",
+                    acronym: "KO",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
                     id: "sample-eligibility",
                     title: "Eligibility Analysis",
                     description: "",
@@ -306,6 +317,14 @@ const application = {
                 //     id: "rd-tiering",
                 //     title: "RD Tiering",
                 //     acronym: "RDT",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "recessive-gene",
+                //     title: "Recessive Gene Analysis",
+                //     acronym: "RG",
                 //     description: "",
                 //     icon: "",
                 //     visibility: "public"
@@ -414,19 +433,24 @@ const application = {
                     icon: "",
                     visibility: "public"
                 },
-                // {
-                //     id: "beacon",
-                //     title: "GA4GH Beacon",
-                //     description: "",
-                //     icon: "beacon.svg",
-                //     visibility: "public"
-                // }
+                {
+                    id: "beacon",
+                    title: "GA4GH Beacon",
+                    description: `
+                        <ul>
+                            <li>Federated search from the Global Alliance for Genomics and Health</li>
+                            <li>Find databases that have information about specific variants</li>
+                        </ul>`,
+                    thumbnail: "beacon.png",
+                    fa_icon: "fa fa-globe-europe",
+                    icon: "beacon.svg",
+                    visibility: "public"
+                }
             ]
         },*/
         {
             id: "clinical",
             title: "Case Interpretation",
-            description: "",
             icon: "interpretation_portal.svg",
             visibility: "private",
             submenu: [
@@ -440,9 +464,16 @@ const application = {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
                     acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
+                    description: `
+                        <ul>
+                            <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
+                            <li>Filter by gene, consequence, frequency and much more</li>
+                        </ul>
+                    `,
+                    visibility: "public",
+                    fa_icon: "fa fa-user-md",
+                    icon: "interpretation_portal.svg",
+                    thumbnail: "interpretation_portal.png",
                 },
                 // {
                 //     id: "clinical-analysis-writer",
@@ -563,22 +594,24 @@ const application = {
                     visibility: "public"
                 },*/
                 {
-                    id: "samples",
+                    id: "sample",
                     title: "Sample Browser",
                     visibility: "public"
                 },
                 {
-                    id: "individuals",
+                    id: "individual",
                     title: "Individual Browser",
                     visibility: "public"
                 },
                 {
-                    id: "families",
+                    id: "family",
                     title: "Family Browser",
                     visibility: "public"
                 },
                 /*{
                     id: "cohorts",
+                {
+                    id: "cohort",
                     title: "Cohort Browser",
                     visibility: "public"
                 },
@@ -588,7 +621,7 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "jobs",
+                    id: "job",
                     title: "Job Browser",
                     visibility: "public"
                 }*/
@@ -661,63 +694,7 @@ const application = {
             <li>whether you think IVA will expand the utility of the research environment to a new user base</li>
         </ul>`,
     welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
-    components: [
-        {
-            id: "browser",
-            title: "Variant Browser",
-            visibility: "public",
-            thumbnail: "variant-browser.png",
-            fa_icon: "fa fa-list",
-            icon: "variant_browser.svg",
-            description: `
-                <p>Explore all variants identified by the 100,000 Genomes Project</p>
-                <ul>
-                    <li>Rich annotation and links to leading reference databases</li>
-                    <li>Filter by gene, consequence, frequency and much more</li>
-                </ul>`
-        },
-        {
-            id: "facet",
-            title: "Aggregation Stats",
-            visibility: "public",
-            thumbnail: "variant-browser_aggregation.png",
-            fa_icon: "fa fa-chart-bar",
-            icon: "aggregation2.svg",
-            description: `
-                    <ul>
-                        <li>Filter by gene, consequence, frequency and much more</li>
-                        <li>Add nested facets to generate aggregate statistics</li>
-                    </ul>
-                </p>`
-        },
-        {
-            id: "clinicalAnalysisPortal",
-            title: "Interpretation portal",
-            visibility: "public",
-            thumbnail: "interpretation_portal.png",
-            fa_icon: "fa fa-user-md",
-            icon: "interpretation_portal.svg",
-            description: `
-                <ul>
-                    <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
-                    <li>Filter by gene, consequence, frequency and much more</li>
-                </ul>                
-            `
-        },
-        {
-            id: "beacon",
-            title: "GA4GH Beacon",
-            visibility: "public",
-            thumbnail: "beacon.png",
-            fa_icon: "fa fa-globe-europe",
-            icon: "beacon.svg",
-            description: `
-                <ul>
-                    <li>Federated search from the Global Alliance for Genomics and Health</li>
-                    <li>Find databases that have information about specific variants</li>
-                </ul>`
-        }
-    ]
+    gettingStartedComponents: ["browser", "clinicalAnalysisPortal"]
 };
 
 //export {application, beacon, cellbase, consequenceTypes, opencga, populationFrequencies, proteinSubstitutionScores}

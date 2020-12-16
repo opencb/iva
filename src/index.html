@@ -13,6 +13,9 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
+
+  [build-signature]
+
   -->
 
 <html lang="en">
@@ -57,7 +60,7 @@
     <script defer src="conf/opencga-family-browser.config.js"></script>
     <script defer src="conf/opencga-file-browser.config.js"></script>
     <script defer src="conf/opencga-individual-browser.config.js"></script>
-    <script defer src="conf/opencga-jobs-browser.config.js"></script>
+    <script defer src="conf/opencga-job-browser.config.js"></script>
     <script defer src="conf/opencga-clinical-analysis-browser.config.js"></script>
     <script defer src="conf/opencga-clinical-analysis-view.settings.js"></script>
     <script defer src="conf/opencga-sample-browser.config.js"></script>
@@ -156,6 +159,7 @@
 
     <!-- Load IVA CSS styles -->
     <!-- build:css[assets/css/styles.css] -->
+    <link rel="stylesheet" href="../lib/jsorolla/styles/css/global.css">
     <link rel="stylesheet" href="../lib/jsorolla/styles/css/style.css">
     <link rel="stylesheet" href="styles/toggle-switch.css">
     <link rel="stylesheet" href="styles/magic-check.css">

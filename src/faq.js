@@ -15,7 +15,7 @@
  */
 
 import {LitElement, html} from "/web_modules/lit-element.js";
-import "../lib/jsorolla/src/core/webcomponents/tool-header.js";
+import "../lib/jsorolla/src/core/webcomponents/commons/tool-header.js";
 
 
 export default class FaqWeb extends LitElement {

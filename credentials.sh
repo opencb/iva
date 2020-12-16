@@ -3,7 +3,7 @@
 echo -n "Enter your Opencga Username [ENTER]: "
 read username
 stty -echo
-printf "Enter your Opencga password [ENTER]: "
+printf "Enter your Opencga Password [ENTER]: "
 read password
 stty echo
 
