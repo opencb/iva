@@ -31,7 +31,7 @@ context("checks on Header Bar elements", () => {
     });
 
     it("check header-bar icons resolve correctly", () => {
-        cy.get("a.navbar-brand").click();
+        cy.get("a.navbar-brand").first().click();
         cy.get("#welcome-page-title", {timeout: 60000}).contains("Interactive Variant Analysis");
 
     });
