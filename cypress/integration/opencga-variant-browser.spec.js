@@ -54,6 +54,13 @@ context("Variant Browser", () => {
         cy.get("#type_Select a").contains("INSERTION").click({force: true});
         cy.get("div.search-button-wrapper button").click();
 
+        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
+
+        cy.get("div.facet-wrapper button[data-filter-name='chromosome']").click();
+        cy.get("div.facet-wrapper button[data-filter-name='type']").click();
+        cy.get("div.facet-wrapper button[data-filter-name='genes']").click();
+
+
     });
 
     // Variant Browser: Filter controls
@@ -89,12 +96,12 @@ context("Variant Browser", () => {
     // Variant Browser: Individual filters
     it("query", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
-        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
+        checkResultsOrNot("variant-browser-grid");
 
-
+        cy.get("variant-browser a[href='#filters_tab']").click();
         // Study and Cohorts: Cohort Alternate Stats
-        cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").first().click();
-        cy.get("cohort-stats-filter input[data-field='value']").first().type("0.00001"); // set ALL cohort
+        cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").first({timeout: 60000}).should("be.visible").click();
+        cy.get("cohort-stats-filter input[data-field='value']").first({timeout: 60000}).type("0.00001"); // set ALL cohort
         cy.get("div.search-button-wrapper button").click();
         checkResultsOrNot("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='cohortStatsAlt']").contains("Cohort ALT Stats");
