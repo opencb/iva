@@ -15,7 +15,7 @@
  */
 
 
-import {login} from "../plugins/utils.js";
+import {login, checkResults} from "../plugins/utils.js";
 
 context("File Browser", () => {
     before(() => {
@@ -26,14 +26,14 @@ context("File Browser", () => {
         cy.get("a[data-id=sample]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Sample Browser");
 
-        cy.get("opencga-sample-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
+        checkResults("opencga-sample-grid");
 
-        cy.get("#somatic + .subsection-content label").contains("True").click({force: true});
+        cy.get("#somatic + .subsection-content label").contains("True").click({force: true}); // setting filter Somatic = true
 
         cy.get(".lhs button[data-filter-name]").should("have.length", 1);
         cy.get("div.search-button-wrapper button").click();
 
-        cy.get(".lhs .somaticActiveFilter").click();
+        cy.get("opencga-active-filters button[data-filter-name='somatic']").click();
         cy.get(".lhs button[data-filter-name]").should("have.length", 0);
 
     });
