@@ -15,7 +15,7 @@
  */
 
 
-import {checkResultsOrNot, login} from "../plugins/utils.js";
+import {checkResultsOrNot, login, getResult} from "../plugins/utils.js";
 
 context("Family Browser", () => {
     before(() => {
@@ -26,13 +26,11 @@ context("Family Browser", () => {
         cy.get("a[data-id=family]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser");
         checkResultsOrNot("opencga-family-grid");
-        
-        // move in utils
-        cy.get("opencga-family-grid table", {timeout: 60000}).find(`tr[data-index=0] > :nth-child(1)`, {timeout: 60000}).then($td => { 
-            cy.get("family-id-autocomplete input").type($td.text().trim() + "{enter}");
-        });
 
-        
+        getResult("opencga-family-grid").then($text => {
+            cy.get("family-id-autocomplete input").type($text + "{enter}");
+        })
+        cy.get(".lhs button[data-filter-name]").should("have.length", 1);
         cy.get("div.search-button-wrapper button").click();
 
         waitTableResults("opencga-family-grid");

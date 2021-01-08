@@ -15,7 +15,7 @@
  */
 
 
-import {login, checkResults} from "../plugins/utils.js";
+import {login, checkResults, getResult} from "../plugins/utils.js";
 
 context("File Browser", () => {
     before(() => {
@@ -28,11 +28,17 @@ context("File Browser", () => {
 
         checkResults("opencga-sample-grid");
 
-        cy.get("#somatic + .subsection-content label").contains("True").click({force: true}); // setting filter Somatic = true
+        getResult("opencga-sample-grid").then($text => {
+            cy.get("sample-id-autocomplete input").type($text + "{enter}");
+        })
 
         cy.get(".lhs button[data-filter-name]").should("have.length", 1);
         cy.get("div.search-button-wrapper button").click();
+        checkResults("opencga-sample-grid");
 
+        cy.get("#somatic + .subsection-content label").contains("True").click({force: true}); // setting filter Somatic = true
+
+        cy.get("opencga-active-filters button[data-filter-name='id']").click();
         cy.get("opencga-active-filters button[data-filter-name='somatic']").click();
         cy.get(".lhs button[data-filter-name]").should("have.length", 0);
 
@@ -40,13 +46,12 @@ context("File Browser", () => {
 
     it("aggregated query", () => {
         cy.get("a[data-id=sample]").click({force: true});
-
         cy.get("a[href='#facet_tab']").click({force: true});
+
         cy.get("button.default-facets-button").click();
         cy.get("div.search-button-wrapper button").click();
 
         cy.get(".facet-wrapper .button-list button").should("have.length", 4);
-
         cy.get("opencb-facet-results opencga-facet-result-view").should("have.length", 4);
 
     });

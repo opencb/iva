@@ -55,10 +55,11 @@ export const checkResultsOrNot = gridSelector => {
 /**
  * TODO FIXME returns undefined
 */
-export const getResult = (gridSelector, rowIndex = 0, colIndex = 1) => {
+export const getResult = (gridSelector, colIndex = 1, rowIndex = 0) => {
     // check results are >= resultIndex
-    cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gte", rowIndex);
+    //cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gte", rowIndex);
+    //cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text").as("text")
+    return cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text")
 
-    cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text").as("text")
 
 } 

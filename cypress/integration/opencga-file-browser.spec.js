@@ -30,12 +30,12 @@ context("File Browser", () => {
 
         checkResults("opencga-file-grid");
 
-        // move in utils
-        cy.get("opencga-file-grid table", {timeout: 60000}).find(`tr[data-index=0] > :nth-child(1)`, {timeout: 60000}).then($td => { 
-            cy.get("file-name-autocomplete input").type($td.text().trim() + "{enter}");
-        });
-
+        getResult("opencga-file-grid").then($text => {
+            cy.get("file-name-autocomplete input").type($text + "{enter}");
+        })
         
+        cy.get(".lhs button[data-filter-name]").should("have.length", 1);
+
         cy.get("div.search-button-wrapper button").click();
         waitTableResults("opencga-file-grid");
         checkResults("opencga-file-grid");
