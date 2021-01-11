@@ -22,9 +22,12 @@
     "browser-support": "npx browserslist",
     "build": "npx webpack",
     "deploy": "npx webpack && ./docker/docker-build.py push",
+    "eslint": "eslint -c .eslintrc.json . --ignore-pattern '/web_modules/'",
     "e2e": "./credentials.sh npx cypress open",
-    "e2e-headless": "./credentials.sh npx cypress run --headless",
-    "eslint": "eslint -c .eslintrc.json . --ignore-pattern '/web_modules/'"
+    "e2e-report-spec": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --headless --spec 'cypress/integration/login.js'",
+    "e2e-report": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --config video=false --headless --spec 'cypress/integration/*.js'",
+    "mocha:merge-reports": "mochawesome-merge mochawesome-report/*.json > mochawesome-report/cypress-combined-report.json",
+    "mocha:report": "npm run mocha:merge-reports && marge --reportDir cypress/report mochawesome-report/cypress-combined-report.json"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
@@ -91,6 +94,10 @@
     "html-webpack-plugin": "^3.2.0",
     "jest": "^25.1.0",
     "js-beautify": "~1.6.4",
+    "mocha": "^8.2.1",
+    "mochawesome": "^6.2.1",
+    "mochawesome-merge": "^4.2.0",
+    "mochawesome-report-generator": "^5.1.0",
     "nightwatch": "^0.9.16",
     "null-loader": "^4.0.0",
     "rollup-plugin-babel": "^4.3.3",
