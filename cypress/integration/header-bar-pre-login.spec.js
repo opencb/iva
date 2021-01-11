@@ -17,7 +17,7 @@
 /**
  * Header bar (pre-login)
  */
-context("checks on Header Bar elements", () => {
+context("Header bar (pre-login): checks on Header Bar elements", () => {
     before(() => {
         cy.visit("http://localhost:3000/src/");
 
