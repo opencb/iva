@@ -15,7 +15,7 @@
  */
 
 
-import {login, waitTableResults, checkResultsOrNot, checkResults} from "../plugins/utils.js";
+import {login, waitTableResults, getResult, checkResults} from "../plugins/utils.js";
 
 
 
@@ -43,7 +43,7 @@ context("File Browser", () => {
         cy.get("#format + .subsection-content a").contains("VCF").click({force: true});
         cy.get("#bioformat + .subsection-content a").contains("VARIANT").click({force: true});
         
-        cy.get(".lhs button[data-filter-name]").should("have.length", 2);
+        cy.get(".lhs button[data-filter-name]").should("have.length", 3);
         cy.get("div.search-button-wrapper button").click();
 
         waitTableResults("opencga-file-grid");
@@ -60,6 +60,9 @@ context("File Browser", () => {
         cy.get("a[data-collapse=\"#creationYear_nested\"]").click({force: true}); // creation y field
         cy.get("#bs-select-7-3").click({force: true}); // creation month nested in year field
         cy.get("div.search-button-wrapper button").click();
+
+        cy.get(".facet-wrapper .button-list button").should("have.length", 1);
+        cy.get("opencb-facet-results opencga-facet-result-view").should("have.length", 1);
 
     });
 });
