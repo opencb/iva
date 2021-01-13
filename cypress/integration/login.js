@@ -25,7 +25,7 @@ context("Login", () => {
         cy.get("#opencgaUser").type("demo2");
         cy.get("#opencgaPassword").type("demo2");
         cy.get("form#formLogin").submit();
-
+        cy.get("#error").should("be.visible");
         cy.get("#error").contains("Incorrect user or password.");
     });
 
@@ -40,7 +40,12 @@ context("Login", () => {
         cy.get("#opencgaPassword").type(password);
         cy.get("form#formLogin").submit();
 
-        // cy.url().should("include", "#home")
+        //cy.get("#error").should("be.not.visible");
+
+        cy.get(".login-overlay", {timeout: 60000}).should("be.visible");
+        cy.get(".login-overlay", {timeout: 60000}).should("not.exist");
+
+        cy.url().should("include", "#home", {timeout: 15000})
         cy.get(".subtitle", {timeout: 60000}).contains("Interactive Variant Analysis");
     });
 

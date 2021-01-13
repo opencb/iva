@@ -107,5 +107,12 @@ context("Variant Browser", () => {
         cy.reload();*/
 
         //cy.get("button[type=submit]").click()
+
+
+        // LOOP
+        // cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
+        //      Cypress.$("a", $li)
+        //    });
+
     })
 })

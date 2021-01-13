@@ -15,7 +15,7 @@
  */
 
 
-import {login} from "../plugins/utils.js";
+import {login, checkResults, getResult, waitTableResults} from "../plugins/utils.js";
 
 context("Individual Browser", () => {
     before(() => {
@@ -26,33 +26,38 @@ context("Individual Browser", () => {
         cy.get("a[data-id=individual]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Individual Browser");
 
-        cy.get("opencga-individual-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
+        checkResults("opencga-individual-grid");
+
+
+        getResult("opencga-individual-grid", 2).then($text => {
+            cy.get("opencga-individual-filter .form-group:nth-child(1) individual-id-autocomplete input").type($text + "{enter}");
+        })
 
         cy.get("#sex + .subsection-content a").contains("MALE").click({force: true}); // query: sex=MALE
         cy.get("#sex + .subsection-content a").contains("FEMALE").click({force: true}); // query: sex=FEMALE
+        cy.get("#sex + .subsection-content a").contains("UNKNOWN").click({force: true}); // query: sex=UNKNOWN
 
-        cy.get("#date + .subsection-content input[data-tab=recent] + label").click(); // query: creationDate recent
+        //cy.get("#date + .subsection-content input[data-tab=recent] + label").click(); // query: creationDate recent
 
         cy.get(".lhs button[data-filter-name]").should("have.length", 2);
         cy.get("div.search-button-wrapper button").click();
 
+        waitTableResults("opencga-individual-grid");
+        checkResults("opencga-individual-grid");
+
     });
 
+   
     it("aggregated query", () => {
         cy.get("a[data-id=individual]").click({force: true});
-
         cy.get("a[href='#facet_tab']").click({force: true});
-        cy.get("button.default-facets-button").click();
-
-        cy.get(".lhs button[data-filter-name]:nth-child(3)").click(); // remove creationDate
 
         cy.get("button.default-facets-button").click();
+        cy.get("div.search-button-wrapper button").click();
 
-        // cy.get("div.search-button-wrapper button").click()
+        cy.get(".facet-wrapper .button-list button").should("have.length", 8);
 
-        // cy.get(".facet-wrapper .button-list button").should("have.length", 4);
-
-        // cy.get("opencb-facet-results opencga-facet-result-view").should("have.length", 4);
-
+        cy.get("opencb-facet-results opencga-facet-result-view").should("have.length", 8);
     });
+
 });

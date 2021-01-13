@@ -15,7 +15,9 @@
  */
 
 
-import {login, waitTableResults, checkResultsOrNot, checkResults} from "../plugins/utils.js";
+import {login, waitTableResults, getResult, checkResults} from "../plugins/utils.js";
+
+
 
 context("File Browser", () => {
     before(() => {
@@ -28,32 +30,39 @@ context("File Browser", () => {
 
         checkResults("opencga-file-grid");
 
-        cy.get("file-name-autocomplete input").type("AR2.10039966-01T.copynumber.caveman.vcf.gz{enter}");
+        getResult("opencga-file-grid").then($text => {
+            cy.get("file-name-autocomplete input").type($text + "{enter}");
+        })
+        
+        cy.get(".lhs button[data-filter-name]").should("have.length", 1);
+
+        cy.get("div.search-button-wrapper button").click();
+        waitTableResults("opencga-file-grid");
+        checkResults("opencga-file-grid");
+
+        cy.get("#format + .subsection-content a").contains("VCF").click({force: true});
+        cy.get("#bioformat + .subsection-content a").contains("VARIANT").click({force: true});
+        
+        cy.get(".lhs button[data-filter-name]").should("have.length", 3);
         cy.get("div.search-button-wrapper button").click();
 
         waitTableResults("opencga-file-grid");
+        checkResults("opencga-file-grid");
 
-        checkResultsOrNot("opencga-file-grid");
-
-        /* cy.get("#format + .subsection-content a").contains("VCF").click({force: true});
-        cy.get("#bioformat + .subsection-content a").contains("VARIANT").click({force: true});
-
-        cy.get(".lhs button[data-filter-name]").should("have.length", 2);
-
-        cy.get("div.search-button-wrapper button").click();*/
     });
 
-    /* it("aggregated query", () => {
+    it("aggregated query", () => {
         cy.get("a[data-id=file]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
-        // cy.get("div.search-button-wrapper button").click()
 
-        // cy.wait(2000);
+        cy.get("facet-filter .facet-selector li a").contains("Creation Year").click({force: true}); // Creation Year selection
 
-        cy.get("#bs-select-4-2").click({force: true}); // creation year field
         cy.get("a[data-collapse=\"#creationYear_nested\"]").click({force: true}); // creation y field
         cy.get("#bs-select-7-3").click({force: true}); // creation month nested in year field
         cy.get("div.search-button-wrapper button").click();
 
-    });*/
+        cy.get(".facet-wrapper .button-list button").should("have.length", 1);
+        cy.get("opencb-facet-results opencga-facet-result-view").should("have.length", 1);
+
+    });
 });

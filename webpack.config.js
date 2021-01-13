@@ -116,6 +116,16 @@ module.exports = {
         }),
         new CopyWebpackPlugin([
             {
+                context: "./",
+                from: "LICENSE",
+                to: DIST_PATH
+            },
+            {
+                context: "./",
+                from: "README.md",
+                to: DIST_PATH
+            },
+            {
                 context: "./src/conf",
                 from: "**/*.js",
                 to: DIST_PATH + "/conf"

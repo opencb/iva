@@ -30,15 +30,15 @@ export const waitTableResults = gridSelector => {
 /**
  * it check the table actually contains a single result
  */
-export const checkSingleResult = gridSelector => {
-    cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.lengthOf", 1); // .should("be.gte", 1);
+export const checkExactResult = (gridSelector, numResults = 1) => {
+    cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.lengthOf", numResults); // .should("be.gte", 1);
 };
 
 /**
  * it check the table actually contains results
  */
 export const checkResults = gridSelector => {
-    cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gt", 1); // .should("be.gte", 1);
+    cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gt", 0); // .should("be.gte", 1);
 };
 
 /**
@@ -51,3 +51,13 @@ export const checkResultsOrNot = gridSelector => {
             return $els.data("index") !== undefined || $els.text().includes("No matching records found");
         });
 };
+
+/**
+ * given column and row coordinates, it returns a single value out of a bootstrap table 
+ */
+export const getResult = (gridSelector, colIndex = 1, rowIndex = 0) => {
+    // check results are >= resultIndex
+    //cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gte", rowIndex);
+    //cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text").as("text")
+    return cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text")
+}
