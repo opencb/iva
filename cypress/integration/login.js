@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import {login} from "../plugins/utils.js";
 
 
@@ -49,14 +50,4 @@ context("Login", () => {
         cy.get(".subtitle", {timeout: 60000}).contains("Interactive Variant Analysis");
     });
 
-    /* it("check sessions", () => {
-        login()
-
-        cy.window()
-            .then((win) => {
-                console.log(Cypress.$(win.document).application)
-                console.log(Cypress.$(win.document).get(0))
-            })
-
-    })*/
 });

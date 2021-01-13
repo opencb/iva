@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-
 import {login, randomString, checkResults, checkExactResult, checkResultsOrNot} from "../plugins/utils.js";
+
 
 context("Case Portal", () => {
     before(() => {
@@ -29,7 +29,6 @@ context("Case Portal", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal");
 
         checkResults("opencga-clinical-analysis-grid");
-
 
         // reading from the first row the case Id, the proband Id, and the Family Id and use them as filters
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000})

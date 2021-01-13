@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-
 import {login, waitTableResults, getResult, checkResults} from "../plugins/utils.js";
-
 
 
 context("File Browser", () => {
@@ -33,7 +31,7 @@ context("File Browser", () => {
         getResult("opencga-file-grid").then($text => {
             cy.get("file-name-autocomplete input").type($text + "{enter}");
         })
-        
+
         cy.get(".lhs button[data-filter-name]").should("have.length", 1);
 
         cy.get("div.search-button-wrapper button").click();
@@ -42,7 +40,7 @@ context("File Browser", () => {
 
         cy.get("#format + .subsection-content a").contains("VCF").click({force: true});
         cy.get("#bioformat + .subsection-content a").contains("VARIANT").click({force: true});
-        
+
         cy.get(".lhs button[data-filter-name]").should("have.length", 3);
         cy.get("div.search-button-wrapper button").click();
 
