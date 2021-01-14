@@ -83,7 +83,7 @@ npm run install
 ```
 
 ### Run
-To buil IVA, run
+To run IVA in dev mode (hot reload for CSS files and hot restart (aka live reloading) for JS scripts), run
 
 `
 npm run serve
@@ -93,8 +93,6 @@ npm run serve
 To buil IVA, just run
 
 `
-npm install
-` and then `
 npm run build
 `.
 
