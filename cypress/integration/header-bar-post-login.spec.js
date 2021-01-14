@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import {login} from "../plugins/utils.js";
+import {login, checkResultsOrNot} from "../plugins/utils.js";
+
 
 /**
  * Header bar (post-login)
  */
-context("Checks each menu item in header-bar resolves correctly", () => {
+context("Header bar (post-login): Checks each menu item in header-bar resolves correctly", () => {
     before(() => {
         login();
     });
@@ -27,31 +28,33 @@ context("Checks each menu item in header-bar resolves correctly", () => {
     it("checks Variant Browser menu item", () => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
-        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
+        checkResultsOrNot("variant-browser-grid");
+
     });
 
     it("checks Case Portal menu item", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal");
-        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
+        checkResultsOrNot("opencga-clinical-analysis-grid");
     });
 
     it("checks Sample Browser menu item", () => {
         cy.get("a[data-id=sample]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Sample Browser");
-        cy.get("opencga-sample-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
+        checkResultsOrNot("opencga-sample-grid");
     });
 
     it("checks Individual Browser menu item", () => {
         cy.get("a[data-id=individual]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Individual Browser"); // should assertion comes from Chai and it follows its logic
-        cy.get("opencga-individual-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
+        checkResultsOrNot("opencga-individual-grid");
+
     });
 
     it("checks Family Browser menu item", () => {
         cy.get("a[data-id=family]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser"); // should assertion comes from Chai and it follows its logic
-        cy.get("opencga-family-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
+        checkResultsOrNot("opencga-family-grid");
     });
 
     it("checks study selector menu items", () => {

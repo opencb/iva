@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import {login} from "../plugins/utils.js";
 
 
@@ -25,7 +26,7 @@ context("Login", () => {
         cy.get("#opencgaUser").type("demo2");
         cy.get("#opencgaPassword").type("demo2");
         cy.get("form#formLogin").submit();
-
+        cy.get("#error").should("be.visible");
         cy.get("#error").contains("Incorrect user or password.");
     });
 
@@ -40,18 +41,13 @@ context("Login", () => {
         cy.get("#opencgaPassword").type(password);
         cy.get("form#formLogin").submit();
 
-        // cy.url().should("include", "#home")
+        //cy.get("#error").should("be.not.visible");
+
+        cy.get(".login-overlay", {timeout: 60000}).should("be.visible");
+        cy.get(".login-overlay", {timeout: 60000}).should("not.exist");
+
+        cy.url().should("include", "#home", {timeout: 15000})
         cy.get(".subtitle", {timeout: 60000}).contains("Interactive Variant Analysis");
     });
 
-    /* it("check sessions", () => {
-        login()
-
-        cy.window()
-            .then((win) => {
-                console.log(Cypress.$(win.document).application)
-                console.log(Cypress.$(win.document).get(0))
-            })
-
-    })*/
 });

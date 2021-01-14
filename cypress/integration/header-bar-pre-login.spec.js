@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@
 /**
  * Header bar (pre-login)
  */
-context("checks on Header Bar elements", () => {
+context("Header bar (pre-login): checks on Header Bar elements", () => {
     before(() => {
         cy.visit("http://localhost:3000/src/");
 

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import {login, randomString, checkResults, checkExactResult, checkResultsOrNot} from "../plugins/utils.js";
 
-import {login, randomString, checkResults, checkSingleResult} from "../plugins/utils.js";
 
 context("Case Portal", () => {
     before(() => {
@@ -30,7 +30,6 @@ context("Case Portal", () => {
 
         checkResults("opencga-clinical-analysis-grid");
 
-
         // reading from the first row the case Id, the proband Id, and the Family Id and use them as filters
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000})
             .find("td:nth-child(1) a[data-cy='case-id']")
@@ -38,10 +37,10 @@ context("Case Portal", () => {
                 caseId = $a.text().trim();
                 cy.get("div[data-cy='form-case'] button").click();
                 cy.get("div[data-cy='form-case'] input").type(caseId + "{enter}", {force: true});
-                cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container").find("tr[data-index]").should("have.length.gte", 1); // .should("be.gte", 1);
+                checkResultsOrNot("opencga-clinical-analysis-grid");
 
             });
-        checkSingleResult("opencga-clinical-analysis-grid");
+        checkExactResult("opencga-clinical-analysis-grid");
 
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000}).find("td:nth-child(1) a[data-cy='case-id']", {timeout: 60000}).click();
 
@@ -53,6 +52,3 @@ context("Case Portal", () => {
 
 });
 
-/* cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
-    //Cypress.$("a", $li)
-});*/

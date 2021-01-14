@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import {login, checkResults, getResult} from "../plugins/utils.js";
 
-import {login} from "../plugins/utils.js";
 
 context("File Browser", () => {
     before(() => {
@@ -26,27 +26,31 @@ context("File Browser", () => {
         cy.get("a[data-id=sample]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Sample Browser");
 
-        cy.get("opencga-sample-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1); // .should("be.gte", 1);
+        checkResults("opencga-sample-grid");
 
-        cy.get("#somatic + .subsection-content label").contains("True").click({force: true});
+        getResult("opencga-sample-grid").then($text => {
+            cy.get("sample-id-autocomplete input").type($text + "{enter}");
+        });
 
         cy.get(".lhs button[data-filter-name]").should("have.length", 1);
         cy.get("div.search-button-wrapper button").click();
+        checkResults("opencga-sample-grid");
 
-        cy.get(".lhs .somaticActiveFilter").click();
+        cy.get("#somatic + .subsection-content label").contains("True").click({force: true}); // setting filter Somatic = true
+
+        cy.get("opencga-active-filters button[data-filter-name='id']").click();
+        cy.get("opencga-active-filters button[data-filter-name='somatic']").click();
         cy.get(".lhs button[data-filter-name]").should("have.length", 0);
 
     });
 
     it("aggregated query", () => {
         cy.get("a[data-id=sample]").click({force: true});
-
         cy.get("a[href='#facet_tab']").click({force: true});
+
         cy.get("button.default-facets-button").click();
         cy.get("div.search-button-wrapper button").click();
-
         cy.get(".facet-wrapper .button-list button").should("have.length", 4);
-
         cy.get("opencb-facet-results opencga-facet-result-view").should("have.length", 4);
 
     });

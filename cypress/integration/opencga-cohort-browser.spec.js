@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import {checkResultsOrNot, login, getResult, waitTableResults} from "../plugins/utils.js";
 
-import {checkResultsOrNot, login} from "../plugins/utils.js";
 
 context("Cohort Browser", () => {
     before(() => {
@@ -27,6 +27,18 @@ context("Cohort Browser", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Cohort Browser");
         checkResultsOrNot("opencga-cohort-grid");
 
+        // cy.get("opencga-cohort-grid table", {timeout: 60000}).find(`tr[data-index=0] > :nth-child(1)`, {timeout: 60000}).then($td => {
+        //     cy.get("cohort-id-autocomplete input").type($td.text().trim() + "{enter}");
+        // });
+        getResult("opencga-cohort-grid").then($text => {
+            cy.get("cohort-id-autocomplete input").type($text + "{enter}");
+        });
+        cy.get(".lhs button[data-filter-name]").should("have.length", 1);
+
+        cy.get("div.search-button-wrapper button").click();
+
+        waitTableResults("opencga-cohort-grid");
+        checkResultsOrNot("opencga-cohort-grid");
     });
 
     it("aggregated query", () => {
@@ -34,7 +46,11 @@ context("Cohort Browser", () => {
 
         cy.get("a[href='#facet_tab']").click({force: true});
         cy.get("button.default-facets-button").click();
-        cy.get(".facet-wrapper .button-list button").should("have.length.gte", 1);
+        cy.get("div.search-button-wrapper button").click();
+
+        cy.get(".facet-wrapper .button-list button").should("have.length", 3);
+
+        cy.get("opencb-facet-results opencga-facet-result-view").should("have.length", 3);
 
     });
 });

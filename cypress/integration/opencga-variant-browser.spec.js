@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-
 import {login, randomString, checkResultsOrNot} from "../plugins/utils.js";
+
 
 context("Variant Browser", () => {
     before(() => {
@@ -37,28 +37,6 @@ context("Variant Browser", () => {
 
         cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // reactivate all the columns
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.length.gt", 1);
-
-        // cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").each(($li, index, $lis) => {
-        //      Cypress.$("a", $li)
-        //    });
-    });
-
-    it("aggregated query", () => {
-        cy.get("a[href='#facet_tab']").click({force: true});
-        cy.get("button.default-facets-button").click();
-        cy.get("div.search-button-wrapper button").click();
-
-        // cy.wait(2000);
-
-        cy.get("#bs-select-1-4").click({force: true}); // gene aggregation field
-        cy.get("#type_Select a").contains("INSERTION").click({force: true});
-        cy.get("div.search-button-wrapper button").click();
-
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
-
-        cy.get("div.facet-wrapper button[data-filter-name='chromosome']").click();
-        cy.get("div.facet-wrapper button[data-filter-name='type']").click();
-        cy.get("div.facet-wrapper button[data-filter-name='genes']").click();
 
 
     });
@@ -235,6 +213,24 @@ context("Variant Browser", () => {
         checkResultsOrNot("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='conservation']").click();
 
+
+    });
+
+    it("aggregated query", () => {
+        cy.get("a[href='#facet_tab']").click({force: true});
+        cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
+        cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
+        cy.get("#type_Select a").contains("INSERTION").click({force: true}); // type=INSERTION
+
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
+
+        cy.get("div.facet-wrapper button[data-filter-name='chromosome']").click();
+        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 2);
+        cy.get("div.facet-wrapper button[data-filter-name='type']").click();
+        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 1);
+        cy.get("div.facet-wrapper button[data-filter-name='genes']").click();
+        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 0);
 
     });
 
