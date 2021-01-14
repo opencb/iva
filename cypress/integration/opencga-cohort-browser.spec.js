@@ -50,7 +50,7 @@ context("Cohort Browser", () => {
 
         cy.get(".facet-wrapper .button-list button").should("have.length", 3);
 
-        cy.get("opencb-facet-results opencga-facet-result-view").should("have.length", 3);
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 60000}).should("have.length", 3);
 
     });
 });

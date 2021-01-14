@@ -51,7 +51,7 @@ context("File Browser", () => {
         cy.get("button.default-facets-button").click();
         cy.get("div.search-button-wrapper button").click();
         cy.get(".facet-wrapper .button-list button").should("have.length", 4);
-        cy.get("opencb-facet-results opencga-facet-result-view").should("have.length", 4);
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 60000}).should("have.length", 4);
 
     });
 });
