@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-
 import {login, randomString, checkResultsOrNot} from "../plugins/utils.js";
+
 
 context("Variant Browser", () => {
     before(() => {
@@ -26,7 +26,7 @@ context("Variant Browser", () => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
     });
 
-    /*it("check Columns togglability", () => {
+    it("check Columns togglability", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
 
         cy.get("variant-browser-grid .columns-toggle-wrapper button").should("be.visible").and("contain", "Columns").click();
@@ -39,29 +39,10 @@ context("Variant Browser", () => {
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.length.gt", 1);
 
 
-    });*/
-
-    it("aggregated query", () => {
-        cy.get("a[href='#facet_tab']").click({force: true});
-        cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
-        cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
-        cy.get("#type_Select a").contains("INSERTION").click({force: true}); // type=INSERTION
-
-        cy.get("div.search-button-wrapper button").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
-
-        cy.get("div.facet-wrapper button[data-filter-name='chromosome']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 2);
-        cy.get("div.facet-wrapper button[data-filter-name='type']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 1);
-        cy.get("div.facet-wrapper button[data-filter-name='genes']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 0);
-
-
     });
 
     // Variant Browser: Filter controls
-    /*it("check Saved Filter actions", () => {
+    it("check Saved Filter actions", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
 
         cy.get("input[value*=LoF]").click({force: true});
@@ -235,8 +216,26 @@ context("Variant Browser", () => {
 
     });
 
+    it("aggregated query", () => {
+        cy.get("a[href='#facet_tab']").click({force: true});
+        cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
+        cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
+        cy.get("#type_Select a").contains("INSERTION").click({force: true}); // type=INSERTION
+
+        cy.get("div.search-button-wrapper button").click();
+        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
+
+        cy.get("div.facet-wrapper button[data-filter-name='chromosome']").click();
+        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 2);
+        cy.get("div.facet-wrapper button[data-filter-name='type']").click();
+        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 1);
+        cy.get("div.facet-wrapper button[data-filter-name='genes']").click();
+        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 0);
+
+    });
+
     // Variant Browser: Tabs
-    /!*it("checks Variant Browser detail tabs", () => {
+    /*it("checks Variant Browser detail tabs", () => {
 
         // TODO FIXME this line doesn't work if you run it along with other tests. It works if you run this test case alone..
         cy.get("variant-browser-detail > div > h3", {timeout: 60000}).should("be.visible").should("contain", /Variant: [a-z0-9:]+/gim);
@@ -262,7 +261,7 @@ context("Variant Browser", () => {
         cy.get("variant-beacon-network", {timeout: 60000}).find(".beacon-square").its("length").should("eq", 15);
 
 
-    });*!/
+    });*/
 
     it("checks the links of the first row", () => {
         cy.get("button[data-id='table-tab']", {timeout: 60000}).click();
@@ -274,5 +273,5 @@ context("Variant Browser", () => {
         cy.get("div.page-title h2").contains(/Gene [a-z0-9:]+/gim);
 
 
-    });*/
+    });
 });

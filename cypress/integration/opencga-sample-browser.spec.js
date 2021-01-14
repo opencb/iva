@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2016 OpenCB
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-
 import {login, checkResults, getResult} from "../plugins/utils.js";
+
 
 context("File Browser", () => {
     before(() => {
@@ -30,7 +30,7 @@ context("File Browser", () => {
 
         getResult("opencga-sample-grid").then($text => {
             cy.get("sample-id-autocomplete input").type($text + "{enter}");
-        })
+        });
 
         cy.get(".lhs button[data-filter-name]").should("have.length", 1);
         cy.get("div.search-button-wrapper button").click();
@@ -50,7 +50,6 @@ context("File Browser", () => {
 
         cy.get("button.default-facets-button").click();
         cy.get("div.search-button-wrapper button").click();
-
         cy.get(".facet-wrapper .button-list button").should("have.length", 4);
         cy.get("opencb-facet-results opencga-facet-result-view").should("have.length", 4);
 
