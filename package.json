@@ -16,8 +16,8 @@
     "deploy": "npx webpack && ./docker/docker-build.py push",
     "eslint": "eslint -c .eslintrc.json . --ignore-pattern '/web_modules/'",
     "e2e": "./credentials.sh npx cypress open",
-    "e2e-report-spec": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --headless --spec 'cypress/integration/login.js'",
-    "e2e-report": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --config video=false --headless --spec 'cypress/integration/*.js'",
+    "e2e-report-spec": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --headless --spec 'cypress/integration/opencga-variant-browser.spec.js'; npm run mocha:report && rm -rf 'mochawesome-report/'",
+    "e2e-report": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --config video=false --headless --spec 'cypress/integration/*.js'; npm run mocha:report && rm -rf 'mochawesome-report/'",
     "mocha:merge-reports": "mochawesome-merge mochawesome-report/*.json > mochawesome-report/cypress-combined-report.json",
     "mocha:report": "npm run mocha:merge-reports && marge --reportDir cypress/report mochawesome-report/cypress-combined-report.json"
   },
@@ -25,6 +25,7 @@
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@polymer/polymer": "2.6.1",
     "@svgdotjs/svg.js": "^3.0.16",
+    "@vaadin/router": "^1.7.2",
     "@webcomponents/webcomponentsjs": "^1.1.0",
     "animate.css": "^3.5.2",
     "backbone": "~1.3.3",
