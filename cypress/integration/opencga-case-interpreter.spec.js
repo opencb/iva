@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults, checkExactResult, checkResultsOrNot} from "../plugins/utils.js";
+import {login, randomString, checkResults, checkExactResult, checkResultsOrNot, waitTableResults} from "../plugins/utils.js";
 
 
-context("Case Portal", () => {
+context("Case Interpreter", () => {
     before(() => {
         login();
     });
@@ -32,14 +32,14 @@ context("Case Portal", () => {
 
         // reading from the first row the case Id, the proband Id, and the Family Id and use them as filters
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000})
-            .find("td:nth-child(1) a[data-cy='case-id']")
+            .find("td:nth-child(1) a[data-cy='case-id']", {timeout: 60000})
             .then($a => {
                 caseId = $a.text().trim();
                 cy.get("div[data-cy='form-case'] button").click();
                 cy.get("div[data-cy='form-case'] input").type(caseId + "{enter}", {force: true});
                 checkResultsOrNot("opencga-clinical-analysis-grid");
-
             });
+
         checkExactResult("opencga-clinical-analysis-grid");
 
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000}).find("td:nth-child(1) a[data-cy='case-id']", {timeout: 60000}).click();
