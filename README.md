@@ -69,12 +69,12 @@ Checking connectivity... done.
 ```
 
 After this, in both cases, you **must** execute the following command to fetch the JSorolla submodule (only the first time):
- 
+
 ```
 git submodule update --init
 ```
 
-Go to `./lib/jsorolla` and checkout to ***develop*** branch of Jsorolla by 
+Go to `./lib/jsorolla` and checkout to ***develop*** branch of Jsorolla by
 
 ```
 cd lib/jsorolla
@@ -97,11 +97,13 @@ npm run build
 `.
 
 ### Test
-We use [Cypress.io](https://www.cypress.io/) as testing framework. You can run the E2E test suite running the command
+We use [Cypress.io](https://www.cypress.io/) as testing framework.
+
+Having the project running through the command `npm run serve`, you can run the interactive E2E test suite by running the command
 ```
 npm run e2e
 ```
-or the headless version (no brower window)
+or the headless version (no browser window)
 ```
 npm run e2e-headless
 ```
