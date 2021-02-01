@@ -113,4 +113,4 @@ npm run e2e-win
 npm run e2e-report-win
 ```
 
-The headless version will generate an HTML report in `./report`
+The headless version will generate an HTML report in `./report`.
