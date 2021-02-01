@@ -27,16 +27,16 @@ context("Family Browser", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser");
 
         checkResultsOrNot("opencga-family-grid")
-        /*getResult("opencga-family-grid").then($text => {
+        /*
+        getResult("opencga-family-grid").then($text => {
             cy.get("family-id-autocomplete input").type($text + "{enter}");
             cy.get(".lhs button[data-filter-name]").should("have.length", 1);
             cy.get("div.search-button-wrapper button").click();
 
-        })*/
-
+        })
         waitTableResults("opencga-family-grid");
         checkResultsOrNot("opencga-family-grid");
-
+        */
     });
 
     it("aggregated query", () => {

@@ -26,15 +26,16 @@ context("Case Portal", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal");
 
-        waitTableResults("opencga-clinical-analysis-grid");
+        checkResults("opencga-clinical-analysis-grid");
 
         cy.get("div[data-cy='form-priority'] button").click();
         cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains("URGENT").click({force: true});
         cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains("HIGH").click({force: true});
         cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains("MEDIUM").click({force: true});
         cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains("LOW").click({force: true});
+        cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains("UNKNOWN").click({force: true});
 
-        waitTableResults("opencga-clinical-analysis-grid");
+        //waitTableResults("opencga-clinical-analysis-grid");
         checkResults("opencga-clinical-analysis-grid");
 
         // reading from the first row the case Id, the proband Id, and the Family Id and use them as filters
