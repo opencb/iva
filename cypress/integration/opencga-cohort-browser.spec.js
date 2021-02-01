@@ -27,9 +27,6 @@ context("Cohort Browser", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Cohort Browser");
         checkResultsOrNot("opencga-cohort-grid");
 
-        // cy.get("opencga-cohort-grid table", {timeout: 60000}).find(`tr[data-index=0] > :nth-child(1)`, {timeout: 60000}).then($td => {
-        //     cy.get("cohort-id-autocomplete input").type($td.text().trim() + "{enter}");
-        // });
         getResult("opencga-cohort-grid").then($text => {
             cy.get("cohort-id-autocomplete input").type($text + "{enter}");
         });

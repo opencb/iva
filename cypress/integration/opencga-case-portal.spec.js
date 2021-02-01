@@ -58,14 +58,6 @@ context("Case Portal", () => {
                 checkResults("opencga-clinical-analysis-grid");
 
             });
-        // family is missing sometimes
-        /* .find("td:nth-child(3) span[data-cy='family-id']")
-            .then($div => {
-                const sampleId = $div.html().trim().split("<br>")[0];
-                cy.get("div[data-cy='form-family'] button").click();
-                cy.get("div[data-cy='form-family'] input").type(sampleId + "{enter}", {force: true});
-                checkResults("opencga-clinical-analysis-grid");
-            });*/
 
         // cy.get("opencga-clinical-review-cases .rhs button", {timeout: 60000}).should("be.visible").and("contain", "Clear").click()
         cy.get("button[data-cy='filter-button']").click({force: true});
