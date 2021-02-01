@@ -122,8 +122,8 @@ const application = {
         {
             id: "browser",
             title: "Variant Browser",
-            icon: "variant_browser.svg",
             fa_icon: "fa fa-list",
+            icon: "variant_browser.svg",
             visibility: "private",
             submenu: [
                 {

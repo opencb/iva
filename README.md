@@ -69,12 +69,12 @@ Checking connectivity... done.
 ```
 
 After this, in both cases, you **must** execute the following command to fetch the JSorolla submodule (only the first time):
- 
+
 ```
 git submodule update --init
 ```
 
-Go to `./lib/jsorolla` and checkout to ***develop*** branch of Jsorolla by 
+Go to `./lib/jsorolla` and checkout to ***develop*** branch of Jsorolla by
 
 ```
 cd lib/jsorolla
@@ -83,7 +83,7 @@ npm run install
 ```
 
 ### Run
-To buil IVA, run
+To run IVA in dev mode (hot reload for CSS files and hot restart (aka live reloading) for JS scripts), run
 
 `
 npm run serve
@@ -93,17 +93,24 @@ npm run serve
 To buil IVA, just run
 
 `
-npm install
-` and then `
 npm run build
 `.
 
 ### Test
-We use [Cypress.io](https://www.cypress.io/) as testing framework. You can run the E2E test suite running the command
+We use [Cypress.io](https://www.cypress.io/) as testing framework.
+
+Having the project running through the command `npm run serve`, you can run the interactive E2E test suite by running the command
 ```
 npm run e2e
 ```
-or the headless version (no brower window)
+or the headless version (no browser window)
 ```
-npm run e2e-headless
+npm run e2e-report
 ```
+for Windows environment, just add the suffix `-win`
+```
+npm run e2e-win
+npm run e2e-report-win
+```
+
+The headless version will generate an HTML report in `./report`.

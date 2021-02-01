@@ -479,6 +479,10 @@ class IvaApp extends LitElement {
         window.clearInterval(this.intervalCheckSession);
     }
 
+    saveLastStudy(newStudy) {
+        this.opencgaClient.updateUserConfigs({...this.opencgaSession.user.configs, lastStudy: newStudy.fqn});
+    }
+
     onUrlChange(e) {
         let hashFrag = e.detail.id;
         if (UtilsNew.isNotUndefined(this.opencgaSession.project) && UtilsNew.isNotEmpty(this.opencgaSession.project.alias)) {
@@ -697,6 +701,11 @@ class IvaApp extends LitElement {
         const {study, project} = e.target.dataset;
         const newProject = this.opencgaSession.projects.find(p => p.id === project);
         const newStudy = newProject.studies.find(s => s.id === study);
+
+        // update the lastStudy in config iff has changed
+        if (this.opencgaSession.study.fqn !== newStudy.fqn) {
+            this.saveLastStudy(newStudy);
+        }
         this.opencgaSession = {...this.opencgaSession, project: newProject, study: newStudy};
     }
 

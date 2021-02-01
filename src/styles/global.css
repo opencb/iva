@@ -705,10 +705,11 @@ button.active-filter-label:hover {
 }
 
 .saved-filter-wrapper .filtersLink .id-filter-button {
-    padding-left: 25px;
+    /*padding: 0px 10px;*/
+    margin: 0px 25px 0px 10px;
 }
 
-.saved-filter-wrapper .delete-filter-button {
+.saved-filter-wrapper .filter-buttons {
     padding: 0 0 0 10px;
     color: #adadad;
     position: absolute;
@@ -718,7 +719,7 @@ button.active-filter-label:hover {
 
 }
 
-.saved-filter-wrapper .delete-filter-button:hover {
+.saved-filter-wrapper .filter-buttons i:hover {
     color: black;
 }
 
@@ -1156,7 +1157,7 @@ a#waffle-icon-wrapper {
 
 /* browsers style */
 .browser-subsection {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
     padding: 7px 0px 5px 0px;
     color: #444444;

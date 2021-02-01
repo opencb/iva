@@ -25,6 +25,7 @@ context("Variant Browser", () => {
     beforeEach(() => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
     });
+/*
 
     it("check Columns togglability", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
@@ -33,10 +34,10 @@ context("Variant Browser", () => {
         cy.get("variant-browser-grid .columns-toggle-wrapper ul li").and("have.length.gt", 1);
 
         cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // deactivate all the columns
-        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.lengthOf", 1);
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000}).find("td", {timeout: 60000}).should("have.lengthOf", 1);
 
         cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // reactivate all the columns
-        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0]").find("td").should("have.length.gt", 1);
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000}).find("td", {timeout: 60000}).should("have.length.gt", 1);
 
 
     });
@@ -70,6 +71,7 @@ context("Variant Browser", () => {
         cy.get(".swal2-confirm").click({force: true}); // dismiss confirmation modal
 
     });
+*/
 
     // Variant Browser: Individual filters
     it("query", () => {
@@ -215,7 +217,7 @@ context("Variant Browser", () => {
 
 
     });
-
+/*
     it("aggregated query", () => {
         cy.get("a[href='#facet_tab']").click({force: true});
         cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
@@ -235,7 +237,7 @@ context("Variant Browser", () => {
     });
 
     // Variant Browser: Tabs
-    /*it("checks Variant Browser detail tabs", () => {
+    /!*it("checks Variant Browser detail tabs", () => {
 
         // TODO FIXME this line doesn't work if you run it along with other tests. It works if you run this test case alone..
         cy.get("variant-browser-detail > div > h3", {timeout: 60000}).should("be.visible").should("contain", /Variant: [a-z0-9:]+/gim);
@@ -261,7 +263,7 @@ context("Variant Browser", () => {
         cy.get("variant-beacon-network", {timeout: 60000}).find(".beacon-square").its("length").should("eq", 15);
 
 
-    });*/
+    });*!/
 
     it("checks the links of the first row", () => {
         cy.get("button[data-id='table-tab']", {timeout: 60000}).click();
@@ -274,4 +276,6 @@ context("Variant Browser", () => {
 
 
     });
+
+    */
 });
