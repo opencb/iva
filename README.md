@@ -105,5 +105,12 @@ npm run e2e
 ```
 or the headless version (no browser window)
 ```
-npm run e2e-headless
+npm run e2e-report
 ```
+for Windows environment, just add the suffix `-win`
+```
+npm run e2e-win
+npm run e2e-report-win
+```
+
+The headless version will generate an HTML report in `./report`.
