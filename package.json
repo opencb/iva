@@ -16,11 +16,13 @@
     "package": "mv build iva-$npm_package_version && tar zcvf iva-$npm_package_version.tar.gz iva-$npm_package_version && mv iva-$npm_package_version build",
     "deploy": "npx webpack && ./docker/docker-build.py push",
     "eslint": "eslint -c .eslintrc.json . --ignore-pattern '/web_modules/'",
-    "e2e": "node prompt.js npx cypress open",
-    "e2e-report-spec": "rm -rf mochawesome-report/ && node prompt.js npx cypress run --headless --spec 'cypress/integration/login.js'; npm run mocha:report && rm -rf 'mochawesome-report/'",
-    "e2e-report": "rm -rf mochawesome-report/ && node prompt.js npx cypress run --config video=false --headless --spec 'cypress/integration/*.js'; npm run mocha:report && rm -rf 'mochawesome-report/'",
+    "e2e": "./credentials.sh npx cypress open",
+    "e2e-win": "credentials.bat npx cypress open",
+    "e2e-report-spec": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --headless --spec 'cypress/integration/login.js'; npm run mocha:report && rm -rf 'mochawesome-report/'",
+    "e2e-report": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --config video=false --headless --spec 'cypress/integration/*.js'; npm run mocha:report && rm -rf 'mochawesome-report/'",
+    "e2e-report-win": "rmdir /S/Q mochawesome-report && credentials.bat npx cypress run --config video=false --headless --spec 'cypress/integration/*.js'; npm run mocha:report && rmdir /S/Q mochawesome-report",
     "mocha:merge-reports": "mochawesome-merge mochawesome-report/*.json > mochawesome-report/cypress-combined-report.json",
-    "mocha:report": "npm run mocha:merge-reports && marge --reportDir cypress/report mochawesome-report/cypress-combined-report.json"
+    "mocha:report": "npm run mocha:merge-reports && marge --reportDir ./report mochawesome-report/cypress-combined-report.json"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
