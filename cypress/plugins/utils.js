@@ -12,7 +12,6 @@ export const login = () => {
 
     // switch to defined Study
     if (Cypress.env("study")) {
-        alert(Cypress.env("study"))
         cy.get(`a[data-fqn=${Cypress.env("study")}]`, {timeout: 60000}).click({force: true});
     }
 

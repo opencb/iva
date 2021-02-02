@@ -1,1 +1,1 @@
-marge --reportDir ./report mochawesome-report/cypress-combined-report.json --reportFilename STUDY.html
+marge --reportDir ./report mochawesome-report/cypress-combined-report.json --reportFilename report.html
