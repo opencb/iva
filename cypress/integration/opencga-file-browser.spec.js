@@ -35,7 +35,7 @@ context("File Browser", () => {
         cy.get(".lhs button[data-filter-name]").should("have.length", 1);
 
         cy.get("div.search-button-wrapper button").click();
-        waitTableResults("opencga-file-grid");
+        // waitTableResults("opencga-file-grid");
         checkResults("opencga-file-grid");
 
         cy.get("#format + .subsection-content a").contains("VCF").click({force: true});
@@ -44,7 +44,7 @@ context("File Browser", () => {
         cy.get(".lhs button[data-filter-name]").should("have.length", 3);
         cy.get("div.search-button-wrapper button").click();
 
-        waitTableResults("opencga-file-grid");
+        // waitTableResults("opencga-file-grid");
         checkResults("opencga-file-grid");
 
     });

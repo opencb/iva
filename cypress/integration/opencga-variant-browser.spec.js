@@ -33,10 +33,10 @@ context("Variant Browser", () => {
         cy.get("variant-browser-grid .columns-toggle-wrapper ul li").and("have.length.gt", 1);
 
         cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // deactivate all the columns
-        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000}).find("td", {timeout: 60000}).should("have.lengthOf", 1);
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0] > td", {timeout: 60000}).should("have.lengthOf", 1);
 
         cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // reactivate all the columns
-        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000}).find("td", {timeout: 60000}).should("have.length.gt", 1);
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0] > td", {timeout: 60000}).should("have.length.gt", 1);
 
 
     });
@@ -61,7 +61,7 @@ context("Variant Browser", () => {
         cy.get(".swal2-actions").contains(/Yes|OK/).click(); // dismiss notification (either new filter or overwrite a saved one)
         cy.get("button[data-cy='filter-button']").click();
         cy.get("ul.saved-filter-wrapper").contains(name);
-        cy.get(`span.delete-filter-button[data-filter-id='${name}']`).click();
+        cy.get(`span.filter-buttons i[data-cy=delete][data-filter-id='${name}']`).click();
         cy.get(".swal2-title").contains("Are you sure?");
         cy.get(".swal2-confirm").click(); // confirm deletion action
 
@@ -126,7 +126,7 @@ context("Variant Browser", () => {
         cy.get("consequence-type-select-filter input[value='Loss-of-Function (LoF)'").click({force: true});
         cy.get("div.search-button-wrapper button").click();
         checkResultsOrNot("variant-browser-grid");
-        cy.get("opencga-active-filters button[data-filter-name='ct']").click();
+        //cy.get("opencga-active-filters button[data-filter-name='ct']").click();
 
         // Consequence type: SO Term - Use example: Missense
         cy.get("consequence-type-select-filter button").click();
