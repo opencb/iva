@@ -3,6 +3,8 @@
 
 rem set the username using a plain prompt
 	SET /p CYPRESS_username=Enter your Opencga Username [ENTER]:
+	SET /p CYPRESS_study=Enter the FQN of the Study you want to test (leave empty for default) [ENTER]:
+
 rem Call the subroutine to get the password
     call :getPassword CYPRESS_password
 
