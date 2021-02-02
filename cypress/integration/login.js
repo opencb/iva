@@ -41,8 +41,6 @@ context("Login", () => {
         cy.get("#opencgaPassword").type(password);
         cy.get("form#formLogin").submit();
 
-        //cy.get("#error").should("be.not.visible");
-
         cy.get(".login-overlay", {timeout: 60000}).should("be.visible");
         cy.get(".login-overlay", {timeout: 60000}).should("not.exist");
 
