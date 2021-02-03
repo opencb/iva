@@ -19,7 +19,7 @@
     "eslint": "eslint -c .eslintrc.json . --ignore-pattern '/web_modules/'",
     "e2e": "./credentials.sh npx cypress open",
     "e2e-win": "credentials.bat npx cypress open",
-    "e2e-report-spec": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --headless --spec 'cypress/integration/login.js'; npm run mocha:report && rm -rf 'mochawesome-report/'",
+    "e2e-report-spec": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --headless --spec 'cypress/integration/2-login.js'; npm run mocha:report && rm -rf 'mochawesome-report/'",
     "e2e-report-win-spec": "(if exist mochawesome-report rmdir /S/Q mochawesome-report)&& credentials.bat npx cypress run --config video=false --headless --spec \"cypress/integration/login.js\"& npm run mocha:report && (if exist mochawesome-report rmdir /S/Q mochawesome-report)",
     "e2e-report": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --config video=false --headless --spec 'cypress/integration/*.js'; npm run mocha:report && rm -rf 'mochawesome-report/'",
     "e2e-report-win": "(if exist mochawesome-report rmdir /S/Q mochawesome-report)&& credentials.bat npx cypress run --config video=false --headless --spec \"cypress/integration/*.js\"& npm run mocha:report && (if exist mochawesome-report rmdir /S/Q mochawesome-report)",
