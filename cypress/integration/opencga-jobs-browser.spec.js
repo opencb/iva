@@ -17,12 +17,12 @@
 import {login, waitTableResults, getResult, checkResults} from "../plugins/utils.js";
 
 
-context("Jobs Browser", () => {
+context("12 - Jobs Browser", () => {
     before(() => {
         login();
     });
 
-    it("query", () => {
+    it("12.1 - query", () => {
         cy.get("a[data-id=job]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Jobs Browser");
 
@@ -50,7 +50,7 @@ context("Jobs Browser", () => {
 
     });
 
-    it("aggregated query", () => {
+    it("12.1 - aggregated query", () => {
         cy.get("a[data-id=job]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
 

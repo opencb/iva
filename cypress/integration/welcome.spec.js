@@ -24,12 +24,12 @@ const resolveButtons = page => {
     cy.get("a.navbar-brand").click();
 };
 
-context("Welcome page", () => {
+context("13 - Welcome page", () => {
     before(() => {
         login();
     });
 
-    it("check home page content", () => {
+    it("13.1 - check home page content", () => {
         cy.get("#home-nav > img", {timeout: 60000}).should("be.visible");
         cy.get("a.navbar-brand").click();
         cy.get(".login-overlay", {timeout: 60000}).should("not.exist");
@@ -38,7 +38,7 @@ context("Welcome page", () => {
         cy.get("#welcome-page-title ").contains("Interactive Variant Analysis");
     });
 
-    it("check buttons resolves correctly", () => {
+    it("13.2 - check buttons resolves correctly", () => {
 
         cy.get(".hi-icon-animation > a").each(el => {
             const id = el.data("cat-id");
@@ -47,7 +47,4 @@ context("Welcome page", () => {
         });
     });
 
-    it("check documentation page", () => {
-        // TODO
-    });
 });

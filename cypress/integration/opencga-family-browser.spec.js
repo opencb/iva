@@ -17,12 +17,12 @@
 import {checkResultsOrNot, login, getResult, waitTableResults} from "../plugins/utils.js";
 
 
-context("Family Browser", () => {
+context("9 - Family Browser", () => {
     before(() => {
         login();
     });
 
-    it("query", () => {
+    it("9.1 - query", () => {
         cy.get("a[data-id=family]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser");
 
@@ -39,7 +39,7 @@ context("Family Browser", () => {
         */
     });
 
-    it("aggregated query", () => {
+    it("9.2 - aggregated query", () => {
         cy.get("a[data-id=family]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
 

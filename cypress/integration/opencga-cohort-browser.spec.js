@@ -17,12 +17,12 @@
 import {checkResultsOrNot, login, getResult, waitTableResults} from "../plugins/utils.js";
 
 
-context("Cohort Browser", () => {
+context("11 - Cohort Browser", () => {
     before(() => {
         login();
     });
 
-    it("query", () => {
+    it("11.1 - query", () => {
         cy.get("a[data-id=cohort]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Cohort Browser");
         checkResultsOrNot("opencga-cohort-grid");
@@ -38,7 +38,7 @@ context("Cohort Browser", () => {
         checkResultsOrNot("opencga-cohort-grid");
     });
 
-    it("aggregated query", () => {
+    it("11.2 - aggregated query", () => {
         cy.get("a[data-id=cohort]").click({force: true});
 
         cy.get("a[href='#facet_tab']").click({force: true});

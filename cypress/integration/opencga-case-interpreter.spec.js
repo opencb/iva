@@ -17,12 +17,12 @@
 import {login, randomString, checkResults, checkExactResult, checkResultsOrNot, waitTableResults} from "../plugins/utils.js";
 
 
-context("Case Interpreter", () => {
+context("6 - Case Interpreter", () => {
     before(() => {
         login();
     });
 
-    it("check query results", () => {
+    it("6.1 - check query results", () => {
         let caseId;
 
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});

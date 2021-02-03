@@ -17,12 +17,12 @@
 import {login, waitTableResults, getResult, checkResults} from "../plugins/utils.js";
 
 
-context("File Browser", () => {
+context("10 - File Browser", () => {
     before(() => {
         login();
     });
 
-    it("query", () => {
+    it("10.1 - query", () => {
         cy.get("a[data-id=file]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "File Browser");
 
@@ -49,7 +49,7 @@ context("File Browser", () => {
 
     });
 
-    it("aggregated query", () => {
+    it("10.2 - aggregated query", () => {
         cy.get("a[data-id=file]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
 
