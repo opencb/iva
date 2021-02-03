@@ -17,12 +17,12 @@
 import {login, randomString, checkResults, waitTableResults} from "../plugins/utils.js";
 
 
-context("Case Portal", () => {
+context("5 - Case Portal", () => {
     before(() => {
         login();
     });
 
-    it("check query results", () => {
+    it("5.1 - check query results", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal");
 
@@ -65,7 +65,7 @@ context("Case Portal", () => {
 
     });
 
-    it("check Columns togglability", () => {
+    it("5.2 - check Columns togglability", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal");
 

@@ -17,26 +17,22 @@
 /**
  * Header bar (pre-login)
  */
-context("Header bar (pre-login): checks on Header Bar elements", () => {
+context("1 - Header bar (pre-login): checks on Header Bar elements", () => {
     before(() => {
         cy.visit("http://localhost:3000/src/");
 
     });
 
-    it("check login page content", () => {
+    it("1.1 - check login page content", () => {
         cy.get("#loginButton", {timeout: 60000}).should("be.visible");
         cy.get("#loginButton").click();
         cy.get("#opencgaUser").should("be.visible");
         cy.get("#opencgaPassword").should("be.visible");
     });
 
-    it("check header-bar icons resolve correctly", () => {
+    it("1.2 - check header-bar icons resolve correctly", () => {
         cy.get("a.navbar-brand").first().click();
         cy.get("#welcome-page-title", {timeout: 60000}).contains("Interactive Variant Analysis");
 
-    });
-
-    it("check about page", () => {
-        // TODO
     });
 });

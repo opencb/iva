@@ -10,6 +10,12 @@ export const login = () => {
     cy.get(".login-overlay", {timeout: 60000}).should("be.visible");
     cy.get(".login-overlay", {timeout: 60000}).should("not.exist");
 
+    // switch to defined Study
+    if (Cypress.env("study")) {
+        cy.get(`a[data-fqn="${Cypress.env("study")}"]`, {timeout: 60000}).click({force: true});
+    }
+
+
 };
 
 export const randomString = length => {
@@ -53,7 +59,7 @@ export const checkResultsOrNot = gridSelector => {
 };
 
 /**
- * given column and row coordinates, it returns a single value out of a bootstrap table 
+ * given column and row coordinates, it returns a single value out of a bootstrap table
  */
 export const getResult = (gridSelector, colIndex = 1, rowIndex = 0) => {
     // check results are >= resultIndex

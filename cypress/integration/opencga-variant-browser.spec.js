@@ -17,7 +17,7 @@
 import {login, randomString, checkResultsOrNot} from "../plugins/utils.js";
 
 
-context("Variant Browser", () => {
+context("4. Variant Browser", () => {
     before(() => {
         login();
     });
@@ -26,7 +26,7 @@ context("Variant Browser", () => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
     });
 
-    it("check Columns togglability", () => {
+    it("4.1 Check Columns togglability", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
 
         cy.get("variant-browser-grid .columns-toggle-wrapper button").should("be.visible").and("contain", "Columns").click();
@@ -42,7 +42,7 @@ context("Variant Browser", () => {
     });
 
     // Variant Browser: Filter controls
-    it("check Saved Filter actions", () => {
+    it("4.2 Filter controls", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
 
         cy.get("input[value*=LoF]").click({force: true});
@@ -72,7 +72,7 @@ context("Variant Browser", () => {
     });
 
     // Variant Browser: Individual filters
-    it("query", () => {
+    it("4.3 Filters", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
         checkResultsOrNot("variant-browser-grid");
 
@@ -215,7 +215,7 @@ context("Variant Browser", () => {
 
 
     });
-    it("aggregated query", () => {
+    it("4.4 aggregated query", () => {
         cy.get("a[href='#facet_tab']").click({force: true});
         cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
         cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
@@ -262,7 +262,7 @@ context("Variant Browser", () => {
 
     });*/
 
-    it("checks the links of the first row", () => {
+    it("4.5 Check gene-view", () => {
         cy.get("button[data-id='table-tab']", {timeout: 60000}).click();
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index='0'] a.gene-tooltip")
             .should("be.visible", {timeout: 60000})
