@@ -9,8 +9,8 @@
   "license": "Apache-2.0",
   "scripts": {
     "clean": "rm -rf build",
-    "serve-live-server": "node live-server.js",
-    "serve": "browser-sync start --config bs-config.js",
+    "serve": "node live-server.js",
+    "serve-browser-sync": "browser-sync start --config bs-config.js",
     "prepare": "node esinstall.mjs",
     "browser-support": "npx browserslist",
     "build": "npx webpack && npm run package",
