@@ -17,7 +17,7 @@
 import {login, checkResults, getResult} from "../plugins/utils.js";
 
 
-context("7 - File Browser", () => {
+context("7 - Sample Browser", () => {
     before(() => {
         login();
     });
