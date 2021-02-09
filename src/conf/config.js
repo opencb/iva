@@ -20,7 +20,7 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "https://ws.opencb.org/opencga-prod",
+    host: "https://ws.opencb.org/opencga-test",
     // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
     // host: "http://172.27.16.123:8080/opencga",
     version: "v2",
@@ -77,7 +77,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.0.0-rc",
+    version: "v2.1.0-beta",
     logo: "img/iva.svg",
     mode: "development",
     appConfig: "opencb",
