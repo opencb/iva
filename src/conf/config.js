@@ -109,7 +109,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.1.0",
+    version: "v2.1.0-RC",
     logo: "img/iva.svg",
     companyLogo: "img/Genomics-England-logo-2015-white.png",
     mode: "development",
