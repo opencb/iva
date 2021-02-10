@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResultsOrNot} from "../plugins/utils.js";
+import {login, randomString, checkResults, checkResultsOrNot, waitTableResults} from "../plugins/utils.js";
+import "cypress-wait-until";
 
 
 context("4. Variant Browser", () => {
@@ -25,6 +26,32 @@ context("4. Variant Browser", () => {
     beforeEach(() => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
     });
+
+    /* it("4.0 disease", () => {
+
+        // disease-panel-filter select + button
+        cy.get("disease-panel-filter").find(" a").contains("Childhood onset dystonia or chorea or related movement disorder").click({force:true})
+        //cy.get("disease-panel-filter").find(" a").contains("Amelogenesis imperfecta").click({force:true})
+        cy.get("div.search-button-wrapper button").click();
+
+        waitTableResults("variant-browser-grid")
+        checkResultsOrNot("variant-browser-grid")
+
+        /!*cy.get("disease-panel-filter div.dropdown-menu a").each(el => {
+
+            // cannot use cy.wrap(el) here. disease-panel-filter div.dropdown-menu is refreshed on click on buttons and the refs are broken (https://github.com/cypress-io/cypress/issues/7306)
+            const id = el.attr("id");
+            cy.get("#" + id).should("exist").click({force: true});
+            //cy.wrap(el).should("exist").click({force: true});
+            cy.get("div.search-button-wrapper button").click();
+            checkResultsOrNot("variant-browser-grid");
+            cy.wait(2000)
+            cy.get("opencga-active-filters button[data-filter-name='panel']").click();
+
+
+        });*!/
+
+    });*/
 
     it("4.1 Check Columns togglability", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
@@ -126,7 +153,7 @@ context("4. Variant Browser", () => {
         cy.get("consequence-type-select-filter input[value='Loss-of-Function (LoF)'").click({force: true});
         cy.get("div.search-button-wrapper button").click();
         checkResultsOrNot("variant-browser-grid");
-        //cy.get("opencga-active-filters button[data-filter-name='ct']").click();
+        // cy.get("opencga-active-filters button[data-filter-name='ct']").click();
 
         // Consequence type: SO Term - Use example: Missense
         cy.get("consequence-type-select-filter button").click();
@@ -234,7 +261,7 @@ context("4. Variant Browser", () => {
     });
 
     // Variant Browser: Tabs
-    /*it("checks Variant Browser detail tabs", () => {
+    /* it("checks Variant Browser detail tabs", () => {
 
         // TODO FIXME this line doesn't work if you run it along with other tests. It works if you run this test case alone..
         cy.get("variant-browser-detail > div > h3", {timeout: 60000}).should("be.visible").should("contain", /Variant: [a-z0-9:]+/gim);
