@@ -2404,6 +2404,14 @@ interpretation-editor .status-wrapper .row > div:last-child {
 .number-field-filter > div:not(:first-child) {
     padding: 0px 10px
 }
+@media (max-width: 1500px) {
+    .number-field-filter > div:not(:first-child) {
+        padding: 0px 2px
+    }
+    .number-field-filter .input-sm {
+        padding: 5px;
+    }
+}
 
 /****   Updated color   ****/
 .updated {
