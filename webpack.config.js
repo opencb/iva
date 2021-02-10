@@ -108,7 +108,8 @@ module.exports = {
                     "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js",
                     "./node_modules/@svgdotjs/svg.js/dist/svg.min.js",
                     "./node_modules/sweetalert2/dist/sweetalert2.js",
-                    "./node_modules/@highlightjs/cdn-assets/highlight.min.js"
+                    "./node_modules/@highlightjs/cdn-assets/highlight.min.js",
+                    "./node_modules/clipboard/dist/clipboard.min.js"
                 ]
             },
             transform: {

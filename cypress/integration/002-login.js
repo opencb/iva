@@ -17,12 +17,12 @@
 import {login} from "../plugins/utils.js";
 
 
-context("Login", () => {
+context("2 - Login", () => {
     beforeEach(() => {
         cy.visit("http://localhost:3000/src/#login");
     });
 
-    it("login unsuccessful", () => {
+    it("2.1 - login unsuccessful", () => {
         cy.get("#opencgaUser").type("demo2");
         cy.get("#opencgaPassword").type("demo2");
         cy.get("form#formLogin").submit();
@@ -30,7 +30,7 @@ context("Login", () => {
         cy.get("#error").contains("Incorrect user or password.");
     });
 
-    it("login successful", () => {
+    it("2.2 - login successful", () => {
 
         const username = Cypress.env("username");
         const password = Cypress.env("password");
@@ -40,8 +40,6 @@ context("Login", () => {
         cy.get("#opencgaUser").type(username);
         cy.get("#opencgaPassword").type(password);
         cy.get("form#formLogin").submit();
-
-        //cy.get("#error").should("be.not.visible");
 
         cy.get(".login-overlay", {timeout: 60000}).should("be.visible");
         cy.get(".login-overlay", {timeout: 60000}).should("not.exist");

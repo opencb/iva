@@ -17,29 +17,29 @@
 import {checkResultsOrNot, login, getResult, waitTableResults} from "../plugins/utils.js";
 
 
-context("Family Browser", () => {
+context("9 - Family Browser", () => {
     before(() => {
         login();
     });
 
-    it("query", () => {
+    it("9.1 - query", () => {
         cy.get("a[data-id=family]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser");
 
-        checkResultsOrNot("opencga-family-grid")
-        /*getResult("opencga-family-grid").then($text => {
+        checkResultsOrNot("opencga-family-grid");
+        /*
+        getResult("opencga-family-grid").then($text => {
             cy.get("family-id-autocomplete input").type($text + "{enter}");
             cy.get(".lhs button[data-filter-name]").should("have.length", 1);
             cy.get("div.search-button-wrapper button").click();
 
-        })*/
-
+        })
         waitTableResults("opencga-family-grid");
         checkResultsOrNot("opencga-family-grid");
-
+        */
     });
 
-    it("aggregated query", () => {
+    it("9.2 - aggregated query", () => {
         cy.get("a[data-id=family]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
 

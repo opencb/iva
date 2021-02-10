@@ -17,12 +17,12 @@
 import {login, checkResults, getResult, waitTableResults} from "../plugins/utils.js";
 
 
-context("Individual Browser", () => {
+context("8 - Individual Browser", () => {
     before(() => {
         login();
     });
 
-    it("query", () => {
+    it("8.1 - query", () => {
         cy.get("a[data-id=individual]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Individual Browser");
 
@@ -45,7 +45,7 @@ context("Individual Browser", () => {
     });
 
 
-    it("aggregated query", () => {
+    it("8.2 - aggregated query", () => {
         cy.get("a[data-id=individual]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
 

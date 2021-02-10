@@ -17,19 +17,16 @@
 import {checkResultsOrNot, login, getResult, waitTableResults} from "../plugins/utils.js";
 
 
-context("Cohort Browser", () => {
+context("11 - Cohort Browser", () => {
     before(() => {
         login();
     });
 
-    it("query", () => {
+    it("11.1 - query", () => {
         cy.get("a[data-id=cohort]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Cohort Browser");
         checkResultsOrNot("opencga-cohort-grid");
 
-        // cy.get("opencga-cohort-grid table", {timeout: 60000}).find(`tr[data-index=0] > :nth-child(1)`, {timeout: 60000}).then($td => {
-        //     cy.get("cohort-id-autocomplete input").type($td.text().trim() + "{enter}");
-        // });
         getResult("opencga-cohort-grid").then($text => {
             cy.get("cohort-id-autocomplete input").type($text + "{enter}");
         });
@@ -37,11 +34,11 @@ context("Cohort Browser", () => {
 
         cy.get("div.search-button-wrapper button").click();
 
-        waitTableResults("opencga-cohort-grid");
+        //waitTableResults("opencga-cohort-grid");
         checkResultsOrNot("opencga-cohort-grid");
     });
 
-    it("aggregated query", () => {
+    it("11.2 - aggregated query", () => {
         cy.get("a[data-id=cohort]").click({force: true});
 
         cy.get("a[href='#facet_tab']").click({force: true});
