@@ -52,6 +52,10 @@ a.disabled, a.disabled:hover {
     padding: 15px;
 }
 
+.pad-left-15 {
+    padding-left: 15px;
+}
+
 .mag5 {
     margin: 5px;
 }
@@ -701,10 +705,11 @@ button.active-filter-label:hover {
 }
 
 .saved-filter-wrapper .filtersLink .id-filter-button {
-    padding-left: 25px;
+    /*padding: 0px 10px;*/
+    margin: 0px 25px 0px 10px;
 }
 
-.saved-filter-wrapper .delete-filter-button {
+.saved-filter-wrapper .filter-buttons {
     padding: 0 0 0 10px;
     color: #adadad;
     position: absolute;
@@ -714,7 +719,7 @@ button.active-filter-label:hover {
 
 }
 
-.saved-filter-wrapper .delete-filter-button:hover {
+.saved-filter-wrapper .filter-buttons i:hover {
     color: black;
 }
 
@@ -1106,7 +1111,7 @@ a#waffle-icon-wrapper {
 }
 
 .bootstrap-table .fixed-table-loading {
-    min-height: 90px;
+    min-height: 110px;
 }
 
 .bootstrap-table > .fixed-table-pagination .pagination{
@@ -1152,7 +1157,7 @@ a#waffle-icon-wrapper {
 
 /* browsers style */
 .browser-subsection {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
     padding: 7px 0px 5px 0px;
     color: #444444;
@@ -1392,87 +1397,6 @@ Toggle Changes
 
 .switch-container .radio-and:checked ~ .toggle-rating-pill {
     /*background-color: #00b9ee;*/
-}
-
-/* Notification */
-
-#notifications-queue {
-    position: fixed;
-    top: 10px;
-    z-index: 9999;
-    left: 33%;
-}
-
-#notifications-queue .alert {
-    display: flex;
-    align-items: center;
-    margin: 5px auto;
-    position: relative;
-    transition: all 0.5s ease-in-out 0s;
-    z-index: 2020;
-    box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302), 0 4px 8px 3px rgba(60, 64, 67, 0.149);
-    font-size: .9em;
-    letter-spacing: .2px;
-    background-color: #373743;
-    border: none;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    bottom: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    color: #fff;
-    left: 0;
-    padding: 10px 24px 11px 24px;
-    white-space: normal;
-}
-
-#notifications-queue .alert p.title {
-    font-size: 1.2em;
-}
-
-#notifications-queue .alert p.title i {
-    vertical-align: sub;
-}
-
-#notifications-queue .alert p.details {
-    color: #b6c1c9;
-    word-break: break-all;
-}
-
-#notifications-queue .alert a {
-    color: #c9c9c9;
-}
-
-#notifications-queue .alert .close {
-    position: absolute;
-    top: 5px;
-    right: 0px;
-    font-size: 1em;
-    opacity: .4;
-}
-
-#notifications-queue .alert .close i {
-    color: #fff;
-}
-
-#notifications-queue .alert .fa {
-    margin-right: .3em;
-}
-
-#notifications-queue .alert-success i {
-    color: #91f096;
-}
-
-#notifications-queue .alert-info i {
-    color: #d2e6f7;
-}
-
-#notifications-queue .alert-warning i {
-    color: #f5e513;
-}
-
-#notifications-queue .alert-danger i {
-    color: #f28c8b;
 }
 
 .guard-page {
@@ -2471,4 +2395,17 @@ interpretation-editor .status-wrapper .row > div:last-child {
 
 .dropdown-menu li.active .text-muted {
     color: white;
+}
+
+/************  number-field-filter component style  ************/
+.number-field-filter {
+    margin: 5px 0px;
+}
+.number-field-filter > div:not(:first-child) {
+    padding: 0px 10px
+}
+
+/****   Updated color   ****/
+.updated {
+    border-color: darkorange;
 }

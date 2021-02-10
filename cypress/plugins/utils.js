@@ -10,7 +10,14 @@ export const login = () => {
     cy.get(".login-overlay", {timeout: 60000}).should("be.visible");
     cy.get(".login-overlay", {timeout: 60000}).should("not.exist");
 
+    // switch to defined Study
+    if (Cypress.env("study")) {
+        cy.get(`a[data-fqn="${Cypress.env("study")}"]`, {timeout: 60000}).click({force: true});
+    }
+
+
 };
+
 export const randomString = length => {
     let result = "";
     const _length = length || 6;
@@ -20,3 +27,43 @@ export const randomString = length => {
     }
     return result;
 };
+
+export const waitTableResults = gridSelector => {
+    cy.get(gridSelector + " div.fixed-table-loading", {timeout: 60000}).should("be.visible");
+    cy.get(gridSelector + " div.fixed-table-loading", {timeout: 60000}).should("be.not.visible");
+};
+
+/**
+ * it check the table actually contains a single result
+ */
+export const checkExactResult = (gridSelector, numResults = 1) => {
+    cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.lengthOf", numResults); // .should("be.gte", 1);
+};
+
+/**
+ * it check the table actually contains results
+ */
+export const checkResults = gridSelector => {
+    cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gt", 0); // .should("be.gte", 1);
+};
+
+/**
+ * it check the table contains results or the message "No matching records found"
+ */
+export const checkResultsOrNot = gridSelector => {
+    cy.get(gridSelector + " table", {timeout: 60000}).find("tbody tr", {timeout: 60000})
+        .should("satisfy", $els => {
+            // it covers either the case of some results or 0 results
+            return $els.data("index") !== undefined || $els.text().includes("No matching records found");
+        });
+};
+
+/**
+ * given column and row coordinates, it returns a single value out of a bootstrap table
+ */
+export const getResult = (gridSelector, colIndex = 1, rowIndex = 0) => {
+    // check results are >= resultIndex
+    //cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gte", rowIndex);
+    //cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text").as("text")
+    return cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text")
+}

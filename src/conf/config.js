@@ -20,9 +20,9 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
+    host: "https://ws.opencb.org/opencga-test",
     // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
-    // host: "http://localhost:9090/opencga",
+    // host: "http://172.27.16.123:8080/opencga",
     version: "v2",
     serverVersion: "1.4",
 
@@ -77,13 +77,15 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.0.0-rc",
+    version: "v2.1.0-beta",
     logo: "img/iva.svg",
     mode: "development",
     appConfig: "opencb",
     defaultStudy: "serena@cancer37:test",
+    // defaultStudy: "demo@population:1000g",
     // defaultStudy: "demo@family:corpasome",
     // defaultStudy: "emee-glh@cancer_grch38:myeloid",
+    // defaultStudy: "sanger@poc:exomes",
     // The order, title and nested submenus are respected
     menu: [
         {

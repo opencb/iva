@@ -479,6 +479,10 @@ class IvaApp extends LitElement {
         window.clearInterval(this.intervalCheckSession);
     }
 
+    saveLastStudy(newStudy) {
+        this.opencgaClient.updateUserConfigs({...this.opencgaSession.user.configs, lastStudy: newStudy.fqn});
+    }
+
     onUrlChange(e) {
         let hashFrag = e.detail.id;
         if (UtilsNew.isNotUndefined(this.opencgaSession.project) && UtilsNew.isNotEmpty(this.opencgaSession.project.alias)) {
@@ -697,6 +701,11 @@ class IvaApp extends LitElement {
         const {study, project} = e.target.dataset;
         const newProject = this.opencgaSession.projects.find(p => p.id === project);
         const newStudy = newProject.studies.find(s => s.id === study);
+
+        // update the lastStudy in config iff has changed
+        if (this.opencgaSession.study.fqn !== newStudy.fqn) {
+            this.saveLastStudy(newStudy);
+        }
         this.opencgaSession = {...this.opencgaSession, project: newProject, study: newStudy};
     }
 
@@ -1145,7 +1154,7 @@ class IvaApp extends LitElement {
                                             <li><a title="${project.fqn}"><b>${project.name} [${project.fqn.split("@")[0]}]</b></a></li>
                                             ${project.studies && project.studies.length && project.studies.map(study => html`
                                                 <li>
-                                                    <a href="#" data-study="${study.id}" data-project="${project.id}" data-study-name="${study.name}" title="${study.fqn}" @click="${this.onStudySelect}">${study.name}</a>
+                                                    <a href="#" data-study="${study.id}" data-fqn="${study.fqn}" data-project="${project.id}" data-study-name="${study.name}" title="${study.fqn}" @click="${this.onStudySelect}">${study.name}</a>
                                                 </li>
                                             `)}                                            
                                         `)}
@@ -1611,7 +1620,7 @@ class IvaApp extends LitElement {
                  
                  ${this.config.enabledComponents["knockout-result"] ? html`
                     <div class="content" id="opencga-knockout-analysis-result">
-                        <opencga-knockout-analysis-result .opencgaSession="${this.opencgaSession}" .cellbaseClient="${this.cellbaseClient}" ></opencga-knockout-analysis-result>
+                        <opencga-knockout-analysis-result .jobId="${"knockout_1521_01122020"}" .opencgaSession="${this.opencgaSession}" .cellbaseClient="${this.cellbaseClient}" ></opencga-knockout-analysis-result>
                     </div>
                 ` : null}
                 
@@ -1766,8 +1775,6 @@ class IvaApp extends LitElement {
                         <opencga-job-view .jobId="${this.jobSelected}" mode="full" .opencgaSession="${this.opencgaSession}"></opencga-job-view>
                     </div>
                 ` : null}
-
-                <div id="notifications-queue" class="col-xs-11 col-sm-4"></div>
 
             </div>
             <notification-element .queue="${new NotificationQueue().get()}"></notification-element>
