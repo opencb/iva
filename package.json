@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
-    "@highlightjs/cdn-assets": "^10.5.0",
+    "@highlightjs/cdn-assets": "^10.6.0",
     "@polymer/polymer": "2.6.1",
     "@svgdotjs/svg.js": "^3.0.16",
     "@vaadin/router": "^1.7.2",
@@ -88,6 +88,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-webpack-plugin": "^2.1.0",
     "file-loader": "^5.0.2",
+    "highlight.js": "^10.6.0",
     "html-loader": "^0.5.5",
     "html-replace-webpack-plugin": "^2.5.6",
     "html-webpack-plugin": "^3.2.0",
