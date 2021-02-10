@@ -2401,13 +2401,17 @@ interpretation-editor .status-wrapper .row > div:last-child {
 .number-field-filter {
     margin: 5px 0px;
 }
+
 .number-field-filter > div:not(:first-child) {
     padding: 0px 10px
 }
-@media (max-width: 1500px) {
+
+@media (max-width: 1650px) {
     .number-field-filter > div:not(:first-child) {
         padding: 0px 2px
     }
+}
+@media (max-width: 1900px) {
     .number-field-filter .input-sm {
         padding: 5px;
     }
