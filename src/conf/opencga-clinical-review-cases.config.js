@@ -1,0 +1,3 @@
+const OpencgaClinicalReviewCasesConfig = {
+    showCreate: true
+};
