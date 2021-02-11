@@ -1,4 +1,4 @@
-const OpencgaClinicalPortalConfig = {
+const OpencgaClinicalReviewCasesConfig = {
     showCreate: false,
     reviewCases: {
         title: "Review Cases",
