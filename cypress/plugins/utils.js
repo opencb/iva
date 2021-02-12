@@ -73,10 +73,10 @@ export const checkResultsOrNot = gridSelector => {
     cy.get(gridSelector + " table", {timeout: 60000}).find("tbody tr", {timeout: 10000})
         .should("satisfy", $els => {
             const $firstRow = Cypress.$($els[0]);
-            console.error(" $firstRow.data(index)", $firstRow.data("index"))
-            console.error("No matching records found", $els.text().includes("No matching records found"))
+            // console.error("$firstRow.data(index)", $firstRow.data("index"))
+            // console.error("No matching records found", $els.text().includes("No matching records found"))
             // it covers either the case of some results or 0 results
-            return $firstRow.data("index") || $els.text().includes("No matching records found")
+            return $firstRow.data("index") === 0 || $els.text().includes("No matching records found")
         });
 };
 
