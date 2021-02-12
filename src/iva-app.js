@@ -1322,14 +1322,9 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents["clinicalAnalysisPortal"] ? html`
                     <div class="content" id="clinicalAnalysisPortal">
-                        <!--
-                        <opencga-clinical-portal .opencgaSession="${this.opencgaSession}"
-                                                .config="${OpencgaClinicalPortalConfig}"
-                                                .cellbaseClient="${this.cellbaseClient}">
-                        </opencga-clinical-portal>
-                        -->
                         <tool-header title="${"Case Portal"}" icon="${"fas fa-window-restore"}"></tool-header>
-                        <opencga-clinical-review-cases  .opencgaSession="${this.opencgaSession}"></opencga-clinical-review-cases>
+                        <opencga-clinical-review-cases  .opencgaSession="${this.opencgaSession}"
+                                                        .config="${OpencgaClinicalReviewCasesConfig}"></opencga-clinical-review-cases>
                     </div>
                 ` : null}
 

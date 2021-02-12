@@ -1,3 +1,7 @@
 const OpencgaClinicalReviewCasesConfig = {
-    showCreate: true
+    grid: {
+        toolbar: {
+            showCreate: true
+        }
+    }
 };
