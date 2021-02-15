@@ -1,3 +1,3 @@
 const OpencgaSampleBrowserConfig = {
-
+    downloadFile: false
 };
