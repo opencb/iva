@@ -604,6 +604,11 @@ class IvaApp extends LitElement {
 
     }
 
+    redirect(e) {
+        this.tool = e.detail.hash;
+        this.renderHashFragments();
+    }
+
     hashFragmentListener(ctx) {
         console.log("hashFragmentListener - DEBUG", this.tool);
         // Hide all elements
