@@ -1907,6 +1907,7 @@ opencga-gene-view h3.section-title /* TODO refactor */{
     padding: 5px 0 0px 12px;
     cursor: pointer;
     color: #337ab7;
+    transition: 0.3s background-color;
 }
 
 .file-manager-tree .file i{
@@ -1915,6 +1916,7 @@ opencga-gene-view h3.section-title /* TODO refactor */{
 }
 
 .file-manager-tree .file.active {
+    background-color: #f1f1f1;
     color: black;
 }
 
