@@ -265,7 +265,6 @@ class IvaApp extends LitElement {
 
 
         // Other initialisations
-        this.icd10 = ICD_10;
         this._isBreadcrumbVisible = false;
         // This manages the sample selected in each tool for updating the breadcrumb
         this.samples = [];
