@@ -709,7 +709,7 @@ button.active-filter-label:hover {
     margin: 0px 25px 0px 10px;
 }
 
-.saved-filter-wrapper .filter-buttons {
+.saved-filter-wrapper .action-buttons {
     padding: 0 0 0 10px;
     color: #adadad;
     position: absolute;
@@ -719,7 +719,7 @@ button.active-filter-label:hover {
 
 }
 
-.saved-filter-wrapper .filter-buttons i:hover {
+.saved-filter-wrapper .action-buttons i:hover {
     color: black;
 }
 

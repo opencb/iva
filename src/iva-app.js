@@ -1506,13 +1506,13 @@ class IvaApp extends LitElement {
                 
                 ${this.config.enabledComponents["sampleVariantStatsBrowser"] ? html`
                     <div class="content" id="sampleVariantStatsBrowser">
-                        <sample-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}"></sample-variant-stats-browser>
+                        <sample-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}" .active="${true}"></sample-variant-stats-browser>
                     </div>
                 ` : null}
                 
                 ${this.config.enabledComponents["sampleCancerVariantStatsBrowser"] ? html`
                     <div class="content" id="sampleCancerVariantStatsBrowser">
-                        <sample-cancer-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}" .active="true"></sample-cancer-variant-stats-browser>
+                        <sample-cancer-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}" .active="${true}"></sample-cancer-variant-stats-browser>
                     </div>
                 ` : null}
                 
