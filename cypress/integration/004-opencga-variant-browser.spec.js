@@ -39,6 +39,7 @@ context("4. Variant Browser", () => {
 
         /!*cy.get("disease-panel-filter div.dropdown-menu a").each(el => {
 
+            // TODO the loop works but checkResultsOrNot is always satisfied. Handle error messages
             // cannot use cy.wrap(el) here. disease-panel-filter div.dropdown-menu is refreshed on click on buttons and the refs are broken (https://github.com/cypress-io/cypress/issues/7306)
             const id = el.attr("id");
             cy.get("#" + id).should("exist").click({force: true});
