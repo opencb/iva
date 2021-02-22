@@ -243,20 +243,24 @@ context("4. Variant Browser", () => {
 
     });
     it("4.4 aggregated query", () => {
+
+        cy.get("opencga-variant-filter a[data-accordion-id='ConsequenceType']").click();
+        cy.get("consequence-type-select-filter input[value='Loss-of-Function (LoF)'").click({force: true});
+
         cy.get("a[href='#facet_tab']").click({force: true});
         cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
         cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
         cy.get("#type_Select a").contains("INSERTION").click({force: true}); // type=INSERTION
 
         cy.get("div.search-button-wrapper button").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
 
         cy.get("div.facet-wrapper button[data-filter-name='chromosome']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 2);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 2);
         cy.get("div.facet-wrapper button[data-filter-name='type']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 1);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 1);
         cy.get("div.facet-wrapper button[data-filter-name='genes']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 0);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 0);
 
     });
 
