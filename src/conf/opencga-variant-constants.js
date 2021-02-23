@@ -18,9 +18,9 @@
 // export const biotypes = VARIANT_CONSTANTS.biotypes;
 const CHROMOSOMES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"];
 
-const BIOTYPES = ["protein_coding", "nonsense_mediated_decay", "lncRNA", "non_stop_decay", "lincRNA",
-    "3prime_overlapping_ncrna", "bidirectional_promoter_lncRNA", "miRNA", "retained_intron",
-    "snRNA", "snoRNA", "non_coding", "antisense", "sense_intronic", "sense_overlapping"
+const BIOTYPES = ["3prime_overlapping_ncrna", "antisense", "bidirectional_promoter_lncRNA", "lincRNA",
+    "lncRNA", "miRNA", "non_coding", "non_stop_decay", "nonsense_mediated_decay", "protein_coding",
+    "retained_intron", "sense_intronic", "sense_overlapping", "snRNA", "snoRNA"
 ];
 
 const VARIANT_TYPES = ["SNV", "INDEL", "COPY_NUMBER", "INSERTION", "DELETION", "MNV", "SV"];
