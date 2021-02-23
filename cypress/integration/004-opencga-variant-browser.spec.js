@@ -39,6 +39,7 @@ context("4. Variant Browser", () => {
 
         /!*cy.get("disease-panel-filter div.dropdown-menu a").each(el => {
 
+            // TODO the loop works but checkResultsOrNot is always satisfied. Handle error messages
             // cannot use cy.wrap(el) here. disease-panel-filter div.dropdown-menu is refreshed on click on buttons and the refs are broken (https://github.com/cypress-io/cypress/issues/7306)
             const id = el.attr("id");
             cy.get("#" + id).should("exist").click({force: true});
@@ -88,7 +89,7 @@ context("4. Variant Browser", () => {
         cy.get(".swal2-actions").contains(/Yes|OK/).click(); // dismiss notification (either new filter or overwrite a saved one)
         cy.get("button[data-cy='filter-button']").click();
         cy.get("ul.saved-filter-wrapper").contains(name);
-        cy.get(`span.filter-buttons i[data-cy=delete][data-filter-id='${name}']`).click();
+        cy.get(`span.action-buttons i[data-cy=delete][data-filter-id='${name}']`).click();
         cy.get(".swal2-title").contains("Are you sure?");
         cy.get(".swal2-confirm").click(); // confirm deletion action
 
@@ -186,7 +187,7 @@ context("4. Variant Browser", () => {
         cy.get("opencga-active-filters button[data-filter-name='populationFrequencyAlt']").click();
 
         // Clinical and Disease: ClinVar Accessions	Use example: Pathogenic
-        cy.get("opencga-variant-filter a[data-accordion-id='ClinicalandDisease']").click();
+        cy.get("opencga-variant-filter a[data-accordion-id='Clinical']").click();
         cy.get("clinvar-accessions-filter select").select("Pathogenic", {force: true});
         checkResultsOrNot("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='clinicalSignificance']").click();
@@ -243,20 +244,24 @@ context("4. Variant Browser", () => {
 
     });
     it("4.4 aggregated query", () => {
+
+        cy.get("opencga-variant-filter a[data-accordion-id='ConsequenceType']").click();
+        cy.get("consequence-type-select-filter input[value='Loss-of-Function (LoF)'").click({force: true});
+
         cy.get("a[href='#facet_tab']").click({force: true});
         cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
         cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
         cy.get("#type_Select a").contains("INSERTION").click({force: true}); // type=INSERTION
 
         cy.get("div.search-button-wrapper button").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
 
         cy.get("div.facet-wrapper button[data-filter-name='chromosome']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 2);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 2);
         cy.get("div.facet-wrapper button[data-filter-name='type']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 1);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 1);
         cy.get("div.facet-wrapper button[data-filter-name='genes']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 0);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 0);
 
     });
 
