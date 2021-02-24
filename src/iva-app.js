@@ -265,7 +265,6 @@ class IvaApp extends LitElement {
 
 
         // Other initialisations
-        this.icd10 = ICD_10;
         this._isBreadcrumbVisible = false;
         // This manages the sample selected in each tool for updating the breadcrumb
         this.samples = [];
@@ -604,6 +603,11 @@ class IvaApp extends LitElement {
 
     }
 
+    redirect(e) {
+        this.tool = e.detail.hash;
+        this.renderHashFragments();
+    }
+
     hashFragmentListener(ctx) {
         console.log("hashFragmentListener - DEBUG", this.tool);
         // Hide all elements
@@ -737,70 +741,6 @@ class IvaApp extends LitElement {
         }
     }
 
-    buildQuery(e) {
-        const query = {};
-        let value = "";
-        // TODO searchTextBox is not used anymore. Remove related code
-        if (UtilsNew.isNotUndefined(e) && UtilsNew.isNotUndefined(e.detail.value)) {
-            value = e.detail.value; // It takes care of the fired event from welcome.html
-        } else if (UtilsNew.isNotUndefined(e) && e.keyCode === "13" || UtilsNew.isNotUndefined(e) && e.type === "click") {
-            value = this.querySelector("#" + searchTextBox).value; // When enter key is pressed or search icon is clicked, it takes the value entered and assign it
-        }
-
-        if (value !== "") {
-            if (value.startsWith("rs") || value.split(":").length > 2) {
-                query.ids = value;
-            } else if (value.indexOf(":") > -1 && value.indexOf("-") > -1) {
-                query.region = value;
-            } else if (value.startsWith("GO:")) {
-                query["annot-go"] = value;
-            } else if (value.startsWith("HP:")) {
-                query["annot-hpo"] = value;
-            } else if (value.startsWith("ENST")) {
-                this.transcript = value;
-                this.tool = "#transcript";
-            } else {
-                this.gene = value.toUpperCase();
-                this.tool = "#gene";
-            }
-
-            // This query object is built for variant browser. Only when the queries to browser are made, we are setting the tool to browser
-            if (Object.keys(query).length > 0) {
-                this._query = query;
-                this.tool = "#browser";
-            }
-
-            this.renderHashFragments();
-            // TODO convert in LitElement compliant
-            this.$.searchTextBox.value = ""; // Empty the value of search text box when search is complete and respective view is loaded
-        }
-    }
-
-    /*onQuickSearch(e) {
-        const gene = PolymerUtils.getValue("searchTextBox");
-        if (UtilsNew.isNotUndefinedOrNull(this.tool)) {
-            const _query = {
-                xref: gene
-            };
-            switch (this.tool) {
-                case "#browser":
-                    window.location.hash = "browser/" + this.opencgaSession.project.id + "/" + this.opencgaSession.study.id;
-                    this.browserSearchQuery = _query;
-                    break;
-                case "#interpretation":
-                    window.location.hash = "interpretation/" + this.opencgaSession.project.id + "/" + this.opencgaSession.study.id;
-                    this.interpretationSearchQuery = _query;
-                    break;
-                default:
-                    this.tool = "#browser";
-                    window.location.hash = "browser/" + this.opencgaSession.project.id + "/" + this.opencgaSession.study.id;
-                    this.browserSearchQuery = _query;
-                    break;
-            }
-        }
-        // debugger
-    }
-*/
     quickSearch(e) {
         // debugger
         this.tool = "#browser";
@@ -867,6 +807,11 @@ class IvaApp extends LitElement {
         const sidenav = this.querySelector("#side-nav");
         $("#side-nav").toggleClass("active");
         $("#overlay").toggleClass("active");
+    }
+
+    sideNavChangeTool(e) {
+        this.toggleSideNav(e);
+        this.changeTool(e);
     }
 
     isVisible(item) {
@@ -950,19 +895,6 @@ class IvaApp extends LitElement {
                     margin: auto;
                     text-align: justify;
                     width: 90%;
-                }
-                .search-box-wrapper .form-control{
-                    border-right-width: 0;                   
-                }
-                .search-box-wrapper .input-group-addon{
-                    background: #fff;
-                    cursor: pointer;
-                }
-                .search-box-wrapper .input-group-addon:hover{
-                    background: #eee;
-                }
-                #searchTextBox {
-                    width: 100px;
                 }
                 
                 #login {
@@ -1060,7 +992,7 @@ class IvaApp extends LitElement {
             <div id="side-nav" class="sidenav shadow-lg">
                 <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
                 <nav class="navbar" id="sidebar-wrapper" role="navigation">
-                    <a href="#home" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
+                    <a href="#home" @click="${this.sideNavChangeTool}">
                         <div class="iva-logo">
                             <img src="./img/iva.svg" />
                             <span class="subtitle">Interactive Variant Analysis</span>
@@ -1069,14 +1001,14 @@ class IvaApp extends LitElement {
                     <ul class="nav sidebar-nav">
                         ${!this.isLoggedIn() ? html`
                             <li>
-                                <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
+                                <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${this.sideNavChangeTool}">
                                     <i href="#login" class="fa fa-3x fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
                                 </a>
                             </li>
                         ` : null }
-                        ${this.config?.menu?.filter?.(this.isVisible).map(item => html`
+                        ${this.config?.menu?.filter?.(item => this.isVisible(item)).map(item => html`
                             <li>
-                                <a href="#cat-${item.id}" role="button" @click="${e => {this.toggleSideNav(e); this.changeTool(e);}}">
+                                <a href="#cat-${item.id}" role="button" @click="${this.sideNavChangeTool}">
                                     <img src="img/tools/icons/${item.icon}" alt="${item.title}"/>  ${item.title}
                                 </a>
                              </li>
@@ -1110,7 +1042,7 @@ class IvaApp extends LitElement {
                         <!-- Controls aligned to the LEFT -->
                         <ul class="nav navbar-nav">
                             <!-- This code parse the config menu arrays and creates a custom menu taking into account visibility -->
-                            ${this.config?.menu?.filter?.(this.isVisible).map(item => html`
+                            ${this.config?.menu?.filter?.(item => this.isVisible(item)).map(item => html`
                                 <!-- If there is not submenu we just display a button -->
                                 ${!item.submenu ? html`
                                     <li>
@@ -1168,16 +1100,16 @@ class IvaApp extends LitElement {
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
                             ` : null}
                             
-                            <!--Search menu-->
-                            ${this.opencgaSession && this.opencgaSession.projects && this.config.search.visible ? html`
-                                    <form class="navbar-form navbar-left" role="search">
+                            
+                            ${false && this.opencgaSession && this.opencgaSession.projects && this.config.search.visible ? html`
+                                <!-- Search menu <form class="navbar-form navbar-left" role="search">
                                         <div class="form-group">
                                             <div class="input-group search-box-wrapper">
                                                 <input class="form-control" id="searchTextBox" placeholder="${this.config.search.placeholder}" @input="${this.buildQuery}">
                                                 <span class="input-group-addon"><span class="fa fa-search" aria-hidden="true" @click="${this.onQuickSearch}"></span></span>
                                             </div>
                                         </div>
-                                    </form>
+                                    </form>-->
                             ` : null}
                             
                             ${this.isVisible(this.config.fileExplorer) ? html`
@@ -1296,7 +1228,8 @@ class IvaApp extends LitElement {
                         <opencga-login  .opencgaSession="${this.opencgaSession}"
                                         loginTitle="Sign in"
                                         .notifyEventMessage="${this.config.notifyEventMessage}"
-                                        @login="${this.onLogin}">
+                                        @login="${this.onLogin}"
+                                        @redirect="${this.redirect}">
                         </opencga-login>
                     </div>
                 ` : null}
@@ -1322,14 +1255,9 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents["clinicalAnalysisPortal"] ? html`
                     <div class="content" id="clinicalAnalysisPortal">
-                        <!--
-                        <opencga-clinical-portal .opencgaSession="${this.opencgaSession}"
-                                                .config="${OpencgaClinicalPortalConfig}"
-                                                .cellbaseClient="${this.cellbaseClient}">
-                        </opencga-clinical-portal>
-                        -->
                         <tool-header title="${"Case Portal"}" icon="${"fas fa-window-restore"}"></tool-header>
-                        <opencga-clinical-review-cases  .opencgaSession="${this.opencgaSession}"></opencga-clinical-review-cases>
+                        <opencga-clinical-review-cases  .opencgaSession="${this.opencgaSession}"
+                                                        .config="${OpencgaClinicalReviewCasesConfig}"></opencga-clinical-review-cases>
                     </div>
                 ` : null}
 
@@ -1577,13 +1505,13 @@ class IvaApp extends LitElement {
                 
                 ${this.config.enabledComponents["sampleVariantStatsBrowser"] ? html`
                     <div class="content" id="sampleVariantStatsBrowser">
-                        <sample-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}"></sample-variant-stats-browser>
+                        <sample-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}" .active="${true}"></sample-variant-stats-browser>
                     </div>
                 ` : null}
                 
                 ${this.config.enabledComponents["sampleCancerVariantStatsBrowser"] ? html`
                     <div class="content" id="sampleCancerVariantStatsBrowser">
-                        <sample-cancer-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}" .active="true"></sample-cancer-variant-stats-browser>
+                        <sample-cancer-variant-stats-browser .opencgaSession="${this.opencgaSession}" .sampleId="${this.sampleId}" .active="${true}"></sample-cancer-variant-stats-browser>
                     </div>
                 ` : null}
                 
@@ -1778,8 +1706,7 @@ class IvaApp extends LitElement {
 
             </div>
             <notification-element .queue="${new NotificationQueue().get()}"></notification-element>
-`;
-
+        `;
     }
 
 }

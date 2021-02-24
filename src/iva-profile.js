@@ -110,6 +110,15 @@ export default class IvaProfile extends LitElement {
                             }
                         },
                         {
+                            name: "Data release",
+                            type: "custom",
+                            field: "project.attributes",
+                            display: {
+                                visible: data => !!data.project?.attributes?.release,
+                                render: attributes => attributes?.release
+                            }
+                        },
+                        {
                             name: "Project and studies",
                             field: "projects",
                             type: "table",

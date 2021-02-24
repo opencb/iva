@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResultsOrNot} from "../plugins/utils.js";
+import {login, randomString, checkResults, checkResultsOrNot, waitTableResults} from "../plugins/utils.js";
+import "cypress-wait-until";
 
 
 context("4. Variant Browser", () => {
@@ -25,6 +26,33 @@ context("4. Variant Browser", () => {
     beforeEach(() => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
     });
+
+    /* it("4.0 disease", () => {
+
+        // disease-panel-filter select + button
+        cy.get("disease-panel-filter").find(" a").contains("Childhood onset dystonia or chorea or related movement disorder").click({force:true})
+        //cy.get("disease-panel-filter").find(" a").contains("Amelogenesis imperfecta").click({force:true})
+        cy.get("div.search-button-wrapper button").click();
+
+        waitTableResults("variant-browser-grid")
+        checkResultsOrNot("variant-browser-grid")
+
+        /!*cy.get("disease-panel-filter div.dropdown-menu a").each(el => {
+
+            // TODO the loop works but checkResultsOrNot is always satisfied. Handle error messages
+            // cannot use cy.wrap(el) here. disease-panel-filter div.dropdown-menu is refreshed on click on buttons and the refs are broken (https://github.com/cypress-io/cypress/issues/7306)
+            const id = el.attr("id");
+            cy.get("#" + id).should("exist").click({force: true});
+            //cy.wrap(el).should("exist").click({force: true});
+            cy.get("div.search-button-wrapper button").click();
+            checkResultsOrNot("variant-browser-grid");
+            cy.wait(2000)
+            cy.get("opencga-active-filters button[data-filter-name='panel']").click();
+
+
+        });*!/
+
+    });*/
 
     it("4.1 Check Columns togglability", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
@@ -61,7 +89,7 @@ context("4. Variant Browser", () => {
         cy.get(".swal2-actions").contains(/Yes|OK/).click(); // dismiss notification (either new filter or overwrite a saved one)
         cy.get("button[data-cy='filter-button']").click();
         cy.get("ul.saved-filter-wrapper").contains(name);
-        cy.get(`span.filter-buttons i[data-cy=delete][data-filter-id='${name}']`).click();
+        cy.get(`span.action-buttons i[data-cy=delete][data-filter-id='${name}']`).click();
         cy.get(".swal2-title").contains("Are you sure?");
         cy.get(".swal2-confirm").click(); // confirm deletion action
 
@@ -126,7 +154,7 @@ context("4. Variant Browser", () => {
         cy.get("consequence-type-select-filter input[value='Loss-of-Function (LoF)'").click({force: true});
         cy.get("div.search-button-wrapper button").click();
         checkResultsOrNot("variant-browser-grid");
-        //cy.get("opencga-active-filters button[data-filter-name='ct']").click();
+        // cy.get("opencga-active-filters button[data-filter-name='ct']").click();
 
         // Consequence type: SO Term - Use example: Missense
         cy.get("consequence-type-select-filter button").click();
@@ -159,7 +187,7 @@ context("4. Variant Browser", () => {
         cy.get("opencga-active-filters button[data-filter-name='populationFrequencyAlt']").click();
 
         // Clinical and Disease: ClinVar Accessions	Use example: Pathogenic
-        cy.get("opencga-variant-filter a[data-accordion-id='ClinicalandDisease']").click();
+        cy.get("opencga-variant-filter a[data-accordion-id='Clinical']").click();
         cy.get("clinvar-accessions-filter select").select("Pathogenic", {force: true});
         checkResultsOrNot("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='clinicalSignificance']").click();
@@ -216,25 +244,29 @@ context("4. Variant Browser", () => {
 
     });
     it("4.4 aggregated query", () => {
+
+        cy.get("opencga-variant-filter a[data-accordion-id='ConsequenceType']").click();
+        cy.get("consequence-type-select-filter input[value='Loss-of-Function (LoF)'").click({force: true});
+
         cy.get("a[href='#facet_tab']").click({force: true});
         cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
         cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
         cy.get("#type_Select a").contains("INSERTION").click({force: true}); // type=INSERTION
 
         cy.get("div.search-button-wrapper button").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
 
         cy.get("div.facet-wrapper button[data-filter-name='chromosome']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 2);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 2);
         cy.get("div.facet-wrapper button[data-filter-name='type']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 1);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 1);
         cy.get("div.facet-wrapper button[data-filter-name='genes']").click();
-        cy.get("opencb-facet-results", {timeout: 60000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 0);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 0);
 
     });
 
     // Variant Browser: Tabs
-    /*it("checks Variant Browser detail tabs", () => {
+    /* it("checks Variant Browser detail tabs", () => {
 
         // TODO FIXME this line doesn't work if you run it along with other tests. It works if you run this test case alone..
         cy.get("variant-browser-detail > div > h3", {timeout: 60000}).should("be.visible").should("contain", /Variant: [a-z0-9:]+/gim);

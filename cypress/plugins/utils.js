@@ -1,3 +1,21 @@
+
+/**
+ * https://github.com/cypress-io/cypress/issues/5743#issuecomment-650421731
+ * getAttached(selector)
+ * getAttached(selectorFn)
+ *
+ * Waits until the selector finds an attached element, then yields it (wrapped).
+ * selectorFn, if provided, is passed $(document). Don't use cy methods inside selectorFn.
+ */
+Cypress.Commands.add("getAttached", selector => {
+    const getElement = typeof selector === "function" ? selector : $d => $d.find(selector);
+    let $el = null;
+    return cy.document().should($d => {
+        $el = getElement(Cypress.$($d));
+        expect(Cypress.dom.isDetached($el)).to.be.false;
+    }).then(() => cy.wrap($el));
+});
+
 export const login = () => {
     cy.visit("http://localhost:3000/src/#login");
     const username = Cypress.env("username");
@@ -51,10 +69,14 @@ export const checkResults = gridSelector => {
  * it check the table contains results or the message "No matching records found"
  */
 export const checkResultsOrNot = gridSelector => {
-    cy.get(gridSelector + " table", {timeout: 60000}).find("tbody tr", {timeout: 60000})
+    // FIXME note this selector matches also the inner tables for each row
+    cy.get(gridSelector + " table", {timeout: 60000}).find("tbody tr", {timeout: 10000})
         .should("satisfy", $els => {
+            const $firstRow = Cypress.$($els[0]);
+            // console.error("$firstRow.data(index)", $firstRow.data("index"))
+            // console.error("No matching records found", $els.text().includes("No matching records found"))
             // it covers either the case of some results or 0 results
-            return $els.data("index") !== undefined || $els.text().includes("No matching records found");
+            return $firstRow.data("index") === 0 || $els.text().includes("No matching records found")
         });
 };
 
