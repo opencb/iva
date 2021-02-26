@@ -21,7 +21,7 @@ const cellbase = {
 
 const opencga = {
     //host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
-    host: "http://re-prod.opencga.gel.zone/opencga",
+    host: "http://re-uat.opencga.gel.zone:9090/opencga",
     //host: "http://localhost:9090/opencga",
     version: "v2",
     serverVersion: "1.4",
@@ -109,7 +109,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.1.0",
+    version: "v2.1.1-alpha",
     logo: "img/iva.svg",
     companyLogo: "img/Genomics-England-logo-2015-white.png",
     mode: "development",
