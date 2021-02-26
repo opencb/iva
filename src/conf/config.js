@@ -431,6 +431,14 @@ const application = {
                     visibility: "public"
                 },
                 {
+                    id: "rga",
+                    title: "RGA",
+                    acronym: "",
+                    icon: "",
+                    description: "",
+                    visibility: "public"
+                },
+                {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
                     acronym: "",
