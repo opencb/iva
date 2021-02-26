@@ -157,7 +157,7 @@ const application = {
                 // },
             ]
         },
-        /*{
+        /* {
             id: "analysis",
             title: "Variant Analysis",
             description: "",
@@ -454,12 +454,20 @@ const application = {
             icon: "interpretation_portal.svg",
             visibility: "private",
             submenu: [
-                /*{
+                /* {
                     title: "Clinical Management",
                     category: true,
                     id: "cat-clinical",
                     visibility: "public"
                 },*/
+                {
+                    id: "rga",
+                    title: "RGA",
+                    acronym: "",
+                    icon: "",
+                    description: "",
+                    visibility: "public"
+                },
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
@@ -487,7 +495,7 @@ const application = {
                 //     separator: true,
                 //     visibility: "public"
                 // },
-                /*{
+                /* {
                     title: "Case Interpretation",
                     category: true,
                     id: "cat-clinical",
@@ -573,7 +581,7 @@ const application = {
             visibility: "private",
             icon: "aggregation2.svg",
             submenu: [
-                /*{
+                /* {
                     id: "projects",
                     title: "Projects",
                     visibility: "public"
@@ -588,7 +596,7 @@ const application = {
                     id: "cat-catalog",
                     visibility: "public"
                 },
-                /*{
+                /* {
                     id: "files",
                     title: "File Browser",
                     visibility: "public"
@@ -607,8 +615,8 @@ const application = {
                     id: "family",
                     title: "Family Browser",
                     visibility: "public"
-                },
-                /*{
+                }
+                /* {
                     id: "cohorts",
                 {
                     id: "cohort",
