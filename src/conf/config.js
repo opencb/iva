@@ -430,14 +430,7 @@ const application = {
                     id: "cat-clinical",
                     visibility: "public"
                 },
-                {
-                    id: "rga",
-                    title: "RGA",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                },
+
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
@@ -461,24 +454,71 @@ const application = {
                     description: "",
                     visibility: "public"
                 },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Case Interpretation",
-                    category: true,
-                    id: "cat-clinical",
-                    visibility: "public"
-                },
-                {
-                    id: "interpreter",
-                    title: "Case Interpreter",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                }
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Clinical Analysis",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "rga",
+                //     title: "RGA",
+                //     acronym: "",
+                //     icon: "",
+                //     description: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Case Interpretation",
+                //     category: true,
+                //     id: "cat-clinical",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "rd-tiering",
+                //     title: "RD Tiering",
+                //     acronym: "RDT",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "team",
+                //     title: "TEAM",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "zetta",
+                //     title: "Zetta",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "cancer-tiering",
+                //     title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "interpreter",
+                //     title: "Case Interpreter",
+                //     acronym: "",
+                //     icon: "",
+                //     description: "",
+                //     visibility: "public"
+                // }
                 // {
                 //     separator: true,
                 //     visibility: "public"
