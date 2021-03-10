@@ -408,6 +408,7 @@ const application = {
                     id: "cat-clinical",
                     visibility: "public"
                 },
+
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",

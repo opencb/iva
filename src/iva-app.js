@@ -82,6 +82,8 @@ import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysi
 import "../lib/jsorolla/src/core/webcomponents/file/opencga-file-manager.js";
 import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
 import "../lib/jsorolla/src/core/webcomponents/loading-spinner.js";
+// import "../lib/jsorolla/src/core/webcomponents/clinical/rga/rga-browser.js";
+
 // import "./loading-bar.js";
 
 // import "../lib/jsorolla/src/core/webcomponents/alignment/analysis/opencga-alignment-stats-analysis.js";
@@ -221,7 +223,8 @@ class IvaApp extends LitElement {
             "alignment-index",
             "alignment-stats",
             "coverage-index",
-            "job-view"];
+            "job-view",
+            "rga"];
 
         for (const component of components) {
             _config.enabledComponents[component] = false;
@@ -1258,6 +1261,12 @@ class IvaApp extends LitElement {
                         <tool-header title="${"Case Portal"}" icon="${"fas fa-window-restore"}"></tool-header>
                         <opencga-clinical-review-cases  .opencgaSession="${this.opencgaSession}"
                                                         .config="${OpencgaClinicalReviewCasesConfig}"></opencga-clinical-review-cases>
+                    </div>
+                ` : null}
+
+                ${this.config.enabledComponents["rga"] ? html`
+                    <div class="content" id="rga">
+                        <rga-browser  .opencgaSession="${this.opencgaSession}" .cellbaseClient="${this.cellbaseClient}" ></rga-browser>
                     </div>
                 ` : null}
 
