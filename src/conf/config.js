@@ -20,7 +20,7 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "https://ws.opencb.org/opencga-test",
+    host: "https://ws.opencb.org/opencga-prod",
     // host: "http://localhost:1234/opencga",
     // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
     version: "v2",
@@ -87,6 +87,7 @@ const application = {
     // defaultStudy: "emee-glh@cancer_grch38:myeloid",
     // defaultStudy: "sanger@poc:exomes",
     // The order, title and nested submenus are respected
+
     menu: [
         {
             id: "browser",
