@@ -75,20 +75,200 @@ const opencga = {
     }
 };
 
+// FIXME Change JSorolla components to use suite.appConfig instead
 const application = {
-    title: "IVA",
+    appConfig: "opencb",
+}
+
+const suite = {
+    name: "OpenCGA Suite",
     version: "v2.1.0-beta",
     logo: "img/iva.svg",
+
     mode: "development",
     appConfig: "opencb",
-    defaultStudy: "serena@cancer37:test",
-    // defaultStudy: "demo@population:1000g",
-    // defaultStudy: "demo@family:corpasome",
-    // defaultStudy: "emee-glh@cancer_grch38:myeloid",
-    // defaultStudy: "sanger@poc:exomes",
-    // The order, title and nested submenus are respected
+    about: {
+        dropdown: true,
+        links: [
+            {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},
+            {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva", icon: "fa fa-book"},
+            {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
+            {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: "fa fa-archive"},
+            {id: "about", name: "About", url: "#about", icon: "fa fa-info-circle"},
+            {id: "terms", name: "Terms", url: "#terms", icon: "fa fa-file-alt"},
+            {id: "contact", name: "Contact", url: "#contact", icon: "fa fa-envelope"},
+            {id: "faq", name: "FAQ", url: "#faq", icon: "fa fa-question"}
+        ]
+    },
+    userMenu: [
+        {id: "account", name: "Your Profile", url: "#account", icon: "fa fa-user", visibility: "private"},
+        {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
+        {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"}
+        // {id: "settings", name: "Settings", url: "#settings", icon: "fas fa-cogs"}
+    ],
+    login: {
+        visible: true
+    },
+    notifyEventMessage: "notifymessage",
+    session: {
+        checkTime: 60000,   // 1 min
+        minRemainingTime: 60000,
+        maxRemainingTime: 600000    // 10 min
+    },
+    // Components in the welcome page
+    welcomePageContent: `
+            <p class="text-center">
+                Welcome to the IVA tool for whole genome variant analysis.<br />
+                This interactive tool allows finding genes affected by deleterious variants<br />that segregate along family
+                pedigrees, case-controls or sporadic samples.
+            </p><br>`,
+    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
+    // gettingStartedComponents: ["browser", "clinicalAnalysisPortal"],
 
-    menu: [
+    // The order, title and nested submenus are respected
+    apps: [
+        {
+            id: "iva",
+            name: "IVA",
+            // icon: "variant_browser.svg",
+            logo: "img/iva-white.svg",
+            visibility: "public",
+            menu: [
+                {
+                    id: "browser",
+                    name: "Variant Browser",
+                    // fa_icon: "fa fa-list",
+                    icon: "variant_browser.svg",
+                    visibility: "public",
+                    submenu: [
+                        {
+                            id: "browser",
+                            name: "Variant Browser",
+                            acronym: "VB",
+                            description: `
+                                <p>Explore all variants</p>
+                                <ul>
+                                    <li>Rich annotation and links to leading reference databases</li>
+                                    <li>Filter by gene, consequence, frequency and much more</li>
+                                </ul>`,
+                            visibility: "public",
+                            // fa_icon: "fa fa-list",
+                            icon: "variant_browser.svg",
+                            thumbnail: "variant-browser.png"
+                        }
+                    ]
+                },
+                {
+                    id: "browser",
+                    name: "Case Interpreter",
+                    // fa_icon: "fa fa-list",
+                    icon: "variant_browser.svg",
+                    visibility: "public",
+                    submenu: [
+                        {
+                            id: "browser",
+                            name: "Variant Browser",
+                            acronym: "VB",
+                            description: `
+                            <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                            <ul>
+                                <li>Rich annotation and links to leading reference databases</li>
+                                <li>Filter by gene, consequence, frequency and much more</li>
+                            </ul>`,
+                            visibility: "public",
+                            // fa_icon: "fa fa-list",
+                            icon: "variant_browser.svg",
+                            thumbnail: "variant-browser.png"
+                        }
+                    ]
+                },
+            ],
+            fileExplorer: {
+                visibility: "private"
+            },
+            jobMonitor: {
+                visibility: "private"
+            },
+            // TODO This option seems to be deprecated, do we need to keep it?
+            search: {
+                placeholder: "Search",
+                visible: false
+            },
+            about: {
+                dropdown: true,
+                links: [
+                    {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},
+                    {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva", icon: "fa fa-book"},
+                    {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
+                ]
+            },
+            userMenu: [
+                {id: "account", name: "Your Profile", url: "#account", icon: "fa fa-user", visibility: "private"},
+                {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
+                {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"}
+                // {id: "settings", name: "Settings", url: "#settings", icon: "fas fa-cogs"}
+            ],
+        },
+        {
+            id: "admin",
+            name: "OpenCGA Admin",
+            logo: "interpretation_portal.svg",
+            visibility: "public",
+            menu: [
+                {
+                    id: "browser",
+                    name: "Users",
+                    fa_icon: "fa fa-list",
+                    icon: "variant_browser.svg",
+                    visibility: "public",
+                    submenu: [
+                        {
+                            id: "browser",
+                            name: "Variant Browser",
+                            acronym: "VB",
+                            description: `
+                            <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                            <ul>
+                                <li>Rich annotation and links to leading reference databases</li>
+                                <li>Filter by gene, consequence, frequency and much more</li>
+                            </ul>`,
+                            visibility: "public",
+                            fa_icon: "fa fa-list",
+                            icon: "variant_browser.svg",
+                            thumbnail: "variant-browser.png"
+                        }
+                    ]
+                },
+            ],
+            fileExplorer: {
+                visibility: "private"
+            },
+            jobMonitor: {
+                visibility: "none"
+            },
+            search: {
+                placeholder: "Search",
+                visible: false
+            },
+            about: {
+                dropdown: true,
+                links: [
+                    {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},
+                    {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva", icon: "fa fa-book"},
+                    {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
+                    {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: "fa fa-archive"},
+                    {id: "about", name: "About", url: "#about", icon: "fa fa-info-circle"},
+                ]
+            },
+            userMenu: [
+                {id: "account", name: "Your Profile", url: "#account", icon: "fa fa-user", visibility: "private"},
+                {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
+                {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"}
+                // {id: "settings", name: "Settings", url: "#settings", icon: "fas fa-cogs"}
+            ],
+        }
+    ],
+    _menu: [
         {
             id: "browser",
             title: "Variant Browser",
@@ -645,61 +825,5 @@ const application = {
             ]
         }
     ],
-    fileExplorer: {
-        visibility: "private"
-    },
-    jobMonitor: {
-        visibility: "private"
-    },
-    search: {
-        placeholder: "Search",
-        visible: false
-    },
-    about: {
-        dropdown: true,
-        links: [
-            {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},
-            {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva", icon: "fa fa-book"},
-            {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
-            {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: "fa fa-archive"},
-            {id: "about", name: "About", url: "#about", icon: "fa fa-info-circle"},
-            {id: "terms", name: "Terms", url: "#terms", icon: "fa fa-file-alt"},
-            {id: "contact", name: "Contact", url: "#contact", icon: "fa fa-envelope"},
-            {id: "faq", name: "FAQ", url: "#faq", icon: "fa fa-question"}
-        ]
-    },
-    userMenu: [
-        {id: "account", name: "Your Profile", url: "#account", icon: "fa fa-user", visibility: "private"},
-        {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
-        {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"}
-        // {id: "settings", name: "Settings", url: "#settings", icon: "fas fa-cogs"}
-    ],
-    login: {
-        visible: true
-    },
-    breadcrumb: {
-        title: "Projects",
-        visible: true
-    },
-    notifyEventMessage: "notifymessage",
-    session: {
-        // 60000 ms = 1 min
-        checkTime: 60000,
-        // 60000 ms = 1 min
-        minRemainingTime: 60000,
-        // 600000 ms = 10 min = 1000(1sec) * 60(60 sec = 1min) * 10(10 min)
-        maxRemainingTime: 600000
-    },
-    // Components in the welcome page
-    welcomePageContent: `<p class="text-center">
-                Welcome to the IVA tool for whole genome variant analysis.<br />
-                This interactive tool allows finding genes affected by deleterious variants<br />that segregate along family
-                pedigrees, case-controls or sporadic samples.
-            </p>
-            <br>`,
-    welcomePageFooter: "<p><img id=\"logo\" src=\"img/" +
-        "opencb-logo.png\" alt=\"opencb-logo\"/></p>",
-    gettingStartedComponents: ["browser", "clinicalAnalysisPortal"]
-};
 
-//export {application, beacon, cellbase, consequenceTypes, opencga, populationFrequencies, proteinSubstitutionScores}
+};
