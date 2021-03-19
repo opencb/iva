@@ -145,6 +145,33 @@ export default class WelcomeWeb extends LitElement {
         }
     }
 
+    renderSuiteWelcome() {
+        return html`
+            <div>
+                
+                
+            </div>
+        `;
+    }
+
+    renderIvaWelcome() {
+        return html`
+            <welcomw-iva></welcomw-iva>
+        `;
+    }
+
+    renderClinicalWelcome() {
+        return html`
+        
+        `;
+    }
+
+    renderAdminWelcome() {
+        return html`
+        
+        `;
+    }
+
     render() {
         return html`
         <style>
@@ -270,8 +297,28 @@ export default class WelcomeWeb extends LitElement {
                     <a class="getting-started" href="${this.config.about.links.find(link => link.id === "documentation").url}" target="_blank"><span>Documentation</span></a>
                 </div>
             `}
+
+            ${!this.app || this.app.id === "suite" ? html`
+                        ${this.renderSuiteWelcome()}`
+                    : null
+            }
+
+
+            ${this.app && this.app.id === "iva" ? html`
+                        <welcomw-iva></welcomw-iva>`
+                    : null
+            }
+
+            ${this.app && this.app.id === "clinical" ? html`
+                        ${this.renderClinicalWelcome()}`
+                    : null
+            }
+
+            ${this.app && this.app.id === "admin" ? html`
+                        ${this.renderAdminWelcome()}`
+                    : null
+            }
             
-                       
            <!-- <h4>Note</h4>
             <small>
                 IVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as

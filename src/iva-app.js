@@ -799,10 +799,10 @@ class IvaApp extends LitElement {
             this.app = this.config.apps.find(app => app.id === e.currentTarget.dataset.id);
         } else {
             this.app = {
-                id: this.config.id,
                 name: this.config.name,
-                about: this.config.about,
+                version: this.config.version,
                 logo: this.config.logo,
+                about: this.config.about,
                 userMenu: this.config.userMenu,
             }
         }
@@ -827,6 +827,18 @@ class IvaApp extends LitElement {
 
     isLoggedIn() {
         return !!this?.opencgaSession?.token;
+    }
+
+    createAboutLink(link, button) {
+        let url = link.url ? `${link.url}` : `#${link.id}`;
+        let iconHtml = link.icon ? html`<i class="${link.icon} icon-padding" aria-hidden="true"></i>` : null;
+        if (link.url) {
+            return html`
+                <a href="${url}" role="${button ? "button" : "link"}" target="_blank">${iconHtml} ${link.name}</a>`;
+        } else {
+            return html`
+                <a href="${url}" role="${button ? "button" : "link"}">${iconHtml} ${link.name}</a>`;
+        }
     }
 
     render() {
@@ -994,7 +1006,7 @@ class IvaApp extends LitElement {
                             <nav class="navbar" id="sidebar-wrapper" role="navigation">
                                 <a href="#home" @click="${this.sideNavChangeTool}">
                                     <div class="iva-logo">
-                                        <img src="./img/iva.svg" />
+                                        <img src="${this.config.logo}" />
                                         <span class="subtitle">OpenCB Suite</span>
                                     </div>
                                 </a>
@@ -1146,16 +1158,12 @@ class IvaApp extends LitElement {
                                     </a>
                                     <ul class="dropdown-menu">
                                         ${this.app.about.links && this.app.about.links.map(link => html`
-                                            <li>
-                                                <a href="${link.url}" target="_blank"><i class="${link.icon} icon-padding" aria-hidden="true"></i> ${link.name}</a>
-                                            </li>
+                                            <li>${this.createAboutLink(link, false)}</li>
                                         `)}
                                     </ul>
                                 </li>
                             ` : this.app?.about.links && this.app.about.links.map(link => html`
-                                <li>
-                                    <a href="#${link.id}" role="button" @click="${this.changeTool}">${link.name}</a>
-                                </li>
+                                    <li>${this.createAboutLink(link, true)}</li>
                             `) }
 
                             <!-- Login/Logout button -->
@@ -1174,7 +1182,7 @@ class IvaApp extends LitElement {
                                         <i class="fa fa-user-circle fa-lg icon-padding" aria-hidden="true"></i>${this.opencgaSession.user?.name ?? this.opencgaSession.user?.email} <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        ${this.config.userMenu.length ? this.config.userMenu.filter(item => this.isVisible(item)).map(item => html`
+                                        ${this.app.userMenu.length ? this.app.userMenu.filter(item => this.isVisible(item)).map(item => html`
                                             <li>
                                                 <a href="${item.url}" data-user-menu="${item.id}"><i class="${item.icon} icon-padding" aria-hidden="true"></i> ${item.name}</a>
                                             </li>
@@ -1189,8 +1197,6 @@ class IvaApp extends LitElement {
                                 </li>
                             ` : null}
                         </ul>
-
-
                     </div>
                 </div>
             </nav>

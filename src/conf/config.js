@@ -83,7 +83,7 @@ const application = {
 const suite = {
     name: "OpenCGA Suite",
     version: "v2.1.0-beta",
-    logo: "img/iva.svg",
+    logo: "img/iva2.svg",
 
     mode: "development",
     appConfig: "opencb",
@@ -130,8 +130,8 @@ const suite = {
         {
             id: "iva",
             name: "IVA",
-            // icon: "variant_browser.svg",
             logo: "img/iva-white.svg",
+            icon: "variant_browser.svg",
             visibility: "public",
             menu: [
                 {
@@ -200,10 +200,12 @@ const suite = {
                     {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},
                     {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva", icon: "fa fa-book"},
                     {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
+                    {id: "faq", name: "FAQ", icon: "fa fa-question"}
                 ]
             },
             userMenu: [
                 {id: "account", name: "Your Profile", url: "#account", icon: "fa fa-user", visibility: "private"},
+                {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
                 {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
                 {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"}
                 // {id: "settings", name: "Settings", url: "#settings", icon: "fas fa-cogs"}
