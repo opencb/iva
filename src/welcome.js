@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {LitElement, html} from "/web_modules/lit-element.js";
+import { LitElement, html } from "/web_modules/lit-element.js";
 import UtilsNew from "./../lib/jsorolla/src/core/utilsNew.js";
 import PolymerUtils from "../lib/jsorolla/src/core/webcomponents/PolymerUtils.js";
 
@@ -64,7 +64,7 @@ export default class WelcomeWeb extends LitElement {
     }
 
     onExampleClick(e) {
-        const query = {study: this.opencgaSession.study.fqn};
+        const query = { study: this.opencgaSession.study.fqn };
         switch (e.currentTarget.dataset.type) {
             case "gene":
                 query.gene = e.currentTarget.text;
@@ -145,31 +145,19 @@ export default class WelcomeWeb extends LitElement {
         }
     }
 
-    renderSuiteWelcome() {
-        return html`
-            <div>
-                
-                
-            </div>
-        `;
-    }
+    renderWelcome(app) {
+        if (!app || app.id === "suite")
+            return html`<div>Welcome Suite</div>`
 
-    renderIvaWelcome() {
-        return html`
-            <welcomw-iva></welcomw-iva>
-        `;
-    }
-
-    renderClinicalWelcome() {
-        return html`
-        
-        `;
-    }
-
-    renderAdminWelcome() {
-        return html`
-        
-        `;
+        // TODO Create a component each app.
+        switch (app.id) {
+            case "iva":
+                return html`<div>Welcome iva</div>`
+            case "admin":
+                return html`<div>Welcome admin</div>`
+            case "clinical":
+                return html`<div>Welcome clinical</div>`
+        }
     }
 
     render() {
@@ -263,7 +251,7 @@ export default class WelcomeWeb extends LitElement {
                             Variant: <a @click="${this.onExampleClick}" data-type="variant" style="cursor: pointer">13:32962274:G:T</a>
                     </span>
                 </div>` :
-        null }
+                null}
             -->
              
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
@@ -298,28 +286,10 @@ export default class WelcomeWeb extends LitElement {
                 </div>
             `}
 
-            ${!this.app || this.app.id === "suite" ? html`
-                        ${this.renderSuiteWelcome()}`
-                    : null
-            }
-
-
-            ${this.app && this.app.id === "iva" ? html`
-                        <welcomw-iva></welcomw-iva>`
-                    : null
-            }
-
-            ${this.app && this.app.id === "clinical" ? html`
-                        ${this.renderClinicalWelcome()}`
-                    : null
-            }
-
-            ${this.app && this.app.id === "admin" ? html`
-                        ${this.renderAdminWelcome()}`
-                    : null
-            }
             
-           <!-- <h4>Note</h4>
+            ${this.renderWelcome(this.app)}
+
+            <!-- <h4>Note</h4>
             <small>
                 IVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as
                 Web Components,
@@ -328,8 +298,8 @@ export default class WelcomeWeb extends LitElement {
             </small>-->
             ${UtilsNew.renderHTML(this.config.welcomePageFooter)}
 
-        </div>
-        `;
+        </div >
+            `;
     }
 
 }
