@@ -118,7 +118,7 @@ const suite = {
     // Components in the welcome page
     welcomePageContent: `
             <p class="text-center">
-                Welcome to the IVA tool for whole genome variant analysis.<br />
+                Welcome to the Suite tool for whole genome variant analysis.<br />
                 This interactive tool allows finding genes affected by deleterious variants<br />that segregate along family
                 pedigrees, case-controls or sporadic samples.
             </p><br>`,
