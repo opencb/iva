@@ -15,9 +15,7 @@
  */
 import { LitElement, html } from "/web_modules/lit-element.js";
 import UtilsNew from "./../lib/jsorolla/src/core/utilsNew.js";
-import PolymerUtils from "../lib/jsorolla/src/core/webcomponents/PolymerUtils.js";
 import "./welcome-iva.js"
-import "./welcome-suite.js"
 import "./welcome-admin.js"
 import "./welcome-clinical.js"
 
@@ -25,6 +23,7 @@ export default class WelcomeWeb extends LitElement {
 
     constructor() {
         super();
+
         this.checkProjects = false;
     }
 
@@ -34,6 +33,9 @@ export default class WelcomeWeb extends LitElement {
 
     static get properties() {
         return {
+            app: {
+                type: Object
+            },
             opencgaSession: {
                 type: Object
             },
@@ -43,98 +45,28 @@ export default class WelcomeWeb extends LitElement {
             cellbaseClient: {
                 type: Object
             },
-            checkProjects: {
-                type: Boolean
-            },
+            // checkProjects: {
+            //     type: Boolean
+            // },
             config: {
                 type: Object
             }
         };
     }
 
-    updated(changedProperties) {
-        if (changedProperties.has("opencgaSession")) {
-            this.opencgaSessionObserver();
+    update(changedProperties) {
+        if (changedProperties.has("app")) {
+            this._checkProjects();
         }
-    }
 
-    opencgaSessionObserver() {
-        this._checkProjects();
+        if (changedProperties.has("opencgaSession")) {
+            this._checkProjects();
+        }
+        super.update(changedProperties);
     }
 
     _checkProjects() {
         return !!(UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project));
-
-    }
-
-    onExampleClick(e) {
-        const query = { study: this.opencgaSession.study.fqn };
-        switch (e.currentTarget.dataset.type) {
-            case "gene":
-                query.gene = e.currentTarget.text;
-                break;
-            case "region":
-                query.region = e.currentTarget.text;
-                break;
-            case "snp":
-                query.xref = e.currentTarget.text;
-                break;
-            case "variant":
-                query.xref = e.currentTarget.text;
-                break;
-        }
-        this.notify(query);
-    }
-
-    notify(query) {
-        this.dispatchEvent(new CustomEvent("search", {
-            detail: {
-                ...query,
-                study: this.opencgaSession.study.fqn
-            },
-            bubbles: true,
-            composed: true
-        }));
-    }
-
-    callAutocomplete(e) {
-        // Only gene symbols are going to be searched and not Ensembl IDs
-        const featureId = this.querySelector("#welcomeSearchTextBox").value;
-        if (UtilsNew.isNotEmpty(featureId)) {
-            const query = {};
-            if (featureId.startsWith("chr") || featureId.startsWith("X") || featureId.startsWith("Y") || featureId.startsWith("MT") || featureId.match(/^\d/)) {
-                if (featureId.split(":").length < 3) {
-                    // It's a region, contains only one ':' character
-                    query.region = featureId;
-                } else {
-                    query.xref = featureId;
-                }
-            } else if (featureId.startsWith("rs")) {
-                query.xref = featureId;
-            } else {
-                // The ID written seems to be a gene name
-                query.gene = featureId;
-                if (featureId.length >= 3 && !featureId.startsWith("ENS")) {
-                    const _this = this;
-                    _this.cellbaseClient.get("feature", "id", featureId.toUpperCase(), "starts_with", {}, {})
-                        .then(function (response) {
-                            let options = "";
-                            for (const id of response.response[0].result) {
-                                options += `<option value="${id.name}">`;
-                            }
-                            PolymerUtils.innerHTML("FeatureDatalist", options);
-                        });
-                }
-            }
-
-            if (e.keyCode === 13) {
-                this.notify(query);
-                this.querySelector("#welcomeSearchTextBox").value = "";
-            }
-
-        } else {
-            PolymerUtils.innerHTML("FeatureDatalist", "");
-        }
     }
 
     isVisible(item) {
@@ -149,41 +81,91 @@ export default class WelcomeWeb extends LitElement {
         }
     }
 
-    renderWelcome(app) {
-        if (!app || app.id === "suite")
-            return html`
-                <welcome-suite
-                    .opencgaSession="${this.opencgaSession}" 
-                    .config="${this.config}"
-                ></welcome-suite>`
+    renderSuiteWelome() {
+        return html`
+            <div>
+                <h1 style="text-align: center">
+                    OpenCB Suite
+                </h1>
+                <div style="margin: 20px">
+                    ${UtilsNew.renderHTML(this.config.welcomePageContent)}
+                </div>
 
-        
-        switch (app.id) {
-            case "iva":
-                return html`
-                    <welcome-iva 
-                        .opencgaSession="${this.opencgaSession}" 
-                        version="${this.config.version}" 
-                        .cellbaseClient=${this.cellbaseClient} 
-                        .config="${this.config}">
-                    </welcome-iva>`;
-            case "admin":
-                return html`
-                    <welcome-admin
-                        .opencgaSession="${this.opencgaSession}" 
-                        .config="${this.config}">
-                    </welcome-admin>`;
-            case "clinical":
-                return html`
-                    <welcome-clinical
-                        .opencgaSession="${this.opencgaSession}" 
-                        .config="${this.config}">
-                    </welcome-clinical>`;
+                <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
+                    ${this.config.apps.filter(this.isVisible).map(item => html`
+                        <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
+                            <div class="hi-icon">
+                                <img alt="${item.name}" src="${item.logo}" /> 
+                            </div>
+                            <p>${item.name}</p>
+                            <span class="smaller"></span>
+                        </a>
+                    `)}
+                </div>
+            </div>`;
+    }
+
+    renderWelcome(app) {
+        if (!app || app.id === "suite") {
+            return this.renderSuiteWelome();
+        } else {
+            switch (app.id) {
+                case "iva":
+                    return html`
+                        <welcome-iva 
+                                .app="${app}"
+                                .opencgaSession="${this.opencgaSession}" 
+                                version="${this.config.version}" 
+                                .cellbaseClient=${this.cellbaseClient} 
+                                .config="${this.config}">
+                        </welcome-iva>`;
+                case "clinical":
+                    return html`
+                        <welcome-clinical
+                                .opencgaSession="${this.opencgaSession}"
+                                .config="${this.config}">
+                        </welcome-clinical>`;
+                case "admin":
+                    return html`
+                        <welcome-admin
+                                .opencgaSession="${this.opencgaSession}" 
+                                .config="${this.config}">
+                        </welcome-admin>`;
+                default:
+                    return this.renderSuiteWelome();
+            }
         }
     }
+
     // TODO Add Behaviour to select different application and render the selected application
     render() {
-        return html`${this.renderWelcome(this.app)}`;
+        return html`
+            <style>
+                footer {
+                    display: flex;
+                    justify-content: center;
+                    padding: 5px;
+                    background-color: lightgrey;
+                    color: #fff;
+                }
+            </style>
+
+            <div class="col-md-8 col-md-offset-2 col-sm-12 welcome-center text-muted text-justify">
+                <div style="margin: 20px">
+                    ${this.renderWelcome(this.app)}
+                </div>
+
+                <footer>
+                    ${UtilsNew.renderHTML(this.config.welcomePageFooter)}
+                    <small>
+                        IVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as
+                        Web Components,
+                        so only modern web browsers are fully supported, these include Chrome 49+, Firefox 45+, Microsoft Edge 14+,
+                        Safari 10+ and Opera 36+.
+                    </small>-->
+                </footer>
+            </div>
+        `;
     }
 
 }

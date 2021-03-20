@@ -62,7 +62,6 @@ export default class WelcomeAdmin extends LitElement {
 
     _checkProjects() {
         return !!(UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project));
-
     }
 
 

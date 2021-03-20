@@ -21,6 +21,7 @@ export default class WelcomeIva extends LitElement {
 
     constructor() {
         super();
+
         this.checkProjects = false;
     }
 
@@ -30,6 +31,9 @@ export default class WelcomeIva extends LitElement {
 
     static get properties() {
         return {
+            app: {
+                type: Object
+            },
             opencgaSession: {
                 type: Object
             },
@@ -48,10 +52,11 @@ export default class WelcomeIva extends LitElement {
         };
     }
 
-    updated(changedProperties) {
+    update(changedProperties) {
         if (changedProperties.has("opencgaSession")) {
             this.opencgaSessionObserver();
         }
+        super.update(changedProperties);
     }
 
     opencgaSessionObserver() {
@@ -60,7 +65,6 @@ export default class WelcomeIva extends LitElement {
 
     _checkProjects() {
         return !!(UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project));
-
     }
 
     onExampleClick(e) {
@@ -147,142 +151,106 @@ export default class WelcomeIva extends LitElement {
 
     render() {
         return html`
-        <style>
-            #logo {
-                width: 200px;
-                margin: 50px 0 0 0;
-            }
-                    
-            .smaller {
-                font-size: 75%;
-            }
+            <style>
+                #logo {
+                    width: 200px;
+                    margin: 50px 0 0 0;
+                }
 
-            .getting-started {
-                display: inline-block;
-                border: 4px var(--main-bg-color) solid;
-                background: white;
-                position: relative;
-                padding: 10px 35px;
-                -webkit-transition: all 0.3s;
-                -moz-transition: all 0.3s;
-                transition: all 0.3s;
-                border-radius: 30px;
-            }
+                .smaller {
+                    font-size: 75%;
+                }
 
-            .getting-started:hover {
-                text-decoration: none;
-            }
+                .getting-started {
+                    display: inline-block;
+                    border: 4px var(--main-bg-color) solid;
+                    background: white;
+                    position: relative;
+                    padding: 10px 35px;
+                    -webkit-transition: all 0.3s;
+                    -moz-transition: all 0.3s;
+                    transition: all 0.3s;
+                    border-radius: 30px;
+                }
 
-            .getting-started span {
-                color: var(--main-bg-color);
-                font-size: .8em;
-                display: inline-block;
-                -webkit-transition: all 0.3s;
-                -moz-transition: all 0.3s;
-                transition: all 0.3s;
-            }
+                .getting-started:hover {
+                    text-decoration: none;
+                }
 
-            .getting-started:hover {
-                -webkit-transform: scale(1.2);
-                -moz-transform: scale(1.2);
-                -ms-transform: scale(1.2);
-                transform: scale(1.2);
-                border: 4px #fff solid;
-                background: var(--main-bg-color);
-            }
+                .getting-started span {
+                    color: var(--main-bg-color);
+                    font-size: .8em;
+                    display: inline-block;
+                    -webkit-transition: all 0.3s;
+                    -moz-transition: all 0.3s;
+                    transition: all 0.3s;
+                }
 
-            .getting-started:hover span {
-                -webkit-transform: scale(1);
-                -moz-transform: scale(1);
-                -ms-transform: scale(1);
-                transform: scale(1);
-                color: #fff
-            }
+                .getting-started:hover {
+                    -webkit-transform: scale(1.2);
+                    -moz-transform: scale(1.2);
+                    -ms-transform: scale(1.2);
+                    transform: scale(1.2);
+                    border: 4px #fff solid;
+                    background: var(--main-bg-color);
+                }
 
-            .footer {
-                margin-bottom: 80px;
-            }
-        
-            
-        </style>                                         
+                .getting-started:hover span {
+                    -webkit-transform: scale(1);
+                    -moz-transform: scale(1);
+                    -ms-transform: scale(1);
+                    transform: scale(1);
+                    color: #fff
+                }
+            </style>
 
-        <!-- This is where main application is rendered -->
-        <div class="col-md-6 col-md-offset-3 col-sm-12 welcome-center text-muted text-justify">
-            <h1 id="welcome-page-title">
-                <div class="iva-logo">
-                    <img alt="IVA" src="./img/iva.svg" />
-                    <p class="version">
-                        <span class="bracket">(</span><span>${this.version}</span><span class="bracket">)</span>
-                    </p>
-                    <span class="subtitle">Interactive Variant Analysis</span>
-                </div>
-            </h1>
-            
-            ${UtilsNew.renderHTML(this.config.welcomePageContent)}
-            
-            <!--<input type="text" class="form-control input-lg" id="welcomeSearchTextBoxOld" style="text-align: center;"-->
-            <!--placeholder="Search for a gene, transcript, protein or a variant" on-blur="onBlur" on-keyup="onKeyup">-->
-            <!--<br>-->
-        
-            
-            <!--${false && this._checkProjects() ? html`
-                <div>
-                    <input id="welcomeSearchTextBox" type="text" class="form-control input-lg" list="FeatureDatalist" @change="${this.callAutocomplete}" placeholder="Search for gene symbols, genomic regions or variants" value="">
-                        <datalist id="FeatureDatalist"></datalist>
-                        <!-- Examples -->
-                    <span style="font-size: 0.8em; padding-left: 10px">
-                            Examples - Gene: <a @click="${this.onExampleClick}" data-type="gene" style="cursor: pointer">BRCA2</a>,
-                            Region: <a @click="${this.onExampleClick}" data-type="region" style="cursor: pointer">3</a>, <a @click="${this.onExampleClick}" data-type="region" style="cursor: pointer">3:113000-1150000</a>,
-                            SNP: <a @click="${this.onExampleClick}" data-type="snp" style="cursor: pointer">rs445909</a>
-                            Variant: <a @click="${this.onExampleClick}" data-type="variant" style="cursor: pointer">13:32962274:G:T</a>
-                    </span>
-                </div>` :
-                null}
-            -->
-            
-            <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
-                ${this.config.apps.filter(this.isVisible).map(item => html`
-                    ${item.submenu ? html`
-                        <a class="icon-wrapper" data-cat-id="cat-${item.id}" data-title="${item.name}" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
-                            <div class="hi-icon">
-                                <img alt="${item.name}" src="img/tools/icons/${item.icon}" /> 
-                            </div>
-                            <p>${item.name}</p>
-                            <span class="smaller"></span>
-                        </a>
+            <!-- This is where main application is rendered -->
+            <div>
+                <h1 id="welcome-page-title">
+                    <div class="iva-logo">
+                        <img alt="IVA" src="./img/iva.svg" />
+                        <p class="version">
+                            <span class="bracket">(</span><span>${this.version}</span><span class="bracket">)</span>
+                        </p>
+                        <span class="subtitle">Interactive Variant Analysis</span>
+                    </div>
+                </h1>
+
+                ${UtilsNew.renderHTML(this.config.welcomePageContent)}
+
+                <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
+                    ${this.app.menu.filter(this.isVisible).map(item => html`
+                        ${item.submenu ? html`
+                            <a class="icon-wrapper" data-cat-id="cat-${item.id}" data-title="${item.name}" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
+                                <div class="hi-icon">
+                                    <img alt="${item.name}" src="img/tools/icons/${item.icon}" />
+                                </div>
+                                <p>${item.name}</p>
+                                <span class="smaller"></span>
+                            </a>
                         ` : html`
                             <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
-                            <div class="hi-icon">
-                                <img alt="${item.name}" src="${item.logo}" /> 
-                            </div>
-                            <p>${item.name}</p>
-                            <span class="smaller"></span>
-                        </a>
-                    `}
-                `)}
-            </div>
-
-            ${suite.appConfig === "opencb" ? html`
-                <div class="row text-center">
-                    <a class="getting-started" href="#gettingstarted"><span>Getting started with IVA</span></a>
+                                <div class="hi-icon">
+                                    <img alt="${item.name}" src="${item.logo}" />
+                                </div>
+                                <p>${item.name}</p>
+                                <span class="smaller"></span>
+                            </a>
+                        `}
+                    `)}
                 </div>
-            ` : html`
-                <div class="row text-center">
-                    <a class="getting-started" href="${this.config.about.links.find(link => link.id === "documentation").url}" target="_blank"><span>Documentation</span></a>
-                </div>
-            `}
 
-            <!-- <h4>Note</h4>
-            <small>
-                IVA web application makes an intensive use of the HTML5 standard and other cutting-edge web technologies such as
-                Web Components,
-                so only modern web browsers are fully supported, these include Chrome 49+, Firefox 45+, Microsoft Edge 14+,
-                Safari 10+ and Opera 36+.
-            </small>-->
-            ${UtilsNew.renderHTML(this.config.welcomePageFooter)}
-
-        </div >
-            `;
+                ${suite.appConfig === "opencb" ? html`
+                    <div class="row text-center">
+                        <a class="getting-started" href="#gettingstarted"><span>Getting started with IVA</span></a>
+                    </div>
+                ` : html`
+                    <div class="row text-center">
+                        <a class="getting-started" href="${this.config.about.links.find(link => link.id === "documentation").url}" target="_blank"><span>Documentation</span></a>
+                    </div>
+                `}
+            </div >
+        `;
     }
 
 }

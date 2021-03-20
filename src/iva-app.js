@@ -998,54 +998,51 @@ class IvaApp extends LitElement {
             <loading-bar></loading-bar>
 
             <!-- Left Sidebar: we only display this if more than 1 visible app exist -->
-            ${this.config.apps?.filter(app => this.isVisible(app)).length > 0
-                    ? html`
-                        <div id="overlay" @click="${this.toggleSideNav}"></div>
-                        <div id="side-nav" class="sidenav shadow-lg">
-                            <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
-                            <nav class="navbar" id="sidebar-wrapper" role="navigation">
-                                <a href="#home" @click="${this.sideNavChangeTool}">
-                                    <div class="iva-logo">
-                                        <img src="${this.config.logo}" />
-                                        <span class="subtitle">OpenCB Suite</span>
-                                    </div>
-                                </a>
-                                <ul class="nav sidebar-nav">
-                                    ${!this.isLoggedIn() ? html`
-                                        <li>
-                                            <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${this.sideNavChangeTool}">
-                                                <i href="#login" class="fa fa-3x fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
-                                            </a>
-                                        </li>
-                                    ` : null
-                                    }
-                                    ${this.config?.apps?.filter(item => this.isVisible(item)).map(item => html`
-                                        <li>
-                                            <a href="#cat-${item.id}" role="button" data-id="${item.id}" @click="${this.sideNavChangeTool}">
-                                                <img src="img/tools/icons/${item.icon}" alt="${item.name}"/>  ${item.name}
-                                            </a>
-                                        </li>
-                                    `)}
-                                </ul>
-                            </nav>
-                        </div>`
-                    : null
+            ${this.config.apps?.filter(app => this.isVisible(app)).length > 0 ? html`
+                <div id="overlay" @click="${this.toggleSideNav}"></div>
+                <div id="side-nav" class="sidenav shadow-lg">
+                    <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
+                    <nav class="navbar" id="sidebar-wrapper" role="navigation">
+                        <a href="#home" @click="${this.sideNavChangeTool}">
+                            <div class="iva-logo">
+                                <img src="${this.config.logo}" />
+                                <span class="subtitle">OpenCB Suite</span>
+                            </div>
+                        </a>
+                        <ul class="nav sidebar-nav">
+                            ${!this.isLoggedIn() ? html`
+                                <li>
+                                    <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${this.sideNavChangeTool}">
+                                        <i href="#login" class="fa fa-3x fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
+                                    </a>
+                                </li>
+                                ` : null
+                            }
+                            ${this.config?.apps?.filter(item => this.isVisible(item)).map(item => html`
+                                <li>
+                                    <a href="#home" role="button" data-id="${item.id}" @click="${this.sideNavChangeTool}">
+                                        <img src="img/tools/icons/${item.icon}" alt="${item.name}"/>  ${item.name}
+                                    </a>
+                                </li>
+                            `)}
+                        </ul>
+                    </nav>
+                </div>
+                ` : null
             }
-
 
             <nav class="navbar navbar-inverse main-navbar">
                 <div>
                     <!-- Left Sidebar Icon: we only show the icon if more than 1 visible app exist -->
-                    ${this.config.apps?.filter(app => this.isVisible(app)).length > 0
-                            ? html`
-                                <ul class="nav navbar-nav">
-                                    <li>
-                                        <a href="#" @click="${this.toggleSideNav}" id="waffle-icon-wrapper">
-                                            <div id="waffle-icon"></div>
-                                        </a>
-                                    </li>
-                                </ul>`
-                            : null
+                    ${this.config.apps?.filter(app => this.isVisible(app)).length > 0 ? html`
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="#" @click="${this.toggleSideNav}" id="waffle-icon-wrapper">
+                                    <div id="waffle-icon"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        ` : null
                     }
 
 
@@ -1211,7 +1208,7 @@ class IvaApp extends LitElement {
             <div class="container-fluid">
                 ${this.config.enabledComponents.home ? html`
                     <div class="content" id="home">
-                        <welcome-web .opencgaSession="${this.opencgaSession}" version="${this.config.version}" .cellbaseClient=${this.cellbaseClient} @search="${this.quickSearch}" .config="${this.config}"> </welcome-web>
+                        <welcome-web .app="${this.app}" .opencgaSession="${this.opencgaSession}" version="${this.config.version}" .cellbaseClient=${this.cellbaseClient} @search="${this.quickSearch}" .config="${this.config}"> </welcome-web>
                     </div>
                 ` : null}
 

@@ -15,7 +15,6 @@
  */
 import { LitElement, html } from "/web_modules/lit-element.js";
 import UtilsNew from "./../lib/jsorolla/src/core/utilsNew.js";
-import PolymerUtils from "../lib/jsorolla/src/core/webcomponents/PolymerUtils.js";
 
 export default class WelcomeClinical extends LitElement {
 
@@ -64,8 +63,6 @@ export default class WelcomeClinical extends LitElement {
         return !!(UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotUndefinedOrNull(this.opencgaSession.project));
 
     }
-
-
 
     render() {
         return html`
