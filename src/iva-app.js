@@ -788,12 +788,12 @@ class IvaApp extends LitElement {
 
     toggleSideNav(e) {
         e.preventDefault();
-        const sidenav = this.querySelector("#side-nav");
+        // const sidenav = this.querySelector("#side-nav");
         $("#side-nav").toggleClass("active");
         $("#overlay").toggleClass("active");
     }
 
-    sideNavChangeTool(e) {
+    onChangeApp(e, toggle) {
         // If an App ID exists we display the corresponding app. If not we just show the Suite
         if (e.currentTarget.dataset.id) {
             this.app = this.config.apps.find(app => app.id === e.currentTarget.dataset.id);
@@ -807,11 +807,34 @@ class IvaApp extends LitElement {
             }
         }
 
-        this.toggleSideNav(e);
-        this.changeTool(e);
+        // We only want to toggle when clicked in the sidenav
+        if (toggle) {
+            this.toggleSideNav(e);
+        }
 
+        this.changeTool(e);
         this.requestUpdate();
     }
+
+    // changeApp(id) {
+    //     // If an App ID exists we display the corresponding app. If not we just show the Suite
+    //     if (id) {
+    //         this.app = this.config.apps.find(app => app.id === id);
+    //     } else {
+    //         this.app = {
+    //             name: this.config.name,
+    //             version: this.config.version,
+    //             logo: this.config.logo,
+    //             about: this.config.about,
+    //             userMenu: this.config.userMenu,
+    //         }
+    //     }
+    //
+    //     this.toggleSideNav(e);
+    //     this.changeTool(e);
+    //
+    //     this.requestUpdate();
+    // }
 
     isVisible(item) {
         switch (item?.visibility) {
@@ -924,7 +947,7 @@ class IvaApp extends LitElement {
                     background-color: #fff;
                     overflow-x: hidden;
                     padding-top: 20px;
-                    width: 250px;
+                    width: 320px;
                     visibility: hidden;
                     /*transform: translate(-250px);*/
                     height: 100vh;
@@ -952,7 +975,7 @@ class IvaApp extends LitElement {
                     color: #818181;
                     display: block;
                     transition: 0.3s;
-                    font-size: 13px;
+                    font-size: 14px;
                     text-transform: uppercase;
                     letter-spacing: .2em;
                 }
@@ -1003,7 +1026,7 @@ class IvaApp extends LitElement {
                 <div id="side-nav" class="sidenav shadow-lg">
                     <a href="javascript:void(0)" class="closebtn" @click="${this.toggleSideNav}">&times;</a>
                     <nav class="navbar" id="sidebar-wrapper" role="navigation">
-                        <a href="#home" @click="${this.sideNavChangeTool}">
+                        <a href="#home" @click="${e => this.onChangeApp(e, true)}">
                             <div class="iva-logo">
                                 <img src="${this.config.logo}" />
                                 <span class="subtitle">OpenCB Suite</span>
@@ -1012,15 +1035,15 @@ class IvaApp extends LitElement {
                         <ul class="nav sidebar-nav">
                             ${!this.isLoggedIn() ? html`
                                 <li>
-                                    <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${this.sideNavChangeTool}">
+                                    <a href="#login" class="text-center sidebar-nav-login" role="button" @click="${e => this.onChangeApp(e, true)}">
                                         <i href="#login" class="fa fa-3x fa-sign-in-alt fa-lg icon-padding" aria-hidden="true"></i>Login
                                     </a>
                                 </li>
-                                ` : null
-                            }
+                            ` : null}
+                            
                             ${this.config?.apps?.filter(item => this.isVisible(item)).map(item => html`
                                 <li>
-                                    <a href="#home" role="button" data-id="${item.id}" @click="${this.sideNavChangeTool}">
+                                    <a href="#home" role="button" data-id="${item.id}" @click="${e => this.onChangeApp(e, true)}">
                                         <img src="img/tools/icons/${item.icon}" alt="${item.name}"/>  ${item.name}
                                     </a>
                                 </li>
@@ -1028,7 +1051,7 @@ class IvaApp extends LitElement {
                         </ul>
                     </nav>
                 </div>
-                ` : null
+            ` : null
             }
 
             <nav class="navbar navbar-inverse main-navbar">
@@ -1042,23 +1065,17 @@ class IvaApp extends LitElement {
                                 </a>
                             </li>
                         </ul>
-                        ` : null
-                    }
-
+                    ` : null}
 
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         ${this.app.logo ? html`
                             <a href="#home" class="navbar-brand company-logo" @click="${this.changeTool}">
                                 <img src="${this.app.logo}" alt="logo">
-                            </a>` : null
-                        }
-                        <!-- 
-                            <a class="navbar-brand iva-logo-white" href="#home" id="home-nav" @click="${this.changeTool}">
-                                <img src="${this.app?.icon}" alt="logo"> <b><sup>${this.config.version}</sup></b>
                             </a>
-                        -->
+                        ` : null}
                     </div>
+
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <!-- Controls aligned to the LEFT -->
@@ -1066,29 +1083,30 @@ class IvaApp extends LitElement {
                             <!-- This code parse the config menu arrays and creates a custom menu taking into account visibility -->
                             ${this.app?.menu?.filter?.(item => this.isVisible(item)).map(item => html`
                                 <!-- If there is not submenu we just display a button -->
-                                ${item.submenu && item.submenu.filter(sm => this.isVisible(sm)).length > 0
-                                        ? html`
-                                            <!-- If there is a submenu we create a dropdown menu item -->
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                    ${item.name} <span class="caret"></span>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    ${item.submenu.map(subitem => subitem.category
-                                                            ? html`
-                                                                <li><a class="nav-item-category" href="${subitem.id ? "#" + subitem.id : "javascript: void 0"}">${subitem.name}</a></li>`
-                                                            : subitem.separator
-                                                                    ? html`
-                                                                        <li role="separator" class="divider"></li>`
-                                                                    : html`
-                                                                        <li><a href="#${subitem.id}" @click="${this.changeTool}" data-id="${subitem.id}">${subitem.name}</a></li>
-                                                                    `)}
-                                                </ul>
-                                            </li>`
-                                        : html`
-                                            <li>
-                                                <a href="#${item.id}" role="button" @click="${this.changeTool}">${item.name}</a>
-                                            </li>`
+                                ${item.submenu && item.submenu.filter(sm => this.isVisible(sm)).length > 0 ? html`
+                                    <!-- If there is a submenu we create a dropdown menu item -->
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            ${item.name} <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            ${item.submenu.map(subitem => subitem.category ? html`
+                                                <li>
+                                                    <a class="nav-item-category" href="${subitem.id ? "#" + subitem.id : "javascript: void 0"}">${subitem.name}</a>
+                                                </li>
+                                            ` : subitem.separator ? html`
+                                                <li role="separator" class="divider"></li>
+                                            ` : html`
+                                                <li>
+                                                    <a href="#${subitem.id}" @click="${this.changeTool}" data-id="${subitem.id}">${subitem.name}</a>
+                                                </li>
+                                            `)}
+                                        </ul>
+                                    </li>
+                                ` : html`
+                                    <li>
+                                        <a href="#${item.id}" role="button" @click="${this.changeTool}">${item.name}</a>
+                                    </li>`
                                 }`
                             )}
                         </ul>
@@ -1125,7 +1143,6 @@ class IvaApp extends LitElement {
                                 <job-monitor .opencgaSession="${this.opencgaSession}" @jobSelected="${this.onJobSelected}"></job-monitor>
                             ` : null}
 
-
                             ${false && this.opencgaSession && this.opencgaSession.projects && this.config.search.visible ? html`
                                 <!-- Search menu <form class="navbar-form navbar-left" role="search">
                                         <div class="form-group">
@@ -1144,8 +1161,7 @@ class IvaApp extends LitElement {
                                     </a>
                                 </li>
                                 <li class="separator"></li>
-                            ` : null }
-
+                            ` : null}
 
                             <!-- About dropdown menu-->
                             ${this.app?.about.dropdown ? html`
@@ -1160,7 +1176,7 @@ class IvaApp extends LitElement {
                                     </ul>
                                 </li>
                             ` : this.app?.about.links && this.app.about.links.map(link => html`
-                                    <li>${this.createAboutLink(link, true)}</li>
+                                <li>${this.createAboutLink(link, true)}</li>
                             `) }
 
                             <!-- Login/Logout button -->
@@ -1183,7 +1199,7 @@ class IvaApp extends LitElement {
                                             <li>
                                                 <a href="${item.url}" data-user-menu="${item.id}"><i class="${item.icon} icon-padding" aria-hidden="true"></i> ${item.name}</a>
                                             </li>
-                                        `) : null }
+                                        `) : null}
                                         <li role="separator" class="divider"></li>
                                         <li>
                                             <a id="logoutButton" role="button" @click="${this.logout}" data-user-menu="logout">
@@ -1197,18 +1213,24 @@ class IvaApp extends LitElement {
                     </div>
                 </div>
             </nav>
+
             <!-- End of navigation bar -->
             ${this.signingIn ? html`
                 <div class="login-overlay"><loading-spinner .description="${this.signingIn}"></loading-spinner></div>
             ` : null}
-            <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>-->
 
-            <!-- ${JSON.stringify(this.config.enabledComponents)} -->
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
                 ${this.config.enabledComponents.home ? html`
                     <div class="content" id="home">
-                        <welcome-web .app="${this.app}" .opencgaSession="${this.opencgaSession}" version="${this.config.version}" .cellbaseClient=${this.cellbaseClient} @search="${this.quickSearch}" .config="${this.config}"> </welcome-web>
+                        <welcome-web .app="${this.app}" 
+                                     .opencgaSession="${this.opencgaSession}" 
+                                     version="${this.config.version}" 
+                                     .cellbaseClient=${this.cellbaseClient} 
+                                     @changeApp="${e => this.onChangeApp(e.detail.e, false)}"
+                                     @search="${this.quickSearch}" 
+                                     .config="${this.config}">
+                        </welcome-web>
                     </div>
                 ` : null}
 
@@ -1488,14 +1510,14 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents["cat-browser"] ? html`
                     <div class="content" id="cat-browser">
-                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "browser")}">
+                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.app?.menu.find(item => item.id === "browser")}">
                         </category-page>
                     </div>
                 ` : null}
 
                 ${this.config.enabledComponents["cat-analysis"] ? html`
                     <div class="content" id="cat-analysis">
-                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "analysis")}">
+                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.app?.menu.find(item => item.id === "analysis")}">
                         </category-page>
                     </div>
                 ` : null}

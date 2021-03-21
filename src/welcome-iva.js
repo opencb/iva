@@ -231,7 +231,7 @@ export default class WelcomeIva extends LitElement {
                         ` : html`
                             <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
                                 <div class="hi-icon">
-                                    <img alt="${item.name}" src="${item.logo}" />
+                                    <img alt="${item.name}" src="img/tools/icons/${item.icon}" />
                                 </div>
                                 <p>${item.name}</p>
                                 <span class="smaller"></span>

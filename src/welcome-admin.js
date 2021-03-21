@@ -69,9 +69,32 @@ export default class WelcomeAdmin extends LitElement {
     render() {
         return html`
             <div>
-                Welcome Admin
+                <h1>OpenCGA Admin</h1>
             </div>
-            `;
+
+            <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
+                ${this.app.menu.filter(this.isVisible).map(item => html`
+                    ${item.submenu ? html`
+                        <a class="icon-wrapper" data-cat-id="cat-${item.id}" data-title="${item.name}" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
+                            <div class="hi-icon">
+                                <img alt="${item.name}" src="img/tools/icons/${item.icon}" />
+                            </div>
+                            <p>${item.name}</p>
+                            <span class="smaller"></span>
+                        </a>
+                    ` : html`
+                        <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
+                            <div class="hi-icon">
+                                <img alt="${item.name}" src="${item.logo}" />
+                            </div>
+                            <p>${item.name}</p>
+                            <span class="smaller"></span>
+                        </a>
+                    `}
+                `)}
+            </div>
+
+        `;
     }
 
 }

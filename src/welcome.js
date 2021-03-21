@@ -81,42 +81,18 @@ export default class WelcomeWeb extends LitElement {
         }
     }
 
-    renderSuiteWelome() {
-        return html`
-            <div>
-                <h1 style="text-align: center">
-                    OpenCB Suite
-                </h1>
-                <div style="margin: 20px">
-                    ${UtilsNew.renderHTML(this.config.welcomePageContent)}
-                </div>
-
-                <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
-                    ${this.config.apps.filter(this.isVisible).map(item => html`
-                        <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
-                            <div class="hi-icon">
-                                <img alt="${item.name}" src="${item.logo}" /> 
-                            </div>
-                            <p>${item.name}</p>
-                            <span class="smaller"></span>
-                        </a>
-                    `)}
-                </div>
-            </div>`;
-    }
-
     renderWelcome(app) {
         if (!app || app.id === "suite") {
-            return this.renderSuiteWelome();
+            return this.renderSuiteWelcome();
         } else {
             switch (app.id) {
                 case "iva":
                     return html`
-                        <welcome-iva 
+                        <welcome-iva
                                 .app="${app}"
-                                .opencgaSession="${this.opencgaSession}" 
-                                version="${this.config.version}" 
-                                .cellbaseClient=${this.cellbaseClient} 
+                                .opencgaSession="${this.opencgaSession}"
+                                version="${this.config.version}"
+                                .cellbaseClient=${this.cellbaseClient}
                                 .config="${this.config}">
                         </welcome-iva>`;
                 case "clinical":
@@ -128,13 +104,47 @@ export default class WelcomeWeb extends LitElement {
                 case "admin":
                     return html`
                         <welcome-admin
-                                .opencgaSession="${this.opencgaSession}" 
+                                .opencgaSession="${this.opencgaSession}"
                                 .config="${this.config}">
                         </welcome-admin>`;
                 default:
-                    return this.renderSuiteWelome();
+                    return this.renderSuiteWelcome();
             }
         }
+    }
+
+    renderSuiteWelcome() {
+        return html`
+            <div>
+                <h1 style="text-align: center">
+                    OpenCB Suite
+                </h1>
+                <div style="margin: 20px">
+                    ${UtilsNew.renderHTML(this.config.welcomePageContent)}
+                </div>
+
+                <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
+                    ${this.config.apps.filter(this.isVisible).map(item => html`
+                        <a class="icon-wrapper" href="#home" data-id="${item.id}" @click="${this.onChangeApp}">
+                            <div class="hi-icon">
+                                <img alt="${item.name}" src="${item.logo}" />
+                            </div>
+                            <div><span style="font-weight: bold">${item.name}</span></div>
+                        </a>
+                    `)}
+                </div>
+            </div>`;
+    }
+
+    onChangeApp(e) {
+        this.dispatchEvent(new CustomEvent("changeApp", {
+            detail: {
+                id: e.currentTarget.dataset.id,
+                e: e
+            },
+            bubbles: true,
+            composed: true
+        }));
     }
 
     // TODO Add Behaviour to select different application and render the selected application
@@ -151,7 +161,7 @@ export default class WelcomeWeb extends LitElement {
             </style>
 
             <div class="col-md-8 col-md-offset-2 col-sm-12 welcome-center text-muted text-justify">
-                <div style="margin: 20px">
+                <div style="margin: 40px">
                     ${this.renderWelcome(this.app)}
                 </div>
 

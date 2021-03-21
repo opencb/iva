@@ -83,7 +83,7 @@ const application = {
 const suite = {
     name: "OpenCGA Suite",
     version: "v2.1.0-beta",
-    logo: "img/iva2.svg",
+    logo: "img/opencb-logo.png",
 
     mode: "development",
     appConfig: "opencb",
@@ -118,7 +118,7 @@ const suite = {
     // Components in the welcome page
     welcomePageContent: `
             <p class="text-center">
-                Welcome to the Suite tool for whole genome variant analysis.<br />
+                Welcome to the OpenCB Suite for whole genome variant analysis.<br />
                 This interactive tool allows finding genes affected by deleterious variants<br />that segregate along family
                 pedigrees, case-controls or sporadic samples.
             </p><br>`,
@@ -129,8 +129,8 @@ const suite = {
     apps: [
         {
             id: "iva",
-            name: "IVA",
-            logo: "img/iva-white.svg",
+            name: "Variant Analysis (IVA)",
+            logo: "img/iva-black.svg",
             icon: "variant_browser.svg",
             visibility: "public",
             menu: [
@@ -140,34 +140,34 @@ const suite = {
                     // fa_icon: "fa fa-list",
                     icon: "variant_browser.svg",
                     visibility: "public",
-                    submenu: [
-                        {
-                            id: "browser",
-                            name: "Variant Browser",
-                            acronym: "VB",
-                            description: `
-                                <p>Explore all variants</p>
-                                <ul>
-                                    <li>Rich annotation and links to leading reference databases</li>
-                                    <li>Filter by gene, consequence, frequency and much more</li>
-                                </ul>`,
-                            visibility: "public",
-                            // fa_icon: "fa fa-list",
-                            icon: "variant_browser.svg",
-                            thumbnail: "variant-browser.png"
-                        }
-                    ]
+                    // submenu: [
+                    //     {
+                    //         id: "browser",
+                    //         name: "Variant Browser",
+                    //         acronym: "VB",
+                    //         description: `
+                    //             <p>Explore all variants</p>
+                    //             <ul>
+                    //                 <li>Rich annotation and links to leading reference databases</li>
+                    //                 <li>Filter by gene, consequence, frequency and much more</li>
+                    //             </ul>`,
+                    //         visibility: "public",
+                    //         // fa_icon: "fa fa-list",
+                    //         icon: "variant_browser.svg",
+                    //         thumbnail: "variant-browser.png"
+                    //     }
+                    // ]
                 },
                 {
-                    id: "browser",
-                    name: "Case Interpreter",
-                    // fa_icon: "fa fa-list",
+                    id: "analysis",
+                    name: "Variant Analysis",
                     icon: "variant_browser.svg",
                     visibility: "public",
                     submenu: [
                         {
                             id: "browser",
                             name: "Variant Browser",
+                            icon: "variant_browser.svg",
                             acronym: "VB",
                             description: `
                             <p>Explore all variants identified by the 100,000 Genomes Project</p>
@@ -177,7 +177,6 @@ const suite = {
                             </ul>`,
                             visibility: "public",
                             // fa_icon: "fa fa-list",
-                            icon: "variant_browser.svg",
                             thumbnail: "variant-browser.png"
                         }
                     ]
@@ -212,11 +211,95 @@ const suite = {
             ],
         },
         {
-            id: "admin",
-            name: "OpenCGA Admin",
-            logo: "interpretation_portal.svg",
+            id: "clinical",
+            name: "Clinical (XetaBase)",
+            logo: "img/tools/icons/interpretation_portal.svg",
+            icon: "interpretation_portal.svg",
             visibility: "public",
             menu: [
+                {
+                    id: "browser",
+                    name: "Users",
+                    fa_icon: "fa fa-list",
+                    icon: "variant_browser.svg",
+                    visibility: "public",
+                    submenu: [
+                        {
+                            id: "browser",
+                            name: "Variant Browser",
+                            acronym: "VB",
+                            description: `
+                            <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                            <ul>
+                                <li>Rich annotation and links to leading reference databases</li>
+                                <li>Filter by gene, consequence, frequency and much more</li>
+                            </ul>`,
+                            visibility: "public",
+                            fa_icon: "fa fa-list",
+                            icon: "variant_browser.svg",
+                            thumbnail: "variant-browser.png"
+                        }
+                    ]
+                },
+            ],
+            fileExplorer: {
+                visibility: "private"
+            },
+            jobMonitor: {
+                visibility: "none"
+            },
+            search: {
+                placeholder: "Search",
+                visible: false
+            },
+            about: {
+                dropdown: true,
+                links: [
+                    {id: "code", name: "Source code", url: "https://github.com/opencb/iva", icon: "fa fa-code"},
+                    {id: "documentation", name: "Documentation", url: "http://docs.opencb.org/display/iva", icon: "fa fa-book"},
+                    {id: "tutorial", name: "Tutorial", url: "http://docs.opencb.org/display/iva/Tutorials", icon: "fa fa-question-circle"},
+                    {id: "releases", name: "Releases", url: "https://github.com/opencb/iva/releases", icon: "fa fa-archive"},
+                    {id: "about", name: "About", url: "#about", icon: "fa fa-info-circle"},
+                ]
+            },
+            userMenu: [
+                {id: "account", name: "Your Profile", url: "#account", icon: "fa fa-user", visibility: "private"},
+                {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
+                {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"}
+                // {id: "settings", name: "Settings", url: "#settings", icon: "fas fa-cogs"}
+            ],
+        },
+        {
+            id: "admin",
+            name: "OpenCGA Admin",
+            logo: "img/tools/icons/file_explorer.svg",
+            icon: "file_explorer.svg",
+            visibility: "public",
+            menu: [
+                {
+                    id: "browser",
+                    name: "Users",
+                    fa_icon: "fa fa-list",
+                    icon: "variant_browser.svg",
+                    visibility: "public",
+                    submenu: [
+                        {
+                            id: "browser",
+                            name: "Variant Browser",
+                            acronym: "VB",
+                            description: `
+                            <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                            <ul>
+                                <li>Rich annotation and links to leading reference databases</li>
+                                <li>Filter by gene, consequence, frequency and much more</li>
+                            </ul>`,
+                            visibility: "public",
+                            fa_icon: "fa fa-list",
+                            icon: "variant_browser.svg",
+                            thumbnail: "variant-browser.png"
+                        }
+                    ]
+                },
                 {
                     id: "browser",
                     name: "Users",

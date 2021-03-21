@@ -135,7 +135,7 @@ export default class CategoryPage extends LitElement {
             }
         </style>
 
-        <tool-header title="${this.config.title}" icon="${this.config.icon}"></tool-header>
+        <tool-header title="${this.config.name}" icon="${this.config.icon}"></tool-header>
         
         <div id="category-page">
             ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item, i) => item.category ? html`
