@@ -218,13 +218,8 @@ class IvaApp extends LitElement {
         // We set the global Polymer variable, this produces one single event
         this.config = _config;
 
-        this.app = {
-            id: this.config.id,
-            name: this.config.name,
-            about: this.config.about,
-            logo: this.config.logo,
-            userMenu: this.config.userMenu,
-        }
+        // Initially we load the SUIte config
+        this.app = this.getSuiteConfig();
 
         // We need to listen to hash fragment changes to update the display and breadcrumb
         const _this = this;
@@ -237,7 +232,7 @@ class IvaApp extends LitElement {
         this.tool = window.location.hash.split("/")[0];
         if (UtilsNew.isEmpty(this.tool)) {
             this.tool = "#home";
-            this.app = null;
+            // this.app = null;
         }
 
         // Go to the page that tool has
@@ -438,7 +433,7 @@ class IvaApp extends LitElement {
 
         if (this.tool === "#login") {
             this.tool = "#home";
-            this.app = null;
+            this.app = this.getSuiteConfig();
         }
 
         // 60000 ms = 1 min. Every 1 min we check if session is close to expire.
@@ -454,10 +449,8 @@ class IvaApp extends LitElement {
         await this.opencgaClient.logout();
         this._createOpencgaSessionFromConfig();
 
-        // this.config.menu = [...application.menu];
-
         this.tool = "#home";
-        this.app = null;
+        this.app = this.getSuiteConfig();
         window.location.hash = "home";
         window.clearInterval(this.intervalCheckSession);
     }
@@ -798,13 +791,7 @@ class IvaApp extends LitElement {
         if (e.currentTarget.dataset.id) {
             this.app = this.config.apps.find(app => app.id === e.currentTarget.dataset.id);
         } else {
-            this.app = {
-                name: this.config.name,
-                version: this.config.version,
-                logo: this.config.logo,
-                about: this.config.about,
-                userMenu: this.config.userMenu,
-            }
+            this.app = this.getSuiteConfig();
         }
 
         // We only want to toggle when clicked in the sidenav
@@ -816,25 +803,15 @@ class IvaApp extends LitElement {
         this.requestUpdate();
     }
 
-    // changeApp(id) {
-    //     // If an App ID exists we display the corresponding app. If not we just show the Suite
-    //     if (id) {
-    //         this.app = this.config.apps.find(app => app.id === id);
-    //     } else {
-    //         this.app = {
-    //             name: this.config.name,
-    //             version: this.config.version,
-    //             logo: this.config.logo,
-    //             about: this.config.about,
-    //             userMenu: this.config.userMenu,
-    //         }
-    //     }
-    //
-    //     this.toggleSideNav(e);
-    //     this.changeTool(e);
-    //
-    //     this.requestUpdate();
-    // }
+    getSuiteConfig() {
+        return {
+            name: this.config.name,
+            version: this.config.version,
+            logo: this.config.logo,
+            about: this.config.about,
+            userMenu: this.config.userMenu,
+        }
+    }
 
     isVisible(item) {
         switch (item?.visibility) {
@@ -1069,7 +1046,7 @@ class IvaApp extends LitElement {
 
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        ${this.app.logo ? html`
+                        ${this.app?.logo ? html`
                             <a href="#home" class="navbar-brand company-logo" @click="${this.changeTool}">
                                 <img src="${this.app.logo}" alt="logo">
                             </a>

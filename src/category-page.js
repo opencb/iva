@@ -150,7 +150,7 @@ export default class CategoryPage extends LitElement {
                     ` : null}
                         
                             <div class="text-icon-wrapper">
-                                <text-icon title="${item.title}" color="${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}" acronym="${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}"></text-icon>
+                                <text-icon title="${item.title}" color="${i % 2 === 0 ? "green" : i % 3 === 0 ? "red": ""}" acronym="${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}"></text-icon>
                                 <!--<div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">
                                     ${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}
                                     
