@@ -277,9 +277,9 @@ const suite = {
             visibility: "public",
             menu: [
                 {
-                    id: "browser",
-                    name: "Users",
-                    fa_icon: "fa fa-list",
+                    id: "study-dashboard",
+                    name: "Study Dashboard",
+                    fa_icon: "fas fa-file-invoice",
                     icon: "variant_browser.svg",
                     visibility: "public",
                     submenu: [
@@ -301,10 +301,10 @@ const suite = {
                     ]
                 },
                 {
-                    id: "browser",
-                    name: "Users",
-                    fa_icon: "fa fa-list",
-                    icon: "variant_browser.svg",
+                    id: "opencga-admin",
+                    name: "Opencga Admin",
+                    fa_icon: "fas fa-user-shield",
+                    icon: "file_explorer.svg",
                     visibility: "public",
                     submenu: [
                         {

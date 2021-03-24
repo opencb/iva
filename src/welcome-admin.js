@@ -56,6 +56,7 @@ export default class WelcomeAdmin extends LitElement {
             this.opencgaSessionObserver();
         }
 
+
         super.update(changedProperties);
 
     }
@@ -83,23 +84,44 @@ export default class WelcomeAdmin extends LitElement {
 
 
 
-// <study-dashboard
-// .config=${this.config}
-//                     .opencgaSession=${this.opencgaSession}>
-// </study-dashboard>
+    // <study-dashboard
+    // .config=${this.config}
+    //                     .opencgaSession=${this.opencgaSession}>
+    // </study-dashboard>
     // TODO Add content 
     render() {
         return html`
-            <div>ksaksa aslklks salksalk sallklk as</div>
+                <h1 style="text-align: center">
+                    Administration
+                </h1>
+                <div style="margin: 20px">
+                    ${UtilsNew.renderHTML(this.config.welcomePageContent)}
+                </div>
 
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
-                <a class="icon-wrapper" href="#study-dashboard"">
-                    <p>Study Dashboard</p>
-                    <span class="smaller"></span>
-                </a>
-            </div>
-
-        `;
+                ${this.app?.menu?.filter(this.isVisible).map(item => html`
+                    ${item.submenu ? html`
+                        <a class="icon-wrapper" data-title="${item.name}" href="#${item.id}">
+                            <div class="hi-icon">
+                                <img alt="${item.name}" src="img/tools/icons/${item.icon}" />
+                            </div>
+                            <div><span style="font-weight: bold">${item.name}</span></div>
+                        </a>
+                            <span class="smaller"></span>
+                        </a>
+                    ` : html`
+                        <a class="icon-wrapper" href="#${item.id}">
+                            <div class="hi-icon">
+                                <img alt="${item.name}" src="img/tools/icons/${item.icon}" />
+                            </div>
+                            <div><span style="font-weight: bold">${item.name}</span></div>
+                        </a>
+                            <div><span style="font-weight: bold">${item.name}</span></div>
+                            <span class="smaller"></span>
+                        </a>
+                    `}
+                `)}
+            </div>`;
     }
 
 }
