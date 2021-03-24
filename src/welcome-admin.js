@@ -57,7 +57,7 @@ export default class WelcomeAdmin extends LitElement {
         }
 
         super.update(changedProperties);
-        
+
     }
 
 
@@ -82,13 +82,23 @@ export default class WelcomeAdmin extends LitElement {
     }
 
 
+
+// <study-dashboard
+// .config=${this.config}
+//                     .opencgaSession=${this.opencgaSession}>
+// </study-dashboard>
     // TODO Add content 
     render() {
         return html`
-            <study-dashboard 
-                .config=${this.config} 
-                .opencgaSession=${this.opencgaSession}>
-            </study-dashboard>
+            <div>ksaksa aslklks salksalk sallklk as</div>
+
+            <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
+                <a class="icon-wrapper" href="#study-dashboard"">
+                    <p>Study Dashboard</p>
+                    <span class="smaller"></span>
+                </a>
+            </div>
+
         `;
     }
 

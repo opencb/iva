@@ -209,7 +209,8 @@ class IvaApp extends LitElement {
             "alignment-stats",
             "coverage-index",
             "job-view",
-            "rga"];
+            "rga",
+            "study-dashboard"];
 
         for (const component of components) {
             _config.enabledComponents[component] = false;
@@ -1725,6 +1726,14 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null
                 }
+
+                <!-- Admin -->
+                ${this.config.enabledComponents["study-dashboard"] ? html`
+                    <tool-header title="Study Dashboard" icon="${"fas fa-rocket"}"></tool-header>
+                    <div id="coverage-index" class="content col-md-10 col-md-offset-1">
+                        <study-dashboard .opencgaSession="${this.opencgaSession}"></study-dashboard>
+                    </div>
+                ` : null}
             </div>
             <notification-element .queue="${new NotificationQueue().get()}"></notification-element>
         `;
