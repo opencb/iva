@@ -1069,9 +1069,9 @@ class IvaApp extends LitElement {
 
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        ${this.app.logo ? html`
+                        ${this.app?.logo ? html`
                             <a href="#home" class="navbar-brand company-logo" @click="${this.changeTool}">
-                                <img src="${this.app.logo}" alt="logo">
+                                <img src="${this.app?.logo}" alt="logo">
                             </a>
                         ` : null}
                     </div>

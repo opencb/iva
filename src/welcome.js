@@ -104,6 +104,7 @@ export default class WelcomeWeb extends LitElement {
                 case "admin":
                     return html`
                         <welcome-admin
+                                .app="${app}"
                                 .opencgaSession="${this.opencgaSession}"
                                 .config="${this.config}">
                         </welcome-admin>`;
