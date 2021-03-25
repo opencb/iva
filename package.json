@@ -78,7 +78,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "crisper": "~2.1.1",
     "css-loader": "^3.4.2",
-    "cypress": "^6.4.0",
+    "cypress": "^6.8.0",
     "cypress-wait-until": "^1.7.1",
     "esinstall": "^1.0.2",
     "eslint": "^7.9.0",
