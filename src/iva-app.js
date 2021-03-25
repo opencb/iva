@@ -82,6 +82,7 @@ import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysi
 import "../lib/jsorolla/src/core/webcomponents/file/opencga-file-manager.js";
 import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
 import "../lib/jsorolla/src/core/webcomponents/loading-spinner.js";
+import "../lib/jsorolla/src/core/webcomponents/study/study-admin.js";
 // import "../lib/jsorolla/src/core/webcomponents/clinical/rga/rga-browser.js";
 
 // import "./loading-bar.js";
@@ -211,7 +212,8 @@ class IvaApp extends LitElement {
             "job-view",
             "rga",
             "study-dashboard",
-            "opencga-admin"];
+            "opencga-admin",
+            "study-admin"];
 
         for (const component of components) {
             _config.enabledComponents[component] = false;
@@ -1736,11 +1738,17 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
 
-
                 ${this.config.enabledComponents["opencga-admin"] ? html`
                     <tool-header title="Study Dashboard" icon="${"fas fa-rocket"}"></tool-header>
                     <div id="coverage-index" class="content col-md-10 col-md-offset-1">
                         <study-dashboard .opencgaSession="${this.opencgaSession}"></study-dashboard>
+                    </div>
+                ` : null}
+
+                ${this.config.enabledComponents["study-admin"] ? html`
+                    <tool-header title="Study Admin" icon="${"fas fa-rocket"}"></tool-header>
+                    <div id="coverage-index" class="content ">
+                        <study-admin .opencgaSession="${this.opencgaSession}"></study-admin>
                     </div>
                 ` : null}
             </div>
