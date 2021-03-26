@@ -1750,7 +1750,7 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents["study-admin"] ? html`
                     <tool-header title="Study Admin" icon="${"fas fa-rocket"}"></tool-header>
-                    <div id="coverage-index" class="content ">
+                    <div class="content">
                         <study-admin .studyId="${this.studyAdminFqn}" .opencgaSession="${this.opencgaSession}"></study-admin>
                     </div>
                 ` : null}
