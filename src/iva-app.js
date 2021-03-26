@@ -641,6 +641,9 @@ class IvaApp extends LitElement {
                 case "#sampleCancerVariantStatsBrowser":
                     this.sampleId = feature;
                     break;
+                case "#study-admin":
+                    this.studyAdminFqn = arr[1];
+                    break;
             }
 
 
@@ -1748,7 +1751,7 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["study-admin"] ? html`
                     <tool-header title="Study Admin" icon="${"fas fa-rocket"}"></tool-header>
                     <div id="coverage-index" class="content ">
-                        <study-admin .opencgaSession="${this.opencgaSession}"></study-admin>
+                        <study-admin .studyId="${this.studyAdminFqn}" .opencgaSession="${this.opencgaSession}"></study-admin>
                     </div>
                 ` : null}
             </div>
