@@ -1,6 +1,8 @@
 :root {
     --main-bg-color: #0c2f4c;
-    --main-bg-color-darker: #09243a;
+    --main-color-darker: #09243a;
+    --main-color-link: #286090;
+    --main-color-hover: #23527c;
 }
 
 body, * {
@@ -12,11 +14,11 @@ p {
 }
 
 a:link, a:visited {
-    color: #286090;
+    color: var(--main-color-link);
 }
 
 a:focus, a:hover {
-    /*color: #333;*/
+    color: var(--main-color-hover);
     text-decoration: none;
 }
 
