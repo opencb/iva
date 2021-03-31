@@ -324,6 +324,7 @@ class IvaApp extends LitElement {
         const _this = this;
         const opencgaSession = this.opencgaClient.createSession()
             .then(response => {
+                debugger
                 console.log("_createOpenCGASession", response);
                 // check if project array has been defined in the config.js
                 if (UtilsNew.isNotEmptyArray(_this.config.opencga.projects)) {
@@ -848,6 +849,41 @@ class IvaApp extends LitElement {
         }
     }
 
+    onSessionUpdateRequest() {
+        this._createOpenCGASession();
+        this.opencgaSession
+        debugger
+    }
+
+    onStudyUpdateRequest(e) {
+        if (e.detail.value) {
+            this.opencgaSession.opencgaClient.studies().info(e.detail.value)
+                .then(res => {
+                    const updatedStudy = res.responses[0].results[0];
+                    for (let project of this.opencgaSession.user.projects) {
+                        if (project.studies?.length > 0) {
+                            let studyIndex = project.studies.findIndex(study => study.fqn === e.detail.value);
+                            if (studyIndex >= 0) {
+                                project.studies[studyIndex] = updatedStudy;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (this.opencgaSession.study && this.opencgaSession.study.fqn === e.detail.value) {
+                        this.opencgaSession.study = updatedStudy;
+                    }
+
+                    this.opencgaSession = {...this.opencgaSession};
+                    // this.requestUpdate();
+                })
+                .catch(e => {
+                    console.error(e);
+                    params.error(e);
+                });
+        }
+    }
+
     render() {
         return html`
             <style>
@@ -1103,13 +1139,13 @@ class IvaApp extends LitElement {
                                     <a href="#" class="dropdown-toggle study-switcher" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-cy="active-study">
                                         <div><i class="fa fa-database fa-lg" style="padding-right: 10px"></i></div>
                                         <div style="margin-right: 5px">
-                                            <p class="project-name">${this.opencgaSession.project.id}</p>
-                                            <p class="study-id">${this.opencgaSession.study.name}</p>
+                                            <p class="project-name">${this.opencgaSession.project?.id}</p>
+                                            <p class="study-id">${this.opencgaSession.study?.name}</p>
                                         </div>
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        ${this.opencgaSession.projects.map(project => html`
+                                        ${this.opencgaSession.projects.filter(project => project?.studies.length > 0).map(project => html`
                                             <li><a title="${project.fqn}"><b>${project.name} [${project.fqn.split("@")[0]}]</b></a></li>
                                             ${project.studies && project.studies.length && project.studies.map(study => html`
                                                 <li>
@@ -1737,21 +1773,31 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["study-dashboard"] ? html`
                     <tool-header title="Study Dashboard" icon="${"fas fa-rocket"}"></tool-header>
                     <div id="coverage-index" class="content col-md-10 col-md-offset-1">
-                        <study-dashboard .opencgaSession="${this.opencgaSession}"></study-dashboard>
+                        <study-dashboard 
+                                .opencgaSession="${this.opencgaSession}"
+                                @sessionUpdateRequest="${this.onSessionUpdateRequest}">
+                        </study-dashboard>
                     </div>
                 ` : null}
 
                 ${this.config.enabledComponents["opencga-admin"] ? html`
                     <tool-header title="Study Dashboard" icon="${"fas fa-rocket"}"></tool-header>
                     <div id="coverage-index" class="content col-md-10 col-md-offset-1">
-                        <study-dashboard .opencgaSession="${this.opencgaSession}"></study-dashboard>
+                        <study-dashboard 
+                                .opencgaSession="${this.opencgaSession}"
+                                @sessionUpdateRequest="${this.onSessionUpdateRequest}">
+                        </study-dashboard>
                     </div>
                 ` : null}
 
                 ${this.config.enabledComponents["study-admin"] ? html`
                     <tool-header title="Study Admin" icon="${"fas fa-rocket"}"></tool-header>
                     <div class="content">
-                        <study-admin .studyId="${this.studyAdminFqn}" .opencgaSession="${this.opencgaSession}"></study-admin>
+                        <study-admin 
+                                .studyId="${this.studyAdminFqn}" 
+                                .opencgaSession="${this.opencgaSession}" 
+                                @studyUpdateRequest="${this.onStudyUpdateRequest}">
+                        </study-admin>
                     </div>
                 ` : null}
             </div>
