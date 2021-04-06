@@ -13,6 +13,7 @@ jobs:
       - name: IVA Npm install
         run: npm install
       - name: Jsorolla Npm install
+        run: |
           git submodule update --init
           cd lib/jsorolla
           npm run install
