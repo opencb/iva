@@ -12,7 +12,9 @@ jobs:
       ## Install deps and build IVA
       - uses: actions/checkout@v2
       - name: IVA Npm install and Prepare
-        run: npm install && npm run prepare
+        run: |
+          npm install && npm run prepare
+          npm install bower
       - name: Jsorolla Npm install
         run: |
           git submodule update --init
