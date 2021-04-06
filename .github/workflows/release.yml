@@ -2,9 +2,9 @@ name: "release"
 
 on:
   push:
-    #branches-ignore:
-    #  - '**'
-    branches: [ CI-CD ]
+    branches-ignore:
+      - '**'
+    #branches: [ master ]
 
 jobs:
   build:
