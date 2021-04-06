@@ -2,7 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ CI-CD ]
+    branches-ignore:
+      - '**'
+    #branches: [ develop ]
 
 jobs:
   build:
