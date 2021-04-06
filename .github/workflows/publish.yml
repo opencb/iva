@@ -21,7 +21,7 @@ jobs:
         run: npm run build
       - name: LS
         run: ls
-      - name: Temporarily save webpack artifact
+      - name: Upload webpack artifact
         uses: actions/upload-artifact@v2
         with:
           name: webpack-artifact
@@ -35,7 +35,7 @@ jobs:
     steps:
       ## Publish docker image to DockerHub
       - uses: actions/checkout@v2
-      - name: Retrieve built package
+      - name: Download webpack artifact
         uses: actions/download-artifact@v2
         with:
           name: webpack-artifact
@@ -48,4 +48,4 @@ jobs:
       - name: Login to dockerhub
         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_HUB_USER }} --password-stdin
       - name: Build and Publish Docker image
-        run: python3 ./docker/docker-build.py push --images app --tag gel-${{ steps.package-version.outputs.version }}_dev
+        run: python3 ./docker/docker-build.py push --images app --tag gel-${{ steps.package-version.outputs.version }}_dev+test
