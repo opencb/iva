@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    name: Install deps and Build
     runs-on: ubuntu-18.04
     steps:
       ## Install deps and build IVA
@@ -16,7 +17,7 @@ jobs:
         run: |
           git submodule update --init
           cd lib/jsorolla
-          npm run install
+          npm install
       - name: Npm build
         run: npm run build
       - name: LS
