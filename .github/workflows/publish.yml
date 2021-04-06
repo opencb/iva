@@ -17,7 +17,7 @@ jobs:
         run: |
           git submodule update --init
           cd lib/jsorolla
-          npm install -g bower
+          npm install bower
           npm install
       - name: Npm build
         run: npm run build
