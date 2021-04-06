@@ -52,4 +52,4 @@ jobs:
       - name: Login to dockerhub
         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_HUB_USER }} --password-stdin
       - name: Build and Publish Docker image
-        run: python3 ./docker/docker-build.py push --images app --tag gel-${{ steps.package-version.outputs.version }}_dev_test
+        run: python3 ./docker/docker-build.py push --images app --tag ${{ steps.package-version.outputs.version }}
