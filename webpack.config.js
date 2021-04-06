@@ -9,6 +9,8 @@ const PluginProposalExportDefaultFrom = require("@babel/plugin-proposal-export-d
 const MergeIntoSingleFilePlugin = require("webpack-merge-and-include-globally");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
+const packageJson = require("./package.json");
 
 const DIST_PATH = path.resolve(__dirname, "build/");
 
@@ -37,15 +39,21 @@ module.exports = {
             minify: {
                 removeAttributeQuotes: true,
                 collapseWhitespace: true
-                //removeComments: true //cannot be uncommented because of HtmlReplaceWebpackPlugin depends on comments
+                // removeComments: true //cannot be uncommented because of HtmlReplaceWebpackPlugin depends on comments
             }
         }),
         new HtmlReplaceWebpackPlugin([
             {
                 // mimic the behaviour of Grunt processhtml (for the assets defined in MergeIntoSingleFilePlugin())
                 pattern: /<!-- build:([\s\S]*?)\[([\s\S]*?)] -->[\s\S]*?<!-- \/build -->/m,
-                replacement: function(match, type, path) {
+                replacement: function (match, type, path) {
                     return tpl(path)[type];
+                }
+            },
+            {
+                pattern: /\[build-signature\]/m,
+                replacement: function (match, type, path) {
+                    return `${packageJson.name} ${packageJson.version} - Build generated on: ${new Date()}`;
                 }
             }
         ]
@@ -53,6 +61,7 @@ module.exports = {
         new MergeIntoSingleFilePlugin({
             files: {
                 "assets/css/styles.css": [
+                    "lib/jsorolla/styles/css/global.css",
                     "lib/jsorolla/styles/css/style.css",
                     "src/styles/toggle-switch.css",
                     "src/styles/magic-check.css",
@@ -97,7 +106,8 @@ module.exports = {
                     "./node_modules/tokenize2/dist/tokenize2.min.js",
                     "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js",
                     "./node_modules/@svgdotjs/svg.js/dist/svg.min.js",
-                    "./node_modules/sweetalert2/dist/sweetalert2.js"
+                    "./node_modules/sweetalert2/dist/sweetalert2.js",
+                    "./node_modules/clipboard/dist/clipboard.min.js"
                 ]
             },
             transform: {
@@ -106,6 +116,16 @@ module.exports = {
             }
         }),
         new CopyWebpackPlugin([
+            {
+                context: "./",
+                from: "LICENSE",
+                to: DIST_PATH
+            },
+            {
+                context: "./",
+                from: "README.md",
+                to: DIST_PATH
+            },
             {
                 context: "./src/conf",
                 from: "**/*.js",
@@ -142,7 +162,7 @@ module.exports = {
 
             }
         ]),
-        /*new MethodExtractor({options: true, output: DIST_PATH + "/conf", components: [
+        /* new MethodExtractor({options: true, output: DIST_PATH + "/conf", components: [
             "./lib/jsorolla/src/core/webcomponents/opencga/catalog/cohorts/opencga-cohort-browser.js"
             ]})*/
         // ignore is not the best way to externalize a resource, but webpack don't support external ES modules yet.
@@ -150,20 +170,22 @@ module.exports = {
         // why do whe need to bundle iva-app in webpack at all then? Because we need to process litElement imports
         new webpack.IgnorePlugin({
             checkResource(resource) {
-                //console.log("res", resource)
-                //if (resource === "./conf/opencga-variant-browser.config.js") return true;
-                //return false;
+                // console.log("res", resource)
+                // if (resource === "./conf/opencga-variant-browser.config.js") return true;
+                // return false;
             }
 
-            //resourceRegExp: /import [\s\S]+? from "\.\/\.\.\/lib\/jsorolla\/dist\/main\.js";/
-            //resourceRegExp: /import [\s\S]+? from "main\.js";/
-            //resourceRegExp: /^\.\/locale$/,
-            //contextRegExp: /moment$/
+            // resourceRegExp: /import [\s\S]+? from "\.\/\.\.\/lib\/jsorolla\/dist\/main\.js";/
+            // resourceRegExp: /import [\s\S]+? from "main\.js";/
+            // resourceRegExp: /^\.\/locale$/,
+            // contextRegExp: /moment$/
         })
+        // new ESLintPlugin({fix:false})
+
     ],
     optimization: {
         minimize: true
-        /*minimizer: [
+        /* minimizer: [
             new TerserPlugin({
                 terserOptions: {
                     keep_classnames: true,
@@ -180,12 +202,12 @@ module.exports = {
     module: {
         rules: [
             // es-lint check step
-            /*{
+            /* {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: ["babel-loader", "eslint-loader"]
             },*/
-            /*{
+            /* {
                 // Test for a polyfill (or any file) and it won't be included in your
                 // bundle
                 test: path.resolve(__dirname, "src/conf/external-config.js"),
@@ -211,7 +233,7 @@ module.exports = {
                         ]],
                         plugins: [
                             "@babel/plugin-proposal-export-default-from",
-                            //"@babel/regenerator-runtime/runtime",
+                            // "@babel/regenerator-runtime/runtime",
                             "@babel/transform-runtime",
                             ["@babel/plugin-proposal-class-properties", {"loose": true}]
                         ]
@@ -254,7 +276,7 @@ module.exports = {
                     ]
 
                 }
-            },
+            }
 
         ]
 

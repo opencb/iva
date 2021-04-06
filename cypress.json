@@ -2,5 +2,12 @@
   "baseUrl": "http://localhost:3000/src/",
   "chromeWebSecurity": false,
   "viewportWidth": 1600,
-  "viewportHeight": 660
+  "viewportHeight": 660,
+  "reporter": "mochawesome",
+  "reporterOptions": {
+      "overwrite": false,
+      "html": false,
+      "json": true
+  }
+
 }

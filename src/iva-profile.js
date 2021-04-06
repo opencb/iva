@@ -17,7 +17,7 @@
 import {LitElement, html} from "/web_modules/lit-element.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import "../lib/jsorolla/src/core/webcomponents/commons/view/data-form.js";
-import "../lib/jsorolla/src/core/webcomponents/tool-header.js";
+import "../lib/jsorolla/src/core/webcomponents/commons/tool-header.js";
 
 export default class IvaProfile extends LitElement {
 
@@ -107,6 +107,15 @@ export default class IvaProfile extends LitElement {
                             type: "custom",
                             display: {
                                 render: field => `${field?.name} (${UtilsNew.dateFormatter(field?.date)})`
+                            }
+                        },
+                        {
+                            name: "Data release",
+                            type: "custom",
+                            field: "project.attributes",
+                            display: {
+                                visible: data => !!data.project?.attributes?.release,
+                                render: attributes => attributes?.release
                             }
                         },
                         {

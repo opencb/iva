@@ -6,6 +6,7 @@ node_modules
 web_modules
 private
 web_modules
+iva-*.tar.gz
 
 # General
 *.jar
