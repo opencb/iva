@@ -262,6 +262,10 @@ class IvaApp extends LitElement {
             this.requestUpdate();
         }, false);
 
+        globalThis.addEventListener("signingInError", e => {
+            new NotificationQueue().push("Error", e.detail.value, "error", true, false);
+        }, false);
+
     }
 
     connectedCallback() {
@@ -957,7 +961,6 @@ class IvaApp extends LitElement {
                     justify-content: center;
                 }
 
-
                 /* The side navigation menu */
                 #side-nav {
                     position: fixed;
@@ -1028,6 +1031,7 @@ class IvaApp extends LitElement {
                 #side-nav .nav a.sidebar-nav-login {
                     padding: 20px 0;
                 }
+
                 /*#progress-bar {
                     width: 100%;
                     position: fixed;
@@ -1238,6 +1242,7 @@ class IvaApp extends LitElement {
             ${this.signingIn ? html`
                 <div class="login-overlay"><loading-spinner .description="${this.signingIn}"></loading-spinner></div>
             ` : null}
+            <!--<div class="alert alert-info">${JSON.stringify(this.queries)}</div>-->
 
             <!-- This is where main IVA application is rendered -->
             <div class="container-fluid">
