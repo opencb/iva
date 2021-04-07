@@ -141,7 +141,15 @@ const application = {
                     fa_icon: "fa fa-list",
                     icon: "variant_browser.svg",
                     thumbnail: "variant-browser.png"
-                }
+                },
+                {
+                    id: "rga",
+                    title: "RGA",
+                    acronym: "",
+                    icon: "",
+                    description: "",
+                    visibility: "public"
+                },
                 // {
                 //     id: "genomeBrowser",
                 //     title: "Genome Browser",
@@ -461,14 +469,6 @@ const application = {
                     id: "cat-clinical",
                     visibility: "public"
                 },*/
-                {
-                    id: "rga",
-                    title: "RGA",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                },
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
