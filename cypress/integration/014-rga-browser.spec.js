@@ -22,10 +22,11 @@ context("14 - RGA Browser", () => {
         login();
     });
 
-    /*it("14.1 - Gene View", () => {
+    it("14.1 - Gene View", () => {
         cy.get("a[data-id=rga]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Recessive Variant Browser");
 
+        cy.get("opencga-active-filters button[data-filter-name='geneName']").click();
 
         waitTableResults("rga-gene-grid");
         checkResults("rga-gene-grid");
@@ -33,14 +34,21 @@ context("14 - RGA Browser", () => {
         let geneName;
         getResult("rga-gene-grid", 1).then($text => {
             geneName = $text;
-            console.log("geneName i", geneName)
-            cy.get("feature-filter input[type='text']").type(geneName); // typing missense using autocomplete
+            console.log("geneName i", geneName);
+            cy.get("feature-filter input[type='text']").type(geneName + "22{enter}");
             cy.get("div.search-button-wrapper button").click();
             checkResults("rga-gene-grid");
         });
-    });*/
 
-    it("14.2 - Individual View", () => {
+        // set numParents=0
+        cy.get("section-filter#Confidence .magic-checkbox-wrapper > :nth-child(1) > label").click();
+        cy.get("div.search-button-wrapper button").click();
+        waitTableResults("rga-gene-grid");
+        checkResults("rga-gene-grid");
+
+    });
+
+    /* it("14.2 - Individual View", () => {
         cy.get("a[data-id=rga]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Recessive Variant Browser");
 
@@ -56,7 +64,7 @@ context("14 - RGA Browser", () => {
 
             checkResults("rga-individual-grid");
         });
-    });
+    });*/
 
     it("14.3 - Variant View", () => {
 
