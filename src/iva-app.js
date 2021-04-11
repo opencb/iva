@@ -328,7 +328,6 @@ class IvaApp extends LitElement {
         const _this = this;
         const opencgaSession = this.opencgaClient.createSession()
             .then(response => {
-                debugger
                 console.log("_createOpenCGASession", response);
                 // check if project array has been defined in the config.js
                 if (UtilsNew.isNotEmptyArray(_this.config.opencga.projects)) {
