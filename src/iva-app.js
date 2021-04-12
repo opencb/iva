@@ -463,9 +463,9 @@ class IvaApp extends LitElement {
         window.clearInterval(this.intervalCheckSession);
     }
 
-    saveLastStudy(newStudy) {
-        this.opencgaClient.updateUserConfigs({...this.opencgaSession.user.configs, lastStudy: newStudy.fqn});
-    }
+    // saveLastStudy(studyFqn) {
+    //     this.opencgaClient.updateUserConfigs({...this.opencgaSession.user.configs, lastStudy: studyFqn});
+    // }
 
     onUrlChange(e) {
         let hashFrag = e.detail.id;
@@ -647,20 +647,9 @@ class IvaApp extends LitElement {
                     break;
                 case "#study-admin":
                     // this.studyAdminFqn = arr[1];
-
-                    // Change active study
-                    for (const project of this.opencgaSession.projects) {
-                        const studyIndex = project.studies.findIndex(s => s.fqn === arr[1]);
-                        if (studyIndex >= 0) {
-                            this.opencgaSession.project = project;
-                            this.opencgaSession.study = project.studies[studyIndex];
-                            break;
-                        }
-                    }
-                    this.opencgaSession = {...this.opencgaSession};
+                    this.changeActiveStudy(arr[1]);
                     break;
             }
-
 
             if (UtilsNew.isNotEmpty(feature)) {
                 if (hashTool === "#protein") {
@@ -701,15 +690,38 @@ class IvaApp extends LitElement {
 
     onStudySelect(e) {
         e.preventDefault(); // prevents the hash change to "#" and allows to manipulate the hash fragment as needed
-        const {study, project} = e.target.dataset;
-        const newProject = this.opencgaSession.projects.find(p => p.id === project);
-        const newStudy = newProject.studies.find(s => s.id === study);
 
-        // update the lastStudy in config iff has changed
-        if (this.opencgaSession.study.fqn !== newStudy.fqn) {
-            this.saveLastStudy(newStudy);
+        this.changeActiveStudy(e.target.dataset.studyFqn);
+    }
+
+    changeActiveStudy(studyFqn) {
+        if (this.opencgaSession.study.fqn === studyFqn) {
+            console.log("New selected study is already the current active study!");
+            return;
         }
-        this.opencgaSession = {...this.opencgaSession, project: newProject, study: newStudy};
+
+        // Change active study
+        let studyFound = false;
+        for (const project of this.opencgaSession.projects) {
+            const studyIndex = project.studies.findIndex(s => s.fqn === studyFqn);
+            if (studyIndex >= 0) {
+                this.opencgaSession.project = project;
+                this.opencgaSession.study = project.studies[studyIndex];
+                studyFound = true;
+                break;
+            }
+        }
+
+        if (studyFound) {
+            // Update the lastStudy in config iff has changed
+            this.opencgaClient.updateUserConfigs({...this.opencgaSession.user.configs, lastStudy: studyFqn});
+
+            // Refresh the session
+            this.opencgaSession = {...this.opencgaSession};
+        } else {
+            // TODO Convert this into a user notification
+            console.error("Study not found!")
+        }
     }
 
     updateProject(e) {
@@ -1164,7 +1176,8 @@ class IvaApp extends LitElement {
                                             <li><a title="${project.fqn}"><b>${project.name} [${project.fqn.split("@")[0]}]</b></a></li>
                                             ${project.studies && project.studies.length && project.studies.map(study => html`
                                                 <li>
-                                                    <a href="#" data-study="${study.id}" data-fqn="${study.fqn}" data-project="${project.id}" data-study-name="${study.name}" title="${study.fqn}" @click="${this.onStudySelect}">${study.name}</a>
+                                                    <a href="#" data-study-fqn="${study.fqn}" data-study-name="${study.name}" title="${study.fqn}" 
+                                                       @click="${this.onStudySelect}">${study.name}</a>
                                                 </li>
                                             `)}
                                         `)}
