@@ -646,7 +646,18 @@ class IvaApp extends LitElement {
                     this.sampleId = feature;
                     break;
                 case "#study-admin":
-                    this.studyAdminFqn = arr[1];
+                    // this.studyAdminFqn = arr[1];
+
+                    // Change active study
+                    for (const project of this.opencgaSession.projects) {
+                        const studyIndex = project.studies.findIndex(s => s.fqn === arr[1]);
+                        if (studyIndex >= 0) {
+                            this.opencgaSession.project = project;
+                            this.opencgaSession.study = project.studies[studyIndex];
+                            break;
+                        }
+                    }
+                    this.opencgaSession = {...this.opencgaSession};
                     break;
             }
 
@@ -854,8 +865,8 @@ class IvaApp extends LitElement {
 
     onSessionUpdateRequest() {
         this._createOpenCGASession();
-        this.opencgaSession
-        debugger
+        // this.opencgaSession
+        // debugger
     }
 
     onStudyUpdateRequest(e) {
@@ -873,6 +884,7 @@ class IvaApp extends LitElement {
                         }
                     }
 
+                    // Update opencgaSession.study if the study updated is the active one
                     if (this.opencgaSession.study && this.opencgaSession.study.fqn === e.detail.value) {
                         this.opencgaSession.study = updatedStudy;
                     }
@@ -1798,7 +1810,7 @@ class IvaApp extends LitElement {
                     <tool-header title="Study Admin" icon="${"fas fa-rocket"}"></tool-header>
                     <div class="content">
                         <study-admin
-                                .studyId="${this.studyAdminFqn}"
+                                .study="${this.opencgaSession.study}"
                                 .opencgaSession="${this.opencgaSession}" 
                                 @studyUpdateRequest="${this.onStudyUpdateRequest}">
                         </study-admin>
