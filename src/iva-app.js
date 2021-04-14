@@ -82,6 +82,7 @@ import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysi
 import "../lib/jsorolla/src/core/webcomponents/file/opencga-file-manager.js";
 import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
 import "../lib/jsorolla/src/core/webcomponents/loading-spinner.js";
+import "../lib/jsorolla/src/core/webcomponents/project/projects-admin.js";
 import "../lib/jsorolla/src/core/webcomponents/study/study-admin.js";
 // import "../lib/jsorolla/src/core/webcomponents/clinical/rga/rga-browser.js";
 
@@ -211,7 +212,7 @@ class IvaApp extends LitElement {
             "coverage-index",
             "job-view",
             "rga",
-            "study-dashboard",
+            "projects-admin",
             "opencga-admin",
             "study-admin"];
 
@@ -1799,23 +1800,23 @@ class IvaApp extends LitElement {
                 }
 
                 <!-- Admin -->
-                ${this.config.enabledComponents["study-dashboard"] ? html`
-                    <tool-header title="Study Dashboard" icon="${"fas fa-rocket"}"></tool-header>
-                    <div id="coverage-index" class="content col-md-10 col-md-offset-1">
-                        <study-dashboard 
+                ${this.config.enabledComponents["projects-admin"] ? html`
+                    <tool-header title="Projects Admin" icon="${"fas fa-rocket"}"></tool-header>
+                    <div id="projects-admin" class="content col-md-10 col-md-offset-1">
+                        <projects-admin 
                                 .opencgaSession="${this.opencgaSession}"
                                 @sessionUpdateRequest="${this.onSessionUpdateRequest}">
-                        </study-dashboard>
+                        </projects-admin>
                     </div>
                 ` : null}
 
                 ${this.config.enabledComponents["opencga-admin"] ? html`
                     <tool-header title="Study Dashboard" icon="${"fas fa-rocket"}"></tool-header>
-                    <div id="coverage-index" class="content col-md-10 col-md-offset-1">
-                        <study-dashboard 
+                    <div id="opencga-admin" class="content col-md-10 col-md-offset-1">
+                        <projects-admin 
                                 .opencgaSession="${this.opencgaSession}"
                                 @sessionUpdateRequest="${this.onSessionUpdateRequest}">
-                        </study-dashboard>
+                        </projects-admin>
                     </div>
                 ` : null}
 

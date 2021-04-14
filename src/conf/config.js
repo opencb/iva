@@ -277,53 +277,43 @@ const suite = {
             visibility: "public",
             menu: [
                 {
-                    id: "study-dashboard",
-                    name: "Study Dashboard",
+                    id: "projects-admin",
+                    name: "Project Manager",
                     fa_icon: "fas fa-file-invoice",
                     icon: "variant_browser.svg",
                     visibility: "public",
-                    submenu: [
-                        {
-                            id: "browser",
-                            name: "Variant Browser",
-                            acronym: "VB",
-                            description: `
-                            <p>Explore all variants identified by the 100,000 Genomes Project</p>
-                            <ul>
-                                <li>Rich annotation and links to leading reference databases</li>
-                                <li>Filter by gene, consequence, frequency and much more</li>
-                            </ul>`,
-                            visibility: "public",
-                            fa_icon: "fa fa-list",
-                            icon: "variant_browser.svg",
-                            thumbnail: "variant-browser.png"
-                        }
-                    ]
                 },
                 {
-                    id: "opencga-admin",
-                    name: "Opencga Admin",
-                    fa_icon: "fas fa-user-shield",
-                    icon: "file_explorer.svg",
+                    id: "study-admin",
+                    name: "Study Admin",
+                    fa_icon: "fas fa-file-invoice",
+                    icon: "variant_browser.svg",
                     visibility: "public",
-                    submenu: [
-                        {
-                            id: "browser",
-                            name: "Variant Browser",
-                            acronym: "VB",
-                            description: `
-                            <p>Explore all variants identified by the 100,000 Genomes Project</p>
-                            <ul>
-                                <li>Rich annotation and links to leading reference databases</li>
-                                <li>Filter by gene, consequence, frequency and much more</li>
-                            </ul>`,
-                            visibility: "public",
-                            fa_icon: "fa fa-list",
-                            icon: "variant_browser.svg",
-                            thumbnail: "variant-browser.png"
-                        }
-                    ]
                 },
+                // {
+                //     id: "opencga-admin",
+                //     name: "Opencga Admin",
+                //     fa_icon: "fas fa-user-shield",
+                //     icon: "file_explorer.svg",
+                //     visibility: "public",
+                //     submenu: [
+                //         {
+                //             id: "browser",
+                //             name: "Variant Browser",
+                //             acronym: "VB",
+                //             description: `
+                //             <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                //             <ul>
+                //                 <li>Rich annotation and links to leading reference databases</li>
+                //                 <li>Filter by gene, consequence, frequency and much more</li>
+                //             </ul>`,
+                //             visibility: "public",
+                //             fa_icon: "fa fa-list",
+                //             icon: "variant_browser.svg",
+                //             thumbnail: "variant-browser.png"
+                //         }
+                //     ]
+                // },
             ],
             fileExplorer: {
                 visibility: "private"

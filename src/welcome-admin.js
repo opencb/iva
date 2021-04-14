@@ -15,7 +15,7 @@
  */
 import { LitElement, html } from "/web_modules/lit-element.js";
 import UtilsNew from "./../lib/jsorolla/src/core/utilsNew.js";
-import "../lib/jsorolla/src/core/webcomponents/study/study-dashboard.js";
+import "../lib/jsorolla/src/core/webcomponents/project/projects-admin.js";
 
 export default class WelcomeAdmin extends LitElement {
 
@@ -116,7 +116,6 @@ export default class WelcomeAdmin extends LitElement {
                             </div>
                             <div><span style="font-weight: bold">${item.name}</span></div>
                         </a>
-                            <div><span style="font-weight: bold">${item.name}</span></div>
                             <span class="smaller"></span>
                         </a>
                     `}
