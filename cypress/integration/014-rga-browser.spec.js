@@ -109,19 +109,19 @@ context("14 - RGA Browser", () => {
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Recessive Variant Browser");
         cy.get("button[data-tab-id='variant-tab']", {timeout: 60000}).click({force: true});
 
-        waitTableResults("rga-individual-grid");
-        checkResults("rga-individual-grid");
+        waitTableResults("rga-variant-grid");
+        checkResults("rga-variant-grid");
 
         // queries for the first gene and then check if the first result contains the gene.
         let IndividualId;
-        getResult("rga-individual-grid", 1).then($text => {
+        getResult("rga-variant-grid", 1).then($text => {
             IndividualId = $text;
             console.log("IndividualId i", IndividualId);
             cy.get("feature-filter input[type='text']").type(IndividualId + "{enter}");
             cy.get("div.search-button-wrapper button").click();
-            checkResults("rga-individual-grid");
+            checkResults("rga-variant-grid");
 
-            getResult("rga-individual-grid", 1).then($resultCell => {
+            getResult("rga-variant-grid", 1).then($resultCell => {
                 console.log("$TEXT", $resultCell);
                 cy.wrap($resultCell).should("contain", IndividualId);
 
