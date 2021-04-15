@@ -69,10 +69,14 @@ export const checkResults = gridSelector => {
  * it check the table contains results or the message "No matching records found"
  */
 export const checkResultsOrNot = (gridSelector, id) => {
+    // TODO FIXME it seems it matches the loading spinner as well. Rethink the whole method. Also, the message "No matching records found" is there during the loading.
     // FIXME note this selector matches also the inner tables for each row
     cy.get(gridSelector + " table", {timeout: 60000}).find("tbody tr", {timeout: 10000})
         .should("satisfy", $els => {
             // console.error("$els", $els)
+            console.error("$els[0]", $els)
+            cy.wait(2000)
+            console.error("$els[0]", $els)
             const $firstRow = Cypress.$($els[0]);
             if ($firstRow) {
                 // console.error("$firstRow.data(index)", $firstRow.data("index"))
