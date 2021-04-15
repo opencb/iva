@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, checkResultsOrNot} from "../plugins/utils.js";
+import {login, checkResults} from "../plugins/utils.js";
 
 
 /**
@@ -28,33 +28,33 @@ context("3 - Header bar (post-login): Checks each menu item in header-bar resolv
     it("3.1 - checks Variant Browser menu item", () => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
-        checkResultsOrNot("variant-browser-grid");
+        checkResults("variant-browser-grid");
 
     });
 
     it("3.2 - checks Case Portal menu item", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal");
-        checkResultsOrNot("opencga-clinical-analysis-grid");
+        checkResults("opencga-clinical-analysis-grid");
     });
 
     it("3.3 - checks Sample Browser menu item", () => {
         cy.get("a[data-id=sample]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Sample Browser");
-        checkResultsOrNot("opencga-sample-grid");
+        checkResults("opencga-sample-grid");
     });
 
     it("3.4 - checks Individual Browser menu item", () => {
         cy.get("a[data-id=individual]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Individual Browser"); // should assertion comes from Chai and it follows its logic
-        checkResultsOrNot("opencga-individual-grid");
+        checkResults("opencga-individual-grid");
 
     });
 
     it("3.5 - checks Family Browser menu item", () => {
         cy.get("a[data-id=family]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser"); // should assertion comes from Chai and it follows its logic
-        checkResultsOrNot("opencga-family-grid");
+        checkResults("opencga-family-grid");
     });
 
     it("3.6 - checks study selector menu items", () => {
