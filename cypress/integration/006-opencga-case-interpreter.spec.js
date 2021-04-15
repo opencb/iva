@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults, checkExactResult, checkResults, waitTableResults} from "../plugins/utils.js";
+import {login, randomString, checkResults, checkExactResult, waitTableResults} from "../plugins/utils.js";
 
 
 context("6 - Case Interpreter", () => {
