@@ -23,7 +23,7 @@ const BIOTYPES = ["3prime_overlapping_ncrna", "antisense", "bidirectional_promot
     "retained_intron", "sense_intronic", "sense_overlapping", "snRNA", "snoRNA"
 ];
 
-const VARIANT_TYPES = ["SNV", "INDEL", "COPY_NUMBER", "INSERTION", "DELETION", "MNV", "SV"];
+const VARIANT_TYPES = ["SNV", "INDEL", "COPY_NUMBER", "INSERTION", "DELETION", "DUPLICATION", "MNV", "SV"];
 
 const consequenceTypes = {
     style: {
