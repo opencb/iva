@@ -46,6 +46,10 @@ a.disabled, a.disabled:hover {
     display: inline-block;
 }
 
+.font-smaller {
+    font-size: .8em;
+}
+
 .pad5 {
     padding: 5px;
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults, checkExactResult, checkResultsOrNot, waitTableResults} from "../plugins/utils.js";
+import {login, randomString, checkResults, checkExactResult, waitTableResults} from "../plugins/utils.js";
 
 
 context("6 - Case Interpreter", () => {
@@ -37,7 +37,7 @@ context("6 - Case Interpreter", () => {
                 caseId = $a.text().trim();
                 cy.get("div[data-cy='form-case'] button").click();
                 cy.get("div[data-cy='form-case'] input").type(caseId + "{enter}", {force: true});
-                checkResultsOrNot("opencga-clinical-analysis-grid");
+                checkResults("opencga-clinical-analysis-grid");
             });
 
         checkExactResult("opencga-clinical-analysis-grid");

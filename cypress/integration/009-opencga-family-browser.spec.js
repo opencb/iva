@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {checkResultsOrNot, login, getResult, waitTableResults} from "../plugins/utils.js";
+import {checkResults, login, getResult, waitTableResults, checkResultsOrNot} from "../plugins/utils.js";
 
 
 context("9 - Family Browser", () => {
