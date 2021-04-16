@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {checkResults, login, getResult, waitTableResults} from "../plugins/utils.js";
+import {checkResults, login, getResult, waitTableResults, checkResultsOrNot} from "../plugins/utils.js";
 
 
 context("9 - Family Browser", () => {
@@ -26,7 +26,7 @@ context("9 - Family Browser", () => {
         cy.get("a[data-id=family]", {timeout: 60000}).click({force: true});
         cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser");
 
-        checkResults("opencga-family-grid");
+        checkResultsOrNot("opencga-family-grid");
         /*
         getResult("opencga-family-grid").then($text => {
             cy.get("family-id-autocomplete input").type($text + "{enter}");

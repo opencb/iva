@@ -27,30 +27,29 @@ context("4. Variant Browser", () => {
         cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
     });
 
-    /* it("4.0 disease", () => {
+     /*it("4.0 disease", () => {
 
         // disease-panel-filter select + button
-        cy.get("disease-panel-filter").find(" a").contains("Childhood onset dystonia or chorea or related movement disorder").click({force:true})
-        //cy.get("disease-panel-filter").find(" a").contains("Amelogenesis imperfecta").click({force:true})
-        cy.get("div.search-button-wrapper button").click();
+        //cy.get("disease-panel-filter").find(" a").contains("Childhood onset dystonia or chorea or related movement disorder").click({force:true}) // URI too long
+        // cy.get("disease-panel-filter").find(" a").contains("Amelogenesis imperfecta").click({force:true})
+        // cy.get("div.search-button-wrapper button").click();
+        //
+        // checkResultsOrNot("variant-browser-grid")
 
-        waitTableResults("variant-browser-grid")
-        checkResultsOrNot("variant-browser-grid")
+        // NOTE Covid19... is the first URI too long
+        cy.get("disease-panel-filter div.dropdown-menu a").each(el => {
 
-        /!*cy.get("disease-panel-filter div.dropdown-menu a").each(el => {
-
-            // TODO the loop works but checkResultsOrNot is always satisfied. Handle error messages
-            // cannot use cy.wrap(el) here. disease-panel-filter div.dropdown-menu is refreshed on click on buttons and the refs are broken (https://github.com/cypress-io/cypress/issues/7306)
+            // cannot use cy.wrap(el) here. disease-panel-filter div.dropdown-menu is refreshed on click on buttons and DOM refs are broken (https://github.com/cypress-io/cypress/issues/7306)
             const id = el.attr("id");
             cy.get("#" + id).should("exist").click({force: true});
             //cy.wrap(el).should("exist").click({force: true});
             cy.get("div.search-button-wrapper button").click();
             checkResultsOrNot("variant-browser-grid");
-            cy.wait(2000)
+            cy.wait(2000);
             cy.get("opencga-active-filters button[data-filter-name='panel']").click();
 
 
-        });*!/
+        });
 
     });*/
 
