@@ -76,7 +76,7 @@ export const checkResultsOrNot = (gridSelector, id) => {
         .should("satisfy", $els => {
 
             // TODO Debug this. the first print is defined the second is not
-            /*console.error("$els", $els)
+            /* console.error("$els", $els)
             cy.wait(1000)
             console.error("$els", $els)*/
 
@@ -95,10 +95,24 @@ export const checkResultsOrNot = (gridSelector, id) => {
 
 /**
  * given column and row coordinates, it returns a single value out of a bootstrap table
+ *
  */
-export const getResult = (gridSelector, colIndex = 1, rowIndex = 0) => {
+export const getResult = (gridSelector, colIndex = 0, rowIndex = 0, invokeFn= "text") => {
     // check results are >= resultIndex
-    //cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gte", rowIndex);
-    //cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text").as("text")
-    return cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).first().invoke("text")
-}
+    // cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gte", rowIndex);
+    // cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text").as("text")
+    return cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex + 1})`, {timeout: 60000}).first().invoke(invokeFn);
+};
+
+/**
+ * it checks whether the grid has results.
+ *
+ */
+export const hasResults = gridSelector => {
+    return cy.get(gridSelector + " .fixed-table-body > table > tbody > tr")
+        .then($rows => {
+            if ($rows.length) {
+                return !Cypress.$($rows[0]).hasClass("no-records-found");
+            }
+        });
+};
