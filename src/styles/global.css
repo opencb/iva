@@ -78,6 +78,10 @@ input[type="number"] {
     height: 100px;
 }
 
+.label {
+    padding: .2em .6em .3em;
+}
+
 .badge {;
     margin: 0 1px;
     background: #337ab7;
