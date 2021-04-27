@@ -144,7 +144,7 @@ const application = {
                 },
                 {
                     id: "rga",
-                    title: "RGA",
+                    title: "Recessive Variant Browser",
                     acronym: "",
                     icon: "",
                     description: "",
