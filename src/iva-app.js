@@ -46,7 +46,7 @@ import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-transcript-view.j
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-protein-view.js";
 import "../lib/jsorolla/src/core/webcomponents/user/opencga-projects.js";
 import "../lib/jsorolla/src/core/webcomponents/sample/opencga-sample-browser.js";
-import "../lib/jsorolla/src/core/webcomponents/sample/opencga-sample-view.js";
+import "../lib/jsorolla/src/core/webcomponents/sample/sample-view.js";
 import "../lib/jsorolla/src/core/webcomponents/sample/sample-variant-stats-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/sample/sample-cancer-variant-stats-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/file/opencga-file-browser.js";

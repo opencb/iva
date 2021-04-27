@@ -20,7 +20,7 @@ const cellbase = {
 };
 
 const opencga = {
-    host: "https://ws.opencb.org/opencga-prod",
+    host: "https://ws.opencb.org/opencga-test",
     // host: "http://localhost:1234/opencga",
     // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
     version: "v2",
@@ -180,6 +180,11 @@ const suite = {
                             thumbnail: "variant-browser.png"
                         }
                     ]
+                },
+                {
+                    id: "sample",
+                    name: "Sample Browser",
+                    visibility: "public"
                 },
             ],
             fileExplorer: {
