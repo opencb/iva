@@ -14,28 +14,28 @@
  * limitations under the License.
  */
 
+import {login, checkResults, getResult} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
-/**
- * Header bar (pre-login)
- */
-context("1 - Header bar (pre-login): checks on Header Bar elements", () => {
+context("7 - Sample Browser", () => {
     before(() => {
-        cy.visit("http://localhost:3000/src/");
-
+        login();
     });
 
-    it("1.1 - check login page content", () => {
-        cy.get("#loginButton", {timeout: TIMEOUT}).should("be.visible");
-        cy.get("#loginButton").click();
-        cy.get("#opencgaUser").should("be.visible");
-        cy.get("#opencgaPassword").should("be.visible");
-    });
+    it("7.1 - query", () => {
+        cy.get("a[data-id=sample]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Sample Browser");
 
-    it("1.2 - check header-bar icons resolve correctly", () => {
-        cy.get("a.navbar-brand").first().click();
-        cy.get("#welcome-page-title", {timeout: TIMEOUT}).contains("Interactive Variant Analysis");
+        // checkResults("opencga-sample-grid");
+
+        cy.get("sample-id-autocomplete input").invoke("val", "LP3000045-DNA_B04");
+        cy.get("sample-id-autocomplete input").type("{enter}");
+
+        cy.get("div.search-button-wrapper button").click();
+
+        //cy.get("opencga-active-filters button[data-filter-name='id']").click();
+
 
     });
 });

@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {checkResultsOrNot, login, getResult, waitTableResults} from "../plugins/utils.js";
+import {checkResults, login, getResult} from "../plugins/utils.js";
+import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("11 - Cohort Browser", () => {
@@ -23,8 +24,8 @@ context("11 - Cohort Browser", () => {
     });
 
     it("11.1 - query", () => {
-        cy.get("a[data-id=cohort]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Cohort Browser");
+        cy.get("a[data-id=cohort]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Cohort Browser");
         checkResults("opencga-cohort-grid");
 
         getResult("opencga-cohort-grid").then($text => {
@@ -47,7 +48,7 @@ context("11 - Cohort Browser", () => {
 
         cy.get(".facet-wrapper .button-list button").should("have.length", 3);
 
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 60000}).should("have.length", 3);
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 3);
 
     });
 });

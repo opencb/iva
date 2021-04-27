@@ -15,7 +15,8 @@
  */
 
 import {login, randomString, checkResults, checkResultsOrNot, waitTableResults} from "../plugins/utils.js";
-import "cypress-wait-until";
+import {TIMEOUT} from "../plugins/constants.js";
+//import "cypress-wait-until";
 
 
 context("4. Variant Browser", () => {
@@ -24,7 +25,7 @@ context("4. Variant Browser", () => {
     });
 
     beforeEach(() => {
-        cy.get("a[data-id=browser]", {timeout: 60000}).click({force: true});
+        cy.get("a[data-id=browser]", {timeout: TIMEOUT}).click({force: true});
     });
 
      /*it("4.0 disease", () => {
@@ -54,23 +55,23 @@ context("4. Variant Browser", () => {
     });*/
 
     it("4.1 Check Columns togglability", () => {
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Variant Browser");
 
         cy.get("variant-browser-grid .columns-toggle-wrapper button").should("be.visible").and("contain", "Columns").click();
         cy.get("variant-browser-grid .columns-toggle-wrapper ul li").and("have.length.gt", 1);
 
-        cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // deactivate all the columns
-        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0] > td", {timeout: 60000}).should("have.lengthOf", 1);
+        cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: TIMEOUT}); // deactivate all the columns
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0] > td", {timeout: TIMEOUT}).should("have.lengthOf", 1);
 
-        cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // reactivate all the columns
-        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0] > td", {timeout: 60000}).should("have.length.gt", 1);
+        cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: TIMEOUT}); // reactivate all the columns
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0] > td", {timeout: TIMEOUT}).should("have.length.gt", 1);
 
 
     });
 
     // Variant Browser: Filter controls
     it("4.2 Filter controls", () => {
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser");
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Variant Browser");
 
         cy.get("input[value*=LoF]").click({force: true});
         cy.get("opencga-active-filters").contains("Consequence Types 10");
@@ -92,21 +93,21 @@ context("4. Variant Browser", () => {
         cy.get(".swal2-title").contains("Are you sure?");
         cy.get(".swal2-confirm").click(); // confirm deletion action
 
-        // cy.get(".swal2-content", {timeout: 60000}).contains("Filter has been deleted."); // this selector doesn't work without .should("be.visible") assertion because it refers to the previous #swal2-content which has been detatched from DOM before
-        cy.contains(".swal2-content", "Filter has been deleted", {timeout: 60000}).should("be.visible");
+        // cy.get(".swal2-content", {timeout: TIMEOUT}).contains("Filter has been deleted."); // this selector doesn't work without .should("be.visible") assertion because it refers to the previous #swal2-content which has been detatched from DOM before
+        cy.contains(".swal2-content", "Filter has been deleted", {timeout: TIMEOUT}).should("be.visible");
         cy.get(".swal2-confirm").click({force: true}); // dismiss confirmation modal
         cy.get("opencga-active-filters button[data-filter-name='ct']").click();
     });
 
     // Variant Browser: Individual filters
     it("4.3 Filters", () => {
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
         checkResults("variant-browser-grid");
 
         cy.get("variant-browser a[href='#filters_tab']").click();
         // Study and Cohorts: Cohort Alternate Stats
-        cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").first({timeout: 60000}).should("be.visible").click();
-        cy.get("cohort-stats-filter input[data-field='value']").first({timeout: 60000}).type("0.00001"); // set ALL cohort
+        cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").first({timeout: TIMEOUT}).should("be.visible").click();
+        cy.get("cohort-stats-filter input[data-field='value']").first({timeout: TIMEOUT}).type("0.00001"); // set ALL cohort
         cy.get("div.search-button-wrapper button").click();
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='cohortStatsAlt']").contains("Cohort ALT Stats");
@@ -130,7 +131,7 @@ context("4. Variant Browser", () => {
         // cy.get("disease-panel-filter button").click();
         // cy.get("disease-panel-filter div.dropdown-menu a").click();
         // cy.get("div.search-button-wrapper button").click();
-        // cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: 60000}).find("tr[data-index]").should("have.length.gt", 1);
+        // cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: TIMEOUT}).find("tr[data-index]").should("have.length.gt", 1);
         // cy.get("opencga-active-filters button[data-filter-name='panel']").click();
 
         // Genomic: Gene Biotype
@@ -255,21 +256,21 @@ context("4. Variant Browser", () => {
         cy.get("#type_Select a").contains("INSERTION").click({force: true}); // type=INSERTION
 
         cy.get("div.search-button-wrapper button").click();
-        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 3); // 2 default fields + genes
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 3); // 2 default fields + genes
 
         cy.get("div.facet-wrapper button[data-filter-name='chromosome']").click();
-        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 2);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 2);
         cy.get("div.facet-wrapper button[data-filter-name='type']").click();
-        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 1);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 1);
         cy.get("div.facet-wrapper button[data-filter-name='genes']").click();
-        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 0);
+        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 0);
 
     });
 
     // Variant Browser: Tabs
     /*it("checks Variant Browser detail tabs", () => {
 
-        cy.get("variant-browser-detail > detail-tabs > div.panel > h3", {timeout: 60000}).should("contain", "Variant:");
+        cy.get("variant-browser-detail > detail-tabs > div.panel > h3", {timeout: TIMEOUT}).should("contain", "Variant:");
 
         cy.get("cellbase-variant-annotation-summary h3").contains("Summary");
 
@@ -289,15 +290,15 @@ context("4. Variant Browser", () => {
         checkResults("opencga-variant-samples");
 
         cy.get("variant-browser-detail [data-id='beacon']").click();
-        cy.get("variant-beacon-network", {timeout: 60000}).find(".beacon-square").its("length").should("eq", 15);*!/
+        cy.get("variant-beacon-network", {timeout: TIMEOUT}).find(".beacon-square").its("length").should("eq", 15);*!/
 
 
     });*/
 
     it("4.5 Check gene-view", () => {
-        cy.get("button[data-id='table-tab']", {timeout: 60000}).click();
+        cy.get("button[data-id='table-tab']", {timeout: TIMEOUT}).click();
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index='0'] a.gene-tooltip")
-            .should("be.visible", {timeout: 60000})
+            .should("be.visible", {timeout: TIMEOUT})
             .click({force: true});
         // .trigger('mouseover'); // .trigger('mouseover') doesn't work in this case as the hover action changes the DOM
         cy.get(".qtip-content").find("a[data-cy='gene-view']").click({force: true});

@@ -15,6 +15,7 @@
  */
 
 import {login, waitTableResults, getResult, checkResults, checkResultsOrNot} from "../plugins/utils.js";
+import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("14 - RGA Browser", () => {
@@ -30,9 +31,9 @@ context("14 - RGA Browser", () => {
         "consequenceType",
         "clinicalSignificance"*/
     it("14.1 - Gene View", () => {
-        cy.get("a[data-id=rga]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Recessive Variant Browser");
-        cy.get("button[data-tab-id='gene-tab']", {timeout: 60000}).click({force: true});
+        cy.get("a[data-id=rga]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Recessive Variant Browser");
+        cy.get("button[data-tab-id='gene-tab']", {timeout: TIMEOUT}).click({force: true});
 
         cy.get("opencga-active-filters button[data-filter-name='geneName']").click();
 
@@ -80,9 +81,9 @@ context("14 - RGA Browser", () => {
     });
 
     it("14.2 - Individual View", () => {
-        cy.get("a[data-id=rga]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Recessive Variant Browser");
-        cy.get("button[data-tab-id='individual-tab']", {timeout: 60000}).click({force: true});
+        cy.get("a[data-id=rga]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Recessive Variant Browser");
+        cy.get("button[data-tab-id='individual-tab']", {timeout: TIMEOUT}).click({force: true});
 
         waitTableResults("rga-individual-grid");
         checkResults("rga-individual-grid");
@@ -105,9 +106,9 @@ context("14 - RGA Browser", () => {
     });
 
     it("14.3 - Variant View", () => {
-        cy.get("a[data-id=rga]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Recessive Variant Browser");
-        cy.get("button[data-tab-id='variant-tab']", {timeout: 60000}).click({force: true});
+        cy.get("a[data-id=rga]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Recessive Variant Browser");
+        cy.get("button[data-tab-id='variant-tab']", {timeout: TIMEOUT}).click({force: true});
 
         waitTableResults("rga-variant-grid");
         checkResults("rga-variant-grid");
