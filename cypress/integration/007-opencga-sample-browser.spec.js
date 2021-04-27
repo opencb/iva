@@ -15,6 +15,7 @@
  */
 
 import {login, checkResults, getResult} from "../plugins/utils.js";
+import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("7 - Sample Browser", () => {
@@ -23,8 +24,8 @@ context("7 - Sample Browser", () => {
     });
 
     it("7.1 - query", () => {
-        cy.get("a[data-id=sample]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Sample Browser");
+        cy.get("a[data-id=sample]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Sample Browser");
 
         checkResults("opencga-sample-grid");
 
@@ -51,7 +52,7 @@ context("7 - Sample Browser", () => {
         cy.get("button.default-facets-button").click();
         cy.get("div.search-button-wrapper button").click();
         cy.get(".facet-wrapper .button-list button").should("have.length", 4);
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 60000}).should("have.length", 4);
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 4);
 
     });
 });

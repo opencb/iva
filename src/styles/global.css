@@ -46,6 +46,10 @@ a.disabled, a.disabled:hover {
     display: inline-block;
 }
 
+.font-smaller {
+    font-size: .8em;
+}
+
 .pad5 {
     padding: 5px;
 }
@@ -72,6 +76,10 @@ input[type="number"] {
 
 .v-space {
     height: 100px;
+}
+
+.label {
+    padding: .3em .6em .3em;
 }
 
 .badge {;
