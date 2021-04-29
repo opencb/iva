@@ -29,7 +29,7 @@ context("8 - Individual Browser", () => {
 
         checkResults("opencga-individual-grid");
 
-        getResult("opencga-individual-grid", 2).then($text => {
+        getResult("opencga-individual-grid", 1).then($text => {
             cy.get("opencga-individual-filter .form-group:nth-child(1) individual-id-autocomplete input").type($text + "{enter}");
         });
 
