@@ -20,16 +20,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node.version }}
+      
+      - name: Install bower
+        run: npm install bower
+
       - name: CI
         run: npm ci
 
-      - name: Install bower
-        run: npm install bower
-      - name: Install Dependecies
+      - name: Install Dependencies
         run: npm install
-
-      # - name: Test
-      #   run: npm test
 
       - name: Build
         run: npm run build --if-present
@@ -40,7 +39,7 @@ jobs:
           name: webpack-artifact
           path: build
           retention-days: 2
-          
+
 # Testing one test. :P
   test:
     name: Test Iva
