@@ -1,0 +1,73 @@
+name: "Develop CI/CD"
+
+on:
+  push:
+    branches: [suite-menu]
+
+jobs:
+  build:
+    name: IVA Build
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+    steps:
+      - name: Fetch IVA repository with JSOrolla
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Set up Nodejs ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node.version }}
+      - name: CI
+        run: npm ci
+      - name: Install bower
+        run: npm install
+      - name: Install Dependecies
+        run: npm install
+
+      # - name: Test
+      #   run: npm test
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Upload webpack artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: webpack-artifact
+          path: build
+          retention-days: 2
+
+  test:
+    name: Test Iva
+    runs-on: ubuntu-20.04
+    needs: build
+    steps:
+      - name: Download webpack-artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: webpack-artifact
+          path: build
+
+  deploy:
+    name: Publish Docker image in Docker Hub repository
+    runs-on: ubuntu-20.04
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download webpack artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: webpack-artifact
+          path: build
+      - name: Read package.json
+        uses: "tyankatsu0105/read-package-version-actions@v1"
+        id: package-version
+      - name: Show version number
+        run: echo "Version is ${{ steps.package-version.outputs.version }}"
+      - name: Login to dockerhub
+        run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_HUB_USER }} --password-stdin
+      - name: Build and Publish Docker image
+        run: python3 ./docker/docker-build.py push --images app --tag ${{ steps.package-version.outputs.version }}
