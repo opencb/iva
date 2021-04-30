@@ -8,35 +8,18 @@ jobs:
   build:
     name: IVA Build
     runs-on: ubuntu-20.04
-#    strategy:
-#      matrix:
-#        node-version: [12.x, 14.x]
     steps:
-      - name: Fetch IVA repository with JSOrolla
+      - name: Clone IVA repository with JSOrolla
         uses: actions/checkout@v2
         with:
           submodules: recursive
-#      - name: Install Nodejs ${{ matrix.node-version }}
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: ${{ matrix.node.version }}
-      - name: Install bower
+      - name: Install bower dependecy
         run: npm install bower
-      - name: CI
+      - name: Run npm ci
         run: npm ci
-      - name: Set up npm package
+      - name: Run npm install
         run: npm init -y && npm install
-#      - name: Build
-#        run: npm run build --if-present
-#      - name: Test Iva - Cypress run
-#        uses: cypress-io/github-action@v2
-#        with:
-#          start: npm run serve
-#          browser: chrome
-#          headless: true
-#          spec: cypress/integration/001-header-bar-pre-login.spec.js
-#          wait-on: http://localhost:3000
-      - name: Npm build
+      - name: Build IVA app
         run: npm run build
       - name: Upload webpack artifact
         uses: actions/upload-artifact@v2
@@ -46,7 +29,7 @@ jobs:
           retention-days: 2
 
   test:
-    name: Test Iva
+    name: IVA Tests
     runs-on: ubuntu-20.04
     needs: build
     strategy:
@@ -54,7 +37,7 @@ jobs:
         node-version: [ 12.x, 14.x ]
         browsers: [chrome, firefox]
     steps:
-      - name: Fetch IVA repository with JSOrolla
+      - name: Clone IVA repository with JSOrolla
         uses: actions/checkout@v2
         with:
           submodules: recursive
@@ -62,9 +45,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node.version }}
-      - name: Install bower
+      - name: Install bower dependency
         run: npm install bower
-      - name: Set up npm package
+      - name: Run npm install
         run: npm init -y && npm install
       - name: Test Iva - Cypress run
         uses: cypress-io/github-action@v2
@@ -106,4 +89,4 @@ jobs:
   #     - name: Login to dockerhub
   #       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_HUB_USER }} --password-stdin
   #     - name: Build and Publish Docker image
-  #       run: python3 ./docker/docker-build.py push --images app --tag ${{ steps.package-version.outputs.version }}
+  #       run: python3 ./docker/docker-build.py push --images app --tag 2.1.0-exp
