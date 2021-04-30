@@ -22,8 +22,9 @@ jobs:
           node-version: ${{ matrix.node.version }}
       - name: CI
         run: npm ci
+
       - name: Install bower
-        run: npm install
+        run: npm install bower
       - name: Install Dependecies
         run: npm install
 
@@ -39,35 +40,50 @@ jobs:
           name: webpack-artifact
           path: build
           retention-days: 2
-
+          
+# Testing one test. :P
   test:
     name: Test Iva
     runs-on: ubuntu-20.04
     needs: build
     steps:
+
       - name: Download webpack-artifact
         uses: actions/download-artifact@v2
         with:
           name: webpack-artifact
           path: build
 
-  deploy:
-    name: Publish Docker image in Docker Hub repository
-    runs-on: ubuntu-20.04
-    needs: test
-    steps:
-      - uses: actions/checkout@v2
-      - name: Download webpack artifact
-        uses: actions/download-artifact@v2
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
         with:
-          name: webpack-artifact
-          path: build
-      - name: Read package.json
-        uses: "tyankatsu0105/read-package-version-actions@v1"
-        id: package-version
-      - name: Show version number
-        run: echo "Version is ${{ steps.package-version.outputs.version }}"
-      - name: Login to dockerhub
-        run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_HUB_USER }} --password-stdin
-      - name: Build and Publish Docker image
-        run: python3 ./docker/docker-build.py push --images app --tag ${{ steps.package-version.outputs.version }}
+          start: npm run serve
+          browser: chrome
+          headless: true
+          spec: cypress/integration/001-header-bar-pre-login.spec.js  
+          wait-on: http://localhost:3000
+
+
+
+          
+
+  # deploy:
+  #   name: Publish Docker image in Docker Hub repository
+  #   runs-on: ubuntu-20.04
+  #   needs: test
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Download webpack artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: webpack-artifact
+  #         path: build
+  #     - name: Read package.json
+  #       uses: "tyankatsu0105/read-package-version-actions@v1"
+  #       id: package-version
+  #     - name: Show version number
+  #       run: echo "Version is ${{ steps.package-version.outputs.version }}"
+  #     - name: Login to dockerhub
+  #       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_HUB_USER }} --password-stdin
+  #     - name: Build and Publish Docker image
+  #       run: python3 ./docker/docker-build.py push --images app --tag ${{ steps.package-version.outputs.version }}
