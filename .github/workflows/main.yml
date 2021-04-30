@@ -71,9 +71,21 @@ jobs:
         with:
           start: npm run serve
           browser: ${{ matrix.browsers }}
-          headless: true
           spec: cypress/integration/001-header-bar-pre-login.spec.js
           wait-on: http://localhost:3000
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - name: Upload Video
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
 
   # deploy:
   #   name: Publish Docker image in Docker Hub repository
