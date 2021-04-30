@@ -109,7 +109,7 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.1.1",
+    version: "v2.1.2-alpha4",
     logo: "img/iva.svg",
     companyLogo: "img/Genomics-England-logo-2015-white.png",
     mode: "development",
@@ -142,14 +142,14 @@ const application = {
                     icon: "variant_browser.svg",
                     thumbnail: "variant-browser.png"
                 },
-                /*{
+                {
                     id: "rga",
                     title: "Recessive Variant Browser",
                     acronym: "",
                     icon: "",
                     description: "",
                     visibility: "public"
-                },*/
+                },
                 // {
                 //     id: "genomeBrowser",
                 //     title: "Genome Browser",

@@ -82,7 +82,7 @@ import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysi
 import "../lib/jsorolla/src/core/webcomponents/file/opencga-file-manager.js";
 import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
 import "../lib/jsorolla/src/core/webcomponents/loading-spinner.js";
-// import "../lib/jsorolla/src/core/webcomponents/clinical/rga/rga-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/rga/rga-browser.js";
 
 // import "./loading-bar.js";
 
