@@ -8,42 +8,36 @@ jobs:
   build:
     name: IVA Build
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x]
+#    strategy:
+#      matrix:
+#        node-version: [12.x, 14.x]
     steps:
-      
       - name: Fetch IVA repository with JSOrolla
         uses: actions/checkout@v2
         with:
           submodules: recursive
-      
-      - name: Install Nodejs ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node.version }}
-      
+#      - name: Install Nodejs ${{ matrix.node-version }}
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: ${{ matrix.node.version }}
       - name: Install bower
         run: npm install bower
-
       - name: CI
         run: npm ci
-
       - name: Set up npm package
         run: npm init -y && npm install
-
-      - name: Build
-        run: npm run build --if-present
-
-      - name: Test Iva - Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run serve
-          browser: chrome
-          headless: true
-          spec: cypress/integration/001-header-bar-pre-login.spec.js  
-          wait-on: http://localhost:3000
-
+#      - name: Build
+#        run: npm run build --if-present
+#      - name: Test Iva - Cypress run
+#        uses: cypress-io/github-action@v2
+#        with:
+#          start: npm run serve
+#          browser: chrome
+#          headless: true
+#          spec: cypress/integration/001-header-bar-pre-login.spec.js
+#          wait-on: http://localhost:3000
+      - name: Npm build
+        run: npm run build
       - name: Upload webpack artifact
         uses: actions/upload-artifact@v2
         with:
@@ -51,31 +45,35 @@ jobs:
           path: build
           retention-days: 2
 
-# Testing one test. :P
-  # test:
-  #   name: Test Iva
-  #   runs-on: ubuntu-20.04
-  #   needs: build
-  #   steps:
-
-  #     - name: Download webpack-artifact
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: webpack-artifact
-  #         path: build
-
-      # - name: Cypress run
-      #   uses: cypress-io/github-action@v2
-      #   with:
-      #     start: npm run serve
-      #     browser: chrome
-      #     headless: true
-      #     spec: cypress/integration/001-header-bar-pre-login.spec.js  
-      #     wait-on: http://localhost:3000
-
-
-
-          
+  test:
+    name: Test Iva
+    runs-on: ubuntu-20.04
+    needs: build
+    strategy:
+      matrix:
+        node-version: [ 12.x, 14.x ]
+        browsers: [chrome, firefox]
+    steps:
+      - name: Fetch IVA repository with JSOrolla
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Install Nodejs ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node.version }}
+      - name: Install bower
+        run: npm install bower
+      - name: Set up npm package
+        run: npm init -y && npm install
+      - name: Test Iva - Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run serve
+          browser: ${{ matrix.browsers }}
+          headless: true
+          spec: cypress/integration/001-header-bar-pre-login.spec.js
+          wait-on: http://localhost:3000
 
   # deploy:
   #   name: Publish Docker image in Docker Hub repository
