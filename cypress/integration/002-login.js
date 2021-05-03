@@ -45,6 +45,7 @@ context("2 - Login", () => {
         cy.get(".login-overlay", {timeout: 60000}).should("not.exist");
 
         cy.url().should("include", "#home", {timeout: 15000})
+        cy.get(".row > [data-id='iva']").click();
         cy.get(".subtitle", {timeout: 60000}).contains("Interactive Variant Analysis");
     });
 
