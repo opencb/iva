@@ -34,7 +34,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        node-version: [ 12.x, 14.x ]
+        node-version: [12.x, 14.x]
         browsers: [chrome, firefox]
     steps:
       - name: Clone IVA repository with JSOrolla
@@ -54,22 +54,22 @@ jobs:
         with:
           start: npm run serve
           browser: ${{ matrix.browsers }}
-          spec: cypress/integration/001-header-bar-pre-login.spec.js
+          spec: |
+            cypress/integration/001-header-bar-pre-login.spec.js
+            cypress/integration/002-login.js
           wait-on: http://localhost:3000
       - name: Upload Screenshots
         uses: actions/upload-artifact@v2
         if: failure()
         with:
-          name: cypress-screenshots
+          name: cypress-screenshots-${{ matrix.browsers }}_${{ matrix.node-version }}
           path: cypress/screenshots
       - name: Upload Video
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: cypress-videos
+          name: cypress-videos-${{ matrix.browsers }}_${{ matrix.node-version }}
           path: cypress/videos
-
-
   # deploy:
   #   name: Publish Docker image in Docker Hub repository
   #   runs-on: ubuntu-20.04
