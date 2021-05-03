@@ -58,6 +58,9 @@ jobs:
             cypress/integration/001-header-bar-pre-login.spec.js
             cypress/integration/002-login.js
           wait-on: http://localhost:3000
+        env:
+          cypress_username: demouser
+          cypress_password: demouser
       - name: Upload Screenshots
         uses: actions/upload-artifact@v2
         if: failure()
