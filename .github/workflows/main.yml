@@ -67,12 +67,14 @@ jobs:
         with:
           name: cypress-screenshots-${{ matrix.browsers }}_${{ matrix.node-version }}
           path: cypress/screenshots
+          retention-days: 2
       - name: Upload Video
         uses: actions/upload-artifact@v2
         if: always()
         with:
           name: cypress-videos-${{ matrix.browsers }}_${{ matrix.node-version }}
           path: cypress/videos
+          retention-days: 2
 
   deploy:
     name: Web App Delivery
@@ -90,8 +92,8 @@ jobs:
           local: iva-2.1.0
           remote: /mnt/data/WEB-APPS
           host: 128.232.224.128
-          username: ${{ secrets.SCP_SITE_USER }}
-          password: ${{ secrets.SCP_SITE_PASSWORD }}
+          username: ${{ secrets.SSH_SWDEV_USER }}
+          password: ${{ secrets.SSH_SWDEV_PASSWORD }}
 
 
   # docker:
