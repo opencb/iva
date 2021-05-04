@@ -85,11 +85,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: webpack-artifact
-          path: iva-2.1.0
+          path: iva-2.1.0/
       - name: Web Delivery 
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: /iva-2.1.0
+          local: iva-2.1.0
           remote: /mnt/data/WEB-APPS
           host: 128.232.224.128
           username: ${{ secrets.SSH_SWDEV_USER }}
