@@ -103,7 +103,7 @@ jobs:
   deploy:
     name: Web App Delivery
     runs-on: ubuntu-20.04
-    needs: build
+    needs: test
     steps:
       - name: Download Webpack artifact
         uses: actions/download-artifact@v2
@@ -120,21 +120,21 @@ jobs:
           password: ${{ secrets.SSH_SWDEV_PASSWORD }}
 
 
-  # docker:
-  #   name: Publish Docker image in Docker Hub repository
-  #   runs-on: ubuntu-20.04
-  #   needs: test
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Download webpack artifact
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: webpack-artifact
-  #         path: build
-  #     - name: Login to dockerhub
-  #       uses: docker/login-action@v2
-  #       with:
-  #         username: ${{ secrets.DOCKER_HUB_USER }}
-  #         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-  #     - name: Build and publish Docker image
-  #       run: python3 ./docker/docker-build.py push --images app --tag 2.1.0-exp
+  docker:
+    name: Publish Docker image in Docker Hub repository
+    runs-on: ubuntu-20.04
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download webpack artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: webpack-artifact
+          path: build
+      - name: Login to dockerhub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      - name: Build and publish Docker image
+        run: python3 ./docker/docker-build.py push --images app --tag 2.1.0-exp
