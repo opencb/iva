@@ -28,58 +28,58 @@ jobs:
           path: build
           retention-days: 2
 
-  test:
-    name: IVA Tests
-    runs-on: ubuntu-20.04
-    needs: build
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x]
-        browsers: [chrome, firefox]
-    steps:
-      - name: Clone IVA repository with JSOrolla
-        uses: actions/checkout@v2
-        with:
-          submodules: recursive
-      - name: Install Nodejs ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node.version }}
-      - name: Install bower dependency
-        run: npm install bower
-      - name: Run npm install
-        run: npm init -y && npm install
-      - name: Test Iva - Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run serve
-          browser: ${{ matrix.browsers }}
-          spec: |
-            cypress/integration/001-header-bar-pre-login.spec.js
-            cypress/integration/002-login.js
-          wait-on: http://localhost:3000
-        env:
-          cypress_username: demouser
-          cypress_password: demouser
-      - name: Upload Screenshots
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: cypress-screenshots-${{ matrix.browsers }}_${{ matrix.node-version }}
-          path: cypress/screenshots
-          retention-days: 2
-      - name: Upload Video
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: cypress-videos-${{ matrix.browsers }}_${{ matrix.node-version }}
-          path: cypress/videos
-          retention-days: 2
+  # test:
+  #   name: IVA Tests
+  #   runs-on: ubuntu-20.04
+  #   needs: build
+  #   strategy:
+  #     matrix:
+  #       node-version: [12.x, 14.x]
+  #       browsers: [chrome, firefox]
+  #   steps:
+  #     - name: Clone IVA repository with JSOrolla
+  #       uses: actions/checkout@v2
+  #       with:
+  #         submodules: recursive
+  #     - name: Install Nodejs ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node.version }}
+  #     - name: Install bower dependency
+  #       run: npm install bower
+  #     - name: Run npm install
+  #       run: npm init -y && npm install
+  #     - name: Test Iva - Cypress run
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         start: npm run serve
+  #         browser: ${{ matrix.browsers }}
+  #         spec: |
+  #           cypress/integration/001-header-bar-pre-login.spec.js
+  #           cypress/integration/002-login.js
+  #         wait-on: http://localhost:3000
+  #       env:
+  #         cypress_username: demouser
+  #         cypress_password: demouser
+  #     - name: Upload Screenshots
+  #       uses: actions/upload-artifact@v2
+  #       if: failure()
+  #       with:
+  #         name: cypress-screenshots-${{ matrix.browsers }}_${{ matrix.node-version }}
+  #         path: cypress/screenshots
+  #         retention-days: 2
+  #     - name: Upload Video
+  #       uses: actions/upload-artifact@v2
+  #       if: always()
+  #       with:
+  #         name: cypress-videos-${{ matrix.browsers }}_${{ matrix.node-version }}
+  #         path: cypress/videos
+  #         retention-days: 2
 
   deploy:
     name: Web App Delivery
     runs-on: ubuntu-20.04
-    needs: test
+    needs: build
     steps:
       - name: Download Webpack artifact
         uses: actions/download-artifact@v2
@@ -89,7 +89,7 @@ jobs:
       - name: Web Delivery 
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: iva-2.1.0
+          local: /iva-2.1.0
           remote: /mnt/data/WEB-APPS
           host: 128.232.224.128
           username: ${{ secrets.SSH_SWDEV_USER }}
