@@ -73,7 +73,28 @@ jobs:
         with:
           name: cypress-videos-${{ matrix.browsers }}_${{ matrix.node-version }}
           path: cypress/videos
-  # deploy:
+
+  deploy:
+    name: Web App Delivery
+    runs-on: ubuntu-20.04
+    needs: test
+    steps:
+      - name: Download Webpack artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: webpack-artifact
+          path: iva-2.1.0
+      - name: Web Delivery 
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: iva-2.1.0
+          remote: /mnt/data/WEB-APPS
+          host: 128.232.224.128
+          username: ${{ secrets.SCP_SITE_USER }}
+          password: ${{ secrets.SCP_SITE_PASSWORD }}
+
+
+  # docker:
   #   name: Publish Docker image in Docker Hub repository
   #   runs-on: ubuntu-20.04
   #   needs: test
@@ -84,12 +105,10 @@ jobs:
   #       with:
   #         name: webpack-artifact
   #         path: build
-  #     - name: Read package.json
-  #       uses: "tyankatsu0105/read-package-version-actions@v1"
-  #       id: package-version
-  #     - name: Show version number
-  #       run: echo "Version is ${{ steps.package-version.outputs.version }}"
   #     - name: Login to dockerhub
-  #       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_HUB_USER }} --password-stdin
-  #     - name: Build and Publish Docker image
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKER_HUB_USER }}
+  #         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+  #     - name: Build and publish Docker image
   #       run: python3 ./docker/docker-build.py push --images app --tag 2.1.0-exp
