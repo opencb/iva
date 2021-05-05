@@ -69,10 +69,17 @@ export const checkResults = gridSelector => {
  * it check the table contains results or the message "No matching records found"
  */
 export const checkResultsOrNot = (gridSelector, id) => {
-    // FIXME note this selector matches also the inner tables for each row
-    cy.get(gridSelector + " table", {timeout: 60000}).find("tbody tr", {timeout: 10000})
+    cy.wait(1000); // it is necessary to avoid the following negative assertion is early satisfied
+    cy.get(gridSelector + " div.fixed-table-loading", {timeout: 60000}).should("be.not.visible");
+
+    cy.get(gridSelector + " .fixed-table-body > table > tbody", {timeout: 60000}).find(" > tr", {timeout: 10000})
         .should("satisfy", $els => {
-            // console.error("$els", $els)
+
+            // TODO Debug this. the first print is defined the second is not
+            /* console.error("$els", $els)
+            cy.wait(1000)
+            console.error("$els", $els)*/
+
             const $firstRow = Cypress.$($els[0]);
             if ($firstRow) {
                 // console.error("$firstRow.data(index)", $firstRow.data("index"))
@@ -80,7 +87,7 @@ export const checkResultsOrNot = (gridSelector, id) => {
                 // console.error("id", id)
                 // console.error("No matching records found", $els.text().includes("No matching records found"))
                 // it covers either the case of some results or 0 results
-                return $firstRow.data("index") === 0 || $els.text().includes("No matching records found")
+                return $firstRow.data("index") === 0 || $els.text().includes("No matching records found");
             }
 
         });
@@ -88,10 +95,24 @@ export const checkResultsOrNot = (gridSelector, id) => {
 
 /**
  * given column and row coordinates, it returns a single value out of a bootstrap table
+ *
  */
-export const getResult = (gridSelector, colIndex = 1, rowIndex = 0) => {
+export const getResult = (gridSelector, colIndex = 0, rowIndex = 0, invokeFn= "text") => {
     // check results are >= resultIndex
-    //cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gte", rowIndex);
-    //cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text").as("text")
-    return cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text")
-}
+    // cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gte", rowIndex);
+    // cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex})`, {timeout: 60000}).invoke("text").as("text")
+    return cy.get(gridSelector + " table", {timeout: 60000}).find(`tr[data-index=${rowIndex}] > :nth-child(${colIndex + 1})`, {timeout: 60000}).first().invoke(invokeFn);
+};
+
+/**
+ * it checks whether the grid has results.
+ *
+ */
+export const hasResults = gridSelector => {
+    return cy.get(gridSelector + " .fixed-table-body > table > tbody > tr")
+        .then($rows => {
+            if ($rows.length) {
+                return !Cypress.$($rows[0]).hasClass("no-records-found");
+            }
+        });
+};

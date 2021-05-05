@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {checkResultsOrNot, login, getResult, waitTableResults} from "../plugins/utils.js";
+import {checkResults, login, getResult, checkResultsOrNot, hasResults} from "../plugins/utils.js";
+import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("9 - Family Browser", () => {
@@ -23,32 +24,52 @@ context("9 - Family Browser", () => {
     });
 
     it("9.1 - query", () => {
-        cy.get("a[data-id=family]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser");
+        cy.get("a[data-id=family]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Family Browser");
 
         checkResultsOrNot("opencga-family-grid");
-        /*
-        getResult("opencga-family-grid").then($text => {
-            cy.get("family-id-autocomplete input").type($text + "{enter}");
-            cy.get(".lhs button[data-filter-name]").should("have.length", 1);
-            cy.get("div.search-button-wrapper button").click();
 
-        })
-        waitTableResults("opencga-family-grid");
-        checkResultsOrNot("opencga-family-grid");
-        */
+        hasResults("opencga-family-grid").then($bool => {
+            if ($bool) {
+                // run other tests in case there are results
+                getResult("opencga-family-grid", 1).then($text => {
+                    cy.get("family-id-autocomplete input").type($text + "{enter}");
+                    cy.get(".lhs button[data-filter-name]").should("have.length", 1);
+                    cy.get("div.search-button-wrapper button").click();
+                });
+                checkResults("opencga-family-grid");
+                cy.get("opencga-active-filters button[data-filter-name='id']").click();
+
+                checkResults("opencga-family-grid");
+                getResult("opencga-family-grid", 3, 0, "html").then($html => {
+                    cy.wrap($html).get("span[data-cy]").then($text => {
+                        cy.get(".subsection-content[data-cy=disorders] input").type($text.first().text() + "{enter}")
+                        cy.get("div.search-button-wrapper button").click();
+                        checkResults("opencga-family-grid");
+                        cy.get("opencga-active-filters button[data-filter-name='disorders']").click();
+                    });
+                });
+                checkResults("opencga-family-grid");
+            }
+        });
     });
 
     it("9.2 - aggregated query", () => {
         cy.get("a[data-id=family]").click({force: true});
-        cy.get("a[href='#facet_tab']").click({force: true});
+        cy.get("a[data-id=family]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Family Browser");
 
-        cy.get("button.default-facets-button").click();
-        cy.get("div.search-button-wrapper button").click();
+        checkResultsOrNot("opencga-family-grid");
 
-        cy.get(".facet-wrapper .button-list button").should("have.length", 5);
-
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 60000}).should("have.length", 5);
+        hasResults("opencga-family-grid").then($bool => {
+            if ($bool) {
+                // in case there are actually results, run the aggregated tests
+                cy.get("a[href='#facet_tab']").click({force: true});
+                cy.get("button.default-facets-button").click(); // default facets selection
+                cy.get("div.search-button-wrapper button").click();
+                cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 5);
+            }
+        });
 
     });
 });

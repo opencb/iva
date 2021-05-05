@@ -87,6 +87,7 @@ const application = {
     // defaultStudy: "emee-glh@cancer_grch38:myeloid",
     // defaultStudy: "sanger@poc:exomes",
     // The order, title and nested submenus are respected
+
     menu: [
         {
             id: "browser",

@@ -15,6 +15,7 @@
  */
 
 import {login, waitTableResults, getResult, checkResults} from "../plugins/utils.js";
+import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("12 - Jobs Browser", () => {
@@ -23,8 +24,8 @@ context("12 - Jobs Browser", () => {
     });
 
     it("12.1 - query", () => {
-        cy.get("a[data-id=job]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Jobs Browser");
+        cy.get("a[data-id=job]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Jobs Browser");
 
         checkResults("opencga-job-grid");
 
@@ -60,7 +61,7 @@ context("12 - Jobs Browser", () => {
         cy.get("div.search-button-wrapper button").click();
 
         cy.get(".facet-wrapper .button-list button").should("have.length", 1);
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 60000}).should("have.length", 1);
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 1);
 
     });
 });
