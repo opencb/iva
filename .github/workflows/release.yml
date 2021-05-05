@@ -56,7 +56,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: release-artifact
-          path: iva-${{ steps.package-version.outputs.version }}.tar.gz
       - name: Read package.json
         uses: "tyankatsu0105/read-package-version-actions@v1"
         id: package-version
