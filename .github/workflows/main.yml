@@ -100,26 +100,6 @@ jobs:
           path: cypress/videos
           retention-days: 2
 
-  deploy:
-    name: Web App Delivery
-    runs-on: ubuntu-20.04
-    needs: test
-    steps:
-      - name: Download Webpack artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: webpack-artifact
-          path: web_app/iva-2.1.0
-      - name: Web Delivery 
-        uses: garygrossgarten/github-action-scp@release
-        with:
-          local: web_app
-          remote: /mnt/data/WEB-APPS
-          host: 128.232.224.128
-          username: ${{ secrets.SSH_SWDEV_USER }}
-          password: ${{ secrets.SSH_SWDEV_PASSWORD }}
-
-
   docker:
     name: Publish Docker image in Docker Hub repository
     runs-on: ubuntu-20.04
@@ -138,3 +118,22 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: Build and publish Docker image
         run: python3 ./docker/docker-build.py push --images app --tag 2.1.0-exp
+
+  deploy-ucam:
+    name: Deploy Web App in UCam
+    runs-on: ubuntu-20.04
+    needs: test
+    steps:
+      - name: Download Webpack artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: webpack-artifact
+          path: web_app/iva-2.1.0
+      - name: Web Delivery 
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: web_app
+          remote: /mnt/data/WEB-APPS
+          host: ${{ secrets.SSH_SWDEV_IP }}
+          username: ${{ secrets.SSH_SWDEV_USER }}
+          password: ${{ secrets.SSH_SWDEV_PASSWORD }}
