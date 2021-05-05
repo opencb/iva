@@ -3,6 +3,8 @@ name: "Develop CI/CD"
 on:
   push:
     branches: [suite-menu]
+    tags:
+      - "*"
 
 jobs:
   build:
@@ -124,17 +126,20 @@ jobs:
     runs-on: ubuntu-20.04
     needs: test
     steps:
+      - uses: actions/checkout@v2
       - name: Download Webpack artifact
         uses: actions/download-artifact@v2
         with:
           name: webpack-artifact
           path: build
+      - name: Read package.json
+        uses: "tyankatsu0105/read-package-version-actions@v1"
+        id: package-version
       - name: Web Delivery 
         uses: garygrossgarten/github-action-scp@release
         with:
           local: build
-#          remote: /mnt/data/WEB-APPS/iva-${{ ... }}
-          remote: /mnt/data/WEB-APPS/iva-2.1.0-dev
+          remote: /mnt/data/WEB-APPS/iva-{{ steps.package-version.outputs.version }}
           rmRemote: true
           host: ${{ secrets.SSH_SWDEV_IP }}
           username: ${{ secrets.SSH_SWDEV_USER }}
