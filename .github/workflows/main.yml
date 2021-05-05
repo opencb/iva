@@ -132,8 +132,9 @@ jobs:
       - name: Web Delivery 
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: web_app
+          local: iva-2.1.0
           remote: /mnt/data/WEB-APPS/iva-2.1.0-test
+          rmRemote: true
           host: ${{ secrets.SSH_SWDEV_IP }}
           username: ${{ secrets.SSH_SWDEV_USER }}
           password: ${{ secrets.SSH_SWDEV_PASSWORD }}
