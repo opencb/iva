@@ -133,7 +133,8 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: build
-          remote: /mnt/data/WEB-APPS/iva-2.1.0-test
+#          remote: /mnt/data/WEB-APPS/iva-${{ ... }}
+          remote: /mnt/data/WEB-APPS/iva-2.1.0-dev
           rmRemote: true
           host: ${{ secrets.SSH_SWDEV_IP }}
           username: ${{ secrets.SSH_SWDEV_USER }}
