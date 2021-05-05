@@ -53,7 +53,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: webpack-artifact
-          path: build
+          path: web-app/${{ steps.package-version.outputs.version }}
       - name: Read package.json
         uses: "tyankatsu0105/read-package-version-actions@v1"
         id: package-version
@@ -67,4 +67,4 @@ jobs:
           prerelease: false
           files: |
             iva-${{ steps.package-version.outputs.version }}.tar.gz
-            build
+            web-app
