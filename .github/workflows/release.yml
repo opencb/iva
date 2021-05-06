@@ -2,10 +2,10 @@ name: "release"
 
 on:
   push:
-    branches-ignore:
-      - '**'
     tags:
       - "*"
+#    branches-ignore:
+#      - '**'
 
 jobs:
   build:
@@ -48,7 +48,7 @@ jobs:
 
   release:
     name: release Iva
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     needs: build
     steps:
       - uses: actions/checkout@v2
@@ -56,9 +56,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: release-artifact
-      - name: Read package.json
+      - id: package-version
+        name: Read package.json
         uses: "tyankatsu0105/read-package-version-actions@v1"
-        id: package-version
       - name: Create release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
