@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, checkResults} from "../plugins/utils.js";
+import {login, checkResults, checkResultsOrNot} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -55,7 +55,7 @@ context("3 - Header bar (post-login): Checks each menu item in header-bar resolv
     it("3.5 - checks Family Browser menu item", () => {
         cy.get("a[data-id=family]", {timeout: TIMEOUT}).click({force: true});
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Family Browser"); // should assertion comes from Chai and it follows its logic
-        checkResults("opencga-family-grid");
+        checkResultsOrNot("opencga-family-grid");
     });
 
     it("3.6 - checks study selector menu items", () => {
