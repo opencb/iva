@@ -106,12 +106,13 @@ context("4. Variant Browser", () => {
 
         cy.get("variant-browser a[href='#filters_tab']").click();
         // Study and Cohorts: Cohort Alternate Stats
-        cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").first({timeout: TIMEOUT}).should("be.visible").click();
+        // TODO add condition
+        /*cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").first({timeout: TIMEOUT}).should("be.visible").click();
         cy.get("cohort-stats-filter input[data-field='value']").first({timeout: TIMEOUT}).type("0.00001"); // set ALL cohort
         cy.get("div.search-button-wrapper button").click();
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='cohortStatsAlt']").contains("Cohort ALT Stats");
-        cy.get("opencga-active-filters button[data-filter-name='cohortStatsAlt']").click();
+        cy.get("opencga-active-filters button[data-filter-name='cohortStatsAlt']").click();*/
 
         // Genomic: Genomic Location
         cy.get("opencga-variant-filter a[data-accordion-id='Genomic']").click();
