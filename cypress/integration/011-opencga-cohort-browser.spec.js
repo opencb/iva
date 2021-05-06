@@ -35,7 +35,6 @@ context("11 - Cohort Browser", () => {
 
         cy.get("div.search-button-wrapper button").click();
 
-        //waitTableResults("opencga-cohort-grid");
         checkResults("opencga-cohort-grid");
     });
 

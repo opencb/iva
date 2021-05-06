@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, waitTableResults, getResult, checkResults} from "../plugins/utils.js";
+import {login, getResult, checkResults} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -39,7 +39,6 @@ context("12 - Jobs Browser", () => {
         cy.get(".lhs button[data-filter-name]").should("have.length", 2);
 
         cy.get("div.search-button-wrapper button").click();
-        waitTableResults("opencga-job-grid");
         checkResults("opencga-job-grid");
 
         cy.get("#priority + .subsection-content a").click({force: true, multiple: true});

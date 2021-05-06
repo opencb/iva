@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults, checkExactResult, waitTableResults} from "../plugins/utils.js";
+import {login, randomString, checkResults, checkExactResult} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 

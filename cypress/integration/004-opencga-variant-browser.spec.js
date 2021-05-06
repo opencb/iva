@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults, checkResultsOrNot, waitTableResults} from "../plugins/utils.js";
+import {login, randomString, checkResults, checkResultsOrNot} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 //import "cypress-wait-until";
 

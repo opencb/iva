@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, checkResults, getResult, waitTableResults} from "../plugins/utils.js";
+import {login, checkResults, getResult} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -40,7 +40,6 @@ context("8 - Individual Browser", () => {
         cy.get(".lhs button[data-filter-name]").should("have.length", 2);
         cy.get("div.search-button-wrapper button").click();
 
-        waitTableResults("opencga-individual-grid");
         checkResults("opencga-individual-grid");
 
     });
