@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login} from "../plugins/utils.js";
+import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("2 - Login", () => {
@@ -41,10 +41,10 @@ context("2 - Login", () => {
         cy.get("#opencgaPassword").type(password);
         cy.get("form#formLogin").submit();
 
-        cy.get(".login-overlay", {timeout: 60000}).should("be.visible");
-        cy.get(".login-overlay", {timeout: 60000}).should("not.exist");
+        cy.get(".login-overlay", {timeout: TIMEOUT}).should("be.visible");
+        cy.get(".login-overlay", {timeout: TIMEOUT}).should("not.exist");
 
-        cy.url().should("include", "#home", {timeout: 15000})
+        cy.url().should("include", "#home", {timeout: TIMEOUT})
         cy.get(".row > [data-id='iva']").click();
         cy.get(".subtitle", {timeout: 60000}).contains("Interactive Variant Analysis");
     });

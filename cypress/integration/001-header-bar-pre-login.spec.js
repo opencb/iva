@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import {TIMEOUT} from "../plugins/constants.js";
+
+
 /**
  * Header bar (pre-login)
  */
@@ -24,7 +27,7 @@ context("1 - Header bar (pre-login): checks on Header Bar elements", () => {
     });
 
     it("1.1 - check login page content", () => {
-        cy.get("#loginButton", {timeout: 60000}).should("be.visible");
+        cy.get("#loginButton", {timeout: TIMEOUT}).should("be.visible");
         cy.get("#loginButton").click();
         cy.get("#opencgaUser").should("be.visible");
         cy.get("#opencgaPassword").should("be.visible");

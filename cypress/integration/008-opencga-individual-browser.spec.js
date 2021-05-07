@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {login, checkResults, getResult, waitTableResults} from "../plugins/utils.js";
+import {login, checkResults, getResult} from "../plugins/utils.js";
+import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("8 - Individual Browser", () => {
@@ -23,12 +24,12 @@ context("8 - Individual Browser", () => {
     });
 
     it("8.1 - query", () => {
-        cy.get("a[data-id=individual]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Individual Browser");
+        cy.get("a[data-id=individual]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Individual Browser");
 
         checkResults("opencga-individual-grid");
 
-        getResult("opencga-individual-grid", 2).then($text => {
+        getResult("opencga-individual-grid", 1).then($text => {
             cy.get("opencga-individual-filter .form-group:nth-child(1) individual-id-autocomplete input").type($text + "{enter}");
         });
 
@@ -39,7 +40,6 @@ context("8 - Individual Browser", () => {
         cy.get(".lhs button[data-filter-name]").should("have.length", 2);
         cy.get("div.search-button-wrapper button").click();
 
-        waitTableResults("opencga-individual-grid");
         checkResults("opencga-individual-grid");
 
     });
@@ -52,7 +52,7 @@ context("8 - Individual Browser", () => {
         cy.get("button.default-facets-button").click();
         cy.get("div.search-button-wrapper button").click();
         cy.get(".facet-wrapper .button-list button").should("have.length", 8);
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 60000}).should("have.length", 8);
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 8);
     });
 
 });
