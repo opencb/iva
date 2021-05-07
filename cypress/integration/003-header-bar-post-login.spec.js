@@ -24,9 +24,11 @@ import {TIMEOUT} from "../plugins/constants.js";
 context("3 - Header bar (post-login): Checks each menu item in header-bar resolves correctly", () => {
     before(() => {
         login();
+        cy.get(".row > [data-id='iva']").click();
     });
 
     it("3.1 - checks Variant Browser menu item", () => {
+        
         cy.get("a[data-id=browser]", {timeout: TIMEOUT}).click({force: true});
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
         checkResults("variant-browser-grid");

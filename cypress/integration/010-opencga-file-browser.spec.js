@@ -21,6 +21,7 @@ import {TIMEOUT} from "../plugins/constants.js";
 context("10 - File Browser", () => {
     before(() => {
         login();
+        cy.get(".row > [data-id='iva']").click();
     });
 
     it("10.1 - query", () => {

@@ -46,7 +46,7 @@ context("2 - Login", () => {
 
         cy.url().should("include", "#home", {timeout: TIMEOUT})
         cy.get(".row > [data-id='iva']").click();
-        cy.get(".subtitle", {timeout: 60000}).contains("Interactive Variant Analysis");
+        cy.get(".subtitle", {timeout: TIMEOUT}).contains("Interactive Variant Analysis");
     });
 
 });

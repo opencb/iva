@@ -21,6 +21,7 @@ import {TIMEOUT} from "../plugins/constants.js";
 context("6 - Case Interpreter", () => {
     before(() => {
         login();
+        cy.get(".row > [data-id='iva']").click();
     });
 
     it("6.1 - check query results", () => {

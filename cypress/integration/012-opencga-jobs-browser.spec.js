@@ -21,6 +21,7 @@ import {TIMEOUT} from "../plugins/constants.js";
 context("12 - Jobs Browser", () => {
     before(() => {
         login();
+        cy.get(".row > [data-id='iva']").click();
     });
 
     it("12.1 - query", () => {

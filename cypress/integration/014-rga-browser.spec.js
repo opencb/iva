@@ -21,6 +21,7 @@ import {TIMEOUT} from "../plugins/constants.js";
 context("14 - RGA Browser", () => {
     before(() => {
         login();
+        cy.get(".row > [data-id='iva']").click();
     });
     /* "geneName",
         "IndividualId",

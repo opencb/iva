@@ -21,6 +21,7 @@ import {TIMEOUT} from "../plugins/constants.js";
 context("11 - Cohort Browser", () => {
     before(() => {
         login();
+        cy.get(".row > [data-id='iva']").click();
     });
 
     it("11.1 - query", () => {
