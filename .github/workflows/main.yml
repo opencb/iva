@@ -29,8 +29,8 @@ jobs:
             ${{ runner.os }}-
       - name: Install bower dependecy
         run: npm install bower
-      - name: Run npm ci
-        run: npm ci
+      - name: Run npm ci 
+        run: npm ci --only-production --ignore-scripts
       - name: Run npm install
         run: npm init -y && npm install
       - name: Build IVA app
