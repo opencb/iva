@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults, checkExactResult} from "../plugins/utils.js";
+import {login, goTo, randomString, checkResults, checkExactResult} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("6 - Case Interpreter", () => {
     before(() => {
         login();
-        cy.get(".row > [data-id='iva']").click();
+        goTo("iva");
     });
 
     it("6.1 - check query results", () => {

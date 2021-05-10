@@ -15,6 +15,7 @@
  */
 
 import {TIMEOUT} from "../plugins/constants.js";
+import {goTo} from "../plugins/utils.js";
 
 
 /**
@@ -34,10 +35,8 @@ context("1 - Header bar (pre-login): checks on Header Bar elements", () => {
     });
 
     it("1.2 - check header-bar icons resolve correctly", () => {
-        
-        cy.get("a.navbar-brand").first().click();  
-        cy.get(".row > [data-id='iva']").click();
-        cy.get("#welcome-page-title", {timeout: 60000}).contains("Interactive Variant Analysis");
+        goTo("iva");
+        cy.get("#welcome-page-title", {timeout: TIMEOUT}).contains("Interactive Variant Analysis");
 
     });
 });

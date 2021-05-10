@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import {login, getResult, checkResults, checkResultsOrNot} from "../plugins/utils.js";
+import {login, goTo, getResult, checkResults, checkResultsOrNot} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("14 - RGA Browser", () => {
     before(() => {
         login();
-        cy.get(".row > [data-id='iva']").click();
+        goTo("iva");
     });
     /* "geneName",
         "IndividualId",

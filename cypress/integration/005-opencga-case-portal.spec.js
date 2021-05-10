@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults} from "../plugins/utils.js";
+import {login, goTo, randomString, checkResults} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("5 - Case Portal", () => {
     before(() => {
         login();
-        cy.get(".row > [data-id='iva']").click();
+        goTo("iva");
     });
 
     it("5.1 - check query results", () => {

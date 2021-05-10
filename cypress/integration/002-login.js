@@ -15,6 +15,7 @@
  */
 
 import {TIMEOUT} from "../plugins/constants.js";
+import {goTo} from "../plugins/utils.js";
 
 
 context("2 - Login", () => {
@@ -45,7 +46,7 @@ context("2 - Login", () => {
         cy.get(".login-overlay", {timeout: TIMEOUT}).should("not.exist");
 
         cy.url().should("include", "#home", {timeout: TIMEOUT})
-        cy.get(".row > [data-id='iva']").click();
+        goTo("iva");
         cy.get(".subtitle", {timeout: TIMEOUT}).contains("Interactive Variant Analysis");
     });
 

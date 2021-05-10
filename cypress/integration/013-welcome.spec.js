@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login} from "../plugins/utils.js";
+import {login, goTo} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -24,13 +24,12 @@ const resolveButtons = page => {
     cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", page.title);
     // cy.get("a#home-nav").click();
     cy.get(".navbar-header > a[href='#home']").click();
-
 };
 
 context("13 - Welcome page", () => {
     before(() => {
         login();
-        cy.get(".row > [data-id='iva']").click();
+        goTo("iva");
     });
 
     it("13.1 - check home page content", () => {

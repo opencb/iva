@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults, checkResultsOrNot} from "../plugins/utils.js";
+import {login, goTo, randomString, checkResults, checkResultsOrNot} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 //import "cypress-wait-until";
 
@@ -22,7 +22,7 @@ import {TIMEOUT} from "../plugins/constants.js";
 context("4. Variant Browser", () => {
     before(() => {
         login();
-        cy.get(".row > [data-id='iva']").click();
+        goTo("iva");
     });
 
     beforeEach(() => {

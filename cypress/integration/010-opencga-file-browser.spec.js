@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import {login, getResult, checkResults} from "../plugins/utils.js";
+import {login, goTo, getResult, checkResults} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("10 - File Browser", () => {
     before(() => {
         login();
-        cy.get(".row > [data-id='iva']").click();
+        goTo("iva");
     });
 
     it("10.1 - query", () => {
