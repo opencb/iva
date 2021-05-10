@@ -1574,28 +1574,28 @@ class IvaApp extends LitElement {
 
                 ${this.config.enabledComponents["cat-clinical"] ? html`
                     <div class="content" id="cat-clinical">
-                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "clinical")}">
+                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.app?.menu?.find(item => item.id === "clinical")}">
                         </category-page>
                     </div>
                 ` : null}
 
                 ${this.config.enabledComponents["cat-catalog"] ? html`
                     <div class="content" id="cat-catalog">
-                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "catalog")}">
+                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.app?.menu?.find(item => item.id === "catalog")}">
                         </category-page>
                     </div>
                 ` : null}
 
                 ${this.config.enabledComponents["cat-alignment"] ? html`
                     <div class="content" id="cat-alignment">
-                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "alignment")}">
+                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.app?.menu?.find(item => item.id === "alignment")}">
                         </category-page>
                     </div>
                 ` : null}
 
                 ${this.config.enabledComponents["cat-ga4gh"] ? html`
                     <div class="content" id="cat-ga4gh">
-                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.config.menu.find(item => item.id === "ga4gh")}">
+                        <category-page .opencgaSession="${this.opencgaSession}" .config="${this.app?.menu?.find(item => item.id === "ga4gh")}">
                         </category-page>
                     </div>
                 ` : null}
