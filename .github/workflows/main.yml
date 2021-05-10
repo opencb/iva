@@ -29,8 +29,8 @@ jobs:
             ${{ runner.os }}-
       - name: Install bower dependecy
         run: npm install bower
-      - name: Run npm ci
-        run: npm ci
+      - name: Run npm ci 
+        run: npm ci --only-production --ignore-scripts
       - name: Run npm install
         run: npm init -y && npm install
       - name: Build IVA app
@@ -91,16 +91,18 @@ jobs:
         uses: actions/upload-artifact@v2
         if: failure()
         with:
-          name: cypress-screenshots-${{ matrix.browsers }}_${{ matrix.node-version }}
-          path: cypress/screenshots
+          name: cypress-${{ matrix.browsers }}_${{ matrix.node-version }}
+          path: |
+            cypress/screenshots
+            cypress/videos
           retention-days: 2
-      - name: Upload Video
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: cypress-videos-${{ matrix.browsers }}_${{ matrix.node-version }}
-          path: cypress/videos
-          retention-days: 2
+#      - name: Upload Video
+#        uses: actions/upload-artifact@v2
+#        if: always()
+#        with:
+#          name: cypress-videos-${{ matrix.browsers }}_${{ matrix.node-version }}
+#          path: cypress/videos
+#          retention-days: 2
 
   docker:
     name: Publish Docker image in Docker Hub repository
@@ -132,10 +134,10 @@ jobs:
         with:
           name: webpack-artifact
           path: build
-      - name: Read package.json
+      - id: package-version
+        name: Read package.json
         uses: "tyankatsu0105/read-package-version-actions@v1"
-        id: package-version
-      - name: Web Delivery 
+      - name: Web Delivery
         uses: garygrossgarten/github-action-scp@release
         with:
           local: build

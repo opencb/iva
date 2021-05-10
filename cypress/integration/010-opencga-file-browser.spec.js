@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-import {login, waitTableResults, getResult, checkResults} from "../plugins/utils.js";
+import {login, getResult, checkResults} from "../plugins/utils.js";
+import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("10 - File Browser", () => {
     before(() => {
         login();
+        cy.get(".row > [data-id='iva']").click();
     });
 
     it("10.1 - query", () => {
-        cy.get("a[data-id=file]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "File Browser");
+        cy.get("a[data-id=file]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "File Browser");
 
         checkResults("opencga-file-grid");
 
@@ -35,7 +37,6 @@ context("10 - File Browser", () => {
         cy.get(".lhs button[data-filter-name]").should("have.length", 1);
 
         cy.get("div.search-button-wrapper button").click();
-        // waitTableResults("opencga-file-grid");
         checkResults("opencga-file-grid");
 
         cy.get("#format + .subsection-content a").contains("VCF").click({force: true});
@@ -44,7 +45,6 @@ context("10 - File Browser", () => {
         cy.get(".lhs button[data-filter-name]").should("have.length", 3);
         cy.get("div.search-button-wrapper button").click();
 
-        // waitTableResults("opencga-file-grid");
         checkResults("opencga-file-grid");
 
     });
@@ -60,7 +60,7 @@ context("10 - File Browser", () => {
         cy.get("div.search-button-wrapper button").click();
 
         cy.get(".facet-wrapper .button-list button").should("have.length", 1);
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 60000}).should("have.length", 1);
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 1);
 
     });
 });

@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-import {checkResults, login, getResult, waitTableResults, checkResultsOrNot, getResultHtml, hasResults} from "../plugins/utils.js";
+import {checkResults, login, getResult, checkResultsOrNot, hasResults} from "../plugins/utils.js";
+import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("9 - Family Browser", () => {
     before(() => {
         login();
+        cy.get(".row > [data-id='iva']").click();
     });
 
     it("9.1 - query", () => {
-        cy.get("a[data-id=family]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser");
+        cy.get("a[data-id=family]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Family Browser");
 
         checkResultsOrNot("opencga-family-grid");
 
@@ -55,8 +57,8 @@ context("9 - Family Browser", () => {
 
     it("9.2 - aggregated query", () => {
         cy.get("a[data-id=family]").click({force: true});
-        cy.get("a[data-id=family]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Family Browser");
+        cy.get("a[data-id=family]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Family Browser");
 
         checkResultsOrNot("opencga-family-grid");
 
@@ -66,7 +68,7 @@ context("9 - Family Browser", () => {
                 cy.get("a[href='#facet_tab']").click({force: true});
                 cy.get("button.default-facets-button").click(); // default facets selection
                 cy.get("div.search-button-wrapper button").click();
-                cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: 60000}).should("have.lengthOf", 5);
+                cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 5);
             }
         });
 

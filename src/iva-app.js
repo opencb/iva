@@ -464,9 +464,13 @@ class IvaApp extends LitElement {
         window.clearInterval(this.intervalCheckSession);
     }
 
-    // saveLastStudy(studyFqn) {
-    //     this.opencgaClient.updateUserConfigs({...this.opencgaSession.user.configs, lastStudy: studyFqn});
-    // }
+    async saveLastStudy(newStudy) {
+        const userConfig = await this.opencgaClient.updateUserConfigs({
+            ...this.opencgaSession.user.configs.IVA,
+            lastStudy: newStudy.fqn
+        });
+        this.opencgaSession.user.configs.IVA = userConfig.responses[0].results[0];
+    }
 
     onUrlChange(e) {
         let hashFrag = e.detail.id;

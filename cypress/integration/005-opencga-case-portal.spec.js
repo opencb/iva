@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults, waitTableResults} from "../plugins/utils.js";
+import {login, randomString, checkResults} from "../plugins/utils.js";
+import {TIMEOUT} from "../plugins/constants.js";
 
 
 context("5 - Case Portal", () => {
     before(() => {
         login();
+        cy.get(".row > [data-id='iva']").click();
     });
 
     it("5.1 - check query results", () => {
-        cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal");
+        cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Case Portal");
 
         checkResults("opencga-clinical-analysis-grid");
 
@@ -49,7 +51,7 @@ context("5 - Case Portal", () => {
 
 
         // reading from the first row the case Id, the proband Id, and the Family Id and use them as filters
-        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000})
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT})
             .find("td:nth-child(1) a[data-cy='case-id']")
             .then($a => {
                 const caseId = $a.text().trim();
@@ -69,26 +71,26 @@ context("5 - Case Portal", () => {
 
             });
 
-        // cy.get("opencga-clinical-review-cases .rhs button", {timeout: 60000}).should("be.visible").and("contain", "Clear").click()
+        // cy.get("opencga-clinical-review-cases .rhs button", {timeout: TIMEOUT}).should("be.visible").and("contain", "Clear").click()
         cy.get("button[data-cy='filter-button']").click({force: true});
         cy.get(".saved-filter-wrapper a").contains("Clear").click({force: true});
 
     });
 
     it("5.2 - check Columns togglability", () => {
-        cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: 60000}).click({force: true});
-        cy.get("div.page-title h2", {timeout: 60000}).should("be.visible").and("contain", "Case Portal");
+        cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: TIMEOUT}).click({force: true});
+        cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Case Portal");
 
 
         cy.get("opencga-clinical-analysis-grid .columns-toggle-wrapper button").should("be.visible").and("contain", "Columns").click();
         cy.get("opencga-clinical-analysis-grid .columns-toggle-wrapper ul li").should("have.length.gt", 1);
 
 
-        cy.get("opencga-clinical-analysis-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // deactivate all the columns
-        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000}).find("td", {timeout: 60000}).should("have.lengthOf", 1);
+        cy.get("opencga-clinical-analysis-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: TIMEOUT}); // deactivate all the columns
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT}).find("td", {timeout: TIMEOUT}).should("have.lengthOf", 1);
 
-        cy.get("opencga-clinical-analysis-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: 60000}); // reactivate all the columns
-        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: 60000}).find("td", {timeout: 60000}).should("have.length.gt", 1);
+        cy.get("opencga-clinical-analysis-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: TIMEOUT}); // reactivate all the columns
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT}).find("td", {timeout: TIMEOUT}).should("have.length.gt", 1);
 
 
     });

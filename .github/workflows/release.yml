@@ -2,10 +2,10 @@ name: "release"
 
 on:
   push:
-    branches-ignore:
-      - '**'
     tags:
       - "*"
+#    branches-ignore:
+#      - '**'
 
 jobs:
   build:
@@ -36,32 +36,34 @@ jobs:
         run: npm init -y && npm install
       - name: Build IVA app
         run: npm run build
+      - name: Read package.json
+        uses: "tyankatsu0105/read-package-version-actions@v1"
+        id: package-version
       - name: Upload webpack artifact
         uses: actions/upload-artifact@v2
         with:
-          name: webpack-artifact
-          path: build
+          name: release-artifact
+          path: iva-${{ steps.package-version.outputs.version }}.tar.gz
           retention-days: 2
 
   release:
     name: release Iva
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     needs: build
     steps:
       - uses: actions/checkout@v2
       - name: Download webpack artifact
         uses: actions/download-artifact@v2
         with:
-          name: webpack-artifact
-          path: build
-      - name: Read package.json
+          name: release-artifact
+      - id: package-version
+        name: Read package.json
         uses: "tyankatsu0105/read-package-version-actions@v1"
-        id: package-version
       - name: Create release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          draft: true
+          draft: ${{ contains(steps.package-version.outputs.version,'-') }}
           automatic_release_tag: "v${{ steps.package-version.outputs.version }}"
           title: "v${{ steps.package-version.outputs.version }}"
           prerelease: false

@@ -140,52 +140,555 @@ const suite = {
                     // fa_icon: "fa fa-list",
                     icon: "variant_browser.svg",
                     visibility: "public",
-                    // submenu: [
-                    //     {
-                    //         id: "browser",
-                    //         name: "Variant Browser",
-                    //         acronym: "VB",
-                    //         description: `
-                    //             <p>Explore all variants</p>
-                    //             <ul>
-                    //                 <li>Rich annotation and links to leading reference databases</li>
-                    //                 <li>Filter by gene, consequence, frequency and much more</li>
-                    //             </ul>`,
-                    //         visibility: "public",
-                    //         // fa_icon: "fa fa-list",
-                    //         icon: "variant_browser.svg",
-                    //         thumbnail: "variant-browser.png"
-                    //     }
-                    // ]
-                },
-                {
-                    id: "analysis",
-                    name: "Variant Analysis",
-                    icon: "variant_browser.svg",
-                    visibility: "public",
                     submenu: [
                         {
                             id: "browser",
                             name: "Variant Browser",
-                            icon: "variant_browser.svg",
                             acronym: "VB",
                             description: `
-                            <p>Explore all variants identified by the 100,000 Genomes Project</p>
-                            <ul>
-                                <li>Rich annotation and links to leading reference databases</li>
-                                <li>Filter by gene, consequence, frequency and much more</li>
-                            </ul>`,
+                                    <p>Explore all variants identified by the 100,000 Genomes Project</p>
+                                    <ul>
+                                        <li>Rich annotation and links to leading reference databases</li>
+                                        <li>Filter by gene, consequence, frequency and much more</li>
+                                    </ul>`,
                             visibility: "public",
-                            // fa_icon: "fa fa-list",
+                            fa_icon: "fa fa-list",
+                            icon: "variant_browser.svg",
                             thumbnail: "variant-browser.png"
+                        }
+                        // {
+                        //     id: "genomeBrowser",
+                        //     title: "Genome Browser",
+                        //     acronym: "GB",
+                        //     description: `<ul>
+                        //                     <li>Based on Genome Maps (http://genomemaps.org)</li>
+                        //                     <li>Smooth, interactive variant visualisation</li>
+                        //                     </ul>`,
+                        //     visibility: "private",
+                        //     thumbnail: "screenshot3.png",
+                        //     fa_icon: "fa fa-globe-europe",
+                        //     icon: "genome_browser.svg"
+                        //
+                        // },
+                    ]
+                },
+                {
+                    id: "analysis",
+                    name: "Variant Analysis",
+                    description: "",
+                    icon: "aggregation.svg",
+                    visibility: "public",
+                    submenu: [
+                        {
+                            name: "Summary Stats",
+                            category: true,
+                            id: "cat-analysis",
+                            visibility: "public"
+                        },
+                        {
+                            id: "sample-variant-stats",
+                            name: "Sample Variant Stats",
+                            acronym: "SVS",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "cohort-variant-stats",
+                            name: "Cohort Variant Stats",
+                            acronym: "CS",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        // {
+                        //     id: "hw", title: "Hardy-Weinberg", acronym: "HW",
+                        //     description: "",
+                        //     icon: "",
+                        //     visibility: "public"
+                        // },
+                        {
+                            separator: true,
+                            visibility: "public"
+                        },
+                        {
+                            name: "Association Analysis",
+                            category: true,
+                            id: "cat-analysis",
+                            visibility: "public"
+                        },
+                        {
+                            id: "gwas",
+                            name: "Genome-Wide Association Study (GWAS)",
+                            acronym: "GWAS",
+                            description: "Study of a genome-wide set of genetic variants in different individuals to see if any variant is associated with a trait",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        // {
+                        //     id: "tdt",
+                        //     title: "Family-Based Association (TDT)",
+                        //     acronym: "TDT",
+                        //     description: "",
+                        //     icon: "",
+                        //     visibility: "public"
+                        // },
+                        {
+                            separator: true,
+                            visibility: "public"
+                        },
+                        {
+                            name: "Sample Analysis",
+                            category: true,
+                            id: "cat-analysis",
+                            visibility: "public"
+                        },
+                        {
+                            id: "knockout",
+                            name: "Knockout Analysis",
+                            acronym: "KO",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "knockout-result",
+                            name: "Knockout Analysis result",
+                            acronym: "KO",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "sample-eligibility",
+                            name: "Eligibility Analysis",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+        
+                        {
+                            separator: true,
+                            visibility: "public"
+                        },
+                        {
+                            name: "Individual Analysis",
+                            category: true,
+                            id: "cat-analysis",
+                            visibility: "public"
+                        },
+                        {
+                            id: "inferred-sex",
+                            name: "Sex Inference",
+                            acronym: "SI",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "individual-relatedness",
+                            name: "Relatedness",
+                            acronym: "RL",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "mendelian-errors",
+                            name: "Mendelian Errors",
+                            acronym: "ME",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            separator: true,
+                            visibility: "public"
+                        },
+                        {
+                            name: "Cancer Analysis",
+                            category: true,
+                            id: "cat-analysis",
+                            visibility: "public"
+                        },
+                        {
+                            id: "mutational-signature",
+                            name: "Mutational Signature",
+                            acronym: "SG",
+                            description: "",
+                            icon: "aggregation.svg",
+                            visibility: "public"
+                        },
+                        {
+                            separator: true,
+                            visibility: "public"
+                        },
+                        {
+                            name: "Clinical Interpretation",
+                            category: true,
+                            id: "cat-analysis",
+                            visibility: "public"
+                        },
+                        {
+                            id: "rd-tiering",
+                            name: "RD Tiering",
+                            acronym: "RDT",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "recessive-gene",
+                            name: "Recessive Gene Analysis",
+                            acronym: "RG",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        // {
+                        //     id: "team",
+                        //     title: "TEAM",
+                        //     description: "",
+                        //     icon: "",
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     id: "zetta",
+                        //     title: "Zetta",
+                        //     description: "",
+                        //     icon: "",
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     id: "cancer-tiering",
+                        //     title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
+                        //     description: "",
+                        //     icon: "",
+                        //     visibility: "public"
+                        // },
+                        {
+                            separator: true,
+                            visibility: "public"
+                        },
+                        {
+                            name: "Quality Control",
+                            category: true,
+                            id: "cat-analysis",
+                            visibility: "public"
+                        },
+                        {
+                            id: "sample-qc",
+                            name: "Sample Quality Control",
+                            description: "Calculate different genetic checks and metrics and store data in Sample Catalog",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "individual-qc",
+                            name: "Individual Quality Control",
+                            description: "Calculate different genetic checks and metrics and store data in Individual Catalog",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "family-qc",
+                            name: "Family Quality Control",
+                            description: "Calculate different genetic checks and metrics and store data in Family Catalog",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            separator: true,
+                            visibility: "public"
+                        },
+                        {
+                            name: "External Tools",
+                            category: true,
+                            id: "cat-analysis",
+                            visibility: "public"
+                        },
+                        {
+                            id: "plink",
+                            name: "Plink",
+                            acronym: "Pl",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "gatk",
+                            name: "GATK",
+                            acronym: "GT",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            separator: true,
+                            visibility: "public"
+                        },
+                        {
+                            name: "Other",
+                            category: true,
+                            id: "cat-analysis",
+                            visibility: "public"
+                        },
+                        {
+                            id: "variant-exporter",
+                            name: "Variant Exporter",
+                            acronym: "EX",
+                            description: "",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "variant-stats-exporter",
+                            name: "Variant Stats Exporter",
+                            acronym: "VSE",
+                            description: "Export variant stats for different cohorts",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "beacon",
+                            name: "GA4GH Beacon",
+                            description: `
+                                <ul>
+                                    <li>Federated search from the Global Alliance for Genomics and Health</li>
+                                    <li>Find databases that have information about specific variants</li>
+                                </ul>`,
+                            thumbnail: "beacon.png",
+                            fa_icon: "fa fa-globe-europe",
+                            icon: "beacon.svg",
+                            visibility: "public"
                         }
                     ]
                 },
                 {
-                    id: "sample",
-                    name: "Sample Browser",
-                    visibility: "public"
+                    id: "clinical",
+                    name: "Case Interpretation",
+                    icon: "interpretation_portal.svg",
+                    visibility: "public",
+                    submenu: [
+                        {
+                            name: "Clinical Management",
+                            category: true,
+                            id: "cat-clinical",
+                            visibility: "public"
+                        },
+        
+                        {
+                            id: "clinicalAnalysisPortal",
+                            name: "Case Portal",
+                            acronym: "",
+                            description: `
+                                <ul>
+                                    <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
+                                    <li>Filter by gene, consequence, frequency and much more</li>
+                                </ul>
+                            `,
+                            visibility: "public",
+                            fa_icon: "fa fa-user-md",
+                            icon: "interpretation_portal.svg",
+                            thumbnail: "interpretation_portal.png",
+                        },
+                        {
+                            id: "clinical-analysis-writer",
+                            name: "Create Case",
+                            acronym: "",
+                            icon: "",
+                            description: "",
+                            visibility: "public"
+                        },
+                        // {
+                        //     separator: true,
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     title: "Clinical Analysis",
+                        //     category: true,
+                        //     id: "cat-analysis",
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     id: "rga",
+                        //     title: "RGA",
+                        //     acronym: "",
+                        //     icon: "",
+                        //     description: "",
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     separator: true,
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     title: "Case Interpretation",
+                        //     category: true,
+                        //     id: "cat-clinical",
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     id: "rd-tiering",
+                        //     title: "RD Tiering",
+                        //     acronym: "RDT",
+                        //     description: "",
+                        //     icon: "",
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     id: "team",
+                        //     title: "TEAM",
+                        //     description: "",
+                        //     icon: "",
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     id: "zetta",
+                        //     title: "Zetta",
+                        //     description: "",
+                        //     icon: "",
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     id: "cancer-tiering",
+                        //     title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
+                        //     description: "",
+                        //     icon: "",
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     id: "interpreter",
+                        //     title: "Case Interpreter",
+                        //     acronym: "",
+                        //     icon: "",
+                        //     description: "",
+                        //     visibility: "public"
+                        // }
+                        // {
+                        //     separator: true,
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     title: "Reported Variants",
+                        //     category: true,
+                        //     id: "cat-clinical",
+                        //     visibility: "public"
+                        // },
+                        // {
+                        //     id: "cva",
+                        //     title: "Clinical Variant Browser",
+                        //     acronym: "CVB",
+                        //     description: "",
+                        //     icon: "",
+                        //     visibility: "public"
+                        // }
+                    ]
                 },
+                {
+                    id: "alignment",
+                    name: "Alignment",
+                    description: "",
+                    icon: "alignment.svg",
+                    visibility: "public",
+                    submenu: [
+                        {
+                            name: "Data Management",
+                            category: true,
+                            id: "cat-alignment",
+                            visibility: "public"
+                        },
+                        {
+                            id: "alignment-index",
+                            name: "Alignment Index",
+                            description: "Create a .bai index file.",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            id: "coverage-index",
+                            name: "Coverage Index",
+                            description: "Precompute coverage in a BigWig file",
+                            icon: "",
+                            visibility: "public"
+                        },
+                        {
+                            separator: true,
+                            visibility: "public"
+                        },
+                        {
+                            name: "Summary Stats",
+                            category: true,
+                            id: "cat-alignment",
+                            visibility: "public"
+                        },
+                        {
+                            id: "alignment-stats",
+                            name: "Alignment Stats",
+                            description: "Compute BAM stats using samtools",
+                            icon: "",
+                            visibility: "public"
+                        }
+                    ]
+                },
+                {
+                    id: "catalog",
+                    name: "Catalog",
+                    visibility: "public",
+                    icon: "aggregation2.svg",
+                    submenu: [
+                        {
+                            id: "projects",
+                            name: "Projects",
+                            visibility: "public"
+                        },
+                        {
+                            separator: true,
+                            visibility: "public"
+                        },
+                        {
+                            name: "Browsers",
+                            category: true,
+                            id: "cat-catalog",
+                            visibility: "public"
+                        },
+                        {
+                            id: "file",
+                            name: "File Browser",
+                            visibility: "public"
+                        },
+                        {
+                            id: "sample",
+                            name: "Sample Browser",
+                            visibility: "public"
+                        },
+                        {
+                            id: "individual",
+                            name: "Individual Browser",
+                            visibility: "public"
+                        },
+                        {
+                            id: "family",
+                            name: "Family Browser",
+                            visibility: "public"
+                        },
+                        {
+                            id: "cohort",
+                            name: "Cohort Browser",
+                            visibility: "public"
+                        },
+                        {
+                            id: "clinicalAnalysis",
+                            name: "Clinical Analysis Browser",
+                            visibility: "public"
+                        },
+                        {
+                            id: "job",
+                            name: "Job Browser",
+                            visibility: "public"
+                        }
+                    ]
+                }
             ],
             fileExplorer: {
                 visibility: "private"
@@ -351,14 +854,14 @@ const suite = {
     _menu: [
         {
             id: "browser",
-            title: "Variant Browser",
+            name: "Variant Browser",
             fa_icon: "fa fa-list",
             icon: "variant_browser.svg",
             visibility: "public",
             submenu: [
                 {
                     id: "browser",
-                    title: "Variant Browser",
+                    name: "Variant Browser",
                     acronym: "VB",
                     description: `
                             <p>Explore all variants identified by the 100,000 Genomes Project</p>
@@ -373,7 +876,7 @@ const suite = {
                 }
                 // {
                 //     id: "genomeBrowser",
-                //     title: "Genome Browser",
+                //     name: "Genome Browser",
                 //     acronym: "GB",
                 //     description: `<ul>
                 //                     <li>Based on Genome Maps (http://genomemaps.org)</li>
@@ -389,20 +892,20 @@ const suite = {
         },
         {
             id: "analysis",
-            title: "Variant Analysis",
+            name: "Variant Analysis",
             description: "",
             icon: "aggregation.svg",
             visibility: "public",
             submenu: [
                 {
-                    title: "Summary Stats",
+                    name: "Summary Stats",
                     category: true,
                     id: "cat-analysis",
                     visibility: "public"
                 },
                 {
                     id: "sample-variant-stats",
-                    title: "Sample Variant Stats",
+                    name: "Sample Variant Stats",
                     acronym: "SVS",
                     description: "",
                     icon: "",
@@ -410,7 +913,7 @@ const suite = {
                 },
                 {
                     id: "cohort-variant-stats",
-                    title: "Cohort Variant Stats",
+                    name: "Cohort Variant Stats",
                     acronym: "CS",
                     description: "",
                     icon: "",
@@ -427,14 +930,14 @@ const suite = {
                     visibility: "public"
                 },
                 {
-                    title: "Association Analysis",
+                    name: "Association Analysis",
                     category: true,
                     id: "cat-analysis",
                     visibility: "public"
                 },
                 {
                     id: "gwas",
-                    title: "Genome-Wide Association Study (GWAS)",
+                    name: "Genome-Wide Association Study (GWAS)",
                     acronym: "GWAS",
                     description: "Study of a genome-wide set of genetic variants in different individuals to see if any variant is associated with a trait",
                     icon: "",
@@ -442,7 +945,7 @@ const suite = {
                 },
                 // {
                 //     id: "tdt",
-                //     title: "Family-Based Association (TDT)",
+                //     name: "Family-Based Association (TDT)",
                 //     acronym: "TDT",
                 //     description: "",
                 //     icon: "",
@@ -453,14 +956,14 @@ const suite = {
                     visibility: "public"
                 },
                 {
-                    title: "Sample Analysis",
+                    name: "Sample Analysis",
                     category: true,
                     id: "cat-analysis",
                     visibility: "public"
                 },
                 {
                     id: "knockout",
-                    title: "Knockout Analysis",
+                    name: "Knockout Analysis",
                     acronym: "KO",
                     description: "",
                     icon: "",
@@ -468,7 +971,7 @@ const suite = {
                 },
                 {
                     id: "knockout-result",
-                    title: "Knockout Analysis result",
+                    name: "Knockout Analysis result",
                     acronym: "KO",
                     description: "",
                     icon: "",
@@ -476,7 +979,7 @@ const suite = {
                 },
                 {
                     id: "sample-eligibility",
-                    title: "Eligibility Analysis",
+                    name: "Eligibility Analysis",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -487,14 +990,14 @@ const suite = {
                     visibility: "public"
                 },
                 {
-                    title: "Individual Analysis",
+                    name: "Individual Analysis",
                     category: true,
                     id: "cat-analysis",
                     visibility: "public"
                 },
                 {
                     id: "inferred-sex",
-                    title: "Sex Inference",
+                    name: "Sex Inference",
                     acronym: "SI",
                     description: "",
                     icon: "",
@@ -502,7 +1005,7 @@ const suite = {
                 },
                 {
                     id: "individual-relatedness",
-                    title: "Relatedness",
+                    name: "Relatedness",
                     acronym: "RL",
                     description: "",
                     icon: "",
@@ -510,7 +1013,7 @@ const suite = {
                 },
                 {
                     id: "mendelian-errors",
-                    title: "Mendelian Errors",
+                    name: "Mendelian Errors",
                     acronym: "ME",
                     description: "",
                     icon: "",
@@ -521,14 +1024,14 @@ const suite = {
                     visibility: "public"
                 },
                 {
-                    title: "Cancer Analysis",
+                    name: "Cancer Analysis",
                     category: true,
                     id: "cat-analysis",
                     visibility: "public"
                 },
                 {
                     id: "mutational-signature",
-                    title: "Mutational Signature",
+                    name: "Mutational Signature",
                     acronym: "SG",
                     description: "",
                     icon: "aggregation.svg",
@@ -539,14 +1042,14 @@ const suite = {
                     visibility: "public"
                 },
                 {
-                    title: "Clinical Interpretation",
+                    name: "Clinical Interpretation",
                     category: true,
                     id: "cat-analysis",
                     visibility: "public"
                 },
                 {
                     id: "rd-tiering",
-                    title: "RD Tiering",
+                    name: "RD Tiering",
                     acronym: "RDT",
                     description: "",
                     icon: "",
@@ -554,7 +1057,7 @@ const suite = {
                 },
                 {
                     id: "recessive-gene",
-                    title: "Recessive Gene Analysis",
+                    name: "Recessive Gene Analysis",
                     acronym: "RG",
                     description: "",
                     icon: "",
@@ -562,21 +1065,21 @@ const suite = {
                 },
                 // {
                 //     id: "team",
-                //     title: "TEAM",
+                //     name: "TEAM",
                 //     description: "",
                 //     icon: "",
                 //     visibility: "public"
                 // },
                 // {
                 //     id: "zetta",
-                //     title: "Zetta",
+                //     name: "Zetta",
                 //     description: "",
                 //     icon: "",
                 //     visibility: "public"
                 // },
                 // {
                 //     id: "cancer-tiering",
-                //     title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
+                //     name: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
                 //     description: "",
                 //     icon: "",
                 //     visibility: "public"
@@ -586,28 +1089,28 @@ const suite = {
                     visibility: "public"
                 },
                 {
-                    title: "Quality Control",
+                    name: "Quality Control",
                     category: true,
                     id: "cat-analysis",
                     visibility: "public"
                 },
                 {
                     id: "sample-qc",
-                    title: "Sample Quality Control",
+                    name: "Sample Quality Control",
                     description: "Calculate different genetic checks and metrics and store data in Sample Catalog",
                     icon: "",
                     visibility: "public"
                 },
                 {
                     id: "individual-qc",
-                    title: "Individual Quality Control",
+                    name: "Individual Quality Control",
                     description: "Calculate different genetic checks and metrics and store data in Individual Catalog",
                     icon: "",
                     visibility: "public"
                 },
                 {
                     id: "family-qc",
-                    title: "Family Quality Control",
+                    name: "Family Quality Control",
                     description: "Calculate different genetic checks and metrics and store data in Family Catalog",
                     icon: "",
                     visibility: "public"
@@ -617,14 +1120,14 @@ const suite = {
                     visibility: "public"
                 },
                 {
-                    title: "External Tools",
+                    name: "External Tools",
                     category: true,
                     id: "cat-analysis",
                     visibility: "public"
                 },
                 {
                     id: "plink",
-                    title: "Plink",
+                    name: "Plink",
                     acronym: "Pl",
                     description: "",
                     icon: "",
@@ -632,7 +1135,7 @@ const suite = {
                 },
                 {
                     id: "gatk",
-                    title: "GATK",
+                    name: "GATK",
                     acronym: "GT",
                     description: "",
                     icon: "",
@@ -643,14 +1146,14 @@ const suite = {
                     visibility: "public"
                 },
                 {
-                    title: "Other",
+                    name: "Other",
                     category: true,
                     id: "cat-analysis",
                     visibility: "public"
                 },
                 {
                     id: "variant-exporter",
-                    title: "Variant Exporter",
+                    name: "Variant Exporter",
                     acronym: "EX",
                     description: "",
                     icon: "",
@@ -658,7 +1161,7 @@ const suite = {
                 },
                 {
                     id: "variant-stats-exporter",
-                    title: "Variant Stats Exporter",
+                    name: "Variant Stats Exporter",
                     acronym: "VSE",
                     description: "Export variant stats for different cohorts",
                     icon: "",
@@ -666,7 +1169,7 @@ const suite = {
                 },
                 {
                     id: "beacon",
-                    title: "GA4GH Beacon",
+                    name: "GA4GH Beacon",
                     description: `
                         <ul>
                             <li>Federated search from the Global Alliance for Genomics and Health</li>
@@ -681,12 +1184,12 @@ const suite = {
         },
         {
             id: "clinical",
-            title: "Case Interpretation",
+            name: "Case Interpretation",
             icon: "interpretation_portal.svg",
             visibility: "public",
             submenu: [
                 {
-                    title: "Clinical Management",
+                    name: "Clinical Management",
                     category: true,
                     id: "cat-clinical",
                     visibility: "public"
@@ -694,7 +1197,7 @@ const suite = {
 
                 {
                     id: "clinicalAnalysisPortal",
-                    title: "Case Portal",
+                    name: "Case Portal",
                     acronym: "",
                     description: `
                         <ul>
@@ -709,7 +1212,7 @@ const suite = {
                 },
                 {
                     id: "clinical-analysis-writer",
-                    title: "Create Case",
+                    name: "Create Case",
                     acronym: "",
                     icon: "",
                     description: "",
@@ -720,14 +1223,14 @@ const suite = {
                 //     visibility: "public"
                 // },
                 // {
-                //     title: "Clinical Analysis",
+                //     name: "Clinical Analysis",
                 //     category: true,
                 //     id: "cat-analysis",
                 //     visibility: "public"
                 // },
                 // {
                 //     id: "rga",
-                //     title: "RGA",
+                //     name: "RGA",
                 //     acronym: "",
                 //     icon: "",
                 //     description: "",
@@ -738,14 +1241,14 @@ const suite = {
                 //     visibility: "public"
                 // },
                 // {
-                //     title: "Case Interpretation",
+                //     name: "Case Interpretation",
                 //     category: true,
                 //     id: "cat-clinical",
                 //     visibility: "public"
                 // },
                 // {
                 //     id: "rd-tiering",
-                //     title: "RD Tiering",
+                //     name: "RD Tiering",
                 //     acronym: "RDT",
                 //     description: "",
                 //     icon: "",
@@ -753,28 +1256,28 @@ const suite = {
                 // },
                 // {
                 //     id: "team",
-                //     title: "TEAM",
+                //     name: "TEAM",
                 //     description: "",
                 //     icon: "",
                 //     visibility: "public"
                 // },
                 // {
                 //     id: "zetta",
-                //     title: "Zetta",
+                //     name: "Zetta",
                 //     description: "",
                 //     icon: "",
                 //     visibility: "public"
                 // },
                 // {
                 //     id: "cancer-tiering",
-                //     title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
+                //     name: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
                 //     description: "",
                 //     icon: "",
                 //     visibility: "public"
                 // },
                 // {
                 //     id: "interpreter",
-                //     title: "Case Interpreter",
+                //     name: "Case Interpreter",
                 //     acronym: "",
                 //     icon: "",
                 //     description: "",
@@ -785,14 +1288,14 @@ const suite = {
                 //     visibility: "public"
                 // },
                 // {
-                //     title: "Reported Variants",
+                //     name: "Reported Variants",
                 //     category: true,
                 //     id: "cat-clinical",
                 //     visibility: "public"
                 // },
                 // {
                 //     id: "cva",
-                //     title: "Clinical Variant Browser",
+                //     name: "Clinical Variant Browser",
                 //     acronym: "CVB",
                 //     description: "",
                 //     icon: "",
@@ -802,27 +1305,27 @@ const suite = {
         },
         {
             id: "alignment",
-            title: "Alignment",
+            name: "Alignment",
             description: "",
             icon: "alignment.svg",
             visibility: "public",
             submenu: [
                 {
-                    title: "Data Management",
+                    name: "Data Management",
                     category: true,
                     id: "cat-alignment",
                     visibility: "public"
                 },
                 {
                     id: "alignment-index",
-                    title: "Alignment Index",
+                    name: "Alignment Index",
                     description: "Create a .bai index file.",
                     icon: "",
                     visibility: "public"
                 },
                 {
                     id: "coverage-index",
-                    title: "Coverage Index",
+                    name: "Coverage Index",
                     description: "Precompute coverage in a BigWig file",
                     icon: "",
                     visibility: "public"
@@ -832,14 +1335,14 @@ const suite = {
                     visibility: "public"
                 },
                 {
-                    title: "Summary Stats",
+                    name: "Summary Stats",
                     category: true,
                     id: "cat-alignment",
                     visibility: "public"
                 },
                 {
                     id: "alignment-stats",
-                    title: "Alignment Stats",
+                    name: "Alignment Stats",
                     description: "Compute BAM stats using samtools",
                     icon: "",
                     visibility: "public"
@@ -848,13 +1351,13 @@ const suite = {
         },
         {
             id: "catalog",
-            title: "Catalog",
+            name: "Catalog",
             visibility: "public",
             icon: "aggregation2.svg",
             submenu: [
                 {
                     id: "projects",
-                    title: "Projects",
+                    name: "Projects",
                     visibility: "public"
                 },
                 {
@@ -862,44 +1365,44 @@ const suite = {
                     visibility: "public"
                 },
                 {
-                    title: "Browsers",
+                    name: "Browsers",
                     category: true,
                     id: "cat-catalog",
                     visibility: "public"
                 },
                 {
                     id: "file",
-                    title: "File Browser",
+                    name: "File Browser",
                     visibility: "public"
                 },
                 {
                     id: "sample",
-                    title: "Sample Browser",
+                    name: "Sample Browser",
                     visibility: "public"
                 },
                 {
                     id: "individual",
-                    title: "Individual Browser",
+                    name: "Individual Browser",
                     visibility: "public"
                 },
                 {
                     id: "family",
-                    title: "Family Browser",
+                    name: "Family Browser",
                     visibility: "public"
                 },
                 {
                     id: "cohort",
-                    title: "Cohort Browser",
+                    name: "Cohort Browser",
                     visibility: "public"
                 },
                 {
                     id: "clinicalAnalysis",
-                    title: "Clinical Analysis Browser",
+                    name: "Clinical Analysis Browser",
                     visibility: "public"
                 },
                 {
                     id: "job",
-                    title: "Job Browser",
+                    name: "Job Browser",
                     visibility: "public"
                 }
             ]
