@@ -134,12 +134,11 @@ export default class CategoryPage extends LitElement {
                 margin: -10px;
             }
         </style>
-
         <tool-header title="${this.config.name}" icon="${this.config.icon}"></tool-header>
         
         <div id="category-page">
-            ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map( (item, i) => item.category ? html`
-                <div class="section-title">${item.title}</div>
+            ${this.config.submenu && this.config.submenu.length ? this.config.submenu.map((item, i) => item.category ? html`
+                <div class="section-title">${item.name}</div>
                 ` : item.separator ? null : html`
                     
                     <a class="item ${item.disabled ? "disabled" : ""}" href="${ !item.disabled ? `#${item.id}` : "javascript: void 0"}">
@@ -150,18 +149,18 @@ export default class CategoryPage extends LitElement {
                     ` : null}
                         
                             <div class="text-icon-wrapper">
-                                <text-icon title="${item.title}" color="${i % 2 === 0 ? "green" : i % 3 === 0 ? "red": ""}" acronym="${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}"></text-icon>
+                                <text-icon title="${item.name}" color="${i % 2 === 0 ? "green" : i % 3 === 0 ? "red": ""}" acronym="${item.acronym ?? item.name[0] + item.name[1] + item.name[2].toLowerCase()}"></text-icon>
                                 <!--<div class="text-icon ${i % 2 === 0 ? "green": i % 3 === 0 ? "red": ""}">
-                                    ${item.acronym ? item.acronym : item.title[0] + item.title[1] + item.title[2].toLowerCase()}
+                                    ${item.acronym ? item.acronym : item.name[0] + item.name[1] + item.name[2].toLowerCase()}
                                     
                                 </div> -->
                             </div>
                             <div class="content">
-                                <div class="title uppercase">${item.title}</div>
+                                <div class="title uppercase">${item.name}</div>
                                 <div class="description">${this.renderHTML(item.description || "")}</div>
                             </div>
                     </a>
-                    ` ) : null}
+                    `) : null}
         </div>
         `;
     }
