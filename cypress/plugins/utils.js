@@ -129,6 +129,12 @@ export const Facet = {
     select: label => {
         cy.get("facet-filter .facet-selector li a").contains(label).click({force: true});
     },
+    // TODO add action: remove from select
+    remove: label => {
+        // TODO check whether it is active and then remove from select
+        // cy.get("div.facet-wrapper button[data-filter-name='" + field + "']")
+        cy.get("facet-filter .facet-selector li a").contains(label).click({force: true});
+    },
     selectDefaultFacet: () => {
         cy.get("button.default-facets-button").click();
     },
