@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, checkResults, getResult} from "../plugins/utils.js";
+import {login, checkResults, getResult, Facet} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -49,10 +49,33 @@ context("7 - Sample Browser", () => {
         cy.get("a[data-id=sample]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
 
-        cy.get("button.default-facets-button").click();
-        cy.get("div.search-button-wrapper button").click();
-        cy.get(".facet-wrapper .button-list button").should("have.length", 4);
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 4);
+        Facet.selectDefaultFacet(); // "creationYear>>creationMonth", "status", "phenotypes", "somatic"
+        // cy.get("button.default-facets-button").click(); // "creationYear>>creationMonth", "status", "phenotypes", "somatic"
 
+        Facet.checkActiveFacet("creationYear", "creationYear>>creationMonth");
+        Facet.checkActiveFacet("status", "status");
+        Facet.checkActiveFacet("phenotypes", "phenotypes");
+        Facet.checkActiveFacet("somatic", "somatic");
+
+
+        Facet.checkActiveFacetLength(4);
+        cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(4);
+
+        // cy.get("div.facet-wrapper button[data-filter-name='creationYear']").contains("creationYear>>creationMonth");
+
+        cy.get("[data-id='status'] ul.dropdown-menu a").contains("READY").click({force: true}); // status=READY
+        Facet.checkActiveFacet("status", "status[READY]");
+        // cy.get("div.facet-wrapper button[data-filter-name='status']").contains("status[READY]");
+
+
+        cy.get("[data-id='somatic'] ul.dropdown-menu a").contains("true").click({force: true}); // somatic=true
+        Facet.checkActiveFacet("somatic", "somatic[true]");
+
+        Facet.select("Status"); // removing status
+
+        Facet.checkActiveFacetLength(3);
+        cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(3);
     });
 });

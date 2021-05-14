@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {checkResults, login, getResult, checkResultsOrNot, hasResults} from "../plugins/utils.js";
+import {checkResults, login, getResult, checkResultsOrNot, hasResults, Facet} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -43,7 +43,7 @@ context("9 - Family Browser", () => {
                 checkResults("opencga-family-grid");
                 getResult("opencga-family-grid", 3, 0, "html").then($html => {
                     cy.wrap($html).get("span[data-cy]").then($text => {
-                        cy.get(".subsection-content[data-cy=disorders] input").type($text.first().text() + "{enter}")
+                        cy.get(".subsection-content[data-cy=disorders] input").type($text.first().text() + "{enter}");
                         cy.get("div.search-button-wrapper button").click();
                         checkResults("opencga-family-grid");
                         cy.get("opencga-active-filters button[data-filter-name='disorders']").click();
@@ -65,9 +65,30 @@ context("9 - Family Browser", () => {
             if ($bool) {
                 // in case there are actually results, run the aggregated tests
                 cy.get("a[href='#facet_tab']").click({force: true});
-                cy.get("button.default-facets-button").click(); // default facets selection
+
+                Facet.selectDefaultFacet(); // "creationYear>>creationMonth", "status", "phenotypes", "expectedSize", "numMembers[0..20]:2"
+
+                Facet.checkActiveFacet("creationYear", "creationYear>>creationMonth");
+                Facet.checkActiveFacet("status", "status");
+                Facet.checkActiveFacet("phenotypes", "phenotypes");
+                Facet.checkActiveFacet("expectedSize", "expectedSize");
+                Facet.checkActiveFacet("numMembers", "numMembers[0..20]:2");
+
+
+                Facet.checkActiveFacetLength(5);
                 cy.get("div.search-button-wrapper button").click();
-                cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 5);
+                Facet.checkResultLength(5);
+
+                cy.get("[data-id='status'] ul.dropdown-menu a").contains("READY").click({force: true}); // status=READY
+                Facet.checkActiveFacet("status", "status[READY]");
+
+                Facet.select("Status"); // removing status
+                Facet.select("Expected Size"); // removing status
+
+                Facet.checkActiveFacetLength(4);
+                cy.get("div.search-button-wrapper button").click();
+                Facet.checkResultLength(4);
+
             }
         });
 

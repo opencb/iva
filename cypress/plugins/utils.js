@@ -7,6 +7,9 @@
  * Waits until the selector finds an attached element, then yields it (wrapped).
  * selectorFn, if provided, is passed $(document). Don't use cy methods inside selectorFn.
  */
+
+import {TIMEOUT} from "./constants.js";
+
 Cypress.Commands.add("getAttached", selector => {
     const getElement = typeof selector === "function" ? selector : $d => $d.find(selector);
     let $el = null;
@@ -119,4 +122,26 @@ export const hasResults = gridSelector => {
                 return !Cypress.$($rows[0]).hasClass("no-records-found");
             }
         });
+};
+
+
+export const Facet = {
+    select: label => {
+        cy.get("facet-filter .facet-selector li a").contains(label).click({force: true});
+    },
+    selectDefaultFacet: () => {
+        cy.get("button.default-facets-button").click();
+    },
+    removeActive: field => {
+        cy.get("div.facet-wrapper button[data-filter-name='" + field + "']").click();
+    },
+    checkActiveFacet: (field, value) => {
+        cy.get("div.facet-wrapper button[data-filter-name='" + field + "']").contains(value);
+    },
+    checkActiveFacetLength: len => {
+        cy.get("div.facet-wrapper button[data-filter-value]", {timeout: TIMEOUT}).should("have.length", len);
+    },
+    checkResultLength: len => {
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", len);
+    }
 };
