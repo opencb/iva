@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, checkResults, getResult, waitTableResults} from "../plugins/utils.js";
+import {login, checkResults, getResult, Facet} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -40,7 +40,6 @@ context("8 - Individual Browser", () => {
         cy.get(".lhs button[data-filter-name]").should("have.length", 2);
         cy.get("div.search-button-wrapper button").click();
 
-        waitTableResults("opencga-individual-grid");
         checkResults("opencga-individual-grid");
 
     });
@@ -54,6 +53,38 @@ context("8 - Individual Browser", () => {
         cy.get("div.search-button-wrapper button").click();
         cy.get(".facet-wrapper .button-list button").should("have.length", 8);
         cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 8);
+
+
+        Facet.selectDefaultFacet(); // "creationYear>>creationMonth", "status", "ethnicity", "population", "lifeStatus", "phenotypes", "sex", "numSamples[0..10]:1"
+        // cy.get("button.default-facets-button").click(); // "creationYear>>creationMonth", "status", "phenotypes", "somatic"
+
+        Facet.checkActiveFacet("creationYear", "creationYear>>creationMonth");
+        Facet.checkActiveFacet("status", "status");
+        Facet.checkActiveFacet("ethnicity", "ethnicity");
+        Facet.checkActiveFacet("population", "population");
+        Facet.checkActiveFacet("lifeStatus", "lifeStatus");
+        Facet.checkActiveFacet("phenotypes", "phenotypes");
+        Facet.checkActiveFacet("sex", "sex");
+        Facet.checkActiveFacet("numSamples", "numSamples[0..10]:1");
+
+
+        Facet.checkActiveFacetLength(8);
+        cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(8);
+
+        // cy.get("div.facet-wrapper button[data-filter-name='creationYear']").contains("creationYear>>creationMonth");
+
+        cy.get("[data-id='status'] ul.dropdown-menu a").contains("READY").click({force: true}); // status=READY
+        Facet.checkActiveFacet("status", "status[READY]");
+        // cy.get("div.facet-wrapper button[data-filter-name='status']").contains("status[READY]");
+
+
+        Facet.select("Status"); // removing status
+
+        Facet.checkActiveFacetLength(7);
+        cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(7);
+
     });
 
 });
