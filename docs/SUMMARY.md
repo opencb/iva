@@ -5,16 +5,19 @@
   * [Configuration](installation/configuration.md)
   * [Docker](installation/docker.md)
 * [Gallery](gallery.md)
+* [Developers](developers/README.md)
+  * [Libraries](developers/libraries.md)
+  * [Component Architecture](developers/component-architecture.md)
 * [FAQ](faq.md)
 
 ## User Manual
 
 * [Login](user-manual/login.md)
+* [Structure](user-manual/structure.md)
+* [Variant Analysis \(IVA\)](user-manual/variant-analysis-iva.md)
+* [Clinical Interpreter](user-manual/clinical-interpreter.md)
 * [Admin Dashboard](user-manual/admin-dashboard/README.md)
   * [Study Admin](user-manual/admin-dashboard/study-admin.md)
-* [Developers](user-manual/developers/README.md)
-  * [Libraries](user-manual/developers/libraries.md)
-  * [Component Architecture](user-manual/developers/component-architecture.md)
 
 ## About
 
