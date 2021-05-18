@@ -12,6 +12,9 @@
 * [Login](user-manual/login.md)
 * [Admin Dashboard](user-manual/admin-dashboard/README.md)
   * [Study Admin](user-manual/admin-dashboard/study-admin.md)
+* [Developers](user-manual/developers/README.md)
+  * [Libraries](user-manual/developers/libraries.md)
+  * [Component Architecture](user-manual/developers/component-architecture.md)
 
 ## About
 
