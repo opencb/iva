@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, getResult, checkResults} from "../plugins/utils.js";
+import {login, getResult, checkResults, Facet} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -29,10 +29,10 @@ context("12 - Jobs Browser", () => {
 
         checkResults("opencga-job-grid");
 
-        getResult("opencga-job-grid", 2).then($text => {
+        getResult("opencga-job-grid", 1).then($text => {
             cy.get("jobs-id-autocomplete input").type($text + "{enter}");
         });
-        getResult("opencga-job-grid", 3).then($text => {
+        getResult("opencga-job-grid", 2).then($text => {
             cy.get("analysis-tool-id-autocomplete input").type($text + "{enter}");
         });
 
@@ -54,13 +54,21 @@ context("12 - Jobs Browser", () => {
         cy.get("a[data-id=job]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
 
-        cy.get("facet-filter .facet-selector li a").contains("Creation Year").click({force: true}); // Creation Year selection
-        cy.get("a[data-collapse=\"#creationYear_nested\"]").click({force: true});
-        cy.get("#creationYear_nested select-field-filter div.dropdown-menu a").contains("Creation Month").click({force: true}); // Creation Month nested in year field
-        cy.get("div.search-button-wrapper button").click();
 
-        cy.get(".facet-wrapper .button-list button").should("have.length", 1);
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 1);
+        Facet.selectDefaultFacet(); // "creationYear>>creationMonth", "toolId>>executorId"
+
+        Facet.checkActiveFacet("creationYear", "creationYear>>creationMonth");
+        Facet.checkActiveFacet("toolId", "toolId>>executorId");
+
+        Facet.checkActiveFacetLength(2);
+        cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(2);
+
+        Facet.select("Tool Id"); // removing toolId
+
+        Facet.checkActiveFacetLength(1);
+        cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(1);
 
     });
 });

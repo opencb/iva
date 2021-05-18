@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {checkResults, login, getResult} from "../plugins/utils.js";
+import {checkResults, login, getResult, Facet} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -42,12 +42,29 @@ context("11 - Cohort Browser", () => {
         cy.get("a[data-id=cohort]").click({force: true});
 
         cy.get("a[href='#facet_tab']").click({force: true});
-        cy.get("button.default-facets-button").click();
+
+        Facet.selectDefaultFacet(); // "creationYear>>creationMonth", "status", "numSamples[0..10]:1"
+
+        Facet.checkActiveFacet("creationYear", "creationYear>>creationMonth");
+        Facet.checkActiveFacet("status", "status");
+        Facet.checkActiveFacet("numSamples", "numSamples[0..10]:1");
+
+
+        Facet.checkActiveFacetLength(3);
         cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(3);
 
-        cy.get(".facet-wrapper .button-list button").should("have.length", 3);
+        // cy.get("div.facet-wrapper button[data-filter-name='creationYear']").contains("creationYear>>creationMonth");
 
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 3);
+        cy.get("[data-id='status'] ul.dropdown-menu a").contains("READY").click({force: true}); // status=READY
+        Facet.checkActiveFacet("status", "status[READY]");
+
+        Facet.select("Status"); // removing status
+
+        Facet.checkActiveFacetLength(2);
+        cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(2);
+
 
     });
 });
