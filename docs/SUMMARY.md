@@ -1,7 +1,10 @@
 # Table of contents
 
 * [Overview](README.md)
-* [Installation](installation.md)
+* [Installation](installation/README.md)
+  * [Configuration](installation/configuration.md)
+  * [Docker](installation/docker.md)
+* [Gallery](gallery.md)
 * [FAQ](faq.md)
 
 ## User Manual
