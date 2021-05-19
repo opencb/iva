@@ -1,2 +1,19 @@
 # Overview
 
+The interactive Variant Analysis \(IVA\) tool is an open-source project implemented to facilitate the filtering, analysis and interpretation of whole-genome variant data. This interactive tool allows the identification of genes affected by deleterious variants that segregate along with family pedigrees, case-control or sporadic samples.
+
+IVA has been developed as part of the [OpenCGA](http://docs.opencb.org/display/opencga/Welcome+to+OpenCGA) project, making it easy to work with clinical and variant information stored in a Catalog and Variant storage instance.
+
+### Main Features
+
+* Allow loading VCF files and samples together with clinical data
+* High-performance and scalable VCF and gVCF indexing
+* VCF normalization and variant annotation
+* Clinical interpretation analysis of samples and families
+
+
+
+
+
+
+
