@@ -17,6 +17,14 @@ IVA has been developed as part of the [OpenCGA](http://docs.opencb.org/display/o
 * **Clinical Interpretation:** It can select samples and families to perform an interpretation analysis, disease panels are also available.
 * **Genome Browser:** A genome browser based on Genome Maps allows for an interactive and smooth variant visualisation.
 
+{% hint style="success" %}
+  **Rich Configuration** 💡  
+
+You can highly customise your IVA installation thanks to the rich configuration implemented. You can easily customise the navigation bar, welcome page and other options.
+{% endhint %}
+
+
+
 
 
 
