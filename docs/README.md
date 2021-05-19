@@ -11,6 +11,14 @@ IVA has been developed as part of the [OpenCGA](http://docs.opencb.org/display/o
 * VCF normalization and variant annotation
 * Clinical interpretation analysis of samples and families
 
+### Main Tools
+
+* **Variant Browser:** It can efficiently browse annotated and indexed variant studies using a web-based application.
+* **Clinical Interpretation:** It can select samples and families to perform an interpretation analysis, disease panels are also available.
+* **Genome Browser:** A genome browser based on Genome Maps allows for an interactive and smooth variant visualisation.
+
+
+
 
 
 
