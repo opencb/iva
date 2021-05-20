@@ -6,10 +6,10 @@ IVA has been developed as part of the [OpenCGA](http://docs.opencb.org/display/o
 
 ### Main Features
 
-* Allow loading VCF files and samples together with clinical data
-* High-performance and scalable VCF and gVCF indexing
-* VCF normalization and variant annotation
-* Clinical interpretation analysis of samples and families
+* Allow loading VCF files and samples together with clinical data.
+* High-performance and scalable VCF and gVCF indexing.
+* VCF normalization and variant annotation.
+* Clinical interpretation analysis of samples and families.
 
 ### Main Tools
 

@@ -6,6 +6,7 @@
   * [Docker](installation/docker.md)
 * [Gallery](gallery.md)
 * [Developers](developers/README.md)
+  * [How to build from source code](developers/how-to-build-from-source-code.md)
   * [Libraries](developers/libraries.md)
   * [Component Architecture](developers/component-architecture.md)
 * [FAQ](faq.md)
