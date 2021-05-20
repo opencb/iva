@@ -76,3 +76,27 @@ npm run build
 
 when completed, all compiled files will be located under the `build` folder.
 
+### Test
+
+We use [Cypress.io](https://www.cypress.io/) as testing framework.
+
+Having the project running through the command `npm run serve`, you can run the **interactive E2E** test suite by running the command
+
+```text
+npm run e2e
+```
+
+or the **headless E2E** test suite \(no browser window\).  
+This mode comes with an HTML report \(generated in `./report`\).
+
+```text
+npm run e2e-report
+```
+
+in a Windows environment, just add the suffix `-win`
+
+```text
+npm run e2e-win
+npm run e2e-report-win
+```
+

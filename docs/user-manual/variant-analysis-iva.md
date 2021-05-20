@@ -1,2 +1,2 @@
-# Variant Analysis \(IVA\)
+# Variant Analysis
 
