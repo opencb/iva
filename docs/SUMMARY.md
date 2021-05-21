@@ -13,13 +13,13 @@
 
 ## User Manual
 
-* [Login](user-manual/login.md)
-* [Structure](user-manual/structure.md)
-* [IVA General Usage](user-manual/iva-general-usage.md)
-* [Variant Browser](user-manual/variant-browser.md)
-* [Case Interpreter](user-manual/clinical-interpreter.md)
-* [Variant Analysis](user-manual/variant-analysis-iva.md)
-* [Catalog Browser](user-manual/catalog-browser.md)
+* [General Usage](user-manual/iva-general-usage/README.md)
+  * [Login](user-manual/iva-general-usage/login.md)
+* [Metadata and Clinical Data](user-manual/catalog-browser.md)
+* [Variant Analysis](user-manual/variant-analysis-iva/README.md)
+  * [Variant Browser](user-manual/variant-analysis-iva/variant-browser.md)
+* [Clinical Analysis](user-manual/clinical-interpreter/README.md)
+  * [Case Interpreter](user-manual/clinical-interpreter/case-interpreter.md)
 * [Admin Dashboard](user-manual/admin-dashboard/README.md)
   * [Study Admin](user-manual/admin-dashboard/study-admin.md)
 

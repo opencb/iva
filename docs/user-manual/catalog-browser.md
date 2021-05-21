@@ -1,2 +1,2 @@
-# Catalog Browser
+# Metadata and Clinical Data
 
