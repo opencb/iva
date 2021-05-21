@@ -153,6 +153,6 @@ export const Facet = {
         cy.get("div.facet-wrapper button[data-filter-value]", {timeout: TIMEOUT}).should("have.length", len);
     },
     checkResultLength: len => {
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", len);
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 180000}).should("have.length", len);
     }
 };
