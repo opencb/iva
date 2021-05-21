@@ -15,12 +15,14 @@
  */
 
 const cellbase = {
-    hosts: ["https://ws.opencb.org/cellbase-4.8.2"],
+    hosts: ["https://cellbase.gel.zone/cellbase"],
     version: "v4"
 };
 
 const opencga = {
-    host: "https://ws.opencb.org/opencga-test",
+    //host: "https://ws.opencb.org/opencga-test",
+    host: "https://re-uat.opencga.gel.zone/opencga",
+
     // host: "http://localhost:1234/opencga",
     // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
     version: "v2",
