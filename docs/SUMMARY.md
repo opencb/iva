@@ -13,8 +13,8 @@
 
 ## User Manual
 
-* [Login](user-manual/login.md)
-* [General Usage](user-manual/iva-general-usage.md)
+* [General Usage](user-manual/iva-general-usage/README.md)
+  * [Login](user-manual/iva-general-usage/login.md)
 * [Metadata and Clinical Data](user-manual/catalog-browser.md)
 * [Variant Analysis](user-manual/variant-analysis-iva/README.md)
   * [Variant Browser](user-manual/variant-analysis-iva/variant-browser.md)
