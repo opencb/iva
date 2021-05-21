@@ -576,7 +576,8 @@ const suite = {
         {
             id: "clinical",
             name: "Clinical (XetaBase)",
-            logo: "img/tools/icons/interpretation_portal.svg",
+            logo: "img/tools/icons/interpretation_portal_white.svg",
+            logo2: "img/tools/icons/interpretation_portal.svg",
             icon: "interpretation_portal.svg",
             visibility: "public",
             menu: [
