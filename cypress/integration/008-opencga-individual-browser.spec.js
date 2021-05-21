@@ -45,6 +45,8 @@ context("8 - Individual Browser", () => {
                                 cy.wrap($input).type(str);
                                 cy.get("opencga-annotation-filter-modal .modal-footer button").contains("OK").click();
                                 cy.get("opencga-active-filters button[data-filter-name='annotation']").contains(`annotation: ${variableSetId}:${variableId}=${str}`);
+                                cy.get("opencga-active-filters button[data-filter-name='annotation']").click();
+                                checkResults("opencga-individual-grid");
                             });
                         }
                     } else {
