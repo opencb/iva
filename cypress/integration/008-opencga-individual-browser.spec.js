@@ -33,6 +33,7 @@ context("8 - Individual Browser", () => {
             .then($wc => {
                 // check whether there are variableSet
                 if (Cypress.$("button", $wc).length) {
+                    cy.get("sample-browser-filter div[data-cy='annotations'] button").contains("Annotation").click();
                     const $tabs = Cypress.$("div.tab-pane", $wc);
                     // console.log("$wc", $tabs.length)
                     if ($tabs.length) {
