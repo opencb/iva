@@ -113,7 +113,6 @@ export const getResult = (gridSelector, colIndex = 0, rowIndex = 0, invokeFn= "t
 
 /**
  * it checks whether the grid has results.
- *
  */
 export const hasResults = gridSelector => {
     return cy.get(gridSelector + " .fixed-table-body > table > tbody > tr")
@@ -124,6 +123,12 @@ export const hasResults = gridSelector => {
         });
 };
 
+/**
+ * change page in a BT table
+ */
+export const changePage = (gridSelector, page) => {
+    cy.get(gridSelector + " .fixed-table-container + .fixed-table-pagination ul.pagination li a.page-link").should("be.visible").contains(page).click();
+};
 
 export const Facet = {
     select: label => {
@@ -148,6 +153,6 @@ export const Facet = {
         cy.get("div.facet-wrapper button[data-filter-value]", {timeout: TIMEOUT}).should("have.length", len);
     },
     checkResultLength: len => {
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", len);
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 180000}).should("have.length", len);
     }
 };

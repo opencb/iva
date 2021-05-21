@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults, checkResultsOrNot, Facet} from "../plugins/utils.js";
+import {login, randomString, checkResults, checkResultsOrNot, Facet, changePage} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 //import "cypress-wait-until";
 
@@ -102,6 +102,10 @@ context("4. Variant Browser", () => {
     // Variant Browser: Individual filters
     it("4.3 Filters", () => {
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
+        checkResults("variant-browser-grid");
+        changePage("variant-browser-grid", 2);
+        checkResults("variant-browser-grid");
+        changePage("variant-browser-grid", 1);
         checkResults("variant-browser-grid");
 
         cy.get("variant-browser a[href='#filters_tab']").click();

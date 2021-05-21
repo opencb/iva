@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, checkResults, getResult, Facet} from "../plugins/utils.js";
+import {login, checkResults, changePage, getResult, Facet, randomString} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -28,7 +28,6 @@ context("7 - Sample Browser", () => {
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Sample Browser");
 
         checkResults("opencga-sample-grid");
-
         getResult("opencga-sample-grid").then($text => {
             cy.get("sample-id-autocomplete input").type($text + "{enter}");
         });
@@ -43,8 +42,42 @@ context("7 - Sample Browser", () => {
         cy.get("opencga-active-filters button[data-filter-name='somatic']").click();
         cy.get(".lhs button[data-filter-name]").should("have.length", 0);
 
-    });
+        checkResults("opencga-sample-grid");
+        changePage("opencga-sample-grid", 2);
+        checkResults("opencga-sample-grid");
 
+
+        /**
+         * Lookup for the first simple text variable
+         * type a random string and then check whether the button in opencga-active-filters is built correctly
+          */
+        cy.get("opencga-annotation-filter-modal", {timeout: 60000})
+            .then($wc => {
+                // check whether there are variableSet
+                if (Cypress.$("button", $wc).length) {
+                    cy.get("sample-browser-filter div[data-cy='annotations'] button").contains("Annotation").click();
+                    const $tabs = Cypress.$("div.tab-pane", $wc);
+                    // console.log("$wc", $tabs.length)
+                    if ($tabs.length) {
+                        const $firstTab = Cypress.$($tabs[0]);
+                        if ($firstTab) {
+                            cy.get("opencga-annotation-filter-modal").find("input[data-variable-id]").first().should("be.visible").then($input => {
+                                const str = randomString();
+                                const variableSetId = $input.data("variableSetId");
+                                const variableId = $input.data("variableId");
+                                cy.wrap($input).type(str);
+                                cy.get("opencga-annotation-filter-modal .modal-footer button").contains("OK").click();
+                                cy.get("opencga-active-filters button[data-filter-name='annotation']").contains(`annotation: ${variableSetId}:${variableId}=${str}`);
+                            });
+                        }
+                    } else {
+                        return true;
+                    }
+                } else {
+                    cy.wrap($wc).contains("No variableSets defined in the study");
+                }
+            });
+    });
     it("7.2 - aggregated query", () => {
         cy.get("a[data-id=sample]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
