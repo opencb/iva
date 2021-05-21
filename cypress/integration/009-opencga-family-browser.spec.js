@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {checkResults, login, getResult, checkResultsOrNot, hasResults, Facet} from "../plugins/utils.js";
+import {checkResults, login, getResult, checkResultsOrNot, hasResults, Facet, changePage} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -49,6 +49,8 @@ context("9 - Family Browser", () => {
                         cy.get("opencga-active-filters button[data-filter-name='disorders']").click();
                     });
                 });
+                checkResults("opencga-family-grid");
+                changePage("opencga-family-grid", 2);
                 checkResults("opencga-family-grid");
             }
         });

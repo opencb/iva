@@ -113,7 +113,6 @@ export const getResult = (gridSelector, colIndex = 0, rowIndex = 0, invokeFn= "t
 
 /**
  * it checks whether the grid has results.
- *
  */
 export const hasResults = gridSelector => {
     return cy.get(gridSelector + " .fixed-table-body > table > tbody > tr")
@@ -124,6 +123,12 @@ export const hasResults = gridSelector => {
         });
 };
 
+/**
+ * change page in a BT table
+ */
+export const changePage = (gridSelector, page) => {
+    cy.get(gridSelector + " .fixed-table-container + .fixed-table-pagination ul.pagination li a.page-link").should("be.visible").contains(page).click();
+};
 
 export const Facet = {
     select: label => {

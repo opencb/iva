@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, getResult, checkResults, Facet} from "../plugins/utils.js";
+import {login, getResult, checkResults, Facet, changePage} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -45,6 +45,9 @@ context("10 - File Browser", () => {
         cy.get("div.search-button-wrapper button").click();
 
         checkResults("opencga-file-grid");
+        changePage("opencga-file-grid", 2);
+        checkResults("opencga-file-grid");
+
 
     });
 
