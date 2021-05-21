@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import {login, goTo, randomString, checkResults, checkResultsOrNot} from "../plugins/utils.js";
+import {login, randomString, checkResults, checkResultsOrNot, Facet, changePage, goTo} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
-//import "cypress-wait-until";
+// import "cypress-wait-until";
 
 
 context("4. Variant Browser", () => {
@@ -29,7 +29,7 @@ context("4. Variant Browser", () => {
         cy.get("a[data-id=browser]", {timeout: TIMEOUT}).click({force: true});
     });
 
-     /*it("4.0 disease", () => {
+    /* it("4.0 disease", () => {
 
         // disease-panel-filter select + button
         //cy.get("disease-panel-filter").find(" a").contains("Childhood onset dystonia or chorea or related movement disorder").click({force:true}) // URI too long
@@ -94,7 +94,8 @@ context("4. Variant Browser", () => {
         cy.get(".swal2-title").contains("Are you sure?");
         cy.get(".swal2-confirm").click(); // confirm deletion action
 
-        // cy.get(".swal2-content", {timeout: TIMEOUT}).contains("Filter has been deleted."); // this selector doesn't work without .should("be.visible") assertion because it refers to the previous #swal2-content which has been detatched from DOM before
+        // cy.get(".swal2-content", {timeout: TIMEOUT}).contains("Filter has been deleted.");
+        // this selector doesn't work without .should("be.visible") assertion because it refers to the previous #swal2-content which has been detatched from DOM before
         cy.contains(".swal2-content", "Filter has been deleted", {timeout: TIMEOUT}).should("be.visible");
         cy.get(".swal2-confirm").click({force: true}); // dismiss confirmation modal
         cy.get("opencga-active-filters button[data-filter-name='ct']").click();
@@ -104,11 +105,16 @@ context("4. Variant Browser", () => {
     it("4.3 Filters", () => {
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Variant Browser"); // should assertion comes from Chai and it follows its logic
         checkResults("variant-browser-grid");
+        changePage("variant-browser-grid", 2);
+        checkResults("variant-browser-grid");
+        changePage("variant-browser-grid", 1);
+        checkResults("variant-browser-grid");
 
         cy.get("variant-browser a[href='#filters_tab']").click();
         // Study and Cohorts: Cohort Alternate Stats
         // TODO add condition
-        /*cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").first({timeout: TIMEOUT}).should("be.visible").click();
+        /*
+        cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").first({timeout: TIMEOUT}).should("be.visible").click();
         cy.get("cohort-stats-filter input[data-field='value']").first({timeout: TIMEOUT}).type("0.00001"); // set ALL cohort
         cy.get("div.search-button-wrapper button").click();
         checkResults("variant-browser-grid");
@@ -179,7 +185,7 @@ context("4. Variant Browser", () => {
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='populationFrequencyAlt']").click();
 
-        // Population Frequency: gnomAD	- Set all < 0.00001
+        // Population Frequency: gnomAD - Set all < 0.00001
         cy.get("population-frequency-filter i[data-cy='pop-freq-toggle-GNOMAD_GENOMES']").click();
         cy.get("population-frequency-filter div[data-cy='pop-freq-codes-wrapper-GNOMAD_GENOMES']").should("be.visible");
         cy.get("population-frequency-filter div[data-cy='pop-freq-codes-wrapper-GNOMAD_GENOMES'] div[data-cy='number-field-filter-wrapper-AFR'] input[data-field='value']").type("0.0001");
@@ -188,22 +194,23 @@ context("4. Variant Browser", () => {
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='populationFrequencyAlt']").click();
 
-        // Clinical and Disease: ClinVar Accessions	Use example: Pathogenic
+        // Clinical and Disease: ClinVar Accessions Use example: Pathogenic
         cy.get("opencga-variant-filter a[data-accordion-id='Clinical']").click();
         cy.get("clinvar-accessions-filter select").select("Pathogenic", {force: true});
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='clinicalSignificance']").click();
 
-        // Clinical and Disease: Full text	Use example: ceroid
+        // Clinical and Disease: Full text Use example: ceroid
         cy.get("fulltext-search-accessions-filter textarea").type("Mortality");
-        //cy.get("fulltext-search-accessions-filter textarea").type("centroid");
+        // cy.get("fulltext-search-accessions-filter textarea").type("centroid");
         cy.get("div.search-button-wrapper button").click();
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='traits']").click();
 
         // TODO you cannot tell in advance which is present in the study
-        // Phenotype: GO Accessions	Use example.
-        /*cy.get("opencga-variant-filter a[data-accordion-id='Phenotype']").click();
+        // Phenotype: GO Accessions Use example.
+        /*
+        cy.get("opencga-variant-filter a[data-accordion-id='Phenotype']").click();
         cy.get("go-accessions-filter > textarea").type("GO:0032996");
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='go']").click();*/
@@ -216,7 +223,8 @@ context("4. Variant Browser", () => {
 
         // TODO you cannot tell in advance which is present in the study
         // Phenotype: HPO Accessions Use example
-        /*cy.get("hpo-accessions-filter > textarea").type("HP:0041054");
+        /*
+        cy.get("hpo-accessions-filter > textarea").type("HP:0041054");
         cy.get("div.search-button-wrapper button").click();
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='annot-hpo']").click();*/
@@ -253,24 +261,36 @@ context("4. Variant Browser", () => {
         cy.get("consequence-type-select-filter input[value='Loss-of-Function (LoF)'").click({force: true});
 
         cy.get("a[href='#facet_tab']").click({force: true});
-        cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
-        cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
+
+        Facet.selectDefaultFacet();
+        // cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
+
+        Facet.select("Gene");
+        // cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
+
         cy.get("#type_Select a").contains("INSERTION").click({force: true}); // type=INSERTION
+        Facet.checkActiveFacet("type", "type[INSERTION]");
+        // cy.get("div.facet-wrapper button[data-filter-name='type']").contains("type[INSERTION]");
 
+        Facet.checkActiveFacetLength(3);
         cy.get("div.search-button-wrapper button").click();
-        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 3); // 2 default fields + genes
+        Facet.checkResultLength(3);
+        // cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 3); // 2 default fields + genes
 
-        cy.get("div.facet-wrapper button[data-filter-name='chromosome']").click();
-        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 2);
-        cy.get("div.facet-wrapper button[data-filter-name='type']").click();
-        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 1);
-        cy.get("div.facet-wrapper button[data-filter-name='genes']").click();
-        cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 0);
+        Facet.select("Chromosome"); // removing chromosome
+        Facet.checkActiveFacetLength(2);
+        cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(2);
+
+        Facet.removeActive("type");
+        Facet.checkResultLength(1);
+        Facet.removeActive("genes");
+        Facet.checkResultLength(0);
 
     });
 
     // Variant Browser: Tabs
-    /*it("checks Variant Browser detail tabs", () => {
+    /* it("checks Variant Browser detail tabs", () => {
 
         cy.get("variant-browser-detail > detail-tabs > div.panel > h3", {timeout: TIMEOUT}).should("contain", "Variant:");
 

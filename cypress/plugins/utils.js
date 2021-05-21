@@ -7,6 +7,9 @@
  * Waits until the selector finds an attached element, then yields it (wrapped).
  * selectorFn, if provided, is passed $(document). Don't use cy methods inside selectorFn.
  */
+
+import {TIMEOUT} from "./constants.js";
+
 Cypress.Commands.add("getAttached", selector => {
     const getElement = typeof selector === "function" ? selector : $d => $d.find(selector);
     let $el = null;
@@ -39,6 +42,7 @@ export const login = () => {
 /**
  * Routes to a specific Tool
  * @param {String} toolId The tool you want to go to
+ * @returns {void}
  */
 export const goTo = toolId => {
     cy.get("#waffle-icon").click();
@@ -62,6 +66,9 @@ export const waitTableResults = gridSelector => {
 
 /**
  * it check the table actually contains a single result
+ * @param {String} [gridSelector] - name gridSelector
+ * @param {Number} [numResults] - nums results
+ * @returns {void}
  */
 export const checkExactResult = (gridSelector, numResults = 1) => {
     cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.lengthOf", numResults); // .should("be.gte", 1);
@@ -69,6 +76,8 @@ export const checkExactResult = (gridSelector, numResults = 1) => {
 
 /**
  * it check the table actually contains results
+ * @param {String} [gridSelector] - name gridSelector
+ * @returns {void}
  */
 export const checkResults = gridSelector => {
     cy.get(gridSelector + " table", {timeout: 60000}).find("tr[data-index]", {timeout: 60000}).should("have.length.gt", 0); // .should("be.gte", 1);
@@ -76,9 +85,20 @@ export const checkResults = gridSelector => {
 
 /**
  * it check the table contains results or the message "No matching records found"
+ * @param {String} [gridSelector] - name gridSelector
+ * @param {Number} [id] - id
+ * @returns {void}
  */
 export const checkResultsOrNot = (gridSelector, id) => {
+    // TODO (no-unnecessary-waiting) #L99
+    // https://docs.cypress.io/guides/references/best-practices#Unnecessary-Waiting
+    // Temporal solution for now
+
+    // *************************
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(1000); // it is necessary to avoid the following negative assertion is early satisfied
+    // *************************
+
     cy.get(gridSelector + " div.fixed-table-loading", {timeout: 60000}).should("be.not.visible");
 
     cy.get(gridSelector + " .fixed-table-body > table > tbody", {timeout: 60000}).find(" > tr", {timeout: 10000})
@@ -104,7 +124,11 @@ export const checkResultsOrNot = (gridSelector, id) => {
 
 /**
  * given column and row coordinates, it returns a single value out of a bootstrap table
- *
+ * @param {String} [gridSelector] - name of the gridSelector
+ * @param {Number} [colIndex] - index of the column
+ * @param {Number} [rowIndex] - index of the row
+ * @param {String} [invokeFn] - invoke a function
+ * @returns {Promise} - return a promise
  */
 export const getResult = (gridSelector, colIndex = 0, rowIndex = 0, invokeFn= "text") => {
     // check results are >= resultIndex
@@ -115,7 +139,8 @@ export const getResult = (gridSelector, colIndex = 0, rowIndex = 0, invokeFn= "t
 
 /**
  * it checks whether the grid has results.
- *
+ * @param {String} [gridSelector] - name of the gridSelector
+ * @returns {boolean} - return a boolean
  */
 export const hasResults = gridSelector => {
     return cy.get(gridSelector + " .fixed-table-body > table > tbody > tr")
@@ -124,4 +149,41 @@ export const hasResults = gridSelector => {
                 return !Cypress.$($rows[0]).hasClass("no-records-found");
             }
         });
+};
+
+/**
+ * change page in a BT table
+ * @param {String} [gridSelector] - Name of the grid
+ * @param {Number} [page] - Number the page of the grid
+ * @returns {String} Page
+ */
+export const changePage = (gridSelector, page) => {
+    cy.get(gridSelector + " .fixed-table-container + .fixed-table-pagination ul.pagination li a.page-link").should("be.visible").contains(page).click();
+};
+
+export const Facet = {
+    select: label => {
+        cy.get("facet-filter .facet-selector li a").contains(label).click({force: true});
+    },
+    // TODO add action: remove from select
+    remove: label => {
+        // TODO check whether it is active and then remove from select
+        // cy.get("div.facet-wrapper button[data-filter-name='" + field + "']")
+        cy.get("facet-filter .facet-selector li a").contains(label).click({force: true});
+    },
+    selectDefaultFacet: () => {
+        cy.get("button.default-facets-button").click();
+    },
+    removeActive: field => {
+        cy.get("div.facet-wrapper button[data-filter-name='" + field + "']").click();
+    },
+    checkActiveFacet: (field, value) => {
+        cy.get("div.facet-wrapper button[data-filter-name='" + field + "']").contains(value);
+    },
+    checkActiveFacetLength: len => {
+        cy.get("div.facet-wrapper button[data-filter-value]", {timeout: TIMEOUT}).should("have.length", len);
+    },
+    checkResultLength: len => {
+        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 180000}).should("have.length", len);
+    }
 };

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, goTo, getResult, checkResults} from "../plugins/utils.js";
+import {login, getResult, checkResults, Facet, changePage, goTo} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -46,6 +46,9 @@ context("10 - File Browser", () => {
         cy.get("div.search-button-wrapper button").click();
 
         checkResults("opencga-file-grid");
+        changePage("opencga-file-grid", 2);
+        checkResults("opencga-file-grid");
+
 
     });
 
@@ -53,14 +56,63 @@ context("10 - File Browser", () => {
         cy.get("a[data-id=file]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
 
-        cy.get("facet-filter .facet-selector li a").contains("Creation Year").click({force: true}); // Creation Year selection
-        cy.get("a[data-collapse=\"#creationYear_nested\"]").click({force: true});
-        cy.get("#creationYear_nested select-field-filter div.dropdown-menu a").contains("Creation Month").click({force: true}); // Creation Month nested in year field
+        Facet.selectDefaultFacet(); // "creationYear>>creationMonth", "bioformat", "format>>bioformat", "status", "size[0..214748364800]:10737418240", "numSamples[0..10]:1"
+
+        Facet.checkActiveFacet("creationYear", "creationYear>>creationMonth");
+        // cy.get("div.facet-wrapper button[data-filter-name='creationYear']").contains("creationYear>>creationMonth");
+
+        Facet.checkActiveFacet("format", "format>>bioformat");
+        // cy.get("div.facet-wrapper button[data-filter-name='format']").contains("format>>bioformat");
+
+        Facet.checkActiveFacet("bioformat", "bioformat");
+        // cy.get("div.facet-wrapper button[data-filter-name='bioformat']").contains("bioformat");
+
+        Facet.checkActiveFacet("status", "status");
+        // cy.get("div.facet-wrapper button[data-filter-name='status']").contains("status");
+
+        Facet.checkActiveFacet("size", "size[0..214748364800]:10737418240");
+        // cy.get("div.facet-wrapper button[data-filter-name='size']").contains("size[0..214748364800]:10737418240");
+
+        Facet.checkActiveFacet("numSamples", "numSamples[0..10]:1");
+        // cy.get("div.facet-wrapper button[data-filter-name='numSamples']").contains("numSamples[0..10]:1");
+
+
+        cy.get("[data-id='status'] ul.dropdown-menu a").contains("READY").click({force: true}); // status=READY
+        Facet.checkActiveFacet("status", "status[READY]");
+        // cy.get("div.facet-wrapper button[data-filter-name='status']").contains("status[READY]");
 
         cy.get("div.search-button-wrapper button").click();
 
-        cy.get(".facet-wrapper .button-list button").should("have.length", 1);
-        cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 1);
+        Facet.checkActiveFacetLength(6);
+        Facet.checkResultLength(6);
+        // cy.get("div.facet-wrapper button[data-filter-value]", {timeout: TIMEOUT}).should("have.length", 6);
+        // cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 6);
+
+
+        Facet.select("Creation Year"); // removing Creation Year
+        // cy.get("facet-filter .facet-selector li a").contains("Creation Year").click({force: true}); // creationYear remove
+
+        Facet.checkActiveFacetLength(5);
+        cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(5);
+
+        // cy.get("div.facet-wrapper button[data-filter-value]", {timeout: TIMEOUT}).should("have.length", 5);
+        // cy.get("div.search-button-wrapper button").click();
+        // cy.get("opencb-facet-results opencga-facet-result-view", {timeout: TIMEOUT}).should("have.length", 5);
+
+        Facet.select("Creation Year"); // adding Creation Year
+        cy.get("a[data-collapse=\"#creationYear_nested\"]").click({force: true});
+        cy.get("#creationYear_nested select-field-filter div.dropdown-menu a").contains("Creation Month").click({force: true}); // Creation Month nested in Year field
+
+        // removing all values but `creationYear` and `format` through the select, not active-filter
+        Facet.select("Bioformat");
+        Facet.select("Status");
+        Facet.select("Size");
+        Facet.select("Number Of Samples");
+
+        Facet.checkActiveFacetLength(2);
+        cy.get("div.search-button-wrapper button").click();
+        Facet.checkResultLength(2);
 
     });
 });
