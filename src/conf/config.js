@@ -136,8 +136,10 @@ const suite = {
     apps: [
         {
             id: "iva",
-            name: "Variant Analysis (IVA)",
-            logo: "img/iva-black.svg",
+            name: "Variant Analysis",
+            // logo: "img/iva-black.svg",
+            logo: "img/tools/icons/variant_browser.svg",
+            // alt: "This is the old IVA tool",
             icon: "variant_browser.svg",
             visibility: "public",
             menu: [
