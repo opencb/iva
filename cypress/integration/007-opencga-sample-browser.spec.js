@@ -73,7 +73,7 @@ context("7 - Sample Browser", () => {
                                     cy.get("opencga-annotation-filter-modal .modal-footer button").contains("OK").click();
                                     cy.get("opencga-active-filters button[data-filter-name='annotation']").contains(`annotation: ${variableSetId}:${variableId}=${str}`);
                                     cy.get("opencga-active-filters button[data-filter-name='annotation']").click();
-                                    checkResults("opencga-individual-grid");
+                                    checkResults("opencga-sample-grid");
                                 });
                             } else {
                                 //return true; // cy..then($wc => {}) fails because you cannot mixing up async and sync code.
