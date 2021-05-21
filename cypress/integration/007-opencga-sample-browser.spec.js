@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, checkResults, getResult, Facet} from "../plugins/utils.js";
+import {login, checkResults, changePage, getResult, Facet} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -43,8 +43,11 @@ context("7 - Sample Browser", () => {
         cy.get("opencga-active-filters button[data-filter-name='somatic']").click();
         cy.get(".lhs button[data-filter-name]").should("have.length", 0);
 
-    });
+        checkResults("opencga-sample-grid");
+        changePage("opencga-sample-grid", 2);
+        checkResults("opencga-sample-grid");
 
+    });
     it("7.2 - aggregated query", () => {
         cy.get("a[data-id=sample]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});

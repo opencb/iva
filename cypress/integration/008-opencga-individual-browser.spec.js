@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, checkResults, getResult, Facet} from "../plugins/utils.js";
+import {login, checkResults, getResult, Facet, changePage} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -40,6 +40,8 @@ context("8 - Individual Browser", () => {
         cy.get(".lhs button[data-filter-name]").should("have.length", 2);
         cy.get("div.search-button-wrapper button").click();
 
+        checkResults("opencga-individual-grid");
+        changePage("opencga-individual-grid", 2);
         checkResults("opencga-individual-grid");
 
     });

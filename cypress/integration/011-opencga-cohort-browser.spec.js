@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {checkResults, login, getResult, Facet} from "../plugins/utils.js";
+import {checkResults, login, getResult, Facet, changePage} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -36,6 +36,9 @@ context("11 - Cohort Browser", () => {
         cy.get("div.search-button-wrapper button").click();
 
         checkResults("opencga-cohort-grid");
+        changePage("opencga-cohort-grid", 2);
+        checkResults("opencga-cohort-grid");
+
     });
 
     it("11.2 - aggregated query", () => {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, getResult, checkResults, Facet} from "../plugins/utils.js";
+import {login, getResult, checkResults, Facet, changePage} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -47,6 +47,9 @@ context("12 - Jobs Browser", () => {
         cy.get("div.search-button-wrapper button").click();
 
         checkResults("opencga-job-grid");
+        changePage("opencga-job-grid", 2);
+        checkResults("opencga-job-grid");
+
 
     });
 
