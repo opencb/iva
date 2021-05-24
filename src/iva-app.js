@@ -1716,6 +1716,18 @@ class IvaApp extends LitElement {
                 ` : null}
 
             </div>
+            
+            <div class="footer">
+                <div class="container">
+                    <a class="footer-img">
+                        <img src="img/iva-white.svg" alt="logo"> <b><sup>${this.config.version}</sup></b>
+                    </a>
+                    <a class="footer-img">
+                        <img src="img/opencb-logo.png" alt="logo"> <b><sup>${this.config.version}</sup></b>
+                    </a>
+                </div>
+            </div>
+            
             <notification-element .queue="${new NotificationQueue().get()}"></notification-element>
         `;
     }
