@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {checkResults, login, getResult, Facet, changePage} from "../plugins/utils.js";
+import {checkResults, login, getResult, Facet, changePage, dateFilterCheck, annotationFilterCheck} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -38,6 +38,11 @@ context("11 - Cohort Browser", () => {
         checkResults("opencga-cohort-grid");
         changePage("opencga-cohort-grid", 2);
         checkResults("opencga-cohort-grid");
+        changePage("opencga-cohort-grid", 1);
+        checkResults("opencga-cohort-grid");
+
+        dateFilterCheck("opencga-cohort-grid");
+        annotationFilterCheck("opencga-cohort-grid");
 
     });
 
