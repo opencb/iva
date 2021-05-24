@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, checkResults, getResult, Facet, changePage} from "../plugins/utils.js";
+import {login, checkResults, getResult, Facet, changePage, randomString} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -29,20 +29,46 @@ context("8 - Individual Browser", () => {
 
         checkResults("opencga-individual-grid");
 
-        getResult("opencga-individual-grid", 1).then($text => {
-            cy.get("opencga-individual-filter .form-group:nth-child(1) individual-id-autocomplete input").type($text + "{enter}");
-        });
-
-        cy.get("#sex + .subsection-content a").contains("MALE").click({force: true}); // query: sex=MALE
-        cy.get("#sex + .subsection-content a").contains("FEMALE").click({force: true}); // query: sex=FEMALE
-        cy.get("#sex + .subsection-content a").contains("UNKNOWN").click({force: true}); // query: sex=UNKNOWN
-
-        cy.get(".lhs button[data-filter-name]").should("have.length", 2);
-        cy.get("div.search-button-wrapper button").click();
-
-        checkResults("opencga-individual-grid");
-        changePage("opencga-individual-grid", 2);
-        checkResults("opencga-individual-grid");
+        /**
+         * Lookup for the first simple text variable
+         * type a random string and then check whether the button in opencga-active-filters is built correctly
+         */
+        cy.get("opencga-annotation-filter-modal", {timeout: 60000})
+            .then($wc => {
+                // check whether there are variableSet
+                if (Cypress.$("button", $wc).length) {
+                    cy.get("div[data-cy='annotations'] button").contains("Annotation").click();
+                    const $tabs = Cypress.$("div.tab-pane", $wc);
+                    // checkes whether there are VariableSets tabs
+                    assert.isAbove($tabs.length, 0, "The number of VariableSets");
+                    if ($tabs.length) {
+                        const $firstTab = Cypress.$($tabs[0]);
+                        if ($firstTab) {
+                            // check whether there is actually an input field in the first VariableSet, if not bypass the test
+                            const $inputFields = Cypress.$("input[data-variable-id]", $firstTab);
+                            if ($inputFields.length) {
+                                cy.get("opencga-annotation-filter-modal").find("input[data-variable-id]").first().should("be.visible").then($input => {
+                                    const str = randomString();
+                                    const variableSetId = $input.data("variableSetId");
+                                    const variableId = $input.data("variableId");
+                                    cy.wrap($input).type(str);
+                                    cy.get("opencga-annotation-filter-modal .modal-footer button").contains("OK").click();
+                                    cy.get("opencga-active-filters button[data-filter-name='annotation']").contains(`annotation: ${variableSetId}:${variableId}=${str}`);
+                                    cy.get("opencga-active-filters button[data-filter-name='annotation']").click();
+                                    checkResults("opencga-individual-grid");
+                                });
+                            } else {
+                                //return true; // cy..then($wc => {}) fails because you cannot mixing up async and sync code.
+                                // so we can just make the test pass by check the non existence of inputs fields
+                                cy.get("opencga-annotation-filter-modal input[data-variable-id]", {timeout: TIMEOUT}).should("not.exist");
+                                cy.get("opencga-annotation-filter-modal .modal-footer button").contains("OK").click();
+                            }
+                        }
+                    }
+                } else {
+                    cy.wrap($wc).contains("No variableSets defined in the study");
+                }
+            });
 
     });
 
