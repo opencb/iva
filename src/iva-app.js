@@ -1092,7 +1092,7 @@ class IvaApp extends LitElement {
                                     </a>
                                 </li>
                             ` : null}
-                            
+
                             ${this.config?.apps?.filter(item => this.isVisible(item)).map(item => html`
                                 <li>
                                     <a href="#home" role="button" data-id="${item.id}" @click="${e => this.onChangeApp(e, true)}">
@@ -1181,7 +1181,7 @@ class IvaApp extends LitElement {
                                             <li><a title="${project.fqn}"><b>${project.name} [${project.fqn.split("@")[0]}]</b></a></li>
                                             ${project.studies && project.studies.length && project.studies.map(study => html`
                                                 <li>
-                                                    <a href="#" data-study-fqn="${study.fqn}" data-study-name="${study.name}" title="${study.fqn}" 
+                                                    <a href="#" data-study-fqn="${study.fqn}" data-study-name="${study.name}" title="${study.fqn}"
                                                        @click="${this.onStudySelect}">${study.name}</a>
                                                 </li>
                                             `)}
@@ -1277,12 +1277,12 @@ class IvaApp extends LitElement {
             <div class="container-fluid">
                 ${this.config.enabledComponents.home ? html`
                     <div class="content" id="home">
-                        <welcome-web .app="${this.app}" 
-                                     .opencgaSession="${this.opencgaSession}" 
-                                     version="${this.config.version}" 
-                                     .cellbaseClient=${this.cellbaseClient} 
+                        <welcome-web .app="${this.app}"
+                                     .opencgaSession="${this.opencgaSession}"
+                                     version="${this.config.version}"
+                                     .cellbaseClient=${this.cellbaseClient}
                                      @changeApp="${e => this.onChangeApp(e.detail.e, false)}"
-                                     @search="${this.quickSearch}" 
+                                     @search="${this.quickSearch}"
                                      .config="${this.config}">
                         </welcome-web>
                     </div>
@@ -1807,7 +1807,7 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["projects-admin"] ? html`
                     <tool-header title="Projects Admin" icon="${"fas fa-rocket"}"></tool-header>
                     <div id="projects-admin" class="content col-md-10 col-md-offset-1">
-                        <projects-admin 
+                        <projects-admin
                                 .opencgaSession="${this.opencgaSession}"
                                 @sessionUpdateRequest="${this.onSessionUpdateRequest}">
                         </projects-admin>
@@ -1817,7 +1817,7 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents["opencga-admin"] ? html`
                     <tool-header title="Study Dashboard" icon="${"fas fa-rocket"}"></tool-header>
                     <div id="opencga-admin" class="content col-md-10 col-md-offset-1">
-                        <projects-admin 
+                        <projects-admin
                                 .opencgaSession="${this.opencgaSession}"
                                 @sessionUpdateRequest="${this.onSessionUpdateRequest}">
                         </projects-admin>
@@ -1829,7 +1829,7 @@ class IvaApp extends LitElement {
                     <div class="content">
                         <study-admin
                                 .study="${this.opencgaSession.study}"
-                                .opencgaSession="${this.opencgaSession}" 
+                                .opencgaSession="${this.opencgaSession}"
                                 @studyUpdateRequest="${this.onStudyUpdateRequest}">
                         </study-admin>
                     </div>

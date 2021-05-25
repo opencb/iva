@@ -88,9 +88,9 @@ context("9 - Family Browser", () => {
                 Facet.select("Status"); // removing status
                 Facet.select("Expected Size"); // removing status
 
-                Facet.checkActiveFacetLength(4);
+                Facet.checkActiveFacetLength(3);
                 cy.get("div.search-button-wrapper button").click();
-                Facet.checkResultLength(4);
+                Facet.checkResultLength(3);
 
             }
         });

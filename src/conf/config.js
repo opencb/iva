@@ -19,19 +19,34 @@ const cellbase = {
     version: "v4"
 };
 
-const hosts = {
-    "prod": "https://ws.opencb.org/opencga-prod",
-    "test": "https://ws.opencb.org/opencga-test",
-    "eglh": "https://eglh.app.zettagenomics.com/opencga", // public instance
-    "local": "http://localhost:1234/opencga"
-};
+const hosts = [
+    {
+        id: "prod",
+        url: "https://ws.opencb.org/opencga-prod"
+    },
+    {
+        id: "test",
+        url: "https://ws.opencb.org/opencga-test"
+    },
+    {
+        id: "eglh",
+        url: "https://eglh.app.zettagenomics.com/opencga"
+    },
+    {
+        id: "local",
+        url: "http://localhost:1234/opencga"
+    }
+];
 
 const opencga = {
-    host: hosts.test,
+    host: hosts[0].url,
+    // host: "https://ws.opencb.org/opencga-prod",
+    // host: "http://localhost:1234/opencga",
+    // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
     version: "v2",
     serverVersion: "1.4",
     cookie: {
-        prefix: "iva"
+        prefix: "iva-" + hosts[0].id
     }
 
     // This forces the following projects to be used instead of the user's project
