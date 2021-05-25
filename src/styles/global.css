@@ -14,7 +14,7 @@ body {
     min-height: 100vh;
     position: relative;
     margin: 0;
-    padding-bottom: 50px; /* height of the footer */
+    padding-bottom: 70px; /* height of the footer + 20px */
 
 }
 
@@ -260,8 +260,9 @@ input[type="number"] {
     padding: 0px 20px;
     margin: 5px;
     border-right: gainsboro solid 1px;
-    height: 40px;
+    /*height: 40px;*/
     display: inline-block;
+    color: grey;
 }
 .footer-img {
     font-variant: all-small-caps;

@@ -1719,12 +1719,12 @@ class IvaApp extends LitElement {
             
             <div class="footer">
                 <div class="container">
-                    <a class="footer-img">
-                        <img src="img/iva-white.svg" alt="logo"> <b><sup>${this.config.version}</sup></b>
-                    </a>
-                    <a class="footer-img">
-                        <img src="img/opencb-logo.png" alt="logo"> <b><sup>${this.config.version}</sup></b>
-                    </a>
+                    <p class="footer-img">
+                        IVA <sup>${this.config.version}</sup>
+                    </p>
+                    <p class="footer-img">
+                        OpenCGA <sup>V${this?.opencgaSession?.server?.about?.Version}</sup>
+                    </p>
                 </div>
             </div>
             
