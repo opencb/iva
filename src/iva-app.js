@@ -1716,6 +1716,18 @@ class IvaApp extends LitElement {
                 ` : null}
 
             </div>
+            
+            <div class="footer">
+                <div class="container">
+                    <p class="footer-img">
+                        IVA <sup>${this.config.version}</sup>
+                    </p>
+                    <p class="footer-img">
+                        OpenCGA <sup>V${this?.opencgaSession?.server?.about?.Version}</sup>
+                    </p>
+                </div>
+            </div>
+            
             <notification-element .queue="${new NotificationQueue().get()}"></notification-element>
         `;
     }

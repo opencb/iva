@@ -13,7 +13,7 @@
     "serve-browser-sync": "browser-sync start --config bs-config.js",
     "prepare": "node esinstall.mjs",
     "browser-support": "npx browserslist",
-    "build": "npx webpack && npm run package",
+    "build": "npm run clean && npx webpack && npm run package",
     "package": "mv build iva-$npm_package_version && tar zcvf iva-$npm_package_version.tar.gz iva-$npm_package_version && mv iva-$npm_package_version build",
     "deploy": "npx webpack && ./docker/docker-build.py push",
     "eslint": "eslint -c .eslintrc.json . --ignore-pattern '/web_modules/'",
@@ -24,7 +24,7 @@
     "e2e-report": "rm -rf mochawesome-report/ && ./credentials.sh npx cypress run --headless --spec 'cypress/integration/*.js'; npm run mocha:report && rm -rf 'mochawesome-report/'",
     "e2e-report-win": "(if exist mochawesome-report rmdir /S/Q mochawesome-report)&& credentials.bat npx cypress run --headless --spec \"cypress/integration/*.js\"& npm run mocha:report && (if exist mochawesome-report rmdir /S/Q mochawesome-report)",
     "mocha:merge-reports": "mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json",
-    "mocha:report": "npm run mocha:merge-reports && marge --reportFilename report.html --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle IVA --reportTitle IVA --reportDir ./report mochawesome-report/cypress-combined-report.json"
+    "mocha:report": "npm run mocha:merge-reports && marge --reportFilename report.html --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle IVA --reportTitle IVA --reportDir ./report mochawesome-report/cypress-combined-report.json; spd-say 'end to end test completed'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
@@ -40,7 +40,7 @@
     "bootstrap-colorpicker": "2.3.6",
     "bootstrap-notify": "git://github.com/mouse0270/bootstrap-notify#master",
     "bootstrap-select": "^1.13.12",
-    "bootstrap-table": "^1.18.0",
+    "bootstrap-table": "^1.18.3",
     "bootstrap-treeview": "1.2.0",
     "bootstrap-validator": "~0.11.9",
     "clipboard": "^2.0.6",

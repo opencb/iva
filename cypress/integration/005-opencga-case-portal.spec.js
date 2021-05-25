@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, randomString, checkResults, waitTableResults} from "../plugins/utils.js";
+import {login, randomString, checkResults} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -31,7 +31,7 @@ context("5 - Case Portal", () => {
 
         // check if priority filter is enabled and visible first, then it tests the filter itself
         // TODO bugfix
-        /*cy.get("div.lhs", {timeout: 5000})
+        /* cy.get("div.lhs", {timeout: 5000})
             .should("satisfy", $els => {
                 const priority = Cypress.$("div[data-cy='form-priority'] button");
                 if (priority.length) {
@@ -60,12 +60,42 @@ context("5 - Case Portal", () => {
 
             })
 
+            .find("td:nth-child(2) p[data-cy='proband-sample-id']").first()
+            .then($p => {
+                const probandSampleId = $p.text().trim();
+                console.log("probandSampleId", probandSampleId);
+                cy.get("div[data-cy='form-sample'] button").click();
+                cy.get("div[data-cy='form-sample'] input").type(probandSampleId + "{enter}", {force: true});
+                checkResults("opencga-clinical-analysis-grid");
+
+            })
+
             .find("td:nth-child(2) span[data-cy='proband-id']")
-            .then($div => {
-                const probandId = $div.text().trim();
+            .then($span => {
+                const probandId = $span.text().trim();
                 console.log("probandId", probandId);
                 cy.get("div[data-cy='form-proband'] button").click();
                 cy.get("div[data-cy='form-proband'] input").type(probandId + "{enter}", {force: true});
+                checkResults("opencga-clinical-analysis-grid");
+
+            })
+
+            .find("td:nth-child(3) span[data-cy='family-id']")
+            .then($span => {
+                const familyId = $span.text().trim();
+                console.log("familyId", familyId);
+                cy.get("div[data-cy='form-family'] button").click();
+                cy.get("div[data-cy='form-family'] input").type(familyId + "{enter}", {force: true});
+                checkResults("opencga-clinical-analysis-grid");
+
+            })
+
+            .find("td:nth-child(4) span[data-cy='disorder-name']")
+            .then($span => {
+                const disorderName = $span.text().trim();
+                console.log("disorderName", disorderName);
+                cy.get("div[data-cy='form-family'] button").click();
+                cy.get("div[data-cy='form-family'] input").type(disorderName + "{enter}", {force: true});
                 checkResults("opencga-clinical-analysis-grid");
 
             });

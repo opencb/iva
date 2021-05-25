@@ -197,12 +197,7 @@ export default class WelcomeWeb extends LitElement {
                 -ms-transform: scale(1);
                 transform: scale(1);
                 color: #fff
-            }
-
-            .footer {
-                margin-bottom: 80px;
-            }
-        
+            }        
             
         </style>                                         
 
