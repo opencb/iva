@@ -79,6 +79,7 @@ const application = {
     title: "IVA",
     version: "v2.1.0-beta",
     logo: "img/iva.svg",
+    footerLogo: "img/opencb-logo.png",
     mode: "development",
     appConfig: "opencb",
     defaultStudy: "serena@cancer37:test",
@@ -697,8 +698,6 @@ const application = {
                 pedigrees, case-controls or sporadic samples.
             </p>
             <br>`,
-    welcomePageFooter: "<p><img id=\"logo\" src=\"img/" +
-        "opencb-logo.png\" alt=\"opencb-logo\"/></p>",
     gettingStartedComponents: ["browser", "clinicalAnalysisPortal"]
 };
 

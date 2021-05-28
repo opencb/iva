@@ -1719,11 +1719,18 @@ class IvaApp extends LitElement {
             
             <div class="footer">
                 <div class="container">
-                    <p class="footer-img">
+                    <img style="height: 25px;" src="${this.config.footerLogo}" alt="logo">
+                    <p class="footer-item">
                         IVA <sup>${this.config.version}</sup>
                     </p>
-                    <p class="footer-img">
-                        OpenCGA <sup>V${this?.opencgaSession?.server?.about?.Version}</sup>
+                    <p class="footer-item">
+                        OpenCGA <sup>v${this?.opencgaSession?.server?.about?.Version}</sup>
+                    </p>
+
+                    <p class="footer-item">
+                        CellBase
+                        ${this.cellbaseVersion ? html`<sup>${this.cellbaseVersion}</sup>` : html`<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>`
+                        }
                     </p>
                 </div>
             </div>

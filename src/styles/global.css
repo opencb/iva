@@ -252,11 +252,11 @@ input[type="number"] {
     width: 100%;
 }
 
-.footer-img:first-child {
+.footer-item:first-child {
     padding-left: 0;
 }
 
-.footer-img {
+.footer-item {
     padding: 0px 20px;
     margin: 5px;
     border-right: gainsboro solid 1px;
@@ -264,12 +264,12 @@ input[type="number"] {
     display: inline-block;
     color: grey;
 }
-.footer-img {
+.footer-item {
     font-variant: all-small-caps;
     text-transform: uppercase;
     font-size: 1.6em;
 }
-.footer-img img{
+.footer-item img{
     height: 40px;
     padding: 5px;
 }
@@ -1252,6 +1252,13 @@ opencga-facet .panel-body > .form-group:not(:first-child) {
 .map-field-inputs {
     margin-top: 10px;
     margin-bottom: 15px;
+}
+
+/*********   select-field-filter (selectpicker)  *********/
+.bootstrap-select.disabled, .bootstrap-select>.disabled,
+.bootstrap-select button.bs-placeholder:hover,
+.bootstrap-select button.bs-placeholder:focus {
+    background-color: #eee !important;
 }
 
 /********** checkbox widget TODO remove ************/
