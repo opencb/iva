@@ -288,6 +288,10 @@ class IvaApp extends LitElement {
             new NotificationQueue().push("Error", e.detail.value, "error", true, false);
         }, false);
 
+        globalThis.addEventListener("cellBaseInitialised", e => {
+            this.cellbaseVersion = e.detail.value;
+        }, false);
+
     }
 
     connectedCallback() {
