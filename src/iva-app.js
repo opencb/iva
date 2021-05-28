@@ -278,7 +278,8 @@ class IvaApp extends LitElement {
         this.browserSearchQuery = {};
         // keeps track of the executedQueries transitioning from browser tool to facet tool
         this.queries = [];
-
+        // keeps track of status and version of the hosts (opencga and cellbase)
+        this.host = {};
         globalThis.addEventListener("signingIn", e => {
             this.signingIn = e.detail.value;
             this.requestUpdate();
@@ -288,8 +289,9 @@ class IvaApp extends LitElement {
             new NotificationQueue().push("Error", e.detail.value, "error", true, false);
         }, false);
 
-        globalThis.addEventListener("cellBaseInitialised", e => {
-            this.cellbaseVersion = e.detail.value;
+        globalThis.addEventListener("hostInit", e => {
+            this.host[e.detail.host] = e.detail.value;
+            this.requestUpdate();
         }, false);
 
     }
@@ -1728,13 +1730,13 @@ class IvaApp extends LitElement {
                         IVA <sup>${this.config.version}</sup>
                     </p>
                     <p class="footer-item">
-                        OpenCGA <sup>v${this?.opencgaSession?.server?.about?.Version}</sup>
+                        OpenCGA
+                        ${this.host?.opencga ? html`<sup>${this.host?.opencga}</sup>` : html`<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>`}
                     </p>
 
                     <p class="footer-item">
                         CellBase
-                        ${this.cellbaseVersion ? html`<sup>${this.cellbaseVersion}</sup>` : html`<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>`
-                        }
+                        ${this.host?.cellbase ? html`<sup>${this.host?.cellbase}</sup>` : html`<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>`}
                     </p>
                 </div>
             </div>
