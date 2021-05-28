@@ -274,8 +274,6 @@ export default class WelcomeWeb extends LitElement {
                 so only modern web browsers are fully supported, these include Chrome 49+, Firefox 45+, Microsoft Edge 14+,
                 Safari 10+ and Opera 36+.
             </small>-->
-            ${UtilsNew.renderHTML(this.config.welcomePageFooter)}
-
         </div>
         `;
     }
