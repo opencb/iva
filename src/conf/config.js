@@ -143,14 +143,14 @@ const application = {
                     icon: "variant_browser.svg",
                     thumbnail: "variant-browser.png"
                 },
-                {
+                /*{
                     id: "rga",
                     title: "Recessive Variant Browser",
                     acronym: "",
                     icon: "",
                     description: "",
                     visibility: "public"
-                },
+                },*/
                 // {
                 //     id: "genomeBrowser",
                 //     title: "Genome Browser",
