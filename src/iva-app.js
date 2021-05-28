@@ -288,6 +288,10 @@ class IvaApp extends LitElement {
             new NotificationQueue().push("Error", e.detail.value, "error", true, false);
         }, false);
 
+        globalThis.addEventListener("cellBaseInitialised", e => {
+            this.cellbaseVersion = e.detail.value;
+        }, false);
+
     }
 
     connectedCallback() {
@@ -1084,7 +1088,7 @@ class IvaApp extends LitElement {
                                     <a href="#" class="dropdown-toggle study-switcher" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-cy="active-study">
                                         <div><i class="fa fa-database fa-lg" style="padding-right: 10px"></i></div>
                                         <div style="margin-right: 5px">
-                                            <p class="project-name">${this.opencgaSession.project.id}</p>
+                                            <p class="project-name">${this.opencgaSession.project.name}</p>
                                             <p class="study-id">${this.opencgaSession.study.name}</p>
                                         </div>
                                         <span class="caret"></span>
@@ -1716,6 +1720,25 @@ class IvaApp extends LitElement {
                 ` : null}
 
             </div>
+            
+            <div class="footer">
+                <div class="container">
+                    <img style="height: 25px;" src="${this.config.footerLogo}" alt="logo">
+                    <p class="footer-item">
+                        IVA <sup>${this.config.version}</sup>
+                    </p>
+                    <p class="footer-item">
+                        OpenCGA <sup>v${this?.opencgaSession?.server?.about?.Version}</sup>
+                    </p>
+
+                    <p class="footer-item">
+                        CellBase
+                        ${this.cellbaseVersion ? html`<sup>${this.cellbaseVersion}</sup>` : html`<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>`
+                        }
+                    </p>
+                </div>
+            </div>
+            
             <notification-element .queue="${new NotificationQueue().get()}"></notification-element>
         `;
     }

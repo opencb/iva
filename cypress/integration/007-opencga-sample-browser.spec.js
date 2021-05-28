@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, checkResults, changePage, getResult, Facet, randomString} from "../plugins/utils.js";
+import {login, checkResults, changePage, getResult, Facet, dateFilterCheck, annotationFilterCheck} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -45,48 +45,13 @@ context("7 - Sample Browser", () => {
         checkResults("opencga-sample-grid");
         changePage("opencga-sample-grid", 2);
         checkResults("opencga-sample-grid");
+        changePage("opencga-sample-grid", 1);
+        checkResults("opencga-sample-grid");
 
+        dateFilterCheck("opencga-sample-grid");
 
-        /**
-         * Lookup for the first simple text variable
-         * type a random string and then check whether the button in opencga-active-filters is built correctly
-          */
-        cy.get("opencga-annotation-filter-modal", {timeout: 60000})
-            .then($wc => {
-                // check whether there are variableSet
-                if (Cypress.$("button", $wc).length) {
-                    cy.get("div[data-cy='annotations'] button").contains("Annotation").click();
-                    const $tabs = Cypress.$("div.tab-pane", $wc);
-                    // checkes whether there are VariableSets tabs
-                    assert.isAbove($tabs.length, 0, "The number of VariableSets");
-                    if ($tabs.length) {
-                        const $firstTab = Cypress.$($tabs[0]);
-                        if ($firstTab) {
-                            // check whether there is actually an input field in the first VariableSet, if not bypass the test
-                            const $inputFields = Cypress.$("input[data-variable-id]", $firstTab);
-                            if ($inputFields.length) {
-                                cy.get("opencga-annotation-filter-modal").find("input[data-variable-id]").first().should("be.visible").then($input => {
-                                    const str = randomString();
-                                    const variableSetId = $input.data("variableSetId");
-                                    const variableId = $input.data("variableId");
-                                    cy.wrap($input).type(str);
-                                    cy.get("opencga-annotation-filter-modal .modal-footer button").contains("OK").click();
-                                    cy.get("opencga-active-filters button[data-filter-name='annotation']").contains(`annotation: ${variableSetId}:${variableId}=${str}`);
-                                    cy.get("opencga-active-filters button[data-filter-name='annotation']").click();
-                                    checkResults("opencga-sample-grid");
-                                });
-                            } else {
-                                //return true; // cy..then($wc => {}) fails because you cannot mixing up async and sync code.
-                                // so we can just make the test pass by check the non existence of inputs fields
-                                cy.get("opencga-annotation-filter-modal input[data-variable-id]", {timeout: TIMEOUT}).should("not.exist");
-                                cy.get("opencga-annotation-filter-modal .modal-footer button").contains("OK").click();
-                            }
-                        }
-                    }
-                } else {
-                    cy.wrap($wc).contains("No variableSets defined in the study");
-                }
-            });
+        annotationFilterCheck("opencga-sample-grid");
+
     });
     it("7.2 - aggregated query", () => {
         cy.get("a[data-id=sample]").click({force: true});
@@ -97,13 +62,12 @@ context("7 - Sample Browser", () => {
 
         Facet.checkActiveFacet("creationYear", "creationYear>>creationMonth");
         Facet.checkActiveFacet("status", "status");
-        Facet.checkActiveFacet("phenotypes", "phenotypes");
         Facet.checkActiveFacet("somatic", "somatic");
 
 
-        Facet.checkActiveFacetLength(4);
+        Facet.checkActiveFacetLength(3);
         cy.get("div.search-button-wrapper button").click();
-        Facet.checkResultLength(4);
+        Facet.checkResultLength(3);
 
         // cy.get("div.facet-wrapper button[data-filter-name='creationYear']").contains("creationYear>>creationMonth");
 
@@ -117,8 +81,8 @@ context("7 - Sample Browser", () => {
 
         Facet.select("Status"); // removing status
 
-        Facet.checkActiveFacetLength(3);
+        Facet.checkActiveFacetLength(2);
         cy.get("div.search-button-wrapper button").click();
-        Facet.checkResultLength(3);
+        Facet.checkResultLength(2);
     });
 });

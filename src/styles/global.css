@@ -3,10 +3,19 @@
     --main-color-darker: #09243a;
     --main-color-link: #286090;
     --main-color-hover: #23527c;
+    --main-color-grey: #f5f5f5;
 }
 
 body, * {
     font-family: "Lato", Helvetica, Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+    padding-bottom: 70px; /* height of the footer + 20px */
+
 }
 
 p {
@@ -233,6 +242,36 @@ input[type="number"] {
     top: -1em;
     text-transform: uppercase;
     font-size: .6em;
+}
+
+.footer {
+    background: var(--main-color-grey);
+    margin-top: 40px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-item:first-child {
+    padding-left: 0;
+}
+
+.footer-item {
+    padding: 0px 20px;
+    margin: 5px;
+    border-right: gainsboro solid 1px;
+    /*height: 40px;*/
+    display: inline-block;
+    color: grey;
+}
+.footer-item {
+    font-variant: all-small-caps;
+    text-transform: uppercase;
+    font-size: 1.6em;
+}
+.footer-item img{
+    height: 40px;
+    padding: 5px;
 }
 
 /* plain text in form-group (instead of input text) */
@@ -1213,6 +1252,13 @@ opencga-facet .panel-body > .form-group:not(:first-child) {
 .map-field-inputs {
     margin-top: 10px;
     margin-bottom: 15px;
+}
+
+/*********   select-field-filter (selectpicker)  *********/
+.bootstrap-select.disabled, .bootstrap-select>.disabled,
+.bootstrap-select button.bs-placeholder:hover,
+.bootstrap-select button.bs-placeholder:focus {
+    background-color: #eee !important;
 }
 
 /********** checkbox widget TODO remove ************/

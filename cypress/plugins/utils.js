@@ -156,3 +156,75 @@ export const Facet = {
         cy.get("opencb-facet-results opencga-facet-result-view", {timeout: 180000}).should("have.length", len);
     }
 };
+
+/**
+ * Date-filter test
+ */
+export const dateFilterCheck = gridSelector => {
+    cy.get("date-filter input[data-tab=range] + label").click();
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=start][data-field=year] button").click();
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=start][data-field=year] a").contains("2020").click();
+
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=start][data-field=month] button").click();
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=start][data-field=month] a").contains("Feb").click();
+
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=start][data-field=day] button").click();
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=start][data-field=day] a").contains("2").click();
+
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=end][data-field=year] button").click();
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=end][data-field=year] a").contains("2020").click();
+
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=end][data-field=month] button").click();
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=end][data-field=month] a").contains("Mar").click();
+
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=end][data-field=day] button").click();
+    cy.get("div[data-cy='date-range'] select-field-filter[data-type=range][data-endpoint=end][data-field=day] a").contains("3").click();
+
+    cy.get("opencga-active-filters button[data-filter-name='creationDate']").contains("20200202-20200303");
+    cy.get("opencga-active-filters button[data-filter-name='creationDate']").click();
+    checkResults(gridSelector);
+};
+
+
+/**
+ * Lookup for the first simple text variable
+ * type a random string and then check whether the button in opencga-active-filters is built correctly
+ */
+export const annotationFilterCheck = gridSelector => {
+    cy.get("opencga-annotation-filter-modal", {timeout: 60000})
+        .then($wc => {
+            // check whether there are variableSet
+            if (Cypress.$("button", $wc).length) {
+                cy.get("div[data-cy='annotations'] button").contains("Annotation").click();
+                const $tabs = Cypress.$("div.tab-pane", $wc);
+                // checkes whether there are VariableSets tabs
+                assert.isAbove($tabs.length, 0, "The number of VariableSets");
+                if ($tabs.length) {
+                    const $firstTab = Cypress.$($tabs[0]);
+                    if ($firstTab) {
+                        // check whether there is actually an input field in the first VariableSet, if not bypass the test
+                        const $inputFields = Cypress.$("input[data-variable-id]", $firstTab);
+                        if ($inputFields.length) {
+                            cy.get("opencga-annotation-filter-modal").find("input[data-variable-id]").first().should("be.visible").then($input => {
+                                const str = randomString();
+                                const variableSetId = $input.data("variableSetId");
+                                const variableId = $input.data("variableId");
+                                cy.wrap($input).type(str);
+                                cy.get("opencga-annotation-filter-modal .modal-footer button").contains("OK").click();
+                                cy.get("opencga-active-filters button[data-filter-name='annotation']").contains(`annotation: ${variableSetId}:${variableId}=${str}`);
+                                cy.get("opencga-active-filters button[data-filter-name='annotation']").click();
+                                checkResults(gridSelector);
+                            });
+                        } else {
+                            //return true; // cy..then($wc => {}) fails because you cannot mixing up async and sync code.
+                            // so we can just make the test pass by check the non existence of inputs fields
+                            cy.get("opencga-annotation-filter-modal input[data-variable-id]", {timeout: TIMEOUT}).should("not.exist");
+                            cy.get("opencga-annotation-filter-modal .modal-footer button").contains("OK").click();
+                        }
+                    }
+                }
+            } else {
+                cy.wrap($wc).contains("No variableSets defined in the study");
+            }
+        });
+};

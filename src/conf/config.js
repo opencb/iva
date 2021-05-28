@@ -112,6 +112,7 @@ const application = {
     version: "v2.1.1",
     logo: "img/iva.svg",
     companyLogo: "img/Genomics-England-logo-2015-white.png",
+    footerLogo: "img/opencb-logo.png",
     mode: "development",
     appConfig: "gel",
     defaultStudy: "re-opencgahadoop@100k_genomes_grch37_germline:RD37",
@@ -702,7 +703,6 @@ const application = {
             <li>any bugs or issues encountered when using IVA</li>
             <li>whether you think IVA will expand the utility of the research environment to a new user base</li>
         </ul>`,
-    welcomePageFooter: "<p><img id=\"logo\" src=\"img/opencb-logo.png\" alt=\"opencb-logo\"/></p>",
     gettingStartedComponents: ["browser", "clinicalAnalysisPortal"]
 };
 
