@@ -1,5 +1,14 @@
 #!/bin/bash
+# @file test_runner.sh
+# @brief This script launches IVA e2e tests over one or more Opencga studies
+# @description It takes Opencga username, password, and a comma-separated list of studies
 
+#declare -a studies=(
+#  "re-opencgahadoop@100k_genomes_grch37_germline:RD37"
+#  "re-opencgahadoop@100k_genomes_grch38_germline:RD38"
+#  "re-opencgahadoop@100k_genomes_grch38_germline:CG38"
+#  "re-opencgahadoop@100k_genomes_grch38_somatic:CS38"
+#  )
 while getopts u:s: opts; do
    case ${opts} in
       u) username=${OPTARG} ;;
@@ -35,8 +44,8 @@ do
   echo "$study"
   rm -rf mochawesome-report/ && \
   CYPRESS_study="$study" npx cypress run --config videosFolder="cypress/videos/$study",screenshotsFolder="cypress/screenshots/$study" --headless --spec 'cypress/integration/002-login.js';  \
-  mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json && \
-  marge --reportFilename "$study".html --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle "IVA $study" --reportTitle "IVA study: $study" --reportDir ./report mochawesome-report/cypress-combined-report.json && \
+  npx mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json && \
+  npx marge --reportFilename "$study".html --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle "IVA $study" --reportTitle "IVA study: $study" --reportDir ./report mochawesome-report/cypress-combined-report.json && \
   rm -rf mochawesome-report/
 done
 spd-say 'end to end test completed'
