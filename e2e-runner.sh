@@ -1,7 +1,7 @@
 #!/bin/bash
 # @file test_runner.sh
 # @brief This script launches IVA e2e tests over one or more Opencga studies
-# @description It takes Opencga username, password, and a comma-separated list of studies
+# @description It takes Opencga username, password, and a comma-separated list of studies (params or prompt)
 
 #declare -a studies=(
 #  "re-opencgahadoop@100k_genomes_grch37_germline:RD37"
@@ -9,10 +9,25 @@
 #  "re-opencgahadoop@100k_genomes_grch38_germline:CG38"
 #  "re-opencgahadoop@100k_genomes_grch38_somatic:CS38"
 #  )
-while getopts u:s: opts; do
+
+function Help () {
+    cat <<TEXT
+ Usage: $0 [-u <USERNAME>] [-s <STUDIES>]
+ Launches IVA e2e tests over one or more Opencga studies.
+ Options:
+ -u     Opencga username.
+ -s     Comma-separated list of studies.
+ -h     Prints command description
+TEXT
+}
+
+
+while getopts :u:s:h opts; do
    case ${opts} in
-      u) username=${OPTARG} ;;
-      s) studies=${OPTARG} ;;
+      u)  username=${OPTARG} ;;
+      s)  studies=${OPTARG} ;;
+      h)  Help "$@"
+          exit 0;;
       *) ;;
    esac
 done

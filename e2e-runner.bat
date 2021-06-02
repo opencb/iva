@@ -1,5 +1,18 @@
+rem This script launches IVA e2e tests over one or more Opencga studies in Windows env
+rem It prompts for Opencga username, password, and a comma-separated list of studies
+rem TODO add cli params
+
 @echo off
     setlocal enableextensions disabledelayedexpansion
+
+:parse
+IF "%~1"=="" GOTO endparse
+IF "%~1"=="-u" SET opencgauser=%~2
+IF "%~1"=="-s" SET studies=%~2
+IF "%~1"=="-h" REM do something else
+SHIFT
+GOTO parse
+:endparse
 
 rem set the username using a plain prompt
 	SET /p username=Enter your Opencga Username [ENTER]:
@@ -25,10 +38,9 @@ rem set the study using a plain prompt
 
 rem iterate over studies and run the test defined in --spec
 for %%a in ("%studies:,=" "%") do (
-echo %%~a
-(if exist mochawesome-report rmdir /S/Q mochawesome-report) && npx cypress run --env username=%username%,password=%password%,study=%%~a --headless --spec \"cypress/integration/003-header-bar-post-login.spec.js\" & npx mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json && ^
-npx marge --reportFilename report.html --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle IVA --reportTitle IVA --reportDir ./report mochawesome-report/cypress-combined-report.json && ^
-(if exist mochawesome-report rmdir /S/Q mochawesome-report)
+    echo %%~a
+    (if exist mochawesome-report rmdir /S/Q mochawesome-report) && npx cypress run --env username=%username%,password=%password%,study=%%~a --headless --spec \"cypress/integration/003-header-bar-post-login.spec.js\" & npx mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json && ^
+    npx marge --reportFilename report.html --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle IVA --reportTitle IVA --reportDir ./report mochawesome-report/cypress-combined-report.json && (if exist mochawesome-report rmdir /S/Q mochawesome-report)
 )
 
 
