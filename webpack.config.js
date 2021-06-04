@@ -11,8 +11,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const packageJson = require("./package.json");
-
 const DIST_PATH = path.resolve(__dirname, "build/");
+const revision = require("./rev-info.js");
 
 const tpl = path => ({
     img: `<img alt="${path}" src="${path}" />`,
@@ -53,7 +53,7 @@ module.exports = {
             {
                 pattern: /\[build-signature\]/m,
                 replacement: function (match, type, path) {
-                    return `${packageJson.name} ${packageJson.version} - Build generated on: ${new Date()}`;
+                    return revision;
                 }
             }
         ]

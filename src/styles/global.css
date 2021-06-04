@@ -1721,7 +1721,7 @@ Toggle Changes
 
 .hi-icon-animation .icon-wrapper.active:not(.disabled) .hi-icon:before {
     transition: all .2s;
-    font-size: 36px;
+    font-size: 40px;
 }
 
 .hi-icon-wrap {
