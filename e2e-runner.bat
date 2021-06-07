@@ -1,9 +1,9 @@
+@echo off
+setlocal EnableExtensions EnableDelayedExpansion
+
 rem This script launches IVA e2e tests over one or more Opencga studies in Windows env
 rem It prompts for Opencga username, password, and a comma-separated list of studies if -u (username) and -s (studies) params are not provided.
 
-
-@echo off
-setlocal EnableExtensions disabledelayedexpansion
 
 :parse
 IF "%~1"=="" GOTO endparse
@@ -40,17 +40,16 @@ rem set the username using a plain prompt
 )
 
 
-echo %opencgaUser% - %opencgaPassword% - %studies%
-
+rem echo %opencgaUser% - %opencgaPassword% - %studies%
 
 rem Iterate over studies and
 for %%a in ("%studies:,=" "%") do (
-echo %%~a
-set var=%~a::=$%
-echo study %var%
-rem (if exist mochawesome-report rmdir /S/Q mochawesome-report) && npx cypress run --env username=%opencgaUser%,password=%opencgaPassword%,study=%%~a --config videosFolder="cypress/videos/%%~a",screenshotsFolder="cypress/screenshots/%%~a" --headless --spec 'cypress/integration/002-login.js' & npx mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json && ^
-rem npx marge --reportFilename report.html --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle IVA --reportTitle IVA --reportDir ./report mochawesome-report/cypress-combined-report.json && (if exist mochawesome-report rmdir /S/Q mochawesome-report)
-
+set tmp=%%~na
+set study=!tmp::=!
+echo %%~a delayed: !study!
+rem TODO fix !study! is not expanded in the following commands
+rem (if exist mochawesome-report rmdir /S/Q mochawesome-report) && npx cypress run --env username=%opencgaUser%,password=%opencgaPassword%,study=%%~a --config videosFolder='cypress/videos/!study!',screenshotsFolder='cypress/screenshots/!study!' --headless --spec 'cypress/integration/002-login.js' & npx mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json && ^
+rem npx marge --reportFilename "!study!.html" --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle 'IVA !study!' --reportTitle 'IVA study: !study!' --reportDir ./report mochawesome-report/cypress-combined-report.json && (if exist mochawesome-report rmdir /S/Q mochawesome-report)
 )
 
 rem End of the process
@@ -109,5 +108,4 @@ rem Subroutine to get the password
     rem return password to caller
     if defined _password ( set "exitCode=0" ) else ( set "exitCode=1" )
     endlocal & set "%~1=%_password%" & exit /b %exitCode%
-
 
