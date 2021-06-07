@@ -1,6 +1,6 @@
 # Overview
 
-The Interactive Variant Analyser \(IVA\) is the web user interface for [OpenCGA](http://docs.opencb.org/display/opencga/Welcome+to+OpenCGA) that provides unprecedented real-time interaction with genomic data. It is suitable for any scale; from the detailed interpretation of a single genomic test through to assessing the genetic diversity of hundreds of thousands of aggregated genomes. It is not just for bioinformaticians; it provides simple and convenient access for biomedical researchers and clinical scientists as well.  
+The Interactive Variant Analyser \(IVA\) is the web user interface for [OpenCGA](http://docs.opencb.org/display/opencga/Welcome+to+OpenCGA) that provides unprecedented features for real-time interaction with genomic data. It is suitable for any scale; from the detailed interpretation of a single genomic test through to assessing the genetic diversity of hundreds of thousands of aggregated genomes. It is not just for bioinformaticians; it provides simple and convenient access for biomedical researchers and clinical scientists as well.  
 
 ### Features
 
