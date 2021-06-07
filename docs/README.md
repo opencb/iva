@@ -1,33 +1,26 @@
 # Overview
 
-Interactive Variant Analysis \(IVA\) is a web application for filtering, analysis and interpretation of population-scale genotype data. This interactive tool allows the identification of genes affected by deleterious variants that segregate along family pedigrees, case-control or sporadic samples.
+The Interactive Variant Analyser \(IVA\) is the web user interface for [OpenCGA](http://docs.opencb.org/display/opencga/Welcome+to+OpenCGA) that provides unprecedented features for real-time interaction with genomic data. It is suitable for any scale; from the detailed interpretation of a single genomic test through to assessing the genetic diversity of hundreds of thousands of aggregated genomes. It is not just for bioinformaticians; it provides simple and convenient access for biomedical researchers and clinical scientists as well.  
 
-IVA has been developed as part of the [OpenCGA](http://docs.opencb.org/display/opencga/Welcome+to+OpenCGA) project, making it easy to work with clinical and variant information stored in a Catalog and Variant storage instance.
+### Features
 
-### Main Features
+* **Variant Browser:** Efficiently browse annotated variants normalised across all samples loaded into a project. Filter variants by multiple criteria including genomic, genetic consequence, population frequency, clinical, phenotype, deleteriousness, and conservation. 
+* **Case Interpreter:** Perform clinical interpretation of cases; singletons, families, cancer from panels, exomes and whole genomes, and record your interpretation findings directly into OpenCGA.  
+* **Variant Analysis:** Access a variety of analysis and QC tools, run asynchronously, at sample, individual and population level. 
+* **Alignment Browser:** interactively and smoothly visualise the genomic alignments \(BAM/CRAM\) associated with your samples.
+* **Catalog Browser:** browse the files, samples, individuals and families associated with your studies
+
+### Benefits
 
 * **Authenticated** and **secure** platform to query and visualise data
-* Fully **customizable platform** and extensible though **pluggings**
-* Multiple tools and analysis available:
-  * Advanced **variant filtering**: filter your variants 
-  * **Genome browser**
-  * **Clinical analysis**
-  * **Aggregation analysis**
-* Allow to load VCF files and samples together with clinical data.
-* High-performance and scalable VCF and gVCF indexing.
-* VCF normalization and variant annotation.
-* Clinical interpretation analysis of samples and families.
+* Highly **customisable;** extensible though **pluggins**
 
-### Main Tools
-
-* **Variant Browser:** It can efficiently browse annotated and indexed variant studies using a web-based application.
-* **Clinical Interpretation:** It can select samples and families to perform an interpretation analysis, disease panels are also available.
-* **Genome Browser:** A genome browser based on Genome Maps allows for an interactive and smooth variant visualisation.
+IVA has been developed as part of the [OpenCGA](http://docs.opencb.org/display/opencga/Welcome+to+OpenCGA) project, making it easy to work with clinical and variant information stored in a Catalog and Variant storage instance.
 
 {% hint style="success" %}
   **Rich Configuration** 💡  
 
-You can highly customise your IVA installation thanks to the rich configuration implemented. You can easily customise the navigation bar, welcome page and other options.
+Administrators can highly customise their IVA installation through a rich set of configuration options. You can easily customise the navigation bar, welcome page, filters and many other aspects of the interface.
 {% endhint %}
 
 
