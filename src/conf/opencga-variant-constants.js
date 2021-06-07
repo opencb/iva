@@ -43,6 +43,9 @@ const consequenceTypes = {
     lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
         "stop_lost", "start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
 
+    // This is filled below from the 'categories' array
+    impact: {},
+
     // 'Title' is optional. if there is not title provided then 'name' will be used.
     //  There are two more optional properties - 'checked' and 'impact'. They can be set to display them default in web application.
     //  Similarly 'description' is optional as well.
@@ -315,6 +318,15 @@ const consequenceTypes = {
         }
     ]
 };
+
+// Fill 'consequenceTypes.impact' from the consequenceTypes.categories
+for (const category of consequenceTypes.categories) {
+    if (category.terms) {
+        category.terms.forEach(term => consequenceTypes.impact[term.name] = term.impact);
+    } else {
+        consequenceTypes.impact[category.name] = category.impact;
+    }
+}
 
 const populationFrequencies = {
     style: {
