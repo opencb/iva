@@ -22,7 +22,7 @@ const cellbase = {
 const opencga = {
     host: "https://ws.opencb.org/opencga-test",
     // host: "http://localhost:1234/opencga",
-    // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
+    // host: "https://uat.eglh.app.zettagenomics.com/opencga", // public instance
     version: "v2",
     serverVersion: "1.4",
 
