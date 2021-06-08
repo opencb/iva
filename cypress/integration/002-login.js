@@ -45,8 +45,12 @@ context("2 - Login", () => {
         cy.get(".login-overlay", {timeout: TIMEOUT}).should("be.visible");
         cy.get(".login-overlay", {timeout: TIMEOUT}).should("not.exist");
 
-        cy.url().should("include", "#home", {timeout: TIMEOUT})
-        goTo("iva");
+        cy.url().should("include", "#home", {timeout: TIMEOUT});
+
+        // switch to defined Study
+        if (Cypress.env("study")) {
+            cy.get(`a[data-fqn="${Cypress.env("study")}"]`, {timeout: 60000}).click({force: true});
+        }
         cy.get(".subtitle", {timeout: TIMEOUT}).contains("Interactive Variant Analysis");
     });
 

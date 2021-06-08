@@ -30,26 +30,6 @@ context("5 - Case Portal", () => {
 
         checkResults("opencga-clinical-analysis-grid");
 
-        // check if priority filter is enabled and visible first, then it tests the filter itself
-        // TODO bugfix
-        /* cy.get("div.lhs", {timeout: 5000})
-            .should("satisfy", $els => {
-                const priority = Cypress.$("div[data-cy='form-priority'] button");
-                if (priority.length) {
-                    cy.get("div[data-cy='form-priority'] button").click();
-                    cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains("URGENT").click({force: true});
-                    cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains("HIGH").click({force: true});
-                    cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains("MEDIUM").click({force: true});
-                    cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains("LOW").click({force: true});
-                    cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains("UNKNOWN").click({force: true});
-                    //waitTableResults("opencga-clinical-analysis-grid");
-                    checkResults("opencga-clinical-analysis-grid");
-                } else {
-                    return true;
-                }
-            });*/
-
-
         // reading from the first row the case Id, the proband Id, and the Family Id and use them as filters
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT})
             .find("td:nth-child(1) a[data-cy='case-id']")
@@ -95,13 +75,26 @@ context("5 - Case Portal", () => {
             .then($span => {
                 const disorderName = $span.text().trim();
                 console.log("disorderName", disorderName);
-                cy.get("div[data-cy='form-family'] button").click();
-                cy.get("div[data-cy='form-family'] input").type(disorderName + "{enter}", {force: true});
+                cy.get("div[data-cy='form-disorder'] button").click();
+                cy.get("div[data-cy='form-disorder'] input").type(disorderName + "{enter}", {force: true});
                 checkResults("opencga-clinical-analysis-grid");
 
             });
 
-        // cy.get("opencga-clinical-review-cases .rhs button", {timeout: TIMEOUT}).should("be.visible").and("contain", "Clear").click()
+        // check whether priority filter is enabled and visible first, then it tests the filter itself
+        cy.get("div.lhs", {timeout: 5000}).then($wc => {
+            if (Cypress.$("div[data-cy='form-priority']", $wc).length) {
+                cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT})
+                    .find("td:nth-child(7) span.label").then($span => {
+                        const priority = $span.text().trim();
+                        console.error("priority", priority);
+                        cy.get("div[data-cy='form-priority'] button").click();
+                        cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains(priority).click({force: true});
+                        checkResults("opencga-clinical-analysis-grid");
+                    });
+            }
+        });
+
         cy.get("button[data-cy='filter-button']").click({force: true});
         cy.get(".saved-filter-wrapper a").contains("Clear").click({force: true});
 

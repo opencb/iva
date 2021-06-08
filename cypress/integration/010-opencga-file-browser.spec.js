@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, getResult, checkResults, Facet, changePage, goTo} from "../plugins/utils.js";
+import {login, getResult, checkResults, Facet, changePage, dateFilterCheck, annotationFilterCheck} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -48,6 +48,11 @@ context("10 - File Browser", () => {
         checkResults("opencga-file-grid");
         changePage("opencga-file-grid", 2);
         checkResults("opencga-file-grid");
+        changePage("opencga-file-grid", 1);
+        checkResults("opencga-file-grid");
+
+        dateFilterCheck("opencga-file-grid");
+        annotationFilterCheck("opencga-file-grid");
 
 
     });

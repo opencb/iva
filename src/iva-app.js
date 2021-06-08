@@ -257,7 +257,8 @@ class IvaApp extends LitElement {
         this.browserSearchQuery = {};
         // keeps track of the executedQueries transitioning from browser tool to facet tool
         this.queries = [];
-
+        // keeps track of status and version of the hosts (opencga and cellbase)
+        this.host = {};
         globalThis.addEventListener("signingIn", e => {
             this.signingIn = e.detail.value;
             this.requestUpdate();
@@ -265,6 +266,11 @@ class IvaApp extends LitElement {
 
         globalThis.addEventListener("signingInError", e => {
             new NotificationQueue().push("Error", e.detail.value, "error", true, false);
+        }, false);
+
+        globalThis.addEventListener("hostInit", e => {
+            this.host[e.detail.host] = e.detail.value;
+            this.requestUpdate();
         }, false);
 
     }
@@ -1171,8 +1177,8 @@ class IvaApp extends LitElement {
                                     <a href="#" class="dropdown-toggle study-switcher" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-cy="active-study">
                                         <div><i class="fa fa-database fa-lg" style="padding-right: 10px"></i></div>
                                         <div style="margin-right: 5px">
-                                            <p class="project-name">${this.opencgaSession.project?.id}</p>
-                                            <p class="study-id">${this.opencgaSession.study?.name}</p>
+                                            <p class="project-name">${this.opencgaSession.project?.name}</p>
+                                            <p class="study-id">${this.opencgaSession.study.name}</p>
                                         </div>
                                         <span class="caret"></span>
                                     </a>
@@ -1835,6 +1841,25 @@ class IvaApp extends LitElement {
                     </div>
                 ` : null}
             </div>
+
+            <div class="footer">
+                <div class="container">
+                    <img style="height: 25px;" src="${this.config.footerLogo}" alt="logo">
+                    <p class="footer-item">
+                        IVA <sup>${this.config.version}</sup>
+                    </p>
+                    <p class="footer-item">
+                        OpenCGA
+                        ${this.host?.opencga ? html`<sup>${this.host?.opencga}</sup>` : html`<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>`}
+                    </p>
+
+                    <p class="footer-item">
+                        CellBase
+                        ${this.host?.cellbase ? html`<sup>${this.host?.cellbase}</sup>` : html`<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>`}
+                    </p>
+                </div>
+            </div>
+
             <notification-element .queue="${new NotificationQueue().get()}"></notification-element>
         `;
     }

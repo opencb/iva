@@ -42,7 +42,7 @@ const opencga = {
     host: hosts[1].url,
     // host: "https://ws.opencb.org/opencga-prod",
     // host: "http://localhost:1234/opencga",
-    // host: "https://eglh.app.zettagenomics.com/opencga", // public instance
+    // host: "https://uat.eglh.app.zettagenomics.com/opencga", // public instance
     version: "v2",
     serverVersion: "1.4",
     cookie: {
@@ -106,7 +106,8 @@ const separator = {
 const suite = {
     name: "OpenCGA Suite",
     version: "v2.1.0-beta",
-    logo: "img/opencb-logo.png",
+    logo: "img/iva.svg",
+    footerLogo: "img/opencb-logo.png",
     mode: "development",
     appConfig: "opencb",
     about: {

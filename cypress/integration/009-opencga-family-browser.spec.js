@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {checkResults, login, getResult, checkResultsOrNot, hasResults, Facet, changePage, goTo} from "../plugins/utils.js";
+import {checkResults, login, getResult, checkResultsOrNot, hasResults, Facet, changePage, dateFilterCheck, annotationFilterCheck} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -53,6 +53,11 @@ context("9 - Family Browser", () => {
                 checkResults("opencga-family-grid");
                 changePage("opencga-family-grid", 2);
                 checkResults("opencga-family-grid");
+                changePage("opencga-family-grid", 1);
+                checkResults("opencga-family-grid");
+
+                dateFilterCheck("opencga-family-grid");
+                annotationFilterCheck("opencga-family-grid");
             }
         });
     });

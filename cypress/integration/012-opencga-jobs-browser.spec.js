@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {login, getResult, checkResults, Facet, changePage, goTo} from "../plugins/utils.js";
+import {login, getResult, checkResults, Facet, changePage, dateFilterCheck, annotationFilterCheck} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
 
@@ -50,7 +50,11 @@ context("12 - Jobs Browser", () => {
         checkResults("opencga-job-grid");
         changePage("opencga-job-grid", 2);
         checkResults("opencga-job-grid");
+        changePage("opencga-job-grid", 1);
+        checkResults("opencga-job-grid");
 
+        dateFilterCheck("opencga-job-grid");
+        annotationFilterCheck("opencga-job-grid");
 
     });
 
