@@ -1,52 +1,74 @@
-rem This script launches IVA e2e tests over one or more Opencga studies in Windows env
-rem It prompts for Opencga username, password, and a comma-separated list of studies
-rem TODO add cli params
-
 @echo off
-    setlocal enableextensions disabledelayedexpansion
+setlocal EnableExtensions EnableDelayedExpansion
+
+rem This script launches IVA e2e tests over one or more Opencga studies in Windows env
+rem It prompts for Opencga username, password, and a comma-separated list of studies if -u (username) and -s (studies) params are not provided.
+
 
 :parse
 IF "%~1"=="" GOTO endparse
-IF "%~1"=="-u" SET opencgauser=%~2
+IF "%~1"=="-u" SET opencgaUser=%~2
 IF "%~1"=="-s" SET studies=%~2
-IF "%~1"=="-h" REM do something else
+IF "%~1"=="-h" call :help & goto :eof
 SHIFT
 GOTO parse
 :endparse
 
+if not defined opencgaUser (
 rem set the username using a plain prompt
-	SET /p username=Enter your Opencga Username [ENTER]:
-	rem this doesnt work?
-	if not defined username (
-        echo Username must be defined
+	SET /p opencgaUser=Enter your Opencga Username [ENTER]:
+	if not defined opencgaUser (
+		echo Username must be defined
 		goto :eof
-    )
+	)
+)
 
 rem Call the subroutine to get the password
-    call :getPassword password
-	if not defined password (
-        echo Password must be defined
-		goto :eof
-    )
+call :getPassword opencgaPassword
+if not defined opencgaPassword (
+	echo Password must be defined
+	goto :eof
+)
 
-rem set the study using a plain prompt
-	SET /p studies=Enter the the FQN (comma-separated) of the studies you want to test [ENTER]:
+if not defined studies (
+rem set the username using a plain prompt
+	SET /p studies="Enter the the FQN (comma-separated) of the studies you want to test [ENTER]:"
 	if not defined studies (
-        echo At least one study must be defined
+		echo studies must be defined
 		goto :eof
-    )
-
-rem iterate over studies and run the test defined in --spec
-for %%a in ("%studies:,=" "%") do (
-    echo %%~a
-    (if exist mochawesome-report rmdir /S/Q mochawesome-report) && npx cypress run --env username=%username%,password=%password%,study=%%~a --headless --spec \"cypress/integration/003-header-bar-post-login.spec.js\" & npx mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json && ^
-    npx marge --reportFilename report.html --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle IVA --reportTitle IVA --reportDir ./report mochawesome-report/cypress-combined-report.json && (if exist mochawesome-report rmdir /S/Q mochawesome-report)
+	)
 )
 
 
+rem echo %opencgaUser% - %opencgaPassword% - %studies%
+
+rem Iterate over studies and
+for %%a in ("%studies:,=" "%") do (
+set tmp=%%~na
+set study=!tmp::=!
+echo %%~a delayed: !study!
+rem TODO fix !study! is not expanded in the following commands
+rem (if exist mochawesome-report rmdir /S/Q mochawesome-report) && npx cypress run --env username=%opencgaUser%,password=%opencgaPassword%,study=%%~a --config videosFolder='cypress/videos/!study!',screenshotsFolder='cypress/screenshots/!study!' --headless --spec 'cypress/integration/002-login.js' & npx mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json && ^
+rem npx marge --reportFilename "!study!.html" --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle 'IVA !study!' --reportTitle 'IVA study: !study!' --reportDir ./report mochawesome-report/cypress-combined-report.json && (if exist mochawesome-report rmdir /S/Q mochawesome-report)
+)
+
 rem End of the process
-    endlocal
-    exit /b
+endlocal
+exit /b
+
+
+:help
+setlocal EnableDelayedExpansion
+set u="Usage: %~n0%~x0 [-u <USERNAME>] [-s <STUDIES>]"
+echo(!~u!
+echo Launches IVA e2e tests over one or more Opencga studies.
+echo Options:
+echo -u     Opencga username.
+echo -s     Comma-separated list of studies. Please wrap the list in quotes in case of more that one study
+echo -h     Prints command description
+
+echo !multiLine!
+endlocal & exit /b 0
 
 
 rem Subroutine to get the password
@@ -86,3 +108,4 @@ rem Subroutine to get the password
     rem return password to caller
     if defined _password ( set "exitCode=0" ) else ( set "exitCode=1" )
     endlocal & set "%~1=%_password%" & exit /b %exitCode%
+
