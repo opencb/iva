@@ -69,8 +69,6 @@ echo Options:
 echo -u     Opencga username.
 echo -s     Comma-separated list of studies. Please wrap the list in quotes in case of more that one study
 echo -h     Prints command description
-
-echo !multiLine!
 endlocal & exit /b 0
 
 
