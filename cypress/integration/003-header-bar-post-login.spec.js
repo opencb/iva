@@ -63,9 +63,9 @@ context("3 - Header bar (post-login): Checks each menu item in header-bar resolv
         cy.get("a[data-study]").each(($el, index, $list) => {
             const study = $el.data("study");
             const studyName = $el.data("study-name");
-            const project = $el.data("project");
-            cy.get(`a[data-study='${study}'][data-project=${project}]`).click({force: true});
-            cy.get("a[data-cy='active-study']").should("be.visible").and("contain", studyName).and("contain", project);
+            const projectName = $el.data("project-name");
+            cy.get(`a[data-study='${study}'][data-project-name="${projectName}"]`).click({force: true});
+            cy.get("a[data-cy='active-study']").should("be.visible").and("contain", studyName).and("contain", projectName);
         });
     });
 
