@@ -1100,7 +1100,7 @@ class IvaApp extends LitElement {
                                             <li><a title="${project.fqn}"><b>${project.name} [${project.fqn.split("@")[0]}]</b></a></li>
                                             ${project.studies && project.studies.length && project.studies.map(study => html`
                                                 <li>
-                                                    <a href="#" data-study="${study.id}" data-fqn="${study.fqn}" data-project="${project.id}" data-study-name="${study.name}" title="${study.fqn}" @click="${this.onStudySelect}">${study.name}</a>
+                                                    <a href="#" data-study="${study.id}" data-project="${project.id}" data-fqn="${study.fqn}" data-project-name="${project.name}" data-study-name="${study.name}" title="${study.fqn}" @click="${this.onStudySelect}">${study.name}</a>
                                                 </li>
                                             `)}
                                         `)}
