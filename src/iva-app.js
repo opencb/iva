@@ -731,6 +731,14 @@ class IvaApp extends LitElement {
     }
 
     updateProject(e) {
+        // if (this.opencgaSession.project.internal.cellbase && this.opencgaSession.project.internal.cellbase.host !== this.cellbaseClient) {
+        //     this.cellbaseClient = new CellBaseClient({
+        //         hosts: this.opencgaSession.project.internal.cellbase.url,
+        //         version: this.opencgaSession.project.internal.cellbase.version,
+        //         species: "hsapiens"
+        //     });
+        // }
+
         this.project = this.projects.find(project => project.name === e.detail.project.name);
         this.tool = "#project";
         this.renderHashFragments();
