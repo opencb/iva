@@ -736,6 +736,14 @@ class IvaApp extends LitElement {
     }
 
     updateProject(e) {
+        // if (this.opencgaSession.project.internal.cellbase && this.opencgaSession.project.internal.cellbase.host !== this.cellbaseClient) {
+        //     this.cellbaseClient = new CellBaseClient({
+        //         hosts: this.opencgaSession.project.internal.cellbase.url,
+        //         version: this.opencgaSession.project.internal.cellbase.version,
+        //         species: "hsapiens"
+        //     });
+        // }
+
         this.project = this.projects.find(project => project.name === e.detail.project.name);
         this.tool = "#project";
         this.renderHashFragments();
@@ -1187,7 +1195,8 @@ class IvaApp extends LitElement {
                                             <li><a title="${project.fqn}"><b>${project.name} [${project.fqn.split("@")[0]}]</b></a></li>
                                             ${project.studies && project.studies.length && project.studies.map(study => html`
                                                 <li>
-                                                    <a href="#" data-study-fqn="${study.fqn}" data-study-name="${study.name}" title="${study.fqn}"
+                                                    <a href="#" data-study="${study.id}" data-project="${project.id}" data-study-fqn="${study.fqn}"
+                                                       data-project-name="${project.name}" data-study-name="${study.name}" title="${study.fqn}"
                                                        @click="${this.onStudySelect}">${study.name}</a>
                                                 </li>
                                             `)}

@@ -2,7 +2,7 @@
 setlocal EnableExtensions EnableDelayedExpansion
 
 rem This script launches IVA e2e tests over one or more Opencga studies in Windows env
-rem It prompts for Opencga username, password, and a comma-separated list of studies if -u (username) and -s (studies) params are not provided.
+rem If -u (username) and -s (studies) params are not provided, it prompts for Opencga username, password, and a comma-separated list of studies
 
 
 :parse
@@ -46,10 +46,13 @@ rem Iterate over studies and
 for %%a in ("%studies:,=" "%") do (
 set tmp=%%~na
 set study=!tmp::=!
-echo %%~a delayed: !study!
-rem TODO fix !study! is not expanded in the following commands
-rem (if exist mochawesome-report rmdir /S/Q mochawesome-report) && npx cypress run --env username=%opencgaUser%,password=%opencgaPassword%,study=%%~a --config videosFolder='cypress/videos/!study!',screenshotsFolder='cypress/screenshots/!study!' --headless --spec 'cypress/integration/002-login.js' & npx mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json && ^
-rem npx marge --reportFilename "!study!.html" --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle 'IVA !study!' --reportTitle 'IVA study: !study!' --reportDir ./report mochawesome-report/cypress-combined-report.json && (if exist mochawesome-report rmdir /S/Q mochawesome-report)
+echo STUDY: %%~a DIR: !study!
+rem mkdir !study! && dir !study!
+(if exist mochawesome-report rmdir /S/Q mochawesome-report)^
+ && call npx cypress run --env username=%opencgaUser%,password=%opencgaPassword%,study=%%~a --config videosFolder="cypress/videos/!study!",screenshotsFolder="cypress/screenshots/!study!" --headless --spec "cypress/integration/001-header-bar-pre-login.spec.js"^
+ & call npx mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json^
+ && call npx marge --reportFilename !study!.html --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle IVA_%%~a --reportTitle IVA__%%~a --reportDir report mochawesome-report/cypress-combined-report.json^
+ && (if exist mochawesome-report rmdir /S/Q mochawesome-report)
 )
 
 rem End of the process
@@ -66,8 +69,6 @@ echo Options:
 echo -u     Opencga username.
 echo -s     Comma-separated list of studies. Please wrap the list in quotes in case of more that one study
 echo -h     Prints command description
-
-echo !multiLine!
 endlocal & exit /b 0
 
 
