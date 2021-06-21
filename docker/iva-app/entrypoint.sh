@@ -1,21 +1,26 @@
 #!/bin/bash
 
-echo "total args:" $#
-echo "first:" $1
-echo "second:" $2
+#echo "total args:" $#
+#echo "first:" $1
+#echo "second:" $2
 #sed -i 's/host:".*"/host: "val" /g' /usr/local/apache2/htdocs/iva/conf/conf.js
 
+# launch command (httpd-foreground)
+cmd=$1
+shift
 
-while [[ $# -gt 0 ]] ;do
-   case $1 in
+for i in "${@}"; do
+   case $i in
       --host=*)
-         echo host ${1##--host=}
-         echo "opencga.host = ${1##--host=};" >> /usr/local/apache2/htdocs/iva/conf/conf.js
-         # exit
+         echo host ${i##--host=}
+         echo "opencga.host = ${i##--host=};" >> /usr/local/apache2/htdocs/iva/conf/config.js
+         shift 2
          ;;
+      -*|--*)
+        echo "Fatal error. Unknown option $i. "
+        exit
+        ;;
    esac
-   shift
 done
 
-echo CMD"$@"
-exec "$@"
+exec "$cmd"
