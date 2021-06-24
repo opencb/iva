@@ -1268,7 +1268,7 @@ class IvaApp extends LitElement {
                     <div class="content" id="clinicalAnalysisPortal">
                         <tool-header title="${"Case Portal"}" icon="${"fas fa-window-restore"}"></tool-header>
                         <opencga-clinical-review-cases  .opencgaSession="${this.opencgaSession}"
-                                                        .config="${OpencgaClinicalReviewCasesConfig}"></opencga-clinical-review-cases>
+                                                        .settings="${OpencgaClinicalReviewCasesSettings}"></opencga-clinical-review-cases>
                     </div>
                 ` : null}
 

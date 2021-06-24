@@ -25,35 +25,29 @@ const OpencgaClinicalReviewCasesSettings = {
             }
         ]
     },
-    filter: {
-        sections: [
-            {
-                id: "main",
-                title: "",
-                fields: [
-                    {
-                        id: "case"
-                    },
-                    {
-                        id: "sample"
-                    },
-                    {
-                        id: "proband"
-                    },
-                    {
-                        id: "family"
-                    },
-                    {
-                        id: "disorder"
-                    },
-                    {
-                        id: "type"
-                    },
-                    {
-                        id: "assignee"
-                    }
-                ]
-            }
-        ]
-    }
+    // NOTE cannot easily customise canned filters here
+    filters: [
+        {
+            id: "case"
+        },
+        {
+            id: "sample"
+        },
+        {
+            id: "proband"
+        },
+        {
+            id: "family"
+        },
+        {
+            id: "disorder"
+        },
+        {
+            id: "type"
+        },
+        {
+            id: "assignee"
+        }
+    ]
+
 };
