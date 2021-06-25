@@ -1,53 +1,33 @@
 const OpencgaClinicalReviewCasesSettings = {
-    grid: {
-        toolbar: {
-            showCreate: true
-        },
-        columns: [
+    menu: {
+        filters: [
             {
-                id: "caseId"
-                // can overwrite any other prop
+                id: "case"
             },
             {
-                id: "probandId"
+                id: "sample"
             },
             {
-                id: "familyId"
+                id: "proband"
             },
             {
-                id: "disorderId"
+                id: "family"
             },
             {
-                id: "interpretation"
+                id: "disorder"
             },
             {
-                id: "action"
+                id: "type"
+            },
+            {
+                id: "assignee"
             }
         ]
     },
-    // NOTE cannot easily customise canned filters here
-    filters: [
-        {
-            id: "case"
-        },
-        {
-            id: "sample"
-        },
-        {
-            id: "proband"
-        },
-        {
-            id: "family"
-        },
-        {
-            id: "disorder"
-        },
-        {
-            id: "type"
-        },
-        {
-            id: "assignee"
-        }
-    ]
-
+    table: {
+        /*toolbar: {
+            showCreate: true
+        },*/
+        columns: ["caseId", "probandId", "familyId", "disorderId", "interpretation", "action"]
+    }
 };
