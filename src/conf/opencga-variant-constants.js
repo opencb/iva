@@ -30,6 +30,30 @@ const BIOTYPES = [
 
 const VARIANT_TYPES = ["SNV", "INDEL", "COPY_NUMBER", "INSERTION", "DELETION", "DUPLICATION", "MNV", "SV"];
 
+const CLINICAL_SIGNIFICANCE = [
+    {
+        id: "benign", name: "Benign"
+    },
+    {
+        id: "likely_benign", name: "Likely benign"
+    },
+    {
+        id: "uncertain_significance", name: "Uncertain significance"
+    },
+    {
+        id: "likely_pathogenic", name: "Likely pathogenic"
+    },
+    {
+        id: "pathogenic", name: "Pathogenic"
+    }
+];
+
+const MODE_OF_INHERITANCE = ["AUTOSOMAL_DOMINANT", "AUTOSOMAL_RECESSIVE", "X_LINKED_DOMINANT", "X_LINKED_RECESSIVE", "Y_LINKED", "MITOCHONDRIAL"];
+
+const ROLE_IN_CANCER = ["ONCOGENE", "TUMOR_SUPPRESSOR_GENE", "FUSION"];
+
+const DISEASE_PANEL_CONFIDENCE = ["HIGH", "MEDIUM", "LOW", "REJECTED"];
+
 const consequenceTypes = {
     style: {
         // This is the impact color. It allows to customise both the impact categories and desired colors

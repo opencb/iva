@@ -1757,6 +1757,7 @@ Toggle Changes
 ul.magic-checkbox-wrapper {
     list-style: none;
     padding: 0;
+    margin: 5px;
 }
 .magic-radio + .magic-horizontal-label {
     display: inline-block;
