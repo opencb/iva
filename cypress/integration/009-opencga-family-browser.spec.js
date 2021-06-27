@@ -55,6 +55,21 @@ context("9 - Family Browser", () => {
                 changePage("opencga-family-grid", 1);
                 checkResults("opencga-family-grid");
 
+                // sort id ASC
+                cy.get("opencga-family-grid table .th-inner.sortable").contains("Family").click();
+                checkResults("opencga-family-grid");
+                getResult("opencga-family-grid", 1, 0).then($f1 => {
+                    getResult("opencga-family-grid", 1, 1).then($f2 => {
+                        getResult("opencga-family-grid", 1, 2).then($f3 => {
+                            const sorted = [$f1, $f2, $f3];
+                            sorted.sort();
+                            expect(JSON.stringify([$f1, $f2, $f3]), "Families are sorted").to.be.equal(JSON.stringify(sorted));
+                            // TODO this fails
+                            // expect([$f1, $f2, $f3], "Families are sorted").to.deep.equal(sorted);
+                        });
+                    });
+                });
+
                 dateFilterCheck("opencga-family-grid");
                 annotationFilterCheck("opencga-family-grid");
             }
