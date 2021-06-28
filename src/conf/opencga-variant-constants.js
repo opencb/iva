@@ -468,7 +468,7 @@ const beacon = {
     ]
 };
 
-const proteinSubstitutionScore = {
+const PROTEIN_SUBSTITUTION_SCORE = {
     style: {
         // This is to show the predictions in respective colors
         sift: {
