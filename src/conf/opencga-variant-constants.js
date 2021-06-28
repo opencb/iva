@@ -54,7 +54,7 @@ const ROLE_IN_CANCER = ["ONCOGENE", "TUMOR_SUPPRESSOR_GENE", "FUSION"];
 
 const DISEASE_PANEL_CONFIDENCE = ["HIGH", "MEDIUM", "LOW", "REJECTED"];
 
-const consequenceTypes = {
+const CONSEQUENCE_TYPES = {
     style: {
         // This is the impact color. It allows to customise both the impact categories and desired colors
         high: "red",
@@ -64,8 +64,11 @@ const consequenceTypes = {
     },
 
     // Loss-of-function SO terms
-    lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
-        "stop_lost", "start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
+    lof: ["frameshift_variant", "incomplete_terminal_codon_variant", "start_lost", "stop_gained", "stop_lost", "splice_acceptor_variant",
+        "splice_donor_variant", "feature_truncation", "transcript_ablation"],
+
+    pa: ["frameshift_variant", "incomplete_terminal_codon_variant", "start_lost", "stop_gained", "stop_lost", "splice_acceptor_variant",
+        "splice_donor_variant", "feature_truncation", "transcript_ablation", "inframe_deletion", "inframe_insertion", "missense_variant"],
 
     // This is filled below from the 'categories' array
     impact: {},
@@ -344,11 +347,11 @@ const consequenceTypes = {
 };
 
 // Fill 'consequenceTypes.impact' from the consequenceTypes.categories
-for (const category of consequenceTypes.categories) {
+for (const category of CONSEQUENCE_TYPES.categories) {
     if (category.terms) {
-        category.terms.forEach(term => consequenceTypes.impact[term.name] = term.impact);
+        category.terms.forEach(term => CONSEQUENCE_TYPES.impact[term.name] = term.impact);
     } else {
-        consequenceTypes.impact[category.name] = category.impact;
+        CONSEQUENCE_TYPES.impact[category.name] = category.impact;
     }
 }
 

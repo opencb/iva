@@ -141,7 +141,7 @@ class IvaApp extends LitElement {
         // _config.panelExamples = diseasePanels;
         _config.populationFrequencies = populationFrequencies;
         _config.proteinSubstitutionScores = proteinSubstitutionScore.style;
-        _config.consequenceTypes = consequenceTypes;
+        _config.consequenceTypes = CONSEQUENCE_TYPES;
 
         // We can customise which components are active by default, this improves the first loading time.
         _config.enabledComponents.home = true;
