@@ -79,7 +79,9 @@ module.exports = {
                     "./node_modules/qtip2/dist/jquery.qtip.min.css",
                     "./node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.css",
                     "./node_modules/tokenize2/dist/tokenize2.min.css",
-                    "./node_modules/sweetalert2/dist/sweetalert2.css"
+                    "./node_modules/sweetalert2/dist/sweetalert2.css",
+                    "./node_modules/select2/dist/css/select2.css",
+                    "./node_modules/select2-bootstrap-theme/dist/select2-bootstrap.css"
                 ],
                 "assets/js/vendor.js": [
                     "./node_modules/jquery/dist/jquery.js",
@@ -107,7 +109,8 @@ module.exports = {
                     "./node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js",
                     "./node_modules/@svgdotjs/svg.js/dist/svg.min.js",
                     "./node_modules/sweetalert2/dist/sweetalert2.js",
-                    "./node_modules/clipboard/dist/clipboard.min.js"
+                    "./node_modules/clipboard/dist/clipboard.min.js",
+                    "./node_modules/select2/dist/js/select2.min.js"
                 ]
             },
             transform: {
