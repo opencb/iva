@@ -41,19 +41,20 @@ context("8 - Individual Browser", () => {
             checkResults("opencga-individual-grid");
         });
 
-        // sort action doesn't show the loading message https://github.com/wenzhixin/bootstrap-table/issues/5761
         // sort id ASC
-        /*cy.get("opencga-individual-grid table .th-inner.sortable").contains("Individual").click();
+        cy.get("opencga-individual-grid table .th-inner.sortable").contains("Individual").click();
         checkResults("opencga-individual-grid");
         getResult("opencga-individual-grid", 1, 0).then($ind1 => {
             getResult("opencga-individual-grid", 1, 1).then($ind2 => {
                 getResult("opencga-individual-grid", 1, 2).then($ind3 => {
                     const sorted = [$ind1, $ind2, $ind3];
                     sorted.sort();
-                    expect([$ind1, $ind3, $ind2], "Individuals are sorted").to.deep.equal(sorted);
+                    expect(JSON.stringify([$ind1, $ind2, $ind3]), "Individuals are sorted").to.be.equal(JSON.stringify(sorted));
+                    // TODO this fails
+                    // expect([$ind1, $ind3, $ind2], "Individuals are sorted").to.deep.equal(sorted);
                 });
             });
-        });*/
+        });
 
         dateFilterCheck("opencga-individual-grid");
         annotationFilterCheck("opencga-individual-grid");
@@ -61,6 +62,7 @@ context("8 - Individual Browser", () => {
 
     });
 
+/*
 
     it("8.2 - aggregated query", () => {
         cy.get("a[data-id=individual]").click({force: true});
@@ -103,5 +105,6 @@ context("8 - Individual Browser", () => {
         Facet.checkResultLength(7);
 
     });
+*/
 
 });
