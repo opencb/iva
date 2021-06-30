@@ -2584,3 +2584,40 @@ interpretation-editor .status-wrapper .row > div:last-child {
 
 /****  /select-field-filter-autocomplete ****/
 
+/****  select2 style override ****/
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__rendered {
+    display: inline-block;
+    width: inherit;
+}
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove {
+    margin: 0 0 0 3px;
+    float: right;
+}
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
+    padding-right: 0;
+}
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
+    border: 1px solid #cdd5e3;
+    margin: 5px 6px 0 6px;
+    position: relative;
+    vertical-align: middle;
+    padding: 0 0 0 5px;
+    background-color: #eff2f7;
+    border-radius: 2px;
+}
+
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove {
+    background: transparent;
+    border: 0;
+}
+
+.select2-container .select2-selection--multiple {
+    cursor: text;
+}
+
+.select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field {
+    padding: 3px;
+}
