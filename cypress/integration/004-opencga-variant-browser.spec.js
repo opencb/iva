@@ -74,7 +74,7 @@ context("4. Variant Browser", () => {
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Variant Browser");
 
         cy.get("input[value*=LoF]").click({force: true});
-        cy.get("opencga-active-filters").contains("Consequence Types 10");
+        cy.get("opencga-active-filters").contains("Consequence Types 9");
 
         cy.get("button[data-cy='filter-button']").click({force: true});
         // cy.get("ul.saved-filter-wrapper a").contains("Save filter...").click(); // it also works
