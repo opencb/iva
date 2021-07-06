@@ -3,7 +3,7 @@
 
 
 {% hint style="info" %}
-_**NOTE**_: _You can access our public IVA installation at the University of Cambridge at_ [_http://bioinfo.hpc.cam.ac.uk/web-apps/iva-prod/\#home_](http://bioinfo.hpc.cam.ac.uk/web-apps/iva-prod/#home)_._ The current version of IVA for the installation is_**`V2.0.0-rc`**_
+_**NOTE**_: _You can access our public IVA installation at the University of Cambridge at_ [_http://bioinfo.hpc.cam.ac.uk/web-apps/iva-prod/\#home_](http://bioinfo.hpc.cam.ac.uk/web-apps/iva-prod/#home)_._ 
 {% endhint %}
 
 ## Login​

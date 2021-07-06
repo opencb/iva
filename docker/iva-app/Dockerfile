@@ -22,4 +22,4 @@ COPY    ./build/                             /usr/local/apache2/htdocs/iva/
 
 EXPOSE 80
 
-CMD ["httpd-foreground"]
+ENTRYPOINT ["entrypoint.sh", "httpd-foreground"]

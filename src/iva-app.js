@@ -130,8 +130,8 @@ class IvaApp extends LitElement {
         _config.cellbase = cellbase;
         _config.tools = tools;
         _config.populationFrequencies = populationFrequencies;
-        _config.proteinSubstitutionScores = proteinSubstitutionScore.style;
-        _config.consequenceTypes = consequenceTypes;
+        _config.proteinSubstitutionScores = PROTEIN_SUBSTITUTION_SCORE.style;
+        _config.consequenceTypes = CONSEQUENCE_TYPES;
 
         // We can customise which components are active by default, this improves the first loading time.
         _config.enabledComponents = {};
@@ -1371,7 +1371,7 @@ class IvaApp extends LitElement {
                     <div class="content" id="clinicalAnalysisPortal">
                         <tool-header title="${"Case Portal"}" icon="${"fas fa-window-restore"}"></tool-header>
                         <opencga-clinical-review-cases  .opencgaSession="${this.opencgaSession}"
-                                                        .config="${OpencgaClinicalReviewCasesConfig}"></opencga-clinical-review-cases>
+                                                        .settings="${OpencgaClinicalReviewCasesSettings}"></opencga-clinical-review-cases>
                     </div>
                 ` : null}
 
