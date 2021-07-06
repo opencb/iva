@@ -60,16 +60,6 @@ context("5 - Case Portal", () => {
 
             })
 
-            .find("td:nth-child(3) span[data-cy='family-id']")
-            .then($span => {
-                const familyId = $span.text().trim();
-                console.log("familyId", familyId);
-                cy.get("div[data-cy='form-family'] button").click();
-                cy.get("div[data-cy='form-family'] input").type(familyId + "{enter}", {force: true});
-                checkResults("opencga-clinical-analysis-grid");
-
-            })
-
             .find("td:nth-child(4) span[data-cy='disorder-name']")
             .then($span => {
                 const disorderName = $span.text().trim();
@@ -80,13 +70,27 @@ context("5 - Case Portal", () => {
 
             });
 
+        // check whether there is a family-id, then it tests the filter itself (Cancer studies doesn't have family ids)
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT})
+            .find("td:nth-child(3)")
+            .then($td => {
+                const spans = Cypress.$("span[data-cy='family-id']", $td);
+                if (spans.length) {
+                    const familyId = spans.first().text().trim();
+                    // console.log("familyId", familyId);
+                    cy.get("div[data-cy='form-family'] button").click();
+                    cy.get("div[data-cy='form-family'] input").type(familyId + "{enter}", {force: true});
+                    checkResults("opencga-clinical-analysis-grid");
+                }
+            });
+
         // check whether priority filter is enabled and visible first, then it tests the filter itself
         cy.get("div.lhs", {timeout: 5000}).then($wc => {
             if (Cypress.$("div[data-cy='form-priority']", $wc).length) {
                 cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT})
                     .find("td:nth-child(7) span.label").then($span => {
                         const priority = $span.text().trim();
-                        console.error("priority", priority);
+                        // console.error("priority", priority);
                         cy.get("div[data-cy='form-priority'] button").click();
                         cy.get("div[data-cy='form-priority'] ul.dropdown-menu li").contains(priority).click({force: true});
                         checkResults("opencga-clinical-analysis-grid");
@@ -99,7 +103,7 @@ context("5 - Case Portal", () => {
 
     });
 
-    it("5.2 - check Columns togglability", () => {
+   it("5.2 - check Columns togglability", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: TIMEOUT}).click({force: true});
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Case Portal");
 
