@@ -51,6 +51,8 @@ context("2 - Login", () => {
         if (Cypress.env("study")) {
             cy.get(`a[data-fqn="${Cypress.env("study")}"]`, {timeout: 60000}).click({force: true});
         }
+
+        goTo("iva");
         cy.get(".subtitle", {timeout: TIMEOUT}).contains("Interactive Variant Analysis");
     });
 
