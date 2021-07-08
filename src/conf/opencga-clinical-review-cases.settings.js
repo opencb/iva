@@ -46,5 +46,6 @@ const OpencgaClinicalReviewCasesSettings = {
         },
         // merge criterium: uses this array as filter for internal 1D/2D array. It handles row/col span
         columns: ["caseId", "probandId", "familyId", "disorderId", "interpretation", "action"]
-    }
+    },
+    // TODO clinical-analysis-view settings?
 };
