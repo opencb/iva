@@ -16,8 +16,6 @@
 
 import {login, randomString, checkResults, checkResultsOrNot, Facet, changePage} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
-//import "cypress-wait-until";
-
 
 context("4. Variant Browser", () => {
     before(() => {
@@ -28,33 +26,10 @@ context("4. Variant Browser", () => {
         cy.get("a[data-id=browser]", {timeout: TIMEOUT}).click({force: true});
     });
 
-     /*it("4.0 disease", () => {
-
-        // disease-panel-filter select + button
-        //cy.get("disease-panel-filter").find(" a").contains("Childhood onset dystonia or chorea or related movement disorder").click({force:true}) // URI too long
-        // cy.get("disease-panel-filter").find(" a").contains("Amelogenesis imperfecta").click({force:true})
-        // cy.get("div.search-button-wrapper button").click();
-        //
-        // checkResultsOrNot("variant-browser-grid")
-
-        // NOTE Covid19... is the first URI too long
-        cy.get("disease-panel-filter div.dropdown-menu a").each(el => {
-
-            // cannot use cy.wrap(el) here. disease-panel-filter div.dropdown-menu is refreshed on click on buttons and DOM refs are broken (https://github.com/cypress-io/cypress/issues/7306)
-            const id = el.attr("id");
-            cy.get("#" + id).should("exist").click({force: true});
-            //cy.wrap(el).should("exist").click({force: true});
-            cy.get("div.search-button-wrapper button").click();
-            checkResultsOrNot("variant-browser-grid");
-            cy.wait(2000);
-            cy.get("opencga-active-filters button[data-filter-name='panel']").click();
-
-
-        });
-
-    });*/
     it("4.1 Columns Visibility", () => {
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Variant Browser");
+
+        checkResults("variant-browser-grid");
 
         cy.get("variant-browser-grid .columns-toggle-wrapper button").should("be.visible").and("contain", "Columns").click();
         cy.get("variant-browser-grid .columns-toggle-wrapper ul li").and("have.length.gt", 1);
@@ -64,7 +39,6 @@ context("4. Variant Browser", () => {
 
         cy.get("variant-browser-grid .columns-toggle-wrapper ul li a").click({multiple: true, timeout: TIMEOUT}); // reactivate all the columns
         cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index=0] > td", {timeout: TIMEOUT}).should("have.length.gt", 1);
-
 
     });
 
@@ -113,7 +87,7 @@ context("4. Variant Browser", () => {
         cy.get("variant-browser a[href='#filters_tab']").click();
         // Study and Cohorts: Cohort Alternate Stats
         // TODO add condition
-        /*cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").first({timeout: TIMEOUT}).should("be.visible").click();
+        /* cy.get("cohort-stats-filter i[data-cy='study-cohort-toggle']").first({timeout: TIMEOUT}).should("be.visible").click();
         cy.get("cohort-stats-filter input[data-field='value']").first({timeout: TIMEOUT}).type("0.00001"); // set ALL cohort
         cy.get("div.search-button-wrapper button").click();
         checkResults("variant-browser-grid");
@@ -136,16 +110,33 @@ context("4. Variant Browser", () => {
         cy.get("div.search-button-wrapper button").click();
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='xref']").click();
+        checkResults("variant-browser-grid");
     });
 
     it("4.7 Filters. Genomic: Disease Panels", () => {
         // Genomic: Disease Panels
         // TODO decomment once opencga error 'URI Too Long' is fixed
-        // cy.get("disease-panel-filter button").click();
-        // cy.get("disease-panel-filter div.dropdown-menu a").click();
+        // disease-panel-filter select + button
+        // cy.get("disease-panel-filter").find(" a").contains("Childhood onset dystonia or chorea or related movement disorder").click({force:true}) // URI too long
+        // cy.get("disease-panel-filter").find(" a").contains("Amelogenesis imperfecta").click({force:true})
         // cy.get("div.search-button-wrapper button").click();
-        // cy.get("variant-browser-grid .bootstrap-table .fixed-table-container", {timeout: TIMEOUT}).find("tr[data-index]").should("have.length.gt", 1);
-        // cy.get("opencga-active-filters button[data-filter-name='panel']").click();
+        //
+        // checkResultsOrNot("variant-browser-grid")
+
+        // NOTE Covid19... is the first URI too long
+        /* cy.get("disease-panel-filter div.dropdown-menu a").each(el => {
+
+            // cannot use cy.wrap(el) here. disease-panel-filter div.dropdown-menu is refreshed on click on buttons and DOM refs are broken (https://github.com/cypress-io/cypress/issues/7306)
+            const id = el.attr("id");
+            cy.get("#" + id).should("exist").click({force: true});
+            //cy.wrap(el).should("exist").click({force: true});
+            cy.get("div.search-button-wrapper button").click();
+            checkResultsOrNot("variant-browser-grid");
+            cy.wait(2000);
+            cy.get("opencga-active-filters button[data-filter-name='panel']").click();
+
+
+        });*/
     });
 
     it("4.8 Filters. Genomic: Gene Biotype", () => {
@@ -228,7 +219,7 @@ context("4. Variant Browser", () => {
     it("4.15 Filters. Clinical and Disease: Full text: Mortality", () => {
         // Clinical and Disease: Full text	Use example: Mortality
         cy.get("fulltext-search-accessions-filter textarea").type("Mortality");
-        //cy.get("fulltext-search-accessions-filter textarea").type("centroid");
+        // cy.get("fulltext-search-accessions-filter textarea").type("centroid");
         cy.get("div.search-button-wrapper button").click();
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='traits']").click();
@@ -244,7 +235,7 @@ context("4. Variant Browser", () => {
 
         // TODO you cannot tell in advance which is present in the study
         // Phenotype: HPO Accessions Use example
-        /*cy.get("hpo-accessions-filter > textarea").type("HP:0041054");
+        /* cy.get("hpo-accessions-filter > textarea").type("HP:0041054");
         cy.get("div.search-button-wrapper button").click();
         checkResults("variant-browser-grid");
         cy.get("opencga-active-filters button[data-filter-name='annot-hpo']").click();*/
@@ -330,16 +321,16 @@ context("4. Variant Browser", () => {
         // cy.get("button.default-facets-button").click(); // default facets selection (chromosome, type)
 
         Facet.select("Gene");
-        //cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
+        // cy.get("facet-filter .facet-selector li a").contains("Gene").click({force: true}); // gene facets selection
 
         cy.get("#type_Select a").contains("INSERTION").click({force: true}); // type=INSERTION
         Facet.checkActiveFacet("type", "type[INSERTION]");
-        //cy.get("div.facet-wrapper button[data-filter-name='type']").contains("type[INSERTION]");
+        // cy.get("div.facet-wrapper button[data-filter-name='type']").contains("type[INSERTION]");
 
         Facet.checkActiveFacetLength(3);
         cy.get("div.search-button-wrapper button").click();
         Facet.checkResultLength(3);
-        //cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 3); // 2 default fields + genes
+        // cy.get("opencb-facet-results", {timeout: 120000}).find("opencga-facet-result-view", {timeout: TIMEOUT}).should("have.lengthOf", 3); // 2 default fields + genes
 
         Facet.select("Chromosome"); // removing chromosome
         Facet.checkActiveFacetLength(2);
