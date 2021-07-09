@@ -47,6 +47,7 @@ const OpencgaClinicalReviewCasesSettings = {
         // merge criterium: uses this array as filter for internal 1D/2D array. It handles row/col span
         columns: ["caseId", "probandId", "familyId", "disorderId", "interpretation", "action"]
     },
+    // TODO details tabs are not configurable at the moment
     // merge criterium: uses this array as filter for internal 1D array. Same as settings.table.columns.
     /** clinical-analysis-view settings
      * works either with:
