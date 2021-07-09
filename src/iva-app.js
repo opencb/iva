@@ -76,6 +76,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-stats-exporter-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-browser-rd.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-browser-cancer.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-browser-rearrangement.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
