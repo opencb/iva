@@ -47,5 +47,14 @@ const OpencgaClinicalReviewCasesSettings = {
         // merge criterium: uses this array as filter for internal 1D/2D array. It handles row/col span
         columns: ["caseId", "probandId", "familyId", "disorderId", "interpretation", "action"]
     },
-    // TODO clinical-analysis-view settings?
+    // merge criterium: uses this array as filter for internal 1D array. Same as settings.table.columns.
+    /** clinical-analysis-view settings
+     * works either with:
+     * - `fields` an explicit list of ids. In this case each field in DataForm needs an id.
+     * - `hiddenFields` a list of fields to exclude
+     */
+    view: {
+        // fields: ["type"],
+        hiddenFields: ["type", "flags", "status.name", "description", "priority", "analyst.assignee", "creationDate", "dueDate", "pedigree"]
+    }
 };
