@@ -55,8 +55,18 @@ const variantInterpreterBrowserRdSettings = {
             }
         ]
     },
-    tableColumns: [
+    table: {
+        // merge criterium: spread operator
+        toolbar: {
+            showColumns: true,
+            showExport: false,
+            showDownload: true
+            // columns list will be added in grid components based on settings.table.columns
+        },
+        // merge criterium: uses this array as filter for internal 1D/2D array. It handles row/col span
+        columns: ["id", "gene", "type", "consequenceType", "zygosity", "evidences", "VCF_Data", "frequencies", "clinicalInfo", "interpretation", "review", "actions"]
+    },
+    // merge criterium: uses this array as filter for internal 1D array.
+    detail: ["annotationSummary", "annotationConsType"]
 
-    ],
-    details: ["annotationSummary", "annotationConsType"]
 };
