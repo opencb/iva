@@ -40,6 +40,7 @@ const OpencgaVariantBrowserSettings = {
         },
         // merge criterium: uses this array as filter for internal 1D/2D array. It handles row/col span
         columns: ["id", "gene", "type", "consequenceType", "deleteriousness", "conservation", "samples", "cohorts", "popfreq", "clinicalInfo"]
-    }
-    // TODO continue on details tabs
+    },
+    // merge criterium: uses this array as filter for internal 1D array.
+    detail: ["annotationSummary", "annotationConsType", "annotationPropFreq", "annotationClinical", "cohortStats", "samples", "beacon", "json-view"]
 };
