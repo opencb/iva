@@ -1,6 +1,7 @@
 const variantInterpreterBrowserCancerSettings = {
     menu: {
         // add all filters and let variant-interpreter-browser-cancer handle the visibility based on callers
+        // filters: []
     },
     table: {
         // merge criterium: spread operator
