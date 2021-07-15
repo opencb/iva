@@ -36,7 +36,7 @@ const OpencgaVariantBrowserSettings = {
             showColumns: true,
             showExport: false,
             showDownload: true
-            // columns list will be added in grid components based on settings.table.columns
+            // columns list for the dropdown will be added in grid components based on settings.table.columns
         },
         // merge criterium: uses this array as filter for internal 1D/2D array. It handles row/col span
         columns: ["id", "gene", "type", "consequenceType", "deleteriousness", "conservation", "samples", "cohorts", "popfreq", "clinicalInfo"]
