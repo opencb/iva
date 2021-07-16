@@ -55,7 +55,7 @@ context("6 - Case Interpreter", () => {
                     /**
                      * Overview test
                      */
-                    cy.get(".variant-interpreter-wizard a.variant-interpreter-step").contains("Case Info Manager").click();
+                    cy.get(".variant-interpreter-wizard a.variant-interpreter-step").contains("Case Info").click();
                     // check Case ID in Overview
                     cy.get("opencga-clinical-analysis-view > data-form .detail-row:nth-child(1)").contains("Case ID");
                     cy.get("opencga-clinical-analysis-view > data-form .detail-row:nth-child(1)").then($div => {
