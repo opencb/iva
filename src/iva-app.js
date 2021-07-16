@@ -39,6 +39,7 @@ import NotificationUtils from "../lib/jsorolla/src/core/NotificationUtils.js";
 import {NotificationQueue} from "../lib/jsorolla/src/core/webcomponents/Notification.js";
 import AnalysisRegistry from "../lib/jsorolla/src/core/webcomponents/variant/analysis/analysis-registry.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
+import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-review-cases.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/variant-beacon.js";
 import "../lib/jsorolla/src/core/webcomponents/opencga/opencga-gene-view.js";
@@ -56,7 +57,6 @@ import "../lib/jsorolla/src/core/webcomponents/individual/opencga-individual-bro
 import "../lib/jsorolla/src/core/webcomponents/cohort/opencga-cohort-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/job/opencga-job-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/job/opencga-job-view.js";
-import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-portal.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-browser.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-gwas-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-sample-variant-stats-analysis.js";
@@ -76,6 +76,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-
 import "../lib/jsorolla/src/core/webcomponents/variant/analysis/opencga-variant-stats-exporter-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-browser-rd.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-browser-cancer.js";
+import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter-browser-rearrangement.js";
 import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-interpreter.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
