@@ -1385,7 +1385,7 @@ class IvaApp extends LitElement {
                                            .populationFrequencies="${this.config.populationFrequencies}"
                                            .consequenceTypes="${this.config.consequenceTypes}"
                                            .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                           .config="${this.config.tools.gene}"
+                                           .settings="${opencgaGeneViewSettings}"
                                            .summary="${this.config.opencga.summary}"
                                            @querySearch="${e => this.onQueryFilterSearch(e, "variant")}">
                         </opencga-gene-view>
@@ -1411,7 +1411,7 @@ class IvaApp extends LitElement {
                                                  .populationFrequencies="${this.config.populationFrequencies}"
                                                  .consequenceTypes="${this.config.consequenceTypes}"
                                                  .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                                 .config="${this.config.tools.gene}">
+                                                 .settings="${opencgaGeneViewSettings}">
                         </opencga-transcript-view>
                     </div>
                 ` : null}
@@ -1427,7 +1427,7 @@ class IvaApp extends LitElement {
                                               .populationFrequencies="${this.config.populationFrequencies}"
                                               .consequenceTypes="${this.config.consequenceTypes}"
                                               .proteinSubstitutionScores="${this.config.proteinSubstitutionScores}"
-                                              .config="${this.config.tools.gene.protein}">
+                                              .settings="${opencgaGeneViewSettings}">
                         </opencga-protein-view>
                     </div>
                 ` : null}
@@ -1479,8 +1479,8 @@ class IvaApp extends LitElement {
                 ${this.config.enabledComponents.job ? html`
                     <div class="content" id="job">
                         <opencga-job-browser   .opencgaSession="${this.opencgaSession}"
-                                               .settings="${opencgaJobBrowserSettings}"
                                                .query="${this.queries.job}"
+                                               .settings="${opencgaJobBrowserSettings}"
                                                @querySearch="${e => this.onQueryFilterSearch(e, "job")}"
                                                @activeFilterChange="${e => this.onQueryFilterSearch(e, "job")}">
                         </opencga-job-browser>
