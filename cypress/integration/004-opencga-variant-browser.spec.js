@@ -276,7 +276,7 @@ context("4. Variant Browser", () => {
 
     it("4.20 Check gene-view", () => {
         cy.get("button[data-id='table-tab']", {timeout: TIMEOUT}).click();
-        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index='0'] a.gene-tooltip")
+        cy.get("variant-browser-grid .bootstrap-table .fixed-table-container tr[data-index='0'] a.gene-tooltip:first-child")
             .should("be.visible", {timeout: TIMEOUT})
             .click({force: true});
         // .trigger('mouseover'); // .trigger('mouseover') doesn't work in this case as the hover action changes the DOM
