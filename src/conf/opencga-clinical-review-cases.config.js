@@ -56,7 +56,7 @@ const OpencgaClinicalReviewCasesConfig = {
         multiSelection: false,
         showDeleteButton: false,
         columns: {
-            hidden: ["type", "status", "priority", "assignedTo", "creationDate", "dueDate"]
+            hidden: ["status", "priority", "assignedTo", "creationDate", "dueDate"]
         },
         showReport: false,
         toolbar: {
