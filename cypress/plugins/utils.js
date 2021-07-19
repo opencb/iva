@@ -78,7 +78,7 @@ export const checkResults = gridSelector => {
 /**
  * it check the table contains results or the message "No matching records found"
  */
-export const checkResultsOrNot = (gridSelector, id) => {
+export const checkResultsOrNot = (gridSelector, noMatchesMessage = "No matching records found") => {
     waitTable(gridSelector);
     cy.get(gridSelector + " .fixed-table-body > table > tbody", {timeout: 60000}).find(" > tr", {timeout: 10000})
         .should("satisfy", $els => {
@@ -91,7 +91,7 @@ export const checkResultsOrNot = (gridSelector, id) => {
             const $firstRow = Cypress.$($els[0]);
             if ($firstRow) {
                 // it covers either the case of some results or 0 results
-                return $firstRow.data("index") === 0 || $els.text().includes("No matching records found");
+                return $firstRow.data("index") === 0 || $els.text().includes(noMatchesMessage);
             }
 
         });

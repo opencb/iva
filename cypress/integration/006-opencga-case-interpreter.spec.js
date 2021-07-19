@@ -62,10 +62,10 @@ context("6 - Case Interpreter", () => {
                         expect($div.first().text()).to.include(caseId);
                     });
                     // check Case Type in Overview
-                    cy.get("opencga-clinical-analysis-view > data-form .detail-row:nth-child(4)").contains("Analysis Type");
+                    /*cy.get("opencga-clinical-analysis-view > data-form .detail-row:nth-child(4)").contains("Analysis Type");
                     cy.get("opencga-clinical-analysis-view > data-form .detail-row:nth-child(4)").then($div => {
                         expect($div.first().text()).to.include("FAMILY");
-                    });
+                    });*/
 
 
                     /**
