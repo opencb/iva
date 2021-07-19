@@ -25,7 +25,6 @@ context("4. Variant Browser", () => {
     beforeEach(() => {
         cy.get("a[data-id=browser]", {timeout: TIMEOUT}).click({force: true});
     });
-
     it("4.1 Columns Visibility", () => {
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Variant Browser");
 
@@ -292,7 +291,7 @@ context("4. Variant Browser", () => {
         cy.get("cellbase-variant-annotation-summary h3").contains("Summary");
 
         cy.get("variant-browser-detail [data-id='annotationConsType']").click();
-        checkResults("variant-consequence-type-view");
+        checkResultsOrNot("variant-consequence-type-view");
 
         cy.get("variant-browser-detail [data-id='annotationPropFreq']").click();
         checkResultsOrNot("cellbase-population-frequency-grid", "No population frequencies found.");
@@ -301,10 +300,10 @@ context("4. Variant Browser", () => {
         checkResultsOrNot("variant-annotation-clinical-view");
 
         cy.get("variant-browser-detail [data-id='cohortStats']").click();
-        checkResults("variant-cohort-stats-grid");
+        checkResultsOrNot("variant-cohort-stats-grid");
 
         cy.get("variant-browser-detail [data-id='samples']").click();
-        checkResults("opencga-variant-samples");
+        checkResultsOrNot("opencga-variant-samples");
 
         cy.get("variant-browser-detail [data-id='beacon']").click();
         cy.get("variant-beacon-network", {timeout: TIMEOUT}).find(".beacon-square").its("length").should("eq", 15);
