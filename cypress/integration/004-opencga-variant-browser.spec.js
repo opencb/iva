@@ -295,7 +295,7 @@ context("4. Variant Browser", () => {
         checkResults("variant-consequence-type-view");
 
         cy.get("variant-browser-detail [data-id='annotationPropFreq']").click();
-        checkResults("cellbase-population-frequency-grid");
+        checkResultsOrNot("cellbase-population-frequency-grid");
 
         cy.get("variant-browser-detail [data-id='annotationClinical']").click();
         checkResultsOrNot("variant-annotation-clinical-view");
