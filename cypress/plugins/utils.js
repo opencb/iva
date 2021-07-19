@@ -247,7 +247,7 @@ export const annotationFilterCheck = gridSelector => {
                                 checkResults(gridSelector);
                             });
                         } else {
-                            //return true; // cy..then($wc => {}) fails because you cannot mixing up async and sync code.
+                            // return true; // cy..then($wc => {}) fails because you cannot mixing up async and sync code.
                             // so we can just make the test pass by check the non existence of inputs fields
                             cy.get("opencga-annotation-filter-modal input[data-variable-id]", {timeout: TIMEOUT}).should("not.exist");
                             cy.get("opencga-annotation-filter-modal .modal-footer button").contains("OK").click();

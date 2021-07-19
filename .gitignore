@@ -79,3 +79,4 @@ test/bin
 test/reports
 test/screenshots
 
+.husky/_/husky.sh

@@ -63,7 +63,6 @@ context("8 - Individual Browser", () => {
 
     });
 
-    /*
     it("8.2 - aggregated query", () => {
         cy.get("a[data-id=individual]").click({force: true});
         cy.get("a[href='#facet_tab']").click({force: true});
@@ -105,6 +104,5 @@ context("8 - Individual Browser", () => {
         Facet.checkResultLength(7);
 
     });
-*/
 
 });
