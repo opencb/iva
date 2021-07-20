@@ -17,6 +17,11 @@
 import {login, checkResults} from "../plugins/utils.js";
 import {TIMEOUT} from "../plugins/constants.js";
 
+const getCaseType = grid => {
+    checkResults(grid);
+    return cy.get("opencga-clinical-analysis-grid table tr[data-index=0] td:nth-child(1)  p[data-cy='case-type']", {timeout: 60000}).then(type => console.log("TYPE", type)).invoke("text")
+};
+
 
 context("6 - Case Interpreter", () => {
     before(() => {
@@ -46,6 +51,22 @@ context("6 - Case Interpreter", () => {
                 // test Case Interpreter in Family Cases
                 console.log("caseType === \"FAMILY\"", caseType === "FAMILY")
                 if (caseType === "FAMILY") {
+
+                    /**
+                     * Overview test
+                     */
+                    cy.get(".variant-interpreter-wizard a.variant-interpreter-step").contains("Case Info").click();
+                    // check Case ID in Overview
+                    cy.get("opencga-clinical-analysis-view > data-form .detail-row:nth-child(1)").contains("Case ID");
+                    cy.get("opencga-clinical-analysis-view > data-form .detail-row:nth-child(1)").then($div => {
+                        expect($div.first().text()).to.include(caseId);
+                    });
+                    // check Case Type in Overview
+                    cy.get("opencga-clinical-analysis-view > data-form .detail-row:nth-child(4)").contains("Analysis Type");
+                    cy.get("opencga-clinical-analysis-view > data-form .detail-row:nth-child(4)").then($div => {
+                        expect($div.first().text()).to.include("FAMILY");
+                    });
+
 
                     /**
                      * Quality control test

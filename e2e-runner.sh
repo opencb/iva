@@ -58,7 +58,7 @@ for study in "${studies[@]}"
 do
   echo "$study"
   rm -rf mochawesome-report/ && \
-  CYPRESS_study="$study" npx cypress run --config videosFolder="cypress/videos/$study",screenshotsFolder="cypress/screenshots/$study" --headless --spec 'cypress/integration/002-login.js';  \
+  CYPRESS_study="$study" npx cypress run --config videosFolder="cypress/videos/$study",screenshotsFolder="cypress/screenshots/$study" --headless --spec 'cypress/integration/*.js';  \
   npx mochawesome-merge mochawesome-report/*.json -o mochawesome-report/cypress-combined-report.json && \
   npx marge --reportFilename "$study".html --charts --timestamp _HH-MM_dd-mm-yyyy --reportPageTitle "IVA $study" --reportTitle "IVA study: $study" --reportDir ./report mochawesome-report/cypress-combined-report.json && \
   rm -rf mochawesome-report/
