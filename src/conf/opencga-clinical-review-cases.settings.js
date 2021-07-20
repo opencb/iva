@@ -16,13 +16,13 @@ const OpencgaClinicalReviewCasesSettings = {
             },
             {
                 id: "disorder"
-            },
-            {
+            }
+            /* {
                 id: "type"
             },
             {
                 id: "assignee"
-            }
+            }*/
         ],
         // merge criterium: full outer join-like. it adds objects presents in internal array only and in external array only. In case of same id, the external value overwrite the internal.
         examples: [
@@ -41,12 +41,12 @@ const OpencgaClinicalReviewCasesSettings = {
             showColumns: true,
             showCreate: true,
             showExport: false,
-            showDownload: true,
+            showDownload: true
             // columns list for the dropdown will be added in grid components based on settings.table.columns
         },
         // merge criterium: uses this array as filter for internal 1D/2D array. It handles row/col span
         // TODO NOTE this refers to clinical-analysis-grid (same list in clinical-analysis-browser.settings)
         columns: ["caseId", "probandId", "familyId", "disorderId", "interpretation", "action"]
-    },
+    }
     // TODO details tabs are not configurable at the moment
 };
