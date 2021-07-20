@@ -15,9 +15,10 @@
  */
 
 /**
- * Created by imedina on 05/06/17.
+ * @deprecated
  */
 
+/*
 const cohortFileMenu = {
     id: "cohort",
     title: "Cohort Alternate Allele Stats",
@@ -42,9 +43,10 @@ const cohortFileMenu = {
         }
     },
     tooltip: "Filter variants by cohort Alternate allele frequency"
-};
+};*/
 
-/* MOVED in variant-browser config (TODO copy in interpretation portal) */
+/* MOVED in variant-browser, variant-interpreter-browser-rd, variant-interpreter-browser-cancer configs */
+/*
 const filterMenu = {
     searchButtonText: "Search",
     tooltip: {
@@ -204,10 +206,11 @@ const filterMenu = {
         }
     ]
 };
+*/
 
 
 // Clone menu for interpretation and add clinical section
-/*const clinical = {
+/* const clinical = {
     title: "Sample and File",
     collapsed: false,
     fields: [
@@ -246,7 +249,7 @@ interpreterMenu.sections = interpreterSections;*/
 
 
 const tools = {
-    /*browser: {
+    /* browser: {
         title: "Variant Browser",
         active: false,
         showSummary: true,
@@ -338,7 +341,7 @@ const tools = {
             // }
         ]
     },*/
-    /*"rd-interpreter": {
+    /* "rd-interpreter": {
         title: "Variant RD Interpreter",
         disableSaveInterpretation: false,
         active: false,
@@ -451,7 +454,7 @@ const tools = {
         }
     },*/
 
-    /*panel: {
+    /* panel: {
         active: false
     },
     individual: {
@@ -459,7 +462,7 @@ const tools = {
     },
     family: {
         active: false
-    },*/
+    },
     gene: {
         protein: {
             color: {
@@ -475,13 +478,13 @@ const tools = {
         },
         active: false
     }
-    /*beacon: {
+    beacon: {
         active: false,
         hosts: [
             "brca-exchange", "cell_lines", "cosmic", "wtsi", "wgs", "ncbi", "ebi", "ega", "broad", "gigascience", "ucsc", "lovd", "hgmd", "icgc", "sahgp"
         ]
     },*/
-    /*clinical: {
+    /* clinical: {
         icd10: ICD_10,
         upload: {
             visible: true
@@ -666,7 +669,7 @@ const tools = {
             downloadQcSample: false
         }
     },*/
-    /*genomeBrowser: {
+    /* genomeBrowser: {
         active: false
     }*/
 };
