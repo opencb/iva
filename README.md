@@ -106,14 +106,19 @@ Having the project running through the command `npm run serve`, you can run the 
 ```
 npm run e2e
 ```
-or the headless version (no browser window)
+
+#### Run tests and generate a report
+To run test in headless version (no browser) and generate a report, run
 ```
 npm run e2e-report
 ```
-for Windows environment, just add the suffix `-win`
+for more help, try ```npm run e2e-report -h```.
+
+For Windows environment, just add the suffix `-win`
 ```
 npm run e2e-win
 npm run e2e-report-win
 ```
+for more help, try ```npm run e2e-report-win -h```.
 
-The headless version will generate an HTML report in `./report`.
+The HTML report will be generated in `./report`. The filename will have the structure `<OPENCGA_STUDY_FQN>__<TIME>_<DATE>.html` 
