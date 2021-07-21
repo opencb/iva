@@ -26,9 +26,10 @@ context("5 - Case Portal", () => {
     it("5.1 - check query results", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: TIMEOUT}).click({force: true});
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Case Portal");
-
         checkResults("opencga-clinical-analysis-grid");
+    });
 
+    it("5.2 - Filter: caseId", () => {
         // reading from the first row the case Id, the proband Id, and the Family Id and use them as filters
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT})
             .find("td:nth-child(1) a[data-cy='case-id']")
@@ -38,8 +39,11 @@ context("5 - Case Portal", () => {
                 cy.get("div[data-cy='form-case'] input").type(caseId + "{enter}", {force: true});
                 checkResults("opencga-clinical-analysis-grid");
 
-            })
+            });
+    });
 
+    it("5.3 - Filter: Proband Sample Id", () => {
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT})
             .find("td:nth-child(2) p[data-cy='proband-sample-id']").first()
             .then($p => {
                 const probandSampleId = $p.text().trim();
@@ -48,8 +52,11 @@ context("5 - Case Portal", () => {
                 cy.get("div[data-cy='form-sample'] input").type(probandSampleId + "{enter}", {force: true});
                 checkResults("opencga-clinical-analysis-grid");
 
-            })
+            });
+    });
 
+    it("5.4 - Filter: Proband Id", () => {
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT})
             .find("td:nth-child(2) span[data-cy='proband-id']")
             .then($span => {
                 const probandId = $span.text().trim();
@@ -58,18 +65,25 @@ context("5 - Case Portal", () => {
                 cy.get("div[data-cy='form-proband'] input").type(probandId + "{enter}", {force: true});
                 checkResults("opencga-clinical-analysis-grid");
 
-            })
+            });
+    });
 
-            .find("td:nth-child(4) span[data-cy='disorder-name']")
-            .then($span => {
-                const disorderName = $span.text().trim();
+    it("5.5 - Filter: Disorder name", () => {
+        // check whether there is a disorder-name, then it tests the filter itself (Cancer studies (type=SINGLE) doesn't have disorder names)
+        cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT})
+            .find("td:nth-child(4)")
+            .then($td => {
+                const span = Cypress.$("span[data-cy='disorder-name']", $td).first();
+                const disorderName = span.text().trim();
                 console.log("disorderName", disorderName);
                 cy.get("div[data-cy='form-disorder'] button").click();
                 cy.get("div[data-cy='form-disorder'] input").type(disorderName + "{enter}", {force: true});
                 checkResults("opencga-clinical-analysis-grid");
 
             });
+    });
 
+    it("5.6 - Filter: Family Id", () => {
         // check whether there is a family-id, then it tests the filter itself (Cancer studies doesn't have family ids)
         cy.get("opencga-clinical-analysis-grid .bootstrap-table .fixed-table-container tr[data-index=0]", {timeout: TIMEOUT})
             .find("td:nth-child(3)")
@@ -83,7 +97,9 @@ context("5 - Case Portal", () => {
                     checkResults("opencga-clinical-analysis-grid");
                 }
             });
+    });
 
+    it("5.7 - Filter: Priority Id", () => {
         // check whether priority filter is enabled and visible first, then it tests the filter itself
         cy.get("div.lhs", {timeout: 5000}).then($wc => {
             if (Cypress.$("div[data-cy='form-priority']", $wc).length) {
@@ -97,13 +113,13 @@ context("5 - Case Portal", () => {
                     });
             }
         });
-
         cy.get("button[data-cy='filter-button']").click({force: true});
         cy.get(".saved-filter-wrapper a").contains("Clear").click({force: true});
 
     });
 
-   it("5.2 - check Columns togglability", () => {
+
+    it("5.2 - Columns Visibility", () => {
         cy.get("a[data-id=clinicalAnalysisPortal]", {timeout: TIMEOUT}).click({force: true});
         cy.get("div.page-title h2", {timeout: TIMEOUT}).should("be.visible").and("contain", "Case Portal");
 
