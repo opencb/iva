@@ -1,4 +1,4 @@
-<img style="width:50%" src="src/img/iva.svg" alt="Logo"/>
+<img src="src/img/iva_logo.png" alt="Logo"/>
 
 # Overview
 
