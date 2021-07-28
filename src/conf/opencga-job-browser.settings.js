@@ -1,4 +1,7 @@
 const opencgaJobBrowserSettings = {
+    /**
+     *  Full settings
+     */
     /* menu: {
         // merge criterium: it uses this `filters` array as filter for internal one. Each object is merged with spread operator
         filters: [
@@ -40,6 +43,7 @@ const opencgaJobBrowserSettings = {
             // columns list for the dropdown will be added in grid components based on settings.table.columns
         },
         // merge criterium: uses this array as filter for internal 1D/2D array. It handles row/col span
+        // It is supported either columns[] or hiddenColumns[].
         columns: ["id",/!* "toolId", "status", "priority", "dependsOn", "output", "execution", "execution", "creationDate"*!/]
     },
     // merge criterium: uses this array as filter for internal 1D array.

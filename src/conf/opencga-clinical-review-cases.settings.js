@@ -45,6 +45,7 @@ const OpencgaClinicalReviewCasesSettings = {
             // columns list for the dropdown will be added in grid components based on settings.table.columns
         },
         // merge criterium: uses this array as filter for internal 1D/2D array. It handles row/col span
+        // It is supported either columns[] or hiddenColumns[].
         // TODO NOTE this refers to clinical-analysis-grid (same list in clinical-analysis-browser.settings)
         columns: ["caseId", "probandId", "familyId", "disorderId", "interpretation", "action"]
     }

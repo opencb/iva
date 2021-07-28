@@ -64,6 +64,7 @@ const variantInterpreterBrowserRdSettings = {
             // columns list for the dropdown will be added in grid components based on settings.table.columns
         },
         // merge criterium: uses this array as filter for internal 1D/2D array. It handles row/col span
+        // It is supported either columns[] or hiddenColumns[].
         columns: ["id", "gene", "type", "consequenceType", "zygosity", "evidences", "VCF_Data", "frequencies", "clinicalInfo", "interpretation", "review", "actions"]
     },
     // merge criterium: uses this array as filter for internal 1D array.
