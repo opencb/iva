@@ -16,6 +16,6 @@ const variantInterpreterBrowserCancerSettings = {
         // columns: ["id"]
     }
     // merge criterium: uses this array as filter for internal 1D array.
-    // detail: []
+    // details: []
 
 };

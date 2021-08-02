@@ -28,8 +28,7 @@ const opencgaClinicalAnalysisBrowserSettings = {
             }
         ],
         // merge criterium: full outer join-like. it adds objects presents in internal array only and in external array only. In case of same id, the external value overwrite the internal.
-        examples: [
-        ]
+        examples: []
     },
     table: {
         // merge criterium: spread operator
@@ -45,5 +44,5 @@ const opencgaClinicalAnalysisBrowserSettings = {
         columns: ["caseId", "probandId", "familyId", "disorderId", "interpretation", "action"]
     },
     // merge criterium: uses this array as filter for internal 1D array.
-    detail: ["clinical-analysis-view", "json-view"]
+    details: ["clinical-analysis-view", "json-view"]
 };

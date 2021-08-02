@@ -47,6 +47,6 @@ const opencgaJobBrowserSettings = {
         columns: ["id",/!* "toolId", "status", "priority", "dependsOn", "output", "execution", "execution", "creationDate"*!/]
     },
     // merge criterium: uses this array as filter for internal 1D array.
-    detail: ["job-view", "job-log", "json-view"]
+    details: ["job-view", "job-log", "json-view"]
     */
 };

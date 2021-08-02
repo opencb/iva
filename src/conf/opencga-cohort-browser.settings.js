@@ -38,6 +38,6 @@ const opencgaCohortBrowserSettings = {
         columns: ["id", "numSamples", "creationDate", "type"]
     },
     // merge criterium: uses this array as filter for internal 1D array.
-    detail: ["cohort-view", "sample-view", "json-view"]
+    details: ["cohort-view", "sample-view", "json-view"]
     */
 };

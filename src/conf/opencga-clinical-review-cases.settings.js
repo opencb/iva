@@ -48,6 +48,6 @@ const OpencgaClinicalReviewCasesSettings = {
         // It is supported either columns[] or hiddenColumns[].
         // TODO NOTE this refers to clinical-analysis-grid (same list in clinical-analysis-browser.settings)
         columns: ["caseId", "probandId", "familyId", "disorderId", "interpretation", "action"]
-    }
-    // TODO details tabs are not configurable at the moment
+    },
+    details: ["clinical-analysis-view", "proband-view"]
 };

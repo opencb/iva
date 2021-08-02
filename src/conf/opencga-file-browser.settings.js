@@ -46,6 +46,6 @@ const opencgaFileBrowserSettings = {
         columns: ["name", "directory", "size", "format", "bioformat", "index", "creationDate", "actions"]
     },
     // merge criterium: uses this array as filter for internal 1D array.
-    detail: ["file-view", "file-preview", "json-view"]
+    details: ["file-view", "file-preview", "json-view"]
     */
 };

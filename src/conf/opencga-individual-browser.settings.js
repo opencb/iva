@@ -61,6 +61,6 @@ const opencgaIndividualBrowserSettings = {
         columns: ["id", "samples", "father", "mother", "disorders", "phenotypes", "caseId", "sex", "lifeStatus", "dateOfBirth", "creationDate"]
     },
     // merge criterium: uses this array as filter for internal 1D array.
-    detail: ["individual-view", "clinical-analysis-grid", "individual-inferred-sex", "individual-mendelian-error", "json-view"]
+    details: ["individual-view", "clinical-analysis-grid", "individual-inferred-sex", "individual-mendelian-error", "json-view"]
     */
 };

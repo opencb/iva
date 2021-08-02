@@ -41,5 +41,5 @@ const opencgaFamilyBrowserSettings = {
         columns: ["id", "members", "disorders", "phenotypes", "caseId", "customAnnotation", "creationDate"]
     },
     // merge criterium: uses this array as filter for internal 1D array.
-    detail: ["family-view", "family-relatedness", "json-view"]*/
+    details: ["family-view", "family-relatedness", "json-view"]*/
 };
