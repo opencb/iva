@@ -18,3 +18,6 @@ exclude=\
 
 depcruise "lib/jsorolla/src/core/webcomponents/**/*.js" -x "^($exclude)" --output-type dot | dot -T svg > dependency.svg
 depcruise "lib/jsorolla/src/core/webcomponents/**/*.js" -x "^($exclude)" --output-type json > dependency.json
+
+# depcruise "lib/jsorolla/src/core/webcomponents/**/*.js" -x "^($exclude)" --output-type dot | dot -Gsplines=ortho -Grankdir=TD -T svg > dependency.svg
+# depcruise "lib/jsorolla/src/core/webcomponents/**/*.js" -x "^($exclude)" --output-type ddot | dot -Gsplines=ortho -T svg > dependency.svg
