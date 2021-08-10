@@ -14,7 +14,7 @@ Navigate to the IVA main page. For example, if you want to access the University
 
 If the credentials provided are correct, a "Welcome Message" will be displayed and the application will start to fetch the studies populated into the correspondent OpenCGA installation you are accessing to.
 
-![](../../.gitbook/assets/image%20%285%29.png)
+![](../../.gitbook/assets/image%20%285%29%20%281%29.png)
 
 ##  Project and Studies
 

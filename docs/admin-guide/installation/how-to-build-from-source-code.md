@@ -78,25 +78,32 @@ when completed, all compiled files will be located under the `build` folder.
 
 ### Test
 
-We use [Cypress.io](https://www.cypress.io/) as testing framework.
+We use [Cypress.io](https://www.cypress.io/) as e2e testing framework.
 
-Having the project running through the command `npm run serve`, you can run the **interactive E2E** test suite by running the command
+Having the project running through the command `npm run serve`, you can run the interactive E2E test suite by running the command
 
 ```text
 npm run e2e
 ```
 
-or the **headless E2E** test suite \(no browser window\).  
-This mode comes with an HTML report \(generated in `./report`\).
+**Run tests and generate a report**
+
+To run test in headless version \(no browser\) and generate a report, run
 
 ```text
 npm run e2e-report
 ```
 
-in a Windows environment, just add the suffix `-win`
+for more help, try `npm run e2e-report -h`.
+
+For Windows environment, just add the suffix `-win`
 
 ```text
 npm run e2e-win
 npm run e2e-report-win
 ```
+
+for more help, try `npm run e2e-report-win -h`.
+
+The HTML report will be generated in `./report`. The filename will have the structure `<OPENCGA_STUDY_FQN>__<TIME>_<DATE>.html`.
 

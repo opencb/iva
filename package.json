@@ -20,7 +20,8 @@
     "e2e": "./cypress/credentials.sh npx cypress open",
     "e2e-win": "crypress/credentials.bat npx cypress open",
     "e2e-report": "./cypress/e2e-runner.sh",
-    "e2e-report-win": "cypress/e2e-runner.bat"
+    "e2e-report-win": "cypress/e2e-runner.bat",
+    "graph": "./dependency-graph.sh"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
@@ -78,6 +79,7 @@
     "css-loader": "^3.4.2",
     "cypress": "^8.0.0",
     "cypress-wait-until": "^1.7.1",
+    "dependency-cruiser": "^10.0.7",
     "esinstall": "^1.0.2",
     "eslint": "^7.29.0",
     "eslint-config-google": "^0.14.0",

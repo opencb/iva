@@ -13,7 +13,7 @@ The Interactive Variant Analyser \(IVA\) is the web user interface for [OpenCGA]
 ### Benefits
 
 * **Authenticated** and **secure** platform to query and visualise data
-* Highly **customisable;** extensible though **pluggins**
+* Highly **customisable;** extensible though **plugins**
 
 IVA has been developed as part of the [OpenCGA](http://docs.opencb.org/display/opencga/Welcome+to+OpenCGA) project, making it easy to work with clinical and variant information stored in a Catalog and Variant storage instance.
 

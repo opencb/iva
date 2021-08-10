@@ -81,7 +81,7 @@ import "../lib/jsorolla/src/core/webcomponents/variant/interpretation/variant-in
 import "../lib/jsorolla/src/core/webcomponents/clinical/analysis/opencga-rd-tiering-analysis.js";
 import "../lib/jsorolla/src/core/webcomponents/clinical/opencga-clinical-analysis-writer.js";
 import "../lib/jsorolla/src/core/webcomponents/file/opencga-file-manager.js";
-import "../lib/jsorolla/src/core/webcomponents/job-monitor.js";
+import "../lib/jsorolla/src/core/webcomponents/job/job-monitor.js";
 import "../lib/jsorolla/src/core/webcomponents/loading-spinner.js";
 // import "../lib/jsorolla/src/core/webcomponents/clinical/rga/rga-browser.js";
 
