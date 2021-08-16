@@ -10,6 +10,7 @@
 
 ## User Manual
 
+* [Introduction](user-manual/introduction.md)
 * [Logging in](user-manual/iva-general-usage/README.md)
   * [Login](user-manual/iva-general-usage/login.md)
 * [Metadata and Clinical Data](user-manual/catalog-browser.md)
