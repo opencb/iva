@@ -522,11 +522,11 @@ class IvaApp extends LitElement {
     }
 
     checkSessionActive() {
-        let _message = "";
+        // let _message = "";
         // We check if refresh token has updated session id cookie
         // let sid = Cookies.get(this.config.opencga.cookie.prefix + "_sid");
 
-        if (UtilsNew.isNotUndefinedOrNull(this.opencgaClient._config.token)) { // UtilsNew.isNotEmpty(this.opencgaSession.token) &&
+        if (this.opencgaClient._config?.token) {
             // this.token = sid;
             const decoded = jwt_decode(this.opencgaClient._config.token);
             const currentTime = new Date().getTime();
@@ -541,28 +541,31 @@ class IvaApp extends LitElement {
             } else {
                 // TODO remove NotificationUtils
                 if (remainingTime < this.config.session.minRemainingTime) {
-                    _message = "Your session has expired.";
+                    // _message = "Your session has expired.";
                     this.logout();
                     window.clearInterval(this.intervalCheckSession);
+                    new NotificationQueue().push("Your session has expired", "", "info", true, false);
                 } else {
-                    if (UtilsNew.isNotUndefinedOrNull(this.notifySession)) {
+                    /* if (UtilsNew.isNotUndefinedOrNull(this.notifySession)) {
                         NotificationUtils.closeNotify(this.notifySession);
                     }
                     return;
+                    */
                 }
             }
         } else {
             // _message = "Your session has expired.";
-            // window.clearInterval(this.intervalCheckSession);
+            window.clearInterval(this.intervalCheckSession);
+            new NotificationQueue().push("Your session has expired", "", "info", true, false);
         }
         // delay = 0 to fix the notify until user closes it.
-        if (UtilsNew.isNotEmpty(_message)) {
+        /* if (UtilsNew.isNotEmpty(_message)) {
             this.notifySession = NotificationUtils.showNotify(_message, UtilsNew.MESSAGE_INFO,
                 {}, {
                     delay: 0,
                     onClosed: this.onCloseRefreshNotify.bind(this)
                 }, this.opencgaClient, this.notifySession);
-        }
+        }*/
     }
 
     onCloseRefreshNotify() {
