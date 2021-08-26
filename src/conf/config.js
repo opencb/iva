@@ -82,11 +82,6 @@ const application = {
     footerLogo: "img/opencb-logo.png",
     mode: "development",
     appConfig: "opencb",
-    defaultStudy: "serena@cancer37:test",
-    // defaultStudy: "demo@population:1000g",
-    // defaultStudy: "demo@family:corpasome",
-    // defaultStudy: "emee-glh@cancer_grch38:myeloid",
-    // defaultStudy: "sanger@poc:exomes",
     // The order, title and nested submenus are respected
 
     menu: [
