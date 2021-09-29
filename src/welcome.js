@@ -55,8 +55,6 @@ export default class WelcomeWeb extends LitElement {
     }
 
     opencgaSessionObserver() {
-        //console.log("opencgaSessionObserver")
-        //console.log(this.opencgaSession)
         this._checkProjects();
     }
 
@@ -68,18 +66,18 @@ export default class WelcomeWeb extends LitElement {
     onExampleClick(e) {
         const query = {study: this.opencgaSession.study.fqn};
         switch (e.currentTarget.dataset.type) {
-        case "gene":
-            query.gene = e.currentTarget.text;
-            break;
-        case "region":
-            query.region = e.currentTarget.text;
-            break;
-        case "snp":
-            query.xref = e.currentTarget.text;
-            break;
-        case "variant":
-            query.xref = e.currentTarget.text;
-            break;
+            case "gene":
+                query.gene = e.currentTarget.text;
+                break;
+            case "region":
+                query.region = e.currentTarget.text;
+                break;
+            case "snp":
+                query.xref = e.currentTarget.text;
+                break;
+            case "variant":
+                query.xref = e.currentTarget.text;
+                break;
         }
         this.notify(query);
     }
@@ -115,7 +113,7 @@ export default class WelcomeWeb extends LitElement {
                 if (featureId.length >= 3 && !featureId.startsWith("ENS")) {
                     const _this = this;
                     _this.cellbaseClient.get("feature", "id", featureId.toUpperCase(), "starts_with", {}, {})
-                        .then(function(response) {
+                        .then(function (response) {
                             let options = "";
                             for (const id of response.response[0].result) {
                                 options += `<option value="${id.name}">`;
@@ -199,12 +197,7 @@ export default class WelcomeWeb extends LitElement {
                 -ms-transform: scale(1);
                 transform: scale(1);
                 color: #fff
-            }
-
-            .footer {
-                margin-bottom: 80px;
-            }
-        
+            }        
             
         </style>                                         
 
@@ -212,7 +205,7 @@ export default class WelcomeWeb extends LitElement {
         <div class="col-md-6 col-md-offset-3 col-sm-12 welcome-center text-muted text-justify">
             <h1 id="welcome-page-title">
                 <div class="iva-logo">
-                    <img src="./img/iva.svg" />
+                    <img alt="IVA" src="./img/iva.svg" />
                     <p class="version">
                         <span class="bracket">(</span><span>${this.version}</span><span class="bracket">)</span>
                     </p>
@@ -237,24 +230,24 @@ export default class WelcomeWeb extends LitElement {
                             SNP: <a @click="${this.onExampleClick}" data-type="snp" style="cursor: pointer">rs445909</a>
                             Variant: <a @click="${this.onExampleClick}" data-type="variant" style="cursor: pointer">13:32962274:G:T</a>
                     </span>
-                </div>`
-            : null }
+                </div>` :
+        null }
             -->
              
             <div class="row hi-icon-wrap hi-icon-effect-9 hi-icon-animation">
-                ${this.config.menu.filter(this.isVisible).map( item => html`
+                ${this.config.menu.filter(this.isVisible).map(item => html`
                     ${item.submenu ? html`
-                        <a class="icon-wrapper" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
+                        <a class="icon-wrapper" data-cat-id="cat-${item.id}" data-title="${item.title}" href="#cat-${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
                             <div class="hi-icon">
-                                <img src="img/tools/icons/${item.icon}" /> 
+                                <img alt="${item.title}" src="img/tools/icons/${item.icon}" /> 
                             </div>
                             <p>${item.title}</p>
                             <span class="smaller"></span>
                         </a>
                         ` : html`
-                            <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ''}">
+                            <a class="icon-wrapper" href="#${item.id}/${this._checkProjects() ? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}">
                             <div class="hi-icon">
-                                <img src="img/tools/icons/${item.icon}" /> 
+                                <img alt="${item.title}" src="img/tools/icons/${item.icon}" /> 
                             </div>
                             <p>${item.title}</p>
                             <span class="smaller"></span>
@@ -269,7 +262,7 @@ export default class WelcomeWeb extends LitElement {
                 </div>
             ` : html`
                 <div class="row text-center">
-                    <a class="getting-started" href="${this.config.about.links.find( link => link.id === "documentation").url}" target="_blank"><span>Documentation</span></a>
+                    <a class="getting-started" href="${this.config.about.links.find(link => link.id === "documentation").url}" target="_blank"><span>Documentation</span></a>
                 </div>
             `}
             
@@ -281,8 +274,6 @@ export default class WelcomeWeb extends LitElement {
                 so only modern web browsers are fully supported, these include Chrome 49+, Firefox 45+, Microsoft Edge 14+,
                 Safari 10+ and Opera 36+.
             </small>-->
-            ${UtilsNew.renderHTML(this.config.welcomePageFooter)}
-
         </div>
         `;
     }

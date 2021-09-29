@@ -16,8 +16,9 @@
 
 
 // export const biotypes = VARIANT_CONSTANTS.biotypes;
+const CHROMOSOMES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"];
 
-const biotypes = [
+const BIOTYPES = [
     "3prime_overlapping_ncrna", "IG_C_gene", "IG_C_pseudogene", "IG_D_gene", "IG_J_gene", "IG_J_pseudogene",
     "IG_V_gene", "IG_V_pseudogene", "Mt_rRNA", "Mt_tRNA", "TR_C_gene", "TR_D_gene", "TR_J_gene", "TR_J_pseudogene",
     "TR_V_gene", "TR_V_pseudogene", "antisense", "lincRNA", "miRNA", "misc_RNA", "non_stop_decay",
@@ -27,9 +28,33 @@ const biotypes = [
     "translated_processed_pseudogene", "unitary_pseudogene", "unprocessed_pseudogene"
 ];
 
-const types = ["SNV", "INDEL", "CNV", "INSERTION", "DELETION", "MNV"];
+const VARIANT_TYPES = ["SNV", "INDEL", "COPY_NUMBER", "INSERTION", "DELETION", "DUPLICATION", "MNV", "SV"];
 
-const consequenceTypes = {
+const CLINICAL_SIGNIFICANCE = [
+    {
+        id: "benign", name: "Benign"
+    },
+    {
+        id: "likely_benign", name: "Likely benign"
+    },
+    {
+        id: "uncertain_significance", name: "Uncertain significance"
+    },
+    {
+        id: "likely_pathogenic", name: "Likely pathogenic"
+    },
+    {
+        id: "pathogenic", name: "Pathogenic"
+    }
+];
+
+const MODE_OF_INHERITANCE = ["AUTOSOMAL_DOMINANT", "AUTOSOMAL_RECESSIVE", "X_LINKED_DOMINANT", "X_LINKED_RECESSIVE", "Y_LINKED", "MITOCHONDRIAL"];
+
+const ROLE_IN_CANCER = ["ONCOGENE", "TUMOR_SUPPRESSOR_GENE", "FUSION"];
+
+const DISEASE_PANEL_CONFIDENCE = ["HIGH", "MEDIUM", "LOW", "REJECTED"];
+
+const CONSEQUENCE_TYPES = {
     style: {
         // This is the impact color. It allows to customise both the impact categories and desired colors
         high: "red",
@@ -39,8 +64,14 @@ const consequenceTypes = {
     },
 
     // Loss-of-function SO terms
-    lof: ["transcript_ablation", "splice_acceptor_variant", "splice_donor_variant", "stop_gained", "frameshift_variant",
-        "stop_lost", "start_lost", "transcript_amplification", "inframe_insertion", "inframe_deletion"],
+    lof: ["frameshift_variant", "incomplete_terminal_codon_variant", "start_lost", "stop_gained", "stop_lost", "splice_acceptor_variant",
+        "splice_donor_variant", "feature_truncation", "transcript_ablation"],
+
+    pa: ["frameshift_variant", "incomplete_terminal_codon_variant", "start_lost", "stop_gained", "stop_lost", "splice_acceptor_variant",
+        "splice_donor_variant", "feature_truncation", "transcript_ablation", "inframe_deletion", "inframe_insertion", "missense_variant"],
+
+    // This is filled below from the 'categories' array
+    impact: {},
 
     // 'Title' is optional. if there is not title provided then 'name' will be used.
     //  There are two more optional properties - 'checked' and 'impact'. They can be set to display them default in web application.
@@ -315,6 +346,15 @@ const consequenceTypes = {
     ]
 };
 
+// Fill 'consequenceTypes.impact' from the consequenceTypes.categories
+for (const category of CONSEQUENCE_TYPES.categories) {
+    if (category.terms) {
+        category.terms.forEach(term => CONSEQUENCE_TYPES.impact[term.name] = term.impact);
+    } else {
+        CONSEQUENCE_TYPES.impact[category.name] = category.impact;
+    }
+}
+
 const populationFrequencies = {
     style: {
         // This is based on this figure:
@@ -375,7 +415,7 @@ const populationFrequencies = {
                 },
                 {
                     id: "NFE", title: "Non-Finnish European [NFE]"
-                },
+                }
                 // {
                 //     id: "SAS", title: "South Asian [SAS]"
                 // }
@@ -428,7 +468,7 @@ const beacon = {
     ]
 };
 
-const proteinSubstitutionScore = {
+const PROTEIN_SUBSTITUTION_SCORE = {
     style: {
         // This is to show the predictions in respective colors
         sift: {

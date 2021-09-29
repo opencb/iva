@@ -1,7 +1,7 @@
 FROM httpd:2.4-alpine
 
 ## To run the docker use:
-## docker build -f ./docker/Dockerfile -t iva-httpd .
+## docker build -f ./docker/iva-app/Dockerfile -t iva-httpd .
 ## docker run -dit --name iva -p 81:80 -v  [ABS_PATH]/iva/build/conf/:/usr/local/apache2/htdocs/iva/conf opencb/iva-app
 ## Then open:  http://localhost:81/iva
 
@@ -22,4 +22,4 @@ COPY    ./build/                             /usr/local/apache2/htdocs/iva/
 
 EXPOSE 80
 
-CMD ["httpd-foreground"]
+ENTRYPOINT ["entrypoint.sh", "httpd-foreground"]

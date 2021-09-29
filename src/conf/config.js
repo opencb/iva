@@ -15,12 +15,14 @@
  */
 
 const cellbase = {
-    host: "http://bioinfo.hpc.cam.ac.uk/cellbase",
+    hosts: ["https://ws.opencb.org/cellbase-4.8.2"],
     version: "v4"
 };
 
 const opencga = {
-    host: "http://bioinfo.hpc.cam.ac.uk/opencga-prod",
+    host: "https://ws.opencb.org/opencga-test",
+    // host: "http://localhost:1234/opencga",
+    // host: "https://uat.eglh.app.zettagenomics.com/opencga", // public instance
     version: "v2",
     serverVersion: "1.4",
 
@@ -75,18 +77,18 @@ const opencga = {
 
 const application = {
     title: "IVA",
-    version: "v2.0.0-rc",
+    version: "v2.1.0-rc",
     logo: "img/iva.svg",
+    footerLogo: "img/opencb-logo.png",
     mode: "development",
     appConfig: "opencb",
-    // defaultStudy: "serena@cancer37:test",
-    // defaultStudy: "emee-glh@cancer:myeloid",
     // The order, title and nested submenus are respected
+
     menu: [
         {
             id: "browser",
             title: "Variant Browser",
-            description: "",
+            fa_icon: "fa fa-list",
             icon: "variant_browser.svg",
             visibility: "public",
             submenu: [
@@ -102,8 +104,9 @@ const application = {
                             </ul>`,
                     visibility: "public",
                     fa_icon: "fa fa-list",
-                    icon: "variant_browser.svg"
-                },
+                    icon: "variant_browser.svg",
+                    thumbnail: "variant-browser.png"
+                }
                 // {
                 //     id: "genomeBrowser",
                 //     title: "Genome Browser",
@@ -147,7 +150,7 @@ const application = {
                     acronym: "CS",
                     description: "",
                     icon: "",
-                    visibility: "public",
+                    visibility: "public"
                 },
                 // {
                 //     id: "hw", title: "Hardy-Weinberg", acronym: "HW",
@@ -194,6 +197,14 @@ const application = {
                 {
                     id: "knockout",
                     title: "Knockout Analysis",
+                    acronym: "KO",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    id: "knockout-result",
+                    title: "Knockout Analysis result",
                     acronym: "KO",
                     description: "",
                     icon: "",
@@ -273,6 +284,14 @@ const application = {
                     id: "rd-tiering",
                     title: "RD Tiering",
                     acronym: "RDT",
+                    description: "",
+                    icon: "",
+                    visibility: "public"
+                },
+                {
+                    id: "recessive-gene",
+                    title: "Recessive Gene Analysis",
+                    acronym: "RG",
                     description: "",
                     icon: "",
                     visibility: "public"
@@ -379,12 +398,18 @@ const application = {
                     acronym: "VSE",
                     description: "Export variant stats for different cohorts",
                     icon: "",
-                    visibility: "public",
+                    visibility: "public"
                 },
                 {
                     id: "beacon",
                     title: "GA4GH Beacon",
-                    description: "",
+                    description: `
+                        <ul>
+                            <li>Federated search from the Global Alliance for Genomics and Health</li>
+                            <li>Find databases that have information about specific variants</li>
+                        </ul>`,
+                    thumbnail: "beacon.png",
+                    fa_icon: "fa fa-globe-europe",
                     icon: "beacon.svg",
                     visibility: "public"
                 }
@@ -393,7 +418,6 @@ const application = {
         {
             id: "clinical",
             title: "Case Interpretation",
-            description: "",
             icon: "interpretation_portal.svg",
             visibility: "public",
             submenu: [
@@ -403,13 +427,21 @@ const application = {
                     id: "cat-clinical",
                     visibility: "public"
                 },
+
                 {
                     id: "clinicalAnalysisPortal",
                     title: "Case Portal",
                     acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
+                    description: `
+                        <ul>
+                            <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
+                            <li>Filter by gene, consequence, frequency and much more</li>
+                        </ul>
+                    `,
+                    visibility: "public",
+                    fa_icon: "fa fa-user-md",
+                    icon: "interpretation_portal.svg",
+                    thumbnail: "interpretation_portal.png",
                 },
                 {
                     id: "clinical-analysis-writer",
@@ -419,24 +451,71 @@ const application = {
                     description: "",
                     visibility: "public"
                 },
-                {
-                    separator: true,
-                    visibility: "public"
-                },
-                {
-                    title: "Case Interpretation",
-                    category: true,
-                    id: "cat-clinical",
-                    visibility: "public"
-                },
-                {
-                    id: "interpreter",
-                    title: "Case Interpreter",
-                    acronym: "",
-                    icon: "",
-                    description: "",
-                    visibility: "public"
-                },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Clinical Analysis",
+                //     category: true,
+                //     id: "cat-analysis",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "rga",
+                //     title: "RGA",
+                //     acronym: "",
+                //     icon: "",
+                //     description: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     separator: true,
+                //     visibility: "public"
+                // },
+                // {
+                //     title: "Case Interpretation",
+                //     category: true,
+                //     id: "cat-clinical",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "rd-tiering",
+                //     title: "RD Tiering",
+                //     acronym: "RDT",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "team",
+                //     title: "TEAM",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "zetta",
+                //     title: "Zetta",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "cancer-tiering",
+                //     title: "OpenCGA Cancer Tiering (Based on GEL algorithm)",
+                //     description: "",
+                //     icon: "",
+                //     visibility: "public"
+                // },
+                // {
+                //     id: "interpreter",
+                //     title: "Case Interpreter",
+                //     acronym: "",
+                //     icon: "",
+                //     description: "",
+                //     visibility: "public"
+                // }
                 // {
                 //     separator: true,
                 //     visibility: "public"
@@ -500,7 +579,7 @@ const application = {
                     description: "Compute BAM stats using samtools",
                     icon: "",
                     visibility: "public"
-                },
+                }
             ]
         },
         {
@@ -525,27 +604,27 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "files",
+                    id: "file",
                     title: "File Browser",
                     visibility: "public"
                 },
                 {
-                    id: "samples",
+                    id: "sample",
                     title: "Sample Browser",
                     visibility: "public"
                 },
                 {
-                    id: "individuals",
+                    id: "individual",
                     title: "Individual Browser",
                     visibility: "public"
                 },
                 {
-                    id: "families",
+                    id: "family",
                     title: "Family Browser",
                     visibility: "public"
                 },
                 {
-                    id: "cohorts",
+                    id: "cohort",
                     title: "Cohort Browser",
                     visibility: "public"
                 },
@@ -555,13 +634,19 @@ const application = {
                     visibility: "public"
                 },
                 {
-                    id: "jobs",
+                    id: "job",
                     title: "Job Browser",
                     visibility: "public"
                 }
             ]
-        },
+        }
     ],
+    fileExplorer: {
+        visibility: "private"
+    },
+    jobMonitor: {
+        visibility: "private"
+    },
     search: {
         placeholder: "Search",
         visible: false
@@ -579,6 +664,12 @@ const application = {
             {id: "faq", name: "FAQ", url: "#faq", icon: "fa fa-question"}
         ]
     },
+    userMenu: [
+        {id: "account", name: "Your Profile", url: "#account", icon: "fa fa-user", visibility: "private"},
+        {id: "projects", name: "Projects", url: "#projects", icon: "fa fa-database", visibility: "private"},
+        {id: "file-manager", name: "File Manager", url: "#file-manager", icon: "fas fa-folder-open", visibility: "private"}
+        // {id: "settings", name: "Settings", url: "#settings", icon: "fas fa-cogs"}
+    ],
     login: {
         visible: true
     },
@@ -602,64 +693,7 @@ const application = {
                 pedigrees, case-controls or sporadic samples.
             </p>
             <br>`,
-    welcomePageFooter: `<p><img id="logo" src="img/opencb-logo.png" alt="opencb-logo"/></p>`,
-    components: [
-        {
-            id: "browser",
-            title: "Variant Browser",
-            visibility: "public",
-            thumbnail: "variant-browser.png",
-            fa_icon: "fa fa-list",
-            icon: "variant_browser.svg",
-            description: `
-                <p>Explore all variants identified by the 100,000 Genomes Project</p>
-                <ul>
-                    <li>Rich annotation and links to leading reference databases</li>
-                    <li>Filter by gene, consequence, frequency and much more</li>
-                </ul>`
-        },
-        {
-            id: "facet",
-            title: "Aggregation Stats",
-            visibility: "public",
-            thumbnail: "variant-browser_aggregation.png",
-            fa_icon: "fa fa-chart-bar",
-            icon: "aggregation2.svg",
-            description: `
-                    <ul>
-                        <li>Filter by gene, consequence, frequency and much more</li>
-                        <li>Add nested facets to generate aggregate statistics</li>
-                    </ul>
-                </p>`
-        },
-        {
-            id: "clinicalAnalysisPortal",
-            title: "Interpretation portal",
-            visibility: "public",
-            thumbnail: "interpretation_portal.png",
-            fa_icon: "fa fa-user-md",
-            icon: "interpretation_portal.svg",
-            description: `
-                <ul>
-                    <li>Analyse the genomes of participants in the 100,000 Genomes Project</li>
-                    <li>Filter by gene, consequence, frequency and much more</li>
-                </ul>                
-            `
-        },
-        {
-            id: "beacon",
-            title: "GA4GH Beacon",
-            visibility: "public",
-            thumbnail: "beacon.png",
-            fa_icon: "fa fa-globe-europe",
-            icon: "beacon.svg",
-            description: `
-                <ul>
-                    <li>Federated search from the Global Alliance for Genomics and Health</li>
-                    <li>Find databases that have information about specific variants</li>
-                </ul>`
-        }
-    ]
+    gettingStartedComponents: ["browser", "clinicalAnalysisPortal"]
 };
 
 //export {application, beacon, cellbase, consequenceTypes, opencga, populationFrequencies, proteinSubstitutionScores}

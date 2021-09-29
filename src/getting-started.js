@@ -16,6 +16,7 @@
 
 import {LitElement, html} from "/web_modules/lit-element.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
+import "../lib/jsorolla/src/core/webcomponents/commons/tool-header.js";
 
 // TODO Video-Tutorial here?
 
@@ -53,15 +54,34 @@ export default class GettingStarted extends LitElement {
         $("#thumbnail_modal", this).modal("show");
     }
 
+    update(changedProperties) {
+        if (changedProperties.has("config")) {
+            this.components = [];
+            for (let i = 0; i < this.config.gettingStartedComponents.length; i++) {
+                for (let a = 0; a < this.config.menu.length; a++) {
+                    const submenu = this.config.menu[a].submenu;
+                    for (let b = 0; b < submenu.length; b++) {
+                        const item = submenu[b];
+                        if (item.id === this.config.gettingStartedComponents[i] && this.isVisible(item)) {
+                            this.components.push(item);
+                        }
+                    }
+                }
+            }
+        }
+        super.update(changedProperties);
+    }
+
+
     isVisible(item) {
         switch (item.visibility) {
-        case "public":
-            return true;
-        case "private":
-            return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
-        case "none":
-        default:
-            return false;
+            case "public":
+                return true;
+            case "private":
+                return UtilsNew.isNotUndefinedOrNull(this.opencgaSession) && UtilsNew.isNotEmpty(this.opencgaSession.token);
+            case "none":
+            default:
+                return false;
         }
     }
 
@@ -112,25 +132,23 @@ export default class GettingStarted extends LitElement {
             
         </style>
         <div class="getting-started">
+            <tool-header title="${"Getting started with IVA"}" icon="${"fas fa-info-circle"}"></tool-header>
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12"><h1>Getting started with IVA</h1>
-                        <hr>
-                    </div>
-                </div>
-                ${this.config.components.filter(this.isVisible).map( (tool, i) => html`
-                    <section>
-                        <div class="row">
-                            <div class="col-sm-6 col-md-5 ${ i % 2 ? "col-md-push-7" : "" } position-relative">
-                                <img class="img-responsive" src="img/tools/thumbnails/${tool.thumbnail}" @click="${this.openModal}">
+                ${this.components.map((component, i) => {
+                    return html`
+                        <section>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-5 ${i % 2 ? "col-md-push-7" : ""} position-relative">
+                                    <img class="img-responsive" src="img/tools/thumbnails/${component?.thumbnail}" alt="${component?.id}" @click="${this.openModal}">
+                                </div>
+                                <div class="col-xs-6 col-md-7 ${i % 2 ? "col-md-pull-5 text-right" : ""}">
+                                    <h2><a href="#${component?.id}/${this.opencgaSession && this.opencgaSession.project? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}"> ${component?.title} </a></h2>
+                                    <div>${this.renderHTML(component?.description)}</div>
+                                </div>
                             </div>
-                            <div class="col-xs-6 col-md-7 ${ i % 2 ? "col-md-pull-5 text-right" : "" }">
-                                <h2><a href="#${tool.id}/${this.opencgaSession && this.opencgaSession.project? `${this.opencgaSession.project.id}/${this.opencgaSession.study.id}` : ""}"> ${tool.title} </a></h2>
-                                <div>${this.renderHTML(tool.description)}</div>
-                            </div>
-                        </div>
-                    </section>
-                `)}
+                        </section>
+                `;
+                })}
             </div>
         </div>
 

@@ -17,7 +17,7 @@
 import {LitElement, html} from "/web_modules/lit-element.js";
 import UtilsNew from "../lib/jsorolla/src/core/utilsNew.js";
 import "../lib/jsorolla/src/core/webcomponents/commons/view/data-form.js";
-import "../lib/jsorolla/src/core/webcomponents/tool-header.js";
+import "../lib/jsorolla/src/core/webcomponents/commons/tool-header.js";
 
 export default class IvaProfile extends LitElement {
 
@@ -110,6 +110,15 @@ export default class IvaProfile extends LitElement {
                             }
                         },
                         {
+                            name: "Data release",
+                            type: "custom",
+                            field: "project.attributes",
+                            display: {
+                                visible: data => !!data.project?.attributes?.release,
+                                render: attributes => attributes?.release
+                            }
+                        },
+                        {
                             name: "Project and studies",
                             field: "projects",
                             type: "table",
@@ -135,7 +144,7 @@ export default class IvaProfile extends LitElement {
                                     }
                                 ]
                             }
-                        },
+                        }
                         /*{
                             name: "Quota",
                             field: "quota",
@@ -145,7 +154,7 @@ export default class IvaProfile extends LitElement {
                             }
                         }*/
                     ]
-                },
+                }
                 /*{
                     title: "Administration",
                     collapsed: false,
@@ -219,6 +228,7 @@ export default class IvaProfile extends LitElement {
             </div>
         `;
     }
+
 }
 
 customElements.define("iva-profile", IvaProfile);

@@ -13,6 +13,8 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
+  [build-signature]
+  ~
   -->
 
 <html lang="en">
@@ -47,9 +49,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- END meta -->
 
-    <!-- Load PanelApps!-->
-    <script src="conf/icd10.js"></script>
-
     <!-- Load IVA configuration file, this must be located in the same folder -->
     <script src="conf/config.js"></script>
     <script src="conf/opencga-variant-constants.js"></script>
@@ -57,13 +56,14 @@
     <script defer src="conf/opencga-family-browser.config.js"></script>
     <script defer src="conf/opencga-file-browser.config.js"></script>
     <script defer src="conf/opencga-individual-browser.config.js"></script>
-    <script defer src="conf/opencga-jobs-browser.config.js"></script>
+    <script defer src="conf/opencga-job-browser.config.js"></script>
     <script defer src="conf/opencga-clinical-analysis-browser.config.js"></script>
     <script defer src="conf/opencga-clinical-analysis-view.settings.js"></script>
     <script defer src="conf/opencga-sample-browser.config.js"></script>
     <script defer src="conf/opencga-variant-browser.config.js"></script>
-    <script defer src="conf/opencga-clinical-portal.config.js"></script>
     <script defer src="conf/variant-interpreter.config.js"></script>
+    <script defer src="conf/opencga-clinical-review-cases.settings.js"></script>
+    <script defer src="conf/variant-interpreter-browser-rd.settings.js"></script>
     <!--    <script src="../lib/jsorolla/src/core/webcomponents/opencga/panels_example.js"></script>-->
     <script src="conf/tools.js"></script>
 
@@ -97,6 +97,10 @@
     <script type="text/javascript" src="../node_modules/tokenize2/dist/tokenize2.min.js"></script>
     <script type="text/javascript" src="../node_modules/@svgdotjs/svg.js/dist/svg.min.js"></script>
     <script type="text/javascript" src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
+<!-- <script type="text/javascript" src="../node_modules/@highlightjs/cdn-assets/highlight.min.js"></script> -->
+    <script type="text/javascript" src="../node_modules/clipboard/dist/clipboard.min.js"></script>
+    <script type="text/javascript" src="../node_modules/select2/dist/js/select2.min.js"></script>
+
     <!-- /build -->
 
     <!-- build:css[assets/css/vendor.css] -->
@@ -112,6 +116,9 @@
     <link rel="stylesheet" href="../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.css">
     <link rel="stylesheet" href="../node_modules/tokenize2/dist/tokenize2.min.css">
     <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
+    <link rel="stylesheet" href="../node_modules/@highlightjs/cdn-assets/styles/default.min.css">
+    <link rel="stylesheet" href="../node_modules/select2/dist/css/select2.css">
+    <link rel="stylesheet" href="../node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css">
     <!-- /build -->
 
     <!-- Load JSorolla dependencies -->
@@ -156,6 +163,7 @@
 
     <!-- Load IVA CSS styles -->
     <!-- build:css[assets/css/styles.css] -->
+    <link rel="stylesheet" href="../lib/jsorolla/styles/css/global.css">
     <link rel="stylesheet" href="../lib/jsorolla/styles/css/style.css">
     <link rel="stylesheet" href="styles/toggle-switch.css">
     <link rel="stylesheet" href="styles/magic-check.css">
@@ -188,6 +196,8 @@
                 return false;
             });
         });
+        $.fn.select2.defaults.set( "theme", "bootstrap" );
+
     </script>
 
 <iva-app></iva-app>
